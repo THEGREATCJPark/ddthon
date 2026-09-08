@@ -511,3 +511,11 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U3(CJ) 구현·검증 완료(63 passed + 실데이터 status·대시보드 HTTP 확인) / P1 A·B 진행 대기(환경 모델 승인 반영).
 
 ---
+
+## U3 사용자 화면·Agent 연결 마무리 지시 및 실행
+**Timestamp**: 2026-09-08T10:09:12Z
+**User Input**: "U3 로컬 구현·검증·push 결과를 수용합니다. 이제 사용자 화면과 Agent 연결을 마무리하세요. B의 구현을 기다리며 전체 작업을 멈추지 않습니다. 1. 대시보드: 가능한 브라우저 도구로 실제 화면을 열어 요약·목록·상세·사람·활동 화면의 가독성과 실제 데이터 표시를 확인. HTTP 200 확인과 브라우저 화면 확인은 구분. 직접 확인할 도구가 없다면 그 제한과 사용자 확인 항목만 짧게. 2. Claude 하단 상태줄: 기존 설정 보존하며 이 프로젝트 statusLine 실제 연결. 실행 Python·작업 디렉터리·데이터 경로 확인해 P0 동일 재사용 데이터를 읽도록. 현재 창에서 실제 표시를 확인 못했다면 그 부분만 사용자 확인으로. 3. Agent Skill wrapper: 승인된 U0/C9 범위 연결 상태 확인. 다음 목표=자연어 요청으로 Claude가 SkillLoop 사용→실제 적용·검증 후 카운트 갱신 장면. 상태줄 출력만으로 Agent 연결 완료 보고 금지. 계획 없으면 최소 변경 파일·호출 흐름·검증을 한 번에 제시, 있으면 이어서 구현. 4. 완료 구분: U3 로컬 동작 완료 유지. 조직 상태·last_sync·타 환경 공유는 B 제공 후. 실제 재사용 성공과 무관하게 카운트 올리는 동작 추가 금지. 외부 사전 구현 Reference 미사용. 다음 보고=실제 화면·연결 결과·남은 차단 원인 중심."
+**AI Response**: "1) 대시보드: 브라우저 렌더링 도구 없음(WebFetch는 http→https 강제로 localhost 미도달)을 확인. HTTP 200을 넘어 각 경로(/,/skills,/skill,/people,/activity)의 실제 서빙 HTML 바이트를 UTF-8로 취득해 실데이터(top_skill=fix-skillloop-demo-pkg-install, reuse=3, actual_reuses=3, demo=0) 표시·정의외 404·traversal 404·POST 405 확인. /skill 상세의 procedure 미노출 재확인(word 'procedure'/action/index:'allow' 부재; applicability 매칭 신호 'pip-install-fail'만 노출=의도된 비민감 값). **브라우저 육안 가독성 확인은 사용자 몫으로 남김.** 2) statusLine: 사용자 settings.json에 Bedrock 토큰 존재 → 무수정 보존. 프로젝트 `.claude/settings.json` 신설(statusLine type=command, command='python -m skillloop status'). Python 3.14(/c/Python314), cwd=프로젝트 루트, 데이터=os.getcwd()/.skillloop_demo → P0 동일 데이터 확인. Claude Code 호출 형태(stdin JSON) 시뮬레이션: exit 0·단일 라인·reuse=3 출력. **현재 창 하단 바 실제 표시는 세션 재적용 필요·직접 관측 불가 → 사용자 확인 항목으로 남김(연결 완료 미보고).** 3) C9 wrapper: 미구현(agent_skill/·.claude/skills 부재) 확인 → 승인 범위 최소 계획(파일·호출 흐름·검증) 제시, 승인 전 미구현. 상태줄 출력만으로 Agent 연결 완료 보고하지 않음. 4) 완료 구분 유지: U3 로컬 동작 완료, 조직 상태·last_sync=계약7·C4 연결 후 NOT_RUN, 카운트는 검증 성공 CLI 경로(C3)만 — wrapper는 카운트 경로 미추가."
+**Context**: U3 후속 — 대시보드 실HTML 검증(브라우저 육안=사용자), 프로젝트 statusLine 연결(하단 바 표시=사용자 확인), C9 wrapper 최소 계획 제시(구현 대기)
+
+---
