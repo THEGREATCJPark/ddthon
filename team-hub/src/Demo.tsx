@@ -328,11 +328,12 @@ export default function Demo({
         </div>
         <div className="claude-sessionbar">
           <div>
-            <pre className="claude-pixel" aria-hidden="true">{"▐▛███▛█\n▝▜██████▀\n  ▝▝ ▝▝"}</pre>
+            <svg className="claude-mascot" viewBox="0 0 80 56" role="img" aria-label="Claude 마스코트" shapeRendering="crispEdges">
+              <path fill="currentColor" d="M10 4h60v16h10v16H68v16h-8V36H48v16h-8V36H28v16h-8V36H10V28H0V16h10Z" />
+              <path fill="#201f1c" d="M22 14h7v10h-7zM51 14h7v10h-7z" />
+            </svg>
             <div className="claude-identity">
               <strong>Claude Code <small>v2.1.263</small></strong>
-              <span>claude-luna · API Usage Billing</span>
-              <small>~\SkillLoopP1Forecast\workspaces\cj-p1-cold-c882b7</small>
             </div>
           </div>
           <div className="claude-progress">

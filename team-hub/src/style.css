@@ -1950,7 +1950,7 @@ footer > span:last-child {
 }
 
 /* Compact Claude terminal identity and SkillLoop status, matching the demo reference. */
-.claude-demo .claude-pixel { margin: 0; color: #d88e73; font-size: 18px; line-height: 1; }
+.claude-demo .claude-mascot { display: block; width: 80px; height: 56px; flex: 0 0 80px; color: #d88e73; }
 .claude-demo .claude-identity { display: flex; flex-direction: column; gap: 4px; color: #999; font-size: 14px; }
 .claude-demo .claude-identity strong { color: #ddd; font-size: 17px; }
 .claude-demo .claude-identity small { font-size: 13px; overflow-wrap: anywhere; }
