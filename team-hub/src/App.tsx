@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
-import { GitBranch, MessageCircle, Flame, ArrowUpRight } from "lucide-react";
+import {
+  GitBranch,
+  MessageCircle,
+  Flame,
+  ArrowUpRight,
+  Play,
+} from "lucide-react";
 import Flow from "./Flow";
 import Community from "./Community";
+import Demo from "./Demo";
 const tabs = [
   { id: "flow", name: "진행 순서도", icon: GitBranch },
   { id: "team", name: "팀 의견", icon: MessageCircle },
   { id: "challenge", name: "딴지 걸기", icon: Flame },
+  { id: "demo", name: "시연", icon: Play },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 function readTab(): Tab {
   const hash = location.hash.slice(1);
+  if (hash === "demo" || hash === "demo-p0" || hash === "demo-p1")
+    return "demo";
   return hash === "team" || hash === "challenge" ? hash : "flow";
 }
 export default function App() {
@@ -20,7 +30,7 @@ export default function App() {
     return () => window.removeEventListener("hashchange", change);
   }, []);
   return (
-    <div className="site">
+    <div className={`site ${tab === "demo" ? "demo-site" : ""}`}>
       <header className="masthead">
         <div className="identity">
           <div className="team-name">
@@ -44,7 +54,7 @@ export default function App() {
         {tabs.map((t) => (
           <a
             key={t.id}
-            href={`#${t.id}`}
+            href={t.id === "demo" ? "#demo-p0" : `#${t.id}`}
             aria-current={tab === t.id ? "page" : undefined}
             className={tab === t.id ? "active" : ""}
           >
@@ -55,7 +65,13 @@ export default function App() {
         ))}
       </nav>
       <main>
-        {tab === "flow" ? <Flow /> : <Community key={tab} board={tab} />}
+        {tab === "flow" ? (
+          <Flow />
+        ) : tab === "demo" ? (
+          <Demo initialScenario={location.hash === "#demo-p1" ? "p1" : "p0"} />
+        ) : (
+          <Community key={tab} board={tab} />
+        )}
       </main>
       <footer>
         <span>NOWHERE · Agent Skillloop</span>
