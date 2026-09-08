@@ -13,3 +13,15 @@
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Team Hub local build and verification artifacts
+team-hub/node_modules/
+team-hub/dist/
+team-hub/*.tsbuildinfo
+team-hub/.playwright-cli/
+team-hub/output/
+team-hub/.archify/
+team-hub/public/archify/*.visual-check.*
+task_plan.md
+findings.md
+progress.md

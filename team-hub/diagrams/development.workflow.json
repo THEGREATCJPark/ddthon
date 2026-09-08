@@ -1,0 +1,145 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "팀 개발 흐름",
+    "quality_profile": "showcase",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "planning",
+      "label": "설계"
+    },
+    {
+      "id": "development",
+      "label": "구현"
+    },
+    {
+      "id": "delivery",
+      "label": "검증 · 제출"
+    }
+  ],
+  "mainPath": [
+    "requirements",
+    "design",
+    "p0",
+    "integration",
+    "qa",
+    "submission"
+  ],
+  "nodes": [
+    {
+      "id": "requirements",
+      "lane": "planning",
+      "col": 0,
+      "type": "frontend",
+      "label": "요구사항",
+      "sublabel": "범위 · 완료 기준"
+    },
+    {
+      "id": "design",
+      "lane": "planning",
+      "col": 1,
+      "type": "backend",
+      "label": "설계 · 통합 규약",
+      "sublabel": "Unit · 인터페이스",
+      "width": 150
+    },
+    {
+      "id": "p0",
+      "lane": "development",
+      "col": 1,
+      "type": "backend",
+      "label": "P0 재사용",
+      "sublabel": "기존 Skill 적용"
+    },
+    {
+      "id": "p1",
+      "lane": "development",
+      "col": 2,
+      "type": "backend",
+      "label": "P1 경험 축적",
+      "sublabel": "업무 해결 · 새 절차"
+    },
+    {
+      "id": "sharing",
+      "lane": "development",
+      "col": 3,
+      "type": "database",
+      "label": "팀 Skill 공유",
+      "sublabel": "Published 전송"
+    },
+    {
+      "id": "integration",
+      "lane": "delivery",
+      "col": 3,
+      "type": "backend",
+      "label": "통합",
+      "sublabel": "흐름 연결"
+    },
+    {
+      "id": "qa",
+      "lane": "delivery",
+      "col": 4,
+      "type": "security",
+      "label": "독립 검증",
+      "sublabel": "실제 결과 · 증거"
+    },
+    {
+      "id": "submission",
+      "lane": "delivery",
+      "col": 5,
+      "type": "external",
+      "label": "시연 · 제출",
+      "sublabel": "README · 화면"
+    }
+  ],
+  "edges": [
+    {
+      "from": "requirements",
+      "to": "design",
+      "label": "합의"
+    },
+    {
+      "from": "design",
+      "to": "p0",
+      "label": "설계 후"
+    },
+    {
+      "from": "design",
+      "to": "p1",
+      "label": "설계 후",
+      "role": "branch"
+    },
+    {
+      "from": "design",
+      "to": "sharing",
+      "label": "규약 후",
+      "role": "branch"
+    },
+    {
+      "from": "p0",
+      "to": "integration"
+    },
+    {
+      "from": "p1",
+      "to": "integration",
+      "role": "branch"
+    },
+    {
+      "from": "sharing",
+      "to": "integration",
+      "role": "branch"
+    },
+    {
+      "from": "integration",
+      "to": "qa"
+    },
+    {
+      "from": "qa",
+      "to": "submission",
+      "label": "검증 후"
+    }
+  ]
+}
