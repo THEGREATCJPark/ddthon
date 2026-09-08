@@ -1,0 +1,36 @@
+{
+  "events_exported": 1,
+  "push": {
+    "ok": true,
+    "commit": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-08T14:52:13.583570+00:00",
+    "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "queryable_range": "shared Git bundles",
+    "bundle": "reuse/5258308111a5ecb27c61569ddc5c81f5fbd0c81a8fe9fe2a91aebdd7d13bdde4.json"
+  },
+  "pull_first": {
+    "ok": true,
+    "commit": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-08T14:52:15.375106+00:00",
+    "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "queryable_range": "shared Git bundles",
+    "imported": 0,
+    "conflicts": 0,
+    "events": 1
+  },
+  "events_after_first": 1,
+  "pull_repeat": {
+    "ok": true,
+    "commit": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-08T14:52:16.752579+00:00",
+    "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "queryable_range": "shared Git bundles",
+    "imported": 0,
+    "conflicts": 0,
+    "events": 0
+  },
+  "events_after_repeat": 1
+}

@@ -21,9 +21,9 @@ Existing Windows Python/pywin32; openpyxl for real standard direct reader, matpl
 - [x] 3. Add local task mapping/chart and CLI; revise C9 environment instructions and invalid P0 unrelated fixture.
 - [x] 4. Regression tests: corrupt digest invokes no runner/count, rejected candidate cannot reuse, remote proof works without local review, COM failed read != NOT_RUN, offset/different-layout capability, candidate contains no schema/data.
 - [x] 5. Isolate real Excel initialization vs open/read; bounded subprocess logs, never kill user Excel. Run direct/read/Replay using explicit prepared files.
-- [ ] 6. Fresh Agent Cold, human exact approval, real GitHub publication and fresh Warm. Human approval remains an explicit user action; incomplete gates remain NOT_RUN.
+- [x] 6. Fresh Agent Cold, human exact approval, real GitHub publication and fresh Warm. Human approval remains an explicit user action; incomplete gates remain NOT_RUN.
 - [x] 7. P0 two-package minimum generalization and verification.
-- [ ] 8. Integrate original A/B Git ancestry, CJ deltas, final tests/docs/README/evidence, push reviewed tested baseline. Preserve team-hub; do not delete branches.
+- [x] 8. Integrate original A/B Git ancestry, CJ deltas, final tests/docs/README/evidence, push reviewed tested baseline. Preserve team-hub; do not delete branches.
 
 ## Testable properties
 Descriptor digest unchanged by task mappings/data (task context excluded); actual values permuting sheet offsets leaves extracted task rows unchanged under corresponding mapping; OLS linear oracle / nonnegative forecast; round-trip existing PBT retained. Failure logs append, not replaced by later skips.
@@ -31,4 +31,4 @@ Descriptor digest unchanged by task mappings/data (task context excluded); actua
 ## P0 minimum-generalization implementation detail (approved step 7)
 Keep legacy run-p0 and its exact fixture behavior. Add optional operator-authored local --policy to apply-requirements: approved exact refs, named local package sources, distribution-to-import mapping. One pinned requirement is parsed from task input; its version/import are task facts. Environment-only Skill declares pip-install and source name, no target/version. Without --policy legacy exact-demo approval remains. Reject URLs/options/unpinned/multiple inputs; this is not a universal package solver. S1 receives explicit pip_task and reuses the same install/version/import verification. Add two generated harmless wheels using the same descriptor/digest, different requirements and clean workspaces. Never let the Agent author its own approval policy.
 
-Current validation: real Excel access PASS after preparation fix; real Cold Agent completed with diagnostic schema correction. Step 6 waits for exact human approval. Step 8 Git ancestry integrated locally; final source regression/push still pending.
+Current validation: initial diagnostic Cold followed by actual human exact approval, different-workbook Replay PASS, GitHub publication and new Agent Warm PASS. Three additional frozen-source Cold sessions PASS. Step 8 completed with original A/B ancestry preserved and baseline 96f3c85 pushed; acceptance evidence follow-up is separately recorded. Whole-product submission review and B-PC demonstration remain pending.

@@ -1,11 +1,23 @@
 # AI-DLC State Tracking
 
-## 현재 인계 상태 — 2026-09-08 Codex/Astra
+## 최신 상태 — 2026-09-09 오전 인계
+
+- **현재 단계**: CONSTRUCTION / 통합 Build & Test. P0 자연어 재현 및 P1 Cold→사람 승인→독립 Replay→GitHub 게시→새 Agent Warm 실제 검증 완료. 전체 제품·제출 최종 승인 아님.
+- **이번 추가 검증**: 동일 제품 소스 `96f3c85`에서 새 Claude Cold 3회 PASS(1100/600/0), 원격 Warm 1회 PASS(2550/reuse+1/candidate0). 코드 변경 없이 수행. 중간 권한/스키마 재시도와 Warm 설명 오류는 로그 보존.
+- **사람 승인**: 사용자가 exact 후보 `file-access-8738e696cff8bbb20c98@1.0.0`, digest `359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af`의 검토·Replay PASS 후 게시·새 Agent 실행을 명시 승인. 실제 S3 기록 후 다른 문서 Replay PASS.
+- **공유 근거**: `team-skill-store` Skill 게시 `28809464218e7328c7184a20bcafebb0e1b18916`, 재사용 이벤트 `04d831066e0fcdae3217412385e37dc0f08cae58`. 별도 mirror/store 수신, receiver local approval/Replay=null. 이벤트 첫 import1/반복0, 조직 총계1.
+- **기존 회귀**: 139 PASS/2 SKIP 및 별도 실제 Excel 1 PASS; GitHub CI run34235737366 success. 이번 추가 사용자 시나리오 수와 합산하지 않음.
+- **A/B 인수**: A PR#1 실제 merge `58adce9`, B 원작성 이력 merge `99cc4e5`. CJ가 완료 인수 코드 통합을 담당; A/B 동시 수정 대기 없음. B 다음 역할은 별도 PC Git 공유 시연 재현.
+- **남은 것**: B PC 실제 재현 NOT_RUN, 상태줄의 공용 실적·팀 순위 표현 마무리, 최종 갤러리/README·시연 검토. 현재 인기·실적 상태줄은 로컬 기준, 조직 이벤트 데이터는 실제1.
+- **기록**: `result/p1-acceptance/`, `construction/build-and-test/`. 제품 코드/C9 불변, 공식 AI-DLC 규칙 불변. 기존 audit append-only, UTC 시각 매번 취득. S3/DB adapter는 구현 아닌 확장안.
+
+
+## 과거 인계 상태 — 2026-09-08 초기 Codex/Astra 인수 기록
 
 - **현재 게이트**: CONSTRUCTION / P0 3회 재현·전체93 PASS 기준 확정 후 사용자 조건부 허가로 P1 구현 진행. A/B 인수 코드와 CJ S2/S3/C4 연결·검증 중. 실제 Excel 시도 FAIL_TIMEOUT, 전체 P1 완료 아님.
 - **CJ 메인 수정자**: Claude Code가 수정 중단·백그라운드 작업 없음으로 인계 보고한 후 Codex/Astra가 인수. main 기준 `a22e1764527e89d73c648f890fa173527d99900e`. 도구 교체는 새 구현·계획 승인으로 간주하지 않는다.
 - **P0 수용 결과**: 새 Claude Code 일반 업무 요청 → 기존 작업 venv 실제 실패 → C5/S1/C3 → reuse=1 → 독립 import/version PASS. 신규 14 tests, 깨끗한 snapshot 전체 80 passed/0 skipped. 설치 후 재요청 +0. result/p0-nl/ 참조.
-- **보존**: README.md/EVALUATION.md 사용자 미커밋 변경, 모든 기존 승인·audit·팀원 코드 이력. 아래 과거 단계 설명은 이력이며 현재 단계 판단에는 이 절을 우선한다.
+- **보존**: README.md/EVALUATION.md 사용자 미커밋 변경, 모든 기존 승인·audit·팀원 코드 이력. 이 절은 당시 인수 기록이며, 현재 판단에는 문서 최상단의 최신 상태를 우선한다.
 - **A 전달 수신**: PR #1 cb25a62의 3파일을 작업 트리에 원문 인수. GitHub PR merge는 미수행. P0 회귀와 P1 실제 연결을 현재 소스에서 검증 중.
 - **B 전달 수신**: 1760d32 코드·U2문서 인수, B audit/state는 handoff 파일로 보존. CJ가 인수한 envharness/replay 무결성·정리 결함 수정. B환경61 PASS와 이번 PC Excel FAIL_TIMEOUT을 구분.
 - **파일 소유권(최신)**: A=match/reuse_service와 담당 테스트 유지. B는 담당 범위 완료(`1760d32`) 보고 후 작업 종료, 사용자 대행 요청(2026-09-08)에 따라 envharness_p1/replay와 담당 테스트도 CJ가 인수. CJ=공통부·cli·C9·U3 및 experience_service/publish_pipeline/gitsync. B의 과거 작성 이력·저작자는 보존한다. P1 수정·통합은 P0보다 후순위이며 새 범위 추가는 별도 계획 검토 대상이다.
@@ -17,7 +29,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-09-08T14:45:14Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: CONSTRUCTION / 시나리오 정정 구현·139 PASS/2 SKIP 검증 완료. 실제 Excel 1 PASS 및 Cold 업무·차트·후보 생성 완료. exact 후보 사람 승인 대기; Git 원격 게시·새 Agent Warm NOT_RUN. 전체 Build and Test 완료 선언 아님.
+- **Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. B PC 재현·팀 UI/최종 제출 검토 남음.
 - **(이전) Current Stage**: **CONSTRUCTION 진입 — Units Generation 승인됨(정정 3건 반영, 2026-09-08)**. 다음: U0 P0 필수 + U1 최소 Functional Design → NFR Requirements(minimal) → Code Plan. **정정**: (1) U3 소유자=**CJ**('여력' 폐기), UI·조직 집계는 승인된 **필수 범위**(P0 비블로킹 ≠ 선택 기능); **U2(B) Day2 대기 해제**(계약+게이트 충족 시 즉시 병행 착수). (2) **파일별 단일 수정자**: usage.py=CJ(카운트+공유 이벤트), cli.py=CJ, gitsync.py=B(전송; 검증·dedup은 usage.py=CJ), envharness_p0.py=CJ/envharness_p1.py=B('함수별 분담' 폐기); U3 집계·표현=읽기전용, C3 공유 이벤트 import=상태 변경(쓰기). (3) 계약 5 **비블로킹**으로 정정, U0 전체 완료 대기 없이 P0 최소 계약+로컬 저장·카운트·환경 인터페이스 확정 후 U0/U1 **병렬**. **코드 작성은 설계·Code Plan 승인 + 공통 기준 SHA·작업 경로 확인 후.**
 - **(이전) Units Generation (minimal) — 산출물 생성 완료**: Unit 정의(U0 공통·계약·통합/CJ, U1 P0 재사용 실행/A 최호길, U2 P1 경험·후보화·게시/B 한석훈, U3 조직 집계·표현·재사용 이벤트 공유, Q1 독립 QA 횡단/C 윤여훈), 의존성·계약 동결(1~8, P0 최소셋=1·3·4)·착수 순서(17:30 P0 앵커)·스토리 매핑(7개 전부 배정). 산출물: `application-design/unit-of-work.md`, `unit-of-work-dependency.md`, `unit-of-work-story-map.md`, `plans/unit-of-work-plan.md`.
 - **(이전) Application Design Request Changes(2건 계약 보완)**: (1) **C10 상태 조회 경로**: S3에 읽기전용 상태 조회 계약(`list_lifecycle_states`/`query_lifecycle_state`, `remote_publish_evidence`/`local_review_evidence`) 신설, C10은 이를 통해서만 상태 조회(추정·게이트 재구현 금지). (2) **재사용 이벤트 공유 자격 분리**: `export_shared_usage(scope=VERIFIED_REUSE)`로 Skill 게시 게이트(SHAREABLE)와 분리, C3가 검증·event_id dedup, `sync`→C3/C4.push_shared_usage 경로는 S3.publish와 독립(A게시→B import→B 검증 성공→B 공유→A 1회 반영). 의존성 매트릭스·다이어그램·텍스트대안(C4→C3, C10→S3, localhost HTTP)·"네트워크 서비스 없음" 범위·UI 프레임워크 단계 표기·채택 repo/branch vs 미정 로컬 경로 정합화. **Application Design 전체 승인·Units Generation은 재검토 후 결정**(REVIEW REQUIRED).
@@ -67,7 +79,7 @@
 ## Execution Plan Summary
 - **실행**: User Stories(minimal), Application Design, Units Generation, Functional Design(per-unit), NFR Requirements(per-unit, minimal), Code Generation, Build and Test
 - **생략**: Reverse Engineering(N/A), NFR Design, Infrastructure Design, Operations(placeholder)
-- **다음 단계**: P0 자연어 수용 Code Plan 개정 2 검토. 승인 후 해당 Part 2 실행. Application Design/Units Generation의 기존 승인을 재요청하지 않는다.
+- **다음 단계**: B PC에서 게시 Skill 가져오기·Warm·usage 공유 시연, 상태줄 팀 지표 정리, 최종 결과 검토. 기존 Application Design/Units 승인을 재요청하지 않는다.
 - **문서**: aidlc-docs/inception/plans/execution-plan.md
 
 ## 승인된 SKIP 경계 (Workflow Planning 승인 시 확정)

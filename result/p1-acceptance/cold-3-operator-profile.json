@@ -1,0 +1,13 @@
+{
+  "sheet": "생산보고",
+  "header_row": 10,
+  "month_col": 1,
+  "value_col": 4,
+  "values": [
+    100,
+    20,
+    0
+  ],
+  "expected_forecast": 0,
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-cold-three-20260908-235058\\cold-3"
+}

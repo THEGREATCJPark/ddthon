@@ -13,11 +13,12 @@
 - **P0 기존 경험 재사용:** 자연어 설치 요청 → 실제 pip 공급 실패 → MATCH → 같은 작업 venv에 설치·버전/import 확인 → 실제 reuse +1. 다른 경로에서 Claude 3개 사례 성공. 추가로 다른 패키지 2종에 같은 환경 Skill을 적용하는 코드 검증을 진행했습니다.
 - **P1 새 경험:** NASCA(가상) 사내환경에서 직접 XLSX 읽기 실패 → NO_MATCH → 새 Claude의 실제 탐색 → 열린 Excel read-only 접근 → 현재 파일의 열 해석 → OLS 예측·PNG 차트 → 환경 절차만 후보화까지 실행했습니다.
 - **상태줄/대시보드:** 로컬 데이터와 실적을 표시합니다. 확인하지 못한 원격 상태는 게시 완료나 0건으로 위장하지 않습니다.
-- **아직 미완료:** 실제 후보 사람 승인 후 원격 게시 및 새 Agent Warm 종단 검증. 코드의 게이트·로컬 Git 왕복 테스트를 실제 원격 종단 완료로 대신하지 않습니다.
+- **P1 실제 공유·재사용:** exact 후보 사람 승인 → 다른 문서 독립 Replay PASS → GitHub team-skill-store 게시 → 새 Claude Warm에서 업무·차트·reuse+1·후보0 → 재사용 이벤트 공유·중복 없는 수신까지 실행했습니다. 추가 Cold 3회도 다른 시트/열/값에서 성공했습니다.
+- **남은 검증/정리:** 별도 B PC 재현, 상태줄 공용 실적·팀 순위 표현, 최종 시연·갤러리 검토. 현재 원격 검증은 같은 PC의 독립 workspace와 실제 GitHub에서 수행했습니다.
 
 ![실제 P1 업무 결과](result/scenario-correction/cold-trend.png)
 
-실제 실행 로그: [P0 3회 재현](result/p0-reproduction/README.md), [P1 시나리오 정정·Cold 결과](result/scenario-correction/README.md).
+실제 실행 로그: [P0 3회 재현](result/p0-reproduction/README.md), [P1 시나리오 정정·Cold 결과](result/scenario-correction/README.md), [추가 Cold 3회·실제 원격 Warm·왕복 검증](result/p1-acceptance/README.md).
 
 ## 설치 및 P0 실행 (Windows PowerShell)
 
@@ -53,6 +54,10 @@ Windows Desktop Excel 설치·실행 및 pywin32가 필요합니다. Excel이 �
 준비 터미널을 유지하고 다른 터미널에서 생성된 `cold` 폴더로 이동해 Claude를 시작합니다. 요청: **AAAAA01_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.** 환경 설명은 NASCA(가상)이며 실제 NASCA 제품 검증을 뜻하지 않습니다. 암호나 해결 방법은 Agent 작업 파일에 제공하지 않습니다. 작업 종료 시 준비 폴더에 `STOP` 파일을 만들면 준비한 workbook만 닫습니다.
 
 사람 검토는 `skillloop review`, 새 접근 검증은 `replay`, 공유는 `publish` 명령으로 분리합니다. 각 명령의 `--help`에서 필수 인자를 확인합니다. 후보 생성은 승인·게시가 아니며, Agent가 review의 사람 확인을 대신 입력하지 않습니다. GitHub sync에는 별도 네트워크·write 인증이 필요합니다. `team-skill-store`는 공유 descriptor·비민감 reuse 이벤트만 전송하고 로컬 DB·업무 값·암호는 보내지 않습니다.
+
+## 팀 공유 시연
+
+[B PC GitHub 준비·Warm 시연 가이드](aidlc-docs/construction/build-and-test/b-github-demo-guide.md), [팀원 전달용 진행 요약](aidlc-docs/construction/build-and-test/team-update.txt). 제품 main과 공용 데이터 team-skill-store를 별도 작업 경로로 운영합니다. 이번 구현은 Git 공유 어댑터입니다. S3·사내 저장소 연결은 향후 별도 인증/권한/동기화 설계와 어댑터로 확장할 수 있으며, 현재 구현 완료로 주장하지 않습니다.
 
 ## 사용한 AI 도구와 개발 기록
 

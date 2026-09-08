@@ -1,0 +1,100 @@
+{
+  "started_at": "2026-09-08T14:53:33.809616+00:00",
+  "prompt": "cold-2_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.",
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-cold-three-20260908-235058\\cold-2",
+  "source_sha": "96f3c85fe3807f4e8c16d2d09034fa159bdbc40a",
+  "pre_store": {
+    "lifecycle": {},
+    "skills": {
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "pip-install-fail:skillloop-demo-pkg"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+        "id": "fix-skillloop-demo-pkg-install",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      }
+    }
+  },
+  "hash_before": "6a14650060602569c7f43ec55ce80059d85174d98a8e26723687b345ec82cd2a",
+  "pid": 11704,
+  "exit_code": 0,
+  "finished_at": "2026-09-08T14:56:14.509356+00:00",
+  "hash_after": "6a14650060602569c7f43ec55ce80059d85174d98a8e26723687b345ec82cd2a",
+  "store": {
+    "lifecycle": {
+      "file-access-8738e696cff8bbb20c98\u001f1.0.0\u001f359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af": {
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "evidence": {},
+        "id": "file-access-8738e696cff8bbb20c98",
+        "state": "PROPOSED",
+        "updated_at": "2026-09-08T14:55:53Z",
+        "version": "1.0.0"
+      }
+    },
+    "skills": {
+      "file-access-8738e696cff8bbb20c98\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "file-access-fail:xlsx"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "id": "file-access-8738e696cff8bbb20c98",
+        "origin": {
+          "author": "local"
+        },
+        "procedure": {
+          "action": "file-access",
+          "method": "excel-com-attach"
+        },
+        "version": "1.0.0"
+      },
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "pip-install-fail:skillloop-demo-pkg"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+        "id": "fix-skillloop-demo-pkg-install",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      }
+    }
+  },
+  "usage": {
+    "counts": {},
+    "seen_run_ids": [],
+    "events": {}
+  },
+  "original_unchanged": true,
+  "charts": [
+    "cold-2-8029167536851dcc7039-trend.png"
+  ]
+}

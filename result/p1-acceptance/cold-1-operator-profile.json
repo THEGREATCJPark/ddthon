@@ -1,0 +1,13 @@
+{
+  "sheet": "공장A",
+  "header_row": 3,
+  "month_col": 2,
+  "value_col": 5,
+  "values": [
+    800,
+    900,
+    1000
+  ],
+  "expected_forecast": 1100.0,
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-cold-three-20260908-235058\\cold-1"
+}

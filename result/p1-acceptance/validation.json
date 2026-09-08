@@ -1,0 +1,150 @@
+{
+  "verified_at": "2026-09-08T14:59:38.198083+00:00",
+  "runs": [
+    {
+      "name": "warm",
+      "verdict": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "one_completed_report": true,
+        "original_unchanged": true,
+        "chart_created": true,
+        "actual_values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "work_verified": true,
+        "search": true,
+        "direct_failure": true,
+        "candidate_delta": true,
+        "reuse": true,
+        "event_count": true
+      },
+      "forecast": 2550.0,
+      "values": [
+        2100,
+        2250,
+        2400
+      ],
+      "intermediate_error_count": 3,
+      "started_at": "2026-09-08T14:49:36.446918+00:00",
+      "finished_at": "2026-09-08T14:50:58.048644+00:00",
+      "source_sha": "96f3c85fe3807f4e8c16d2d09034fa159bdbc40a",
+      "charts": [
+        "warm-4d443bc76d6c80a37de3-trend.png"
+      ]
+    },
+    {
+      "name": "cold-1",
+      "verdict": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "one_completed_report": true,
+        "original_unchanged": true,
+        "chart_created": true,
+        "actual_values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "work_verified": true,
+        "search": true,
+        "direct_failure": true,
+        "candidate_delta": true,
+        "reuse": true,
+        "event_count": true,
+        "discovery_gate": true,
+        "cold_store_no_excel_skill": true,
+        "task_independent_candidate": true
+      },
+      "forecast": 1100.0,
+      "values": [
+        800,
+        900,
+        1000
+      ],
+      "intermediate_error_count": 6,
+      "started_at": "2026-09-08T14:50:59.505992+00:00",
+      "finished_at": "2026-09-08T14:53:32.797662+00:00",
+      "source_sha": "96f3c85fe3807f4e8c16d2d09034fa159bdbc40a",
+      "charts": [
+        "cold-1-c29f3edfa94889094fdb-trend.png"
+      ]
+    },
+    {
+      "name": "cold-2",
+      "verdict": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "one_completed_report": true,
+        "original_unchanged": true,
+        "chart_created": true,
+        "actual_values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "work_verified": true,
+        "search": true,
+        "direct_failure": true,
+        "candidate_delta": true,
+        "reuse": true,
+        "event_count": true,
+        "discovery_gate": true,
+        "cold_store_no_excel_skill": true,
+        "task_independent_candidate": true
+      },
+      "forecast": 600.0,
+      "values": [
+        1500,
+        1200,
+        900
+      ],
+      "intermediate_error_count": 10,
+      "started_at": "2026-09-08T14:53:33.809616+00:00",
+      "finished_at": "2026-09-08T14:56:14.509356+00:00",
+      "source_sha": "96f3c85fe3807f4e8c16d2d09034fa159bdbc40a",
+      "charts": [
+        "cold-2-8029167536851dcc7039-trend.png"
+      ]
+    },
+    {
+      "name": "cold-3",
+      "verdict": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "one_completed_report": true,
+        "original_unchanged": true,
+        "chart_created": true,
+        "actual_values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "work_verified": true,
+        "search": true,
+        "direct_failure": true,
+        "candidate_delta": true,
+        "reuse": true,
+        "event_count": true,
+        "discovery_gate": true,
+        "cold_store_no_excel_skill": true,
+        "task_independent_candidate": true
+      },
+      "forecast": 0,
+      "values": [
+        100,
+        20,
+        0
+      ],
+      "intermediate_error_count": 7,
+      "started_at": "2026-09-08T14:56:15.977348+00:00",
+      "finished_at": "2026-09-08T14:59:24.321146+00:00",
+      "source_sha": "96f3c85fe3807f4e8c16d2d09034fa159bdbc40a",
+      "charts": [
+        "cold-3-28c65c15b149012ecd1a-trend.png"
+      ]
+    }
+  ],
+  "all_pass": true,
+  "limitations": [
+    "Same Windows PC; independent workspaces/sessions and actual GitHub remote, not B-PC validation.",
+    "Warm Agent final narrative incorrectly attributed failure to file lock; actual direct-reader evidence is BadZipFile on Office-encrypted bytes.",
+    "Some agent tool/schema attempts failed before recovery; preserved in traces, not flawless first-try execution.",
+    "Terminal status popularity/count remain local; organization events are available in the shared snapshot.",
+    "S3/database adapter not implemented."
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "review": {
+    "ref": {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+    },
+    "state": "APPROVED",
+    "lifecycle_state": "APPROVED",
+    "local_review_evidence": {
+      "ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "decision": "approve",
+      "reviewer": "cik61 (explicit human approval in current chat)",
+      "reviewed_at": "2026-09-08T14:48:25.115029+00:00"
+    },
+    "remote_publish_evidence": null,
+    "replay": null
+  },
+  "replay": {
+    "ref": {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+    },
+    "state": "LOCALLY_APPROVED",
+    "lifecycle_state": "LOCALLY_APPROVED",
+    "local_review_evidence": {
+      "ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "decision": "approve",
+      "reviewer": "cik61 (explicit human approval in current chat)",
+      "reviewed_at": "2026-09-08T14:48:25.115029+00:00"
+    },
+    "remote_publish_evidence": null,
+    "replay": {
+      "verdict": "PASS",
+      "candidate_ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "evidence": {
+        "replay_independent": true,
+        "reused_first_run_result": false,
+        "candidate_digest_verified": true,
+        "recomputed_digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "app_open": true,
+        "access_method": "excel-com-attach",
+        "access_ok": true,
+        "access_evidence": {
+          "sha256_before": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+          "mtime_before": 1788875135.398,
+          "save_called": false,
+          "ran": true,
+          "stage": "read-complete",
+          "app_open": true,
+          "sha256_after": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+          "mtime_after": 1788875135.398,
+          "original_unchanged": true,
+          "workbook_readable": true
+        },
+        "replay_obtained_sheets": 1,
+        "fresh_content_digest": "c748b7d97cdf86286554fe0c5b1983dca9f35579cb0e58e9138f3a66e054d536"
+      }
+    }
+  },
+  "publication": {
+    "ref": {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+    },
+    "state": "PUBLISHED",
+    "lifecycle_state": "PUBLISHED",
+    "local_review_evidence": {
+      "ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "decision": "approve",
+      "reviewer": "cik61 (explicit human approval in current chat)",
+      "reviewed_at": "2026-09-08T14:48:25.115029+00:00"
+    },
+    "remote_publish_evidence": {
+      "ok": true,
+      "commit": "28809464218e7328c7184a20bcafebb0e1b18916",
+      "branch": "team-skill-store",
+      "synced_at": "2026-09-08T14:48:30.362291+00:00",
+      "branch_revision": "28809464218e7328c7184a20bcafebb0e1b18916",
+      "queryable_range": "shared Git bundles",
+      "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json"
+    },
+    "replay": {
+      "verdict": "PASS",
+      "candidate_ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "evidence": {
+        "replay_independent": true,
+        "reused_first_run_result": false,
+        "candidate_digest_verified": true,
+        "recomputed_digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "app_open": true,
+        "access_method": "excel-com-attach",
+        "access_ok": true,
+        "access_evidence": {
+          "sha256_before": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+          "mtime_before": 1788875135.398,
+          "save_called": false,
+          "ran": true,
+          "stage": "read-complete",
+          "app_open": true,
+          "sha256_after": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+          "mtime_after": 1788875135.398,
+          "original_unchanged": true,
+          "workbook_readable": true
+        },
+        "replay_obtained_sheets": 1,
+        "fresh_content_digest": "c748b7d97cdf86286554fe0c5b1983dca9f35579cb0e58e9138f3a66e054d536"
+      }
+    }
+  },
+  "warm_pull": {
+    "ok": true,
+    "commit": "28809464218e7328c7184a20bcafebb0e1b18916",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-08T14:48:33.369594+00:00",
+    "branch_revision": "28809464218e7328c7184a20bcafebb0e1b18916",
+    "queryable_range": "shared Git bundles",
+    "imported": 1,
+    "conflicts": 0,
+    "events": 0
+  },
+  "receiver_state": {
+    "ref": {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+    },
+    "state": "PUBLISHED",
+    "lifecycle_state": "PUBLISHED",
+    "local_review_evidence": null,
+    "remote_publish_evidence": {
+      "ok": true,
+      "commit": "28809464218e7328c7184a20bcafebb0e1b18916",
+      "branch": "team-skill-store",
+      "synced_at": "2026-09-08T14:48:33.369594+00:00",
+      "branch_revision": "28809464218e7328c7184a20bcafebb0e1b18916",
+      "queryable_range": "shared Git bundles",
+      "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json"
+    },
+    "replay": null
+  }
+}
