@@ -33,7 +33,9 @@ export default function Flow() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let active = true;
-    fetch(`${import.meta.env.BASE_URL}archify/development.svg`)
+    fetch(`${import.meta.env.BASE_URL}archify/development.svg?v=aidlc-v3`, {
+      cache: "no-cache",
+    })
       .then((r) => {
         if (!r.ok) throw Error();
         return r.text();
