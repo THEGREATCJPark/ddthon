@@ -1974,3 +1974,28 @@ footer > span:last-child {
 @media (prefers-reduced-motion: reduce) {
   .claude-demo .skillloop-terminal-status .counter-increased { animation: none; }
 }
+
+/* Original team logo paired with a full-width panoramic event banner. */
+.site .masthead { display: flex; flex-direction: column; align-items: stretch; gap: 22px; padding-bottom: 12px; }
+.brand-heading { display: flex; align-items: center; gap: 26px; }
+.nowhere-logo { position: relative; display: block; flex: 0 0 108px; width: 108px; height: 138px; overflow: hidden; border-radius: 8px; }
+.nowhere-logo img { position: absolute; width: 345.2px; max-width: none; height: 182.2px; left: -118px; top: -21px; mix-blend-mode: multiply; }
+.site .brand-heading .identity h1 { font-size: 38px; margin: 10px 0 8px; }
+.brand-heading .team-name { font-size: 16px; }
+.brand-heading .identity p { font-size: 14px; }
+.event-banner { position: relative; display: flex; align-items: center; justify-content: space-between; overflow: hidden; height: 174px; border-radius: 12px; background: linear-gradient(110deg,#030a19,#0a2455); color: #fff; }
+.event-banner-copy { z-index: 1; padding: 24px 36px; }
+.event-banner-copy > span { font-size: 10px; letter-spacing: 2px; color: #b2c4df; }
+.event-banner-copy strong { display: block; font-size: 30px; margin-top: 5px; letter-spacing: -1px; }
+.event-banner-copy p { margin-top: 8px; font-size: 13px; color: #c6d2e7; }
+.event-banner-art { display: block; height: 100%; width: auto; max-width: 55%; object-fit: contain; object-position: right; mask-image: linear-gradient(to right,transparent,#000 16%); }
+@media (max-width: 700px) {
+  .brand-heading { gap: 14px; }
+  .site .brand-heading .identity h1 { font-size: 27px; white-space: normal; }
+  .brand-heading .event-tag { display: none; }
+  .event-banner { height: 140px; }
+  .event-banner-copy { padding: 18px; }
+  .event-banner-copy strong { font-size: 24px; }
+  .event-banner-copy p, .event-banner-copy > span { display: none; }
+  .event-banner-art { max-width: 60%; object-fit: cover; }
+}
