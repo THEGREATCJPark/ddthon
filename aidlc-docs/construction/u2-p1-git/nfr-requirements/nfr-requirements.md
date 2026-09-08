@@ -24,7 +24,8 @@
 - ✅구현 C-d: `usage.export_shared_usage() -> bytes`/`import_shared_usage(blob, local_ref_exists) -> list[dict]`. 저장·검증·dedup=CJ. **Git 전송·pull·last-sync 경계만 B**, 전송 시 **event_id 재발급 금지**, pull 시 **정확한 로컬 Skill 존재 확인**(`local_ref_exists`=store.get+digest 일치) 연결. **이벤트 공유 왕복 실검증 전 NOT_RUN**.
 
 **외부 의존**
-- Python 3, 표준 라이브러리: `json`, `hashlib`, `zipfile`, `xml.etree.ElementTree`, `subprocess`, `uuid`, `tempfile`, `csv`.
+- Python 3, 표준 라이브러리: `json`, `hashlib`, `zipfile`, `subprocess`, `uuid`, `tempfile`, `csv`.
+- **`pywin32`(win32com) + Excel 설치·실행**(P1 Excel 경로): 암호화 합성 파일 생성(COM SaveAs Password)·실행 중 Excel attach(`GetActiveObject`) 셀 읽기. **NFR-RUN-1 P1 한정 예외**(선언된 사전조건, P0·기타 확대 금지). Excel 미설치→해당 P1 경로 `NOT_RUN`.
 - **Git CLI**(`git`): gitsync가 `subprocess`로 호출(별도 서버 없음, FR-SYNC-2). 실제 원격 push는 **인증 필요** — 불가 시 D-3(PUBLISH_PENDING + NOT_RUN).
 - 테스트: `pytest` + `Hypothesis`(PBT partial).
 - **네트워크 경계 구분**: "외부 인터넷 미의존"은 **로컬 P1 업무·테스트 실행 범위로 한정**한다(사내 데이터·secret 미의존, NFR-RUN-1/NFR-SEC-1). **GitHub 원격 sync(gitsync pull/push)는 네트워크와 인증이 필요**하며 이는 로컬 실행 미의존과 구분되는 별개 요구다.
@@ -37,21 +38,22 @@
 
 | 항목 | 결정 | 근거 |
 |---|---|---|
-| **P1 실패 모델** | **쓰기 금지(read-only) 환경 제약** 채택(FD §1 재정의) | 검증 대상 = "사내 환경 제약에서 정상 직접 접근 실패 → 허용 read-only 대안으로 해결". 파일은 정상 OOXML(손상·DRM·암호 없음), 제약은 **환경(쓰기 거부)**. 폐기: 텍스트/비-ZIP naive 파서 교정 모델 |
-| **직접(정상) 접근** | 원본 옆 작업 산출물(잠금/임시) 생성 또는 modify 핸들 요구하는 표준 열기 | read-only 표면에서 쓰기 거부로 **실제 실행 실패**(OS 실패 관찰, 강제 raise·잘못된 API 아님, FR-P1-1/NFR-SEC-2) |
-| **허용 대안** | 인접 쓰기·잠금 없는 순수 read-only 스트리밍 → `zipfile`+`xml.etree`로 OOXML 파싱 | 환경 허용 read-only 표면 내 → 성공. **stdlib 전용**(제3자 XLSX 라이브러리 필수 의존 없음, NFR-RUN-1). 접근/표면 제어=`os`/(Win)`msvcrt`. openpyxl은 **선택**(데모용, 새-clone 필수 아님) |
+| **P1 실패 모델** | **Office 암호화 합성 파일 + 실행 중 Excel read-only attach** 확정(CJ, (가)안, FD §1/D-5) | 암호화본 바이트=OLE-CFB(zip 아님). 실증: 암호화 직접접근 실패/평문 성공/attach 읽기·원본 무변경. 폐기: read-only 표면·naive 파서 모델 |
+| **직접(정상) 접근** | 표준 XLSX 리더(openpyxl/pandas/zipfile) | 암호화본은 zip이 아니라 리더가 **스스로 `BadZipFile`** → 자연 실패(강제 raise·잘못된 API 아님, 평문 대조군 성공 ⇒ 원인=환경, FR-P1-1) |
+| **허용 대안** | 실행 중 Excel 인스턴스에 attach(`win32com.GetActiveObject`) → 셀 값 read-only 읽기 | 애플리케이션이 복호화한 문서 매개로 성공. **Save 미호출·원본 mtime/hash 무변경**(NFR-SEC-2). Agent가 탐색·선택(harness 미제시) |
 | **Git 전송** | `git` CLI(subprocess) + **team-skill-store 전용 로컬 미러 dir**(D-2) | 별도 서버 없음(FR-SYNC-2), dev worktree 미오염 |
 | **lifecycle 영속** | **CJ `store` 저장·로드 API 사용(C-a 구현 제공됨 `ef03b3a`)** | `save/load_lifecycle_state`·`list_lifecycle_records`. 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json 미구현, exact id/version/digest 연결. 실제 영속 통합 검증 전 NOT_RUN |
 | **테스트 프레임워크** | pytest + Hypothesis | NFR-TEST-1(PBT partial)·TEST-2(process/contract/regression) |
 
-> **모델·의존성 확정(Code Plan 이월 아님)**: P1 실패 모델(쓰기 금지 환경 제약)·직접 접근/허용 대안·필요 의존성(stdlib 전용: `zipfile`/`xml.etree`/`os`/`msvcrt`)은 **본 FD/NFR로 고정**. Code Plan은 **구현 세부(잠금/스트리밍의 정확한 호출·에러코드 매핑)만** 확정.
+> **모델·의존성 확정(Code Plan 이월 아님)**: P1 실패 모델(Office 암호화 + 실행 중 Excel attach)·직접 접근(표준 zip 리더)/허용 대안(Excel attach)·필요 의존성(`pywin32` + **Excel 설치·실행**)은 **본 FD/NFR로 고정**. **NFR-RUN-1의 P1 Excel 경로 한정 예외 승인**(P0·기타 범위 확대 금지, Excel 미설치→`NOT_RUN`). Code Plan은 **구현 세부(attach 재시도·워크북 매칭·셀 범위 읽기 정확한 호출)만** 확정.
 
 ---
 
 ## 3. 실행 환경
 - Windows-native, 로컬 CLI. 합성·비민감 데이터만(CON-1).
-- P1 합성 XLSX: 3개 완료월 총생산량을 담되 **원본 업무 데이터·secret 미포함**(NFR-SEC-1).
-- read-only 경계: 승인된 대상만 read-only 접근, DRM 우회·비허용 접근 금지(NFR-SEC-2).
+- P1 합성 XLSX: 3개 완료월 총생산량을 담되 **원본 업무 데이터·secret 미포함**(NFR-SEC-1). **Office 암호화본**으로 저장하며 **암호는 사용자(사전조건) 소유** — harness/Agent/후보 절차에 평문 암호 미포함.
+- **P1 사전조건**: Excel 설치·실행 + 사용자가 합성 파일을 (암호로) 열어둔 상태. 미충족 시 P1 Excel 경로 `NOT_RUN`.
+- read-only 경계: 실행 중 Excel attach는 **Save 미호출·원본 무변경**의 read-only만, DRM 실제 우회·비허용 접근 금지(NFR-SEC-2).
 - gitsync 미러: 로컬 별도 clone/체크아웃 경로. push 성공 확인 전 PUBLISHED 미보고(D-3).
 
 ---
@@ -60,7 +62,7 @@
 
 | # | 항목 | 근거 | 판정 방식 |
 |---|---|---|---|
-| U2-V1 | 직접 parse는 **실제 실행 관찰 실패**(강제 raise 아님), 합성 XLSX read-only 대안으로 내용 획득 가능 | FR-P1-1/4, C7 경계 | integration(run-p1) |
+| U2-V1 | 표준 zip 리더 직접 접근이 암호화본에서 **실제 실행 관찰 실패**(`BadZipFile`, 강제 raise 아님), 실행 중 Excel attach 대안으로 셀 내용 획득·원본 무변경 | FR-P1-1/4, C7 경계, NFR-RUN-1 P1 예외 | integration(run-p1, Excel 있을 때)/NOT_RUN |
 | U2-V2 | 실제 검색 수행 후에만 NO_MATCH, 오류/timeout/미호출은 별도 상태로 구분 | FR-P1-2 | unit/integration |
 | U2-V3 | FR-P1-5 OLS: 기준월=마지막 완료월+1, 3점 OLS(x=1..3→x=4), 음수 0 clamp | FR-P1-5 | property(Hypothesis)+unit |
 | U2-V4 | 결과 표시: 실제 3개월 + 예상 1개월 구분, 예측 대상 월·단위·값 명시 | FR-P1-5 | unit |

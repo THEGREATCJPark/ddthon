@@ -36,6 +36,18 @@
 - **요청(계약 #4 일반화, 착수 여유 시)**:
   - `search`가 P1 problem 컨텍스트(예: `ProblemContext{kind:"file-access", signals:[...]}`)를 받거나, 시나리오 비의존 query 규격으로 일반화.
   - `check_applicability(candidate, problem) -> {applicable, matched_keywords, matched_conditions}`.
+- **★ P1 파일접근 procedure 실행 함수 계약(U2 확정 모델 반영, A 소유 S1 구현/C6 Replay 공용)**:
+  ```
+  run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult
+    입력: procedure = 후보 descriptor.procedure(서술적 환경 접근 절차만; 스크립트·업무 계산·암호 미포함)
+          env = {xlsx_path, app_open: bool}  (harness 준비 사실; 정답 대안 아님)
+    출력: AccessResult = {ok, content|None, method, evidence}
+    접근 성공(ok=True): (1)원본 바이트 직접 파싱 아님·허용 경로로 content 획득
+                        (2)content가 3개 완료월 (month,total_output) 포함
+                        (3)원본 mtime·sha256 무변경 & Save 미호출(read-only 증거)
+    실패/미충족 → ok=False (강제 raise 아님)
+  ```
+  확정 모델: 직접 접근=표준 zip 리더가 암호화본에서 `BadZipFile` 자연 실패, 허용 대안=실행 중 Excel attach 셀 읽기(§FD 1).
 - **U2 처리(CJ 결정 3, 우회 없음)**: **미구현 검색을 NO_MATCH로 간주 금지**. store 직접 조회로 검색을 대체하는 **우회 제거**. A의 P1 검색 + 파일접근 적용·검증 계약이 서면 그 계약으로 연결. 확정 전 검색·파일접근 재사용 분기 **`NOT_RUN`**.
 - **우선순위**: 중(P1 재사용 분기 정합). **A의 P0(S7/S8) 완성이 선행 우선순위임을 존중** — P1 일반화는 그 이후.
 

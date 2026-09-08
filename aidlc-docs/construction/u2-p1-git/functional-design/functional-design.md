@@ -18,42 +18,62 @@
 - **D-2 (Git 전송 구조)**: `gitsync.py`는 **team-skill-store 전용 로컬 미러 디렉터리**에서만 pull/push 한다. 현재 dev worktree·작업 브랜치(`work/u2-p1-git`)를 절대 오염시키지 않는다.
 - **D-3 (push 불가 시)**: 실제 원격 push 인증이 불가하면 로컬 **SHAREABLE(LOCALLY_APPROVED)** 상태를 보존하고 **PUBLISH_PENDING**으로 둔다. 원격 push 검증은 **NOT_RUN**으로 정직 기록하며 **PUBLISHED로 보고하지 않는다**(FR-P1-7 / CON honesty).
 - **D-4 (team-skill-store 초기화) — CJ 결정 5**: **team-skill-store branch 최초 초기화는 B(U2) 담당**이다. `main`과 **분리된 작업 경로**(D-2 전용 로컬 미러)에서 **공유 데이터 전용**으로 준비한다(합성·비민감 descriptor + 이벤트만; DB 파일·원본·secret 제외, FR-SYNC-5/NFR-SEC-1).
+- **D-5 (P1 실패 모델 확정) — CJ 결정(2026-09-08, (가)안 수정 채택)**: **Office 암호화 합성 파일 + 실행 중 Excel read-only attach**로 확정(§1 상세). 사전조건=Excel 설치·실행 + 사용자 열람 + `pywin32`; **NFR-RUN-1의 P1 Excel 경로 한정 예외 승인**(P0·기타 범위 확대 금지). Excel 미설치 → `NOT_RUN`. **다른 제약 모델 탐색 종료**, 실증(암호화 실패/평문 성공/attach 읽기)을 설계 근거로 사용하고 반복하지 않는다. FR-P1-7 독립 Replay·게시 게이트는 **불변**.
 
 ---
 
 ## 1. C7-P1 — EnvHarness (`envharness_p1.py`) : 합성 환경 준비만
 
-### 합성 실패 모델 (핵심 설계 결정 — CJ 검토 반영 재정의)
+### 합성 실패 모델 (핵심 설계 결정 — **CJ 확정(2026-09-08), 실증 근거 반영**)
 
-> **폐기된 모델**: "정상 XLSX를 텍스트/비-ZIP 방식으로 읽어 실패 → ZIP/XML로 읽어 해결"은 **채택하지 않는다.** 이는 잘못된 파서 사용의 교정일 뿐, 검증 대상이 아니다.
+> **확정 모델**: "**Office 암호화 합성 파일 + 실행 중인 Excel에 대한 허용 read-only attach**". (가)안 수정 채택. 이전 후보(텍스트/비-ZIP 파서 교정, 쓰기 금지 read-only 표면)는 모두 **폐기**된다. 아래 실증으로 성립을 확인했고 **동일 실증을 반복하지 않는다.**
 >
-> **검증 대상**: "**사내 환경 제약을 합성한 조건에서, 정상적인 직접 접근이 실패하고, 허용된 read-only 대안으로 해결하는 흐름**".
+> **실증 근거(설계 기반)**: 암호화본 3종(openpyxl/pandas/zipfile) 직접 접근 **자연 실패**(openpyxl/zipfile=`BadZipFile: File is not a zip file`, 강제 raise 아님) / **평문 대조군 동일 호출 전부 성공**(⇒ 실패 원인=API가 아니라 환경) / **실행 중 Excel attach로 셀 값 획득**(원본과 일치, 원본 mtime·hash 무변경, Save 미호출).
 
-**최소 모델 — 쓰기 금지(read-only) 환경 제약**
-- **합성 제약**: 대상은 **정상 OOXML XLSX**이며 파일 자체는 손상·DRM·암호가 없다. 이 파일을 **쓰기 금지(read-only) 표면**에 배치한다(사내 통제 문서 공유의 read-only 마운트/디렉터리 권한을 합성). 제약은 파일이 아니라 **환경(쓰기 거부)**에 있다.
-- **정상적인 직접 접근이 실패하는 이유**: 업무 표준 XLSX 열기 경로는 처리 과정에서 **원본 위치에 작업 산출물(잠금 파일·임시 추출물)을 생성**하거나 **수정(modify) 핸들**을 요구한다(스프레드시트 도구·다수 XLSX 라이브러리의 실제 기본 동작). read-only 표면에서는 이 쓰기가 **환경에 의해 거부**되어 접근이 **실제 실행에서 실패**한다. → **OS가 낸 쓰기/권한 실패를 관찰**하는 것이며, 잘못된 API를 고르지도, 강제 `raise`로 연출하지도 않는다.
-- **허용 대안이 가능한 이유**: **인접 쓰기·잠금 없이** 파일을 **순수 read-only로 스트리밍**해 메모리에서 내용을 읽는 접근은 환경의 **허용된 read-only 표면 안**이므로 성공한다. 어느 접근이 허용되는지는 EnvHarness가 알려주지 않으며 **Agent가 탐색·선택·실행**한다(제품 흐름에서 정답 대안을 자동 선택하지 않음).
+**모델 구성**
+- **합성 제약(암호화)**: 정상 데이터를 담은 워크북을 **Excel open password로 암호화 저장**한다(FileFormat=51, Password=…). 결과 바이트는 **OLE-CFB 암호화 컨테이너**(`D0 CF 11 E0 …`)이며 **OOXML zip이 아니다**. 제약은 "환경이 만든 암호화 상태"이며 파일 손상이 아니다.
+- **환경 사실(사전조건)**: Excel **설치·실행** + **사용자가 그 파일을 (암호로) 열어둔 상태**. **암호는 사용자만 안다**(harness·Agent·후보 절차에 평문 암호를 넣지 않는다).
+- **직접 접근이 실패하는 이유**: 표준 XLSX 리더(openpyxl/pandas/zipfile)는 파일을 **zip으로 해석**한다. 암호화본은 zip이 아니므로 리더가 **스스로 `BadZipFile`을 낸다**(잘못된 API 선택·강제 raise 아님).
+- **허용 대안이 가능한 이유**: 파일 바이트를 직접 열지 않고, 사용자가 **이미 열어 둔 실행 중 Excel 인스턴스에 attach**(`GetActiveObject`)해 **셀 값만 read-only로** 읽는다. 애플리케이션이 이미 복호화한 문서를 매개하므로 성공한다. 어느 대안이 허용되는지는 harness가 알려주지 않으며 **Agent가 탐색·선택·실행**한다(제품 흐름에서 자동 정답 선택 없음).
 
-**직접 접근 방법·필요 의존성 (FD/NFR 확정 — Code Plan 이월 아님)**
-- **직접(정상) 접근**: 원본 옆 작업 산출물 생성 또는 modify 핸들을 요구하는 표준 열기. read-only 표면에서 쓰기 거부로 실패.
-- **허용 대안**: 인접 쓰기 없는 순수 read-only 스트리밍 읽기 → 내용 획득.
-- **의존성**: **Python 표준 라이브러리 전용** — 내용 파싱은 `zipfile` + `xml.etree.ElementTree`(OOXML), 접근·표면 제어는 `os`/(Windows) `msvcrt`·파일 속성. **제3자 XLSX 라이브러리 필수 의존 없음**(새 clone 실행 가능, NFR-RUN-1). openpyxl 등은 **선택**(더 현실적 데모용)이며 새-clone 실행 필수 아님. 합성 데이터는 3개 완료월 총생산량만 담고 **원본 업무 데이터·secret 미포함**.
-- **구현 세부(잠금/스트리밍의 정확한 호출·에러코드 매핑)만** Code Plan에서 확정한다. 모델·의존성 결정은 본 FD/NFR로 고정.
+**필요 의존성·경계 (FD/NFR 확정 — Code Plan 이월 아님)**
+- **의존성**: `pywin32`(win32com) + **Excel 설치·실행**. **NFR-RUN-1의 P1 Excel 경로 한정 예외 승인됨**(P0·그 외 범위 확대 금지). `msoffcrypto-tool`·`xlwings`는 현재 미설치(대안 아님).
+- **Excel 미설치 → 이 P1 경로 `NOT_RUN`**(무결성·게시 게이트 불변, FR-P1-7).
+- **읽기 전용**: attach 경로는 **Save 계열 호출을 하지 않고** 원본 파일을 수정하지 않는다(NFR-SEC-2). DRM 실제 우회 없음 — 사용자가 정당하게 열어둔 세션을 통해 값만 읽는다.
+- Code Plan은 구현 세부(attach 재시도·워크북 매칭·셀 범위 읽기 정확한 호출)만 확정한다.
 
 ### 계약 시그니처
 ```
-setup_readonly_constrained_xlsx_env(path) -> XlsxEnv
-    # 정상 OOXML XLSX + 쓰기 금지(read-only) 표면을 "배치"만 한다. 정답 대안 미공급.
-    # XlsxEnv = {xlsx_path, readonly_root, present_facts{access_constraint:"read-only"}}
-teardown() -> None
+setup_encrypted_open_xlsx_env(data_rows, password) -> XlsxEnv
+    # 정상 데이터를 Excel(COM)로 암호화 저장 + 사용자 열람 상태(실행 중 Excel)를 "준비"만 한다.
+    # 정답 대안(attach) 미공급. password는 사전조건 소유자(사용자) 것이며 Agent/후보에 넘기지 않는다.
+    # XlsxEnv = {xlsx_path, app_running: bool, present_facts{file_state:"office-encrypted", app_open:true}}
+teardown() -> None      # 열어둔 Excel/워크북 정리, 원본 미변경 확인
 
-# C7↔Agent 관찰 계약 (강제 raise 아님 — 정상 접근을 실제 실행하고 결과만 관찰)
+# C7↔Agent 관찰 계약 (강제 raise 아님 — 표준 리더를 실제 실행하고 결과만 관찰)
 attempt_direct_access(path) -> DirectAccessObservation
-    # 업무 표준 열기(인접 작업 산출물/수정 핸들 요구)를 실제 실행.
+    # 표준 XLSX 리더(zip 기반)를 실제 실행. 암호화본이라 리더가 스스로 실패.
     # DirectAccessObservation = {ran: bool, ok: bool, error: str|None, evidence: dict}
-    # read-only 제약에서 실제 실행 결과가 ok=False(관찰된 환경 실패, FR-P1-1).
+    # 실증: ok=False, error="BadZipFile: File is not a zip file" (관찰된 환경 실패, FR-P1-1).
 ```
-- **경계 규칙**: `attempt_direct_access`는 정상 접근을 실제 실행하고 결과만 관찰한다. 대안 탐색·코드 작성·실행은 EnvHarness 책임 아님(Agent 책임). 실제 회사 데이터·DRM·강제 raise 없음(CON-1), 승인 대상만 read-only(NFR-SEC-2).
+- **경계 규칙**: `attempt_direct_access`는 표준 리더를 실제 실행하고 결과만 관찰한다(대안 미제시). 대안 탐색·attach 코드 작성·실행은 harness 책임 아님(Agent 책임). 평문 업무 내용을 성공 결과로 미리 주지 않는다. 합성·비민감 데이터만(CON-1), 승인 세션을 통한 read-only만(NFR-SEC-2).
+
+### ★ A 전달용 — procedure 실행 함수 계약 (파일접근 유형 재사용, C-c 일부)
+> S1(A 소유)이 파일접근 유형 후보 절차를 실행·검증할 때의 입출력·성공 기준. Replay(C6)도 동일 계약으로 재수행한다.
+```
+run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult
+    # 입력:
+    #   procedure = 후보 descriptor.procedure (서술적 환경 접근 절차만; 스크립트·업무 계산·암호 미포함)
+    #   env       = {xlsx_path, app_open: bool}  (harness가 준비한 사전조건 사실; 정답 대안 아님)
+    # 출력:
+    #   AccessResult = {ok: bool, content: <획득 셀 값/행들>|None, method: str, evidence: dict}
+    # 접근 성공 기준(ok=True):
+    #   (1) 원본 파일 바이트를 직접 파싱하지 않고(직접 접근 실패 대상), 허용 경로로 content를 획득
+    #   (2) content가 대상 3개 완료월 (month,total_output) 행을 포함
+    #   (3) 원본 파일 mtime·sha256 무변경 & Save 계열 호출 없음(read-only 증거)
+    #   실패/미충족 → ok=False (강제 raise로 성공/실패를 연출하지 않음)
+```
+- Replay는 이 함수를 **별도 실행 문맥에서 새로 호출**하고, **최초 실행의 content/판정을 재사용하지 않는다**(§4 C6). `evidence`에 method·mtime/hash 비교·Save 미호출을 남긴다.
 
 ---
 
@@ -62,7 +82,7 @@ attempt_direct_access(path) -> DirectAccessObservation
 ### 흐름 (services.md run_p1 정합)
 ```
 run_p1(xlsx):
-  1. obs = EnvHarness.attempt_direct_access(xlsx)        # 정상 접근 실제 실행 → read-only 제약 실패 관찰 (FR-P1-1)
+  1. obs = EnvHarness.attempt_direct_access(xlsx)        # 표준 zip 리더 실제 실행 → 암호화본 BadZipFile 실패 관찰 (FR-P1-1)
   2. outcome = SkillSearchMatcher.search(problem)        # 실제 검색·범위/질의/결과 기록 (FR-P1-2)
        - status in {ERROR, TIMEOUT, NOT_INVOKED} → 별도 오류 상태(≠ NO_MATCH)  (FR-P1-2)
        - applicable 파일접근 후보 존재:
@@ -71,7 +91,7 @@ run_p1(xlsx):
             content = 재사용으로 획득한 파일 내용;  reused = True
        - else NO_MATCH → 3~4 Agent 탐색
   3. facts = ask_environment_facts(user)                 # 대화형 (FR-P1-3)
-  4. (NO_MATCH) Agent가 허용 read-only 대안을 탐색·선택·코드작성·실행 → content 획득 (FR-P1-4)
+  4. (NO_MATCH) Agent가 허용 read-only 대안 탐색·선택·실행 → 실행 중 Excel attach로 content 획득 (FR-P1-4, run_file_access_procedure)
   5. result = compute_ols_forecast(content);  wv = verify_work_result(result, facts)   # FR-P1-5
   6. 후보 분기(중복 방지):
        - reused & 새 절차 없음  → candidate 생성 안 함
@@ -153,8 +173,8 @@ list_lifecycle_states(filter) -> list[LifecycleState]                        # �
 replay(candidate: Descriptor, env: EnvContext) -> ReplayResult
 # ReplayResult = {verdict: PASS|FAIL|NOT_RUN, candidate_ref:{id,version,digest}, evidence: dict}
 ```
-- **독립 실행**: candidate의 **환경 접근 절차**를 EnvHarness가 준비한 P1 합성 환경에 **독립적으로 재적용**해 실제 효과(파일 내용 획득 = ACCESS_EFFECT)를 확인 → verdict 산출.
-- verdict는 화면 문구가 아닌 **실제 효과** 기반(NFR-TEST-2). `candidate_ref.digest`는 게이트 동일성 확인에 사용.
+- **독립 실행**: candidate의 **환경 접근 절차**를 EnvHarness가 준비한 P1 합성 환경(암호화 파일 + 실행 중 Excel)에 **별도 실행 문맥에서 `run_file_access_procedure`로 새로 재수행**해 실제 효과(셀 내용 획득 = ACCESS_EFFECT)를 확인 → verdict 산출. **최초 실행의 artifact·획득 값·성공 판정을 재사용하지 않는다.** 사용자가 파일을 열어두는 것은 **환경 준비**이며 Replay 대상이 아니다.
+- **환경 미준비(Excel 미설치/미열림) → `NOT_RUN`**(게시 금지). verdict는 화면 문구가 아닌 **실제 효과** 기반(NFR-TEST-2). `candidate_ref.digest`는 게이트 동일성 확인에 사용.
 - 계약 5(ReplayResult + 게이트 입력 규격)는 U0 프리즈가 없으므로 **U2가 `replay.py`에서 정의**하고 S3가 소비.
 
 ---
@@ -228,7 +248,10 @@ status() -> SyncStatus
 
 ---
 
-## 9. 미해결·NOT_RUN 예정 항목 (정직 기록 — CJ 구현 제공됨 반영)
+## 9. 미해결·NOT_RUN 예정 항목 (정직 기록 — CJ 구현 제공됨 + P1 모델 확정 반영)
+- **P1 실패 모델 실증 근거(≠ NOT_RUN, 설계 확정 근거)**: 암호화본 직접 접근 자연 실패 / 평문 대조군 성공 / Excel attach 읽기·원본 무변경을 **실증 완료**(2026-09-08). 이는 확정 모델의 설계 근거로 사용한다.
+- **P1 Excel 경로 NOT_RUN 조건**: **Excel 미설치/미열림 환경**에서는 직접실패→attach 대안·OLS 완료·후보·Replay 경로를 **`NOT_RUN`**으로 표시(NFR-RUN-1 P1 한정 예외, 게시 게이트 불변).
+- **독립 Replay 실검증 NOT_RUN**: `run_file_access_procedure` 기반 C6 독립 Replay는 **구현 후 실제 검증** 예정(현재 미구현 → NOT_RUN).
 - **실패 실행 근거(≠ NOT_RUN)**: 최초 `git push`(작업 브랜치)는 **403으로 실제 실패** → 이는 시도한 실패의 실행 근거로 보존한다. 이후 권한 해결로 push 성공. 이와 별개로 **제품 원격 게시(team-skill-store) 성공 도달 + pull 왕복**은 아직 **NOT_RUN**(D-3).
 - C-a/C-b/C-d는 **구현 제공됨**(main `ef03b3a`/`cfc62e9`, 병합 반영). "구현 SHA 대기" 해소. 단 **실제 연동 통합 검증 전까지** 아래는 **NOT_RUN**(테스트 대역과 실제 성공 구분):
   - **C-a**: lifecycle 실제 저장→재시작 로드→상태 정합 영속 통합(자체 lifecycle.json 미구현, 판단·전이는 S3 유지).

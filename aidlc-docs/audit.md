@@ -517,3 +517,20 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 Functional Design·NFR Requirements 정정 / CJ FD 검토 결과 반영. 로컬 커밋 후 push 진행.
 
 ---
+
+## U2 P1 실패 모델 확정 반영 ((가)안: Office 암호화 + Excel attach) + 최소 Code Plan + A 계약
+**Timestamp**: 2026-09-08T09:53:30Z
+**User Input**: "CJ가 P1 실패 모델을 확정했습니다. (가)안 수정 채택입니다. 다른 제약 모델 탐색은 종료하고, 같은 모델 선택을 다시 질문하지 마세요. 이미 검증한 실증 결과(암호화본 실패 / 평문 대조군 성공 / Excel attach 성공)를 설계 근거로 그대로 사용하고, 변경 없는 실증을 반복하지 마세요. [확정 모델] Office 암호화 합성 파일 + 실행 중인 Excel에 대한 허용 read-only 접근 [1] 실행 조건 - P1 Excel 시나리오는 Excel 설치·실행 및 사용자가 합성 파일을 열어둔 상태를 명시적 사전조건으로 선언합니다. - 필요한 Python/COM 의존성(pywin32 등)과 준비 절차도 선언합니다. - NFR-RUN-1의 전역 설정 비의존 조건에 대해 이 P1 시나리오 한정 예외가 승인됐습니다. P0 및 나머지 제품 실행 범위로 예외를 확대하지 마세요. - Excel 미설치 환경에서는 해당 P1 경로를 명확히 미실행(NOT_RUN)으로 표시합니다. [2] 독립 Replay 유지 (FR-P1-7 변경 없음) - 사용자가 합성 파일을 열어두는 것은 '환경 준비'이며 Replay 대상이 아닙니다. - Replay는 별도 실행 문맥에서 exact candidate의 절차를 실제 수행하고, 새로 획득한 결과로 접근 효과를 검증합니다. - 최초 실행의 artifact·획득 값·성공 판정을 재사용하지 않습니다. - 환경이 준비되지 않았으면 NOT_RUN이며 게시할 수 없습니다. - 사람 승인 + exact candidate 동일성 + 실제 Replay PASS 게이트는 그대로 유지합니다. [3] harness 경계 - harness는 합성 파일 준비·환경 준비·사실 확인만 담당합니다. - Agent에게 정답 절차를 자동 선택해 주지 않습니다. - 미리 획득한 업무 내용을 성공 결과로 제공하지 않습니다. - 사용자가 파일을 여는 준비 과정과 후보 절차 실행을 구조적으로 분리합니다. [4] 문서 반영 범위 (FD/NFR 정정만으로 끝내지 말 것) - aidlc-docs/inception/requirements/requirements.md 의 NFR-RUN-1에 P1 한정 예외를 기록합니다. - 영향받는 스토리(US-P1-1 등), FD, NFR, audit, aidlc-state를 최소 정합화합니다. - 기존 기록은 보존하고 전체 Inception을 다시 시작하지 않습니다. - FR-P1-7의 독립 Replay·게시 조건은 변경하지 않습니다. [5] 구현 연결 — 이번에 함께 제출 - A에게 전달할 procedure 실행 함수의 입력·출력·접근 성공 기준을 명시하세요. - 최소 Code Plan을 한 번에 제시하세요 (파일·호출 계약·실행 명령·검증 방법·작업 순서). - 미검증 상태인 독립 Replay는 구현 후 실제로 검증합니다. [보고] 반영 후 변경 파일 목록, requirements 예외 기록 문구, A 전달용 procedure 함수 계약, 최소 Code Plan을 보고하고 로컬 커밋 후 push까지 진행한 뒤 SHA를 알려주세요."
+**AI Response**:
+- **실증 반복 없음**: 직전 검증(암호화 직접접근 실패/평문 대조군 성공/Excel attach 읽기·원본 무변경)을 설계 근거로 그대로 사용. 다른 제약 모델 탐색 종료, 같은 모델 재질문 없음.
+- **requirements.md NFR-RUN-1**: P1 Excel 경로 한정 예외 기록(Excel 설치·실행 + 사용자 열람 + pywin32 명시 사전조건; P0·기타 범위 확대 금지; Excel 미설치→NOT_RUN; 게시 게이트 불변).
+- **stories.md**: US-P1-1(직접 parser=암호화로 BadZipFile 자연 실패, 대안=Excel attach) + US-P1-2 AC-2(실행 중 Excel attach read-only) 최소 정합(AC 불변).
+- **FD**: §1 실패 모델을 확정 모델로 재작성(암호화 제약·사전조건·직접실패 이유·attach 대안·의존성·harness 경계 + **A 전달용 `run_file_access_procedure` 계약**), §0 D-5 추가, §2 흐름·§4 C6 Replay(별도 실행 문맥·최초 artifact 미재사용·환경 미준비 NOT_RUN)·§9 NOT_RUN 갱신.
+- **NFR**: §2 tech-stack 3행(암호화 모델·표준 리더 직접실패·Excel attach 대안) + 확정 노트(pywin32+Excel, NFR-RUN-1 P1 예외) + §1 외부 의존(pywin32/Excel) + §3 실행 환경(암호화본·사전조건·read-only 경계) + U2-V1 갱신.
+- **coordination-blockers.md**: A(C-c) 통지에 `run_file_access_procedure` 실행 함수 계약(입력·출력·접근 성공 기준) 추가.
+- **최소 Code Plan 신규**(`construction/u2-p1-git/code-plan.md`): 파일·소유, 호출 계약, P1 모델 구현, 실행 명령(run-p1), 검증 방법(U2-V1~14·NOT_RUN 목록), 작업 순서 6단계. 미검증 독립 Replay는 구현 후 실제 검증 명시.
+- **불변 유지**: FR-P1-7 독립 Replay·게시 게이트, 기존 기록 보존, Inception 재시작 없음. CJ/A 소유 코드 미변경, README/EVALUATION 미커밋.
+- **진행 순서**: FD 확인 → NFR 확인 → Code Plan 승인 → 구현. 현재 개정본·Code Plan **승인 대기**(구현 미착수).
+**Context**: CONSTRUCTION / U2 Functional Design·NFR·Requirements(NFR-RUN-1 예외)·Stories·Code Plan / P1 실패 모델 확정((가)안) 반영. 로컬 커밋 후 push 진행.
+
+---
