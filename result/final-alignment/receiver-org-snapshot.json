@@ -1,0 +1,149 @@
+{
+  "summary": {
+    "distinct_skills_local": 2,
+    "published_skills": 1,
+    "verified_reuse_events": 1,
+    "reuser_aliases": [
+      "local"
+    ],
+    "contributor_aliases": [
+      "local",
+      "seed"
+    ]
+  },
+  "scope": {
+    "local": "로컬 store·usage 기준(항상 가용)",
+    "org": "동기화된 events·lifecycle 기준"
+  },
+  "skills": [
+    {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+      "applicability": {
+        "signals": [
+          "file-access-fail:xlsx"
+        ]
+      },
+      "demo_seed": false,
+      "local_reuse_count": 0,
+      "org_reuse_count": 1
+    },
+    {
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "1.0.0",
+      "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+      "applicability": {
+        "signals": [
+          "pip-install-fail:skillloop-demo-pkg"
+        ]
+      },
+      "demo_seed": false,
+      "local_reuse_count": 0,
+      "org_reuse_count": 0
+    }
+  ],
+  "people": [
+    {
+      "alias": "local",
+      "role": "author",
+      "contributions": 1,
+      "cross_reuse": 0
+    },
+    {
+      "alias": "seed",
+      "role": "author",
+      "contributions": 1,
+      "cross_reuse": 0
+    }
+  ],
+  "states": [
+    {
+      "ref": {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+      },
+      "lifecycle_state": "PUBLISHED",
+      "local_review_evidence": {
+        "decision": "approve",
+        "ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reviewed_at": "2026-09-08T14:48:25.115029+00:00",
+        "reviewer": "cik61 (explicit human approval in current chat)"
+      },
+      "remote_publish_evidence": {
+        "branch": "team-skill-store",
+        "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+        "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json",
+        "commit": "04d831066e0fcdae3217412385e37dc0f08cae58",
+        "ok": true,
+        "queryable_range": "shared Git bundles",
+        "synced_at": "2026-09-08T14:52:16.752579+00:00"
+      }
+    }
+  ],
+  "ranking": [
+    {
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0",
+      "reuse_count": 0,
+      "demo_seed": false
+    },
+    {
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "1.0.0",
+      "reuse_count": 0,
+      "demo_seed": false
+    }
+  ],
+  "activity": [
+    {
+      "timestamp": "2026-09-08T14:50:45Z",
+      "skill_ref": {
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0"
+      },
+      "reuser_alias": "local"
+    }
+  ],
+  "last_sync": {
+    "synced_at": "2026-09-08T14:52:16.752579+00:00",
+    "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+    "queryable_range": "shared Git bundles"
+  },
+  "organization": {
+    "available": true,
+    "basis": "마지막 동기화 후 로컬에 관찰된 게시 Skill·검증 이벤트 (실시간 전체 조직 아님)",
+    "verified_reuses": 1,
+    "ranking": [
+      {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "reuse_count": 1,
+        "demo_seed": false
+      }
+    ],
+    "people": [
+      {
+        "alias": "local",
+        "contributions": 1
+      }
+    ],
+    "viewer_contributions": 0
+  },
+  "accounting": {
+    "actual_reuses": 0,
+    "demo_seed_reuses": 0
+  },
+  "viewer": {
+    "alias": "cik61",
+    "contributions": 0,
+    "reuses": 0
+  }
+}

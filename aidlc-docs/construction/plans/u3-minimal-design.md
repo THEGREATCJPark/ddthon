@@ -129,3 +129,8 @@ OrgSnapshot = {
 
 ## 승인된 하단 표현 보완
 u3-statusline-followup-plan.md 사용자 승인 후 C11을 네 줄로 변경하고 status의 명시 경로/표시 옵션, 프로젝트 statusLine 설정을 연결한다. C10 집계·S3/C4 상태 근거·읽기전용·DEMO/actual 분리는 유지한다. 잘못된 별도 match 호출을 유도한 C9 안내는 기존 P0 호출 계약으로 정합화한다.
+
+
+## 2026-09-09 승인된 U3 집계 정합화
+
+근거: final-presentation-alignment-plan.md 사용자 승인. organization projection은 S3의 exact PUBLISHED ref와 원격 commit/branch 근거, C4 last_sync, C3 검증 이벤트를 읽습니다. id/version/digest와 event_id로 현재 exact Skill별 실적을 집계하며 로컬 카운트를 다시 더하지 않습니다. 후보·과거 digest/version·DEMO 이벤트는 팀 게시 순위에서 제외합니다. 기여자는 descriptor origin을 유지합니다. 미연결은 None/확인 대기, 연결된 팀0과 구분합니다. 상태줄·대시보드는 같은 스냅샷을 소비하며 C2/C3/S3/C4를 쓰거나 조회 중 Git을 실행하지 않습니다. 로컬 people 목록은 후보도 포함하므로 팀 게시 기여와 다른 범위라는 라벨을 명시합니다.

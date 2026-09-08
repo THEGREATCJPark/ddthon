@@ -63,6 +63,24 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
     나머지 로컬 실데이터 집계는 그대로 수행한다(이 결정으로 U3를 대기시키지 않는다).
     """
     descriptors = store.list()
+    exact_descriptors = {(d.id, d.version, d.digest): d for d in descriptors}
+    # C3 owns validation/dedup. This read-only projection also excludes obsolete refs
+    # and never adds the local counter to the same event already present in C3.
+    events_by_id = {}
+    for event in usage.list_shared_events():
+        ref = event.get("skill_ref", {})
+        key = (ref.get("id"), ref.get("version"), ref.get("digest"))
+        d = exact_descriptors.get(key)
+        if (d is not None and not d.demo_seed and not event.get("demo_seed")
+                and event.get("event_id")
+                and event.get("evidence", {}).get("is_real_success") is True):
+            events_by_id.setdefault(event["event_id"], event)
+    events = list(events_by_id.values())
+    event_counts = {}
+    for event in events:
+        ref = event["skill_ref"]
+        key = (ref["id"], ref["version"], ref["digest"])
+        event_counts[key] = event_counts.get(key, 0) + 1
 
     # --- 로컬 저장 Skill(dedup: 서로 다른 digest 기준, FR-ORG-1) ---
     seen_digests: set[str] = set()
@@ -73,7 +91,7 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
     demo_seed_reuses = 0
     for d in descriptors:
         local_reuse = usage.current_count(d.id, d.version)
-        org_reuse = usage.shared_reuse_count(d.id, d.version)
+        org_reuse = event_counts.get((d.id, d.version, d.digest), 0)
         author = _author_of(d)
         contributor_aliases.add(author)
         author_by_ref[(d.id, d.version)] = author
@@ -93,7 +111,6 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
         seen_digests.add(d.digest)
 
     # --- 공유 재사용 이벤트(조직 집계 대상; event_id dedup은 C3 소유) ---
-    events = usage.list_shared_events()
     reuser_aliases = sorted({ev.get("reuser_alias", "") for ev in events if ev.get("reuser_alias")})
 
     # people: 작성자(origin) + 재사용자(alias). cross_reuse = 자신이 작성하지 않은 Skill 재사용.
@@ -130,6 +147,7 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
 
     # --- lifecycle 상태(계약7 provider로만; 미연결이면 명시) ---
     if lifecycle_view is None:
+        raw_states = []
         states: object = STATE_UNLINKED
         published_skills: object = PUBLISHED_UNKNOWN
         lifecycle_linked = False
@@ -144,8 +162,9 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
             }
             for rec in raw_states
         ]
-        published_skills = sum(1 for rec in raw_states
-                               if rec.get("lifecycle_state") == "PUBLISHED")
+        published_skills = len({tuple(rec.get("ref", {}).get(k) for k in ("id", "version", "digest"))
+                                for rec in raw_states if rec.get("lifecycle_state") == "PUBLISHED"}
+                               & exact_descriptors.keys())
         lifecycle_linked = True
 
     # --- last_sync(C4 provider로만; 미연결이면 local-only 명시) ---
@@ -162,6 +181,34 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
 
     viewer_contrib = people.get(my_alias, {}).get("contributions", 0)
     viewer_reuse = sum(1 for ev in events if ev.get("reuser_alias") == my_alias)
+
+    org_available = lifecycle_linked and bool(last_sync.get("synced_at"))
+    published_refs = {
+        tuple(rec.get("ref", {}).get(k) for k in ("id", "version", "digest"))
+        for rec in raw_states
+        if rec.get("lifecycle_state") == "PUBLISHED"
+        and (rec.get("remote_publish_evidence") or {}).get("commit")
+        and (rec.get("remote_publish_evidence") or {}).get("branch") == "team-skill-store"
+    } & exact_descriptors.keys()
+    org_people = {}
+    org_ranking = []
+    for ref in sorted(published_refs):
+        d = exact_descriptors[ref]
+        if d.demo_seed:
+            continue
+        author = _author_of(d)
+        org_people[author] = org_people.get(author, 0) + 1
+        org_ranking.append({"id": d.id, "version": d.version, "digest": d.digest,
+                            "reuse_count": event_counts.get(ref, 0), "demo_seed": False})
+    org_ranking.sort(key=lambda r: (-r["reuse_count"], r["id"], r["version"], r["digest"]))
+    organization = {
+        "available": org_available,
+        "basis": "마지막 동기화 후 로컬에 관찰된 게시 Skill·검증 이벤트 (실시간 전체 조직 아님)",
+        "verified_reuses": sum(r["reuse_count"] for r in org_ranking) if org_available else None,
+        "ranking": org_ranking if org_available else [],
+        "people": [{"alias": a, "contributions": n} for a, n in sorted(org_people.items())] if org_available else [],
+        "viewer_contributions": org_people.get(my_alias, 0) if org_available else None,
+    }
 
     return {
         "summary": {
@@ -182,6 +229,7 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
         "ranking": ranking,
         "activity": activity,
         "last_sync": last_sync,
+        "organization": organization,
         "accounting": {                   # FR-USAGE-3: 실제 실적 vs DEMO_SEED
             "actual_reuses": actual_reuses,
             "demo_seed_reuses": demo_seed_reuses,

@@ -142,4 +142,10 @@ def test_status_uses_s3_view_without_git_mutation(scope, monkeypatch, capsys):
     d = build_candidate(PROC); PublishPipeline(store).propose(d)
     monkeypatch.setattr(GitSyncAdapter, '_git', lambda *a, **kw: (_ for _ in ()).throw(AssertionError('UI must not run Git')))
     assert cli.cmd_status(store.path, usage.path) == 0
-    assert '확인 대기' not in capsys.readouterr().out
+    output = capsys.readouterr().out
+    # S3 is connected (candidate exists, no published Skill), while Git sync
+    # has never run. These are independent states, not a shared unknown flag.
+    assert '게시 상태 확인 대기' not in output
+    assert '공개 Skill 0개' in output
+    assert '팀 동기화 미연결' in output
+    assert '팀 실적 확인 대기' in output

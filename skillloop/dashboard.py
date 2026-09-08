@@ -60,9 +60,11 @@ def _render_overview(snapshot: dict) -> str:
         ("로컬 저장 Skill(디스크립터 수)", s.get("distinct_skills_local", 0)),
         ("조직 게시(PUBLISHED)", pub_str),
         ("검증 재사용 이벤트(dedup)", s.get("verified_reuse_events", 0)),
-        ("실제 재사용 합계", acc.get("actual_reuses", 0)),
+        ("로컬 실제 재사용 합계", acc.get("actual_reuses", 0)),
+        ("팀 게시 Skill 실제 재사용(중복 제외)", snapshot.get("organization", {}).get("verified_reuses")
+         if snapshot.get("organization", {}).get("available") else "확인 대기(동기화 미연결)"),
         ("DEMO_SEED(실적 제외)", acc.get("demo_seed_reuses", 0)),
-        ("기여자", ", ".join(s.get("contributor_aliases", [])) or "-"),
+        ("로컬 저장 Skill 작성자", ", ".join(s.get("contributor_aliases", [])) or "-"),
         ("재사용자", ", ".join(s.get("reuser_aliases", [])) or "-"),
     ]
     body = "<h2>요약</h2><table>" + "".join(
@@ -142,9 +144,9 @@ def _render_people(snapshot: dict) -> str:
         f"<td>{_esc(p.get('contributions', 0))}</td><td>{_esc(p.get('cross_reuse', 0))}</td></tr>"
         for p in snapshot.get("people", [])
     ]
-    table = ("<table><tr><th>alias</th><th>역할</th><th>기여(작성)</th><th>교차 재사용</th></tr>"
+    table = ("<table><tr><th>alias</th><th>역할</th><th>로컬 저장 Skill 작성</th><th>관찰된 교차 재사용</th></tr>"
              + "".join(rows) + "</table>") if rows else "<p class='meta'>사람 데이터 없음.</p>"
-    return "<h2>기여·재사용</h2>" + table
+    return "<h2>기여·재사용</h2><p class='meta'>로컬에 저장된 Skill·이벤트 기준입니다. 미게시 후보도 포함하므로 팀 게시 기여 순위와 구분합니다.</p>" + table
 
 
 def _render_activity(snapshot: dict) -> str:

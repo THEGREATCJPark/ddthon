@@ -126,3 +126,72 @@ def test_read_only_does_not_mutate_files(tmp_path):
     OA.build_snapshot(store, usage, my_alias="zzz")
     after = os.stat(usage.path).st_mtime_ns, json.load(open(usage.path, encoding="utf-8"))
     assert before[1] == after[1]      # 내용 불변(무쓰기)
+
+
+class Synced:
+    def last_sync(self):
+        return {"synced_at": "2026-09-09T00:00:00Z", "branch_revision": "test-commit"}
+
+
+def _published(d):
+    return {"ref": {k: getattr(d, k) for k in ("id", "version", "digest")},
+            "lifecycle_state": "PUBLISHED",
+            "remote_publish_evidence": {"commit": "test-commit", "branch": "team-skill-store"}}
+
+
+def test_remote_event_visible_without_local_reuse_and_repeat_is_readonly(tmp_path):
+    from skillloop.statusline import render_statusline
+    from skillloop.dashboard import render_page
+    store, receiver = _seed(tmp_path)
+    d = D.make_descriptor(_content("shared", "1", "alice")); store.put(d)
+    sender = UsageTracker(str(tmp_path / "sender.json"))
+    sender.record_actual_reuse(build_evidence(
+        {k: getattr(d, k) for k in ("id", "version", "digest")},
+        {"is_real_success": True}, "remote-run", reuser_alias="bob"))
+    blob = sender.export_shared_usage()
+    assert receiver.import_shared_usage(blob, local_ref_exists=lambda ref: ref == _published(d)["ref"])[0]["applied"]
+    assert not receiver.import_shared_usage(blob, local_ref_exists=lambda ref: True)[0]["applied"]
+    before = open(receiver.path, "rb").read()
+    snap = OA.build_snapshot(store, receiver, FakeLifecycle([_published(d)]), Synced(), my_alias="alice")
+    assert snap["accounting"]["actual_reuses"] == 0
+    assert snap["organization"]["verified_reuses"] == 1
+    assert snap["organization"]["viewer_contributions"] == 1
+    text = render_statusline(snap)
+    assert "팀 실제 검증 1회" in text and "로컬 데모 기준 0회 + 실제 검증 0회" in text
+    assert "인기 스킬(팀) - shared@1 · 실제 1회" in text
+    assert "팀 게시 기여 1위: alice" in text
+    assert "팀 게시 Skill 실제 재사용(중복 제외)</th><td>1" in render_page(snap, "/", {})
+    assert open(receiver.path, "rb").read() == before
+
+
+def test_own_event_not_added_twice_and_unpublished_author_not_team_leader(tmp_path):
+    store, usage = _seed(tmp_path)
+    d = D.make_descriptor(_content("shared", "1", "alice")); store.put(d)
+    for i in range(3):store.put(D.make_descriptor(_content(f"candidate-{i}", "1", "bob")))
+    usage.record_actual_reuse(build_evidence(_published(d)["ref"], {"is_real_success": True}, "own", reuser_alias="alice"))
+    snap = OA.build_snapshot(store, usage, FakeLifecycle([_published(d)]), Synced())
+    assert snap["accounting"]["actual_reuses"] == snap["organization"]["verified_reuses"] == 1
+    assert snap["organization"]["people"] == [{"alias": "alice", "contributions": 1}]
+    unlinked = OA.build_snapshot(store, usage, FakeLifecycle([_published(d)]))
+    assert unlinked["organization"]["verified_reuses"] is None
+    assert not unlinked["organization"]["available"]
+
+
+def test_old_digest_version_demo_and_duplicate_events_do_not_inflate_projection(tmp_path):
+    from copy import deepcopy
+    store, usage = _seed(tmp_path)
+    d = D.make_descriptor(_content("shared", "2", "alice")); store.put(d)
+    usage.record_actual_reuse(build_evidence(_published(d)["ref"], {"is_real_success": True}, "own", reuser_alias="alice"))
+    event = usage.list_shared_events()[0]
+    class EventView:
+        def current_count(self, *args):return 1
+        def list_shared_events(self):
+            old_digest=deepcopy(event);old_digest["event_id"]="old-digest";old_digest["skill_ref"]["digest"]="old"
+            old_version=deepcopy(event);old_version["event_id"]="old-version";old_version["skill_ref"]["version"]="1"
+            demo=deepcopy(event);demo["event_id"]="demo";demo["demo_seed"]=True
+            return [event, deepcopy(event), old_digest, old_version, demo]
+    old_state=_published(d);old_state["ref"]["digest"]="old"
+    snap=OA.build_snapshot(store, EventView(), FakeLifecycle([_published(d), _published(d), old_state]), Synced())
+    assert snap["summary"]["published_skills"]==1
+    assert snap["organization"]["verified_reuses"]==1
+    assert snap["skills"][0]["org_reuse_count"]==1
