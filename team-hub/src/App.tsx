@@ -12,7 +12,7 @@ import Demo from "./Demo";
 const tabs = [
   { id: "flow", name: "진행 순서도", icon: GitBranch },
   { id: "team", name: "팀 의견", icon: MessageCircle },
-  { id: "challenge", name: "딴지 걸기", icon: Flame },
+  { id: "challenge", name: "태클 걸기", icon: Flame },
   { id: "demo", name: "시연", icon: Play },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];

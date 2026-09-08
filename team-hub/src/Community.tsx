@@ -113,7 +113,7 @@ function CommentForm({
               : parentId
                 ? "답글 남기기"
                 : board === "challenge"
-                  ? "딴지 걸기"
+                  ? "태클 걸기"
                   : "의견 남기기"}
           </button>
         </div>
@@ -254,7 +254,7 @@ export default function Community({ board }: { board: Board }) {
           <div className="section-kicker">
             {board === "team" ? "TEAM TALK" : "CHALLENGE US"}
           </div>
-          <h2>{board === "team" ? "우리 팀의 한마디." : "딴지 환영."}</h2>
+          <h2>{board === "team" ? "우리 팀의 한마디." : "태클 환영."}</h2>
           <p>
             {board === "team"
               ? "길게 정리하지 않아도 괜찮아요. 댓글로 이야기해요."
@@ -270,7 +270,7 @@ export default function Community({ board }: { board: Board }) {
       <CommentForm board={board} onSent={() => setSent(true)} />
       <div className="thread-heading">
         <h3>
-          {board === "team" ? "의견" : "받은 딴지"}{" "}
+          {board === "team" ? "의견" : "받은 태클"}{" "}
           <span>{messages.filter((m) => !m.parentId).length}</span>
         </h3>
         <span className="muted">
