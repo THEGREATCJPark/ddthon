@@ -442,3 +442,11 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 / Functional Design(minimal) CJ 검토 반영 개정. FD는 승인 후 개정본 재검토 대기, Code Plan 미착수. 남은 대기 계약: C-a(CJ lifecycle 저장), C-b(CJ store bundle), C-c(A match P1+파일접근 적용·검증), C-d(CJ 공유 이벤트).
 
 ---
+
+## U2 — CJ 공통 의존성 방향 확정 수신·반영(설계 갱신, push 보류)
+**Timestamp**: 2026-09-08T09:05:49Z
+**User Input**: "CJ로부터 공통 의존성 처리 방향이 추가로 확정됨. FD/NFR 반영. [확정] C-a: S3 상태 판단·변경 요청·조회는 U2, 실제 저장·로드는 CJ store 계약 제공, U2 자체 lifecycle.json 미구현, 상태는 정확한 id/version/digest 연결. C-b: descriptor export/import는 CJ 제공, digest 검증·DEDUP/CONFLICT는 store 처리(U2 미구현), S3는 공유 자격 판단한 정확한 후보만 export 연결. C-d: 공유 이벤트 저장·검증·중복제거는 CJ, Git 전송·pull·last-sync는 U2 경계, 이벤트 전송 시 event_id 새로 발급하지 않음. [CJ 제공 순서] ① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트, 각각 검증 commit SHA 전달 예정. [진행 방침] 확정 호출 계약 기준 S3/gitsync 설계 갱신, 승인 Code Plan 범위 독립 구현만, 테스트 대역 가능하되 실제 공유 성공과 구분(미실행 NOT_RUN), CJ 공통 계약 승인 ≠ U2 전체 구현 승인, C-c(P1 검색·파일접근)는 A와 별도 조율 중 대기 유지. 반영 후 변경 파일 목록+audit 보고. push는 권한 해결 전까지 시도 말고 로컬 커밋까지만."
+**AI Response**: CJ 공통 의존성 확정을 FD·NFR·조율 문서에 반영. FD: §0 개정이력에 2차 확정 추가·D-1을 CJ store 저장·로드 제공(제공 ①, SHA 대기)·자체 lifecycle.json 미구현·exact ref 연결로 갱신, §3 S3 영속 라인 동일 갱신, §5 C4에 'export 대상 한정(C-b: store가 digest 검증·DEDUP/CONFLICT, S3는 공유 자격 판단한 정확한 후보만 export)'·'event_id 보존(C-d: 재발급 금지, 그대로 전송)'·확정 계약 기준 병행 규칙(제공 ①②·SHA 대기·CJ 계약 승인≠U2 전체 승인) 추가, §6 표를 확정(C-a/C-b/C-d)·대기(C-c)로 재작성, §9 NOT_RUN을 SHA 수신·실행 전 기준으로 재작성. NFR: §1 의존성 블록을 계약 확정(제공 순서·SHA 대기)+C-c 대기로 갱신, lifecycle tech-stack 행 갱신, §7 이월 항목 갱신. coordination-blockers: 상태 헤더·CJ 확정 요약(제공 순서·5항목·진행 방침)·요약표 재작성. 방침 준수: 확정 호출 계약 기준 설계만 갱신, 독립 구현은 승인 Code Plan 범위, 미실행 실검증 NOT_RUN, C-c 대기 유지. **push 미시도(권한 403 미해결) — 로컬 커밋까지만 진행.** 다른 Unit·메인 workflow 미변경.
+**Context**: CONSTRUCTION / U2 / Functional Design·NFR CJ 공통 의존성 확정 반영. FD 개정본 승인 대기, Code Plan 미착수. 확정 계약: C-a/C-b/C-d(CJ, SHA 대기). 대기: C-c(A).
+
+---

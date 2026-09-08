@@ -12,9 +12,9 @@
 
 ## 0. 확정된 진행 파라미터
 
-> **개정 이력**: 초안 D-1(U2 자체 lifecycle.json)은 **CJ FD 검토(2026-09-08)로 철회**되고 아래로 대체됨. D-2·D-3 유지. CJ 결정 5(team-skill-store 초기화=B) 추가.
+> **개정 이력**: (1) 초안 D-1(U2 자체 lifecycle.json)은 **CJ FD 검토(2026-09-08)로 철회**되고 아래로 대체됨. D-2·D-3 유지. CJ 결정 5(team-skill-store 초기화=B) 추가. (2) **CJ 공통 의존성 방향 확정(2026-09-08 2차)** — C-a/C-b/C-d의 **호출 계약이 확정**되어 대기 표현을 "확정 계약 기준 연결 + 검증 commit SHA 대기"로 갱신. 제공 순서 **① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트**. 이벤트 전송 시 **event_id 재발급 금지**(C-d). **C-c(P1 검색·파일접근 Skill 적용)는 A와 별도 조율 중 — 대기 유지**. CJ 공통 계약 승인 ≠ U2 전체 구현 승인.
 
-- **D-1 (S3 lifecycle 영속) — CJ 검토 반영, 개정**: 이전 "U2 자체 `lifecycle.json` 영속" 결정을 **철회**한다. lifecycle **저장 책임은 CJ가 `SkillStore` 쪽으로 정합화**한다(services.md의 "SkillStore lifecycle-state 저장 계약" 유지). 단, **상태 판단·게이트 판정·읽기전용 상태 조회 책임은 U2(S3)가 그대로 유지**한다(단일 소유). → **CJ 계약 대기 항목**: `store`의 lifecycle-state 저장/조회 인터페이스가 확정되기 전까지 영속 연동은 **`NOT_RUN`**, S3는 계약 확정 시 저장 호출만 연결한다(자체 저장으로 우회하지 않음).
+- **D-1 (S3 lifecycle 영속) — CJ 공통 의존성 확정 반영**: 이전 "U2 자체 `lifecycle.json` 영속" 결정은 **철회**된 상태를 유지한다. **확정(C-a)**: 실제 **저장·로드는 CJ의 `store` 계약으로 제공**된다(제공 순서 ①, 검증 commit SHA 전달 예정). **상태 판단·변경 요청·조회 책임은 U2(S3)가 단독 유지**한다. **U2 자체 `lifecycle.json` 저장 구현은 진행하지 않는다.** 상태는 **정확한 `id`/`version`/`digest`에 연결**한다. → S3는 확정된 저장/로드 호출 계약에 연결하되, **CJ의 검증 commit SHA 수신 전 실제 영속 연동은 `NOT_RUN`**으로 기록한다(테스트 대역은 실제 저장 성공과 구분).
 - **D-2 (Git 전송 구조)**: `gitsync.py`는 **team-skill-store 전용 로컬 미러 디렉터리**에서만 pull/push 한다. 현재 dev worktree·작업 브랜치(`work/u2-p1-git`)를 절대 오염시키지 않는다.
 - **D-3 (push 불가 시)**: 실제 원격 push 인증이 불가하면 로컬 **SHAREABLE(LOCALLY_APPROVED)** 상태를 보존하고 **PUBLISH_PENDING**으로 둔다. 원격 push 검증은 **NOT_RUN**으로 정직 기록하며 **PUBLISHED로 보고하지 않는다**(FR-P1-7 / CON honesty).
 - **D-4 (team-skill-store 초기화) — CJ 결정 5**: **team-skill-store branch 최초 초기화는 B(U2) 담당**이다. `main`과 **분리된 작업 경로**(D-2 전용 로컬 미러)에서 **공유 데이터 전용**으로 준비한다(합성·비민감 descriptor + 이벤트만; DB 파일·원본·secret 제외, FR-SYNC-5/NFR-SEC-1).
@@ -128,7 +128,7 @@ list_lifecycle_states(filter) -> list[LifecycleState]                        # �
 ```
 - U3(C10)는 이 계약으로만 상태를 조회한다. **상태 추정·게이트 재구현 금지**(AD-Q4).
 - **원격 게시본 구분**: import로 받은 게시본은 `remote_publish_evidence`(원격 근거)와 `local_review_evidence`(수신 환경 검토)를 **분리**한다. 로컬 검토 없으면 "원격 게시(타 환경 근거)"로만 표시, **수신 환경의 승인·Replay 기록을 만들지 않는다**.
-- **영속: D-1(개정)** — lifecycle 저장은 **CJ의 `SkillStore` lifecycle-state 계약**에 위임(대기). **상태 전이 판단·게이트·읽기전용 조회는 S3(U2) 단독 유지**. store lifecycle 저장/조회 계약 확정 전까지 영속 연동은 **`NOT_RUN`**이며, S3는 자체 파일 저장으로 우회하지 않고 계약 확정 시 호출만 연결한다.
+- **영속: D-1(확정 반영)** — lifecycle 저장·로드는 **CJ `store` 계약으로 제공 확정**(C-a, 제공 순서 ①, 검증 commit SHA 대기). **상태 전이 판단·변경 요청·읽기전용 조회는 S3(U2) 단독 유지**. S3는 자체 `lifecycle.json` 저장을 구현하지 않고 확정 저장/로드 호출 계약에 연결하며, 상태는 **정확한 `id`/`version`/`digest`에 연결**한다. **CJ 검증 commit SHA 수신 전 실제 영속 연동은 `NOT_RUN`**.
 
 ---
 
@@ -165,25 +165,27 @@ status() -> SyncStatus
 # SyncResult = {ok, retryable, error}
 ```
 - **경계**: 무결성·CONFLICT·dedup·저장은 **store**(CJ), 공유 이벤트 규격·검증·event_id dedup·저장은 **usage.py**(CJ)에 위임. gitsync는 **전송만**. 승인·게시 lifecycle 미구현(S3 책임). 원격 상태 문자열만으로 로컬 승인/Replay/실적 생성 안 함(AD-Q4).
+- **export 대상 한정(C-b 확정)**: descriptor export/import는 **CJ 제공**. digest 검증·DEDUP/CONFLICT는 **store에서 처리**하므로 U2에서 별도 구현하지 않는다. **S3는 공유 자격(SHAREABLE)을 판단한 정확한 후보만** `export`하도록 연결한다(게이트 통과 exact `{id,version,digest}`만).
+- **event_id 보존(C-d 확정)**: 이벤트 전송 시 gitsync는 **`event_id`를 새로 발급하지 않는다**. usage.py(CJ)가 발급·검증·dedup한 이벤트 레코드를 **그대로 전송**만 한다. Git 전송·`pull`·`last_sync` 경계는 U2 유지.
 - **D-3**: `push_*`가 `ok=False`면 로컬 상태 미변경, `retryable`/`error` 보존. S3는 PUBLISH_PENDING 유지. 실제 원격 push 인증 불가 시 push 검증 **NOT_RUN**.
 - **게시 vs 이벤트 공유 독립**: `push_descriptors`(SHAREABLE descriptor)와 `push_shared_usage`(VERIFIED_REUSE 이벤트)는 별개 경로. 새 Skill을 게시하지 않아도 실적 이벤트 공유 가능.
-- **계약 대기·병행 개발 규칙(CJ 검토 반영, C-b/C-d)**: **U2는 자체 저장·무결성·CONFLICT 처리로 우회하지 않는다**(CJ 결정 2). `store.export_bundle/import_bundle`(C-b)와 `usage.export/import_shared_usage`(C-d)는 **CJ가 우선 제공**한다. gitsync의 **전송 로직은 확정 계약에 맞춘 테스트 대역(stub)으로 병행 개발**하되, **실제 import/pull 검증과는 명확히 구분**하고 미실행분은 **`NOT_RUN`**으로 기록한다. 이벤트 규격·검증·dedup·저장=CJ, **Git 전송 경계만 B 유지**(CJ 결정 4).
+- **확정 계약 기준 병행 개발 규칙(CJ 공통 의존성 확정, C-b/C-d)**: `store` export/import(C-b)와 `usage` 공유 이벤트(C-d)의 **호출 계약이 확정**되었다. **제공 순서 ① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트**, 각 항목은 **검증 commit SHA 전달 예정**. U2는 **확정된 호출 계약 기준으로 전송 로직을 갱신**하고, **승인된 Code Plan 범위의 독립 구현 + 테스트 대역(stub)**만 진행한다. **U2는 자체 저장·무결성·CONFLICT·dedup으로 우회하지 않는다.** 테스트 대역은 **실제 공유 성공과 명확히 구분**하며, CJ 검증 commit SHA 수신 전 실제 import/pull/이벤트 공유 검증은 **`NOT_RUN`**. **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
 
 ---
 
 ## 6. CJ/A 조율 계약 대기 (CJ 검토 반영 — 우회안 제거)
 
-> **CJ FD 검토(2026-09-08) 반영**: 초안의 U2 자체 우회안(자체 lifecycle 저장 / 자체 bundle 직렬화·CONFLICT / 자체 store 조회 NO_MATCH)을 **모두 제거**한다. 해당 계약은 소유자(CJ/A)가 제공하며, U2는 계약에 맞춰 **호출 연결 + 테스트 대역(stub) 병행 개발**만 한다. 미실행 실검증은 **`NOT_RUN`**.
+> **CJ 공통 의존성 방향 확정(2026-09-08 2차) 반영**: C-a/C-b/C-d의 **호출 계약이 확정**되었다(초안 우회안은 계속 제거 상태). 소유자(CJ)가 실제 구현을 **제공 순서 ①②로 전달**하며 각 항목은 **검증 commit SHA**로 온다. U2는 **확정 호출 계약 기준 연결 + 승인 Code Plan 범위 독립 구현 + 테스트 대역(stub)**만 진행하고, 실제 저장·검증·공유 성공은 **SHA 수신·실행 후**에만 인정한다(미실행 **`NOT_RUN`**, 테스트 대역과 실제 성공 구분). **C-c(A)는 별도 조율 중 — 대기 유지.** **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
 
-| # | 계약 대기 | 소유 | U2 처리(우회 없음) | NOT_RUN 항목 |
+| # | 계약 | 소유 / 상태 | U2 처리(우회 없음) | SHA/실행 전 NOT_RUN 항목 |
 |---|---|---|---|---|
-| C-a | S3 lifecycle **저장** 정합화 | **CJ(SkillStore)** | 상태 판단·게이트·읽기전용 조회는 **S3(U2) 유지**. 저장은 CJ 계약에 **호출만 연결**(자체 파일 저장 금지) | lifecycle 영속 연동 |
-| C-b | `store.export_bundle(SHAREABLE)` / `import_bundle` | **CJ(store.py) — 우선 제공** | 자체 저장·무결성·CONFLICT **우회 금지**. gitsync 전송은 **계약 stub로 병행 개발**, 실제 import/pull 검증과 구분 | pull import·CONFLICT 실검증 |
-| C-c | `match.search` P1 입력 **+ 파일접근 Skill 적용·검증 계약** | **A(조율 중)** | **미구현 검색을 NO_MATCH로 간주 금지**. store 직접 조회 우회 **제거**. A 계약 대기 | 검색·파일접근 재사용 분기 |
-| C-d | 공유 이벤트 규격·검증·dedup·**저장** | **CJ(usage.py)** | **Git 전송 경계만 B 유지**. 전송 stub 병행 가능 | 이벤트 공유 왕복 실검증 |
+| C-a | lifecycle **저장·로드** | **CJ store — 확정**(제공 ①, SHA 대기) | 상태 판단·변경 요청·읽기전용 조회는 **S3(U2) 단독**. 저장·로드는 **확정 계약 호출만 연결**(자체 lifecycle.json 미구현). 상태는 exact `id/version/digest`에 연결 | lifecycle 실제 영속 연동 |
+| C-b | descriptor **export/import** | **CJ store — 확정**(제공 ①, SHA 대기) | digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만 export** 연결. gitsync 전송은 stub 병행 | 실제 import/pull·CONFLICT 검증 |
+| C-c | `match.search` P1 입력 **+ 파일접근 Skill 적용·검증** | **A — 조율 중(대기)** | **미구현 검색을 NO_MATCH로 간주 금지**. store 직접 조회 우회 **제거**. A 계약 대기 | 검색·파일접근 재사용 분기 |
+| C-d | 공유 이벤트 규격·검증·dedup·**저장** | **CJ usage — 확정**(제공 ②, SHA 대기) | 저장·검증·dedup=CJ. **Git 전송·pull·last-sync 경계만 B**. 전송 시 **event_id 재발급 금지**(그대로 전송). 전송 stub 병행 | 이벤트 공유 왕복 실검증 |
 
 **이미 확보**: 계약 1(descriptor digest/serialize) ✅, 계약 3 카운트(record_actual_reuse/build_evidence/new_execution_id) ✅. 계약 5(ReplayResult)는 U2 정의.
-**병행 개발 가능(계약 확정 전, stub 기준)**: gitsync 전송 골격(push_descriptors/push_shared_usage/pull/last_sync 인터페이스), S3 상태머신·게이트·읽기전용 조회 계약(#7) 정의, C6 Replay, C7-P1 환경 harness, S2 OLS·후보화(계산·표시 로직).
+**독립 구현 가능(SHA 수신 전, 확정 호출 계약·stub 기준)**: gitsync 전송 골격(push_descriptors/push_shared_usage/pull/last_sync 인터페이스, event_id 보존), S3 상태머신·게이트·읽기전용 조회 계약(#7) 정의·exact 후보 export 연결, C6 Replay, C7-P1 환경 harness, S2 OLS·후보화(계산·표시 로직). **C-c 관련 검색·파일접근 재사용 분기는 제외(A 대기).**
 
 ---
 
@@ -208,9 +210,11 @@ status() -> SyncStatus
 
 ---
 
-## 9. 미해결·NOT_RUN 예정 항목 (정직 기록 — CJ 검토 반영)
-- 실제 원격 push 인증 불가 시 PUBLISHED 도달은 **NOT_RUN**(D-3).
-- CJ `store.export_bundle`/`import_bundle`(C-b) 확정 전 **pull import·CONFLICT 실검증은 NOT_RUN**(자체 저장·CONFLICT 우회 금지).
-- CJ `store` lifecycle-state 저장/조회 계약(C-a) 확정 전 **lifecycle 영속 연동은 NOT_RUN**(자체 파일 저장 금지, 판단·게이트는 S3 유지).
-- CJ `usage.export/import_shared_usage`(C-d) 확정 전 **이벤트 공유 왕복 실검증은 NOT_RUN**(Git 전송 경계만 B).
-- A `match.search` P1 입력 + 파일접근 적용·검증 계약(C-c) 확정 전 **검색·파일접근 재사용 분기는 NOT_RUN**(미구현 검색을 NO_MATCH로 간주 금지).
+## 9. 미해결·NOT_RUN 예정 항목 (정직 기록 — CJ 공통 의존성 확정 반영)
+- 실제 원격 push 인증 불가 시 PUBLISHED 도달은 **NOT_RUN**(D-3, 현재 push 권한 미해결).
+- C-a/C-b/C-d는 **호출 계약 확정**이나, CJ **검증 commit SHA 수신·실행 전까지** 아래는 **NOT_RUN**(테스트 대역과 실제 성공 구분):
+  - **C-a**: lifecycle 실제 저장·로드 영속 연동(자체 lifecycle.json 미구현, 판단·게이트·조회는 S3 유지).
+  - **C-b**: descriptor 실제 import/pull·CONFLICT 검증(digest 검증·DEDUP/CONFLICT는 store 처리, S3는 exact 후보만 export).
+  - **C-d**: 이벤트 공유 왕복 실검증(event_id 재발급 없이 전송만, 저장·검증·dedup=CJ).
+- **C-c(A 대기 유지)**: `match.search` P1 입력 + 파일접근 적용·검증 계약 확정 전 **검색·파일접근 재사용 분기는 NOT_RUN**(미구현 검색을 NO_MATCH로 간주 금지).
+- **CJ 공통 계약 승인 ≠ U2 전체 구현 승인** — U2 구현은 승인된 Code Plan 범위로 한정.

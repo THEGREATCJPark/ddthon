@@ -16,11 +16,12 @@
 - ✅ 계약 3 카운트 경로: `usage.record_actual_reuse/build_evidence/new_execution_id/current_count` — 확보(파일접근 재사용 성공 카운트에 사용).
 - 계약 5 (ReplayResult + 게이트 입력): U0 프리즈 없음 → **U2가 `replay.py`에서 정의**(blocker 아님).
 
-**계약 대기 (CJ 검토 반영 — U2 자체 우회 금지, 소유자 제공)**
-- ⚠ C-a: `store` lifecycle-state 저장/조회 계약 — **CJ 정합화 대기**. 상태 판단·게이트·읽기전용 조회는 S3(U2) 유지, 저장은 계약에 호출만 연결(자체 파일 저장 금지). 확정 전 **영속 연동 NOT_RUN**.
-- ⚠ C-b: `store.export_bundle(SHAREABLE)`/`import_bundle` — **CJ 우선 제공**. 자체 저장·무결성·CONFLICT **우회 금지**. gitsync 전송은 계약 stub로 병행 개발, 실제 import/pull 실검증과 구분 → 미실행 **NOT_RUN**.
-- ⚠ C-c: `match.search` P1 입력 **+ 파일접근 Skill 적용·검증 계약** — **A 조율 중**. 미구현 검색을 NO_MATCH로 간주 금지, store 직접 조회 우회 **제거**. 확정 전 **검색·파일접근 재사용 분기 NOT_RUN**.
-- ⚠ C-d: `usage.export_shared_usage`/`import_shared_usage`(계약 6) — 규격·검증·dedup·**저장 = CJ**, **Git 전송 경계만 B**. 전송 stub 병행 가능, 이벤트 공유 왕복 실검증 확정 전 **NOT_RUN**.
+**계약 확정 (CJ 공통 의존성 확정 2026-09-08 2차 — 호출 계약 확정, 검증 commit SHA 대기)**
+> 제공 순서: **① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트**. 각 항목 검증 commit SHA 전달 예정. U2는 확정 호출 계약 기준 연결 + 승인 Code Plan 범위 독립 구현 + 테스트 대역(stub)만 진행하고, 실제 성공은 SHA 수신·실행 후 인정(미실행 NOT_RUN, 대역과 구분). **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
+- ✅확정 C-a: lifecycle **저장·로드 = CJ `store` 계약 제공**(제공 ①). 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json **미구현**, 상태는 exact `id/version/digest`에 연결. SHA 수신·실행 전 **영속 연동 NOT_RUN**.
+- ✅확정 C-b: descriptor **export/import = CJ 제공**(제공 ①). digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만 export** 연결. gitsync 전송 stub 병행 → 실제 import/pull·CONFLICT 검증은 SHA 전 **NOT_RUN**.
+- ⚠대기 C-c: `match.search` P1 입력 **+ 파일접근 Skill 적용·검증 계약** — **A 조율 중(대기)**. 미구현 검색을 NO_MATCH로 간주 금지, store 직접 조회 우회 **제거**. 확정 전 **검색·파일접근 재사용 분기 NOT_RUN**.
+- ✅확정 C-d: 공유 이벤트 규격·검증·dedup·**저장 = CJ**(제공 ②). **Git 전송·pull·last-sync 경계만 B**, 전송 시 **event_id 재발급 금지**(그대로 전송). 전송 stub 병행 → 이벤트 공유 왕복 실검증은 SHA 전 **NOT_RUN**.
 
 **외부 의존**
 - Python 3, 표준 라이브러리: `json`, `hashlib`, `zipfile`, `xml.etree.ElementTree`, `subprocess`, `uuid`, `tempfile`, `csv`.
@@ -39,7 +40,7 @@
 | **XLSX 파서(허용 대안)** | **stdlib 전용**(`zipfile` + `xml.etree`) 기본 채택 | NFR-RUN-1(새 clone/ZIP에서 선언 의존성만으로 실행). 제3자 XLSX 라이브러리 **필수 의존 회피**. XLSX=OOXML zip이므로 `xl/worksheets/*.xml` read-only 파싱 가능 |
 | **직접 parser(실패 관찰)** | Code Plan에서 **실제 관찰 실패 메커니즘 확정**(강제 raise·DRM 금지) | FR-P1-1/NFR-SEC-2. naive 접근이 이 합성 파일에서 실제 실행 시 실패를 반환하도록 구성. openpyxl 등은 **선택**(더 현실적 데모용)이며 새-clone 실행 필수 아님 |
 | **Git 전송** | `git` CLI(subprocess) + **team-skill-store 전용 로컬 미러 dir**(D-2) | 별도 서버 없음(FR-SYNC-2), dev worktree 미오염 |
-| **lifecycle 영속** | **CJ `SkillStore` 계약에 위임(D-1 개정, 대기)** | 상태 판단·게이트·읽기전용 조회는 S3(U2) 유지, 저장은 CJ 정합화. 확정 전 영속 연동 NOT_RUN |
+| **lifecycle 영속** | **CJ `store` 저장·로드 계약에 위임(C-a 확정, 제공 ①, SHA 대기)** | 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json 미구현, 상태는 exact id/version/digest 연결. SHA 수신·실행 전 영속 연동 NOT_RUN |
 | **테스트 프레임워크** | pytest + Hypothesis | NFR-TEST-1(PBT partial)·TEST-2(process/contract/regression) |
 
 > **미결정→기본 채택 안내**: 직접 parser의 정확한 실패 메커니즘과 openpyxl 채택 여부는 Code Plan에서 확정. 기본은 **stdlib 전용 + 강제 raise 없는 실제 관찰 실패**. 다른 방향(예: openpyxl 필수 채택) 원하시면 검토 게이트에서 지정.
@@ -92,6 +93,6 @@
 - 직접 parser 실패 메커니즘 확정(강제 raise 금지) + openpyxl 채택 여부.
 - 합성 XLSX 픽스처 정의(3개월 생산량 스키마).
 - gitsync 미러 경로·**team-skill-store branch 초기화(D-4, B 담당)**·bundle 파일 레이아웃.
-- lifecycle 저장은 **CJ `SkillStore` 계약**(C-a) 확정 후 연결(자체 파일 저장 없음). CLI 명령 문자열 연결(cli.py=CJ 계약).
+- lifecycle 저장·로드는 **CJ `store` 계약**(C-a 확정, 제공 ①)에 연결(자체 파일 저장 없음). CLI 명령 문자열 연결(cli.py=CJ 계약).
 - OLS·게이트·digest 불변식 PBT 구체화.
-- CJ/A 계약(C-a~C-d) 확정에 맞춘 stub·실연동 전환 및 NOT_RUN 해제 기준.
+- CJ 공통 계약(C-a/C-b/C-d) **확정** — 검증 commit SHA(제공 ①②) 수신 시 stub→실연동 전환 및 해당 NOT_RUN 해제. A 계약(C-c)은 대기 유지.
