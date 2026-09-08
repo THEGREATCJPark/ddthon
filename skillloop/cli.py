@@ -41,6 +41,21 @@ _DEMO_SKILL_CONTENT = {
 _DEMO_DIR = os.path.join(os.getcwd(), ".skillloop_demo")
 
 
+def _ensure_utf8_stdout() -> None:
+    """Windows-native 콘솔(cp949 등)에서 유니코드 출력 크래시 방지.
+
+    한글·em-dash 등 비-ASCII 출력이 콘솔 코드페이지로 인코딩 실패해 UnicodeEncodeError로
+    실행이 중단되는 것을 막는다. 캡처된 스트림(pytest 등)에서는 no-op일 수 있어 예외 무시.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
+
 def _seed_store(store: SkillStore) -> None:
     d = descriptor_mod.make_descriptor(_DEMO_SKILL_CONTENT, demo_seed=False)
     store.put(d)  # STORED 또는 DEDUP(재실행 시). 카운트 변경 없음.
@@ -69,6 +84,7 @@ def run_p0(store_path: str | None = None, usage_path: str | None = None,
     run_id=None이면 새 논리적 실행으로 1회 발급(발급 지점).
     동일 실행의 재시도·재시작이면 호출자가 기존 run_id를 전달 → 중복 카운트 방지(C3 dedup).
     """
+    _ensure_utf8_stdout()
     os.makedirs(_DEMO_DIR, exist_ok=True)
     store = SkillStore(store_path or os.path.join(_DEMO_DIR, "store.json"))
     usage = UsageTracker(usage_path or os.path.join(_DEMO_DIR, "usage.json"))
@@ -154,6 +170,7 @@ def share_import(in_path: str, store_path: str | None = None,
 
 def main(argv: list[str] | None = None) -> int:
     """콘솔 스크립트 진입점. 서브커맨드 라우팅."""
+    _ensure_utf8_stdout()
     parser = argparse.ArgumentParser(prog="skillloop")
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("run-p0", help="P0 재사용 데모 실행")
