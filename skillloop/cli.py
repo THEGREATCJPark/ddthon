@@ -62,15 +62,21 @@ def _observe_failing_install(env, index_dir: str, target: str):
     )
 
 
-def run_p0(store_path: str | None = None, usage_path: str | None = None) -> int:
-    """P0 데모: 설치 실패 → Skill 적용 → 실제 검증 → reuse+1. 종료코드 반환."""
+def run_p0(store_path: str | None = None, usage_path: str | None = None,
+           run_id: str | None = None) -> int:
+    """P0 데모: 설치 실패 → Skill 적용 → 실제 검증 → reuse+1. 종료코드 반환.
+
+    run_id=None이면 새 논리적 실행으로 1회 발급(발급 지점).
+    동일 실행의 재시도·재시작이면 호출자가 기존 run_id를 전달 → 중복 카운트 방지(C3 dedup).
+    """
     os.makedirs(_DEMO_DIR, exist_ok=True)
     store = SkillStore(store_path or os.path.join(_DEMO_DIR, "store.json"))
     usage = UsageTracker(usage_path or os.path.join(_DEMO_DIR, "usage.json"))
     _seed_store(store)
 
-    # 1) 실행 식별자 1회 발급(발급 지점).
-    run_id = new_execution_id()
+    # 1) 실행 식별자: 새 실행이면 1회 발급, 재시도·재시작이면 전달받은 것 재사용.
+    if run_id is None:
+        run_id = new_execution_id()
 
     # 2) 오프라인 index 준비 + clean venv.
     harness.prepare()
