@@ -1,46 +1,23 @@
-name: Deploy Team Hub
-
+name: Deploy Nowhere Workspace
 on:
   push:
     branches: [main, codex/team-hub]
     paths: ["team-hub/**", ".github/workflows/team-hub.yml"]
   workflow_dispatch:
-  issues:
-    types:
-      [
-        opened,
-        edited,
-        deleted,
-        closed,
-        reopened,
-        labeled,
-        unlabeled,
-        assigned,
-        unassigned,
-      ]
-  issue_comment:
-    types: [created, edited, deleted]
-
 permissions:
   contents: read
-
 concurrency:
   group: team-hub-pages
   cancel-in-progress: false
-
 jobs:
   build:
-    if: github.event_name != 'issue_comment' || !github.event.issue.pull_request
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      issues: read
+    timeout-minutes: 12
     defaults:
       run:
         working-directory: team-hub
     steps:
-      - name: Checkout collaboration website
+      - name: Checkout workspace
         uses: actions/checkout@v4
         with:
           ref: codex/team-hub
@@ -50,12 +27,14 @@ jobs:
           node-version: "22.18.0"
           cache: npm
           cache-dependency-path: team-hub/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
       - run: npm ci
       - run: npm test
-      - name: Snapshot public collaboration data
-        run: npm run snapshot
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Verify comment security rules in isolated emulator
+        run: npx --yes firebase-tools@15.29.0 emulators:exec --only firestore --project demo-nowhere "npm run test:rules"
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4
         with:

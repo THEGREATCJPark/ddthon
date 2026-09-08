@@ -75,6 +75,6 @@ AI-DLC-SOURCE.md           공식 규칙의 버전과 출처
 
 ## 팀 협업 공간
 
-[디디톤 Team Hub 열기](https://thegreatcjpark.github.io/ddthon/)
+[노웨어 · Agent Skillloop 열기](https://thegreatcjpark.github.io/ddthon/)
 
-작업·목표·의견과 Archify 개발 흐름을 함께 확인합니다. 웹 소스는 [codex/team-hub 브랜치](https://github.com/THEGREATCJPark/ddthon/tree/codex/team-hub/team-hub)에 분리하고 GitHub Actions로 배포합니다. 허브의 작업 상태는 제품 실행 검증이나 AI-DLC 승인을 대신하지 않습니다.
+직접 표시하는 진행 순서도, 팀 댓글·답글, 다른 팀의 익명 딴지를 함께 봅니다. 웹 소스는 [codex/team-hub 브랜치](https://github.com/THEGREATCJPark/ddthon/tree/codex/team-hub/team-hub)에 분리하고 GitHub Actions로 배포합니다. 댓글은 Firebase로 공유하며 GitHub는 웹 배포에만 사용합니다. 순서도 표시는 제품 실행 검증이나 AI-DLC 승인을 대신하지 않습니다.
