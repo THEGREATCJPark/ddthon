@@ -29,6 +29,11 @@ from .usage import UsageTracker, build_evidence, new_execution_id
 from . import match as match_mod
 from . import reuse_service
 
+# CJ 소유(U3, 읽기전용 파생): 조직 집계·상태줄·대시보드
+from . import org_aggregator
+from . import statusline as statusline_mod
+from . import dashboard as dashboard_mod
+
 # 사전 적재 데모 Skill(합성·비민감). demo_seed=False → 실제 재사용은 실적 반영.
 _DEMO_SKILL_CONTENT = {
     "id": "fix-skillloop-demo-pkg-install",
@@ -168,6 +173,49 @@ def share_import(in_path: str, store_path: str | None = None,
     return 0
 
 
+def _demo_paths(store_path: str | None, usage_path: str | None) -> tuple[str, str]:
+    """P0(run-p0)와 **동일한 기본 경로**를 사용해 로컬 실데이터가 UI에 그대로 보이게 한다."""
+    return (
+        store_path or os.path.join(_DEMO_DIR, "store.json"),
+        usage_path or os.path.join(_DEMO_DIR, "usage.json"),
+    )
+
+
+def _build_local_snapshot(store_path: str | None = None, usage_path: str | None = None) -> dict:
+    """로컬 store·usage로 OrgSnapshot 생성(U3 §2.1).
+
+    lifecycle_view·sync_meta는 **미연결(None)** — 계약7(S3 조회)·C4(last_sync)가 B에서
+    제공되면 이 자리에 실제 provider를 주입한다. 그 전까지는 '상태 조회 미연결'/'local-only'로
+    명시하며, 이미 가능한 로컬 실데이터(Skill·재사용)는 집계·표시한다.
+    """
+    sp, up = _demo_paths(store_path, usage_path)
+    store = SkillStore(sp)
+    usage = UsageTracker(up)
+    alias = os.environ.get("SKILLLOOP_ALIAS", "local")
+    return org_aggregator.build_snapshot(
+        store, usage, lifecycle_view=None, sync_meta=None, my_alias=alias,
+    )
+
+
+def cmd_status(store_path: str | None = None, usage_path: str | None = None) -> int:
+    """`skillloop status` — 상태줄 한 줄을 stdout으로 출력(로컬 스냅샷 기준).
+
+    이 출력은 그대로 Claude Code 하단 상태줄의 statusLine 커맨드로 연결할 수 있다(README 참조).
+    """
+    snapshot = _build_local_snapshot(store_path, usage_path)
+    print(statusline_mod.render_statusline(snapshot))
+    return 0
+
+
+def cmd_dashboard(host: str = "127.0.0.1", port: int = 8765,
+                  store_path: str | None = None, usage_path: str | None = None) -> int:
+    """`skillloop dashboard` — 127.0.0.1 읽기전용 대시보드 기동(요청마다 스냅샷 재생성)."""
+    def provider() -> dict:
+        return _build_local_snapshot(store_path, usage_path)
+    dashboard_mod.serve_readonly(provider, host=host, port=port)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """콘솔 스크립트 진입점. 서브커맨드 라우팅."""
     _ensure_utf8_stdout()
@@ -178,6 +226,10 @@ def main(argv: list[str] | None = None) -> int:
     pe.add_argument("out", help="export 파일 경로")
     pi = sub.add_parser("share-import", help="공유 이벤트 import(검증·dedup)")
     pi.add_argument("inp", help="import 파일 경로")
+    sub.add_parser("status", help="상태줄 한 줄 출력(조직 현황, 읽기전용)")
+    pd = sub.add_parser("dashboard", help="localhost 읽기전용 대시보드 기동")
+    pd.add_argument("--host", default="127.0.0.1", help="바인딩 호스트(기본 127.0.0.1)")
+    pd.add_argument("--port", type=int, default=8765, help="포트(기본 8765)")
     args = parser.parse_args(argv)
     if args.command == "run-p0":
         return run_p0()
@@ -185,6 +237,10 @@ def main(argv: list[str] | None = None) -> int:
         return share_export(args.out)
     if args.command == "share-import":
         return share_import(args.inp)
+    if args.command == "status":
+        return cmd_status()
+    if args.command == "dashboard":
+        return cmd_dashboard(host=args.host, port=args.port)
     parser.print_help()
     return 2
 

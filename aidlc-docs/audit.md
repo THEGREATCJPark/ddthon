@@ -469,3 +469,45 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U1(P0) A 인계 통합·실제 검증 완료. main=e07af72. B P1 실패 모델 미확정(대안 제시 예정).
 
 ---
+
+## P0 CLI 사용 확인 + P1 대기 정정 + U3 준비 지시
+**Timestamp**: 2026-09-08T09:38:26Z
+**User Input**: "사용자가 직접 python -m skillloop run-p0를 실행했고, 실패 관찰 → MATCH → reuse=3(counted=True, reason=ok)를 확인했습니다. P0 CLI 사용 확인까지 완료했으므로, 변경이나 오류가 없으면 반복 테스트하지 마세요. 현재 대기 상태를 정정합니다. \"의존성 미설치로 P1 실패를 재현\"하는 대안은 채택하지 않습니다. B는 이미 전달한 요청에 따라 환경 제약 기반의 P1 실패 모델을 수정 중입니다. 새 대안을 병행 제안하거나 사용자 결정을 다시 요청하지 마세요. A도 기존 P1 계약 초안 보완 요청을 확인 중입니다. A/B의 현재 작업은 유지하고, 두 답변을 합쳐 검토한 뒤 P1 계약 최종 확정과 확장 구현을 진행합니다. 그동안 CJ는 승인된 U3 범위인 조직 집계·상태줄·읽기전용 대시보드 준비를 진행하세요. 상세 설계·NFR·Code Plan이 아직 없다면 최소 깊이로 준비하고, 필요한 결정만 한 번에 검토할 수 있도록 제시하세요. 확정된 요구사항은 재질문하지 마세요. 외부 사전 구현 Reference 사용 금지는 유지합니다."
+**AI Response**:
+- **P0 CLI 사용 확인 수용**: 사용자 직접 실행 reuse=3(counted=True, reason=ok) 확인. 변경·오류 없으면 P0 반복 테스트 중단.
+- **P1 대기 정정 반영**: "의존성 미설치 재현" 대안 철회 — 새 대안 병행 제안·재질문 안 함. B(환경 제약 P1 실패 모델 수정)·A(P1 계약 초안 보완) 현재 작업 유지. 두 답변 취합 후 P1 계약 최종 확정·확장 구현.
+- **CJ 진행**: 승인된 U3 필수 범위(조직 집계 C10·상태줄 C11·읽기전용 대시보드 C12)를 **최소 깊이** Functional Design + NFR(minimal) + Code Plan으로 준비. 필요한 결정만 1회 배치 제시, 확정 요구사항 재질문 금지. 외부 Reference 미사용.
+**Context**: CONSTRUCTION / U1(P0) 사용 확인 완료 / P1 A·B 작업 유지 / U3(CJ) 최소 설계 준비 착수.
+
+---
+
+## U3 최소 설계 — 열린 결정 2건 확정
+**Timestamp**: 2026-09-08T09:45:57Z
+**User Input(결정1, lifecycle 상태 읽기 소스)**: "2번을 선택합니다. Skill·재사용·기여 집계와 상태줄·대시보드는 계속 구현하세요. lifecycle 상태 영역은 S3 조회 계약이 연결될 때까지 "상태 조회 미연결"로 표시하고, 0건이나 특정 상태로 추정하지 마세요. 상태 UI와 테스트는 계약7 형태의 명시적인 테스트 대역으로 준비할 수 있습니다. 실제 제품 경로에서는 store를 직접 읽는 임시 우회를 만들지 않습니다. B의 S3 조회 구현이 제공되면 연결하세요. 이 결정 때문에 나머지 U3 개발을 대기시키지 마세요."
+**User Input(결정2, 대시보드 수단)**: "1번을 선택합니다. 127.0.0.1에 바인딩하고, 대시보드에 필요한 GET 경로만 제공하세요. 프로젝트 디렉터리나 로컬 파일을 임의로 노출하지 않도록 구현하세요. 상태줄과 대시보드는 동일한 OrgSnapshot 집계 계약을 사용합니다. lifecycle 미연결 상태와 실제 실적/DEMO 구분을 유지하세요. 표준 라이브러리를 선택하는 이유는 구현·설치 부담을 줄이기 위해서입니다. 외부 Reference 금지와 외부 라이브러리 사용 금지는 다른 조건입니다. localhost HTTP는 이미 승인된 로컬 UI 범위로 기록하세요. 두 결정은 확정됐으므로 최소 설계·NFR에 반영하고 구현 파일·실행 명령·검증을 담은 Code Plan으로 이어가세요. 확정된 사항은 다시 질문하지 마세요."
+**AI Response**:
+- **결정1 확정(보류형)**: C10은 `LifecycleView`(계약7 형태) provider에만 의존. 미연결 시 상태 = **"상태 조회 미연결"**(0건·특정 상태 추정 금지). **실제 제품 경로에서 store 직접 읽기 임시 우회 미생성**(store.list_lifecycle_records는 저장 API로 남되 C10이 직접 읽지 않음). B의 S3 조회 구현 제공 시 연결. 이 결정으로 나머지 U3(집계·상태줄·대시보드) 대기 안 함. 상태 UI·테스트는 계약7 형태 **명시적 test 대역**으로 준비.
+- **결정2 확정**: C12 = Python stdlib `http.server`, 127.0.0.1 바인딩, **필요한 GET 경로만**, 프로젝트 디렉터리·로컬 파일 임의 노출 금지. 상태줄·대시보드 동일 OrgSnapshot 계약. lifecycle 미연결·실적/DEMO 구분 유지. localhost HTTP = 승인된 로컬 UI 범위로 기록. (외부 Reference 금지 ≠ 외부 라이브러리 금지 — 별개 조건; 여기선 부담 절감 위해 stdlib 선택.)
+- 문서 `u3-minimal-design.md`에 두 결정 반영, Code Plan(구현 파일·실행 명령·검증) 완성. 확정 사항 재질문 안 함.
+**Context**: CONSTRUCTION / U3(CJ) 최소 설계 / 열린 결정 2건 확정 → Code Plan 완성·승인 대기.
+
+---
+
+## U3 구현·검증 완료 + P1 상태 최신 결정 반영
+**Timestamp**: 2026-09-08T10:00:36Z
+**User Input**: "U3 최소 설계·NFR·Code Plan을 승인합니다. §4 순서대로 구현·검증·commit/push까지 진행하세요. 아래는 기존 요구사항의 구현 기준으로 반영하고 재승인 요청하지 마세요. 1. 집계의 정직성: S3 상태 조회가 미연결이면 published_skills도 확인 불가로 표시합니다. store에 있다는 이유만으로 조직에 게시된 Skill로 집계하지 마세요. 로컬 검토 기록이 없다는 사실만으로 "원격 게시"라고 판단하지 말고, 실제 remote_publish_evidence가 있는 경우에만 그렇게 표시하세요. 2. 실제 데이터 연결: P0에서 생성한 로컬 Skill·재사용 이벤트를 UI로 확인할 수 있도록 저장 경로를 일관되게 연결하세요. 로컬 조회 결과와 원격 동기화된 조직 전체 현황을 구분합니다. 미연결인 lifecycle/last-sync만 명시적으로 표시하고, 이미 가능한 로컬 실데이터 UI 검증은 진행하세요. 3. 상태줄 완료 기준: python -m skillloop status의 한 줄 출력과 Claude Code 하단 상태줄에 실제 연결된 상태를 구분하세요. 연결 방법을 제공하고 실제 확인 전에는 하단 상태줄 연결 완료로 보고하지 마세요. 4. 검증·보고: 변경에 필요한 U3 테스트와 전체 회귀를 수행하고, 대시보드를 실제 브라우저에서 확인하세요. 이미 통과한 검증은 새 변경·오류 없이 반복하지 않습니다. 완료 보고는 실행 명령, 실제 결과, commit SHA, 사용자가 확인할 화면·연결 방법 중심으로 주세요. P1 상태도 최신 결정으로 갱신합니다. 사용자는 B의 Office 암호화 합성 파일 + 열린 Excel read-only 접근 모델과 P1 한정 Excel 의존성 예외를 승인해 A/B에게 전달했습니다. 독립 Replay와 게시 게이트는 유지합니다. "환경 모델 선택 대기"로 되돌리지 말고, A/B의 구체 계약·계획 반영과 구현 진행을 기다리세요. U3는 A/B 작업과 독립적으로 계속 진행합니다. 외부 사전 구현 Reference 사용 금지는 유지합니다."
+**AI Response**:
+- **U3 구현(CJ 단일 수정자)**: `org_aggregator.py`(C10 build_snapshot, LifecycleView/SyncMeta protocol)·`statusline.py`(C11 render_statusline)·`dashboard.py`(C12 stdlib http.server, 127.0.0.1, 정의 GET 경로만·비-GET 405·정의외 404·파일 미노출)·`cli.py`(`status`/`dashboard` 서브커맨드, **P0와 동일 기본 경로 `.skillloop_demo/` 연결**). B 파일 미수정.
+- **정직성 기준 반영**: lifecycle 미연결 → `published_skills="확인 불가"`·`states="상태 조회 미연결"`(0·추정 금지, store 직접 읽기 우회 없음). store 존재 ≠ 게시. 원격 게시는 실제 `remote_publish_evidence` 있을 때만 표시(로컬 검토 부재로 원격 게시 추정 안 함). 로컬(store·usage) vs 조직(events·lifecycle·last_sync) 구분, 미연결만 명시. 실적/DEMO 구분(descriptor.demo_seed).
+- **실행 명령·실제 결과**:
+  - `python -m pytest tests/test_org_aggregator.py tests/test_statusline.py tests/test_dashboard.py` → **21 passed**.
+  - `python -m pytest` → **63 passed**(기존 42 + U3 21, 회귀 없음).
+  - `python -m skillloop status`(사용자 run-p0 reuse=3 데이터) → "로컬 Skill 1 | 게시 확인 불가(상태 미연결) | 내 기여(local) 0 | 인기 fix-skillloop-demo-pkg-install@1.0.0(재사용 3) | 실제 재사용 3 | 동기화 없음(local-only)".
+  - 대시보드 실제 HTTP(127.0.0.1) 기동 검증: GET / //skills //skill //activity=200, 정의외=404, POST=405. 본문에 재사용 3·게시 확인불가·계약7 미연결 배너·digest 표시·procedure 미노출 확인(전부 PASS).
+- **상태줄 완료 기준 구분**: `python -m skillloop status` 한 줄 출력은 검증 완료. **Claude Code 하단 상태줄 연결은 사용자 settings(statusLine 커맨드=`python -m skillloop status`) 필요 — 실제 확인 전이므로 하단 상태줄 연결 완료로 보고하지 않음.** 연결 방법만 제공.
+- **NOT_RUN**: lifecycle 상태·last_sync 실데이터·조직 시연은 계약7(S3 조회)·C4(gitsync last_sync) 실연결 후(B 제공 시 provider 주입).
+- README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A) 미수정.
+- **P1 상태 최신 결정 반영(대기 상태 갱신, 재오픈 금지)**: 사용자 승인 = B의 **Office 암호화 합성 파일 + 열린 Excel read-only 접근 모델** + **P1 한정 Excel 의존성 예외** → A/B에게 전달됨. **독립 Replay·게시 게이트 유지.** "환경 모델 선택 대기"로 되돌리지 않으며, **A/B의 구체 계약·계획 반영·구현을 기다린다.** U3는 A/B와 독립 진행.
+**Context**: CONSTRUCTION / U3(CJ) 구현·검증 완료(63 passed + 실데이터 status·대시보드 HTTP 확인) / P1 A·B 진행 대기(환경 모델 승인 반영).
+
+---
