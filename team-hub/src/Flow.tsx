@@ -87,6 +87,8 @@ export default function Flow() {
         `[data-node-id="${stage.id}"]`,
       );
       if (!node) continue;
+      const label = node.querySelector("text[data-node-label]");
+      if (label) label.textContent = stage.name;
       node.dataset.status = String(progress[stage.id]);
       node.setAttribute("role", "button");
       node.setAttribute("tabindex", "0");
@@ -211,8 +213,8 @@ export default function Flow() {
           className={`qa-crosscut s${progress.q1}`}
           onClick={() => setSelected("q1")}
         >
-          <strong>Q1 · 독립 QA / 사용성 / 실행 증거</strong>
-          <span>팀원 1명 · 전 Construction 과정 횡단 ─────────→</span>
+          <strong>{STAGES.find((s) => s.id === "q1")!.name}</strong>
+          <span>전 Construction 과정 횡단 ─────────→</span>
           <b>{STATUS[progress.q1]}</b>
         </button>
         <div className="flow-note">

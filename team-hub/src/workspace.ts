@@ -1,33 +1,33 @@
 export const STAGES = [
   {
     id: "inception",
-    name: "INCEPTION · 아이템 기획",
+    name: "INCEPTION · 아이템 기획 · 공동",
     description:
       "요구사항 → Workflow → User Stories → Application Design → Units Generation",
   },
   {
     id: "u0",
-    name: "U0 · 공통 계약·통합 기반",
+    name: "U0 · 공통 계약·통합 기반 · 박찬준님",
     description: "Skill / Store / Usage / CLI / 공통 계약 동결",
   },
   {
     id: "u1",
-    name: "U1 · P0 기존 Skill 재사용 실행",
+    name: "U1 · P0 기존 Skill 재사용 실행 · 최호길님",
     description: "검색 → 적용 → 실제 검증 → reuse +1",
   },
   {
     id: "u2",
-    name: "U2 · P1 새 경험 축적·게시",
+    name: "U2 · P1 새 경험 축적·게시 · 한석훈님",
     description: "탐색 → 후보화 → 검토 → Replay → Git 게시",
   },
   {
     id: "u3",
-    name: "U3 · 조직 Skill 집계·표현",
+    name: "U3 · 조직 Skill 집계·표현 · 박찬준님",
     description: "상태줄 · 대시보드 · usage 공유",
   },
   {
     id: "build",
-    name: "BUILD & TEST",
+    name: "BUILD & TEST · 공동",
     description: "P0/P1 통합 · 실제 실행 · 종단 검증 · 증거 확보",
   },
   {
@@ -37,9 +37,9 @@ export const STAGES = [
   },
   {
     id: "q1",
-    name: "Q1 · 독립 QA / 사용성 / 실행 증거",
+    name: "Q1 · 독립 QA / 사용성 / 실행 증거 · 윤여훈님",
     description:
-      "팀원 1명이 전 Construction 과정에서 독립 QA, 사용성, 실행 증거를 확인합니다.",
+      "윤여훈님이 전 Construction 과정에서 독립 QA, 사용성, 실행 증거를 확인합니다.",
   },
 ] as const;
 export type StageId = (typeof STAGES)[number]["id"];
