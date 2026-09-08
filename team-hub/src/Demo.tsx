@@ -141,6 +141,16 @@ const P1: DemoStep[] = [
 const SCENARIOS = { p0: P0, p1: P1 } as const;
 const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+function DemoCounter({ value, initial, unit }: { value: number; initial: number; unit: string }) {
+  const increased = value > initial;
+  return (
+    <span key={value} className={`demo-counter ${increased ? "counter-increased" : ""}`} role="status">
+      <b>{value}{unit}</b>
+      {increased && <em className="counter-gain" aria-label={`${value - initial} 증가`}>+{value - initial}</em>}
+    </span>
+  );
+}
+
 function Turn({ item }: { item: DemoStep }) {
   return (
     <article className="claude-turn">
@@ -388,9 +398,9 @@ export default function Demo({
           </button>
         </div>
         <div className="claude-statusbar skillloop-terminal-status">
-          <div>🧠 SkillLoop · 팀 연결 | 📚 '디디톤 기술혁신팀' 공개 Skill <b>{demoState.published}개</b> | cik61</div>
-          <div>✨ 내가 기여한 Skill <b>{demoState.contributed}개</b> · 팀에 도움이 될 스킬을 공유해 보세요</div>
-          <div>👑 우리팀 스킬 적재왕 : 박찬준 | 🔥 인기 스킬 - python pip 사내환경 적용 방법 - <b>{20 + demoState.reused}회 적용</b></div>
+          <div className={demoState.published > 1 ? "counter-row-increased" : undefined}>🧠 SkillLoop · 팀 연결 | 📚 '디디톤 기술혁신팀' 공개 Skill <DemoCounter value={demoState.published} initial={1} unit="개" /> | cik61</div>
+          <div className={demoState.contributed > 0 ? "counter-row-increased" : undefined}>✨ 내가 기여한 Skill <DemoCounter value={demoState.contributed} initial={0} unit="개" /> · 팀에 도움이 될 스킬을 공유해 보세요</div>
+          <div className={demoState.reused > 0 ? "counter-row-increased" : undefined}>👑 우리팀 스킬 적재왕 : 박찬준 | 🔥 인기 스킬 - python pip 사내환경 적용 방법 - <DemoCounter value={20 + demoState.reused} initial={20} unit="회 적용" /></div>
           <div className="skillloop-evidence">데모 기준 20회 + 시뮬레이션 재사용 {demoState.reused}회 · 실제 검증 0회</div>
           <div>⏸ manual mode on · ← for agents <span className="skillloop-simulation">SIMULATION</span></div>
         </div>

@@ -1960,3 +1960,17 @@ footer > span:last-child {
 .claude-demo .skillloop-terminal-status .skillloop-evidence { color: #888; }
 .claude-demo .skillloop-terminal-status .skillloop-simulation { display: inline; margin-left: 12px; color: #d88e73; font-size: 11px; }
 .claude-demo .demo-conversation .claude-turn { animation: none; }
+
+.claude-demo .skillloop-terminal-status > div { border-left: 3px solid transparent; padding: 3px 8px; border-radius: 4px; }
+.claude-demo .skillloop-terminal-status > .counter-row-increased { border-left-color: #efad88; background: #d88e7320; color: #f1d1bd; }
+.claude-demo .skillloop-terminal-status .demo-counter { display: inline-flex; align-items: center; gap: 6px; vertical-align: baseline; }
+.claude-demo .skillloop-terminal-status .counter-increased { padding: 2px 6px; border-radius: 4px; background: #efad88; animation: counter-pop 900ms ease-out 3; }
+.claude-demo .skillloop-terminal-status .counter-increased b { color: #241b16; font-size: 16px; }
+.claude-demo .counter-gain { color: #241b16; font-weight: 800; font-size: 13px; font-style: normal; }
+@keyframes counter-pop {
+  0%, 100% { box-shadow: 0 0 0 0 #efad8800; }
+  40% { box-shadow: 0 0 0 6px #efad8855, 0 0 18px #efad8877; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .claude-demo .skillloop-terminal-status .counter-increased { animation: none; }
+}

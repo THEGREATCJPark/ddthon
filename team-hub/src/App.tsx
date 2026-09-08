@@ -60,7 +60,6 @@ export default function App() {
           >
             <t.icon size={21} />
             {t.name}
-            {t.id === "challenge" && <span className="guest-badge">OPEN</span>}
           </a>
         ))}
       </nav>
