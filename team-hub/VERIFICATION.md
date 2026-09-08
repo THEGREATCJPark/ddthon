@@ -38,7 +38,7 @@
 - `deliver`: 9/9 showcase PASS, composition errors 0, warnings 0.
 - 정확한 spec / HTML의 SHA-256: [archify-receipt.json](diagrams/archify-receipt.json).
 - `visual-check`: 실제 Chrome에서 1440×900, 1600×1000, 1920×1080, 2048×1320의 containment PASS. 양 끝 크기의 light/dark 이미지 생성 완료.
-- 이미지 검토: 원본 light 화면 및 웹에서 합성 상태를 적용한 화면을 직접 확인. 노드 글자·관계선·점등·큰 작업 카드 확인. 원본 dark 화면의 이미지 검토는 별도 미수행이며 자동 검증 결과와 구분합니다.
+- 이미지 검토: 원본 1440×900 light와 2048×1320 dark 화면 및 웹에서 합성 상태를 적용한 화면을 직접 확인. 노드 글자·관계선·점등·큰 작업 카드 확인. 자동 검증과 이미지 검토를 별도로 수행했습니다.
 - 원본 Archify HTML은 유지하고, 추출 SVG에 웹의 별도 상태 표시와 노드 상호작용을 적용합니다. 위 Archify receipt는 원본 정적 HTML에 대한 것이며 동기화 기능의 검증은 브라우저 검사에 해당합니다.
 
 ## 수정 및 검증 중 발견한 사항
