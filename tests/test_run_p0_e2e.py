@@ -2,8 +2,7 @@
 
 소유: CJ 단일 수정자(A는 검증·수정 의견). 구현: S9.
 
-상태: **SKIPPED — A의 S7/S8(match.py/reuse_service.py) 인계 후 아래 skip 해제.**
-본문은 실행 준비 완료 상태이며, A 코드 수신 시 `pytestmark`만 제거하면 실제 통합 검증이 돈다.
+상태: **ACTIVE — A의 S7/S8(match.py/reuse_service.py) 인계(9dea075) 후 unskip.**
 파일 존재만으로 완료 처리하지 않는다 — 실제 설치·검증·카운트 결과를 assert한다.
 """
 
@@ -14,9 +13,6 @@ import pytest
 from skillloop import cli
 from skillloop import usage as U
 from skillloop.usage import UsageTracker
-
-# A(S7/S8) 인계 전까지 e2e는 실행 불가 → 현재 부분 검증 상태 유지(19 PASS / 8 SKIP).
-pytestmark = pytest.mark.skip(reason="A의 S7/S8(match/reuse_service) 인계 대기 — 수신 후 unskip")
 
 DEMO_ID = "fix-skillloop-demo-pkg-install"
 DEMO_VER = "1.0.0"

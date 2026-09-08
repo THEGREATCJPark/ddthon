@@ -534,3 +534,18 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 Functional Design·NFR·Requirements(NFR-RUN-1 예외)·Stories·Code Plan / P1 실패 모델 확정((가)안) 반영. 로컬 커밋 후 push 진행.
 
 ---
+
+## U1(P0) A 인계 통합·실제 검증 완료
+**Timestamp**: 2026-09-08T09:29:20Z
+**User Input**: "지금부터 승인 대기와 문서 핑퐁을 줄입니다. 1. A의 P0 구현 인계를 수용합니다. 받은 패치로 통합·검증을 진행하세요. 문서 정합화는 함께 처리하고, 그것 때문에 통합을 중단하지 마세요. 실제 테스트 결과를 확인한 뒤 P0 완료 여부를 보고하세요. 2. B의 FD 중 책임 분리, lifecycle·게시 게이트, Git 전송, OLS 업무 규칙, 후보화 경계는 승인합니다. NFR의 네트워크·출력 범위·실패 상태 문구 정정은 기존 승인 요구사항에 맞춰 수정 후 보고하면 됩니다. 동일 내용을 다시 승인 요청하지 마세요. 3. B의 P1 실패 모델만 미확정으로 남깁니다. 정상 XLSX를 일부러 부적절한 파서로 읽는 모델은 채택하지 않습니다. 이 부분은 최소 대안을 제시하되, 독립적인 게시·Git 전송·OLS 등의 진행을 막지 마세요. 4. B는 확정된 부분의 최소 Code Plan을 작성하세요. 미확정 P1 환경 부분과 의존 작업만 분리하고, Code Plan 승인 후 확정된 부분부터 구현합니다. 승인된 내용을 매 단계 재질문하지 마세요. 5. 앞으로 보고는 다음 네 가지만: 완료한 것 / 실제 검증 결과 / 지금 진행하는 것 / 사용자 결정이 꼭 필요한 문제. 문서 표현 정정은 작업 중 처리하고, 제품 의미·소유 경계·성공 기준 변경만 별도 결정을 요청하세요."
+**AI Response**:
+- **A 패치 통합**: A의 로컬 commit(875c97e) 패치 2파일 sha256 동일(77e2bf11…) → 중복 미적용. 최신 main 기준 별도 통합 branch `integ/u1-p0-875c97e`에서 `git am` 적용 → `9dea075`(author hogil, files: match.py/reuse_service.py/test_match.py/test_reuse_service.py, 저작자 보존).
+- **계약 준수 확인(코드 리뷰)**: match.search()=결정적 단일 MATCH(적합도↓·version↓·id↑)·NO_MATCH/ERROR/TIMEOUT/NOT_INVOKED 구분. reuse_service.apply_and_verify()=clean 전제 명시적 raise(-O 안전)·cfg=selected.procedure·실제 pip 설치·(exit0 & installed & version & import)=is_real_success·run_id 전달만. 승인 계약과 일치.
+- **CJ 통합 변경(`e07af72`)**: (1) tests/test_run_p0_e2e.py unskip(A 인계로 활성화). (2) **실제 Windows 버그 수정** — run-p0 출력의 한글·em-dash가 cp949 콘솔에서 UnicodeEncodeError로 카운트 직전 크래시(usage.json 미생성·exit1) → `_ensure_utf8_stdout()`로 stdout/stderr를 UTF-8(errors=replace) reconfigure(pytest 캡처 스트림은 no-op, 예외 무시), run_p0·main 시작 시 호출.
+- **실제 검증 결과**: `pytest` **42 passed / 0 skipped**(101.60s, A 스텁 SKIP 해제 후 회귀 없음). 실제 `python -m skillloop run-p0` 2회 — "pip install 실패 관찰(exit=1)"→"MATCH fix-skillloop-demo-pkg-install@1.0.0"→"reuse=1(counted=True,reason=ok)" 후 재실행 "reuse=2". usage.json: counts=2, events 2건(서로 다른 event_id, digest 64bed7bf…, reuser_alias "local"), seen_run_ids 2건. share-export 2 event export 확인.
+- **브랜치 정합화**: `integ/u1-p0-875c97e`(9dea075→e07af72)를 main으로 fast-forward 병합(cfc62e9→e07af72). README/EVALUATION 로컬 변경 stash 복원(미커밋 보존).
+- **P0 완료 판정**: 파일 존재가 아니라 실제 설치·검증·카운트(reuse=1→2)·이벤트 생성·회귀 없음(42 passed)으로 확인. **P0 실제 재사용 루프 완료.**
+- **B 대기 정합화 대상**: "구현 SHA 대기" → "실제 계약 연결·검증 대기"(P0 통합 SHA=e07af72 전달 예정).
+**Context**: CONSTRUCTION / U1(P0) A 인계 통합·실제 검증 완료. main=e07af72. B P1 실패 모델 미확정(대안 제시 예정).
+
+---
