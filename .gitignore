@@ -18,6 +18,13 @@ dist/
 .venv/
 venv/
 
+# run-p0 데모 런타임 작업 디렉터리(로컬 상태)
+.skillloop_demo/
+
+# Generated mock-index artifacts (prepare()가 오프라인 재생성)
+tests/fixtures/indexes/allow/*.whl
+tests/fixtures/indexes/allow/*.tar.gz
+
 # Editor and OS files
 .vscode/
 .idea/

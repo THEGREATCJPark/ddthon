@@ -368,3 +368,15 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION Code Generation Part 1 승인, Part 2 착수. baseline HEAD=8308a65, aidlc-docs untracked.
 
 ---
+
+## Code Generation Part 2 — S0/S1/S6 실행 (기준 커밋·스텁·push)
+**Timestamp**: 2026-09-08T08:08:00Z
+**User Input**: (직전 승인 지시 반영) "Approve — Code Plan과 Part 2 구현 착수 승인. 승인 문서·계약 스텁 커밋 및 origin/main push 승인. 정정: S6 앞으로 이동, run_id 전달 계약, 커밋·소유 범위(aidlc-docs만 stage, README·EVALUATION 제외, 스텁 SHA·경로 A에게 출력, test_run_p0_e2e.py=CJ 단일 수정자, A 파일 인계 후 CJ 동시수정 금지, 팀원 미추적 자료 보존). 이후 실행 막는 문제만 보고하고 계속."
+**AI Response**:
+- S0 기준 커밋: `git add aidlc-docs/`만 명시 stage(README·EVALUATION 제외 확인) → commit `2b26933`(후속 rebase로 `8ccbfdc`).
+- S1 골격+스텁: skillloop/{descriptor,store,usage,envharness_p0,cli}.py(CJ)+{match,reuse_service}.py(A) dataclass·시그니처 스텁(미구현부 NotImplementedError), pyproject(console script skillloop), requirements-dev(pytest,hypothesis), tests/ 스캐폴딩(전부 pytest.skip 스텁=PASS 아님, 15개 collect 확인), fixtures 자리표시자, .gitignore Python 항목 추가. import OK.
+- S6 커밋 `881e5af` → push 거부(remote 선행 2커밋: 752dbb9 team-hub/README). 파일 겹침 없음(origin: team-hub.yml,README / mine: aidlc-docs,skillloop,tests). 로컬 미커밋 README/EVALUATION stash → `git rebase origin/main`(clean) → push 성공 `752dbb9..b0ee495`. stash pop 시 README 충돌(origin +6줄 팀협업공간 vs 로컬 평가구조 개정) → 양쪽 보존 병합, EVALUATION 클린 적용. README/EVALUATION는 미커밋 로컬 수정으로 보존(커밋 안 함).
+- **공통 기준 SHA 확정**: baseline `8ccbfdc`, 스텁·게이트 `b0ee495`(=origin/main HEAD). A 핸드오프 경로 출력 완료.
+**Context**: CONSTRUCTION / Code Generation / Part 2 / S0·S1·S6 완료. 다음: CJ S2~S5 ∥ A S7~S8.
+
+---

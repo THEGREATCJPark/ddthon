@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillloop-demo-pkg"
+version = "1.0.0"
+description = "무해한 합성 배포 패키지 — P0 재사용 데모용(오프라인)"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+py-modules = ["skillloop_demo_pkg"]

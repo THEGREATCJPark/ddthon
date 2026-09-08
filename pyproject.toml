@@ -18,3 +18,6 @@ packages = ["skillloop"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = [
+    "slow: 격리 venv 생성 등 느린 테스트(오프라인이지만 시간 소요)",
+]
