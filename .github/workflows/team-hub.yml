@@ -1,0 +1,76 @@
+name: Deploy Team Hub
+
+on:
+  push:
+    branches: [main, codex/team-hub]
+    paths: ["team-hub/**", ".github/workflows/team-hub.yml"]
+  workflow_dispatch:
+  issues:
+    types:
+      [
+        opened,
+        edited,
+        deleted,
+        closed,
+        reopened,
+        labeled,
+        unlabeled,
+        assigned,
+        unassigned,
+      ]
+  issue_comment:
+    types: [created, edited, deleted]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: team-hub-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.event_name != 'issue_comment' || !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: read
+    defaults:
+      run:
+        working-directory: team-hub
+    steps:
+      - name: Checkout collaboration website
+        uses: actions/checkout@v4
+        with:
+          ref: codex/team-hub
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.18.0"
+          cache: npm
+          cache-dependency-path: team-hub/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Snapshot public collaboration data
+        run: npm run snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: team-hub/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment
