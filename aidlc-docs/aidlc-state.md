@@ -45,7 +45,7 @@
 - [ ] NFR Requirements — EXECUTE (per-unit, minimal)
 - [ ] NFR Design — SKIP
 - [ ] Infrastructure Design — SKIP
-- [ ] Code Generation — EXECUTE (per-unit) — **Part 1(Code Plan) 승인됨(2026-09-08, 정정 3건: S6 앞으로 이동·run_id 전달 계약·커밋 소유 범위)**. Part 2 구현 착수 + aidlc-docs 기준 커밋·스텁 커밋 origin/main push 승인. **진행 중**: P0(U0 P0 필수 + U1).
+- [ ] Code Generation — EXECUTE (per-unit) — **Part 1(Code Plan) 승인됨(2026-09-08)**. **Part 2 진행 중**: S0 기준커밋 `8ccbfdc` → S1 스텁 → S6 스텁 push `b0ee495`(=공통 기준) → **CJ S2~S5+cli 구현·push `986d1cc`(19 PASS)** → **e2e 본문·실행 준비 `c811316`**. **차단(A 대기)**: S7/S8(A 소유 match.py/reuse_service.py) 미구현 → V5~V8·V12(run-p0 e2e) **NOT_RUN**. run-p0는 failing index 실제 pip 실패 관찰까지 동작, match.search(A)에서 정지. cli.run_p0(run_id) 재시도 파라미터 추가. e2e(`test_run_p0_e2e.py`, CJ 단일 수정자) 본문 완료·**SKIP 유지**(파일 존재≠완료, 실제 설치·검증·카운트 확인 필요). **19 PASS / 8 SKIP 부분 검증 유지.** 수신 후 절차: `construction/plans/p0-integration-readiness.md`.
 - [ ] Build and Test — EXECUTE
 
 ### 🟡 OPERATIONS PHASE

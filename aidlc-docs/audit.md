@@ -380,3 +380,33 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / Code Generation / Part 2 / S0·S1·S6 완료. 다음: CJ S2~S5 ∥ A S7~S8.
 
 ---
+
+## Code Generation Part 2 — CJ S2~S5 + cli 구현·push (V12는 A 인계 대기)
+**Timestamp**: 2026-09-08T08:16:27Z
+**User Input**: (직전 승인 지시에 따른 계속 실행 — 신규 입력 없음) "이후에는 실행을 막는 문제만 보고하고 구현을 계속. 17:30에는 실행 명령과 실제 결과를 제시하고, 완료하지 못한 검증은 NOT_RUN으로 구분."
+**AI Response**:
+- S2 descriptor.py(C1): canonical JSON+SHA-256(불변 content만), round-trip. test_descriptor_pbt 4 PASS(Hypothesis 포함).
+- S3 store.py(C2): 로컬 JSON, DEDUP(usage 무병합)·CONFLICT(동일 id,ver+다른 digest)·다른 version 비충돌. test_store 5 PASS.
+- S4 usage.py(C3): 카운트 단독 writer, new_execution_id(uuid4), run_id 실행 dedup(seen_run_ids 영속), demo_seed 분리, 사전적재 실적 반영. test_usage 7 PASS.
+- S5 envharness_p0.py(C7)+합성 패키지: 오프라인 wheel 빌드(--no-index --no-build-isolation), 이중 mock index(failing/allow), clean venv, is_clean. test_envharness 3 PASS(venv 포함).
+- cli.py(C8)+__main__.py: run-p0 오케스트레이션(run_id 1회 발급→S1→C3 전달만), 합성 데모 skill 시드.
+- **전체 pytest: 19 PASS(CJ 전부) / 8 SKIP(A 스텁: match 3, reuse_service 2, e2e 3)**.
+- **run-p0 실제 실행**: prepare→clean venv→failing index로 실제 pip 설치 실패 관찰(exit=1)까지 정상. 이후 match.search(A/match.py)에서 `NotImplementedError: S7` — **정확한 통합 차단 지점 = A의 S7/S8 인계**.
+- 커밋: CJ 구현 `986d1cc` → origin/main push(b0ee495..986d1cc). match.py/reuse_service.py(A 단일 수정자) 미변경. README/EVALUATION 미커밋 보존.
+- **차단 이슈 보고**: V5~V8(match/reuse_service)·V12(run-p0 e2e)는 A 소유 파일 미구현으로 현재 **NOT_RUN**. 단일 수정자 원칙상 CJ가 A 파일을 구현하지 않음(사용자 결정 필요).
+**Context**: CONSTRUCTION / Code Generation / Part 2 / CJ S2~S5+cli 완료·push. S7/S8/S9 e2e는 A 인계 대기.
+
+---
+
+## Code Generation Part 2 — e2e 본문·통합 준비 완료(A 대기)
+**Timestamp**: 2026-09-08T08:16:27Z (동일 작업 세션 연속)
+**User Input**: "A에게 인계하고 착수 여부를 확인 중입니다. 기다리는 동안 CJ 소유 e2e 테스트 본문과 실행 준비를 완료해 주세요. A 코드 수신 후 통합하여 실제 run-p0를 실행합니다. 19 PASS·8 SKIP은 현재 부분 검증 결과로 유지합니다. A 파일이 들어온 것만으로 완료 처리하지 말고, 설치·검증·카운트까지 실제 결과를 확인해 주세요."
+**AI Response**:
+- cli.run_p0(run_id=None) 파라미터 추가: 새 실행이면 1회 발급, 재시도·재시작이면 기존 run_id 전달(C3 dedup) — 발급 지점은 여전히 cli.
+- tests/test_run_p0_e2e.py(CJ 단일 수정자) 본문 준비: reuse=1 / 동일 run_id 재검증 불변 / 새 실행 reuse=2, 실제 설치·검증·카운트 assert. **SKIP 유지**(A의 S7/S8 인계 대기 — 파일 존재≠완료).
+- 전체 pytest **19 PASS / 8 SKIP 유지**(부분 검증 상태 보존). cli import OK.
+- 통합 준비 문서 생성: `construction/plans/p0-integration-readiness.md` — A 계약(신호 문자열·index/target·검증 4요소)·수신 후 절차(skip 해제→pytest→run-p0 2회)·완료 금지 조건(is_real_success·설치·버전·import 미확인 시 NOT_RUN 유지).
+- 커밋: e2e 준비 `c811316` → origin/main push(986d1cc..c811316). match.py/reuse_service.py 미변경.
+**Context**: CONSTRUCTION / Code Generation / Part 2 / e2e·실행 준비 완료. A(S7/S8) 수신 시 통합·실제 run-p0 실행 예정.
+
+---
