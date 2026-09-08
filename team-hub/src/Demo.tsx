@@ -12,7 +12,7 @@ type Scenario = "p0" | "p1";
 type ToolRun = { name: string; output: string[]; tone?: "error" | "success" };
 type DemoStep = {
   title: string;
-  prompt?: string;
+  prompt: string;
   answer: string[];
   tools?: ToolRun[];
 };
@@ -32,6 +32,7 @@ const P0: DemoStep[] = [
   },
   {
     title: "Team Skill 발견",
+    prompt: "사내 Proxy 문제 같은데, 팀에 해결 방법이 있는지 SkillLoop로 찾아봐.",
     answer: [
       "현재 사내 환경으로 판단됩니다. 같은 명령을 반복하지 않고 팀에 검증된 해결 방법이 있는지 Agent SkillLoop에서 확인하겠습니다.",
     ],
@@ -49,6 +50,7 @@ const P0: DemoStep[] = [
   },
   {
     title: "Skill 적용·설치 성공",
+    prompt: "찾은 Skill을 적용해서 설치를 다시 진행해줘.",
     answer: [
       "현재 환경에 적용 가능한 Skill입니다. Skill을 활용해 사내 Proxy 설정을 적용하고 설치를 다시 진행합니다.",
     ],
@@ -67,6 +69,7 @@ const P0: DemoStep[] = [
   },
   {
     title: "재사용 20 → 21",
+    prompt: "설치가 제대로 됐는지 확인하고 재사용 결과를 기록해줘.",
     answer: [
       "설치 결과를 확인했습니다. 검증된 Team Skill 재사용으로 기록합니다.",
       "기존 Team Skill을 재사용해 해결했습니다. 새로운 Skill은 만들지 않고 실제 재사용 횟수만 증가했습니다.",
@@ -135,7 +138,8 @@ const P1: DemoStep[] = [
 ];
 
 // Advance one user prompt and its complete response per click.
-const SCENARIOS = { p0: [P0], p1: P1.map((step) => [step]) } as const;
+const SCENARIOS = { p0: P0, p1: P1 } as const;
+const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Turn({ item }: { item: DemoStep }) {
   return (
@@ -181,13 +185,18 @@ export default function Demo({
 }) {
   const [scenario, setScenario] = useState<Scenario>(initialScenario);
   const [completed, setCompleted] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "typing" | "answering">("idle");
+  const [draft, setDraft] = useState("");
+  const runId = useRef(0);
+  const busy = phase !== "idle";
+  useEffect(() => () => { runId.current += 1; }, []);
   const history = useRef<HTMLDivElement>(null);
   const steps = SCENARIOS[scenario];
   const finished = completed === steps.length;
 
   useEffect(() => {
     setScenario(initialScenario);
-    setCompleted(0);
+    reset();
   }, [initialScenario]);
 
   useEffect(() => {
@@ -206,26 +215,46 @@ export default function Demo({
   );
 
   function reset() {
+    runId.current += 1;
+    setPhase("idle");
+    setDraft("");
     setCompleted(0);
   }
 
   function choose(next: Scenario) {
     location.hash = `demo-${next}`;
     setScenario(next);
-    setCompleted(0);
+    reset();
   }
 
-  function runNext() {
-    setCompleted((value) => Math.min(value + 1, steps.length));
+  async function runNext() {
+    if (busy || finished) return;
+    const token = ++runId.current;
+    const item = steps[completed];
+    setPhase("typing");
+    for (let i = 1; i <= item.prompt.length; i += 1) {
+      await pause(24);
+      if (token !== runId.current) return;
+      setDraft(item.prompt.slice(0, i));
+    }
+    await pause(500);
+    if (token !== runId.current) return;
+    setPhase("answering");
+    await pause(450);
+    if (token !== runId.current) return;
+    setCompleted((value) => value + 1);
+    setDraft("");
+    setPhase("idle");
   }
 
   function previous() {
+    if (busy) return;
     setCompleted((value) => Math.max(value - 1, 0));
   }
 
   const primaryLabel = finished
     ? scenario === "p0" ? "P1 시연 시작" : "전체 시연 다시 보기"
-    : "다음 대화";
+    : phase === "typing" ? "질문 입력 중…" : phase === "answering" ? "답변 중…" : "다음 대화";
 
   return (
     <section className="demo-page claude-demo" data-demo-state="memory-only">
@@ -269,7 +298,7 @@ export default function Demo({
               "Team Skill 발견·적용",
               completed === steps.length
                 ? "재사용 20 → 21"
-                : "자동 검증·재사용 기록",
+                : "설치 검증·재사용 기록",
             ]
           : [
               "기존 Skill 없음",
@@ -319,13 +348,13 @@ export default function Demo({
               <div>
                 <strong>Claude Code</strong>
                 <span>Agent SkillLoop demo</span>
-                <small>다음 대화를 누르면 프롬프트와 답변을 함께 확인합니다.</small>
+                <small>다음 → 질문 입력 → 답변. 한 대화가 끝나면 다음을 눌러 주세요.</small>
               </div>
             </div>
           )}
-          {steps.slice(0, completed).map((group, index) => (
+          {steps.slice(0, completed).map((item, index) => (
             <div className="demo-conversation" key={index}>
-              {group.map((item) => <Turn item={item} key={item.title} />)}
+              <Turn item={item} />
             </div>
           ))}
           {finished && (
@@ -337,21 +366,21 @@ export default function Demo({
           )}
         </div>
 
-        <div className="claude-composer">
+        <div className={`claude-composer ${phase}`}>
           <span>❯</span>
           <textarea
             aria-label="Claude Code 프롬프트"
             readOnly
-            value=""
+            value={draft}
             placeholder={
               finished
                 ? "시연이 완료되었습니다."
-                : "다음 대화로 프롬프트와 답변 보기"
+                : "다음을 누르면 여기에 질문이 입력됩니다"
             }
           />
           <button
             aria-label="다음 대화 보기"
-            disabled={finished}
+            disabled={busy || finished}
             onClick={runNext}
           >
             <Send size={16} />
@@ -375,7 +404,7 @@ export default function Demo({
       <div className="demo-controls claude-controls">
         <button
           className="button"
-          disabled={completed === 0}
+          disabled={busy || completed === 0}
           onClick={previous}
         >
           <ArrowLeft size={17} />
@@ -393,6 +422,7 @@ export default function Demo({
         </span>
         <button
           className="button primary claude-next"
+          disabled={busy}
           onClick={
             finished ? () => choose(scenario === "p0" ? "p1" : "p0") : runNext
           }
