@@ -41,6 +41,7 @@
 
 ### 🟢 CONSTRUCTION PHASE (진입, per-unit loop 시작: U0 P0 필수 → U1)
 - [x] Functional Design — EXECUTE (per-unit) — **P0(U0 P0 필수 + U1) 승인됨(2026-09-08, 정합화 3건 반영: 카운트 쓰기=C3 단독, run_id=실행 식별, 허용 index는 descriptor.procedure 근거)**. U2/U3 Functional Design은 이후 별도.
+- [ ] Functional Design — EXECUTE (per-unit, **U2**, minimal) — **작성 후 CJ FD 검토 반영 개정, 개정본 승인 대기(2026-09-08, 담당 B)**. `construction/u2-p1-git/functional-design/functional-design.md`. 파라미터: **D-1 개정**(자체 lifecycle.json **철회** → CJ `SkillStore` 저장 계약 위임, 상태 판단·게이트·읽기전용 조회는 S3 유지, 영속 연동 NOT_RUN)·D-2(gitsync=team-skill-store 전용 로컬 미러)·D-3(push 불가 시 PUBLISH_PENDING+NOT_RUN)·**D-4 신설**(team-skill-store 최초 초기화=B, main과 분리된 공유 데이터 전용 경로). **CJ 결정 반영: U2 자체 저장·무결성·CONFLICT·NO_MATCH 우회 전면 제거**. 대기 계약: **C-a**(CJ lifecycle 저장)·**C-b**(CJ store.export/import_bundle, 우선 제공·전송은 stub 병행)·**C-c**(A match P1 검색+파일접근 적용·검증, 미구현 검색 NO_MATCH 금지)·**C-d**(CJ 공유 이벤트 규격·검증·dedup·저장, Git 전송 경계만 B). U3 상태 조회 계약(#7) 제공 정의. Code Plan **미착수**. 관련: `nfr-requirements/nfr-requirements.md`(초안, 승인 대기), `coordination-blockers.md`.
 - [x] NFR Requirements — EXECUTE (per-unit, minimal) — **P0 승인됨(2026-09-08)**: pytest+Hypothesis 채택·의존성 명시, "네트워크 미의존"=외부 인터넷 미의존, mock index 제공 방식은 Code Plan 구체화.
 - [ ] NFR Requirements — EXECUTE (per-unit, minimal)
 - [ ] NFR Design — SKIP

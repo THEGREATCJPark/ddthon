@@ -410,3 +410,35 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / Code Generation / Part 2 / e2e·실행 준비 완료. A(S7/S8) 수신 시 통합·실제 run-p0 실행 예정.
 
 ---
+
+## U2 착수 — 담당자 B(한석훈) / 계약·접점 확인 + Functional Design 최소 진행 계획
+**Timestamp**: 2026-09-08T08:39:59Z
+**User Input**: "현재 ddthon의 U2 담당자 B(한석훈)입니다. 메인 AI-DLC에서 Requirements, User Stories, Workflow Plan, Application Design, Units Generation이 승인됐습니다. U0/U1은 P0 구현을 진행 중입니다. 나는 P0 완료를 기다리지 않고 U2의 최소 Functional Design부터 진행합니다. P0용 Code Plan 승인을 U2 구현 승인으로 간주하지 마세요. 기준 커밋: 7cbc856ad03f5a40c0642fd7fac92d33061facd5. 먼저 현재 브랜치·HEAD·작업 트리를 확인하고 [requirements/stories/components/component-methods/services/unit-of-work/unit-of-work-dependency/unit-of-work-story-map]을 읽으세요. 메인에서 완료한 Inception을 다시 시작하거나 이미 확정된 결정을 재질문하지 마세요. [U2 담당 파일] envharness_p1.py, experience_service.py, publish_pipeline.py, replay.py, gitsync.py + 대응 U2 테스트·설계. [담당 기능] 1.P1 합성 환경(직접 parser 실패 관찰, 강제 예외/정답 절차 공급 금지) 2.P1 업무·후보화(FR-P1-5 기준, 환경 접근 절차만) 3.검토·독립 Replay·게시(SHAREABLE 게이트, push 성공 후에만 PUBLISHED, 실패 시 로컬 보존·재시도) 4.상태 조회(S3가 lifecycle 단일 소유, U3 읽기전용 계약 제공, 원격/로컬 근거 구분) 5.Git 전송(THEGREATCJPark/ddthon team-skill-store branch, gitsync.py 단일 수정자 B, descriptor·재사용 이벤트·pull·last-sync, DB 파일 미전송, 게시와 이벤트 공유 독립 경로). [소유 경계] CJ: descriptor.py/store.py/usage.py/envharness_p0.py/cli.py/집계·상태줄·대시보드. A: match.py/reuse_service.py. 직접 수정 금지, 특히 공유 이벤트 검증·dedup·카운트는 usage.py(CJ). [진행 순서] 1.계약·접점 확인 2.FD 최소 3.NFR Requirements(minimal) 4.Code Plan 5.승인 후 구현·검증. 우선 P1 환경 재현과 Git 전송의 실행 위험을 드러내라. [기록] 외부 사전구현 Reference 미사용, 승인된 산출물+실제 실행만 근거, 과거 audit 보존, 실제 OS 시각, 미실행은 NOT_RUN. 다른 Unit 승인·완료 처리 금지. 우선 짧게 보고: 현재 브랜치·HEAD / U2 범위 / 부족한 공통 계약 / FD 최소 진행 계획. 그다음 검토 게이트 승인 요청."
+**AI Response**: 확인 완료 — 브랜치 work/u2-p1-git, HEAD=7cbc856(기준 커밋과 동일), 작업 트리 clean. 승인 산출물 8종 + U0/U1 계약 코드(descriptor/store/usage/cli/match/reuse_service/envharness_p0) 통독. U2 담당 파일 5종(envharness_p1/experience_service/publish_pipeline/replay/gitsync) 및 U2 테스트는 아직 미생성 확인. 부족한 공통 계약과 FD 최소 진행 계획, P1 환경 재현·Git 전송 실행 위험을 사용자에게 보고하고 검토 게이트 승인 요청(파일 미작성 상태로 계획만 제시). 다른 Unit 상태 미변경.
+**Context**: CONSTRUCTION / U2 / 진행순서 1(계약·접점 확인) 완료. FD 최소 진행 승인 대기.
+
+---
+
+## U2 — FD 진행 파라미터 3종 결정(사용자 응답)
+**Timestamp**: 2026-09-08T08:43:25Z
+**User Input**: (AskUserQuestion 응답) "S3 lifecycle 상태 영속 위치 = U2 자체 파일에 영속. Git 전송 team-skill-store 처리 = 전용 로컬 미러 dir. 실제 원격 push 불가 시 = PUBLISH_PENDING + NOT_RUN 기록."
+**AI Response**: 세 결정을 U2 Functional Design 파라미터로 반영: (1) S3 lifecycle는 publish_pipeline.py가 U2 소유 JSON(lifecycle.json)에 영속 — store.py(CJ) 수정 불필요, 단일 수정자·단일 소유 정합. (2) gitsync는 team-skill-store 전용 로컬 미러 dir에서 pull/push — 현재 dev worktree·브랜치 미오염. (3) 원격 push 인증 불가 시 로컬 SHAREABLE 보존 + PUBLISH_PENDING, push 검증은 NOT_RUN으로 정직 기록(PUBLISHED 미보고). 최소 Functional Design 문서 작성 착수.
+**Context**: CONSTRUCTION / U2 / Functional Design(minimal) 파라미터 확정. 문서 작성 진행.
+
+---
+
+## U2 — Functional Design(minimal) 작성 완료 · 승인 대기
+**Timestamp**: 2026-09-08T08:45:35Z
+**User Input**: (신규 입력 없음 — 승인된 FD 진행 계획 + 파라미터 3종 결정에 따른 계속 실행)
+**AI Response**: `aidlc-docs/construction/u2-p1-git/functional-design/functional-design.md` 작성. 내용: C7-P1 합성 실패 모델(직접 parser 실제 실패 관찰, 강제 raise·정답 절차 공급 금지, XLSX=OOXML zip 대안), S2 run_p1 흐름+FR-P1-5 OLS 규칙(마지막 완료월+1, 3점 OLS x=1..3→x=4, 음수 0 clamp, 실제3+예상1 구분, 후보는 환경 절차만), S3 상태머신+게이트+읽기전용 상태 조회 계약(#7, U3 소비)+D-1 lifecycle.json 영속, C6 ReplayResult(ACCESS_EFFECT), C4 gitsync 전송 인터페이스+D-2 전용 미러+D-3 push 불가 처리+FR-SYNC-5 DB 미전송, 조율 blocker C-b/C-c/C-d + 비블로킹 우회, 추적성·확장 준수·NOT_RUN 예정 항목. aidlc-state.md에 U2 FD 승인 대기 라인 추가(P0 상태 미변경, 타 Unit 미변경). 2-옵션 게이트 제시.
+**Context**: CONSTRUCTION / U2 / Functional Design(minimal) 작성 완료. 사용자 승인(변경 요청/다음 단계) 대기.
+
+---
+
+## U2 — CJ FD 검토 결정 수신·반영(설계 개정) + 커밋·push
+**Timestamp**: 2026-09-08T08:56:54Z
+**User Input**: "CJ로부터 FD 검토 답변 수신. 다음을 반영: (C-a) D-1 자체 lifecycle.json 철회 — 저장 책임은 CJ SkillStore로 정합화, S3는 상태 판단·게이트·읽기전용 조회 유지, CJ 계약 대기. (C-b) CJ가 import/export 우선 제공 — U2 자체 저장·무결성·CONFLICT 우회 금지, gitsync 전송은 확정 계약 stub로 병행하되 실제 import/pull 검증과 구분(미실행 NOT_RUN). (C-c) A가 P1 검색 입력 + 파일접근 Skill 적용·검증 계약 동반 확정 — 미구현 검색을 NO_MATCH로 간주 금지, store 직접 조회 우회 제거, A 계약 대기. (C-d) 이벤트 규격·검증·dedup·저장=CJ, Git 전송 경계만 B, 전송 개발 병행 가능. (5) team-skill-store 최초 초기화=B(main과 분리된 공유 데이터 전용 경로). FD 수정 후 work/u2-p1-git에 커밋·push하고 브랜치명+전체 SHA, 수정 파일 목록, FD·Code Plan 승인 상태, 남은 CJ/A 대기 계약을 보고. audit·aidlc-state에 사실대로 기록, 다른 Unit·메인 workflow 미변경."
+**AI Response**: CJ 결정 5건을 FD·NFR·조율 문서에 반영. FD: 개정 이력 추가, D-1 자체 lifecycle.json 철회→CJ SkillStore 계약 위임(판단·게이트·조회는 S3 유지, 영속 연동 NOT_RUN), D-4(team-skill-store 초기화=B) 신설, S2 검색·재사용 계약 의존 절(미구현 검색 NO_MATCH 금지·직접 조회 우회 제거) 추가, S3 D-1 영속 라인 개정, C4 gitsync에 D-4·계약 대기·병행 stub 규칙 추가, §6 조율 표 우회안 제거·§9 NOT_RUN 항목 재작성. NFR: 의존성 블록을 계약 대기(C-a~C-d, 우회 금지 자세)로 개정, lifecycle tech-stack 행을 CJ SkillStore 위임으로 변경, §7 이월 항목 D-4·CJ 계약 의존 반영. coordination-blockers.md: 상단에 CJ 결정 요약 5건 + 각 gap 처리(우회 없음)·요약표 재작성. **자체 저장·무결성·CONFLICT·NO_MATCH 우회는 전면 제거**, 미실행 실검증은 NOT_RUN 유지. 설계 산출물만 커밋·push(README/EVALUATION 로컬 수정·skillloop/tests 미포함). 다른 Unit 상태·메인 workflow 미변경.
+**Context**: CONSTRUCTION / U2 / Functional Design(minimal) CJ 검토 반영 개정. FD는 승인 후 개정본 재검토 대기, Code Plan 미착수. 남은 대기 계약: C-a(CJ lifecycle 저장), C-b(CJ store bundle), C-c(A match P1+파일접근 적용·검증), C-d(CJ 공유 이벤트).
+
+---
