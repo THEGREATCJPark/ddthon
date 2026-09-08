@@ -1,0 +1,137 @@
+{
+  "verified_at": "2026-09-08T23:15:15.924137+00:00",
+  "runs": [
+    {
+      "name": "p0",
+      "functional": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "original_unchanged": true,
+        "independent_import": true,
+        "reuse_one": true,
+        "store_unchanged": true,
+        "actual_supply_failure": true,
+        "matched": true,
+        "same_work_environment": true
+      },
+      "intermediate_tool_errors": 1,
+      "user_visible_messages": 5,
+      "tool_error_categories": {
+        "expected_workflow_pause": 0,
+        "permission_denial": 0,
+        "input_schema_or_mapping": 0,
+        "expected_pip_failure": 0,
+        "other": 1
+      },
+      "product_environment_label_present": false,
+      "wording_review_markers": {
+        "사내환경": 0,
+        "사내 환경": 0,
+        "NASCA(가상)": 0,
+        "제품 CLI": 3,
+        "합성": 1,
+        "harness": 0,
+        "supported scope": 0,
+        "NOT_RUN": 0,
+        "read-only": 0
+      },
+      "started_at": "2026-09-08T23:05:01.477387+00:00",
+      "finished_at": "2026-09-08T23:05:47.967089+00:00",
+      "source_sha": "d8c45cbfae101bd3819c72dec6dc7c0ce78114c4"
+    },
+    {
+      "name": "p1-cold-1",
+      "functional": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "original_unchanged": true,
+        "one_complete": true,
+        "values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "verified": true,
+        "cold_no_preexisting_skill": true,
+        "discovery": true,
+        "actual_no_match": true,
+        "direct_failure": true,
+        "candidate_one": true,
+        "reuse_zero": true,
+        "environment_only": true,
+        "digest_valid": true,
+        "no_approval_or_publication": true,
+        "actual_chart": true
+      },
+      "intermediate_tool_errors": 7,
+      "user_visible_messages": 14,
+      "tool_error_categories": {
+        "expected_workflow_pause": 2,
+        "permission_denial": 2,
+        "input_schema_or_mapping": 3,
+        "expected_pip_failure": 0,
+        "other": 0
+      },
+      "product_environment_label_present": true,
+      "wording_review_markers": {
+        "사내환경": 1,
+        "사내 환경": 0,
+        "NASCA(가상)": 0,
+        "제품 CLI": 0,
+        "합성": 0,
+        "harness": 0,
+        "supported scope": 0,
+        "NOT_RUN": 0,
+        "read-only": 4
+      },
+      "started_at": "2026-09-08T23:05:48.116933+00:00",
+      "finished_at": "2026-09-08T23:08:24.412248+00:00",
+      "source_sha": "d8c45cbfae101bd3819c72dec6dc7c0ce78114c4"
+    },
+    {
+      "name": "p1-cold-2",
+      "functional": "PASS",
+      "checks": {
+        "agent_exit_zero": true,
+        "original_unchanged": true,
+        "one_complete": true,
+        "values": true,
+        "forecast": true,
+        "forecast_month": true,
+        "verified": true,
+        "cold_no_preexisting_skill": true,
+        "discovery": true,
+        "actual_no_match": true,
+        "direct_failure": true,
+        "candidate_one": true,
+        "reuse_zero": true,
+        "environment_only": true,
+        "digest_valid": true,
+        "no_approval_or_publication": true,
+        "actual_chart": true
+      },
+      "intermediate_tool_errors": 6,
+      "user_visible_messages": 13,
+      "tool_error_categories": {
+        "expected_workflow_pause": 1,
+        "permission_denial": 1,
+        "input_schema_or_mapping": 4,
+        "expected_pip_failure": 0,
+        "other": 0
+      },
+      "product_environment_label_present": true,
+      "wording_review_markers": {
+        "사내환경": 0,
+        "사내 환경": 0,
+        "NASCA(가상)": 0,
+        "제품 CLI": 0,
+        "합성": 0,
+        "harness": 0,
+        "supported scope": 0,
+        "NOT_RUN": 0,
+        "read-only": 3
+      },
+      "started_at": "2026-09-08T23:08:24.438008+00:00",
+      "finished_at": "2026-09-08T23:10:50.498089+00:00",
+      "source_sha": "d8c45cbfae101bd3819c72dec6dc7c0ce78114c4"
+    }
+  ]
+}

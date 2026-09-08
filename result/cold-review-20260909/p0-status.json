@@ -1,0 +1,151 @@
+{
+  "started_at": "2026-09-08T23:05:01.477387+00:00",
+  "prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘.",
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-cold-review-20260909-080453\\p0",
+  "source_sha": "d8c45cbfae101bd3819c72dec6dc7c0ce78114c4",
+  "pre_store": {
+    "lifecycle": {},
+    "skills": {
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "pip-install-fail:skillloop-demo-pkg"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+        "id": "fix-skillloop-demo-pkg-install",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      },
+      "unrelated-compile\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "compile-fail:unrelated"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "f345cd7a77d6ff051cbe40e66f3ba109900ac5577baa5505d32dbb79b64e65b4",
+        "id": "unrelated-compile",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      }
+    }
+  },
+  "pre_usage": {
+    "counts": {},
+    "seen_run_ids": [],
+    "events": {}
+  },
+  "input_hash_before": "5bb9c7cf2b44cfc925c993512ff5a266116195fcc8d21263aee0162b05f7fda1",
+  "raw_private_log": "C:\\Users\\cik61\\AppData\\Local\\Temp\\skillloop-cold-review-20260909-080453\\p0.jsonl",
+  "pid": 13028,
+  "exit_code": 0,
+  "finished_at": "2026-09-08T23:05:47.967089+00:00",
+  "store": {
+    "lifecycle": {},
+    "skills": {
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "pip-install-fail:skillloop-demo-pkg"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+        "id": "fix-skillloop-demo-pkg-install",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      },
+      "unrelated-compile\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "compile-fail:unrelated"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "f345cd7a77d6ff051cbe40e66f3ba109900ac5577baa5505d32dbb79b64e65b4",
+        "id": "unrelated-compile",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      }
+    }
+  },
+  "usage": {
+    "counts": {
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": 1
+    },
+    "events": {
+      "c0598138289f433df2182af6a0c3500bcfce28b81e0955f518a60a9f7a42e401": {
+        "demo_seed": false,
+        "event_id": "c0598138289f433df2182af6a0c3500bcfce28b81e0955f518a60a9f7a42e401",
+        "evidence": {
+          "is_real_success": true,
+          "verification": {
+            "import_check": true,
+            "index_source": "allow",
+            "installed_check": true,
+            "is_real_success": true,
+            "pip_exit_code": 0,
+            "run_id": "542c4dc8d14f461db06271178b2bf170",
+            "version_check": true
+          }
+        },
+        "reuser_alias": "local",
+        "skill_ref": {
+          "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+          "id": "fix-skillloop-demo-pkg-install",
+          "version": "1.0.0"
+        },
+        "timestamp": "2026-09-08T23:05:34Z"
+      }
+    },
+    "seen_run_ids": [
+      "542c4dc8d14f461db06271178b2bf170"
+    ]
+  },
+  "input_hash_after": "5bb9c7cf2b44cfc925c993512ff5a266116195fcc8d21263aee0162b05f7fda1",
+  "original_unchanged": true,
+  "charts": [],
+  "independent_import": {
+    "exit_code": 0,
+    "stdout": "1.0.0\n",
+    "stderr": ""
+  }
+}

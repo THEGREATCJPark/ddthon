@@ -2,6 +2,8 @@
 
 ## 최신 상태 — 2026-09-09 오전 인계
 
+- **추가 Cold/응답 검토**: 제품/C9 d8c45cb 고정, 새 P0 1+P1 Cold2 기능PASS(1650/2550). CLI 사내환경·NASCA(가상) 표시는2/2, Agent 설명·한국어·입력계약 안내는 개선 필요. 전체 원문·판정 `result/cold-review-20260909/`; 기능 성공을 UX 완료로 합치지 않는다. 이번에는 테스트·기록만, 응답 개선 구현은 아직 하지 않았다.
+
 - **현재 단계**: CONSTRUCTION / 통합 Build & Test. P0 자연어 재현 및 P1 Cold→사람 승인→독립 Replay→GitHub 게시→새 Agent Warm 실제 검증 완료. 전체 제품·제출 최종 승인 아님.
 - **이번 추가 검증**: 동일 제품 소스 `96f3c85`에서 새 Claude Cold 3회 PASS(1100/600/0), 원격 Warm 1회 PASS(2550/reuse+1/candidate0). 코드 변경 없이 수행. 중간 권한/스키마 재시도와 Warm 설명 오류는 로그 보존.
 - **사람 승인**: 사용자가 exact 후보 `file-access-8738e696cff8bbb20c98@1.0.0`, digest `359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af`의 검토·Replay PASS 후 게시·새 Agent 실행을 명시 승인. 실제 S3 기록 후 다른 문서 Replay PASS.

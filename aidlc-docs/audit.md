@@ -849,3 +849,15 @@ Implemented read-only U3 exact published/event projection and aligned existing t
 ## 2026-09-08T22:58:36.126132+00:00 — Final alignment remote verification complete
 
 User-approved six-step plan complete. Main935b8ec and webbe3013f pushed without force, web author ancestry preserved through selective subtree merge. Exact web tree0ee12f51d7db3d10fbd325517482a22b3ccf0c5d matches both branches; existing generated diagram CRLF preserved despite diff whitespace notices. Main Python CI34287993633 success, main Pages34287993826 success; web Pages34287992312 success. Public browser P0/P1 progression and archived chart rendering PASS; served index-BzLmvpnE.js matches tested production build. Evidence result/final-alignment. No live Firebase writes; no new P1/Cold reruns; no official rule changes. Final receipt is documentation/evidence only; whole-product submission review and separate B-PC reproduction remain.
+
+
+## 2026-09-08T23:03:36.271575+00:00 — Additional Cold/response review authorized
+
+어 우선은 그 팀원끼리 모이지 않았으니까 기능 개발이 정말 잘 되었는지를 좀 더 확실하게 검증을 해보자 이 남는 시간 동안. 우리가 계획했던 시나리오 P0와 P1 그 경우에 뭐 콜드로 진행했을 때 잘 진행되는지 그리고 응답에서 되게 짜치는 표현이 없는지 우리가 정했던 사내 환경 이런 식으로 잘 출력 되는지 봐보고 그 전체 로그도 잘 남겨줘.
+
+Recorded test plan before execution: construction/build-and-test/cold-response-review-plan.md. New P0 1 + P1 Cold2, source frozen, no prompts supplying recovery answer or required wording. Existing Build & Test continuation; human review/publish approval not inferred.
+
+
+## 2026-09-08T23:17:06.268028+00:00 — Additional Cold execution and response review complete
+
+Source d8c45cb frozen. Fresh P0 1 and P1 Cold2 functional PASS; forecasts1650/2550, candidate1/reuse0 each; original hashes unchanged; no approval/publish. P0 independent import1.0.0/reuse1. Product environment label2/2, Agent narrative naming1/2, inconsistent Korean and schema/coordinate retry chatter documented as UX findings. All visible tool/prose traces and intermediary errors retained; private reasoning excluded. Operator formatting issues corrected from unchanged raw traces; scripts guard old logs against overwrites. Owned Excel STOP cleanup confirmed. Result/cold-review-20260909; whole-product final review and B-PC reproduction remain. Product/C9 untouched; existing full-suite/PBT not redundantly rerun for evidence-only change.

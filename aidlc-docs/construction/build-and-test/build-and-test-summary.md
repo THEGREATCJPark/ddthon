@@ -28,3 +28,8 @@ Product/C9 code was frozen during the four additional Agent sessions. Permission
 User-approved continuation recorded before tests; actual exact-candidate human decision preceded S3 review; fresh Replay preceded actual Git publication. Failed/intermediate outputs remain. Timestamp is captured anew for each audit entry in UTC ISO 8601. Existing requirements, plan, Unit ownership, team Git ancestry and official rules are preserved. This run does not invent new features or retroactive approval. Enabled partial PBT baseline remains satisfied; no new pure product algorithm was added. Disabled extension suites remain disabled while core NFRs are observed.
 
 Build/install instructions, unit instructions, integration/acceptance instructions and B handoff are in this directory. Operations remains skipped/placeholder in the approved workflow. Approved final-presentation-alignment-plan governs the U3/web correction and deployment. Deployment/CI receipts are saved in result/final-alignment. Next is B-PC reproduction and final submission review; no new Inception or unrestricted change period.
+
+
+## Additional Cold / language review (2026-09-09 morning)
+
+Fresh P0 1 and P1 Cold2 functional PASS at frozen d8c45cb; not part of142 unit/integration tests. Values/forecasts1650 and2550, hash preserved, candidate1/reuse0. Product label2/2 correct; Agent narrative/Korean/schema ergonomics need improvement. Full raw-visible traces and manual findings: result/cold-review-20260909. No new review/publish, B-PC remains NOT_RUN; overall final review is not auto-approved.
