@@ -20,10 +20,10 @@ CJ의 exact 후보 승인 → 다른 문서에서 독립 Replay PASS → team-sk
 
 4. 현재 단계와 남은 일
 AI-DLC는 Inception을 마치고 Construction의 통합 Build & Test·시연 정리 단계입니다. 기존 승인·팀원 저작 이력·실패 로그를 보존했습니다. 전체 제품/제출 승인 완료는 아닙니다.
-기존 전체 회귀 139 PASS/2 SKIP, 별도 실제 Excel 1 PASS, GitHub Python CI 성공입니다. 이번에는 제품 코드 변경 없이 실제 Claude Cold 3회+Warm 1회를 추가 검증했습니다. 중간 JSON 규격/도구 권한 재시도는 있었고 로그에 보존했습니다.
+실제 Claude Cold 3회+Warm 1회는 같은 제품 소스에서 실행했고 중간 JSON/도구 권한 재시도도 보존했습니다. 이후 승인된 U3 집계 표현을 정정하여 최신 전체 회귀142 PASS/2 SKIP, main935b8ec Windows CI 성공을 확인했습니다. 실제 Excel1 PASS는 별도 실환경 기록입니다. 웹 P0/P1 설명·차트·후보/게시/재사용 구분을 검증하고 Pages 배포도 완료했습니다. 웹 버튼은 실제 실행이 아닌 설명용이며 실제 로그 링크를 별도로 제공합니다.
 
 - A 호길님: U1 구현 인수·통합 완료. 현재 추가 구현 대기 업무 없음. 실제 재현 중 U1 결함이 나오면 해당 부분만 협조 요청.
-- B 석훈님: 9/9 오전 본인 PC에서 최신 main 설치 → 팀 Skill pull → 실제 Warm → 실적 push 시연 준비. 별도 GitHub 저장소/branch 생성은 불필요. 상세 가이드 전달 예정.
+- B 석훈님: 9/9 오전 본인 PC에서 최신 main 설치 → 팀 Skill pull → 실제 Warm → 실적 push 시연 준비. 별도 GitHub 저장소/branch 생성은 불필요. 상세 가이드: aidlc-docs/construction/build-and-test/b-github-demo-guide.md.
 - CJ: B PC 결과 통합, 수정된 상태줄 공용 실적과 웹 시연 확인, README·캡처·갤러리 제출 마무리.
 - QA 여훈님: 실행법을 따라 재현하고 실제 캡처·로그·설명 일치 확인. 코드 테스트 수와 사용자 시나리오 수는 구분.
 

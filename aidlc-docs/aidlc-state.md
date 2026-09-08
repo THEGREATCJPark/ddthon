@@ -8,8 +8,8 @@
 - **공유 근거**: `team-skill-store` Skill 게시 `28809464218e7328c7184a20bcafebb0e1b18916`, 재사용 이벤트 `04d831066e0fcdae3217412385e37dc0f08cae58`. 별도 mirror/store 수신, receiver local approval/Replay=null. 이벤트 첫 import1/반복0, 조직 총계1.
 - **기존 회귀**: 139 PASS/2 SKIP 및 별도 실제 Excel 1 PASS; GitHub CI run34235737366(91dcf82) success. 최신 검토 main75ef7e0도 run34242335266 success 확인. 로컬 테스트 수·CI·추가 사용자 시나리오 수는 합산하지 않음.
 - **A/B 인수**: A PR#1 실제 merge `58adce9`, B 원작성 이력 merge `99cc4e5`. CJ가 완료 인수 코드 통합을 담당; A/B 동시 수정 대기 없음. B 다음 역할은 별도 PC Git 공유 시연 재현.
-- **U3 표현 정합화**: 수신 환경 팀1/로컬0, exact 게시 기반 기여/인기 순위, 이벤트 중복 제외 검증 완료. 전체142 PASS/2 SKIP. 웹 설명 P0 4단계/P1 8단계·실제 차트·버튼 이전/초기화 검증 완료. 웹 소스main 포함·기존 Pages 배포는 승인 계획대로 진행 중.
-- **남은 것**: B PC 실제 재현 NOT_RUN, 최종 GitHub CI/Pages 배포 확인·갤러리/제출 검토. 현재 제품 lifecycle 변경 없이 U3 읽기 표현만 정정했다.
+- **U3 표현 정합화**: 수신 환경 팀1/로컬0, exact 게시 기반 기여/인기 순위, 이벤트 중복 제외 검증 완료. 전체142 PASS/2 SKIP. 웹 설명 P0 4단계/P1 8단계·실제 차트·버튼 이전/초기화 검증 완료. 웹 소스main 포함·기존 Pages 배포 완료. 검증 소스935b8ec Python CI34287993633/Pages34287993826 모두success.
+- **남은 것**: B PC 실제 재현 NOT_RUN, 최종 갤러리/제출 검토. GitHub CI/Pages는935b8ec에서success 확인 완료. 현재 제품 lifecycle 변경 없이 U3 읽기 표현만 정정했다.
 - **기록**: `result/p1-acceptance/`, `construction/build-and-test/`. 추가 Cold/Warm 시험 당시 제품 코드/C9 불변. 이후 승인된 U3 표현 정정은 별도 기록. 공식 AI-DLC 규칙 불변. 기존 audit append-only, UTC 시각 매번 취득. S3/DB adapter는 구현 아닌 확장안.
 
 
@@ -30,7 +30,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-09-08T14:45:14Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. U3 표현 정정·142PASS/2SKIP 완료. 최종 CI/Pages·B PC 재현·제출 검토 남음.
+- **Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. U3 표현 정정·142PASS/2SKIP 완료. CI/Pages success 확인. B PC 재현·최종 제출 검토 남음.
 - **(이전) Current Stage**: **CONSTRUCTION 진입 — Units Generation 승인됨(정정 3건 반영, 2026-09-08)**. 다음: U0 P0 필수 + U1 최소 Functional Design → NFR Requirements(minimal) → Code Plan. **정정**: (1) U3 소유자=**CJ**('여력' 폐기), UI·조직 집계는 승인된 **필수 범위**(P0 비블로킹 ≠ 선택 기능); **U2(B) Day2 대기 해제**(계약+게이트 충족 시 즉시 병행 착수). (2) **파일별 단일 수정자**: usage.py=CJ(카운트+공유 이벤트), cli.py=CJ, gitsync.py=B(전송; 검증·dedup은 usage.py=CJ), envharness_p0.py=CJ/envharness_p1.py=B('함수별 분담' 폐기); U3 집계·표현=읽기전용, C3 공유 이벤트 import=상태 변경(쓰기). (3) 계약 5 **비블로킹**으로 정정, U0 전체 완료 대기 없이 P0 최소 계약+로컬 저장·카운트·환경 인터페이스 확정 후 U0/U1 **병렬**. **코드 작성은 설계·Code Plan 승인 + 공통 기준 SHA·작업 경로 확인 후.**
 - **(이전) Units Generation (minimal) — 산출물 생성 완료**: Unit 정의(U0 공통·계약·통합/CJ, U1 P0 재사용 실행/A 최호길, U2 P1 경험·후보화·게시/B 한석훈, U3 조직 집계·표현·재사용 이벤트 공유, Q1 독립 QA 횡단/C 윤여훈), 의존성·계약 동결(1~8, P0 최소셋=1·3·4)·착수 순서(17:30 P0 앵커)·스토리 매핑(7개 전부 배정). 산출물: `application-design/unit-of-work.md`, `unit-of-work-dependency.md`, `unit-of-work-story-map.md`, `plans/unit-of-work-plan.md`.
 - **(이전) Application Design Request Changes(2건 계약 보완)**: (1) **C10 상태 조회 경로**: S3에 읽기전용 상태 조회 계약(`list_lifecycle_states`/`query_lifecycle_state`, `remote_publish_evidence`/`local_review_evidence`) 신설, C10은 이를 통해서만 상태 조회(추정·게이트 재구현 금지). (2) **재사용 이벤트 공유 자격 분리**: `export_shared_usage(scope=VERIFIED_REUSE)`로 Skill 게시 게이트(SHAREABLE)와 분리, C3가 검증·event_id dedup, `sync`→C3/C4.push_shared_usage 경로는 S3.publish와 독립(A게시→B import→B 검증 성공→B 공유→A 1회 반영). 의존성 매트릭스·다이어그램·텍스트대안(C4→C3, C10→S3, localhost HTTP)·"네트워크 서비스 없음" 범위·UI 프레임워크 단계 표기·채택 repo/branch vs 미정 로컬 경로 정합화. **Application Design 전체 승인·Units Generation은 재검토 후 결정**(REVIEW REQUIRED).
@@ -80,7 +80,7 @@
 ## Execution Plan Summary
 - **실행**: User Stories(minimal), Application Design, Units Generation, Functional Design(per-unit), NFR Requirements(per-unit, minimal), Code Generation, Build and Test
 - **생략**: Reverse Engineering(N/A), NFR Design, Infrastructure Design, Operations(placeholder)
-- **다음 단계**: 최종 CI/Pages 확인, B PC에서 게시 Skill 가져오기·Warm·usage 공유 시연, 최종 결과 검토. 기존 Application Design/Units 승인을 재요청하지 않는다.
+- **다음 단계**: B PC에서 게시 Skill 가져오기·Warm·usage 공유 시연, 최종 결과 검토. 기존 Application Design/Units 승인을 재요청하지 않는다.
 - **문서**: aidlc-docs/inception/plans/execution-plan.md
 
 ## 승인된 SKIP 경계 (Workflow Planning 승인 시 확정)

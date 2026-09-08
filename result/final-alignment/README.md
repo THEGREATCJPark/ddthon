@@ -20,8 +20,10 @@ Approved before implementation: aidlc-docs/construction/plans/final-presentation
 
 ## Source and deployment
 
-Main includes team-hub subtree and the existing Pages workflow, preserving web author ancestry while excluding older root rules/audit. Pages checkout now uses triggering github.sha. Web original third-party notices/license are included. Public deployment/CI receipts will be appended after remote confirmation. S3/DB support remains a future adapter, not implemented here.
+Main includes team-hub subtree and the existing Pages workflow, preserving web author ancestry while excluding older root rules/audit. Pages checkout now uses triggering github.sha. Web original third-party notices/license are included. Main935b8ec Python CI34287993633 and Pages34287993826 success. Web branchbe3013f Pages34287992312 success. github-actions.json records exact SHA/status/time. Public browser P0 all4/P1 all8 PASS with no console errors; served index-BzLmvpnE.js matches local production build. Deployed screenshot/DOM files are separate from localhost captures. S3/DB support remains a future adapter, not implemented here.
 
 ## Remaining human/environment check
 
 Separate B-PC Warm/Git roundtrip remains NOT_RUN. No more repeated same-source Cold tests are required by this correction. Final submission/gallery approval is not assumed.
+
+Source ancestry: webbe3013f is an ancestor of main935b8ec. Both team-hub tree IDs are0ee12f51d7db3d10fbd325517482a22b3ccf0c5d. Existing generated diagram JSON carries CRLF reported by diff whitespace checking during subtree import; retained unchanged from the author branch. Build and pipeline validation passed. Official CLAUDE.md/.aidlc-rule-details paths have no diff from75ef7e0. Final receipt commit changes only documentation/evidence, not tested code.

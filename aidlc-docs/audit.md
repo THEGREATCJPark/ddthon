@@ -844,3 +844,8 @@ Implemented read-only U3 exact published/event projection and aligned existing t
 ## 2026-09-08T22:51:20.292405+00:00 — Final local regression complete
 
 142 PASS/2 SKIP, seed20260908,239.68s after explicit S3-vs-sync test assertion and dashboard local-scope labels. No warning in final run. Earlier failure/warning retained in pytest-first-failure.txt. Web production build and6 tests PASS; browser charts/progression/reset PASS. Integrating tested web source plus workflow only, preserving web author ancestry and main rule/audit roots. Remote CI/Pages not yet claimed.
+
+
+## 2026-09-08T22:58:36.126132+00:00 — Final alignment remote verification complete
+
+User-approved six-step plan complete. Main935b8ec and webbe3013f pushed without force, web author ancestry preserved through selective subtree merge. Exact web tree0ee12f51d7db3d10fbd325517482a22b3ccf0c5d matches both branches; existing generated diagram CRLF preserved despite diff whitespace notices. Main Python CI34287993633 success, main Pages34287993826 success; web Pages34287992312 success. Public browser P0/P1 progression and archived chart rendering PASS; served index-BzLmvpnE.js matches tested production build. Evidence result/final-alignment. No live Firebase writes; no new P1/Cold reruns; no official rule changes. Final receipt is documentation/evidence only; whole-product submission review and separate B-PC reproduction remain.

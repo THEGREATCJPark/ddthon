@@ -1,0 +1,14 @@
+[
+  {
+    "web": "team-hub/public/evidence/p1-cold.png",
+    "source": "result/scenario-correction/cold-trend.png",
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "identical": true
+  },
+  {
+    "web": "team-hub/public/evidence/p1-warm.png",
+    "source": "result/p1-acceptance/warm-4d443bc76d6c80a37de3-trend.png",
+    "sha256": "d8225103390dc8af7c8581d8ac17478481494f729766b5685a1327f0dc61a602",
+    "identical": true
+  }
+]

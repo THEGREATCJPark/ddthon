@@ -1,0 +1,163 @@
+- banner:
+  - link "노웨어 · 진행 순서도":
+    - /url: "#flow"
+    - img "노웨어 NOWHERE 로고"
+  - text: 노웨어
+  - generic: 제4회 디디톤
+  - heading "Agent Skillloop" [level=1]
+  - paragraph: 한 번 푼 문제, 팀의 다음 해결법으로.
+  - text: DS S/W DEVELOPER HACKATHON
+  - strong: 제4회 디디톤
+  - paragraph: Humans set the direction. AI brings the speed.
+  - img "제4회 디디톤 행사 배너"
+- navigation "주 메뉴":
+  - link "진행 순서도":
+    - /url: "#flow"
+    - text: 진행 순서도
+  - link "팀 의견":
+    - /url: "#team"
+    - text: 팀 의견
+  - link "태클 걸기":
+    - /url: "#challenge"
+    - text: 태클 걸기
+  - link "시연":
+    - /url: "#demo-p0"
+    - text: 시연
+  - link "캡처 정리":
+    - /url: "#captures"
+    - text: 캡처 정리
+- main:
+  - generic: MANUAL SIMULATION
+  - heading "Claude Code에서 보는 Agent SkillLoop" [level=2]
+  - text: 설명용 시뮬레이션
+  - paragraph: 실제 구현 흐름을 따라가는 설명용 시연입니다. 다음 단계 버튼은 설명만 진행하며, 설치·게시·실적을 실행하거나 변경하지 않습니다.
+  - tablist "시연 시나리오":
+    - tab "P0 Python 설치 · 기존 Skill 재사용":
+      - generic: P0
+      - generic: Python 설치 · 기존 Skill 재사용
+    - tab "P1 Excel 분석 · 새로운 Skill 발견" [selected]:
+      - generic: P1
+      - generic: Excel 분석 · 새로운 Skill 발견
+  - generic: NO_MATCH·탐색
+  - generic: →
+  - text: 차트·후보
+  - generic: →
+  - text: 검토·Replay
+  - generic: →
+  - text: Git 게시·새 Agent 재사용
+  - generic: Claude Code
+  - emphasis: SIMULATION
+  - generic: ─
+  - generic: □
+  - generic: ×
+  - img "Claude 마스코트"
+  - strong: Claude Code v2.1.263
+  - generic: P1
+  - generic: "8"
+  - text: / 8
+  - article:
+    - generic: ❯
+    - paragraph: AAAAA01_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.
+    - heading "업무 요청 → 직접 읽기 실패 → 관련 Skill 없음" [level=3]
+    - paragraph: 일반적인 XLSX 읽기를 시도한 뒤 현재 팀 Skill을 검색합니다. 작업 공간에는 ‘사내환경 · NASCA(가상)’이라는 환경 정보가 제공되어 있습니다.
+    - strong: ● openpyxl · 실제 직접 읽기 경로
+    - code: "⎿ BadZipFile: File is not a zip file"
+    - strong: ● SkillLoop · 현재 팀 Skill 검색
+    - code: ⎿ NO_MATCH · 관련 해결 절차 없음
+  - article:
+    - heading "환경을 조사하고 허용된 접근 방법 발견" [level=3]
+    - paragraph: 문서는 이미 Excel에서 열려 있습니다. 현재 환경을 조사해 실행 중인 Excel 애플리케이션을 통한 read-only 접근을 발견합니다. 암호를 요구하거나 원본을 저장하지 않습니다.
+    - strong: ● 환경 조사 → Excel 앱 접근
+    - code: "⎿ 현재 어댑터: Excel COM attach"
+    - code: ⎿ workbook read PASS · 원본 hash 유지 · Save 미호출
+  - article:
+    - heading "업무 차트 완성 → 환경 절차만 후보로" [level=3]
+    - paragraph: 현재 문서의 시트·열을 해석해 실제 생산량 1200, 1350, 1500과 다음달 예상 1650을 구했습니다.
+    - strong: ● SkillLoop · 업무 검증·후보 생성
+    - code: ⎿ WORK_COMPLETE · 실제 3개월 + 예상 1개월
+    - code: ⎿ 후보 +1 · 기존 Skill 재사용 0
+    - figure "보관한 실제 실행 차트 · 이 화면에서는 재계산하지 않습니다":
+      - img "실제 세 달 생산량 1200, 1350, 1500과 다음달 예상 1650"
+      - generic: 보관한 실제 실행 차트 · 이 화면에서는 재계산하지 않습니다
+    - paragraph: 환경 접근 절차만 후보로 남깁니다. 생산량·시트·열·계산식·차트·암호는 공유 후보에 포함하지 않습니다. 후보는 아직 게시된 Skill이 아닙니다.
+  - article:
+    - generic: ❯
+    - paragraph: 이 후보의 접근 절차를 확인했어. 이 정확한 내용을 승인할게.
+    - heading "사람이 정확한 후보 내용을 검토" [level=3]
+    - paragraph: 사람이 검토한 id·version·digest에 승인을 연결합니다. 내용이 바뀌면 이 승인은 이어지지 않습니다. 아직 팀 게시 전입니다.
+    - strong: ● 사람 review
+    - code: ⎿ exact candidate APPROVED
+    - code: ⎿ 게시 수 변화 없음
+  - article:
+    - heading "다른 문서에서 독립 Replay" [level=3]
+    - paragraph: 다른 시트 배치·값의 문서에서 같은 절차를 새로 실행합니다. 처음 읽었던 결과를 재사용하지 않습니다.
+    - strong: ● 독립 Replay
+    - code: ⎿ 승인 후보 digest 동일 · fresh read PASS
+    - code: ⎿ 원본 무변경 · FAIL/NOT_RUN이면 게시 금지
+  - article:
+    - heading "GitHub 공용 저장소에 실제 게시하는 단계" [level=3]
+    - paragraph: 검토와 Replay가 충족된 절차만 내보내고 team-skill-store에 push합니다. 원격 성공을 확인해야 PUBLISHED로 표시합니다.
+    - strong: ● Git 공유
+    - code: ⎿ descriptor export → push → remote commit 확인
+    - code: ⎿ 설명용 팀 게시 Skill 0 → 1
+  - article:
+    - generic: ❯
+    - paragraph: BBBBB02_직전_3달_생산량.xlsx도 다음달 예상 생산량을 포함해 보여줘.
+    - heading "새 Agent가 가져온 Skill을 발견" [level=3]
+    - paragraph: 새 작업 환경이 GitHub에서 Skill을 받아 무결성을 확인했습니다. 이번 문서의 직접 읽기 실패에도 해당 Skill이 매칭됩니다. 원격 Skill이므로 정확한 내용의 실행 확인을 받습니다.
+    - strong: ● 새 환경 pull → 검색
+    - code: ⎿ MATCH · 같은 id/version/digest
+    - code: ⎿ 수신 환경의 사람 review·Replay 기록은 만들어 넣지 않음
+    - code: ⎿ CONFIRMATION_REQUIRED
+  - article:
+    - generic: ❯
+    - paragraph: 확인한 이 Skill의 실행을 승인할게.
+    - heading "확인 후 Warm 재사용 → 새 후보 0" [level=3]
+    - paragraph: 다른 문서의 시트·열을 해석해 실제 생산량 2100, 2250, 2400과 예상 2550을 구했습니다.
+    - strong: ● SkillLoop · Warm 검증·실적
+    - code: ⎿ WORK_COMPLETE · reuse +1 · candidate 0
+    - code: ⎿ 공유 이벤트 첫 import 1 · 반복 import 0
+    - figure "보관한 실제 실행 차트 · 이 화면에서는 재계산하지 않습니다":
+      - img "다른 문서 실제 생산량 2100, 2250, 2400과 다음달 예상 2550"
+      - generic: 보관한 실제 실행 차트 · 이 화면에서는 재계산하지 않습니다
+    - paragraph: 같은 환경 Skill을 재사용했으므로 새 후보는 0입니다. 검증된 재사용 이벤트를 공유하고 반복 수신해도 한 번만 집계합니다.
+  - text: P1 시연 완료 · 실제 실행 결과가 아닌 설명용 상태입니다.
+  - generic: ❯
+  - textbox "Claude Code 프롬프트":
+    - /placeholder: 시연이 완료되었습니다.
+  - button "다음 단계 보기" [disabled]:
+  - text: 🧠 SkillLoop · 설명용 팀 현황 | 📚 팀 게시 Skill
+  - status:
+    - generic: 1개
+    - emphasis: "+1"
+  - text: ✨ 미게시 후보 0개 · 게시된 기여
+  - status:
+    - generic: 1개
+    - emphasis: "+1"
+  - text: 🔥 시뮬레이션 재사용
+  - status:
+    - generic: 1회
+    - emphasis: "+1"
+  - text: · 새 Agent의 중복 후보 0개
+  - generic: 위 숫자는 설명용 상태 · 실제 로컬/팀 실적 변경 없음
+  - paragraph: 후보 생성은 게시가 아닙니다. 정확한 내용의 사람 검토와 독립 Replay PASS 뒤 공유하며, 새 Agent는 가져온 Skill의 실행을 확인받습니다. 현재 P1은 지원된 Excel 접근 어댑터 범위입니다.
+  - paragraph:
+    - text: "실제 실행 기록:"
+    - link "P0 자연어 3개 사례":
+      - /url: https://github.com/THEGREATCJPark/ddthon/blob/main/result/p0-reproduction/README.md
+    - text: ·
+    - link "P1 Cold 3회·Git 공유·Warm":
+      - /url: https://github.com/THEGREATCJPark/ddthon/blob/main/result/p1-acceptance/README.md
+    - text: ·
+    - link "실제 공용 Skill 저장소":
+      - /url: https://github.com/THEGREATCJPark/ddthon/tree/team-skill-store
+  - button "이전":
+    - text: 이전
+  - button "처음부터":
+    - text: 처음부터
+  - generic: 실제 Claude·SkillLoop 실행 및 검증 증거가 아닙니다.
+  - button "전체 시연 다시 보기":
+    - text: 전체 시연 다시 보기
+- contentinfo:
+  - generic: NOWHERE · Agent Skillloop
+  - text: 제4회 디디톤

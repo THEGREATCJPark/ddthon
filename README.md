@@ -84,6 +84,8 @@ Claude Code/Amazon Bedrock으로 요구사항·설계·Unit 구현 및 실제 �
 
 제출에는 소스·의존성 선언·fixture·aidlc-docs·실행 증거를 포함합니다. .venv, .git, 개인 설정, 인증정보는 제출 ZIP에 넣지 않습니다.
 
+최종 UI·배포 검증: [집계/웹 검증 기록](result/final-alignment/README.md). 제품 소스935b8ec에서 로컬142 PASS/2 SKIP 및 Windows CI·Pages 배포 성공을 확인했습니다.
+
 ## 팀 협업 공간
 
 [노웨어 · Agent Skillloop 열기](https://thegreatcjpark.github.io/ddthon/)
