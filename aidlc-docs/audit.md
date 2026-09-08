@@ -563,3 +563,11 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 Code Generation Part 2 착수 / 최신 main 병합 + 항목 1·2·4 확정. ①단계(run_file_access_procedure) 구현 다음.
 
 ---
+
+## U2 Construction — ② replay.py(C6) 구현 + hypothesis 설치 후 전체 실행
+**Timestamp**: 2026-09-08T10:35:43Z
+**User Input**: "CJ 승인 확인. ② replay.py와 테스트를 기존 계획 범위에서 마무리하세요. ... [Replay 검증에서 반드시 확인할 것] 정확한 candidate content/version/digest 대상 실행 / 최초 결과·artifact 미재사용 새 접근 / read-only 근거(mtime·sha256 실측, save_called=False) / 미준비=NOT_RUN·실행 후 실패=FAIL / Replay PASS와 승인·게시 분리. [테스트 의존성] hypothesis 설치 후 test_descriptor_pbt.py 실제 실행, '48 passed'는 실행 범위 결과로 유지. [완료 후 push하고 4가지 보고]" (+ 속도 우선 후속: 참고 파일 envharness_p1.py/test_envharness_p1.py 한정, 중간 승인 없이 진행, 검증된 항목 재실행 금지, 설명 최소)
+**AI Response**: "① procedure 인자 실사용 강화 커밋 711466f. ② skillloop/replay.py(C6 ReplayVerifier) + tests/test_replay.py(9케이스) 구현·커밋 2886a63, push 완료. replay(candidate,env)->ReplayResult{verdict,candidate_ref{id,version,digest},evidence}: candidate.procedure를 run_file_access_procedure로 별도 문맥 새 재수행(최초 실행 결과 인자 없음→구조적 미재사용), digest 재계산 동일성 근거, app_open=False/method=none→NOT_RUN·실행 후 미충족→FAIL·성공→PASS. 최초 결과 미재사용은 상태 리더 호출#1(A) vs #2(B) 케이스로 실증. hypothesis>=6 설치 후 전체 스위트 61 passed(PBT 포함, skip 0 — 실 Excel attach PASS)."
+**Context**: Construction / U2 ② replay.py C6, commits 711466f·2886a63 pushed to work/u2-p1-git
+
+---
