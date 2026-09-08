@@ -65,6 +65,11 @@
 - **SCOPE-CHANGE-1 (2026-09-08, 승인됨)**: UI 추가(상태줄 FR-UI-1 + 로컬 읽기전용 대시보드 FR-UI-2, 동일 집계 FR-UI-3) + 조직 집계(FR-ORG-1~5, FR-USAGE-4) + Git 공유 방식 변경(별도 private 저장소 전제 → 동일 저장소 `team-skill-store` branch, 로컬 DB 미전송 FR-SYNC-5). 근거·영향: `plans/change-impact-ui.md`. **과거 Q3=A("별도 private 저장소")·기존 승인 이력은 보존**하고 이번 변경으로 일반화. 표현 참고=ttt(상태줄, organization.html; 백엔드 중앙 API 미채택, 소스≠렌더링). export=SHAREABLE 유지(최초게시·재시도 가능), PUBLISHED=원격 push 성공 후에만.
 
 ## Notes
+- **U2 공통 의존성 계약 — 승인·구현 진행(2026-09-08)**: 산출물 `construction/plans/u2-shared-dependency-contracts.md`(승인 조건·최소 Code Plan 포함). **이 승인은 CJ 공통 의존성 계약·구현에 한정 — B의 U2 전체 설계/Code Plan 승인 아님.**
+  - **C-a/C-b 구현 완료(store.py, C2)**: lifecycle `save/load_lifecycle_state`·`list_lifecycle_records`(저장만·전이 미판단, 키=id/version/digest); descriptor `export_bundle(refs 허용목록·3자 digest 일치·content만)`/`import_bundle(digest 재계산·위조 거부·DEDUP/CONFLICT·content만·승인/Replay 미생성)`. **검증: 전체 26 passed / 8 skipped**(기존 19→26). commit/push·SHA 보고 진행.
+  - **C-d(usage.py+cli.py) 진행 예정**: events 영속화 + export/import_shared_usage(VERIFIED_REUSE·event_id dedup·역산 금지), run-p0 이벤트 배선(digest+reuser_alias, run_id dedup 불변) + share-export/import 서브커맨드.
+  - **제공 순서(B)**: ①store.py(C-a+C-b, 완료) ②usage.py+cli.py(C-d) ③P1 A·B 조율(P0 독립).
+- **A(U1) 인계 상태**: A 로컬 commit `875c97e...` 완료했으나 **push 403 차단 → 패치 전달 요청 상태.** 원격 branch만 대기하지 않음 — **패치 파일 도착 시 최신 main 기준 별도 통합 branch에서 검토·적용 + 실제 P0 검증 병행.** 현재 원격에 A 코드 없음 → P0 e2e(V5~V8·V12) NOT_RUN 유지.
 - **Process/provenance 정합성 정정(제품 scope change 아님)**: 이 시점 이후 구현 기준은 현재 `ddthon`에서 본선 중 생성·승인된 Requirements/User Stories/Workflow Plan/Application Design 및 이후 승인될 Units/Functional Design/Code Plan과 현재 실제 실행 증거다. Application Design 전체 승인 대기 상태는 유지한다. UI는 사용자 승인 FR-UI/FR-ORG 자체를 근거로 유지한다.
 - **외부 사전 구현 Reference 사용 중단**: `ttt`를 포함한 사전 구현의 검색/Fetch/Open/Read/비교/코드 복사/테스트 결과 참조를 중단한다. 필요 시 이유·범위를 먼저 제시하고 사용자 승인을 기다린다. 현재 산출물·실제 오류부터 조사하며 과거 외부 PASS/코드 구조를 본선 완료 근거로 사용하지 않는다. 과거 audit/chat/변경 검토 및 위 SCOPE-CHANGE-1의 참고 사실은 보존한다.
 - **Audit timestamp correction**: 과거 일부 entry의 workflow 시작 timestamp 반복은 capture 오류이며 동일 시각의 이벤트를 뜻하지 않는다. 기존 entry는 수정하지 않고 correction note를 append한다. 이후 각 entry 작성 직전에 PowerShell `Get-Date`로 OS 현재 시각을 새로 취득해 UTC ISO 8601(`Z`)로 기록하고 고정 timestamp를 재사용하지 않는다. 취득 실패 시 `timestamp unavailable`로 표시한다.

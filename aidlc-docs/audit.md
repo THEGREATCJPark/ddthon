@@ -410,3 +410,33 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / Code Generation / Part 2 / e2e·실행 준비 완료. A(S7/S8) 수신 시 통합·실제 run-p0 실행 예정.
 
 ---
+
+## U2 공통 의존성 계약 정리 — 검토 요청(P0 A 인계 병행)
+**Timestamp**: 2026-09-08T08:53:02Z
+**User Input**: "B의 U2 착수 보고를 접수한다. A 인계 대기와 병행해 U2 공통 의존성을 해소해. 현재 main의 store.py에는 export_bundle/import_bundle이 없고, usage.py에는 공유 이벤트 저장·export/import가 없다. P0 완료를 기다리지 말고 아래 계약을 우선 정리해. 1. C-a: services.md는 S3가 상태를 소유·판단하고 SkillStore lifecycle 저장 계약으로 영속한다. B의 U2 자체 lifecycle.json 제안과 차이를 확인해 저장 구현 책임을 하나로 확정할 최소안을 제시해. S3 단일 상태 판단·쓰기와 읽기전용 조회 계약은 유지해. 2. C-b: CJ 소유 store의 descriptor import/export를 우선 준비해. S3가 판정한 exact candidate의 공유 자격 전달 방식 명확화, 미승인 후보 export 금지, digest 재계산 검증, 동일 id/version DEDUP·CONFLICT, content만 import, 원격 문자열로 로컬 승인·Replay 미생성 경계 유지. B의 별도 저장·검증 우회 금지. 3. C-d: 공유 usage 이벤트 최소 규격·호출 계약 우선 제공. counts/seen_run_ids만으로는 성공 근거 export 불가 → 이벤트 영속화·정확한 Skill 참조·성공 근거·비-DEMO·동일 이벤트 왕복 dedup. 기존 카운트에서 과거 이벤트·검증 근거 생성 금지. 4. A·B가 맞출 P1 검색·파일접근 Skill 적용·검증 계약 짧은 조율안. P0 인계 비지연. 기존 승인 문서·현재 코드만 사용, P0 Code Plan 승인을 미포함 공유 기능 구현 승인으로 간주 금지. 승인된 상세 계획 있으면 이어서, 없으면 최소 설계·Code Plan 보완만 묶어 검토 요청. Inception·전체 범위 재시작 금지. 결과는 B에게 전달할 계약·담당자·제공 순서 중심으로 보고. A 코드 도착 시 P0 통합 계속."
+**AI Response**:
+- 근거 확인: services.md·component-methods.md·component-dependency.md·unit-of-work.md(소유·단일 수정자 매핑) + 현재 코드(store.py=get/list/put만, usage.py={counts,seen_run_ids}만). **승인된 U2 상세 계획 없음** → 최소 설계·Code Plan 보완을 **검토 요청**으로 작성(구현 아님).
+- A 인계 점검: `git fetch --all` — 원격은 origin/main·origin/codex/team-hub만(후자 skillloop 코드 없음). **A는 아직 push 없음.** HEAD=7cbc856, 작업 트리=README/EVALUATION 로컬 수정 보존. P0 통합 대기 유지.
+- 산출물: `construction/plans/u2-shared-dependency-contracts.md`.
+  - C-a: lifecycle 저장 단일화 — S3(B) 단일 상태 판단·writer 유지 + C2(store.py, CJ) 단일 저장 구현자(save/load_lifecycle_state, 저장만·판단 없음). **B 자체 lifecycle.json 미채택**(이중 소유·승인 설계 이탈 방지). 소비자는 S3 읽기전용 조회로만 접근(물리 위치 은닉). descriptor와 분리 섹션.
+  - C-b: store export_bundle(S3가 넘긴 SHAREABLE refs 허용목록만)/import_bundle(content만·digest 재계산·DEDUP/CONFLICT·원격 문자열→로컬 승인/Replay 미생성). C2는 공유 자격 미판정(S3 판정 전달). B 재구현 우회 금지.
+  - C-d: usage.py(CJ 단일) 이벤트 영속화({counts,seen_run_ids,events}) — SharedReuseEvent{event_id, skill_ref(id,version,digest), reuser_alias, evidence(is_real_success), demo_seed=false, timestamp}. VERIFIED_REUSE=로컬 존재+실제 성공+비-DEMO. record_actual_reuse 확장(카운트될 때만 이벤트 생성). **기존 카운트 역산 금지.** export/import_shared_usage(검증·event_id dedup=C3 단독, C4 전송만).
+  - P1 조율(짧게): C5 signal 비의존(file-access-fail:* 규약)·S1 시나리오 비의존(procedure.action 분기, B는 S1 호출)·env harness 비의존 EnvCtx(P1=envharness_p1.py/B)·카운트는 C3 단일 경로. A·B 합의점=파일접근 효과 검증 위치.
+  - 제공 순서(B): ①C-a+C-b(store.py, 선행) ②C-d(usage.py) ③P1 조율(병행, P0 독립).
+- **경계 명시**: 미구현 공유 기능. 본 문서 승인 후에만 CJ가 store.py/usage.py 구현. **P0 Code Plan 승인 ≠ 이 공유 기능 구현 승인.** Inception 미재시작.
+**Context**: CONSTRUCTION / U2 착수 전 공통 의존성 정렬 / 검토 요청. P0(A 인계)은 대기 유지·비지연.
+
+---
+
+## U2 공통 의존성 승인 → C-a/C-b 구현·검증(store.py)
+**Timestamp**: 2026-09-08T09:04:54Z
+**User Input**: "검토 승인합니다. 제안한 C-a/C-b/C-d 책임·제공 순서로 확정하고, CJ 소유 공통 의존성 구현을 진행하세요. [조건 반영] C-a: S3(B) 상태 전이 판단, C2(CJ) 저장·로드만, 상태·근거는 정확한 candidate의 id/version/digest 연결, 외부 소비자 조회는 S3 계약 유지. C-b: export는 S3가 공유 가능하다고 판정한 정확한 candidate만, SHAREABLE 문자열/bool로 전체 export 금지, 판정 대상과 export 대상 id/version/digest 일치 확인, 최초 게시·재시도 가능·PUBLISHED를 export 전제로 삼지 않음, import는 digest 재계산·DEDUP/CONFLICT·content만·원격 문자열로 로컬 승인·Replay 미생성. C-d: 동일 이벤트 event_id 유지·재전송 dedup·기존 counts 역산 금지·exact Skill 참조와 reuser_alias 제공 호출자 명확화·CJ CLI 연결 포함·run_id dedup 불변. 이번 승인은 CJ 공통 의존성 계약·구현 승인이며 B의 U2 전체 설계/Code Plan 승인 포함 아님. 문서에 변경 파일·검증·제공 순서 최소 Code Plan 명시하고 별도 새 결정 없으면 재질문 없이 진행. 제공 순서: C-a/C-b 구현→검증→commit/push→SHA 보고, C-d 구현→검증→commit/push→SHA 보고. A는 로컬 commit 875c97e...까지 완료했으나 push 403으로 막혀 패치 전달 요청 상태 → 원격 branch만 기다리지 말고 패치 도착 시 최신 main 기준 별도 통합 branch에서 검토·적용하고 실제 P0 검증 병행. 기존 로컬 변경·audit 이력 보존, 외부 사전 구현 Reference 미사용."
+**AI Response**:
+- 계약 문서 `u2-shared-dependency-contracts.md`에 승인 상태·조건·최소 Code Plan(변경 파일·검증·제공 순서) 반영.
+- **C-a 구현(store.py, C2)**: `save_lifecycle_state(skill_ref{id,version,digest}, state, evidence)`/`load_lifecycle_state`/`list_lifecycle_records`. 저장만 — 전이 규칙·게이트 미판단(S3=B 소유). lifecycle 키=id\x1fversion\x1fdigest(정확한 candidate 연결). 저장 스키마 `{skills}`→`{skills,lifecycle}`(하위호환 load).
+- **C-b 구현(store.py, C2)**: `export_bundle(refs=[{id,version,digest}])` — 허용목록만(전체 export 아님), 로컬 저장 digest·content 재계산 digest·선언 digest 3자 일치 시에만 content(불변부)만 포함, 불일치·미존재 제외. `import_bundle(blob)` — content로 digest 재계산·선언 불일치 거부(위조 방지)→`put` 규칙(STORED/DEDUP/CONFLICT), content만·usage 미반영, 로컬 승인/Replay 미생성.
+- **검증**: `pytest tests/test_store.py` 12 PASS(신규 7: export 허용목록·digest 불일치 제외·왕복 content만·DEDUP/CONFLICT·위조 거부·lifecycle digest 연결·영속). **전체 pytest: 26 passed / 8 skipped**(기존 19→26, A 스텁 SKIP 불변). 기존 P0 테스트 불변.
+- README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A 단일 수정자) 미변경.
+**Context**: CONSTRUCTION / U2 공통 의존성 / C-a·C-b 구현·검증 완료. commit/push·SHA 보고 진행.
+
+---
