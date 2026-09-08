@@ -33,3 +33,14 @@ tests/fixtures/indexes/allow/*.tar.gz
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Team Hub local dependencies, build and emulator artifacts
+team-hub/node_modules/
+team-hub/dist/
+team-hub/*.tsbuildinfo
+team-hub/.playwright-cli/
+team-hub/output/
+team-hub/.archify/
+team-hub/public/archify/*.visual-check.*
+team-hub/.firebase/
+team-hub/*-debug.log*

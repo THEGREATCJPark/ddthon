@@ -1,0 +1,31 @@
+# 노웨어 웹 검증
+
+2026-09-08 · Windows / Node 22 / Chromium · 코드 및 Pages: codex/team-hub.
+
+- 단위 테스트 5개: 설명형 시나리오 이름, 독립 노드 상태 공유·검증, 잘못된 URL 거부, 익명 이름 강제, 댓글 길이·공백 검증, 샘플 구분.
+- Firestore 보안 테스트 5개 그룹: 인증 없는 등록 거부, 조회 개수 제한, 본인만 삭제, 다른 작성자 신원 문서 접근 거부, 위조·초과 입력·추가 필드·시간 위조 거부, 답글의 보드/깊이 제한, 3초 간격과 필수 원자적 쓰기 검증. Java 21의 격리된 `demo-nowhere` 에뮬레이터에서 PASS.
+- TypeScript + Vite production build PASS. GitHub Issues API 및 Mermaid 의존성 제거.
+- 실제 Firebase에서 별도 브라우저 간 댓글·답글 도착과 작성자 삭제를 확인. 검증용 글은 확인 후 삭제하며 사용자 요청의 정적 샘플만 남깁니다.
+- Chromium 행동 검사 15개 PASS: 기존 세 탭과 팀 이름, 제거된 관리 기능, 설명형 노드·클릭·키보드·저장·공유 링크, 실제 다른 브라우저 댓글/답글, 익명 이름·샘플, HTML을 텍스트로 표시, GitHub API 호출 없음. 원격 팀 의견 0개로 검증용 글 정리 확인.
+- 시연 탭 Chromium 검사 PASS: P0 6단계, P1 8단계, 단계 직접 선택, 이전·다음·초기화, P0→P1 연결, URL 시나리오 이동을 확인했습니다. 전체 시연 중 POST·PUT·PATCH·DELETE 요청은 0건이며 상태 표시는 `memory-only`입니다.
+- AI-DLC 진행 순서도 Chromium 검사 PASS: INCEPTION 아이템 기획에서 U1·U2·U3 병렬 CONSTRUCTION으로 분기하고, 평가 담당 팀원 1명에게 합류한 뒤 통합 시연으로 연결됩니다. 노드 상태 변경과 `v3.001000` 공유 URL을 확인했으며, 이전 v2 상태는 거부합니다.
+- 웹의 네 탭과 Archify 원본 1440×900 light 이미지 직접 검토 완료. 시연 탭은 1920×1080에서 가로 넘침 없이 단계 목록·터미널·상태바·조작부가 함께 보이는지 확인했습니다.
+- Archify `deliver`: showcase 9/9 PASS, 오류·경고 0. `visual-check`: 1440×900, 1600×1000, 1920×1080, 2048×1320 containment PASS. 생성물 SHA-256은 receipt에 기록. 웹에서는 생성물의 여백을 조정하고 글자를 확대해 표시합니다.
+- 배너 원본 SHA-256 유지: `a65f4203d75c64378caff2b257143b5af55ca2f98cf14d433ec15a707162bb0d`.
+
+## 접근과 제품 결과를 구분
+
+Firebase 프로젝트 생성과 규칙 배포 성공 외에, 실제 클라이언트에서 서로 다른 작성자가 게시·답글·수신·삭제하는 동작을 별도로 검증합니다. 익명 인증 사용자의 UID는 공개 댓글이 아닌 작성자 전용 문서에 저장합니다. 샘플은 제품 성공이나 실제 사용자 평가를 뜻하지 않습니다.
+
+## 범위
+
+진행 순서도의 상태는 브라우저 저장과 링크 시점 공유입니다. 댓글·답글만 실시간 공동 저장합니다. 팀 의견도 공개이며 로그인으로 팀원을 구분하지 않습니다. 기존 전략의 상세 P1은 XLSX 접근·처리 사례였고, 현재 화면의 **Excel 설치 시나리오** 명칭은 사용자의 최신 요청을 적용했습니다. 이 UI 표시를 실제 제품 시나리오 구현 또는 검증 성공으로 간주하지 않습니다.
+
+기존 프로젝트, 제품 런타임, AI-DLC 승인 상태는 변경하지 않았습니다. 테스트 도구의 브라우저 캐시와 최초 생성 인덱스 준비 지연, Java 17/21 버전 차이를 해결한 후 제품 테스트를 수행했습니다.
+
+시연의 패키지명, workbook, 업무 수치, 승인, Replay, 게시 및 카운터는 모두 설명용 합성값입니다. 시연 상태는 새로 고침하면 첫 단계로 돌아가며 실제 진행 순서도와 댓글 데이터에는 영향을 주지 않습니다.
+
+
+## 2026-09-08T22:49:01.878062+00:00 — evidence-aligned presentation
+
+Approved plan: main/aidlc-docs/construction/plans/final-presentation-alignment-plan.md. Base web49c1711. Unit tests6 PASS; production TypeScript/Vite build PASS. Actual local browser at127.0.0.1:5173/ddthon verified P0 all4 steps and P1 all8 steps, actual archived Cold/Warm chart image rendering, candidate/review/Replay keeps publication0, publication makes1, remote execution confirmation precedes Warm reuse1/candidate0. Back from Warm returns reuse0, reset returns all0. No extra ordinary user recovery prompts. Browser error/warn logs empty. Fixed chart display height after finding clipping inside console. Simulation is labelled and does not execute products or mutate real counters. No community/comment/capture data writes were performed. Public deployment and final Python CI are separately recorded in main/result/final-alignment/.

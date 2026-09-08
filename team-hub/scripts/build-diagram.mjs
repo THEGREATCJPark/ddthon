@@ -1,0 +1,68 @@
+import { execFileSync } from "node:child_process";
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const revision = "daced37a66ab21f1f8bb096daedd2c5337204020";
+const root = resolve(process.argv[2] || ".archify/archify");
+const actual = execFileSync("git", ["-C", root, "rev-parse", "HEAD"], {
+  encoding: "utf8",
+}).trim();
+if (actual !== revision)
+  throw new Error(`Use the pinned Archify revision ${revision}.`);
+const modified = execFileSync(
+  "git",
+  ["-C", root, "status", "--porcelain", "--untracked-files=no"],
+  { encoding: "utf8" },
+);
+if (modified.trim())
+  throw new Error("Archify renderer must be an unmodified checkout.");
+mkdirSync("public/archify", { recursive: true });
+const spec = resolve("diagrams/development.workflow.json");
+const output = resolve("public/archify/development.html");
+const receipt = JSON.parse(
+  execFileSync(
+    process.execPath,
+    [
+      resolve(root, "bin/archify.mjs"),
+      "deliver",
+      "workflow",
+      spec,
+      output,
+      "--quality",
+      "showcase",
+      "--json",
+    ],
+    {
+      encoding: "utf8",
+      env: { ...process.env, ARCHIFY_UPDATE_CHECK_DISABLED: "1" },
+    },
+  ),
+);
+if (!receipt.ok || receipt.validation.checksPassed !== 9)
+  throw new Error("Archify delivery did not pass all nine checks.");
+const html = readFileSync(output, "utf8");
+const svg = html.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/)?.[0];
+if (!svg) throw new Error("Delivered HTML contains no SVG.");
+writeFileSync("public/archify/development.svg", svg);
+copyFileSync(resolve(root, "../LICENSE"), "public/archify/LICENSE.txt");
+copyFileSync(
+  resolve(root, "../THIRD_PARTY_NOTICES.md"),
+  "public/archify/THIRD_PARTY_NOTICES.md",
+);
+writeFileSync(
+  "diagrams/archify-receipt.json",
+  JSON.stringify(
+    {
+      source: "https://github.com/tt-a1i/archify",
+      revision,
+      specification: receipt.specification,
+      artifact: receipt.artifact,
+      validation: receipt.validation,
+    },
+    null,
+    2,
+  ) + "\n",
+);
+console.log(
+  "Archify workflow delivered: 9/9 showcase checks, SVG extracted for the live task overlay.",
+);

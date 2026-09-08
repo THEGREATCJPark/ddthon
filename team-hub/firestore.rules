@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function owner(id) { return signedIn() && get(/databases/$(database)/documents/messageOwners/$(id)).data.uid == request.auth.uid; }
+    match /captures/{id} {
+      allow get: if true;
+      allow list: if request.query.limit != null && request.query.limit <= 50;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['scenario','title','uid','mime','chunks','hasText','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.scenario in ['p0','p1']
+        && request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 80
+        && request.resource.data.mime in ['', 'image/png','image/jpeg','image/gif','image/webp']
+        && request.resource.data.chunks is int && request.resource.data.chunks >= 0 && request.resource.data.chunks <= 28
+        && ((request.resource.data.chunks == 0 && request.resource.data.mime == '') || (request.resource.data.chunks > 0 && request.resource.data.mime != ''))
+        && request.resource.data.hasText is bool
+        && (request.resource.data.hasText || request.resource.data.chunks > 0)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      match /content/{part} {
+        allow get: if exists(/databases/$(database)/documents/captures/$(id));
+        allow list: if exists(/databases/$(database)/documents/captures/$(id)) && request.query.limit != null && request.query.limit <= 29;
+        allow create: if signedIn()
+          && getAfter(/databases/$(database)/documents/captures/$(id)).data.uid == request.auth.uid
+          && getAfter(/databases/$(database)/documents/captures/$(id)).data.createdAt == request.time
+          && ((part == 'transcript' && request.resource.data.keys().hasOnly(['text'])
+            && request.resource.data.text is string && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 60000)
+            || (part.matches('image-(0[0-9]|1[0-9]|2[0-7])') && request.resource.data.keys().hasOnly(['data'])
+            && request.resource.data.data is string && request.resource.data.data.size() > 0 && request.resource.data.data.size() <= 200000));
+        allow delete: if signedIn() && get(/databases/$(database)/documents/captures/$(id)).data.uid == request.auth.uid;
+        allow update: if false;
+      }
+    }
+    match /messages/{id} {
+      allow get: if true;
+      allow list: if request.query.limit != null && request.query.limit <= 200;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['board','body','name','parentId','createdAt'])
+        && request.resource.data.board in ['team','challenge']
+        && request.resource.data.body is string && request.resource.data.body.size() > 0 && request.resource.data.body.size() <= 1000
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 20
+        && (request.resource.data.board != 'challenge' || request.resource.data.name == '익명의 다른 팀')
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.parentId is string
+        && (request.resource.data.parentId == ''
+          || (request.resource.data.parentId == 'sample-challenge' && request.resource.data.board == 'challenge')
+          || (get(/databases/$(database)/documents/messages/$(request.resource.data.parentId)).data.board == request.resource.data.board
+            && get(/databases/$(database)/documents/messages/$(request.resource.data.parentId)).data.parentId == ''))
+        && getAfter(/databases/$(database)/documents/messageOwners/$(id)).data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/postLimits/$(request.auth.uid)).data.last == request.time
+        && getAfter(/databases/$(database)/documents/postLimits/$(request.auth.uid)).data.messageId == id;
+      allow delete: if owner(id);
+      allow update: if false;
+    }
+    match /messageOwners/{id} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create: if signedIn() && request.resource.data.keys().hasOnly(['uid','createdAt'])
+        && request.resource.data.uid == request.auth.uid && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/messages/$(id)).data.createdAt == request.time;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid && !existsAfter(/databases/$(database)/documents/messages/$(id));
+    }
+    match /postLimits/{uid} {
+      allow get: if signedIn() && uid == request.auth.uid;
+      allow create, update: if signedIn() && uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['last','messageId'])
+        && request.resource.data.last == request.time
+        && request.resource.data.messageId is string
+        && getAfter(/databases/$(database)/documents/messages/$(request.resource.data.messageId)).data.createdAt == request.time
+        && (!exists(/databases/$(database)/documents/postLimits/$(uid)) || resource.data.last + duration.value(3,'s') <= request.time);
+    }
+  }
+}
