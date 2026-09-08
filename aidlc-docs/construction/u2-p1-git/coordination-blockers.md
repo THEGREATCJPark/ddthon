@@ -30,26 +30,68 @@
 
 ## → A(최호길) 통지 (1건)
 
-### C-c · `match.py` — P1 검색 query 미지원 + 스텁
-- **현재**: `search(obs: FailureObservation, store) -> SearchOutcome`가 **pip 전용 형태**(target_pkg/error_signature/exit_code)이고 본문은 `raise NotImplementedError("S7")`. `check_applicability` 없음.
-- **U2 영향**: FR-P1-2(실제 검색 후에만 NO_MATCH 판정)를 A 계약으로 수행하려면 P1 problem 컨텍스트(파일접근 유형)를 받는 검색이 필요.
+### C-c · `match.py` / `reuse_service.py` — P1 검색·적용 입력 일반화 (구현됨, 스텁 아님)
+- **현재(정정, main `7256272`/`9dea075` 통합·실검증 완료)**: `search(obs: FailureObservation, store, budget_s=None) -> SearchOutcome`는 **결정적 매칭이 실구현**되어 있다(MATCH/NO_MATCH/ERROR/TIMEOUT/NOT_INVOKED 구분, `raise NotImplementedError` **아님** — 과거 "S7 스텁" 문구는 폐기). `reuse_service.apply_and_verify(selected, obs, env, run_id) -> ApplicationResult`도 실구현(pip 실제 설치·검증). **단 입력·검증이 P0(pip) 특화**: `FailureObservation{command,target_pkg,error_signature,exit_code}`, 검증은 `harness.TARGET_VERSION/TARGET_IMPORT` 기준(코드 주석 RU4=P1 확장 지점 명시).
+- **U2 영향**: FR-P1-2(실제 검색 후에만 NO_MATCH 판정)를 A 계약으로 수행하려면 P1 problem 컨텍스트(파일접근 유형)를 받는 검색 입력 **일반화**가 필요(신규 구현이 아니라 기존 구현의 입력 규격 확장).
 - **요청(계약 #4 일반화, 착수 여유 시)**:
   - `search`가 P1 problem 컨텍스트(예: `ProblemContext{kind:"file-access", signals:[...]}`)를 받거나, 시나리오 비의존 query 규격으로 일반화.
   - `check_applicability(candidate, problem) -> {applicable, matched_keywords, matched_conditions}`.
-- **★ P1 파일접근 procedure 실행 함수 계약(U2 확정 모델 반영, A 소유 S1 구현/C6 Replay 공용)**:
-  ```
-  run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult
-    입력: procedure = 후보 descriptor.procedure(서술적 환경 접근 절차만; 스크립트·업무 계산·암호 미포함)
-          env = {xlsx_path, app_open: bool}  (harness 준비 사실; 정답 대안 아님)
-    출력: AccessResult = {ok, content|None, method, evidence}
-    접근 성공(ok=True): (1)원본 바이트 직접 파싱 아님·허용 경로로 content 획득
-                        (2)content가 3개 완료월 (month,total_output) 포함
-                        (3)원본 mtime·sha256 무변경 & Save 미호출(read-only 증거)
-    실패/미충족 → ok=False (강제 raise 아님)
-  ```
-  확정 모델: 직접 접근=표준 zip 리더가 암호화본에서 `BadZipFile` 자연 실패, 허용 대안=실행 중 Excel attach 셀 읽기(§FD 1).
+- **★ P1 파일접근 procedure 실행 함수 계약 — 모듈 경로·시그니처 확정(항목 1)**:
+  - **모듈 경로**: `skillloop.envharness_p1.run_file_access_procedure` (**B 소유** `envharness_p1.py`에 배치·구현). 근거: Excel attach·mtime/sha256/Save 미호출 증거 수집은 P1 환경 도메인(B) 책임이며, A(S1 파일접근 분기)·B(C6 Replay)가 **동일 함수를 호출**한다. A는 이 계약으로 **호출부와 테스트를 병행 구현**한다(함수 본문은 B 제공).
+  - **정확한 시그니처(파이썬 타입 확정)**:
+    ```python
+    # skillloop/envharness_p1.py (B 소유)
+    @dataclass
+    class EnvContext:
+        xlsx_path: str
+        app_open: bool          # 사용자가 암호로 열어둔 실행 중 Excel 존재 여부(harness 준비 사실)
+
+    @dataclass
+    class AccessResult:
+        ok: bool                # 접근 성공 판정(강제 raise 아님)
+        content: list | None    # 획득 행: [(month:str, total_output:int|float), ...] | 실패 시 None
+        method: str             # 사용한 접근 방식 라벨(예: "excel-com-attach"|"direct-zip"|"none")
+        evidence: dict          # {ran, mtime_before, mtime_after, sha256_before, sha256_after,
+                                #  save_called: bool, error: str|None, app_open: bool, ...}
+
+    def run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult: ...
+    ```
+    - **입력**: `procedure` = 후보 `descriptor.procedure`(서술적 환경 접근 절차만; 스크립트·업무 계산·평문 암호 미포함), `env` = `EnvContext{xlsx_path, app_open}`(harness 준비 사실; 정답 대안 아님).
+    - **접근 성공(ok=True) 기준**: (1) 원본 바이트 직접 파싱 아님·허용 경로로 `content` 획득, (2) `content`가 3개 완료월 `(month, total_output)` 포함, (3) 원본 `mtime`·`sha256` 무변경 & `Save` 계열 미호출(evidence로 입증). 실패/미충족 → `ok=False`(강제 raise 아님). Excel 미설치/미열림(`app_open=False`) → `ok=False, method="none"`(상위에서 `NOT_RUN` 매핑).
+  - 확정 모델: 직접 접근=표준 zip 리더가 암호화본에서 `BadZipFile` 자연 실패, 허용 대안=실행 중 Excel attach 셀 읽기(§FD 1).
+  - **Replay(C6) 공용**: `replay.py`는 이 함수를 **별도 실행 문맥에서 새로 호출**하고 최초 실행 결과를 재사용하지 않는다(§FD 4).
 - **U2 처리(CJ 결정 3, 우회 없음)**: **미구현 검색을 NO_MATCH로 간주 금지**. store 직접 조회로 검색을 대체하는 **우회 제거**. A의 P1 검색 + 파일접근 적용·검증 계약이 서면 그 계약으로 연결. 확정 전 검색·파일접근 재사용 분기 **`NOT_RUN`**.
 - **우선순위**: 중(P1 재사용 분기 정합). **A의 P0(S7/S8) 완성이 선행 우선순위임을 존중** — P1 일반화는 그 이후.
+
+---
+
+## → CJ 통지 — CLI 진입점 서비스 명세 (항목 2, `cli.py`=CJ 소유)
+
+> `cli.py`는 **CJ 단일 수정자**다. U2는 `run-p1`/`store-init` 서브커맨드를 **직접 추가하지 않는다**. 대신 CJ가 연결할 **서비스 진입점(함수 경로)·인자 규격**을 아래로 확정한다(run-p0 배선과 대칭). B는 이 함수들을 소유 모듈에 실구현·테스트하고, CJ는 argparse 서브커맨드에서 호출만 하면 된다.
+
+- **run-p1 오케스트레이션 진입점**
+  ```python
+  skillloop.experience_service.run_p1(
+      xlsx_path: str | None = None,   # None이면 harness 합성 암호화본 준비 경로 사용
+      store_path: str | None = None,  # None → run-p0와 동일 기본(.skillloop_demo/store.json)
+      usage_path: str | None = None,  # None → 동일 기본(.skillloop_demo/usage.json)
+      run_id: str | None = None,      # None이면 usage.new_execution_id()로 1회 발급(재시도 시 전달)
+  ) -> int                            # 종료코드(run-p0와 동일 규약)
+  ```
+  흐름: 직접 접근 실패 관찰 → (검색: A 계약 대기 → NOT_RUN) → 환경 사실 → 허용 대안 attach → OLS 완료·검증 → 후보화 → 검토·독립 Replay·게시 시도. run-p0와 동일하게 `run_id`는 cli 발급·전달만.
+- **team-skill-store 초기화 진입점(D-4)**
+  ```python
+  skillloop.gitsync.init_team_store(mirror_path: str | None = None) -> int
+  # team-skill-store 전용 로컬 미러 준비(main 미오염). mirror_path None이면 기본 미러 경로.
+  ```
+- **(선택) 게시 파이프라인 세분 진입점** — CJ가 별도 서브커맨드를 원할 때만:
+  ```python
+  skillloop.publish_pipeline.review(candidate_ref: dict, decision: dict, store, ...) 
+  skillloop.publish_pipeline.replay(candidate_ref: dict, env, store, ...) 
+  skillloop.publish_pipeline.publish(candidate_ref: dict, store, gitsync, ...) 
+  ```
+  기본 데모는 `run_p1` 하나로 end-to-end 수행하므로 세분 진입점 배선은 필수 아님.
+- **인자 규격 원칙**: 모든 경로 인자는 `None` 허용(run-p0 기본과 동일 디렉터리 규약). 반환은 종료코드(int). CLI 문자열·헬프 텍스트는 CJ 재량.
 
 ---
 

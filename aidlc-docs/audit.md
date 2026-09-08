@@ -549,3 +549,17 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U1(P0) A 인계 통합·실제 검증 완료. main=e07af72. B P1 실패 모델 미확정(대안 제시 예정).
 
 ---
+
+## U2 구현 착수 — 최신 main 병합 + 항목 1(A 계약)·2(CLI 진입점)·4(문구 정정) 확정
+**Timestamp**: 2026-09-08T10:04:34Z
+**User Input**: "CJ가 bb3ac2e의 FD·NFR·Code Plan을 승인했습니다. U2 구현에 착수하세요. 모델과 확정 조건은 다시 승인 요청하지 마세요. [먼저 할 일] 1. A 연결 계약 확정(run_file_access_procedure 실제 모듈 경로·시그니처). 2. CJ 전달용 CLI 진입점 명세(cli.py=CJ 소유; run-p1/store-init 직접 추가 금지, 서비스 진입점·인자 규격 정리). [구현 중] 3. 접근 검증(read-only 획득) vs 업무 입력 검증(S2, 3개월·month/total_output) 분리, S1 상위 반환은 로컬 artifact_ref+접근 근거 연결, 업무 내용 공유 제외. 4. 최신 기준 반영(A P0 검색 main 7256272 통합·검증 완료; match.search '스텁/NotImplementedError' 문구 정정, 필요한 P1 확장만 연결; 최신 main 반영·기존 커밋 보존). 5. NOT_RUN 해제(C-a/C-b/C-d 코드 제공됨→연결 후 실제 검증, 실행 항목 PASS/FAIL 갱신). [작업 순서] ①run_file_access_procedure+테스트 ②Replay ③publish_pipeline ④gitsync 각 단계 push. [소유 경계] B: envharness_p1/experience_service/publish_pipeline/replay/gitsync + 테스트. 수정 금지: descriptor/store/usage/envharness_p0/cli(CJ), match/reuse_service(A). [보고] 먼저 1·2 확정 보고 후 ①단계 착수. 각 단계 push마다 SHA·실제 테스트 결과. 미실행=NOT_RUN, 실행 실패=FAIL 정직 기록."
+**AI Response**:
+- **최신 main 병합**: `origin/main`(`7256272`, A P0 search 실구현 `9dea075` + CJ UTF-8 `e07af72` 포함)을 work/u2-p1-git에 병합(`d717ab5`). 기존 커밋(`bb3ac2e`·`4c70310` 등) 보존. audit.md 충돌은 **양쪽 이력 모두 보존**(HEAD의 U2 FD/NFR·P1 확정 3건 + origin의 U1 P0 완료 1건)으로 해소, git이 미해소 없음 검증.
+- **항목 1 확정(A 계약)**: `run_file_access_procedure`의 모듈 경로 = **`skillloop.envharness_p1.run_file_access_procedure`**(B 소유). 근거: Excel attach·mtime/sha256/Save 미호출 증거 수집은 P1 환경 도메인(B). 정확한 시그니처 확정 — `EnvContext{xlsx_path:str, app_open:bool}`, `AccessResult{ok:bool, content:list|None=[(month,total_output),...], method:str, evidence:dict}`, `run_file_access_procedure(procedure:dict, env:EnvContext)->AccessResult`. 접근 성공 3기준(원본 미파싱·3개월 행·mtime/sha256 무변경&Save 미호출), 실패=ok=False(강제 raise 아님), Excel 미열림→ok=False/method="none"(상위 NOT_RUN). A는 이 계약으로 S1 파일접근 분기 호출부·테스트 병행 구현. coordination-blockers §C-c에 고정.
+- **항목 2 확정(CLI 진입점, CJ 전달)**: cli.py=CJ 단일 수정자 — run-p1/store-init 직접 추가 안 함. 서비스 진입점 확정: `experience_service.run_p1(xlsx_path=None, store_path=None, usage_path=None, run_id=None)->int`(run-p0 대칭), `gitsync.init_team_store(mirror_path=None)->int`(D-4), (선택) `publish_pipeline.review/replay/publish`. 모든 경로 인자 None 허용, 반환=종료코드. coordination-blockers에 CLI 진입점 명세 섹션 추가.
+- **항목 4 정정(문구)**: match.search "pip 전용 + `raise NotImplementedError('S7')` 스텁" 문구 폐기 → 실구현(결정적 매칭, main `7256272`/`9dea075`, 실검증 완료)이나 입력이 P0(pip) 특화이며 P1은 입력 규격 **일반화**만 필요로 정정. reuse_service.apply_and_verify도 실구현(코드 주석 RU4=P1 확장 지점) 반영.
+- **미착수(다음)**: ①~④ 단계 구현·push. 실제 테스트 결과는 각 단계에서 보고. C-a/C-b/C-d/C-c 실연동·독립 Replay 실검증은 구현 후 실제 수행 전까지 NOT_RUN 유지.
+- CJ/A 소유 코드(descriptor/store/usage/envharness_p0/cli/match/reuse_service) 미수정(읽기만). README/EVALUATION 미커밋 보존.
+**Context**: CONSTRUCTION / U2 Code Generation Part 2 착수 / 최신 main 병합 + 항목 1·2·4 확정. ①단계(run_file_access_procedure) 구현 다음.
+
+---
