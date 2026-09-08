@@ -14,215 +14,125 @@ type Phase = "idle" | "typing" | "running";
 type ToolRun = { name: string; output: string[]; tone?: "error" | "success" };
 type DemoStep = {
   title: string;
-  prompt: string;
+  prompt?: string;
   answer: string[];
-  tool?: ToolRun;
+  tools?: ToolRun[];
 };
 
 const P0: DemoStep[] = [
   {
-    title: "일반 설치 시도",
+    title: "Proxy 실패",
     prompt: "이 프로젝트의 requirements.txt 설치를 진행해줘.",
-    answer: [
-      "필요한 패키지를 일반적인 방법으로 설치해 보겠습니다.",
-      "일반 공급 경로에는 필요한 사내 의존성이 없습니다. 같은 명령을 반복하지 않고 팀의 해결 경험을 확인하겠습니다.",
+    answer: ["필요한 패키지를 일반적인 방법으로 설치해 보겠습니다."],
+    tools: [
+      {
+        name: "Bash(python -m pip install -r requirements.txt)",
+        output: ["ProxyError: 사내 Proxy 연결 실패", "exit code 1"],
+        tone: "error",
+      },
     ],
-    tool: {
-      name: "Bash(python -m pip install -r requirements.txt)",
-      output: [
-        "ERROR: Could not find a version that satisfies acme-fab-sdk",
-        "exit code 1",
-      ],
-      tone: "error",
-    },
   },
   {
-    title: "Team Skill 검색",
-    prompt: "팀에서 이미 해결한 설치 방법이 있는지 SkillLoop에서 찾아봐.",
+    title: "Team Skill 발견",
     answer: [
-      "현재 오류와 적용 조건이 일치하는 Team Skill을 찾았습니다.",
-      "검색된 항목은 설명용 합성 데이터이며 실제 사내 주소나 인증정보를 포함하지 않습니다.",
+      "현재 사내 환경으로 판단됩니다. 같은 명령을 반복하지 않고 팀에 검증된 해결 방법이 있는지 Agent SkillLoop에서 확인하겠습니다.",
     ],
-    tool: {
-      name: "SkillLoop.search(environment: python, error: dependency-not-found)",
-      output: [
-        "FOUND  Python 사내 패키지 설치 방법",
-        "STATUS Published · 적용 조건 일치 · 시연 기준 20회",
-      ],
-      tone: "success",
-    },
+    tools: [
+      {
+        name: "SkillLoop.search(error: proxy-error, environment: python)",
+        output: [
+          "FOUND  Python 사내 패키지 설치 방법",
+          "STATUS Published · 적용 조건 일치",
+          "시연 기준 적용 20회",
+        ],
+        tone: "success",
+      },
+    ],
   },
   {
-    title: "적용 조건 확인",
-    prompt: "찾은 Skill이 지금 환경에 적용 가능한지 먼저 확인해줘.",
+    title: "Skill 적용·설치 성공",
     answer: [
-      "운영체제, 프로젝트 유형, 실패 원인을 비교했습니다.",
-      "현재 합성 환경은 Skill의 적용 조건과 일치합니다. 승인된 모의 package source만 사용하겠습니다.",
+      "현재 환경에 적용 가능한 Skill입니다. Skill을 활용해 사내 Proxy 설정을 적용하고 설치를 다시 진행합니다.",
     ],
-    tool: {
-      name: "SkillLoop.check-applicability(team/python-package-install)",
-      output: ["OS windows · source unavailable · MATCH", "secrets exposed 0"],
-      tone: "success",
-    },
+    tools: [
+      {
+        name: "SkillLoop.apply(Python 사내 패키지 설치 방법)",
+        output: ["proxy configuration applied"],
+        tone: "success",
+      },
+      {
+        name: "Bash(python -m pip install -r requirements.txt)",
+        output: ["Successfully installed requirements", "exit code 0"],
+        tone: "success",
+      },
+    ],
   },
   {
-    title: "검증된 절차 적용",
-    prompt: "검증된 절차를 적용해서 설치를 완료해줘.",
-    answer: ["Team Skill의 절차를 적용했습니다. 패키지 설치가 완료되었습니다."],
-    tool: {
-      name: "Bash(pip install acme-fab-sdk --index-url [approved-demo-source])",
-      output: ["Successfully installed acme-fab-sdk", "exit code 0"],
-      tone: "success",
-    },
-  },
-  {
-    title: "업무와 능력 검증",
-    prompt: "설치 결과와 Skill이 실제로 도움 됐는지 각각 검증해줘.",
+    title: "재사용 20 → 21",
     answer: [
-      "요청한 업무와 재사용한 해결 능력을 분리해 확인했습니다.",
-      "검색, 다운로드, 실패, retry는 재사용 실적으로 세지 않습니다.",
+      "설치 결과를 확인했습니다. 검증된 Team Skill 재사용으로 기록합니다.",
+      "기존 Team Skill을 재사용해 해결했습니다. 새로운 Skill은 만들지 않고 실제 재사용 횟수만 증가했습니다.",
     ],
-    tool: {
-      name: "SkillLoop.verify(task, capability)",
-      output: [
-        "TASK VERIFY       PASS · package import",
-        "CAPABILITY VERIFY PASS · approved demo source",
-      ],
-      tone: "success",
-    },
-  },
-  {
-    title: "검증 재사용 기록",
-    prompt: "검증된 재사용만 기록하고 다음 팀원이 바로 쓸 수 있게 정리해줘.",
-    answer: [
-      "검증된 Team Skill 재사용을 시연 상태에 기록했습니다.",
-      "다음 Agent는 같은 실패를 처음부터 조사하지 않고 이 적용 조건부터 확인합니다.",
+    tools: [
+      {
+        name: "SkillLoop.verify-and-record(Python 사내 패키지 설치 방법)",
+        output: ["VERIFY PASS", "verified reuse 20 → 21", "new candidate 0"],
+        tone: "success",
+      },
     ],
-    tool: {
-      name: "SkillLoop.record-verified-reuse(team/python-package-install)",
-      output: ["verified reuse  0 → 1", "new candidate   0"],
-      tone: "success",
-    },
   },
 ];
-
 const P1: DemoStep[] = [
   {
-    title: "합성 Excel 분석 요청",
-    prompt: "합성 생산량.xlsx를 읽고 다음 달 예상치를 포함한 추세를 보여줘.",
-    answer: ["최근 세 달의 값을 읽어 다음 달 예상치를 계산해 보겠습니다."],
-    tool: {
-      name: "Read(합성 생산량.xlsx)",
-      output: [
-        "AccessError: direct parser cannot read protected workbook",
-        "사내 보호문서와 유사한 합성 제약 환경",
-      ],
-      tone: "error",
-    },
-  },
-  {
-    title: "기존 지식 검색",
-    prompt: "팀이나 조직에 이미 검증된 해결 방법이 있는지 찾아봐.",
-    answer: [
-      "현재 실패 조건과 일치하는 기존 지식이 없습니다. 새로운 해결 경로를 탐색하겠습니다.",
+    title: "Excel 읽기 실패",
+    prompt: "AAAAA01_직전_3달_생산량.xlsx 데이터를 읽고 다음달 추세선 보여줘.",
+    answer: ["데이터를 확인해 보겠습니다."],
+    tools: [
+      {
+        name: "Read(AAAAA01_직전_3달_생산량.xlsx)",
+        output: ["AccessError: 현재 Python parser로 직접 읽을 수 없습니다."],
+        tone: "error",
+      },
     ],
-    tool: {
-      name: "SkillLoop.search(environment: protected-workbook)",
-      output: ["Team Skills   NO MATCH", "Org Knowledge NO MATCH"],
-      tone: "error",
-    },
   },
   {
-    title: "안전한 경로 탐색",
+    title: "xlwings 발견·적재 제안",
     prompt:
-      "나는 Excel 앱에서 볼 수 있어. 우회하지 말고 읽기 가능한 안전한 경로를 찾아봐.",
+      "이상하네. 나는 Excel 앱을 직접 열어서 볼 수 있거든. 데이터를 조회할 다른 방법을 Agent SkillLoop를 이용해서 찾아봐.",
     answer: [
-      "Desktop Excel을 통한 application-mediated read-only 접근이 가능합니다.",
-      "특정 보호체계를 우회하지 않고 사용자가 이미 열람 가능한 합성 값만 읽습니다.",
+      "기존에 등록된 해결 방법은 없습니다. 현재 Windows 환경에서는 xlwings를 이용해 Excel 앱을 통해 데이터를 읽는 방법으로 작업이 가능합니다.",
+      "데이터를 정상적으로 확인할 수 있습니다. 새로 확인한 이 방법을 다른 팀원도 사용할 수 있도록 Skill로 적재하시겠습니까?",
     ],
-    tool: {
-      name: "Explore(environment-capabilities)",
-      output: [
-        "Windows Desktop Excel  AVAILABLE",
-        "read-only values access  AVAILABLE",
-      ],
-      tone: "success",
-    },
+    tools: [
+      {
+        name: "SkillLoop.search(environment: excel)",
+        output: ["Team Skills   NO MATCH", "Org Knowledge NO MATCH"],
+        tone: "error",
+      },
+      {
+        name: "Explore(Excel capabilities)",
+        output: ["xlwings + Desktop Excel AVAILABLE"],
+        tone: "success",
+      },
+    ],
   },
   {
-    title: "업무 결과 완성",
-    prompt: "그 경로로 값을 읽고 실제값과 예상값을 구분해서 보여줘.",
+    title: "팀 Skill 적재·내 기여 +1",
+    prompt: "응, 적재해줘.",
     answer: [
-      "완료 월은 7월 100, 8월 110, 9월 120 units입니다.",
-      "3점 OLS 기준 10월 예상값은 130 units이며 예상값으로 따로 표시했습니다.",
+      "동의한 해결 방법을 팀 Skill로 적재합니다. (시연에서는 검토·검증 과정을 축약합니다.)",
+      "사내 Excel 데이터 접근 방법 - CJ가 팀 Skill로 적재되었습니다. 다음 Agent는 같은 환경에서 이 방법을 먼저 확인할 수 있습니다.",
     ],
-    tool: {
-      name: "Excel(read-only) → Analyze(3-point OLS)",
-      output: ["JUL 100  AUG 110  SEP 120", "OCT 130  [FORECAST]"],
-      tone: "success",
-    },
-  },
-  {
-    title: "TASK / CAPABILITY 검증",
-    prompt: "분석 결과와 새 접근 방법을 서로 분리해서 검증해줘.",
-    answer: ["사용자 업무 결과와 환경 접근 능력을 각각 확인했습니다."],
-    tool: {
-      name: "SkillLoop.verify(task, capability)",
-      output: [
-        "TASK VERIFY       PASS · trend and forecast",
-        "CAPABILITY VERIFY PASS · application-mediated read-only",
-      ],
-      tone: "success",
-    },
-  },
-  {
-    title: "Candidate 생성",
-    prompt:
-      "업무 데이터는 빼고 다시 쓸 수 있는 환경 해결 절차만 후보로 만들어줘.",
-    answer: [
-      "Team Skill Candidate를 만들었습니다. 생산량, 파일 경로, 암호, 예측 로직은 제외했습니다.",
-      "아직 Published 상태가 아니며 사람의 검토가 필요합니다.",
+    tools: [
+      {
+        name: "SkillLoop.add-team-skill(사내 Excel 데이터 접근 방법 - CJ)",
+        output: [
+          "ADDED  사내 Excel 데이터 접근 방법 - CJ",
+          "내 기여 Skill 0 → 1",
+        ],
+        tone: "success",
+      },
     ],
-    tool: {
-      name: "SkillLoop.create-candidate(read-only-workbook-access)",
-      output: [
-        "included  적용 조건 · 접근 절차 · 검증 근거",
-        "excluded  business data · paths · secrets",
-      ],
-      tone: "success",
-    },
-  },
-  {
-    title: "검토와 독립 Replay",
-    prompt: "평가 담당자가 승인한 그대로 다른 합성 workbook에서 Replay 해줘.",
-    answer: [
-      "시연용 Human Review와 독립 Replay가 완료되었습니다.",
-      "승인된 Candidate digest와 Replay 대상이 정확히 일치합니다.",
-    ],
-    tool: {
-      name: "SkillLoop.replay(candidate-digest: exact-match)",
-      output: [
-        "HUMAN REVIEW  APPROVED [SIMULATION]",
-        "REPLAY TASK / CAPABILITY  PASS [SIMULATION]",
-      ],
-      tone: "success",
-    },
-  },
-  {
-    title: "게시와 다음 재사용",
-    prompt: "검증된 절차를 게시하고 다음 Agent가 어떻게 쓰는지 보여줘.",
-    answer: [
-      "시연용 Team Skill이 게시되었습니다.",
-      "다음 Agent는 같은 제약에서 처음부터 탐색하지 않고 적용 조건을 확인한 뒤 재사용합니다.",
-    ],
-    tool: {
-      name: "SkillLoop.publish → teammate reuse",
-      output: [
-        "PUBLISHED [SIMULATION]  보호문서 환경의 read-only 값 접근",
-        "next task  SUCCESS · new candidate 0",
-      ],
-      tone: "success",
-    },
   },
 ];
 
@@ -232,22 +142,32 @@ const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 function Turn({ item }: { item: DemoStep }) {
   return (
     <article className="claude-turn">
-      <div className="claude-user">
-        <span>❯</span>
-        <p>{item.prompt}</p>
-      </div>
+      {item.prompt && (
+        <div className="claude-user">
+          <span>❯</span>
+          <p>{item.prompt}</p>
+        </div>
+      )}
       <div className="claude-response">
         {item.answer.slice(0, 1).map((line) => (
           <p key={line}>{line}</p>
         ))}
-        {item.tool && (
-          <div className={`claude-tool ${item.tool.tone || ""}`}>
-            <strong>● {item.tool.name}</strong>
-            {item.tool.output.map((line) => (
-              <code key={line}>⎿ {line}</code>
+        {item.tools?.map((tool) => (
+          <div
+            key={tool.name}
+            className={`claude-tool ${tool.tone || ""} ${tool.name.startsWith("SkillLoop.") ? "skillloop-intervention" : ""}`}
+          >
+            <strong>● {tool.name}</strong>
+            {tool.output.map((line) => (
+              <code
+                className={/20 → 21|0 → 1/.test(line) ? "reuse-highlight" : ""}
+                key={line}
+              >
+                ⎿ {line}
+              </code>
             ))}
           </div>
-        )}
+        ))}
         {item.answer.slice(1).map((line) => (
           <p key={line}>{line}</p>
         ))}
@@ -320,20 +240,28 @@ export default function Demo({
   async function runNext() {
     if (phase !== "idle" || finished) return;
     const token = ++runId.current;
-    setPhase("typing");
-    setDraft("");
-    for (let i = 1; i <= current.prompt.length; i += 1) {
-      await pause(13);
+    for (let index = completed; index < steps.length; index += 1) {
+      const item = steps[index];
+      if (item.prompt) {
+        setPhase("typing");
+        setDraft("");
+        for (let i = 1; i <= item.prompt.length; i += 1) {
+          await pause(13);
+          if (token !== runId.current) return;
+          setDraft(item.prompt.slice(0, i));
+        }
+        await pause(260);
+        if (token !== runId.current) return;
+      }
+      setDraft("");
+      setPhase("running");
+      await pause(950);
       if (token !== runId.current) return;
-      setDraft(current.prompt.slice(0, i));
+      setCompleted(index + 1);
+      if (!steps[index + 1] || steps[index + 1].prompt) break;
+      await pause(1900);
+      if (token !== runId.current) return;
     }
-    await pause(260);
-    if (token !== runId.current) return;
-    setDraft("");
-    setPhase("running");
-    await pause(820);
-    if (token !== runId.current) return;
-    setCompleted((value) => value + 1);
     setPhase("idle");
   }
 
@@ -352,7 +280,9 @@ export default function Demo({
         ? "Claude 작업 중…"
         : completed === 0
           ? "첫 프롬프트 입력"
-          : "다음 프롬프트 입력";
+          : current.prompt
+            ? "다음 프롬프트 입력"
+            : "자동 진행 이어보기";
 
   return (
     <section className="demo-page claude-demo" data-demo-state="memory-only">
@@ -366,6 +296,10 @@ export default function Demo({
           설명용 시뮬레이션
         </div>
       </div>
+      <p className="demo-intro">
+        아이템 이해를 돕기 위한 시연 시나리오입니다. 실제 구현 후 갤러리에 실제
+        실행 캡처 화면을 업로드할 예정입니다.
+      </p>
       <div className="demo-tabs" role="tablist" aria-label="시연 시나리오">
         <button
           role="tab"
@@ -385,6 +319,28 @@ export default function Demo({
         </button>
       </div>
 
+      <div className="demo-storyline">
+        {(scenario === "p0"
+          ? [
+              "Proxy 실패",
+              "Team Skill 발견·적용",
+              completed === steps.length
+                ? "재사용 20 → 21"
+                : "자동 검증·재사용 기록",
+            ]
+          : [
+              "기존 Skill 없음",
+              "xlwings 해결법 발견",
+              "Skill 적재 제안",
+              "내 기여 0 → 1",
+            ]
+        ).map((text, i) => (
+          <span key={text}>
+            {i > 0 && <b>→</b>}
+            {text}
+          </span>
+        ))}
+      </div>
       <div className="claude-window">
         <div className="claude-titlebar">
           <div>
@@ -426,10 +382,12 @@ export default function Demo({
           ))}
           {phase === "running" && (
             <article className="claude-turn pending">
-              <div className="claude-user">
-                <span>❯</span>
-                <p>{current.prompt}</p>
-              </div>
+              {current.prompt && (
+                <div className="claude-user">
+                  <span>❯</span>
+                  <p>{current.prompt}</p>
+                </div>
+              )}
               <div className="claude-thinking">
                 <i />
                 Working… <small>{current.title}</small>
@@ -467,25 +425,34 @@ export default function Demo({
         </div>
         <div className="claude-statusbar">
           <div>
-            <span>🧠 SkillLoop · 팀 연결</span>
+            <span>🧠 Agent SkillLoop · 팀 연결</span>
             <span>
-              📚 시연 Skill <b>{demoState.published}개</b>
+              📚 Team Skill <b>{demoState.published}개</b>
             </span>
             <span>
-              내 기여 <b>{demoState.contributed}개</b>
+              ✨ 내 기여 <b>{demoState.contributed}개</b>
             </span>
           </div>
           <div>
             <span>
-              검증 재사용 <b>{demoState.reused}회</b>
+              🔁 검증 재사용{" "}
+              <b>
+                {scenario === "p0" ? (finished ? "20 → 21회" : "20회") : "0회"}
+              </b>
             </span>
             <span>
-              Claude Sonnet 4 <ChevronDown size={12} />
+              SIMULATION <ChevronDown size={12} />
             </span>
           </div>
         </div>
       </div>
 
+      {scenario === "p1" && (
+        <p className="demo-publish-note">
+          시연에서는 적재 과정을 축약해 표시합니다. 실제 구현에서는 사람 검토와
+          독립 Replay를 통과한 Skill만 팀에 게시됩니다.
+        </p>
+      )}
       <div className="demo-controls claude-controls">
         <button
           className="button"

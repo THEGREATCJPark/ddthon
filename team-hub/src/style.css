@@ -1651,6 +1651,185 @@ main {
     box-shadow: 0 0 10px #d97757;
   }
 }
+.site.demo-site {
+  max-width: 1800px;
+}
+.claude-demo {
+  max-width: 1660px;
+}
+.claude-demo .demo-intro {
+  margin: 0 0 20px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.claude-demo .demo-tabs button {
+  padding: 18px 22px;
+}
+.claude-demo .demo-tabs span {
+  font-size: 19px;
+}
+.claude-demo .demo-tabs b {
+  width: 46px;
+  height: 34px;
+  font-size: 18px;
+}
+.demo-storyline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 18px 0;
+  color: var(--navy);
+  font-size: 19px;
+  font-weight: 700;
+}
+.demo-storyline span {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.demo-storyline b {
+  color: #a9b5c8;
+}
+.claude-demo .claude-window {
+  height: 690px;
+}
+.claude-demo .claude-sessionbar {
+  min-height: 70px;
+}
+.claude-demo .claude-sessionbar strong {
+  font-size: 20px;
+}
+.claude-demo .claude-sessionbar small {
+  font-size: 13px;
+}
+.claude-demo .claude-mark {
+  font-size: 34px;
+}
+.claude-demo .claude-turn {
+  max-width: 1400px;
+  margin-bottom: 32px;
+}
+.claude-demo .claude-user {
+  padding: 16px;
+}
+.claude-demo .claude-user p,
+.claude-demo .claude-response > p {
+  font-size: 17px;
+}
+.claude-demo .claude-response {
+  padding-top: 20px;
+  gap: 15px;
+}
+.claude-demo .claude-tool {
+  padding: 14px 18px;
+  gap: 8px;
+}
+.claude-demo .claude-tool strong {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.claude-demo .claude-tool code {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.claude-demo .skillloop-intervention {
+  border-left: 4px solid #d97757;
+  background: #2a211c;
+}
+.claude-demo .skillloop-intervention strong {
+  color: #efb397;
+}
+.claude-demo .claude-tool .reuse-highlight {
+  color: #ffd8a3;
+  font-weight: 800;
+  font-size: 24px;
+}
+.claude-demo .claude-composer textarea {
+  font-size: 17px;
+  height: 66px;
+}
+.claude-demo .claude-statusbar {
+  min-height: 58px;
+  font-size: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 20px;
+}
+.claude-demo .claude-statusbar > div {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.claude-demo .claude-statusbar b {
+  color: #ffd8a3;
+}
+.claude-demo .claude-thinking {
+  font-size: 16px;
+}
+.claude-demo .claude-welcome strong {
+  font-size: 25px;
+}
+.claude-demo .claude-welcome span {
+  font-size: 19px;
+}
+.claude-demo .claude-welcome small {
+  font-size: 15px;
+}
+.demo-publish-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 14px;
+}
+@media (max-width: 800px) {
+  .demo-site .tabs {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .claude-demo .demo-heading {
+    flex-wrap: wrap;
+  }
+  .claude-demo .demo-tabs {
+    grid-template-columns: 1fr;
+  }
+  .claude-demo .demo-tabs span {
+    font-size: 16px;
+  }
+  .claude-demo .claude-sessionbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+  }
+  .claude-demo .claude-sessionbar > div:first-child {
+    flex-wrap: wrap;
+  }
+  .claude-demo .claude-history {
+    padding: 16px 10px;
+  }
+  .claude-demo .claude-response {
+    padding-left: 6px;
+  }
+  .claude-demo .claude-statusbar {
+    font-size: 13px;
+  }
+  .claude-demo .claude-welcome {
+    margin-top: 35px;
+  }
+  .claude-demo .claude-welcome small {
+    overflow-wrap: anywhere;
+  }
+  .claude-demo .claude-controls {
+    flex-wrap: wrap;
+  }
+  .claude-demo .demo-boundary-inline {
+    order: 5;
+    width: 100%;
+  }
+  .claude-demo .claude-next {
+    min-width: 0;
+  }
+  .claude-demo .claude-composer {
+    margin-inline: 8px;
+  }
+}
 footer {
   display: flex;
   align-items: center;
