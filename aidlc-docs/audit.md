@@ -458,3 +458,62 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 / 설계 산출물 원격 반영 완료. FD 개정본 승인 대기·Code Plan 미착수 상태는 불변.
 
 ---
+
+> **[병합 정합화 노트]** 아래 3개 entry(08:53:02 / 09:04:54 / 09:08:45)는 `origin/main`(CJ 세션)에서 append된 U2 공통 의존성 계약·구현(C-a/C-b/C-d) 기록으로, `work/u2-p1-git` 병합(2026-09-08) 시 함께 보존한다. 위 B 세션 entry들과 timestamp가 교차하나 **양쪽 이력을 모두 보존**하며, 시간순 교차는 이 노트로 갈음한다. 실제 코드(store.py/usage.py/cli.py) 구현 상태는 두 이력이 정합한다.
+
+## U2 공통 의존성 계약 정리 — 검토 요청(P0 A 인계 병행)
+**Timestamp**: 2026-09-08T08:53:02Z
+**User Input**: "B의 U2 착수 보고를 접수한다. A 인계 대기와 병행해 U2 공통 의존성을 해소해. 현재 main의 store.py에는 export_bundle/import_bundle이 없고, usage.py에는 공유 이벤트 저장·export/import가 없다. P0 완료를 기다리지 말고 아래 계약을 우선 정리해. 1. C-a: services.md는 S3가 상태를 소유·판단하고 SkillStore lifecycle 저장 계약으로 영속한다. B의 U2 자체 lifecycle.json 제안과 차이를 확인해 저장 구현 책임을 하나로 확정할 최소안을 제시해. S3 단일 상태 판단·쓰기와 읽기전용 조회 계약은 유지해. 2. C-b: CJ 소유 store의 descriptor import/export를 우선 준비해. S3가 판정한 exact candidate의 공유 자격 전달 방식 명확화, 미승인 후보 export 금지, digest 재계산 검증, 동일 id/version DEDUP·CONFLICT, content만 import, 원격 문자열로 로컬 승인·Replay 미생성 경계 유지. B의 별도 저장·검증 우회 금지. 3. C-d: 공유 usage 이벤트 최소 규격·호출 계약 우선 제공. counts/seen_run_ids만으로는 성공 근거 export 불가 → 이벤트 영속화·정확한 Skill 참조·성공 근거·비-DEMO·동일 이벤트 왕복 dedup. 기존 카운트에서 과거 이벤트·검증 근거 생성 금지. 4. A·B가 맞출 P1 검색·파일접근 Skill 적용·검증 계약 짧은 조율안. P0 인계 비지연. 기존 승인 문서·현재 코드만 사용, P0 Code Plan 승인을 미포함 공유 기능 구현 승인으로 간주 금지. 승인된 상세 계획 있으면 이어서, 없으면 최소 설계·Code Plan 보완만 묶어 검토 요청. Inception·전체 범위 재시작 금지. 결과는 B에게 전달할 계약·담당자·제공 순서 중심으로 보고. A 코드 도착 시 P0 통합 계속."
+**AI Response**:
+- 근거 확인: services.md·component-methods.md·component-dependency.md·unit-of-work.md(소유·단일 수정자 매핑) + 현재 코드(store.py=get/list/put만, usage.py={counts,seen_run_ids}만). **승인된 U2 상세 계획 없음** → 최소 설계·Code Plan 보완을 **검토 요청**으로 작성(구현 아님).
+- A 인계 점검: `git fetch --all` — 원격은 origin/main·origin/codex/team-hub만(후자 skillloop 코드 없음). **A는 아직 push 없음.** HEAD=7cbc856, 작업 트리=README/EVALUATION 로컬 수정 보존. P0 통합 대기 유지.
+- 산출물: `construction/plans/u2-shared-dependency-contracts.md`.
+  - C-a: lifecycle 저장 단일화 — S3(B) 단일 상태 판단·writer 유지 + C2(store.py, CJ) 단일 저장 구현자(save/load_lifecycle_state, 저장만·판단 없음). **B 자체 lifecycle.json 미채택**(이중 소유·승인 설계 이탈 방지). 소비자는 S3 읽기전용 조회로만 접근(물리 위치 은닉). descriptor와 분리 섹션.
+  - C-b: store export_bundle(S3가 넘긴 SHAREABLE refs 허용목록만)/import_bundle(content만·digest 재계산·DEDUP/CONFLICT·원격 문자열→로컬 승인/Replay 미생성). C2는 공유 자격 미판정(S3 판정 전달). B 재구현 우회 금지.
+  - C-d: usage.py(CJ 단일) 이벤트 영속화({counts,seen_run_ids,events}) — SharedReuseEvent{event_id, skill_ref(id,version,digest), reuser_alias, evidence(is_real_success), demo_seed=false, timestamp}. VERIFIED_REUSE=로컬 존재+실제 성공+비-DEMO. record_actual_reuse 확장(카운트될 때만 이벤트 생성). **기존 카운트 역산 금지.** export/import_shared_usage(검증·event_id dedup=C3 단독, C4 전송만).
+  - P1 조율(짧게): C5 signal 비의존(file-access-fail:* 규약)·S1 시나리오 비의존(procedure.action 분기, B는 S1 호출)·env harness 비의존 EnvCtx(P1=envharness_p1.py/B)·카운트는 C3 단일 경로. A·B 합의점=파일접근 효과 검증 위치.
+  - 제공 순서(B): ①C-a+C-b(store.py, 선행) ②C-d(usage.py) ③P1 조율(병행, P0 독립).
+- **경계 명시**: 미구현 공유 기능. 본 문서 승인 후에만 CJ가 store.py/usage.py 구현. **P0 Code Plan 승인 ≠ 이 공유 기능 구현 승인.** Inception 미재시작.
+**Context**: CONSTRUCTION / U2 착수 전 공통 의존성 정렬 / 검토 요청. P0(A 인계)은 대기 유지·비지연.
+
+---
+
+## U2 공통 의존성 승인 → C-a/C-b 구현·검증(store.py)
+**Timestamp**: 2026-09-08T09:04:54Z
+**User Input**: "검토 승인합니다. 제안한 C-a/C-b/C-d 책임·제공 순서로 확정하고, CJ 소유 공통 의존성 구현을 진행하세요. [조건 반영] C-a: S3(B) 상태 전이 판단, C2(CJ) 저장·로드만, 상태·근거는 정확한 candidate의 id/version/digest 연결, 외부 소비자 조회는 S3 계약 유지. C-b: export는 S3가 공유 가능하다고 판정한 정확한 candidate만, SHAREABLE 문자열/bool로 전체 export 금지, 판정 대상과 export 대상 id/version/digest 일치 확인, 최초 게시·재시도 가능·PUBLISHED를 export 전제로 삼지 않음, import는 digest 재계산·DEDUP/CONFLICT·content만·원격 문자열로 로컬 승인·Replay 미생성. C-d: 동일 이벤트 event_id 유지·재전송 dedup·기존 counts 역산 금지·exact Skill 참조와 reuser_alias 제공 호출자 명확화·CJ CLI 연결 포함·run_id dedup 불변. 이번 승인은 CJ 공통 의존성 계약·구현 승인이며 B의 U2 전체 설계/Code Plan 승인 포함 아님. 문서에 변경 파일·검증·제공 순서 최소 Code Plan 명시하고 별도 새 결정 없으면 재질문 없이 진행. 제공 순서: C-a/C-b 구현→검증→commit/push→SHA 보고, C-d 구현→검증→commit/push→SHA 보고. A는 로컬 commit 875c97e...까지 완료했으나 push 403으로 막혀 패치 전달 요청 상태 → 원격 branch만 기다리지 말고 패치 도착 시 최신 main 기준 별도 통합 branch에서 검토·적용하고 실제 P0 검증 병행. 기존 로컬 변경·audit 이력 보존, 외부 사전 구현 Reference 미사용."
+**AI Response**:
+- 계약 문서 `u2-shared-dependency-contracts.md`에 승인 상태·조건·최소 Code Plan(변경 파일·검증·제공 순서) 반영.
+- **C-a 구현(store.py, C2)**: `save_lifecycle_state(skill_ref{id,version,digest}, state, evidence)`/`load_lifecycle_state`/`list_lifecycle_records`. 저장만 — 전이 규칙·게이트 미판단(S3=B 소유). lifecycle 키=id\x1fversion\x1fdigest(정확한 candidate 연결). 저장 스키마 `{skills}`→`{skills,lifecycle}`(하위호환 load).
+- **C-b 구현(store.py, C2)**: `export_bundle(refs=[{id,version,digest}])` — 허용목록만(전체 export 아님), 로컬 저장 digest·content 재계산 digest·선언 digest 3자 일치 시에만 content(불변부)만 포함, 불일치·미존재 제외. `import_bundle(blob)` — content로 digest 재계산·선언 불일치 거부(위조 방지)→`put` 규칙(STORED/DEDUP/CONFLICT), content만·usage 미반영, 로컬 승인/Replay 미생성.
+- **검증**: `pytest tests/test_store.py` 12 PASS(신규 7: export 허용목록·digest 불일치 제외·왕복 content만·DEDUP/CONFLICT·위조 거부·lifecycle digest 연결·영속). **전체 pytest: 26 passed / 8 skipped**(기존 19→26, A 스텁 SKIP 불변). 기존 P0 테스트 불변.
+- README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A 단일 수정자) 미변경.
+**Context**: CONSTRUCTION / U2 공통 의존성 / C-a·C-b 구현·검증 완료. commit/push·SHA 보고 진행.
+
+---
+
+## U2 공통 의존성 — C-d 구현·검증(usage.py + cli.py)
+**Timestamp**: 2026-09-08T09:08:45Z
+**User Input**: (직전 승인의 제공 순서에 따른 계속 실행 — C-a/C-b commit·push 후 C-d 진행) "C-d 계약과 구현 → 검증 → commit/push → B에게 전달할 SHA 보고"
+**AI Response**:
+- **C-d 구현(usage.py, C3)**: 저장 스키마 `{counts,seen_run_ids}`→`{counts,seen_run_ids,events}`(하위호환). `ReuseEvidence`에 `reuser_alias`. `build_evidence(...,reuser_alias)`. `compute_event_id(skill_ref,run_id,reuser_alias)`=결정적 sha256(재전송 dedup 키). `record_actual_reuse`: counted=True & skill_ref에 digest 있을 때만 이벤트 생성(카운트 로직·run_id dedup **불변**). `export_shared_usage`(VERIFIED_REUSE만, counts·seen·로컬 DB 미전송) / `import_shared_usage(blob, local_ref_exists)`(is_real_success·비-DEMO 재검증 + event_id dedup + 로컬 존재 확인, **counts 미변경**; 조직 실적=events). `shared_reuse_count`/`list_shared_events`.
+- **exact 참조·alias 제공 주체 확정**: 이벤트 생성에 필요한 `{id,version,digest}`와 `reuser_alias`는 **호출자(cli)**가 제공. cli.run_p0가 `selected.digest` + env `SKILLLOOP_ALIAS`(기본 "local")를 build_evidence로 전달.
+- **CJ CLI 연결(cli.py)**: run-p0 이벤트 배선(P0 카운트·run_id dedup 불변) + `share-export <out>`/`share-import <in>` 서브커맨드(C3 export/import 호출, import 로컬 존재 확인=기본 store).
+- **역산 금지 검증**: digest 없는 evidence는 카운트되어도 이벤트 미생성 → export 비어 있음(과거 counts에서 이벤트·근거 생성 안 함).
+- **검증**: `pytest tests/test_usage.py` 15 PASS(신규 8: 이벤트 생성 조건·역산 금지·event_id 결정성·왕복 dedup·로컬 존재 가드·자기 이벤트 왕복 불변·import counts 불변). **전체 pytest: 34 passed / 8 skipped**(26→34, A 스텁 SKIP 불변). CLI smoke: export1→import 1/1(counts 0·events 1)→재import dedup(events 1 불변) 확인.
+- README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A 단일 수정자) 미변경.
+**Context**: CONSTRUCTION / U2 공통 의존성 / C-d 구현·검증 완료. commit/push·SHA 보고 진행. A 패치 도착 시 P0 통합 병행.
+
+---
+
+## U2 FD/NFR 정정 — P1 실패 모델 재정의 + CJ 구현 제공됨 반영 (CJ FD 검토 결과 반영)
+**Timestamp**: 2026-09-08T09:30:29Z
+**User Input**: "[1] P1 실패 모델 — 핵심 수정 (FD §1) 현재 모델('정상 XLSX를 텍스트/비-ZIP 방식으로 읽어 실패, ZIP/XML로 읽어 해결')은 채택하지 않습니다. 이는 부적절한 파서 사용의 교정일 뿐, 우리가 검증하려는 것이 아닙니다. 검증 대상은 다음입니다: '사내 환경 제약을 합성한 조건에서, 정상적인 직접 접근이 실패하고, 허용된 read-only 대안으로 해결하는 흐름' 따라서 다음을 최소 모델로 제시해 주세요: - 정상적인 XLSX 접근 방법이 어떤 합성 제약 때문에 실패하는가 - 허용 대안은 왜 가능한가 금지 사항: - 실패를 위해 잘못된 API를 선택하지 않습니다 - 강제 raise로 실패를 연출하지 않습니다 - Agent가 탐색할 대안을 제품 흐름에서 정답으로 자동 선택하지 않습니다 이 결정과 직접 파서·필요 의존성은 FD/NFR에서 정리하고, Code Plan으로 미루지 마세요. [2] CJ 공통 계약 — 실제 구현 제공됨 최신 main에 아래 커밋이 올라왔습니다: - ef03b3a: C-a lifecycle 저장 + C-b descriptor export/import - cfc62e9: C-d 공유 usage 이벤트 현재 작업 branch를 보존하면서 최신 main을 반영하고, 실제 API와 문서 시그니처를 맞춰 주세요. - export_bundle은 scope 문자열이 아니라 exact refs 목록을 받습니다 - usage import는 정확한 로컬 Skill 존재 확인을 연결해야 합니다 '구현 SHA 대기' 상태는 해소하되, 실제 연동 테스트 전까지 영속·공유 검증은 NOT_RUN을 유지하세요. audit/state 충돌은 양쪽 이력을 보존하고 현재 상태를 정합화하세요. [3] NFR 문구 정합화 - '외부 인터넷 미의존'은 로컬 업무·테스트 범위로 한정하고, GitHub 원격 sync에는 네트워크와 인증이 필요함을 구분하세요. - '화면에 계산 결과 미포함'은 수정하세요. P1 업무 결과에는 계산값을 표시해야 하며, 제외 대상은 공유 Skill/공유 bundle의 업무 데이터·계산 로직입니다. - 실제 시도했다가 403으로 실패한 push는 '실패 실행 근거'로 남기고, 미실행된 원격 성공/왕복 검증(NOT_RUN)과 구분하세요. [진행 순서] FD 확인 → NFR 확인 → Code Plan 승인 → 구현 순서를 유지합니다. 기존 NFR 초안은 재작성하지 말고 위 문구만 정정하세요. 반영 후 변경된 문단과 새 P1 실패 모델을 짧게 요약해 보고하고, 로컬 커밋 후 push까지 진행한 뒤 SHA를 알려주세요."
+**AI Response**:
+- **[1] P1 실패 모델 재정의(FD §1)**: 폐기 모델(텍스트/비-ZIP naive 파서 교정)을 명시 폐기. 신규 최소 모델 = **쓰기 금지(read-only) 환경 제약**. 파일은 정상 OOXML(손상·DRM·암호 없음), 제약은 **환경(쓰기 거부)**. 정상 직접 접근은 원본 옆 작업 산출물(잠금·임시 추출물)/수정 핸들을 요구 → read-only 표면에서 환경이 쓰기 거부 → **OS가 낸 실패를 실제 실행에서 관찰**(잘못된 API 선택·강제 raise 아님). 허용 대안 = 인접 쓰기·잠금 없는 **순수 read-only 스트리밍** → `zipfile`+`xml.etree`로 OOXML 파싱(성공). 대안은 **Agent가 탐색·선택·실행**(제품 흐름에서 자동 정답 선택 안 함). 시그니처 `setup_readonly_constrained_xlsx_env(path)->XlsxEnv`, `attempt_direct_access(path)->DirectAccessObservation{ran,ok,error,evidence}`. **의존성 FD/NFR 확정**: stdlib 전용(`zipfile`/`xml.etree`/`os`/`msvcrt`), openpyxl은 선택(데모용). Code Plan은 구현 세부(잠금/스트리밍 정확한 호출·에러코드 매핑)만.
+- **[2] CJ 구현 제공됨 반영**: 최신 main(`ef03b3a`, `cfc62e9`)을 work/u2-p1-git에 병합(audit.md 충돌은 양쪽 이력 보존·정합화 노트). 실제 API 정합: `store.export_bundle(refs: list[dict]) -> bytes`(exact refs 목록, scope 문자열 아님), `import_bundle(blob) -> list[PutResult]`, `save/load_lifecycle_state`·`list_lifecycle_records`, `usage.export_shared_usage() -> bytes`/`import_shared_usage(blob, local_ref_exists) -> list[dict]`. FD §0/§3/§5/§6/§9 + NFR §1/§2 + coordination-blockers를 "구현 제공됨"으로 갱신. "구현 SHA 대기" 해소. **실제 연동 통합 검증 전 영속·공유 검증은 NOT_RUN 유지.**
+- **[3] NFR 문구 정정(재작성 아님)**: (a) "외부 인터넷 미의존" → 로컬 P1 업무·테스트 범위로 한정, GitHub 원격 sync는 네트워크+인증 필요로 구분(NFR §1). (b) NFR-SEC-1 정정 — P1 업무 결과 화면은 **계산값을 표시**(실제 3개월+예상 1개월), 제외 대상은 **공유 Skill descriptor·공유 bundle**의 업무 데이터·계산 로직·원본·secret(NFR §5). (c) 403 실패 push = **실패 실행 근거**로 보존, 미실행 원격 성공/왕복(NOT_RUN)과 구분(NFR §4 note, FD §9).
+- 변경 파일: `functional-design.md`, `nfr-requirements.md`, `coordination-blockers.md`(U2 소유). CJ 소유 store.py/usage.py/cli.py는 병합 반영만(직접 수정 없음). A 소유 match.py/reuse_service.py 미변경. README/EVALUATION 미커밋.
+- **진행 순서 유지**: FD 확인 → NFR 확인 → Code Plan 승인 → 구현. 현재 FD/NFR **개정본 승인 대기**(Code Plan 미착수).
+**Context**: CONSTRUCTION / U2 Functional Design·NFR Requirements 정정 / CJ FD 검토 결과 반영. 로컬 커밋 후 push 진행.
+
+---

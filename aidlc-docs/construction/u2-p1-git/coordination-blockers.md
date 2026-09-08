@@ -2,39 +2,29 @@
 
 **작성일**: 2026-09-08 (기준 커밋 `7cbc856`)
 **작성자**: B(한석훈, U2)
-**상태**: **CJ 공통 의존성 방향 확정 수신·반영(2026-09-08 2차)** — C-a/C-b/C-d **호출 계약 확정**(초안 우회안은 계속 제거). CJ가 실제 구현을 **제공 순서 ①②로 전달**하며 각 항목은 **검증 commit SHA**로 온다. U2는 확정 호출 계약 기준 연결 + 승인 Code Plan 범위 독립 구현 + stub만 진행, 실제 성공은 SHA 수신·실행 후 인정(미실행 **`NOT_RUN`**, 대역과 구분). **C-c(A)는 별도 조율 중 — 대기 유지.** **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
+**상태**: **CJ 공통 의존성 구현 제공됨·반영(2026-09-08 3차, main `ef03b3a`+`cfc62e9` → work/u2-p1-git 병합)** — C-a/C-b/C-d의 **실제 구현이 main에 제공**되었다(제공 ① `ef03b3a` lifecycle 저장+descriptor export/import, 제공 ② `cfc62e9` 공유 usage 이벤트). **"구현 SHA 대기" 해소.** U2는 **실제 API 시그니처(bytes blob)에 gitsync/S3 정합** + 승인 Code Plan 범위 독립 구현 + stub만 진행, 실제 성공은 **실제 연동 통합 검증 후** 인정(미실행 **`NOT_RUN`**, 대역과 구분). **C-c(A)는 별도 조율 중 — 대기 유지.** **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
 **원칙**: 단일 수정자 준수 — 아래 파일은 소유자만 수정한다. U2는 **호출 계약**만 요청하며 직접 수정하지 않는다.
 
-## CJ 공통 의존성 확정(2026-09-08 2차 수신)
-- **제공 순서**: **① lifecycle 저장 + descriptor import/export**, **② 공유 usage 이벤트**. 각각 검증 commit SHA 전달 예정.
-1. **C-a(확정)**: S3의 상태 판단·변경 요청·조회는 **U2**, 실제 **저장·로드는 CJ `store` 계약 제공**. U2 자체 lifecycle.json 저장 **미구현**. 상태는 정확한 `id/version/digest`에 연결.
-2. **C-b(확정)**: descriptor **export/import = CJ 제공**. digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만 export** 연결.
+## CJ 공통 의존성 구현 제공됨(2026-09-08 3차 수신 — main `ef03b3a`+`cfc62e9`)
+- **제공됨**: **① `ef03b3a` lifecycle 저장 + descriptor import/export**, **② `cfc62e9` 공유 usage 이벤트**. work/u2-p1-git에 병합 반영. **"구현 SHA 대기" 해소.**
+1. **C-a(구현 제공됨 `ef03b3a`)**: S3의 상태 판단·변경 요청·조회는 **U2**, 실제 **저장·로드는 CJ `store` API** — `save_lifecycle_state(skill_ref{id,version,digest}, state, evidence)`/`load_lifecycle_state`/`list_lifecycle_records`(저장만·전이 미판단). U2 자체 lifecycle.json 저장 **미구현**. 상태는 정확한 `id/version/digest`에 연결.
+2. **C-b(구현 제공됨 `ef03b3a`)**: `store.export_bundle(refs: list[dict]) -> bytes`(**exact refs 목록, scope 문자열 아님**)/`import_bundle(blob) -> list[PutResult]`. digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만** `export_bundle([ref])` 연결.
 3. **C-c(대기)**: A와 조율 중 — P1 검색 입력 **+ 파일접근 Skill 적용·검증 계약** 동반 확정 필요. **미구현 검색을 NO_MATCH로 간주 금지**, store 직접 조회 우회 **제거**. → **A 계약 대기**.
-4. **C-d(확정)**: 공유 이벤트 저장·검증·dedup = **CJ**, **Git 전송·pull·last-sync 경계만 B**. 전송 시 **event_id 재발급 금지**(그대로 전송).
+4. **C-d(구현 제공됨 `cfc62e9`)**: `usage.export_shared_usage() -> bytes`/`import_shared_usage(blob, local_ref_exists) -> list[dict]`. 저장·검증·dedup = **CJ**, **Git 전송·pull·last-sync 경계만 B**. 전송 시 **event_id 재발급 금지**(그대로 전송), pull 시 **정확한 로컬 Skill 존재 확인**(`local_ref_exists`) 연결.
 5. **team-skill-store 최초 초기화 = B**(D-4). `main`과 분리된 공유 데이터 전용 경로.
-- **진행 방침**: 확정 호출 계약 기준으로 S3/gitsync 설계 갱신, 승인 Code Plan 범위 독립 구현만. 테스트 대역 사용 가능하되 실제 공유 성공과 명확히 구분(미실행 NOT_RUN).
+- **진행 방침**: 실제 API(bytes blob) 시그니처에 S3/gitsync 정합 갱신, 승인 Code Plan 범위 독립 구현만. 테스트 대역 사용 가능하되 실제 공유 성공과 명확히 구분. **실제 연동 통합 검증 전까지 영속·공유 검증은 NOT_RUN.**
 
 ---
 
-## → CJ 통지 (2건)
+## → CJ 통지 (2건) — **구현 제공됨으로 해소**(main `ef03b3a`/`cfc62e9`)
 
-### C-b · `store.py` — descriptor bundle 계약 부재
-- **현재**: `store.py`에 `get/list/put`(STORED/DEDUP/CONFLICT)만 존재. `export_bundle(scope=SHAREABLE)` / `import_bundle(bundle)` **없음**.
-- **U2 영향**: S3.publish의 원격 게시(push_descriptors)와 pull import·CONFLICT 위임 경로가 계약 없이는 정식 연결 불가.
-- **요청(계약 #2 보완)**:
-  - `export_bundle(scope="SHAREABLE") -> Bundle` — 게이트 충족 descriptor만.
-  - `import_bundle(bundle) -> ImportResult{applied, skipped_dedup, conflicts, errors}` — 무결성·dedup·CONFLICT 판정, 자동 overwrite 금지, 원격 상태 문자열로 로컬 승인·Replay 생성 금지(AD-Q4).
-- **U2 처리(CJ 결정 2, 우회 없음)**: 자체 저장·무결성·CONFLICT **우회 금지**. gitsync 전송은 확정 계약 stub로 **병행 개발**하되 실제 import/pull 실검증과 명확히 구분. **pull import·CONFLICT 실검증은 계약 확정까지 `NOT_RUN`**.
-- **우선순위**: CJ 우선 제공.
+### C-b · `store.py` — descriptor bundle 계약 **구현 제공됨** (`ef03b3a`)
+- **현재(해소됨)**: `store.export_bundle(refs: list[dict]) -> bytes` / `import_bundle(blob: bytes) -> list[PutResult]` **구현 제공됨**. export는 **exact refs 허용목록**(scope 문자열 아님)으로 content만·3자 digest 일치 시만 포함, import는 digest 재계산·위조 거부·DEDUP/CONFLICT·content만(원격 문자열로 승인/Replay 미생성, AD-Q4).
+- **U2 처리(우회 없음)**: 자체 저장·무결성·CONFLICT **우회 금지**. gitsync는 blob 전송만·S3는 `export_bundle([exact ref])` 연결. 실제 API(bytes)에 정합 완료. **실제 원격 import/pull·CONFLICT 왕복 실검증은 통합 검증까지 `NOT_RUN`**.
 
-### C-d · `usage.py` — 공유 재사용 이벤트 계약 부재 (계약 #6)
-- **현재**: 카운트 경로(`record_actual_reuse/build_evidence/new_execution_id`)는 있음. `export_shared_usage(VERIFIED_REUSE)` / `import_shared_usage`(event_id 검증·dedup) **없음**.
-- **U2 영향**: `gitsync.push_shared_usage`가 전송할 `SharedUsageBundle` shape 미확정. 재사용 이벤트 공유(게시와 독립 경로) 왕복 불가.
-- **요청(계약 #6)**:
-  - `export_shared_usage(scope="VERIFIED_REUSE") -> SharedUsageBundle` — 이벤트 레코드(event_id, skill_ref{id,version,digest}, reuser_alias, evidence_ref), 비민감·합성만.
-  - `import_shared_usage(bundle) -> UsageImportResult{applied, skipped_dedup, rejected_unverified, errors}` — 정확한 Skill 참조 + 실제 성공 근거 검증, **event_id 기준 dedup**.
-- **U2 처리(CJ 결정 4, 우회 없음)**: 이벤트 규격·검증·dedup·저장 = CJ. **Git 전송 경계만 B**. gitsync는 확정 계약 stub로 **전송만 병행 개발**하고, bundle 생성·검증·dedup은 usage.py(CJ) 확정 시 연결. 이벤트 공유 왕복 실검증은 확정까지 **`NOT_RUN`**.
-- **우선순위**: 하(게시와 독립, 조직 집계 완결용).
+### C-d · `usage.py` — 공유 재사용 이벤트 계약 **구현 제공됨** (`cfc62e9`)
+- **현재(해소됨)**: `usage.export_shared_usage() -> bytes`(VERIFIED_REUSE만) / `import_shared_usage(blob, local_ref_exists) -> list[dict]`(재검증·event_id dedup·로컬 존재 확인, counts 미변경) **구현 제공됨**. `compute_event_id`로 재전송 dedup 키 제공.
+- **U2 처리(우회 없음)**: 이벤트 규격·검증·dedup·저장 = CJ. **Git 전송·pull·last-sync 경계만 B**, **event_id 재발급 금지**(그대로 전송), pull 시 `local_ref_exists`(store.get+digest 일치) 연결. **이벤트 공유 왕복 실검증은 통합 검증까지 `NOT_RUN`**.
 
 ---
 
@@ -51,12 +41,12 @@
 
 ---
 
-## 요약 (CJ 공통 의존성 확정 반영 — 우회 없음)
-| gap | 소유 / 상태 | U2 처리(우회 없음) | SHA/실행 전 NOT_RUN 항목 |
+## 요약 (CJ 공통 의존성 구현 제공됨 반영 — 우회 없음)
+| gap | 소유 / 상태 | U2 처리(우회 없음) | 통합 검증 전 NOT_RUN 항목 |
 |---|---|---|---|
-| C-a lifecycle 저장·로드 | CJ store — **확정**(제공 ①, SHA 대기) | 판단·변경 요청·조회는 S3 단독, 저장·로드는 계약 호출만(자체 lifecycle.json 미구현), 상태 exact ref 연결 | lifecycle 실제 영속 연동 |
-| C-b descriptor export/import | CJ store — **확정**(제공 ①, SHA 대기) | digest 검증·DEDUP/CONFLICT는 store 처리, S3는 exact 후보만 export, 전송 stub 병행 | 실제 import/pull·CONFLICT 검증 |
+| C-a lifecycle 저장·로드 | CJ store — **구현 제공됨** (`ef03b3a`) | 판단·변경 요청·조회는 S3 단독, 저장·로드는 `save/load_lifecycle_state`·`list_lifecycle_records` 호출만(자체 lifecycle.json 미구현), 상태 exact ref 연결 | lifecycle 실제 영속(저장→재시작 로드) 연동 |
+| C-b descriptor export/import | CJ store — **구현 제공됨** (`ef03b3a`) | digest 검증·DEDUP/CONFLICT는 store 처리, S3는 `export_bundle([exact ref])`만, gitsync는 blob 전송만 | 실제 import/pull·CONFLICT 왕복 검증 |
 | C-c match P1 검색 + 파일접근 적용·검증 | A — **대기**(조율 중) | 미구현 검색 NO_MATCH 금지, 직접 조회 우회 제거 | 검색·파일접근 재사용 분기 |
-| C-d usage 공유 이벤트 | CJ — **확정**(제공 ②, SHA 대기) | 저장·검증·dedup=CJ, Git 전송·pull·last-sync 경계만 B, event_id 재발급 금지, 전송 stub 병행 | 이벤트 공유 왕복 실검증 |
+| C-d usage 공유 이벤트 | CJ — **구현 제공됨** (`cfc62e9`) | 저장·검증·dedup=CJ, Git 전송·pull·last-sync 경계만 B, event_id 재발급 금지, `local_ref_exists` 연결 | 이벤트 공유 왕복 실검증 |
 
-**공통**: C-a/C-b/C-d는 **호출 계약 확정**이나 CJ **검증 commit SHA(제공 ①②) 수신·실행 전**의 실제 저장·검증·공유는 **NOT_RUN으로 정직 기록**(테스트 대역과 구분). C-c는 **A 대기 유지**. U2는 확보된 계약(1·3·5-자체정의) + 확정 호출 계약 기준 독립 골격(gitsync 전송 stub·S3 상태머신·exact 후보 export·C6·C7-P1·S2 OLS) 위에서 승인 Code Plan 범위로만 착수한다. **자체 저장·무결성·CONFLICT·NO_MATCH 우회는 하지 않는다. CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
+**공통**: C-a/C-b/C-d는 **실제 구현 제공됨**(main `ef03b3a`/`cfc62e9`, 병합 반영). **"구현 SHA 대기" 해소.** 단 **실제 연동 통합 검증 전**의 실제 저장·검증·공유 성공은 **NOT_RUN으로 정직 기록**(테스트 대역과 구분). C-c는 **A 대기 유지**. U2는 확보된 계약(1·3·5-자체정의) + 실제 API(bytes blob) 정합 독립 골격(gitsync 전송·S3 상태머신·exact 후보 `export_bundle`·`save_lifecycle_state` 영속·C6·C7-P1·S2 OLS) 위에서 승인 Code Plan 범위로만 착수한다. **자체 저장·무결성·CONFLICT·NO_MATCH 우회는 하지 않는다. CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**

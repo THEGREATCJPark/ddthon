@@ -16,18 +16,18 @@
 - ✅ 계약 3 카운트 경로: `usage.record_actual_reuse/build_evidence/new_execution_id/current_count` — 확보(파일접근 재사용 성공 카운트에 사용).
 - 계약 5 (ReplayResult + 게이트 입력): U0 프리즈 없음 → **U2가 `replay.py`에서 정의**(blocker 아님).
 
-**계약 확정 (CJ 공통 의존성 확정 2026-09-08 2차 — 호출 계약 확정, 검증 commit SHA 대기)**
-> 제공 순서: **① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트**. 각 항목 검증 commit SHA 전달 예정. U2는 확정 호출 계약 기준 연결 + 승인 Code Plan 범위 독립 구현 + 테스트 대역(stub)만 진행하고, 실제 성공은 SHA 수신·실행 후 인정(미실행 NOT_RUN, 대역과 구분). **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
-- ✅확정 C-a: lifecycle **저장·로드 = CJ `store` 계약 제공**(제공 ①). 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json **미구현**, 상태는 exact `id/version/digest`에 연결. SHA 수신·실행 전 **영속 연동 NOT_RUN**.
-- ✅확정 C-b: descriptor **export/import = CJ 제공**(제공 ①). digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만 export** 연결. gitsync 전송 stub 병행 → 실제 import/pull·CONFLICT 검증은 SHA 전 **NOT_RUN**.
+**계약 구현 제공됨 (CJ 공통 의존성 — main `ef03b3a`+`cfc62e9`, work/u2-p1-git 병합 반영)**
+> 제공: **① `ef03b3a` lifecycle 저장 + descriptor export/import, ② `cfc62e9` 공유 usage 이벤트**. **"구현 SHA 대기" 해소.** U2는 실제 API(bytes blob) 기준 gitsync/S3 정합 + 승인 Code Plan 범위 독립 구현만 진행하고, 실제 성공은 **실제 연동 통합 검증 후** 인정(미실행 NOT_RUN, 대역과 구분). **CJ 공통 계약 승인 ≠ U2 전체 구현 승인.**
+- ✅구현 C-a: `store.save_lifecycle_state(skill_ref, state, evidence)`/`load_lifecycle_state`/`list_lifecycle_records`(저장만·전이 미판단). 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json **미구현**, 상태는 exact `id/version/digest`에 연결. **실제 영속(저장→재시작 로드) 통합 검증 전 NOT_RUN**.
+- ✅구현 C-b: `store.export_bundle(refs: list[dict]) -> bytes`(**exact refs 목록, scope 문자열 아님**)/`import_bundle(blob) -> list[PutResult]`. digest 검증·DEDUP/CONFLICT는 **store 처리**(U2 미구현). S3는 **공유 자격 판단한 정확한 후보만** `export_bundle([ref])` 연결. **실제 원격 import/pull·CONFLICT 왕복 검증 전 NOT_RUN**.
 - ⚠대기 C-c: `match.search` P1 입력 **+ 파일접근 Skill 적용·검증 계약** — **A 조율 중(대기)**. 미구현 검색을 NO_MATCH로 간주 금지, store 직접 조회 우회 **제거**. 확정 전 **검색·파일접근 재사용 분기 NOT_RUN**.
-- ✅확정 C-d: 공유 이벤트 규격·검증·dedup·**저장 = CJ**(제공 ②). **Git 전송·pull·last-sync 경계만 B**, 전송 시 **event_id 재발급 금지**(그대로 전송). 전송 stub 병행 → 이벤트 공유 왕복 실검증은 SHA 전 **NOT_RUN**.
+- ✅구현 C-d: `usage.export_shared_usage() -> bytes`/`import_shared_usage(blob, local_ref_exists) -> list[dict]`. 저장·검증·dedup=CJ. **Git 전송·pull·last-sync 경계만 B**, 전송 시 **event_id 재발급 금지**, pull 시 **정확한 로컬 Skill 존재 확인**(`local_ref_exists`=store.get+digest 일치) 연결. **이벤트 공유 왕복 실검증 전 NOT_RUN**.
 
 **외부 의존**
 - Python 3, 표준 라이브러리: `json`, `hashlib`, `zipfile`, `xml.etree.ElementTree`, `subprocess`, `uuid`, `tempfile`, `csv`.
 - **Git CLI**(`git`): gitsync가 `subprocess`로 호출(별도 서버 없음, FR-SYNC-2). 실제 원격 push는 **인증 필요** — 불가 시 D-3(PUBLISH_PENDING + NOT_RUN).
 - 테스트: `pytest` + `Hypothesis`(PBT partial).
-- **외부 인터넷·사내 데이터·secret 미의존**(NFR-RUN-1, NFR-SEC-1).
+- **네트워크 경계 구분**: "외부 인터넷 미의존"은 **로컬 P1 업무·테스트 실행 범위로 한정**한다(사내 데이터·secret 미의존, NFR-RUN-1/NFR-SEC-1). **GitHub 원격 sync(gitsync pull/push)는 네트워크와 인증이 필요**하며 이는 로컬 실행 미의존과 구분되는 별개 요구다.
 
 **파일 소유(단일 수정자)**: `experience_service.py`/`publish_pipeline.py`/`replay.py`/`envharness_p1.py`/`gitsync.py` = **B**. descriptor/store/usage/cli/envharness_p0 = CJ, match/reuse_service = A → **호출만**.
 
@@ -37,13 +37,14 @@
 
 | 항목 | 결정 | 근거 |
 |---|---|---|
-| **XLSX 파서(허용 대안)** | **stdlib 전용**(`zipfile` + `xml.etree`) 기본 채택 | NFR-RUN-1(새 clone/ZIP에서 선언 의존성만으로 실행). 제3자 XLSX 라이브러리 **필수 의존 회피**. XLSX=OOXML zip이므로 `xl/worksheets/*.xml` read-only 파싱 가능 |
-| **직접 parser(실패 관찰)** | Code Plan에서 **실제 관찰 실패 메커니즘 확정**(강제 raise·DRM 금지) | FR-P1-1/NFR-SEC-2. naive 접근이 이 합성 파일에서 실제 실행 시 실패를 반환하도록 구성. openpyxl 등은 **선택**(더 현실적 데모용)이며 새-clone 실행 필수 아님 |
+| **P1 실패 모델** | **쓰기 금지(read-only) 환경 제약** 채택(FD §1 재정의) | 검증 대상 = "사내 환경 제약에서 정상 직접 접근 실패 → 허용 read-only 대안으로 해결". 파일은 정상 OOXML(손상·DRM·암호 없음), 제약은 **환경(쓰기 거부)**. 폐기: 텍스트/비-ZIP naive 파서 교정 모델 |
+| **직접(정상) 접근** | 원본 옆 작업 산출물(잠금/임시) 생성 또는 modify 핸들 요구하는 표준 열기 | read-only 표면에서 쓰기 거부로 **실제 실행 실패**(OS 실패 관찰, 강제 raise·잘못된 API 아님, FR-P1-1/NFR-SEC-2) |
+| **허용 대안** | 인접 쓰기·잠금 없는 순수 read-only 스트리밍 → `zipfile`+`xml.etree`로 OOXML 파싱 | 환경 허용 read-only 표면 내 → 성공. **stdlib 전용**(제3자 XLSX 라이브러리 필수 의존 없음, NFR-RUN-1). 접근/표면 제어=`os`/(Win)`msvcrt`. openpyxl은 **선택**(데모용, 새-clone 필수 아님) |
 | **Git 전송** | `git` CLI(subprocess) + **team-skill-store 전용 로컬 미러 dir**(D-2) | 별도 서버 없음(FR-SYNC-2), dev worktree 미오염 |
-| **lifecycle 영속** | **CJ `store` 저장·로드 계약에 위임(C-a 확정, 제공 ①, SHA 대기)** | 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json 미구현, 상태는 exact id/version/digest 연결. SHA 수신·실행 전 영속 연동 NOT_RUN |
+| **lifecycle 영속** | **CJ `store` 저장·로드 API 사용(C-a 구현 제공됨 `ef03b3a`)** | `save/load_lifecycle_state`·`list_lifecycle_records`. 상태 판단·변경 요청·읽기전용 조회는 S3(U2) 단독, 자체 lifecycle.json 미구현, exact id/version/digest 연결. 실제 영속 통합 검증 전 NOT_RUN |
 | **테스트 프레임워크** | pytest + Hypothesis | NFR-TEST-1(PBT partial)·TEST-2(process/contract/regression) |
 
-> **미결정→기본 채택 안내**: 직접 parser의 정확한 실패 메커니즘과 openpyxl 채택 여부는 Code Plan에서 확정. 기본은 **stdlib 전용 + 강제 raise 없는 실제 관찰 실패**. 다른 방향(예: openpyxl 필수 채택) 원하시면 검토 게이트에서 지정.
+> **모델·의존성 확정(Code Plan 이월 아님)**: P1 실패 모델(쓰기 금지 환경 제약)·직접 접근/허용 대안·필요 의존성(stdlib 전용: `zipfile`/`xml.etree`/`os`/`msvcrt`)은 **본 FD/NFR로 고정**. Code Plan은 **구현 세부(잠금/스트리밍의 정확한 호출·에러코드 매핑)만** 확정.
 
 ---
 
@@ -74,12 +75,12 @@
 | U2-V13 | 원격 수신 Skill 자동 실행 금지(Replay는 명시적·독립) | NFR-SEC-4 | unit |
 | U2-V14 | run-p1 실제 샘플 실행 = 직접 실패 관찰 → (검색) → 대안 → OLS 완료·검증 → 후보 → 검토·Replay·(게시 시도) | US-P1-1~4 | e2e 데모, 실행 증거 |
 
-> 실제 원격 push 인증 불가 항목(U2-V10 PUBLISHED 도달, U2-V11 원격 왕복, C-b/C-d 관련 pull·이벤트 공유)은 **NOT_RUN으로 정직 기록**.
+> **실패 실행 근거 vs NOT_RUN 구분(정직 기록)**: (a) 최초 `git push`(작업 브랜치)는 **403으로 실제 시도 후 실패** → "**실패 실행 근거**"로 보존(이후 권한 해결로 push 성공). (b) **아직 실행하지 않은** 제품 원격 게시 성공 도달(U2-V10 PUBLISHED)·원격 왕복(U2-V11)·C-b/C-d pull·이벤트 공유 통합 검증은 **`NOT_RUN`**. (a)와 (b)는 혼동하지 않는다.
 
 ---
 
 ## 5. 보안·복원력 (반영, 신규 아님)
-- **NFR-SEC-1**: candidate·bundle·화면에 secret·원본 업무 데이터·계산 결과 미포함.
+- **NFR-SEC-1(정정)**: **P1 업무 결과 화면에는 계산값을 표시한다**(FR-P1-5: 실제 3개월 + 예상 1개월 값·단위·대상 월). 제외 대상은 **공유 Skill descriptor·공유 bundle**에 담기는 **업무 데이터·계산 로직·생산량 값·secret·원본**이다(공유물은 환경 접근 절차만). 즉 "미포함"은 화면이 아니라 **공유물** 경계에 적용.
 - **NFR-SEC-2**: 보호 XLSX는 승인된 read-only 접근만, DRM 우회 금지.
 - **NFR-SEC-3**: descriptor digest·입력 무결성 검증.
 - **NFR-SEC-4**: 원격 수신 Skill 자동 실행 금지 — Replay·적용은 명시적.

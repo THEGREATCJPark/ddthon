@@ -104,13 +104,16 @@ def run_p0(store_path: str | None = None, usage_path: str | None = None,
             print(f"run-p0: 적용했으나 검증 실패(exit={result.pip_exit_code}) — 카운트 없음")
             return 0
 
-        # 6) 실제 성공만 카운트(C3 단독 경로).
+        # 6) 실제 성공만 카운트(C3 단독 경로) + 공유 이벤트 생성(C-d).
+        #    exact Skill 참조(digest)와 reuser_alias는 호출자(cli)가 제공한다.
+        alias = os.environ.get("SKILLLOOP_ALIAS", "local")
         rec = usage.record_actual_reuse(
             build_evidence(
-                {"id": selected.id, "version": selected.version},
+                {"id": selected.id, "version": selected.version, "digest": selected.digest},
                 result.__dict__,
                 run_id,
                 demo_seed=selected.demo_seed,
+                reuser_alias=alias,
             )
         )
         print(f"run-p0: reuse={rec.new_count} (counted={rec.counted}, reason={rec.reason})")
@@ -120,14 +123,51 @@ def run_p0(store_path: str | None = None, usage_path: str | None = None,
         shutil.rmtree(env.venv_path, ignore_errors=True)
 
 
+def share_export(out_path: str, usage_path: str | None = None) -> int:
+    """C-d: VERIFIED_REUSE 공유 이벤트를 파일로 export(C4/gitsync가 전송할 원본)."""
+    usage = UsageTracker(usage_path or os.path.join(_DEMO_DIR, "usage.json"))
+    blob = usage.export_shared_usage()
+    with open(out_path, "wb") as f:
+        f.write(blob)
+    n = len(usage.list_shared_events())
+    print(f"share-export: {n} event(s) -> {out_path}")
+    return 0
+
+
+def share_import(in_path: str, store_path: str | None = None,
+                 usage_path: str | None = None) -> int:
+    """C-d: 공유 이벤트 import(재검증·event_id dedup). 로컬 존재 확인=기본 store."""
+    store = SkillStore(store_path or os.path.join(_DEMO_DIR, "store.json"))
+    usage = UsageTracker(usage_path or os.path.join(_DEMO_DIR, "usage.json"))
+    with open(in_path, "rb") as f:
+        blob = f.read()
+
+    def _exists(ref: dict) -> bool:
+        d = store.get(ref.get("id", ""), ref.get("version", ""))
+        return d is not None and d.digest == ref.get("digest")
+
+    results = usage.import_shared_usage(blob, local_ref_exists=_exists)
+    applied = sum(1 for r in results if r["applied"])
+    print(f"share-import: {applied}/{len(results)} applied (dedup·검증 반영)")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """콘솔 스크립트 진입점. 서브커맨드 라우팅."""
     parser = argparse.ArgumentParser(prog="skillloop")
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("run-p0", help="P0 재사용 데모 실행")
+    pe = sub.add_parser("share-export", help="VERIFIED_REUSE 공유 이벤트 export")
+    pe.add_argument("out", help="export 파일 경로")
+    pi = sub.add_parser("share-import", help="공유 이벤트 import(검증·dedup)")
+    pi.add_argument("inp", help="import 파일 경로")
     args = parser.parse_args(argv)
     if args.command == "run-p0":
         return run_p0()
+    if args.command == "share-export":
+        return share_export(args.out)
+    if args.command == "share-import":
+        return share_import(args.inp)
     parser.print_help()
     return 2
 
