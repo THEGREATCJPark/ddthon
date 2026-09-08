@@ -1,6 +1,46 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  decodeFlow,
+  encodeFlow,
+  emptyFlow,
+  restoreFlow,
+} from "./manualFlow.ts";
+test("manual sharing preserves each stage independently, including parallel active work", () => {
+  const state = emptyFlow();
+  state.mode = "manual";
+  state.stages.requirements = "done";
+  state.stages.p0 = "doing";
+  state.stages.p1 = "doing";
+  state.stages.qa = "blocked";
+  assert.deepEqual(decodeFlow(encodeFlow(state)), state);
+  assert.equal(decodeFlow(encodeFlow(state))!.stages.integration, "todo");
+});
+test("invalid shared versions, lengths and status values never become progress", () => {
+  for (const input of [
+    null,
+    "",
+    "v2.01230123",
+    "v1.0123",
+    "v1.012301234",
+    "v1.0123012x",
+    "v1.01230124",
+    "<script>",
+  ]) {
+    assert.equal(decodeFlow(input), null);
+  }
+});
+test("corrupt storage safely falls back; GitHub mode preserves private manual marks", () => {
+  assert.deepEqual(restoreFlow("{broken"), emptyFlow());
+  assert.deepEqual(restoreFlow('{"value":4}'), emptyFlow());
+  const saved = restoreFlow(
+    JSON.stringify({ mode: "github", value: "v1.30110000" }),
+  );
+  assert.equal(saved.mode, "github");
+  assert.equal(saved.stages.requirements, "done");
+  assert.equal(saved.stages.p0, "doing");
+});
+import {
   activeIssues,
   checklist,
   cleanTitle,
@@ -123,7 +163,7 @@ test("active and blocked tasks illuminate their exact stage, canceled tasks are 
   work.push(issue({ body, state: "closed", state_reason: "not_planned" }));
   assert.equal(stageProgress(work, "p1").total, 2);
 });
-test("stage completion requires every mapped task completed, and reopened work removes green state", () => {
+test("stage completion requires every mapped task completed, and reopened work removes done state", () => {
   const body = "### 단계\nqa";
   const data = [issue({ body, state: "closed", state_reason: "completed" })];
   assert.equal(stageProgress(data, "qa").status, "done");

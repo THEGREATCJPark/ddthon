@@ -23,12 +23,12 @@ function getMermaid() {
       theme: "base",
       themeVariables: {
         fontFamily: "system-ui, sans-serif",
-        primaryColor: "#eef4e8",
-        primaryTextColor: "#173d35",
-        primaryBorderColor: "#b7cbb9",
-        lineColor: "#749487",
-        secondaryColor: "#f3f0fb",
-        tertiaryColor: "#faf9f5",
+        primaryColor: "#eef2f8",
+        primaryTextColor: "#102449",
+        primaryBorderColor: "#bbc7d8",
+        lineColor: "#64748b",
+        secondaryColor: "#fff5df",
+        tertiaryColor: "#f7f8fb",
       },
       flowchart: { htmlLabels: false, curve: "basis", padding: 18 },
     });
@@ -171,7 +171,12 @@ export default function DiagramTab({
           ))}
         </div>
         {current.id.startsWith("issue-") && (
-          <a className="text-button" href={`${REPO_URL}/issues/${current.id.slice(6)}`} target="_blank" rel="noreferrer">
+          <a
+            className="text-button"
+            href={`${REPO_URL}/issues/${current.id.slice(6)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub 원문 · 수정 / 댓글
           </a>
         )}

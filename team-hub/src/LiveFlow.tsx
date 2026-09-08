@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, GitBranch, Minus, Plus } from "lucide-react";
 import { STATUS_NAMES, type Issue } from "./domain";
 import { STAGES, stageProgress, type StageId } from "./stages";
+import { Modal } from "./Modal";
+import { encodeFlow, FLOW_STATUSES } from "./manualFlow";
+import type { useFlowState } from "./useFlowState";
 let diagram: Promise<string> | null = null;
 function source() {
   return (diagram ||= fetch(
@@ -19,14 +22,36 @@ function source() {
 export default function LiveFlow({
   issues,
   onStage,
+  flow,
 }: {
   issues: Issue[];
   onStage: (id: StageId) => void;
+  flow: ReturnType<typeof useFlowState>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState("");
   const [error, setError] = useState("");
   const [zoom, setZoom] = useState(1);
+  const [selected, setSelected] = useState<StageId | null>(null);
+  const [shareLink, setShareLink] = useState("");
+  const [copied, setCopied] = useState(false);
+  const manual = flow.state.mode === "manual";
+  const statusFor = (id: StageId) =>
+    manual ? flow.state.stages[id] : stageProgress(issues, id).status;
+  const selectStage = (id: StageId) => (manual ? setSelected(id) : onStage(id));
+  async function share() {
+    const url = new URL(location.href);
+    url.searchParams.set("flow", encodeFlow(flow.state));
+    url.hash = "diagrams";
+    setShareLink(url.href);
+    setCopied(false);
+    try {
+      await navigator.clipboard.writeText(url.href);
+      setCopied(true);
+    } catch {
+      /* Selectable URL remains available. */
+    }
+  }
   useEffect(() => {
     let active = true;
     source()
@@ -49,7 +74,12 @@ export default function LiveFlow({
     graphic.setAttribute("viewBox", "28 40 795 374");
     graphic.setAttribute("lang", "ko");
     graphic.setAttribute("role", "group");
-    graphic.setAttribute("aria-label", "작업 상태가 연결된 팀 개발 순서도");
+    graphic.setAttribute(
+      "aria-label",
+      manual
+        ? "수동 상태를 표시한 팀 개발 순서도"
+        : "GitHub 작업 상태가 연결된 팀 개발 순서도",
+    );
     graphic.querySelector("[data-legend]")?.remove();
     for (const stage of STAGES) {
       const progress = stageProgress(issues, stage.id);
@@ -57,19 +87,23 @@ export default function LiveFlow({
         `[data-node-id="${stage.id}"]`,
       );
       if (!node) continue;
-      const statusName =
-        progress.status === "empty" ? "미등록" : STATUS_NAMES[progress.status];
-      node.setAttribute("data-status", progress.status);
+      const status = statusFor(stage.id);
+      const statusName = status === "empty" ? "미등록" : STATUS_NAMES[status];
+      node.setAttribute("data-status", status);
       node.setAttribute(
         "aria-label",
-        `${stage.name} · ${statusName} · ${progress.done}/${progress.total} 완료. 관련 작업 보기`,
+        manual
+          ? `${stage.name} · ${statusName}. 상태 변경`
+          : `${stage.name} · ${statusName} · ${progress.done}/${progress.total} 완료. 관련 작업 보기`,
       );
       node.removeAttribute("aria-pressed");
       const sublabel = node.querySelector('[data-detail="context"]');
       if (sublabel)
-        sublabel.textContent = progress.total
-          ? `${statusName} · ${progress.done}/${progress.total}`
-          : "작업 연결 +";
+        sublabel.textContent = manual
+          ? statusName
+          : progress.total
+            ? `${statusName} · ${progress.done}/${progress.total}`
+            : "작업 연결 +";
       const rect = node.querySelector("rect.c-mask");
       if (rect) {
         const lamp = document.createElementNS(
@@ -89,23 +123,23 @@ export default function LiveFlow({
         lamp.classList.add("stage-lamp");
         node.append(lamp);
       }
-      node.addEventListener("click", () => onStage(stage.id));
+      node.addEventListener("click", () => selectStage(stage.id));
       node.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onStage(stage.id);
+          selectStage(stage.id);
         }
       });
     }
-    // A highlighted connector reflects only its destination's mapped task status.
+    // Highlight only the destination's status in the selected source.
     graphic.querySelectorAll("[data-edge-to]").forEach((edge) => {
       const id = edge.getAttribute("data-edge-to") as StageId;
       if (STAGES.some((s) => s.id === id))
-        edge.setAttribute("data-status", stageProgress(issues, id).status);
+        edge.setAttribute("data-status", statusFor(id));
     });
-  }, [svg, issues, onStage]);
+  }, [svg, issues, onStage, flow.state]);
   const active = STAGES.filter((s) =>
-    ["doing", "blocked"].includes(stageProgress(issues, s.id).status),
+    ["doing", "blocked"].includes(statusFor(s.id)),
   );
   return (
     <section className="panel live-flow">
@@ -142,21 +176,53 @@ export default function LiveFlow({
           </a>
         </div>
       </div>
+      <div className="flow-mode-bar">
+        <div className="flow-mode" role="group" aria-label="순서도 상태 출처">
+          <button
+            aria-pressed={!manual}
+            onClick={() => flow.setState((s) => ({ ...s, mode: "github" }))}
+          >
+            GitHub 연동
+          </button>
+          <button
+            aria-pressed={manual}
+            onClick={() => flow.setState((s) => ({ ...s, mode: "manual" }))}
+          >
+            직접 표시
+          </button>
+        </div>
+        {manual && (
+          <button className="button" onClick={share}>
+            상태 링크 복사
+          </button>
+        )}
+        <span className="flow-source">
+          {manual
+            ? flow.storageError
+              ? "현재 화면만 유지 · 저장 불가"
+              : "이 브라우저에 저장 · 링크로 공유"
+            : "연결된 GitHub 작업 기준"}
+        </span>
+      </div>
       <div className="flow-status-bar">
         <div className="now-stages">
           {active.length ? (
             active.map((s) => (
               <button
                 key={s.id}
-                onClick={() => onStage(s.id)}
-                className={`current-stage ${stageProgress(issues, s.id).status}`}
+                onClick={() => selectStage(s.id)}
+                className={`current-stage ${statusFor(s.id)}`}
               >
                 <span className="dot" />
                 {s.name}
               </button>
             ))
           ) : (
-            <span>진행 중인 작업 없음</span>
+            <span>
+              {manual
+                ? "노드를 눌러 현재 단계를 표시하세요"
+                : "진행 중인 작업 없음"}
+            </span>
           )}
         </div>
         <div className="flow-legend">
@@ -182,7 +248,9 @@ export default function LiveFlow({
         </div>
       )}
       <div className="flow-bottom">
-        <span>노드 선택 → 연결된 작업</span>
+        <span>
+          {manual ? "노드 선택 → 상태 변경" : "노드 선택 → 연결된 작업"}
+        </span>
         <a
           href="https://github.com/tt-a1i/archify"
           target="_blank"
@@ -191,6 +259,68 @@ export default function LiveFlow({
           Archify ↗
         </a>
       </div>
+      {selected && (
+        <Modal
+          title={STAGES.find((s) => s.id === selected)!.name}
+          onClose={() => setSelected(null)}
+        >
+          <div
+            className="manual-status-picker"
+            role="group"
+            aria-label="단계 상태 선택"
+          >
+            {FLOW_STATUSES.map((status) => (
+              <button
+                key={status}
+                className={`manual-status ${status}`}
+                aria-pressed={flow.state.stages[selected] === status}
+                onClick={() => {
+                  flow.setState((s) => ({
+                    ...s,
+                    stages: { ...s.stages, [selected]: status },
+                  }));
+                  setSelected(null);
+                }}
+              >
+                <i className={`legend-dot ${status}`} />
+                {STATUS_NAMES[status]}
+              </button>
+            ))}
+          </div>
+          <div className="manual-modal-footer">
+            <span>수동 표시 · GitHub 작업 상태는 유지됩니다</span>
+            <button
+              className="button"
+              onClick={() => {
+                const id = selected;
+                setSelected(null);
+                onStage(id);
+              }}
+            >
+              연결된 작업
+            </button>
+          </div>
+        </Modal>
+      )}
+      {shareLink && (
+        <Modal
+          title={copied ? "상태 링크를 복사했습니다" : "상태 링크 공유"}
+          onClose={() => setShareLink("")}
+        >
+          <p>
+            지금 표시한 상태를 전달합니다. 이후 변경은 새 링크로 공유하세요.
+          </p>
+          <label className="share-link-label">
+            공유 링크
+            <input
+              readOnly
+              aria-label="상태 공유 링크"
+              value={shareLink}
+              onFocus={(e) => e.target.select()}
+            />
+          </label>
+        </Modal>
+      )}
     </section>
   );
 }

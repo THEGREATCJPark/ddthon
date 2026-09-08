@@ -48,6 +48,7 @@ import {
 } from "./domain";
 import { Composer, Help, IssueDetail, Modal } from "./Modal";
 import LiveFlow from "./LiveFlow";
+import { useFlowState } from "./useFlowState";
 import { STAGES, stageOf, stageProgress, type StageId } from "./stages";
 const DiagramTab = lazy(() => import("./Diagram"));
 const tabs = [
@@ -132,6 +133,7 @@ function IssueCard({
   );
 }
 export default function App() {
+  const flow = useFlowState();
   const [tab, setTab] = useState(readTab);
   const [mobile, setMobile] = useState(false);
   const [query, setQuery] = useState("");
@@ -354,6 +356,17 @@ export default function App() {
           </div>
         </header>
         <main id="main-content">
+          {tab === "dashboard" && (
+            <div className="event-banner">
+              <img
+                src={`${import.meta.env.BASE_URL}images/ddthon-banner.png`}
+                width="1024"
+                height="434"
+                alt="제4회 디디톤 · DS S/W Developer Hackathon. Humans set the direction. AI brings the speed."
+                fetchPriority="high"
+              />
+            </div>
+          )}
           <div className="page-heading">
             <h1>{current.name}</h1>
             <div className="heading-actions">
@@ -489,7 +502,11 @@ export default function App() {
                     </button>
                   ))}
                 </section>
-                <LiveFlow issues={issues} onStage={setStageDetail} />
+                <LiveFlow
+                  issues={issues}
+                  onStage={setStageDetail}
+                  flow={flow}
+                />
                 <div className="dashboard-work">
                   <section className="panel">
                     <div className="panel-heading">
@@ -815,7 +832,7 @@ export default function App() {
                   className={diagramMode === "live" ? "selected" : ""}
                   onClick={() => setDiagramMode("live")}
                 >
-                  개발 흐름 · 실시간
+                  개발 흐름
                 </button>
                 <button
                   className={diagramMode === "notes" ? "selected" : ""}
@@ -825,7 +842,11 @@ export default function App() {
                 </button>
               </div>
               {diagramMode === "live" ? (
-                <LiveFlow issues={issues} onStage={setStageDetail} />
+                <LiveFlow
+                  issues={issues}
+                  onStage={setStageDetail}
+                  flow={flow}
+                />
               ) : (
                 <Suspense fallback={<p role="status">불러오는 중…</p>}>
                   <DiagramTab
