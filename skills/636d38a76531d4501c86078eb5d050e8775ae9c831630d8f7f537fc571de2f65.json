@@ -1,0 +1,1 @@
+{"skills":[{"content":{"applicability":{"signals":["file-access-fail:xlsx"]},"id":"file-access-8738e696cff8bbb20c98","origin":{"author":"local"},"procedure":{"action":"file-access","method":"excel-com-attach"},"version":"1.0.0"},"declared_digest":"359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"}]}
