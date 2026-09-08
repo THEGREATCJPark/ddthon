@@ -1,145 +1,23 @@
 {
   "schema_version": 2,
   "diagram_type": "workflow",
-  "meta": {
-    "title": "팀 개발 흐름",
-    "quality_profile": "showcase",
-    "animation": "none"
-  },
-  "lanes": [
-    {
-      "id": "planning",
-      "label": "설계"
-    },
-    {
-      "id": "development",
-      "label": "구현"
-    },
-    {
-      "id": "delivery",
-      "label": "검증 · 제출"
-    }
-  ],
-  "mainPath": [
-    "requirements",
-    "design",
-    "p0",
-    "integration",
-    "qa",
-    "submission"
-  ],
+  "meta": { "title": "Agent Skillloop 개발 흐름", "quality_profile": "showcase", "animation": "none" },
+  "lanes": [{"id":"prepare","label":"준비"},{"id":"scenarios","label":"두 가지 시나리오"},{"id":"finish","label":"연결하고 시연하기"}],
+  "mainPath": ["plan","python","share","verify","demo"],
   "nodes": [
-    {
-      "id": "requirements",
-      "lane": "planning",
-      "col": 0,
-      "type": "frontend",
-      "label": "요구사항",
-      "sublabel": "범위 · 완료 기준"
-    },
-    {
-      "id": "design",
-      "lane": "planning",
-      "col": 1,
-      "type": "backend",
-      "label": "설계 · 통합 규약",
-      "sublabel": "Unit · 인터페이스",
-      "width": 150
-    },
-    {
-      "id": "p0",
-      "lane": "development",
-      "col": 1,
-      "type": "backend",
-      "label": "P0 재사용",
-      "sublabel": "기존 Skill 적용"
-    },
-    {
-      "id": "p1",
-      "lane": "development",
-      "col": 2,
-      "type": "backend",
-      "label": "P1 경험 축적",
-      "sublabel": "업무 해결 · 새 절차"
-    },
-    {
-      "id": "sharing",
-      "lane": "development",
-      "col": 3,
-      "type": "database",
-      "label": "팀 Skill 공유",
-      "sublabel": "Published 전송"
-    },
-    {
-      "id": "integration",
-      "lane": "delivery",
-      "col": 3,
-      "type": "backend",
-      "label": "통합",
-      "sublabel": "흐름 연결"
-    },
-    {
-      "id": "qa",
-      "lane": "delivery",
-      "col": 4,
-      "type": "security",
-      "label": "독립 검증",
-      "sublabel": "실제 결과 · 증거"
-    },
-    {
-      "id": "submission",
-      "lane": "delivery",
-      "col": 5,
-      "type": "external",
-      "label": "시연 · 제출",
-      "sublabel": "README · 화면"
-    }
+    {"id":"plan","lane":"prepare","col":0,"type":"frontend","label":"아이템 기획","sublabel":"무엇을 해결할지 정하기","width":170},
+    {"id":"python","lane":"scenarios","col":0,"type":"backend","label":"Python 설치 시나리오","sublabel":"P0 · 기존 해결법 다시 쓰기","width":220},
+    {"id":"excel","lane":"scenarios","col":1,"type":"backend","label":"Excel 설치 시나리오","sublabel":"P1 · 새 해결법 배우기","width":220},
+    {"id":"share","lane":"finish","col":1,"type":"database","label":"팀에 해결법 공유","sublabel":"다른 팀원도 사용할 수 있게","width":190},
+    {"id":"verify","lane":"finish","col":2,"type":"security","label":"실제로 되는지 확인","sublabel":"다른 환경에서도 다시 실행","width":190},
+    {"id":"demo","lane":"finish","col":3,"type":"external","label":"시연 준비","sublabel":"한 번에 보여주는 데모","width":160}
   ],
   "edges": [
-    {
-      "from": "requirements",
-      "to": "design",
-      "label": "합의"
-    },
-    {
-      "from": "design",
-      "to": "p0",
-      "label": "설계 후"
-    },
-    {
-      "from": "design",
-      "to": "p1",
-      "label": "설계 후",
-      "role": "branch"
-    },
-    {
-      "from": "design",
-      "to": "sharing",
-      "label": "규약 후",
-      "role": "branch"
-    },
-    {
-      "from": "p0",
-      "to": "integration"
-    },
-    {
-      "from": "p1",
-      "to": "integration",
-      "role": "branch"
-    },
-    {
-      "from": "sharing",
-      "to": "integration",
-      "role": "branch"
-    },
-    {
-      "from": "integration",
-      "to": "qa"
-    },
-    {
-      "from": "qa",
-      "to": "submission",
-      "label": "검증 후"
-    }
+    {"from":"plan","to":"python"},
+    {"from":"plan","to":"excel","role":"branch"},
+    {"from":"python","to":"share"},
+    {"from":"excel","to":"share","role":"branch"},
+    {"from":"share","to":"verify"},
+    {"from":"verify","to":"demo"}
   ]
 }

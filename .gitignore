@@ -25,3 +25,6 @@ team-hub/public/archify/*.visual-check.*
 task_plan.md
 findings.md
 progress.md
+
+team-hub/.firebase/
+team-hub/*-debug.log*
