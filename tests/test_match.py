@@ -140,3 +140,28 @@ def test_error_timeout_not_invoked_distinct_from_no_match():
     nm = M.search(_obs(), _FakeStore([]))
     assert nm.status == "NO_MATCH"
     assert len({err.status, to.status, ni.status, nm.status}) == 4
+
+
+def test_search_supports_p1_file_access_signal():
+    # P1: 검색은 신호 유형에 비의존(제네릭). file-access-fail 신호도 동일 규칙으로 매칭.
+    # target_pkg는 호환용 대상 식별자, 신호는 안정적 자원 유형 키(PC별 절대경로 아님).
+    fa_obs = M.FailureObservation(
+        command="open encrypted-xlsx",
+        target_pkg="encrypted-xlsx",
+        error_signature="file-access-fail:encrypted-xlsx",
+        exit_code=1,
+    )
+    fa_skill = D.make_descriptor({
+        "id": "fix-encrypted-xlsx-access",
+        "version": "1.0.0",
+        "origin": {"author": "test"},
+        "applicability": {"signals": ["file-access-fail:encrypted-xlsx"]},
+        "procedure": {"action": "file-access", "resource": "encrypted-xlsx"},
+    })
+    out = M.search(fa_obs, _FakeStore([
+        _mk("pip-noise", "1.0.0", [_EXACT]),      # 무관 pip 후보는 유효 후보 아님
+        fa_skill,
+    ]))
+    assert out.status == "MATCH"
+    assert out.descriptor.id == "fix-encrypted-xlsx-access"
+    assert out.candidates_considered == 1
