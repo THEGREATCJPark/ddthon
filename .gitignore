@@ -7,6 +7,17 @@
 .claude/settings.local.json
 .mcp.local.json
 
+# Python build / venv / test artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.hypothesis/
+.venv/
+venv/
+
 # Editor and OS files
 .vscode/
 .idea/
