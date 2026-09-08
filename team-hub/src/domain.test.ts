@@ -88,8 +88,45 @@ test("external and script links cannot replace trusted repository links", () => 
     assert.equal(safeGithubUrl(bad), fallback);
   assert.equal(safeGithubUrl(`${fallback}/issues/1`), `${fallback}/issues/1`);
 });
-import { stageOf, stageProgress } from './stages.ts';
-test('stage mapping uses explicit stage before track and never guesses an unknown stage',()=>{assert.equal(stageOf(issue({body:'### 트랙\nP0\n\n### 단계\ndesign'})),'design');assert.equal(stageOf(issue({body:'### 단계\nunknown\n\n### 트랙\nP0'})),null);assert.equal(stageOf(issue({body:'### 트랙\nP1'})),'p1');assert.equal(stageOf(issue()),null);});
-test('unregistered stage stays dark; finished subset does not light an entire stage as completed',()=>{assert.equal(stageProgress([], 'p0').status,'empty');const body='### 단계\np0';const data=[issue({body,state:'closed',state_reason:'completed'}),issue({body})];assert.deepEqual({...stageProgress(data,'p0'),tasks:[]},{status:'todo',total:2,done:1,tasks:[]});});
-test('active and blocked tasks illuminate their exact stage, canceled tasks are excluded',()=>{const body='### 단계\np1';const work=[issue({body,labels:[{name:'status:doing'}]})];assert.equal(stageProgress(work,'p1').status,'doing');assert.equal(stageProgress(work,'p0').status,'empty');work.push(issue({body,labels:[{name:'status:blocked'}]}));assert.equal(stageProgress(work,'p1').status,'blocked');work.push(issue({body,state:'closed',state_reason:'not_planned'}));assert.equal(stageProgress(work,'p1').total,2);});
-test('stage completion requires every mapped task completed, and reopened work removes green state',()=>{const body='### 단계\nqa';const data=[issue({body,state:'closed',state_reason:'completed'})];assert.equal(stageProgress(data,'qa').status,'done');data[0].state='open';assert.equal(stageProgress(data,'qa').status,'todo');});
+import { stageOf, stageProgress } from "./stages.ts";
+test("stage mapping uses explicit stage before track and never guesses an unknown stage", () => {
+  assert.equal(
+    stageOf(issue({ body: "### 트랙\nP0\n\n### 단계\ndesign" })),
+    "design",
+  );
+  assert.equal(
+    stageOf(issue({ body: "### 단계\nunknown\n\n### 트랙\nP0" })),
+    null,
+  );
+  assert.equal(stageOf(issue({ body: "### 트랙\nP1" })), "p1");
+  assert.equal(stageOf(issue()), null);
+});
+test("unregistered stage stays dark; finished subset does not light an entire stage as completed", () => {
+  assert.equal(stageProgress([], "p0").status, "empty");
+  const body = "### 단계\np0";
+  const data = [
+    issue({ body, state: "closed", state_reason: "completed" }),
+    issue({ body }),
+  ];
+  assert.deepEqual(
+    { ...stageProgress(data, "p0"), tasks: [] },
+    { status: "todo", total: 2, done: 1, tasks: [] },
+  );
+});
+test("active and blocked tasks illuminate their exact stage, canceled tasks are excluded", () => {
+  const body = "### 단계\np1";
+  const work = [issue({ body, labels: [{ name: "status:doing" }] })];
+  assert.equal(stageProgress(work, "p1").status, "doing");
+  assert.equal(stageProgress(work, "p0").status, "empty");
+  work.push(issue({ body, labels: [{ name: "status:blocked" }] }));
+  assert.equal(stageProgress(work, "p1").status, "blocked");
+  work.push(issue({ body, state: "closed", state_reason: "not_planned" }));
+  assert.equal(stageProgress(work, "p1").total, 2);
+});
+test("stage completion requires every mapped task completed, and reopened work removes green state", () => {
+  const body = "### 단계\nqa";
+  const data = [issue({ body, state: "closed", state_reason: "completed" })];
+  assert.equal(stageProgress(data, "qa").status, "done");
+  data[0].state = "open";
+  assert.equal(stageProgress(data, "qa").status, "todo");
+});

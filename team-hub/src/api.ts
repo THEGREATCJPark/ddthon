@@ -10,7 +10,9 @@ export async function fetchPages<T>(
       `${API}${path}${path.includes("?") ? "&" : "?"}per_page=100&page=${page}`,
       {
         headers: { Accept: "application/vnd.github+json" },
-        signal: signal || AbortSignal.timeout(15000),
+        signal: signal
+          ? AbortSignal.any([signal, AbortSignal.timeout(15000)])
+          : AbortSignal.timeout(15000),
       },
     );
     if (!response.ok)
@@ -34,7 +36,7 @@ export const fetchComments = (number: number, signal?: AbortSignal) =>
 export async function fetchSnapshot(): Promise<Snapshot> {
   const response = await fetch(
     `${import.meta.env.BASE_URL}data/snapshot.json`,
-    { cache: "no-cache" },
+    { cache: "no-cache", signal: AbortSignal.timeout(10000) },
   );
   if (!response.ok) throw new Error("저장된 데이터가 없습니다.");
   return response.json();

@@ -1,0 +1,4 @@
+# Preserve the exact specification bytes bound by the Archify receipt.
+team-hub/diagrams/development.workflow.json -text
+team-hub/public/archify/development.html -text
+team-hub/public/archify/development.svg -text

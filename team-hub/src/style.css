@@ -1920,3 +1920,11 @@ select {
     scroll-behavior: auto !important;
   }
 }
+@media (max-width: 800px) {
+  .sidebar {
+    visibility: hidden;
+  }
+  .sidebar.mobile-open {
+    visibility: visible;
+  }
+}
