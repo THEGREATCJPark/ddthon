@@ -1948,3 +1948,15 @@ footer > span:last-child {
     scroll-behavior: auto !important;
   }
 }
+
+/* Compact Claude terminal identity and SkillLoop status, matching the demo reference. */
+.claude-demo .claude-pixel { margin: 0; color: #d88e73; font-size: 18px; line-height: 1; }
+.claude-demo .claude-identity { display: flex; flex-direction: column; gap: 4px; color: #999; font-size: 14px; }
+.claude-demo .claude-identity strong { color: #ddd; font-size: 17px; }
+.claude-demo .claude-identity small { font-size: 13px; overflow-wrap: anywhere; }
+.claude-demo .skillloop-terminal-status { display: flex; flex-direction: column; align-items: stretch; gap: 5px; padding: 12px 22px; background: #101010; color: #aaa; font-size: 14px; line-height: 1.4; }
+.claude-demo .skillloop-terminal-status > div { display: block; }
+.claude-demo .skillloop-terminal-status b { color: #ddd; font-size: inherit; }
+.claude-demo .skillloop-terminal-status .skillloop-evidence { color: #888; }
+.claude-demo .skillloop-terminal-status .skillloop-simulation { display: inline; margin-left: 12px; color: #d88e73; font-size: 11px; }
+.claude-demo .demo-conversation .claude-turn { animation: none; }

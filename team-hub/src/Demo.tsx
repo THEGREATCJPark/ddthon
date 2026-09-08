@@ -3,14 +3,12 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
-  ChevronDown,
   FlaskConical,
   RotateCcw,
   Send,
 } from "lucide-react";
 
 type Scenario = "p0" | "p1";
-type Phase = "idle" | "typing" | "running";
 type ToolRun = { name: string; output: string[]; tone?: "error" | "success" };
 type DemoStep = {
   title: string;
@@ -136,8 +134,8 @@ const P1: DemoStep[] = [
   },
 ];
 
-const SCENARIOS = { p0: P0, p1: P1 } as const;
-const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// Advance one user prompt and its complete response per click.
+const SCENARIOS = { p0: [P0], p1: P1.map((step) => [step]) } as const;
 
 function Turn({ item }: { item: DemoStep }) {
   return (
@@ -183,34 +181,20 @@ export default function Demo({
 }) {
   const [scenario, setScenario] = useState<Scenario>(initialScenario);
   const [completed, setCompleted] = useState(0);
-  const [phase, setPhase] = useState<Phase>("idle");
-  const [draft, setDraft] = useState("");
-  const runId = useRef(0);
-  useEffect(
-    () => () => {
-      runId.current += 1;
-    },
-    [],
-  );
   const history = useRef<HTMLDivElement>(null);
   const steps = SCENARIOS[scenario];
-  const current = steps[Math.min(completed, steps.length - 1)];
   const finished = completed === steps.length;
 
   useEffect(() => {
-    runId.current += 1;
     setScenario(initialScenario);
     setCompleted(0);
-    setPhase("idle");
-    setDraft("");
   }, [initialScenario]);
 
   useEffect(() => {
-    history.current?.scrollTo({
-      top: history.current.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [completed, phase]);
+    const panel = history.current;
+    const latest = panel?.querySelector<HTMLElement>(".demo-conversation:last-of-type");
+    if (panel) panel.scrollTop = latest ? latest.offsetTop - panel.offsetTop : 0;
+  }, [completed]);
 
   const demoState = useMemo(
     () => ({
@@ -222,73 +206,32 @@ export default function Demo({
   );
 
   function reset() {
-    runId.current += 1;
     setCompleted(0);
-    setPhase("idle");
-    setDraft("");
   }
 
   function choose(next: Scenario) {
-    runId.current += 1;
     location.hash = `demo-${next}`;
     setScenario(next);
     setCompleted(0);
-    setPhase("idle");
-    setDraft("");
   }
 
-  async function runNext() {
-    if (phase !== "idle" || finished) return;
-    const token = ++runId.current;
-    for (let index = completed; index < steps.length; index += 1) {
-      const item = steps[index];
-      if (item.prompt) {
-        setPhase("typing");
-        setDraft("");
-        for (let i = 1; i <= item.prompt.length; i += 1) {
-          await pause(13);
-          if (token !== runId.current) return;
-          setDraft(item.prompt.slice(0, i));
-        }
-        await pause(260);
-        if (token !== runId.current) return;
-      }
-      setDraft("");
-      setPhase("running");
-      await pause(950);
-      if (token !== runId.current) return;
-      setCompleted(index + 1);
-      if (!steps[index + 1] || steps[index + 1].prompt) break;
-      await pause(1900);
-      if (token !== runId.current) return;
-    }
-    setPhase("idle");
+  function runNext() {
+    setCompleted((value) => Math.min(value + 1, steps.length));
   }
 
   function previous() {
-    if (phase !== "idle" || completed === 0) return;
-    setCompleted((value) => value - 1);
+    setCompleted((value) => Math.max(value - 1, 0));
   }
 
   const primaryLabel = finished
-    ? scenario === "p0"
-      ? "P1 시연 시작"
-      : "전체 시연 다시 보기"
-    : phase === "typing"
-      ? "프롬프트 입력 중…"
-      : phase === "running"
-        ? "Claude 작업 중…"
-        : completed === 0
-          ? "첫 프롬프트 입력"
-          : current.prompt
-            ? "다음 프롬프트 입력"
-            : "자동 진행 이어보기";
+    ? scenario === "p0" ? "P1 시연 시작" : "전체 시연 다시 보기"
+    : "다음 대화";
 
   return (
     <section className="demo-page claude-demo" data-demo-state="memory-only">
       <div className="demo-heading">
         <div>
-          <div className="section-kicker">LIVE SIMULATION</div>
+          <div className="section-kicker">MANUAL SIMULATION</div>
           <h2>Claude Code에서 보는 Agent SkillLoop</h2>
         </div>
         <div className="simulation-badge">
@@ -356,9 +299,12 @@ export default function Demo({
         </div>
         <div className="claude-sessionbar">
           <div>
-            <span className="claude-mark">✻</span>
-            <strong>Agent SkillLoop</strong>
-            <small>~/nowhere/agent-skillloop</small>
+            <pre className="claude-pixel" aria-hidden="true">{"▐▛███▛█\n▝▜██████▀\n  ▝▝ ▝▝"}</pre>
+            <div className="claude-identity">
+              <strong>Claude Code <small>v2.1.263</small></strong>
+              <span>claude-luna · API Usage Billing</span>
+              <small>~\SkillLoopP1Forecast\workspaces\cj-p1-cold-c882b7</small>
+            </div>
           </div>
           <div className="claude-progress">
             <span>{scenario.toUpperCase()}</span>
@@ -367,33 +313,21 @@ export default function Demo({
         </div>
 
         <div className="claude-history" ref={history} aria-live="polite">
-          {completed === 0 && phase === "idle" && (
+          {completed === 0 && (
             <div className="claude-welcome">
               <div className="claude-logo">✻</div>
               <div>
                 <strong>Claude Code</strong>
                 <span>Agent SkillLoop demo</span>
-                <small>다음을 누르면 프롬프트가 입력되고 실행됩니다.</small>
+                <small>다음 대화를 누르면 프롬프트와 답변을 함께 확인합니다.</small>
               </div>
             </div>
           )}
-          {steps.slice(0, completed).map((item) => (
-            <Turn item={item} key={item.title} />
+          {steps.slice(0, completed).map((group, index) => (
+            <div className="demo-conversation" key={index}>
+              {group.map((item) => <Turn item={item} key={item.title} />)}
+            </div>
           ))}
-          {phase === "running" && (
-            <article className="claude-turn pending">
-              {current.prompt && (
-                <div className="claude-user">
-                  <span>❯</span>
-                  <p>{current.prompt}</p>
-                </div>
-              )}
-              <div className="claude-thinking">
-                <i />
-                Working… <small>{current.title}</small>
-              </div>
-            </article>
-          )}
           {finished && (
             <div className="claude-complete">
               <Check size={17} />
@@ -403,47 +337,32 @@ export default function Demo({
           )}
         </div>
 
-        <div className={`claude-composer ${phase}`}>
+        <div className="claude-composer">
           <span>❯</span>
           <textarea
             aria-label="Claude Code 프롬프트"
             readOnly
-            value={draft}
+            value=""
             placeholder={
               finished
                 ? "시연이 완료되었습니다."
-                : "다음을 눌러 프롬프트를 입력하세요"
+                : "다음 대화로 프롬프트와 답변 보기"
             }
           />
           <button
-            aria-label="프롬프트 실행"
-            disabled={phase !== "idle" || finished}
+            aria-label="다음 대화 보기"
+            disabled={finished}
             onClick={runNext}
           >
             <Send size={16} />
           </button>
         </div>
-        <div className="claude-statusbar">
-          <div>
-            <span>🧠 Agent SkillLoop · 팀 연결</span>
-            <span>
-              📚 Team Skill <b>{demoState.published}개</b>
-            </span>
-            <span>
-              ✨ 내 기여 <b>{demoState.contributed}개</b>
-            </span>
-          </div>
-          <div>
-            <span>
-              🔁 검증 재사용{" "}
-              <b>
-                {scenario === "p0" ? (finished ? "20 → 21회" : "20회") : "0회"}
-              </b>
-            </span>
-            <span>
-              SIMULATION <ChevronDown size={12} />
-            </span>
-          </div>
+        <div className="claude-statusbar skillloop-terminal-status">
+          <div>🧠 SkillLoop · 팀 연결 | 📚 '디디톤 기술혁신팀' 공개 Skill <b>{demoState.published}개</b> | cik61</div>
+          <div>✨ 내가 기여한 Skill <b>{demoState.contributed}개</b> · 팀에 도움이 될 스킬을 공유해 보세요</div>
+          <div>👑 우리팀 스킬 적재왕 : 박찬준 | 🔥 인기 스킬 - python pip 사내환경 적용 방법 - <b>{20 + demoState.reused}회 적용</b></div>
+          <div className="skillloop-evidence">데모 기준 20회 + 시뮬레이션 재사용 {demoState.reused}회 · 실제 검증 0회</div>
+          <div>⏸ manual mode on · ← for agents <span className="skillloop-simulation">SIMULATION</span></div>
         </div>
       </div>
 
@@ -456,7 +375,7 @@ export default function Demo({
       <div className="demo-controls claude-controls">
         <button
           className="button"
-          disabled={phase !== "idle" || completed === 0}
+          disabled={completed === 0}
           onClick={previous}
         >
           <ArrowLeft size={17} />
@@ -464,7 +383,6 @@ export default function Demo({
         </button>
         <button
           className="reset-demo"
-          disabled={phase !== "idle"}
           onClick={reset}
         >
           <RotateCcw size={15} />
@@ -475,7 +393,6 @@ export default function Demo({
         </span>
         <button
           className="button primary claude-next"
-          disabled={phase !== "idle"}
           onClick={
             finished ? () => choose(scenario === "p0" ? "p1" : "p0") : runNext
           }
