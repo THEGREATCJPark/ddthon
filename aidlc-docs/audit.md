@@ -805,3 +805,8 @@ Cold Agent completed real file task and created exact candidate 359c5c1763416cdb
 ## Final source regression for scenario correction
 Timestamp: 2026-09-08T14:01:24.215554+00:00
 python -m pytest --hypothesis-seed=20260908 -o addopts= -q: 139 PASS / 2 SKIP / exit0, 267.31s. Skips are opt-in Excel (separate actual test 1 PASS) and missing-B-module N/A after integration. P0 two-package + failed-service compatibility rerun 2 PASS. Cold actual chart/candidate available; human approval pending, no remote publish/Warm success claimed. A cb25a62 and B1760d32 original ancestry merged in integration branch; CJ changes recorded separately next.
+
+
+## Git integration and public main synchronization
+Timestamp: 2026-09-08T14:04:06.433870+00:00
+Original A/B commits merged with authors intact (58adce9 / 99cc4e5). CJ implementation 7100f0a and evidence 91dcf82 pushed to origin/main without force. Local main aligned forward to same revision and tested source LF hashes verified. Pre-fastforward stash retained; initial stash cleanup encountered Windows locks on preparation logs, so integrated files were restored and index/HEAD aligned using non-destructive mixed reset after verifying ancestry. No uncommitted work discarded; raw logs/config remain local and excluded. NASCA(가상) workbook helper remains active for pending human approval/Replay/Warm.
