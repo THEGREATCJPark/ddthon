@@ -20,7 +20,8 @@ jobs:
       - name: Checkout workspace
         uses: actions/checkout@v4
         with:
-          ref: codex/team-hub
+          # Build the triggering revision, including the web source submitted on main.
+          ref: ${{ github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:

@@ -24,3 +24,8 @@ Firebase 프로젝트 생성과 규칙 배포 성공 외에, 실제 클라이언
 기존 프로젝트, 제품 런타임, AI-DLC 승인 상태는 변경하지 않았습니다. 테스트 도구의 브라우저 캐시와 최초 생성 인덱스 준비 지연, Java 17/21 버전 차이를 해결한 후 제품 테스트를 수행했습니다.
 
 시연의 패키지명, workbook, 업무 수치, 승인, Replay, 게시 및 카운터는 모두 설명용 합성값입니다. 시연 상태는 새로 고침하면 첫 단계로 돌아가며 실제 진행 순서도와 댓글 데이터에는 영향을 주지 않습니다.
+
+
+## 2026-09-08T22:49:01.878062+00:00 — evidence-aligned presentation
+
+Approved plan: main/aidlc-docs/construction/plans/final-presentation-alignment-plan.md. Base web49c1711. Unit tests6 PASS; production TypeScript/Vite build PASS. Actual local browser at127.0.0.1:5173/ddthon verified P0 all4 steps and P1 all8 steps, actual archived Cold/Warm chart image rendering, candidate/review/Replay keeps publication0, publication makes1, remote execution confirmation precedes Warm reuse1/candidate0. Back from Warm returns reuse0, reset returns all0. No extra ordinary user recovery prompts. Browser error/warn logs empty. Fixed chart display height after finding clipping inside console. Simulation is labelled and does not execute products or mutate real counters. No community/comment/capture data writes were performed. Public deployment and final Python CI are separately recorded in main/result/final-alignment/.

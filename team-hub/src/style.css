@@ -2023,3 +2023,11 @@ footer > span:last-child {
 .capture-delete-confirm { padding: 14px 26px; background: #fff5ea; }
 .capture-delete-confirm button { margin-left: 16px; font-weight: 700; }
 @media(max-width:700px) { .tabs { gap: 14px; flex-wrap: wrap; } .tabs a { font-size: 14px; } .capture-form { padding: 18px; } }
+
+/* Evidence-aligned explanation; preserves the existing page and community. */
+.demo-step-title { font-size: 15px; color: #e4b390; margin: 0 0 12px; }
+.demo-result-chart { margin: 20px 0; }
+.demo-result-chart img { display: block; width: auto; max-width: 100%; height: auto; max-height: 260px; object-fit: contain; margin: 0 auto; border-radius: 8px; }
+.demo-result-chart figcaption { color: #aaa; font-size: 12px; margin-top: 8px; }
+.demo-evidence-links { font-size: 14px; line-height: 1.8; }
+.demo-evidence-links a { text-decoration: underline; color: var(--blue); }
