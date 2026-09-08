@@ -519,3 +519,11 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: U3 후속 — 대시보드 실HTML 검증(브라우저 육안=사용자), 프로젝트 statusLine 연결(하단 바 표시=사용자 확인), C9 wrapper 최소 계획 제시(구현 대기)
 
 ---
+
+## C9 Agent Skill 진입점 + match CLI 연결 (조정된 최소 범위 구현)
+**Timestamp**: 2026-09-08T10:22:41Z
+**User Input**: "현재 보고를 수용합니다. 대시보드 추가 확인·개선은 후순위(다른 개발 blocker 아님). 상태줄 설정 유지·실제 표시 확인만 남김. C9는 아래 최소 방향으로 조정해 구현 승인. 1) wrapper.py 키워드 매핑기 만들지 않음·그 매핑 검사 테스트 생략. .claude/skills/skillloop/SKILL.md를 Agent 진입점으로. 자연어 해석은 Claude, 제품 로직은 기존 CLI·서비스. 2) 데모 요청과 실제 업무 요청 구분. 명시적 P0 데모만 run-p0. 일반 설치 요청을 무조건 run-p0로 바꿔 실제 업무 적용이라 보고 금지. 3) 실제 업무 연결에 필요한 기존 검색·적용 계약이 CLI에 미노출이면 승인된 계약 호출하는 최소 CLI 연결 포함. 매칭·검증·카운트 로직 중복 구현 금지. 변경 파일·호출 흐름 최소 계획에 기록하고 진행. 새 범위·소유권 충돌 없으면 재승인 요청 금지. 4) 검증은 새 Agent 실제 사용으로. 합성 작업 환경 준비·사용자에게 업무 요청만 제공 후 Skill 지침 사용→실제 검색·적용·검증→실적 반영 확인. 데모 CLI 실행과 업무 중 Skill 활용 구분 보고. 원격 Skill 실행 명시 확인·게시 게이트 유지. 5) A는 승인된 P1 연결 계속. B에게 envharness_p1.py/replay.py 유지, experience_service.py/publish_pipeline.py/gitsync.py를 CJ 이관하는 안 전달함. B 종료 확인·현재 커밋 받은 뒤에만 소유권 기록·인수. 외부 사전 구현 Reference 미사용. 다음엔 설계 설명보다 코드·Agent 실행 결과 보고."
+**AI Response**: "구현: (a) `.claude/skills/skillloop/SKILL.md` 신설 — Agent 진입점(자연어 해석=Claude, 로직=CLI/서비스). 요청 3분류: 명시적 P0 데모→run-p0(자체완결·업무적용 아님 명시), 실제 설치·업무→run-p0 대체 금지·실제 관찰→`skillloop match` 검색→절차 적용·실제 검증→검증 성공 시에만 실적 보고, 조직 현황→status/dashboard. 원격 자동실행 금지·게시 게이트·비밀 미포함 유지. (b) `cli.py` `match` 서브커맨드 신설 — 승인된 검색 계약 C5 `match.search` **호출만**(읽기전용, 적용·검증·카운트 없음, 매칭 로직 미복제). (c) `tests/test_cli_match.py` 3건(MATCH/NO_MATCH/읽기전용). 검증: **전체 66 passed(63→66, 회귀 없음)**; 실제 `skillloop match --signature pip-install-fail:skillloop-demo-pkg` → **MATCH fix-skillloop-demo-pkg-install@1.0.0(fit=2)** exit 0; 미관련 신호 → NO_MATCH exit 0. **남은 차단**: 임의 실제 업무 대상의 **일반화된 적용·검증·카운트**는 A의 P1/RU4 확장 대기(apply_and_verify가 P0 harness 타깃에 결합) → 실제 업무 실적 반영은 그 연결 후. 새 Agent 라이브 사용 장면(업무 요청만 제공→Skill 사용→실적)은 사용자 확인. **wrapper.py·매핑 테스트 미생성(지시 반영). 카운트는 검증 성공 경로만 — match/CLI에 카운트 경로 미추가.** 소유권: experience_service.py/publish_pipeline.py/gitsync.py는 **B 종료 확인·커밋 수령 전까지 인수·소유권 기록 안 함**(현재 B 소유 유지). A는 P1 연결 계속."
+**Context**: C9 진입점(SKILL.md) + match CLI 연결 구현·검증. 실제 업무 실적 반영=A P1/RU4 대기. 소유권 이관=B 확인 대기.
+
+---

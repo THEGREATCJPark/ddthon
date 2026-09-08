@@ -207,6 +207,36 @@ def cmd_status(store_path: str | None = None, usage_path: str | None = None) -> 
     return 0
 
 
+def cmd_match(signature: str, target: str = "", store_path: str | None = None) -> int:
+    """`skillloop match` — 실제 관찰된 실패 신호로 승인된 검색 계약(C5 match.search)을 호출.
+
+    실제 업무 Agent가 관찰한 실패를 그대로 넘겨 재사용 가능한 Skill을 검색한다(FR-MATCH).
+    **읽기전용**: 적용·검증·카운트를 하지 않는다 — 매칭 로직은 여기서 재구현하지 않고
+    A 소유 `match.search`를 호출만 한다. 실적 카운트는 검증된 경로에서만 발생한다.
+    """
+    sp, _ = _demo_paths(store_path, None)
+    store = SkillStore(sp)
+    obs = match_mod.FailureObservation(
+        command=(f"pip install {target}" if target else signature),
+        target_pkg=target,
+        error_signature=signature,
+        exit_code=1,
+    )
+    outcome = match_mod.search(obs, store)
+    if outcome.status == match_mod.STATUS_MATCH:
+        d = outcome.descriptor
+        proc = getattr(d, "procedure", {}) or {}
+        print(f"match: MATCH {d.id}@{d.version} digest={d.digest[:12]}")
+        print(f"match: 적용 절차(참고) action={proc.get('action')} "
+              f"index={proc.get('index')} target={proc.get('target', target)}")
+        print(f"match: {outcome.rationale}")
+        print("match: 이 절차를 실제 업무에 적용·검증한 뒤에만 실적으로 보고하세요"
+              "(카운트는 검증 성공 경로에서만; 원격 Skill은 명시적 확인 후 실행).")
+        return 0
+    print(f"match: {outcome.status} — {outcome.rationale}")
+    return 0
+
+
 def cmd_dashboard(host: str = "127.0.0.1", port: int = 8765,
                   store_path: str | None = None, usage_path: str | None = None) -> int:
     """`skillloop dashboard` — 127.0.0.1 읽기전용 대시보드 기동(요청마다 스냅샷 재생성)."""
@@ -227,6 +257,9 @@ def main(argv: list[str] | None = None) -> int:
     pi = sub.add_parser("share-import", help="공유 이벤트 import(검증·dedup)")
     pi.add_argument("inp", help="import 파일 경로")
     sub.add_parser("status", help="상태줄 한 줄 출력(조직 현황, 읽기전용)")
+    pm = sub.add_parser("match", help="관찰된 실패 신호로 재사용 Skill 검색(읽기전용, 적용·카운트 없음)")
+    pm.add_argument("--signature", required=True, help="관찰된 실패 신호(예: pip-install-fail:pkg)")
+    pm.add_argument("--target", default="", help="대상 패키지(선택, 표시용)")
     pd = sub.add_parser("dashboard", help="localhost 읽기전용 대시보드 기동")
     pd.add_argument("--host", default="127.0.0.1", help="바인딩 호스트(기본 127.0.0.1)")
     pd.add_argument("--port", type=int, default=8765, help="포트(기본 8765)")
@@ -239,6 +272,8 @@ def main(argv: list[str] | None = None) -> int:
         return share_import(args.inp)
     if args.command == "status":
         return cmd_status()
+    if args.command == "match":
+        return cmd_match(args.signature, args.target)
     if args.command == "dashboard":
         return cmd_dashboard(host=args.host, port=args.port)
     parser.print_help()
