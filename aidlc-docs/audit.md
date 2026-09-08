@@ -440,3 +440,17 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 공통 의존성 / C-a·C-b 구현·검증 완료. commit/push·SHA 보고 진행.
 
 ---
+
+## U2 공통 의존성 — C-d 구현·검증(usage.py + cli.py)
+**Timestamp**: 2026-09-08T09:08:45Z
+**User Input**: (직전 승인의 제공 순서에 따른 계속 실행 — C-a/C-b commit·push 후 C-d 진행) "C-d 계약과 구현 → 검증 → commit/push → B에게 전달할 SHA 보고"
+**AI Response**:
+- **C-d 구현(usage.py, C3)**: 저장 스키마 `{counts,seen_run_ids}`→`{counts,seen_run_ids,events}`(하위호환). `ReuseEvidence`에 `reuser_alias`. `build_evidence(...,reuser_alias)`. `compute_event_id(skill_ref,run_id,reuser_alias)`=결정적 sha256(재전송 dedup 키). `record_actual_reuse`: counted=True & skill_ref에 digest 있을 때만 이벤트 생성(카운트 로직·run_id dedup **불변**). `export_shared_usage`(VERIFIED_REUSE만, counts·seen·로컬 DB 미전송) / `import_shared_usage(blob, local_ref_exists)`(is_real_success·비-DEMO 재검증 + event_id dedup + 로컬 존재 확인, **counts 미변경**; 조직 실적=events). `shared_reuse_count`/`list_shared_events`.
+- **exact 참조·alias 제공 주체 확정**: 이벤트 생성에 필요한 `{id,version,digest}`와 `reuser_alias`는 **호출자(cli)**가 제공. cli.run_p0가 `selected.digest` + env `SKILLLOOP_ALIAS`(기본 "local")를 build_evidence로 전달.
+- **CJ CLI 연결(cli.py)**: run-p0 이벤트 배선(P0 카운트·run_id dedup 불변) + `share-export <out>`/`share-import <in>` 서브커맨드(C3 export/import 호출, import 로컬 존재 확인=기본 store).
+- **역산 금지 검증**: digest 없는 evidence는 카운트되어도 이벤트 미생성 → export 비어 있음(과거 counts에서 이벤트·근거 생성 안 함).
+- **검증**: `pytest tests/test_usage.py` 15 PASS(신규 8: 이벤트 생성 조건·역산 금지·event_id 결정성·왕복 dedup·로컬 존재 가드·자기 이벤트 왕복 불변·import counts 불변). **전체 pytest: 34 passed / 8 skipped**(26→34, A 스텁 SKIP 불변). CLI smoke: export1→import 1/1(counts 0·events 1)→재import dedup(events 1 불변) 확인.
+- README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A 단일 수정자) 미변경.
+**Context**: CONSTRUCTION / U2 공통 의존성 / C-d 구현·검증 완료. commit/push·SHA 보고 진행. A 패치 도착 시 P0 통합 병행.
+
+---
