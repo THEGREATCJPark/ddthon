@@ -10,7 +10,7 @@ import {
   type StageId,
   type StageStatus,
 } from "./workspace";
-const KEY = "nowhere.progress.v3";
+const KEY = "nowhere.progress.v4";
 function initial() {
   const shared = decodeProgress(
     new URL(location.href).searchParams.get("flow"),
@@ -33,7 +33,7 @@ export default function Flow() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let active = true;
-    fetch(`${import.meta.env.BASE_URL}archify/development.svg?v=aidlc-v3`, {
+    fetch(`${import.meta.env.BASE_URL}archify/development.svg?v=aidlc-v4`, {
       cache: "no-cache",
     })
       .then((r) => {
@@ -72,6 +72,16 @@ export default function Flow() {
     graphic.setAttribute("role", "group");
     graphic.removeAttribute("aria-labelledby");
     graphic.setAttribute("aria-label", "AI-DLC 활용 개발 진행 순서도");
+    const laneLabels = [
+      "01 / INCEPTION",
+      "02 / CONSTRUCTION · 공통 기반",
+      "CONSTRUCTION · U1 / U2 / U3 병렬 진행",
+      "03 / BUILD & TEST",
+      "통합 시연",
+    ];
+    graphic.querySelectorAll("text.t-dim").forEach((label, index) => {
+      if (index < laneLabels.length) label.textContent = laneLabels[index];
+    });
     for (const stage of STAGES) {
       const node = graphic.querySelector<SVGGElement>(
         `[data-node-id="${stage.id}"]`,
@@ -195,8 +205,16 @@ export default function Flow() {
             {error}
           </p>
         ) : (
-          <div className="flow-canvas" ref={ref} />
+          <div className="flow-canvas flow-expanded" ref={ref} />
         )}
+        <button
+          className={`qa-crosscut s${progress.q1}`}
+          onClick={() => setSelected("q1")}
+        >
+          <strong>Q1 · 독립 QA / 사용성 / 실행 증거</strong>
+          <span>팀원 1명 · 전 Construction 과정 횡단 ─────────→</span>
+          <b>{STATUS[progress.q1]}</b>
+        </button>
         <div className="flow-note">
           <span>
             {storageFailed

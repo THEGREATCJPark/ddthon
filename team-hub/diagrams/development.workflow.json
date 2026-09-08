@@ -7,74 +7,135 @@
     "animation": "none"
   },
   "lanes": [
-    { "id": "inception", "label": "INCEPTION" },
-    { "id": "construction", "label": "CONSTRUCTION · U1 / U2 / U3 병렬 진행" },
-    { "id": "evaluation", "label": "EVALUATION · 팀원 1명 전담" }
+    {
+      "id": "inception",
+      "label": "01 / INCEPTION"
+    },
+    {
+      "id": "foundation",
+      "label": "02 / CONSTRUCTION · 공통 기반"
+    },
+    {
+      "id": "parallel",
+      "label": "CONSTRUCTION · U1 / U2 / U3 병렬 진행"
+    },
+    {
+      "id": "test",
+      "label": "03 / BUILD & TEST"
+    },
+    {
+      "id": "show",
+      "label": "통합 시연"
+    }
   ],
-  "mainPath": ["inception", "u1", "evaluation", "demo"],
+  "mainPath": [
+    "inception",
+    "u0",
+    "u2",
+    "build",
+    "demo"
+  ],
   "nodes": [
     {
       "id": "inception",
       "lane": "inception",
-      "col": 0,
-      "type": "frontend",
+      "col": 1,
+      "type": "backend",
       "label": "INCEPTION · 아이템 기획",
-      "sublabel": "문제 · 사용자 · 성공 기준 정의",
-      "width": 230
+      "sublabel": "요구사항 → Workflow → User Stories → Application Design → Units Generation",
+      "width": 440
+    },
+    {
+      "id": "u0",
+      "lane": "foundation",
+      "col": 1,
+      "type": "backend",
+      "label": "U0 · 공통 계약·통합 기반",
+      "sublabel": "Skill / Store / Usage / CLI / 공통 계약 동결",
+      "width": 350
     },
     {
       "id": "u1",
-      "lane": "construction",
+      "lane": "parallel",
       "col": 0,
       "type": "backend",
-      "label": "U1 · Python 설치",
-      "sublabel": "P0 · 기존 Skill 재사용",
-      "width": 205
+      "label": "U1 · P0 기존 Skill 재사용 실행",
+      "sublabel": "검색 → 적용 → 실제 검증 → reuse +1",
+      "width": 280
     },
     {
       "id": "u2",
-      "lane": "construction",
+      "lane": "parallel",
       "col": 1,
-      "type": "database",
-      "label": "U2 · Excel 분석",
-      "sublabel": "P1 · 새 Skill 발견",
-      "width": 205
+      "type": "backend",
+      "label": "U2 · P1 새 경험 축적·게시",
+      "sublabel": "탐색 → 후보화 → 검토 → Replay → Git 게시",
+      "width": 280
     },
     {
       "id": "u3",
-      "lane": "construction",
+      "lane": "parallel",
       "col": 2,
-      "type": "frontend",
-      "label": "U3 · 협업 Web",
-      "sublabel": "순서도 · 의견 · 시연 연결",
-      "width": 205
+      "type": "backend",
+      "label": "U3 · 조직 Skill 집계·표현",
+      "sublabel": "상태줄 · 대시보드 · usage 공유",
+      "width": 280
     },
     {
-      "id": "evaluation",
-      "lane": "evaluation",
+      "id": "build",
+      "lane": "test",
       "col": 1,
-      "type": "security",
-      "label": "평가 담당 · 팀원 1명",
-      "sublabel": "U1 · U2 · U3 독립 확인",
-      "width": 220
+      "type": "backend",
+      "label": "BUILD & TEST",
+      "sublabel": "P0/P1 통합 · 실제 실행 · 종단 검증 · 증거 확보",
+      "width": 350
     },
     {
       "id": "demo",
-      "lane": "evaluation",
-      "col": 2,
-      "type": "external",
+      "lane": "show",
+      "col": 1,
+      "type": "backend",
       "label": "통합 시연",
-      "sublabel": "평가 결과 반영 후 연결",
-      "width": 175
+      "sublabel": "Agent SkillLoop",
+      "width": 280
     }
   ],
   "edges": [
-    { "from": "inception", "to": "u1" },
-    { "from": "inception", "to": "u2", "role": "branch" },
-    { "from": "inception", "to": "u3", "role": "branch" },
-    { "from": "u1", "to": "evaluation" },
-    { "from": "u2", "to": "evaluation", "role": "branch" },
-    { "from": "u3", "to": "evaluation", "role": "branch" },
-    { "from": "evaluation", "to": "demo" }
+    {
+      "from": "inception",
+      "to": "u0"
+    },
+    {
+      "from": "u0",
+      "to": "u1",
+      "role": "branch"
+    },
+    {
+      "from": "u0",
+      "to": "u2"
+    },
+    {
+      "from": "u0",
+      "to": "u3",
+      "role": "branch"
+    },
+    {
+      "from": "u1",
+      "to": "build",
+      "role": "branch"
+    },
+    {
+      "from": "u2",
+      "to": "build"
+    },
+    {
+      "from": "u3",
+      "to": "build",
+      "role": "branch"
+    },
+    {
+      "from": "build",
+      "to": "demo"
+    }
   ]
 }

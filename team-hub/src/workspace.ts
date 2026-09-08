@@ -3,37 +3,43 @@ export const STAGES = [
     id: "inception",
     name: "INCEPTION · 아이템 기획",
     description:
-      "AI-DLC의 시작 단계입니다. 해결할 문제, 사용자, 성공 기준과 시연 범위를 함께 정합니다.",
+      "요구사항 → Workflow → User Stories → Application Design → Units Generation",
+  },
+  {
+    id: "u0",
+    name: "U0 · 공통 계약·통합 기반",
+    description: "Skill / Store / Usage / CLI / 공통 계약 동결",
   },
   {
     id: "u1",
-    name: "U1 · Python 설치",
-    description:
-      "CONSTRUCTION 병렬 작업 · 설치가 막히면 팀이 이미 해결한 방법을 찾아 적용합니다.",
+    name: "U1 · P0 기존 Skill 재사용 실행",
+    description: "검색 → 적용 → 실제 검증 → reuse +1",
   },
   {
     id: "u2",
-    name: "U2 · Excel 분석",
-    description:
-      "CONSTRUCTION 병렬 작업 · 합성 제약 환경의 Excel을 분석하고 새 해결법을 남깁니다.",
+    name: "U2 · P1 새 경험 축적·게시",
+    description: "탐색 → 후보화 → 검토 → Replay → Git 게시",
   },
   {
     id: "u3",
-    name: "U3 · 협업 Web",
-    description:
-      "CONSTRUCTION 병렬 작업 · 진행 순서도, 의견, 딴지와 시연 화면을 하나의 Web으로 연결합니다.",
+    name: "U3 · 조직 Skill 집계·표현",
+    description: "상태줄 · 대시보드 · usage 공유",
   },
   {
-    id: "evaluation",
-    name: "평가 담당 · 팀원 1명",
-    description:
-      "구현과 분리된 팀원 한 명이 U1·U2·U3 결과와 시연 흐름을 확인하고 피드백합니다.",
+    id: "build",
+    name: "BUILD & TEST",
+    description: "P0/P1 통합 · 실제 실행 · 종단 검증 · 증거 확보",
   },
   {
     id: "demo",
     name: "통합 시연",
+    description: "Agent SkillLoop",
+  },
+  {
+    id: "q1",
+    name: "Q1 · 독립 QA / 사용성 / 실행 증거",
     description:
-      "평가를 통과한 U1·U2·U3를 연결해 Agent SkillLoop의 전체 흐름을 보여줍니다.",
+      "팀원 1명이 전 Construction 과정에서 독립 QA, 사용성, 실행 증거를 확인합니다.",
   },
 ] as const;
 export type StageId = (typeof STAGES)[number]["id"];
@@ -44,10 +50,10 @@ export function emptyProgress(): Progress {
   return Object.fromEntries(STAGES.map((s) => [s.id, 0])) as Progress;
 }
 export function encodeProgress(p: Progress) {
-  return `v3.${STAGES.map((s) => p[s.id]).join("")}`;
+  return `v4.${STAGES.map((s) => p[s.id]).join("")}`;
 }
 export function decodeProgress(value: string | null): Progress | null {
-  if (!value || !/^v3\.[0-3]{6}$/.test(value)) return null;
+  if (!value || !/^v4\.[0-3]{8}$/.test(value)) return null;
   return Object.fromEntries(
     STAGES.map((s, i) => [s.id, Number(value[i + 3])]),
   ) as Progress;

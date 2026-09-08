@@ -318,6 +318,42 @@ main {
   display: block;
   font-family: "DM Sans", "Noto Sans KR", sans-serif;
 }
+.flow-canvas.flow-expanded svg {
+  max-height: none;
+}
+.qa-crosscut {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: calc(100% - 48px);
+  margin: 12px 24px;
+  padding: 18px 22px;
+  border: 1px dashed var(--blue);
+  border-radius: 10px;
+  text-align: left;
+  background: #eef4ff;
+  color: var(--navy);
+}
+.qa-crosscut span {
+  flex: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+.qa-crosscut b {
+  font-size: 13px;
+}
+.qa-crosscut.s1 {
+  border-style: solid;
+  box-shadow: inset 4px 0 var(--blue);
+}
+.qa-crosscut.s2 {
+  background: #fff6e4;
+  border-color: var(--gold);
+}
+.qa-crosscut.s3 {
+  background: var(--navy);
+  color: white;
+}
 .flow-canvas .c-grid {
   stroke: #dce3ee;
   opacity: 0.3;

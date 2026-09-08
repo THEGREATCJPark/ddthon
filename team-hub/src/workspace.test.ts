@@ -8,21 +8,13 @@ import {
   decodeProgress,
   emptyProgress,
 } from "./workspace.ts";
-test("AI-DLC stages name inception, three parallel units, and evaluation", () => {
-  assert.equal(STAGES.length, 6);
-  assert.match(STAGES[0].name, /INCEPTION.*아이템 기획/);
-  assert.match(STAGES[1].name, /U1.*Python 설치/);
-  assert.match(STAGES[2].name, /U2.*Excel 분석/);
-  assert.match(STAGES[3].name, /U3.*협업 Web/);
-  assert.match(STAGES[4].name, /평가 담당.*팀원 1명/);
-});
 test("progress links preserve independent parallel stages", () => {
   const p = emptyProgress();
   p.u1 = 1;
   p.u2 = 2;
   p.u3 = 3;
   assert.deepEqual(decodeProgress(encodeProgress(p)), p);
-  assert.equal(p.evaluation, 0);
+  assert.equal(p.q1, 0);
 });
 test("unrecognized link versions and invalid statuses never invent progress", () => {
   for (const v of [
@@ -30,8 +22,9 @@ test("unrecognized link versions and invalid statuses never invent progress", ()
     "",
     "v1.01230123",
     "v2.012301",
-    "v3.01230",
-    "v3.012304",
+    "v3.012301",
+    "v4.01230",
+    "v4.01230400",
     "v3.0123012",
     "v3.<script>",
   ])

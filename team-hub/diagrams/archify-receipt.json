@@ -2,12 +2,12 @@
   "source": "https://github.com/tt-a1i/archify",
   "revision": "daced37a66ab21f1f8bb096daedd2c5337204020",
   "specification": {
-    "sha256": "1087b5045c28c9ff2bceb9d8ff74498c58582ed2ccb44a1e3bd8572abf02f764",
-    "bytes": 2164
+    "sha256": "ca25ffeb2a0092e1ddd45d5381747a895f503f1846fc75f64a4d4b3f30ecdee3",
+    "bytes": 3031
   },
   "artifact": {
-    "sha256": "a8e2214afbfc322486984cfdb94fbb92f3097823387fe22f92c31f939f54c9f9",
-    "bytes": 706432
+    "sha256": "6eb8e701272209ea0ee093bbed20ad441094f1c3f47af253b74f74df373a55fb",
+    "bytes": 706811
   },
   "validation": {
     "checksPassed": 9,
