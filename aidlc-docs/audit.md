@@ -450,3 +450,11 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **Context**: CONSTRUCTION / U2 / Functional Design·NFR CJ 공통 의존성 확정 반영. FD 개정본 승인 대기, Code Plan 미착수. 확정 계약: C-a/C-b/C-d(CJ, SHA 대기). 대기: C-c(A).
 
 ---
+
+## U2 — work/u2-p1-git 원격 push 완료(권한 해결)
+**Timestamp**: 2026-09-08T09:10:22Z
+**User Input**: "git push -u origin work/u2-p1-git"
+**AI Response**: 권한 해결됨 — `git push -u origin work/u2-p1-git` 성공. 원격에 `work/u2-p1-git` 신규 브랜치 생성, 로컬 커밋 2건(`6f517d7` CJ FD 1차 검토 반영, `b0488ae` CJ 공통 의존성 확정 반영)이 모두 원격 반영. upstream=origin/work/u2-p1-git 설정. 원격 HEAD=`b0488ae378241c00f424edf8f5ade10fc1cbd312`. 이전 기록의 'push NOT_RUN(403)' 항목은 이 시점에 실제 완료로 갱신(과거 entry는 수정하지 않고 correction으로 append). 다른 Unit·메인 workflow·main 브랜치 미변경.
+**Context**: CONSTRUCTION / U2 / 설계 산출물 원격 반영 완료. FD 개정본 승인 대기·Code Plan 미착수 상태는 불변.
+
+---
