@@ -70,10 +70,10 @@ skillloop/                 # 파이썬 패키지 (application code, 워크스페
   cli.py                   # C8 — 수정자: **CJ 단일**. 타 Unit은 연결할 호출 계약(엔트리 시그니처)만 제공
   match.py                 # C5                         — 수정자: A(U1)
   reuse_service.py         # S1                         — 수정자: A(U1)
-  experience_service.py    # S2                         — 수정자: B(U2)
-  publish_pipeline.py      # S3 (+읽기전용 상태 조회 계약)  — 수정자: B(U2)
-  replay.py                # C6                         — 수정자: B(U2)
-  gitsync.py               # C4 (push_descriptors·push_shared_usage·pull·last_sync 전송) — 수정자: **B 단일**
+  experience_service.py    # S2  — 수정자: **CJ(이관: B→CJ, 2026-09-08, 8c7999a 확인 후; 미생성·소유권만·새 구현 별도 승인)**
+  publish_pipeline.py      # S3 (+읽기전용 상태 조회 계약)  — 수정자: **CJ(이관: B→CJ, 2026-09-08; 미생성·소유권만·새 구현 별도 승인)**
+  replay.py                # C6                         — 수정자: B(U2) (유지)
+  gitsync.py               # C4 (push_descriptors·push_shared_usage·pull·last_sync 전송) — 수정자: **CJ(이관: B→CJ, 2026-09-08; 미생성·소유권만·새 구현 별도 승인)**
                            #     (전송만; 공유 이벤트 검증·dedup은 usage.py=CJ 책임)
   org_aggregator.py        # C10 (읽기전용 집계)          — 수정자: CJ(U3)
   statusline.py            # C11 (읽기전용 표현)          — 수정자: CJ(U3)
@@ -82,5 +82,6 @@ skillloop/                 # 파이썬 패키지 (application code, 워크스페
 tests/                     # Q1 검토 대상: PBT(Hypothesis)·process·contract·regression
 ```
 - **환경 harness는 P0/P1 파일 분리**(`envharness_p0.py`=CJ, `envharness_p1.py`=B)로 단일 수정자 원칙 유지.
-- `usage.py`·`cli.py`는 **CJ 단일 수정자**, `gitsync.py`는 **B 단일 수정자**로 통일(이전의 "함수별 분담" 표기를 폐기). 공유 이벤트 검증·dedup은 gitsync가 아니라 `usage.py`(CJ)에 위치.
+- `usage.py`·`cli.py`는 **CJ 단일 수정자**, `gitsync.py`는 (이관 전) B 단일 수정자로 통일(이전의 "함수별 분담" 표기를 폐기). 공유 이벤트 검증·dedup은 gitsync가 아니라 `usage.py`(CJ)에 위치.
+- **소유권 이관(2026-09-08, 8c7999a 확인 후)**: `experience_service.py`(S2)·`publish_pipeline.py`(S3)·`gitsync.py`(C4)의 **단일 수정자를 B→CJ로 이관**. 이 세 파일은 B 브랜치(`origin/work/u2-p1-git` HEAD `8c7999a`)에 **아직 미생성** → 이관은 **구현 소유권**의 이전이며 **기존 코드 이동이 아니다.** B는 `envharness_p1.py`(8c7999a 구현)·`replay.py`(C6, 미생성·책임 유지) 보유. **소유권 인수 ≠ 세 파일 새 구현 승인**(구현은 별도 Code Plan·승인). **CJ의 해당 구현은 P0 자연어 수용 검증(US-P0-1)보다 후순위.** U2 "소유 경계"(위 U2 절)는 이 이관으로 갱신되며, 게시 게이트·상태 lifecycle 계약(S3)도 CJ 소유로 이동한다.
 - 실제 branch·Git 작업 경로·remote 등록·인증은 **미결정**(착수 게이트에서 공통 기준 SHA·경로 확인 시 확정).
