@@ -1,0 +1,21 @@
+{
+  "baseline": "a22e1764527e89d73c648f890fa173527d99900e",
+  "overlays": {
+    "skillloop/cli.py": "982ac7009a033da67da856412949b33671294ac037f53878e2f2a262b26479bd",
+    ".claude/skills/skillloop/SKILL.md": "2366b8b197e486816d406a1560d29f381ae6f4a6208eaa95dcce290aedf0ac9e",
+    "pyproject.toml": "20bd1d7b5f0cbd6b86c18b1573c27bd6d48cd57978c9bbb8119f0c7d8f2584e7",
+    "requirements-dev.txt": "1111c3ea9a81df8b59cb02a554b81504e3f253eab562871777570325ec312501",
+    "tests/prepare_p0_work.py": "d3facce14cf5baa2e28f0e160adaf13110761281e5b4d34956a95df94d6261ee",
+    "tests/test_apply_requirements.py": "31dcc8aed7da21f6e3113e98b3e12fd8ce2bf16f122a61ae310a8c0c2befd729",
+    "tests/fixtures/work/requirements.txt": "5bb9c7cf2b44cfc925c993512ff5a266116195fcc8d21263aee0162b05f7fda1"
+  },
+  "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+  "targeted_tests": 14,
+  "full_tests": 80,
+  "failed": 0,
+  "skipped": 0,
+  "test_environment": "fresh venv; git archive a22e176 + listed source overlays; pip install -e CHECKOUT -r requirements-dev.txt",
+  "model": "global.anthropic.claude-opus-4-8",
+  "claims": "Synthetic P0 work request only. No P1/remote/whole-product completion claim.",
+  "source_hashes_match": true
+}

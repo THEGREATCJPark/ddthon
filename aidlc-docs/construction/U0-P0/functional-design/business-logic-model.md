@@ -72,3 +72,10 @@ cli.run-p0
 
 ## 5. 남은 결정(Code Plan으로 이월)
 - JSON 파일 레이아웃·경로, 라이브러리 선택, CLI 인자 문자열, pip 호출 방식(subprocess 등), run_id 생성 방식의 구체 구현.
+
+## P0 자연어 수용 개정 2 — 사용자 승인 반영
+
+C7 준비는 업무 요청 전에 수행한다. C8 apply-requirements는 기존 작업 venv와 requirements를 받아 실제 pip 설치를 관찰하고 C5 → S1 → C3를 호출한다. venv 생성/교체, seed, 패키지 제거를 실행 경로에서 하지 않는다. 첫 설치 성공은 재사용 0, 실패 후 S1 검증 성공만 +1이다. 동일 실행 id는 유지하며 작업 환경은 보존한다. 지원 범위는 skillloop-demo-pkg==1.0.0 한 건이며 그 밖의 입력은 거절한다. 알려진 승인 로컬 합성 descriptor의 exact digest만 무인 수용 범위다. 기존 run-p0와 A 소유 계약은 유지한다.
+
+## P0 관찰/검색 결함 정합화
+C8의 실제 pip exit/stderr/요청 대상은 공통 관찰 변환을 거쳐 기존 FailureObservation으로 전달한다. 패키지 이름/버전 분리 및 이름 구분자 정규화는 Skill identity나 해결 경로 선택과 독립이다. 공급 실패에서 보고된 대상과 요청 대상이 일치할 때만 안정 신호를 생성한다. 성공·타 대상·기타 오류는 공급 실패로 변환하지 않는다. 외부에서 관찰을 전달하는 read-only match는 stderr 파일/종료코드/대상/실제 store를 명시한다. 기존 canonical signal 계약과 A matcher는 유지한다.

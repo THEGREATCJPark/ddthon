@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import math
 import tempfile
 import zipfile
 from dataclasses import dataclass, field
@@ -64,7 +65,7 @@ class DirectAccessObservation:
 class AccessResult:
     """파일접근 procedure 실행 결과. ok는 실제 효과 기반(강제 raise로 연출 금지)."""
     ok: bool
-    content: list | None          # [(month:str, total_output:int|float), ...] | None
+    content: dict | None          # local workbook snapshot; never shared task data
     method: str                   # "excel-com-attach" | "direct-zip" | "none"
     evidence: dict = field(default_factory=dict)
 
@@ -85,25 +86,6 @@ def _mtime_of(path: str) -> float | None:
     return os.path.getmtime(path) if os.path.exists(path) else None
 
 
-def _looks_like_completed_month_rows(content) -> bool:
-    """content가 3개 완료월 (month, total_output) 행을 포함하는지(접근 성공 기준 2).
-
-    업무 입력 검증(S2, month/total_output 값의 업무적 타당성)과는 구분되는
-    **접근 검증 최소 형태 확인**만 수행한다(형태·개수).
-    """
-    if not isinstance(content, (list, tuple)) or len(content) < 3:
-        return False
-    for row in content:
-        if not (isinstance(row, (list, tuple)) and len(row) == 2):
-            return False
-        month, total = row
-        if not isinstance(month, str) or not month.strip():
-            return False
-        if not isinstance(total, (int, float)) or isinstance(total, bool):
-            return False
-    return True
-
-
 # --- COM(Excel) 경계: 미가용 시 정직하게 실패 반환(연출 금지) ---
 
 def _write_encrypted_placeholder(path: str) -> None:
@@ -121,6 +103,7 @@ def _write_encrypted_placeholder(path: str) -> None:
 # 실행 중 Excel 인스턴스 참조를 모듈에 유지(사용자가 열어둔 상태 대역).
 # 로컬 변수로 두면 함수 반환 시 COM 참조가 GC되어 Excel이 종료 → GetActiveObject 실패.
 _excel_app = None
+_excel_book = None
 
 
 def _try_com_create_encrypted(data_rows, password: str, path: str) -> bool:
@@ -130,89 +113,99 @@ def _try_com_create_encrypted(data_rows, password: str, path: str) -> bool:
     앱 참조는 모듈에 유지해 인스턴스가 살아 있게 하고, Visible=True로 ROT에 등록해
     이후 GetActiveObject(attach)가 발견할 수 있게 한다. 실패/미가용이면 False(연출 없음).
     """
-    global _excel_app
+    global _excel_app, _excel_book
     try:
         import win32com.client  # type: ignore
     except Exception:
         return False
     try:
-        excel = win32com.client.Dispatch("Excel.Application")
-        excel.Visible = True          # ROT 등록(GetActiveObject 발견 가능)
+        excel = win32com.client.DispatchEx("Excel.Application")
+        _excel_app = excel  # only this newly owned instance may be cleaned up
+        excel.Visible = False          # ROT 등록(GetActiveObject 발견 가능)
         excel.DisplayAlerts = False
         wb = excel.Workbooks.Add()
+        _excel_book = wb
         ws = wb.Worksheets(1)
         for i, (month, total) in enumerate(data_rows, start=1):
             ws.Cells(i, 1).Value = month
             ws.Cells(i, 2).Value = total
         # open password로 암호화 저장(FileFormat=51). Password는 사전조건 소유자 것.
         wb.SaveAs(path, FileFormat=_XL_OPENXML, Password=password)
-        wb.Close(SaveChanges=False)
-        # 사용자가 (암호로) 열어둔 상태 대역: 암호로 다시 연다.
-        excel.Workbooks.Open(path, Password=password)
+        # SaveAs leaves the authorized document open; reopening caused a real COM timeout.
+        _excel_book = wb
         _excel_app = excel            # 인스턴스 유지(함수 반환 후 종료 방지)
         return True
     except Exception:
+        teardown()
         return False
 
 
-def _procedure_read_spec(procedure: dict) -> tuple[int, int, int]:
-    """procedure(서술적 접근 절차)에서 실제 읽기 위치를 취득. 인자를 무시하지 않는다.
-
-    반환: (sheet_index_1based, month_col_1based, total_col_1based).
-    기본값(sheet=1, month=1열, total=2열)은 procedure가 명시하지 않을 때만 사용한다.
-    """
-    if not isinstance(procedure, dict):
-        return 1, 1, 2
-    sheet = procedure.get("sheet", 1)
-    month_col = procedure.get("month_col", 1)
-    total_col = procedure.get("total_col", 2)
-    try:
-        return int(sheet), int(month_col), int(total_col)
-    except (TypeError, ValueError):
-        return 1, 1, 2
+class AccessUnavailable(RuntimeError):
+    """Precondition unavailable, distinct from a running reader failure."""
 
 
-# 테스트 주입 지점: 실제 Excel attach 대신 monkeypatch 가능(Excel 미가용 시 read-only 로직 검증용).
+def _cell_value(value):
+    if value is None or type(value) in (str, bool, int):
+        return value
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise ValueError("nonfinite Excel value")
+        return int(value) if value.is_integer() else value
+    if hasattr(value, 'isoformat'):
+        return value.isoformat()
+    return str(value)
+
+
+def _snapshot_workbook(wb):
+    """Read used cell ranges; no production schema or task column selection."""
+    sheets = []
+    for ws in wb.Worksheets:
+        used = ws.UsedRange
+        first_row, first_col = int(used.Row), int(used.Column)
+        nrows, ncols = int(used.Rows.Count), int(used.Columns.Count)
+        raw = used.Value2
+        if nrows == ncols == 1:
+            raw = ((raw,),)
+        values = [[_cell_value(v) for v in row] for row in raw]
+        sheets.append({'name': str(ws.Name), 'first_row': first_row,
+                       'first_col': first_col, 'values': values})
+    return {'sheets': sheets}
+
+
+def _valid_snapshot(content):
+    if not isinstance(content, dict) or not isinstance(content.get('sheets'), list):
+        return False
+    for sheet in content['sheets']:
+        if (not isinstance(sheet, dict) or not isinstance(sheet.get('name'), str)
+            or type(sheet.get('first_row')) is not int or sheet['first_row'] < 1
+            or type(sheet.get('first_col')) is not int or sheet['first_col'] < 1):
+            return False
+        rows = sheet.get('values')
+        if not isinstance(rows, list) or not rows or not all(isinstance(r, list) for r in rows):
+            return False
+        if not rows[0] or any(len(r) != len(rows[0]) for r in rows):
+            return False
+    return bool(content['sheets'])
+
+
 def _read_via_excel_attach(env: EnvContext, procedure: dict):
-    """실행 중 Excel 인스턴스에 attach → procedure가 지정한 시트·열을 read-only 읽기. 미가용이면 None.
-
-    반환: content=[(month, total_output), ...] 또는 None(attach/읽기 불가).
-    **Save 계열을 호출하지 않는다**(read-only). 원본 파일 바이트를 직접 열지 않고,
-    애플리케이션이 이미 복호화한 문서를 매개로 값만 읽는다. 읽기 대상(시트/열)은
-    전달받은 procedure에서 취득한다(인자 무시 금지).
-    """
+    """Attach to an already open workbook. Never opens/decrypts/saves it."""
     if not env.app_open:
-        return None
+        raise AccessUnavailable('environment: workbook not reported open')
     try:
-        import win32com.client  # type: ignore
-    except Exception:
-        return None
+        import win32com.client
+    except ImportError as exc:
+        raise AccessUnavailable('dependency: pywin32 unavailable') from exc
     try:
-        excel = win32com.client.GetActiveObject("Excel.Application")
-    except Exception:
-        return None
-    try:
-        sheet_idx, month_col, total_col = _procedure_read_spec(procedure)
-        target = os.path.normcase(os.path.abspath(env.xlsx_path))
-        for wb in excel.Workbooks:
-            if os.path.normcase(os.path.abspath(wb.FullName)) != target:
-                continue
-            ws = wb.Worksheets(sheet_idx)
-            used = ws.UsedRange
-            rows = []
-            for r in range(1, used.Rows.Count + 1):
-                month = ws.Cells(r, month_col).Value
-                total = ws.Cells(r, total_col).Value
-                if month is None:
-                    continue
-                # COM은 정수도 float로 줄 수 있음 → 정수형은 int로 정규화(값 보존).
-                if isinstance(total, float) and total.is_integer():
-                    total = int(total)
-                rows.append((str(month), total))
-            return rows  # Save 미호출: 읽기만 하고 반환.
-        return None
-    except Exception:
-        return None
+        excel = _excel_app if _excel_app is not None else win32com.client.GetActiveObject('Excel.Application')
+    except Exception as exc:
+        raise AccessUnavailable('attach: running Excel unavailable') from exc
+    # Errors after attachment are real failed execution, not NOT_RUN.
+    target = os.path.normcase(os.path.abspath(env.xlsx_path))
+    for wb in excel.Workbooks:
+        if os.path.normcase(os.path.abspath(wb.FullName)) == target:
+            return _snapshot_workbook(wb)
+    raise AccessUnavailable('workbook: target is not open in attached Excel')
 
 
 # --- 공개 계약 ---
@@ -240,23 +233,25 @@ def setup_encrypted_open_xlsx_env(data_rows, password: str) -> XlsxEnv:
     _active = XlsxEnv(
         xlsx_path=path,
         app_running=app_running,
-        present_facts={"file_state": "office-encrypted", "app_open": app_running},
+        present_facts={"file_state": "office-encrypted" if app_running else "non-office-placeholder", "app_open": app_running},
     )
     return _active
 
 
 def teardown() -> None:
     """열어둔 Excel/워크북 정리 + 원본 파일 제거. 원본 미변경 전제(read-only)."""
-    global _active, _excel_app
+    global _active, _excel_app, _excel_book
     if _excel_app is not None:
         try:
             _excel_app.DisplayAlerts = False
-            for wb in list(_excel_app.Workbooks):
-                wb.Close(SaveChanges=False)   # read-only: 저장 없이 닫기
-            _excel_app.Quit()
+            if _excel_book is not None:
+                _excel_book.Close(SaveChanges=False)
+            if _excel_app.Workbooks.Count == 0:
+                _excel_app.Quit()
         except Exception:
             pass
         _excel_app = None
+        _excel_book = None
     if _active is not None:
         try:
             if os.path.exists(_active.xlsx_path):
@@ -278,67 +273,43 @@ def attempt_direct_access(path: str) -> DirectAccessObservation:
             evidence={"path": path},
         )
     try:
-        with zipfile.ZipFile(path) as zf:  # 표준 리더의 근간(openpyxl/pandas도 zip 전제)
-            names = zf.namelist()
-        return DirectAccessObservation(
-            ran=True, ok=True, error=None,
-            evidence={"reader": "zipfile", "entries": len(names)},
-        )
-    except zipfile.BadZipFile as exc:
-        return DirectAccessObservation(
-            ran=True, ok=False, error=f"BadZipFile: {exc}",
-            evidence={"reader": "zipfile", "reason": "not a zip (office-encrypted)"},
-        )
-    except Exception as exc:  # 기타 리더 오류도 관찰로 반환(강제 raise 아님)
-        return DirectAccessObservation(
-            ran=True, ok=False, error=f"{type(exc).__name__}: {exc}",
-            evidence={"reader": "zipfile"},
-        )
+        from openpyxl import load_workbook
+    except ImportError:
+        return DirectAccessObservation(False, False, 'openpyxl dependency unavailable', {'reader': 'openpyxl'})
+    try:
+        book = load_workbook(path, read_only=True, data_only=True)
+        try:
+            names = book.sheetnames
+        finally:
+            book.close()
+        return DirectAccessObservation(True, True, None, {'reader': 'openpyxl', 'sheets': len(names)})
+    except Exception as exc:
+        return DirectAccessObservation(True, False, f'{type(exc).__name__}: {exc}', {'reader': 'openpyxl'})
 
 
 def run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult:
-    """후보 procedure를 대상 env에 실제 실행하고 접근 효과·read-only 증거로 판정.
-
-    접근 성공(ok=True) 기준(FD §1, coordination-blockers §C-c):
-      (1) 원본 바이트 직접 파싱 아님·허용 경로(실행 중 Excel attach)로 content 획득,
-      (2) content가 3개 완료월 (month, total_output) 행 포함,
-      (3) 원본 mtime·sha256 무변경 & Save 계열 미호출(read-only 증거).
-    미충족/실패 → ok=False(강제 raise 아님). Excel 미열림/미가용 → method="none".
-
-    A(S1 파일접근 분기)와 C6 Replay가 동일 계약으로 호출한다. procedure는 서술적 접근
-    절차만 담으며(스크립트·업무 계산·평문 암호 미포함) 여기서 실행 대상 사실로 참조된다.
-    """
-    sha_before = _sha256_of(env.xlsx_path)
-    mtime_before = _mtime_of(env.xlsx_path)
-    read_spec = _procedure_read_spec(procedure)
-    evidence: dict = {
-        "procedure_keys": sorted(procedure.keys()) if isinstance(procedure, dict) else None,
-        "read_spec": {"sheet": read_spec[0], "month_col": read_spec[1], "total_col": read_spec[2]},
-        "app_open": env.app_open,
-        "sha256_before": sha_before,
-        "mtime_before": mtime_before,
-        "save_called": False,   # attach 읽기 경로는 Save를 호출하지 않는다.
-    }
-
-    content = _read_via_excel_attach(env, procedure)
-    if content is None:
-        evidence["error"] = "excel attach unavailable or not open"
-        return AccessResult(ok=False, content=None, method="none", evidence=evidence)
-
-    sha_after = _sha256_of(env.xlsx_path)
-    mtime_after = _mtime_of(env.xlsx_path)
-    evidence["sha256_after"] = sha_after
-    evidence["mtime_after"] = mtime_after
-
-    unchanged = (sha_before == sha_after) and (mtime_before == mtime_after)
-    has_rows = _looks_like_completed_month_rows(content)
-    evidence["original_unchanged"] = unchanged
-    evidence["completed_month_rows"] = has_rows
-
-    ok = bool(content is not None and has_rows and unchanged and not evidence["save_called"])
-    return AccessResult(
-        ok=ok,
-        content=content if ok else None,
-        method="excel-com-attach",
-        evidence=evidence,
-    )
+    """Execute environment capability only; task mapping and data stay local."""
+    if procedure != {'action': 'file-access', 'method': 'excel-com-attach'}:
+        return AccessResult(False, None, 'invalid-procedure', {'ran': False, 'error': 'unsupported environment procedure'})
+    if not env.app_open:
+        return AccessResult(False, None, 'none', {'ran': False, 'stage': 'environment', 'error': 'workbook not reported open'})
+    evidence = {'sha256_before': _sha256_of(env.xlsx_path), 'mtime_before': _mtime_of(env.xlsx_path),
+                'save_called': False, 'ran': False, 'stage': 'attach', 'app_open': env.app_open}
+    try:
+        content = _read_via_excel_attach(env, procedure)
+        if content is None:
+            raise AccessUnavailable('attach: no running workbook')
+    except AccessUnavailable as exc:
+        evidence['error'] = str(exc)
+        return AccessResult(False, None, 'none', evidence)
+    except Exception as exc:
+        evidence.update(ran=True, stage='workbook-read', error=f'{type(exc).__name__}: {exc}')
+        return AccessResult(False, None, 'excel-com-attach', evidence)
+    evidence.update(ran=True, stage='read-complete', sha256_after=_sha256_of(env.xlsx_path),
+                    mtime_after=_mtime_of(env.xlsx_path))
+    unchanged = (bool(evidence['sha256_before']) and evidence['sha256_before'] == evidence['sha256_after']
+                 and evidence['mtime_before'] is not None and evidence['mtime_before'] == evidence['mtime_after'])
+    evidence['original_unchanged'] = unchanged
+    evidence['workbook_readable'] = _valid_snapshot(content)
+    ok = unchanged and evidence['workbook_readable']
+    return AccessResult(bool(ok), content if ok else None, 'excel-com-attach', evidence)

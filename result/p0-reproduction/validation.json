@@ -1,0 +1,25 @@
+{
+  "base": "a22e176",
+  "source_state": "tracked baseline plus current source overlay; README/EVALUATION overlays excluded",
+  "full_suite_passed": 93,
+  "full_suite_exit": 0,
+  "scope": "single synthetic package P0; 3 separate Claude work sessions, one interrupted attempt retained",
+  "files": {
+    "skillloop\\cli.py": "d9918fe67c61e94791c29d5010b4a8771f3c6ade44e4c988fb4aa940acf90f19",
+    "skillloop\\dashboard.py": "a400f4b71ae83e8b4c2646f87500df8dea722ec12a583d30d38e00339a423e4a",
+    "skillloop\\descriptor.py": "45b43a7103540127386b9db61849ca59fb79ec3bf10c96f332f2e6010acbf6a1",
+    "skillloop\\envharness_p0.py": "ef11ef8671bed3886f51ab9fedc5af55c7462eec0ff748e207c57a6a6ebd705f",
+    "skillloop\\match.py": "0a028f68290de76b543440cf0b18ba4ae158ca1929ab6a6a9c1382fb6913d1bd",
+    "skillloop\\org_aggregator.py": "a5f842ab64e75d3c8c16e43748118184bb3174dd3e2e25a58931e2e62dc0ac2c",
+    "skillloop\\reuse_service.py": "09dc3df4c3a71f05d85baef762961f7fa0dda8e7657f21ff995ecde54fab134f",
+    "skillloop\\statusline.py": "641a0903d9f0c24a1eac6b9a54f04c06835f80ce7b7ea9da5ca4efa2d27a3f95",
+    "skillloop\\store.py": "04ab5f44978297b3ef1516264eff3f970dd42d3343d82594fe8bbdd04e2f8e2d",
+    "skillloop\\usage.py": "cad1ffd5a3bc8d85448dd5d0a2ac0dd986f2f72f6c84dfe8d9c54c2e60460d0f",
+    "skillloop\\__init__.py": "6621009b0c195a101683b29eccaa3a0aa6dc49e35990a66f1569eea265398ecd",
+    "skillloop\\__main__.py": "7a615b6f95fd155e203d1f7c70582a962109aac8825cf13f9677517c398d6105",
+    ".claude/skills/skillloop/SKILL.md": "e7599968ccd1b73f5994033fc01aab12ac786337e22c08e709a776d910546970",
+    "pyproject.toml": "20bd1d7b5f0cbd6b86c18b1573c27bd6d48cd57978c9bbb8119f0c7d8f2584e7",
+    "scripts/prepare-p0.ps1": "aadf97091743bc0025e15fc39180f769c04e75c1325b21bbd820ae077f9b4222",
+    "tests/prepare_p0_work.py": "8c6b4cd482ab39b9b7224df8e37a26a9d12209b25ebc588162edc41fbf4b645c"
+  }
+}

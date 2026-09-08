@@ -1,0 +1,26 @@
+{
+  "base": "a22e176",
+  "uncommitted": true,
+  "checks": [
+    {
+      "command": "python -m pytest tests/test_cli_match.py tests/test_statusline.py -q",
+      "passed": 21,
+      "exit": 0
+    },
+    {
+      "command": "python -m pytest tests/test_apply_requirements.py tests/test_run_p0_e2e.py tests/test_match.py tests/test_reuse_service.py -q",
+      "passed": 22,
+      "exit": 0
+    }
+  ],
+  "sha256": {
+    "skillloop/cli.py": "d9918fe67c61e94791c29d5010b4a8771f3c6ade44e4c988fb4aa940acf90f19",
+    "skillloop/statusline.py": "641a0903d9f0c24a1eac6b9a54f04c06835f80ce7b7ea9da5ca4efa2d27a3f95",
+    ".claude/skills/skillloop/SKILL.md": "e7599968ccd1b73f5994033fc01aab12ac786337e22c08e709a776d910546970",
+    "tests/test_cli_match.py": "fca2a7052e01fe7af8261d0ef28d64d11bfd63c878dfc054f96f57ac5ebe576f",
+    "tests/test_statusline.py": "980e12d7603f96d99f7586dcbfc2415e0af0e3e0f0b644e9cbc7bf4ab8b14cf9",
+    "tests/test_apply_requirements.py": "31dcc8aed7da21f6e3113e98b3e12fd8ce2bf16f122a61ae310a8c0c2befd729",
+    "skillloop/match.py": "0a028f68290de76b543440cf0b18ba4ae158ca1929ab6a6a9c1382fb6913d1bd",
+    "skillloop/reuse_service.py": "09dc3df4c3a71f05d85baef762961f7fa0dda8e7657f21ff995ecde54fab134f"
+  }
+}

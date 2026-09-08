@@ -1,0 +1,21 @@
+{
+  "captured_at_utc": "2026-09-08T11:32:12.612180+00:00",
+  "count_before": 1,
+  "count_after": 2,
+  "event_count": 2,
+  "new_run_id": "457588103ff547ed936309e715d30487",
+  "store_unchanged": true,
+  "requirements_unchanged": true,
+  "probes": {
+    "existing_work": {
+      "exit": 0,
+      "stdout": "1.0.0\nIMPORT_OK\n"
+    },
+    "new_work": {
+      "exit": 0,
+      "stdout": "1.0.0\nIMPORT_OK\n"
+    }
+  },
+  "standalone_match_exit": 0,
+  "pip_errors_source": "Exact ERROR lines extracted from actual apply-requirements tool output, not an independent pip rerun."
+}

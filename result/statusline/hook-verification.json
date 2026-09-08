@@ -1,0 +1,13 @@
+{
+  "command_source": ".claude/settings.local.json",
+  "shell": "Git Bash",
+  "stdin": "Claude workspace JSON",
+  "cwd": "outside project",
+  "exit_code": 0,
+  "lines": 4,
+  "actual_reuse": 1,
+  "demo_reuse": 0,
+  "requirements_store_usage_unchanged": true,
+  "native_footer_visual_check": "USER_CONFIRMED: 네, 네 줄이 보입니다",
+  "screenshot_captured": false
+}

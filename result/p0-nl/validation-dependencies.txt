@@ -1,0 +1,12 @@
+colorama==0.4.6
+hypothesis==6.167.1
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+Pygments==2.21.0
+pytest==9.1.1
+setuptools==84.0.0
+# Editable install with no version control (skillloop==0.0.1)
+-e [TEST_ROOT]\checkout
+sortedcontainers==2.4.0
+wheel==0.48.0

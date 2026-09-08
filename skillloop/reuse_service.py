@@ -14,7 +14,7 @@ P1 확장(승인 2026-09-08, CJ/B 계약 · B 기준 1760d32 정합):
         -> AccessResult(ok: bool, content: list|None, method: str, evidence: dict)
       (모듈 확정: envharness_p1. 준비/테스트는 file_access_runner 대역 주입; 대역도 AccessResult형.)
     - S1은 B의 접근 실행 결과를 '재검증'한다: ok 플래그만 신뢰하지 않고 evidence의
-      원본 무변경(original_unchanged) + 접근 최소형태(completed_month_rows) +
+      원본 무변경(original_unchanged) + 접근 최소형태(workbook_readable) +
       read-only(save_called=False)를 확인한다. 빈 근거·실패 근거로는 성공 처리하지 않는다.
     - 실제 성공 시에만 획득 내용을 로컬 artifact로 저장하고 artifact_ref만 반환한다.
       업무 원문(raw content)은 결과/공유 이벤트에 직접 싣지 않는다(로컬 참조화).
@@ -78,7 +78,7 @@ def _pip_install(env, index_dir: str, target: str) -> int:
     return proc.returncode
 
 
-def _verify_installed(env, target: str) -> tuple[bool, bool]:
+def _verify_installed(env, target: str, expected_version=None) -> tuple[bool, bool]:
     """pip show로 설치 여부와 요구 버전(TARGET_VERSION) 일치를 확인.
 
     반환: (installed_check, version_check).
@@ -94,19 +94,19 @@ def _verify_installed(env, target: str) -> tuple[bool, bool]:
         if line.lower().startswith("version:"):
             installed_version = line.split(":", 1)[1].strip()
             break
-    return True, installed_version == harness.TARGET_VERSION
+    return True, installed_version == (expected_version or harness.TARGET_VERSION)
 
 
-def _verify_import(env) -> bool:
+def _verify_import(env, module=None) -> bool:
     """격리 환경에서 합성 패키지 import 성공 여부를 확인."""
     proc = subprocess.run(
-        [env.python_exe, "-c", f"import {harness.TARGET_IMPORT}"],
+        [env.python_exe, "-c", "import importlib,sys; importlib.import_module(sys.argv[1])", module or harness.TARGET_IMPORT],
         capture_output=True, text=True,
     )
     return proc.returncode == 0
 
 
-def _apply_pip_install(selected, obs, env, run_id: str) -> ApplicationResult:
+def _apply_pip_install(selected, obs, env, run_id: str, pip_task=None) -> ApplicationResult:
     """P0: 선택 절차를 clean 환경에 적용하고 실제 설치·효과를 검증(동작 불변).
 
     "실제 성공" = clean 전제 + pip 종료코드 0 + 설치·요구버전 일치 + 합성 import 성공.
@@ -118,13 +118,20 @@ def _apply_pip_install(selected, obs, env, run_id: str) -> ApplicationResult:
         raise RuntimeError("clean 환경 전제 위반: 대상 패키지가 이미 설치됨(오판 방지)")
 
     cfg = selected.procedure
-    index_name = cfg["index"]
-    target = cfg.get("target", obs.target_pkg)
-    index_dir = harness.resolve_index(index_name)
-
-    pip_exit_code = _pip_install(env, index_dir, target)
-    installed_check, version_check = _verify_installed(env, target)
-    import_check = _verify_import(env)
+    if pip_task is None:
+        index_name = cfg['index']; target = cfg.get('target', obs.target_pkg)
+        index_dir = harness.resolve_index(index_name)
+        expected_version, module = harness.TARGET_VERSION, harness.TARGET_IMPORT
+        install_target = target
+    else:
+        index_name = cfg['source']; target = pip_task['name']
+        if target != obs.target_pkg:
+            raise ValueError('Task target differs from observation')
+        index_dir = pip_task['source_path']; expected_version = pip_task['version']; module = pip_task['import_module']
+        install_target = target + '==' + expected_version
+    pip_exit_code = _pip_install(env, index_dir, install_target)
+    installed_check, version_check = _verify_installed(env, target, expected_version)
+    import_check = _verify_import(env, module)
 
     is_real_success = (
         pip_exit_code == 0 and installed_check and version_check and import_check
@@ -181,7 +188,7 @@ def _apply_file_access(selected, obs, env, run_id: str, file_access_runner) -> F
     실제 접근·원본 무변경을 직접 확인한다(가짜/빈/실패 근거 배제):
         - access_ok(True) 이고 content 획득,
         - evidence.original_unchanged is True   (원본 mtime·sha256 무변경),
-        - evidence.completed_month_rows is True  (접근 최소형태 확인),
+        - evidence.workbook_readable is True  (접근 최소형태 확인),
         - evidence.save_called is False          (read-only: Save 미호출).
     위를 모두 충족할 때만 획득 내용을 로컬 artifact로 저장하고 참조(artifact_ref)만 반환한다
     (원문 미노출). 하나라도 불충족이면 is_real_success=False, artifact_ref=None.
@@ -196,7 +203,7 @@ def _apply_file_access(selected, obs, env, run_id: str, file_access_runner) -> F
 
     ev = evidence if isinstance(evidence, dict) else {}
     original_unchanged = ev.get("original_unchanged") is True   # 원본 무변경 근거
-    completed_rows = ev.get("completed_month_rows") is True      # 접근 최소형태
+    completed_rows = ev.get("workbook_readable") is True      # 접근 최소형태
     read_only = ev.get("save_called") is False                  # Save 미호출(read-only)
 
     access_verified = (
@@ -219,7 +226,7 @@ def _apply_file_access(selected, obs, env, run_id: str, file_access_runner) -> F
     )
 
 
-def apply_and_verify(selected, obs, env, run_id: str, *, file_access_runner=None):
+def apply_and_verify(selected, obs, env, run_id: str, *, file_access_runner=None, pip_task=None):
     """선택된 Skill 절차를 적용하고 실제 효과를 검증. run_id는 전달만(재발급 금지).
 
     procedure.action 으로 경로 분기(명시적 화이트리스트):
@@ -229,11 +236,14 @@ def apply_and_verify(selected, obs, env, run_id: str, *, file_access_runner=None
     file_access_runner: B의 run_file_access_procedure 대역 주입점.
       미지정 시 실제 모듈을 late-import(미확정이면 NotImplementedError → 대역과 구분됨).
     """
+    from .descriptor import compute_digest
+    if compute_digest(vars(selected)) != selected.digest:
+        raise ValueError("INTEGRITY_ERROR: current content differs from digest")
     action = selected.procedure.get("action")
     if action == ACTION_FILE_ACCESS:
         return _apply_file_access(selected, obs, env, run_id, file_access_runner)
     if action == ACTION_PIP_INSTALL:
-        return _apply_pip_install(selected, obs, env, run_id)
+        return _apply_pip_install(selected, obs, env, run_id, pip_task)
     raise ValueError(
         f"지원하지 않는 procedure.action: {action!r} "
         f"(pip 경로 자동 실행 금지 — 지원: {ACTION_PIP_INSTALL!r}, {ACTION_FILE_ACCESS!r})"

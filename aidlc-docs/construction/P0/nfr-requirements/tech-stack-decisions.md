@@ -37,3 +37,7 @@
 
 ## 5. 미결정(Code Plan 이월)
 - 구체 버전 핀·의존성 목록·가상환경 방식, pip 격리 실행 방식, `new_execution_id` 구현, JSON 파일 경로·락, CLI 인자 문자열, 합성 패키지 정의.
+
+## P0 자연어 수용 개정 2 — 사용자 승인 반영
+
+prepare()의 pip wheel --no-build-isolation은 실행 Python의 setuptools/wheel을 사용하므로 pyproject 실행 의존성과 requirements-dev에 명시한다. 제품·개발 의존성 설치 및 Claude/Bedrock에는 네트워크가 필요할 수 있다. 합성 업무 설치·복구는 준비된 로컬 index만 사용한다. 작업 venv와 제품 Python을 구분하며 전역 pip 설정을 바꾸지 않는다. 준비 도구는 checkout에서 실행한다.

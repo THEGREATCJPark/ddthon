@@ -36,10 +36,8 @@
 
 **참조**: FR-P1-1, FR-P1-2, FR-MATCH-1~3, NFR-SEC-2
 
-> **P1 실패 모델 확정(2026-09-08, CJ)**: "보호된 합성 XLSX"는 **Office 암호화 합성 파일**(open password로 저장 → 바이트가 OLE-CFB, OOXML zip 아님)로 구체화된다. 직접 parser 접근(openpyxl/pandas/zipfile)은 파일이 zip이 아니라 **자연 실패**(`BadZipFile`; 강제 raise·잘못된 API 아님, 평문 대조군은 동일 호출 성공 → 실패 원인=환경). 허용 대안(US-P1-2)은 **실행 중 Excel 인스턴스에 attach한 read-only 셀 읽기**. 사전조건: Excel 설치·실행 + 사용자가 파일을 열어둔 상태 + `pywin32`(NFR-RUN-1 P1 한정 예외). AC는 불변.
-
 **Acceptance Criteria**
-- **AC-1** — GIVEN 보호된 합성 XLSX(Office 암호화)에 대해, WHEN Agent가 직접 parser 접근을 시도하면, THEN **실제로 실패**한다(암호화로 zip 아님 → 자연 실패, DRM 우회·비허용 접근 없음). `[FR-P1-1, NFR-SEC-2]`
+- **AC-1** — GIVEN 보호된 합성 XLSX에 대해, WHEN Agent가 직접 parser 접근을 시도하면, THEN **실제로 실패**한다(DRM 우회·비허용 접근 없음). `[FR-P1-1, NFR-SEC-2]`
 - **AC-2** — WHEN Agent가 Team Skill 및 제공 Org Knowledge를 검색하면, THEN **검색 범위·질의·결과가 기록**된다. `[FR-P1-2, FR-MATCH-1]`
 - **AC-3** — GIVEN 검색이 실제 수행된 상태에서, WHEN 적용 가능한 Skill이 **하나도 없을 때만**, THEN `NO_MATCH`로 진행한다. `[FR-P1-2]`
 - **AC-4** — WHEN 관련 Skill이 실제 존재하면, THEN 숨기거나 제거하지 않고 재사용 경로(US-P0-1)를 따른다. `[FR-P1-2, FR-MATCH-2]`
@@ -57,7 +55,7 @@
 
 **Acceptance Criteria**
 - **AC-1** — WHEN Agent가 대화형으로 환경 사실을 물으면, THEN PER-1의 입력을 받아 진행한다. `[FR-P1-3]`
-- **AC-2** — GIVEN 정답 라이브러리를 고정하지 않은 상태에서, WHEN Agent가 Windows에서 **허용된 read-only 대안 절차**를 탐색하면(확정 모델: **실행 중 Excel 인스턴스 attach → 셀 read-only 읽기**, 암호 재입력·Save 없음, 원본 mtime/hash 무변경), THEN 파일 내용을 얻는다(비허용 접근 없음). `[FR-P1-4, NFR-SEC-2]`
+- **AC-2** — GIVEN 정답 라이브러리를 고정하지 않은 상태에서, WHEN Agent가 Windows에서 **허용된 read-only 대안 절차**를 탐색하면, THEN 파일 내용을 얻는다(비허용 접근 없음). `[FR-P1-4, NFR-SEC-2]`
 - **AC-3 (업무 완료)** — WHEN 이전 3개 완료 월의 월별 총생산량으로 계산하면, THEN "다음 달"은 **마지막 완료 월+1**, 3점 단순 OLS(`x=1,2,3`→`x=4`), 음수는 **0 clamp**로 예상값을 산출한다. `[FR-P1-5]`
 - **AC-4 (표시)** — THEN 결과에 **실제 3개월과 예상 1개월을 구분**하고 예측 대상 월·단위·예상값을 명확히 표시한다. `[FR-P1-5]`
 

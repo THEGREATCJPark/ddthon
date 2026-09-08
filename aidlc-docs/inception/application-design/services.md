@@ -164,3 +164,6 @@ list_lifecycle_states(filter) -> list[LifecycleState] (읽기 전용)
 | (집계·표현, 서비스 아님) | C10 OrgAggregator ← C2, C3, C4.last_sync, **S3 상태 조회(읽기전용)** → C11 상태줄 / C12 대시보드 (읽기전용) |
 
 **호출 진입점**: C8 CLI → S1/S2/S3, 그리고 `sync` → C3/C4(재사용 이벤트 공유). C9 Wrapper → C8 CLI. (AD-Q6) 상태줄·대시보드는 C10 스냅샷 소비(읽기전용).
+
+## Current contract correction — scenario continuation
+The approved `construction/plans/p1-scenario-correction-plan.md` supersedes earlier task-specific access schema in this document. Shared procedure contains only action=file-access and method=excel-com-attach. C7/S1/C6 validate workbook accessibility and read-only evidence (workbook_readable), independent of production rows. C7 returns a local workbook snapshot preserving sheet names and UsedRange origins. S2 receives a separate local task mapping, interprets current columns/rows, verifies OLS and creates the actual3+forecast1 PNG. No task schema, chart or content is shared. S3 owns reuse eligibility as well as publication state; explicit execution confirmation does not replace integrity or lifecycle eligibility. CJ now integrates A/B completed handoffs; original authors and prior validation are preserved.

@@ -411,56 +411,6 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 
 ---
 
-## U2 착수 — 담당자 B(한석훈) / 계약·접점 확인 + Functional Design 최소 진행 계획
-**Timestamp**: 2026-09-08T08:39:59Z
-**User Input**: "현재 ddthon의 U2 담당자 B(한석훈)입니다. 메인 AI-DLC에서 Requirements, User Stories, Workflow Plan, Application Design, Units Generation이 승인됐습니다. U0/U1은 P0 구현을 진행 중입니다. 나는 P0 완료를 기다리지 않고 U2의 최소 Functional Design부터 진행합니다. P0용 Code Plan 승인을 U2 구현 승인으로 간주하지 마세요. 기준 커밋: 7cbc856ad03f5a40c0642fd7fac92d33061facd5. 먼저 현재 브랜치·HEAD·작업 트리를 확인하고 [requirements/stories/components/component-methods/services/unit-of-work/unit-of-work-dependency/unit-of-work-story-map]을 읽으세요. 메인에서 완료한 Inception을 다시 시작하거나 이미 확정된 결정을 재질문하지 마세요. [U2 담당 파일] envharness_p1.py, experience_service.py, publish_pipeline.py, replay.py, gitsync.py + 대응 U2 테스트·설계. [담당 기능] 1.P1 합성 환경(직접 parser 실패 관찰, 강제 예외/정답 절차 공급 금지) 2.P1 업무·후보화(FR-P1-5 기준, 환경 접근 절차만) 3.검토·독립 Replay·게시(SHAREABLE 게이트, push 성공 후에만 PUBLISHED, 실패 시 로컬 보존·재시도) 4.상태 조회(S3가 lifecycle 단일 소유, U3 읽기전용 계약 제공, 원격/로컬 근거 구분) 5.Git 전송(THEGREATCJPark/ddthon team-skill-store branch, gitsync.py 단일 수정자 B, descriptor·재사용 이벤트·pull·last-sync, DB 파일 미전송, 게시와 이벤트 공유 독립 경로). [소유 경계] CJ: descriptor.py/store.py/usage.py/envharness_p0.py/cli.py/집계·상태줄·대시보드. A: match.py/reuse_service.py. 직접 수정 금지, 특히 공유 이벤트 검증·dedup·카운트는 usage.py(CJ). [진행 순서] 1.계약·접점 확인 2.FD 최소 3.NFR Requirements(minimal) 4.Code Plan 5.승인 후 구현·검증. 우선 P1 환경 재현과 Git 전송의 실행 위험을 드러내라. [기록] 외부 사전구현 Reference 미사용, 승인된 산출물+실제 실행만 근거, 과거 audit 보존, 실제 OS 시각, 미실행은 NOT_RUN. 다른 Unit 승인·완료 처리 금지. 우선 짧게 보고: 현재 브랜치·HEAD / U2 범위 / 부족한 공통 계약 / FD 최소 진행 계획. 그다음 검토 게이트 승인 요청."
-**AI Response**: 확인 완료 — 브랜치 work/u2-p1-git, HEAD=7cbc856(기준 커밋과 동일), 작업 트리 clean. 승인 산출물 8종 + U0/U1 계약 코드(descriptor/store/usage/cli/match/reuse_service/envharness_p0) 통독. U2 담당 파일 5종(envharness_p1/experience_service/publish_pipeline/replay/gitsync) 및 U2 테스트는 아직 미생성 확인. 부족한 공통 계약과 FD 최소 진행 계획, P1 환경 재현·Git 전송 실행 위험을 사용자에게 보고하고 검토 게이트 승인 요청(파일 미작성 상태로 계획만 제시). 다른 Unit 상태 미변경.
-**Context**: CONSTRUCTION / U2 / 진행순서 1(계약·접점 확인) 완료. FD 최소 진행 승인 대기.
-
----
-
-## U2 — FD 진행 파라미터 3종 결정(사용자 응답)
-**Timestamp**: 2026-09-08T08:43:25Z
-**User Input**: (AskUserQuestion 응답) "S3 lifecycle 상태 영속 위치 = U2 자체 파일에 영속. Git 전송 team-skill-store 처리 = 전용 로컬 미러 dir. 실제 원격 push 불가 시 = PUBLISH_PENDING + NOT_RUN 기록."
-**AI Response**: 세 결정을 U2 Functional Design 파라미터로 반영: (1) S3 lifecycle는 publish_pipeline.py가 U2 소유 JSON(lifecycle.json)에 영속 — store.py(CJ) 수정 불필요, 단일 수정자·단일 소유 정합. (2) gitsync는 team-skill-store 전용 로컬 미러 dir에서 pull/push — 현재 dev worktree·브랜치 미오염. (3) 원격 push 인증 불가 시 로컬 SHAREABLE 보존 + PUBLISH_PENDING, push 검증은 NOT_RUN으로 정직 기록(PUBLISHED 미보고). 최소 Functional Design 문서 작성 착수.
-**Context**: CONSTRUCTION / U2 / Functional Design(minimal) 파라미터 확정. 문서 작성 진행.
-
----
-
-## U2 — Functional Design(minimal) 작성 완료 · 승인 대기
-**Timestamp**: 2026-09-08T08:45:35Z
-**User Input**: (신규 입력 없음 — 승인된 FD 진행 계획 + 파라미터 3종 결정에 따른 계속 실행)
-**AI Response**: `aidlc-docs/construction/u2-p1-git/functional-design/functional-design.md` 작성. 내용: C7-P1 합성 실패 모델(직접 parser 실제 실패 관찰, 강제 raise·정답 절차 공급 금지, XLSX=OOXML zip 대안), S2 run_p1 흐름+FR-P1-5 OLS 규칙(마지막 완료월+1, 3점 OLS x=1..3→x=4, 음수 0 clamp, 실제3+예상1 구분, 후보는 환경 절차만), S3 상태머신+게이트+읽기전용 상태 조회 계약(#7, U3 소비)+D-1 lifecycle.json 영속, C6 ReplayResult(ACCESS_EFFECT), C4 gitsync 전송 인터페이스+D-2 전용 미러+D-3 push 불가 처리+FR-SYNC-5 DB 미전송, 조율 blocker C-b/C-c/C-d + 비블로킹 우회, 추적성·확장 준수·NOT_RUN 예정 항목. aidlc-state.md에 U2 FD 승인 대기 라인 추가(P0 상태 미변경, 타 Unit 미변경). 2-옵션 게이트 제시.
-**Context**: CONSTRUCTION / U2 / Functional Design(minimal) 작성 완료. 사용자 승인(변경 요청/다음 단계) 대기.
-
----
-
-## U2 — CJ FD 검토 결정 수신·반영(설계 개정) + 커밋·push
-**Timestamp**: 2026-09-08T08:56:54Z
-**User Input**: "CJ로부터 FD 검토 답변 수신. 다음을 반영: (C-a) D-1 자체 lifecycle.json 철회 — 저장 책임은 CJ SkillStore로 정합화, S3는 상태 판단·게이트·읽기전용 조회 유지, CJ 계약 대기. (C-b) CJ가 import/export 우선 제공 — U2 자체 저장·무결성·CONFLICT 우회 금지, gitsync 전송은 확정 계약 stub로 병행하되 실제 import/pull 검증과 구분(미실행 NOT_RUN). (C-c) A가 P1 검색 입력 + 파일접근 Skill 적용·검증 계약 동반 확정 — 미구현 검색을 NO_MATCH로 간주 금지, store 직접 조회 우회 제거, A 계약 대기. (C-d) 이벤트 규격·검증·dedup·저장=CJ, Git 전송 경계만 B, 전송 개발 병행 가능. (5) team-skill-store 최초 초기화=B(main과 분리된 공유 데이터 전용 경로). FD 수정 후 work/u2-p1-git에 커밋·push하고 브랜치명+전체 SHA, 수정 파일 목록, FD·Code Plan 승인 상태, 남은 CJ/A 대기 계약을 보고. audit·aidlc-state에 사실대로 기록, 다른 Unit·메인 workflow 미변경."
-**AI Response**: CJ 결정 5건을 FD·NFR·조율 문서에 반영. FD: 개정 이력 추가, D-1 자체 lifecycle.json 철회→CJ SkillStore 계약 위임(판단·게이트·조회는 S3 유지, 영속 연동 NOT_RUN), D-4(team-skill-store 초기화=B) 신설, S2 검색·재사용 계약 의존 절(미구현 검색 NO_MATCH 금지·직접 조회 우회 제거) 추가, S3 D-1 영속 라인 개정, C4 gitsync에 D-4·계약 대기·병행 stub 규칙 추가, §6 조율 표 우회안 제거·§9 NOT_RUN 항목 재작성. NFR: 의존성 블록을 계약 대기(C-a~C-d, 우회 금지 자세)로 개정, lifecycle tech-stack 행을 CJ SkillStore 위임으로 변경, §7 이월 항목 D-4·CJ 계약 의존 반영. coordination-blockers.md: 상단에 CJ 결정 요약 5건 + 각 gap 처리(우회 없음)·요약표 재작성. **자체 저장·무결성·CONFLICT·NO_MATCH 우회는 전면 제거**, 미실행 실검증은 NOT_RUN 유지. 설계 산출물만 커밋·push(README/EVALUATION 로컬 수정·skillloop/tests 미포함). 다른 Unit 상태·메인 workflow 미변경.
-**Context**: CONSTRUCTION / U2 / Functional Design(minimal) CJ 검토 반영 개정. FD는 승인 후 개정본 재검토 대기, Code Plan 미착수. 남은 대기 계약: C-a(CJ lifecycle 저장), C-b(CJ store bundle), C-c(A match P1+파일접근 적용·검증), C-d(CJ 공유 이벤트).
-
----
-
-## U2 — CJ 공통 의존성 방향 확정 수신·반영(설계 갱신, push 보류)
-**Timestamp**: 2026-09-08T09:05:49Z
-**User Input**: "CJ로부터 공통 의존성 처리 방향이 추가로 확정됨. FD/NFR 반영. [확정] C-a: S3 상태 판단·변경 요청·조회는 U2, 실제 저장·로드는 CJ store 계약 제공, U2 자체 lifecycle.json 미구현, 상태는 정확한 id/version/digest 연결. C-b: descriptor export/import는 CJ 제공, digest 검증·DEDUP/CONFLICT는 store 처리(U2 미구현), S3는 공유 자격 판단한 정확한 후보만 export 연결. C-d: 공유 이벤트 저장·검증·중복제거는 CJ, Git 전송·pull·last-sync는 U2 경계, 이벤트 전송 시 event_id 새로 발급하지 않음. [CJ 제공 순서] ① lifecycle 저장 + descriptor import/export, ② 공유 usage 이벤트, 각각 검증 commit SHA 전달 예정. [진행 방침] 확정 호출 계약 기준 S3/gitsync 설계 갱신, 승인 Code Plan 범위 독립 구현만, 테스트 대역 가능하되 실제 공유 성공과 구분(미실행 NOT_RUN), CJ 공통 계약 승인 ≠ U2 전체 구현 승인, C-c(P1 검색·파일접근)는 A와 별도 조율 중 대기 유지. 반영 후 변경 파일 목록+audit 보고. push는 권한 해결 전까지 시도 말고 로컬 커밋까지만."
-**AI Response**: CJ 공통 의존성 확정을 FD·NFR·조율 문서에 반영. FD: §0 개정이력에 2차 확정 추가·D-1을 CJ store 저장·로드 제공(제공 ①, SHA 대기)·자체 lifecycle.json 미구현·exact ref 연결로 갱신, §3 S3 영속 라인 동일 갱신, §5 C4에 'export 대상 한정(C-b: store가 digest 검증·DEDUP/CONFLICT, S3는 공유 자격 판단한 정확한 후보만 export)'·'event_id 보존(C-d: 재발급 금지, 그대로 전송)'·확정 계약 기준 병행 규칙(제공 ①②·SHA 대기·CJ 계약 승인≠U2 전체 승인) 추가, §6 표를 확정(C-a/C-b/C-d)·대기(C-c)로 재작성, §9 NOT_RUN을 SHA 수신·실행 전 기준으로 재작성. NFR: §1 의존성 블록을 계약 확정(제공 순서·SHA 대기)+C-c 대기로 갱신, lifecycle tech-stack 행 갱신, §7 이월 항목 갱신. coordination-blockers: 상태 헤더·CJ 확정 요약(제공 순서·5항목·진행 방침)·요약표 재작성. 방침 준수: 확정 호출 계약 기준 설계만 갱신, 독립 구현은 승인 Code Plan 범위, 미실행 실검증 NOT_RUN, C-c 대기 유지. **push 미시도(권한 403 미해결) — 로컬 커밋까지만 진행.** 다른 Unit·메인 workflow 미변경.
-**Context**: CONSTRUCTION / U2 / Functional Design·NFR CJ 공통 의존성 확정 반영. FD 개정본 승인 대기, Code Plan 미착수. 확정 계약: C-a/C-b/C-d(CJ, SHA 대기). 대기: C-c(A).
-
----
-
-## U2 — work/u2-p1-git 원격 push 완료(권한 해결)
-**Timestamp**: 2026-09-08T09:10:22Z
-**User Input**: "git push -u origin work/u2-p1-git"
-**AI Response**: 권한 해결됨 — `git push -u origin work/u2-p1-git` 성공. 원격에 `work/u2-p1-git` 신규 브랜치 생성, 로컬 커밋 2건(`6f517d7` CJ FD 1차 검토 반영, `b0488ae` CJ 공통 의존성 확정 반영)이 모두 원격 반영. upstream=origin/work/u2-p1-git 설정. 원격 HEAD=`b0488ae378241c00f424edf8f5ade10fc1cbd312`. 이전 기록의 'push NOT_RUN(403)' 항목은 이 시점에 실제 완료로 갱신(과거 entry는 수정하지 않고 correction으로 append). 다른 Unit·메인 workflow·main 브랜치 미변경.
-**Context**: CONSTRUCTION / U2 / 설계 산출물 원격 반영 완료. FD 개정본 승인 대기·Code Plan 미착수 상태는 불변.
-
----
-
-> **[병합 정합화 노트]** 아래 3개 entry(08:53:02 / 09:04:54 / 09:08:45)는 `origin/main`(CJ 세션)에서 append된 U2 공통 의존성 계약·구현(C-a/C-b/C-d) 기록으로, `work/u2-p1-git` 병합(2026-09-08) 시 함께 보존한다. 위 B 세션 entry들과 timestamp가 교차하나 **양쪽 이력을 모두 보존**하며, 시간순 교차는 이 노트로 갈음한다. 실제 코드(store.py/usage.py/cli.py) 구현 상태는 두 이력이 정합한다.
-
 ## U2 공통 의존성 계약 정리 — 검토 요청(P0 A 인계 병행)
 **Timestamp**: 2026-09-08T08:53:02Z
 **User Input**: "B의 U2 착수 보고를 접수한다. A 인계 대기와 병행해 U2 공통 의존성을 해소해. 현재 main의 store.py에는 export_bundle/import_bundle이 없고, usage.py에는 공유 이벤트 저장·export/import가 없다. P0 완료를 기다리지 말고 아래 계약을 우선 정리해. 1. C-a: services.md는 S3가 상태를 소유·판단하고 SkillStore lifecycle 저장 계약으로 영속한다. B의 U2 자체 lifecycle.json 제안과 차이를 확인해 저장 구현 책임을 하나로 확정할 최소안을 제시해. S3 단일 상태 판단·쓰기와 읽기전용 조회 계약은 유지해. 2. C-b: CJ 소유 store의 descriptor import/export를 우선 준비해. S3가 판정한 exact candidate의 공유 자격 전달 방식 명확화, 미승인 후보 export 금지, digest 재계산 검증, 동일 id/version DEDUP·CONFLICT, content만 import, 원격 문자열로 로컬 승인·Replay 미생성 경계 유지. B의 별도 저장·검증 우회 금지. 3. C-d: 공유 usage 이벤트 최소 규격·호출 계약 우선 제공. counts/seen_run_ids만으로는 성공 근거 export 불가 → 이벤트 영속화·정확한 Skill 참조·성공 근거·비-DEMO·동일 이벤트 왕복 dedup. 기존 카운트에서 과거 이벤트·검증 근거 생성 금지. 4. A·B가 맞출 P1 검색·파일접근 Skill 적용·검증 계약 짧은 조율안. P0 인계 비지연. 기존 승인 문서·현재 코드만 사용, P0 Code Plan 승인을 미포함 공유 기능 구현 승인으로 간주 금지. 승인된 상세 계획 있으면 이어서, 없으면 최소 설계·Code Plan 보완만 묶어 검토 요청. Inception·전체 범위 재시작 금지. 결과는 B에게 전달할 계약·담당자·제공 순서 중심으로 보고. A 코드 도착 시 P0 통합 계속."
@@ -502,36 +452,6 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 - **검증**: `pytest tests/test_usage.py` 15 PASS(신규 8: 이벤트 생성 조건·역산 금지·event_id 결정성·왕복 dedup·로컬 존재 가드·자기 이벤트 왕복 불변·import counts 불변). **전체 pytest: 34 passed / 8 skipped**(26→34, A 스텁 SKIP 불변). CLI smoke: export1→import 1/1(counts 0·events 1)→재import dedup(events 1 불변) 확인.
 - README/EVALUATION 로컬 변경 미커밋 보존. match.py/reuse_service.py(A 단일 수정자) 미변경.
 **Context**: CONSTRUCTION / U2 공통 의존성 / C-d 구현·검증 완료. commit/push·SHA 보고 진행. A 패치 도착 시 P0 통합 병행.
-
----
-
-## U2 FD/NFR 정정 — P1 실패 모델 재정의 + CJ 구현 제공됨 반영 (CJ FD 검토 결과 반영)
-**Timestamp**: 2026-09-08T09:30:29Z
-**User Input**: "[1] P1 실패 모델 — 핵심 수정 (FD §1) 현재 모델('정상 XLSX를 텍스트/비-ZIP 방식으로 읽어 실패, ZIP/XML로 읽어 해결')은 채택하지 않습니다. 이는 부적절한 파서 사용의 교정일 뿐, 우리가 검증하려는 것이 아닙니다. 검증 대상은 다음입니다: '사내 환경 제약을 합성한 조건에서, 정상적인 직접 접근이 실패하고, 허용된 read-only 대안으로 해결하는 흐름' 따라서 다음을 최소 모델로 제시해 주세요: - 정상적인 XLSX 접근 방법이 어떤 합성 제약 때문에 실패하는가 - 허용 대안은 왜 가능한가 금지 사항: - 실패를 위해 잘못된 API를 선택하지 않습니다 - 강제 raise로 실패를 연출하지 않습니다 - Agent가 탐색할 대안을 제품 흐름에서 정답으로 자동 선택하지 않습니다 이 결정과 직접 파서·필요 의존성은 FD/NFR에서 정리하고, Code Plan으로 미루지 마세요. [2] CJ 공통 계약 — 실제 구현 제공됨 최신 main에 아래 커밋이 올라왔습니다: - ef03b3a: C-a lifecycle 저장 + C-b descriptor export/import - cfc62e9: C-d 공유 usage 이벤트 현재 작업 branch를 보존하면서 최신 main을 반영하고, 실제 API와 문서 시그니처를 맞춰 주세요. - export_bundle은 scope 문자열이 아니라 exact refs 목록을 받습니다 - usage import는 정확한 로컬 Skill 존재 확인을 연결해야 합니다 '구현 SHA 대기' 상태는 해소하되, 실제 연동 테스트 전까지 영속·공유 검증은 NOT_RUN을 유지하세요. audit/state 충돌은 양쪽 이력을 보존하고 현재 상태를 정합화하세요. [3] NFR 문구 정합화 - '외부 인터넷 미의존'은 로컬 업무·테스트 범위로 한정하고, GitHub 원격 sync에는 네트워크와 인증이 필요함을 구분하세요. - '화면에 계산 결과 미포함'은 수정하세요. P1 업무 결과에는 계산값을 표시해야 하며, 제외 대상은 공유 Skill/공유 bundle의 업무 데이터·계산 로직입니다. - 실제 시도했다가 403으로 실패한 push는 '실패 실행 근거'로 남기고, 미실행된 원격 성공/왕복 검증(NOT_RUN)과 구분하세요. [진행 순서] FD 확인 → NFR 확인 → Code Plan 승인 → 구현 순서를 유지합니다. 기존 NFR 초안은 재작성하지 말고 위 문구만 정정하세요. 반영 후 변경된 문단과 새 P1 실패 모델을 짧게 요약해 보고하고, 로컬 커밋 후 push까지 진행한 뒤 SHA를 알려주세요."
-**AI Response**:
-- **[1] P1 실패 모델 재정의(FD §1)**: 폐기 모델(텍스트/비-ZIP naive 파서 교정)을 명시 폐기. 신규 최소 모델 = **쓰기 금지(read-only) 환경 제약**. 파일은 정상 OOXML(손상·DRM·암호 없음), 제약은 **환경(쓰기 거부)**. 정상 직접 접근은 원본 옆 작업 산출물(잠금·임시 추출물)/수정 핸들을 요구 → read-only 표면에서 환경이 쓰기 거부 → **OS가 낸 실패를 실제 실행에서 관찰**(잘못된 API 선택·강제 raise 아님). 허용 대안 = 인접 쓰기·잠금 없는 **순수 read-only 스트리밍** → `zipfile`+`xml.etree`로 OOXML 파싱(성공). 대안은 **Agent가 탐색·선택·실행**(제품 흐름에서 자동 정답 선택 안 함). 시그니처 `setup_readonly_constrained_xlsx_env(path)->XlsxEnv`, `attempt_direct_access(path)->DirectAccessObservation{ran,ok,error,evidence}`. **의존성 FD/NFR 확정**: stdlib 전용(`zipfile`/`xml.etree`/`os`/`msvcrt`), openpyxl은 선택(데모용). Code Plan은 구현 세부(잠금/스트리밍 정확한 호출·에러코드 매핑)만.
-- **[2] CJ 구현 제공됨 반영**: 최신 main(`ef03b3a`, `cfc62e9`)을 work/u2-p1-git에 병합(audit.md 충돌은 양쪽 이력 보존·정합화 노트). 실제 API 정합: `store.export_bundle(refs: list[dict]) -> bytes`(exact refs 목록, scope 문자열 아님), `import_bundle(blob) -> list[PutResult]`, `save/load_lifecycle_state`·`list_lifecycle_records`, `usage.export_shared_usage() -> bytes`/`import_shared_usage(blob, local_ref_exists) -> list[dict]`. FD §0/§3/§5/§6/§9 + NFR §1/§2 + coordination-blockers를 "구현 제공됨"으로 갱신. "구현 SHA 대기" 해소. **실제 연동 통합 검증 전 영속·공유 검증은 NOT_RUN 유지.**
-- **[3] NFR 문구 정정(재작성 아님)**: (a) "외부 인터넷 미의존" → 로컬 P1 업무·테스트 범위로 한정, GitHub 원격 sync는 네트워크+인증 필요로 구분(NFR §1). (b) NFR-SEC-1 정정 — P1 업무 결과 화면은 **계산값을 표시**(실제 3개월+예상 1개월), 제외 대상은 **공유 Skill descriptor·공유 bundle**의 업무 데이터·계산 로직·원본·secret(NFR §5). (c) 403 실패 push = **실패 실행 근거**로 보존, 미실행 원격 성공/왕복(NOT_RUN)과 구분(NFR §4 note, FD §9).
-- 변경 파일: `functional-design.md`, `nfr-requirements.md`, `coordination-blockers.md`(U2 소유). CJ 소유 store.py/usage.py/cli.py는 병합 반영만(직접 수정 없음). A 소유 match.py/reuse_service.py 미변경. README/EVALUATION 미커밋.
-- **진행 순서 유지**: FD 확인 → NFR 확인 → Code Plan 승인 → 구현. 현재 FD/NFR **개정본 승인 대기**(Code Plan 미착수).
-**Context**: CONSTRUCTION / U2 Functional Design·NFR Requirements 정정 / CJ FD 검토 결과 반영. 로컬 커밋 후 push 진행.
-
----
-
-## U2 P1 실패 모델 확정 반영 ((가)안: Office 암호화 + Excel attach) + 최소 Code Plan + A 계약
-**Timestamp**: 2026-09-08T09:53:30Z
-**User Input**: "CJ가 P1 실패 모델을 확정했습니다. (가)안 수정 채택입니다. 다른 제약 모델 탐색은 종료하고, 같은 모델 선택을 다시 질문하지 마세요. 이미 검증한 실증 결과(암호화본 실패 / 평문 대조군 성공 / Excel attach 성공)를 설계 근거로 그대로 사용하고, 변경 없는 실증을 반복하지 마세요. [확정 모델] Office 암호화 합성 파일 + 실행 중인 Excel에 대한 허용 read-only 접근 [1] 실행 조건 - P1 Excel 시나리오는 Excel 설치·실행 및 사용자가 합성 파일을 열어둔 상태를 명시적 사전조건으로 선언합니다. - 필요한 Python/COM 의존성(pywin32 등)과 준비 절차도 선언합니다. - NFR-RUN-1의 전역 설정 비의존 조건에 대해 이 P1 시나리오 한정 예외가 승인됐습니다. P0 및 나머지 제품 실행 범위로 예외를 확대하지 마세요. - Excel 미설치 환경에서는 해당 P1 경로를 명확히 미실행(NOT_RUN)으로 표시합니다. [2] 독립 Replay 유지 (FR-P1-7 변경 없음) - 사용자가 합성 파일을 열어두는 것은 '환경 준비'이며 Replay 대상이 아닙니다. - Replay는 별도 실행 문맥에서 exact candidate의 절차를 실제 수행하고, 새로 획득한 결과로 접근 효과를 검증합니다. - 최초 실행의 artifact·획득 값·성공 판정을 재사용하지 않습니다. - 환경이 준비되지 않았으면 NOT_RUN이며 게시할 수 없습니다. - 사람 승인 + exact candidate 동일성 + 실제 Replay PASS 게이트는 그대로 유지합니다. [3] harness 경계 - harness는 합성 파일 준비·환경 준비·사실 확인만 담당합니다. - Agent에게 정답 절차를 자동 선택해 주지 않습니다. - 미리 획득한 업무 내용을 성공 결과로 제공하지 않습니다. - 사용자가 파일을 여는 준비 과정과 후보 절차 실행을 구조적으로 분리합니다. [4] 문서 반영 범위 (FD/NFR 정정만으로 끝내지 말 것) - aidlc-docs/inception/requirements/requirements.md 의 NFR-RUN-1에 P1 한정 예외를 기록합니다. - 영향받는 스토리(US-P1-1 등), FD, NFR, audit, aidlc-state를 최소 정합화합니다. - 기존 기록은 보존하고 전체 Inception을 다시 시작하지 않습니다. - FR-P1-7의 독립 Replay·게시 조건은 변경하지 않습니다. [5] 구현 연결 — 이번에 함께 제출 - A에게 전달할 procedure 실행 함수의 입력·출력·접근 성공 기준을 명시하세요. - 최소 Code Plan을 한 번에 제시하세요 (파일·호출 계약·실행 명령·검증 방법·작업 순서). - 미검증 상태인 독립 Replay는 구현 후 실제로 검증합니다. [보고] 반영 후 변경 파일 목록, requirements 예외 기록 문구, A 전달용 procedure 함수 계약, 최소 Code Plan을 보고하고 로컬 커밋 후 push까지 진행한 뒤 SHA를 알려주세요."
-**AI Response**:
-- **실증 반복 없음**: 직전 검증(암호화 직접접근 실패/평문 대조군 성공/Excel attach 읽기·원본 무변경)을 설계 근거로 그대로 사용. 다른 제약 모델 탐색 종료, 같은 모델 재질문 없음.
-- **requirements.md NFR-RUN-1**: P1 Excel 경로 한정 예외 기록(Excel 설치·실행 + 사용자 열람 + pywin32 명시 사전조건; P0·기타 범위 확대 금지; Excel 미설치→NOT_RUN; 게시 게이트 불변).
-- **stories.md**: US-P1-1(직접 parser=암호화로 BadZipFile 자연 실패, 대안=Excel attach) + US-P1-2 AC-2(실행 중 Excel attach read-only) 최소 정합(AC 불변).
-- **FD**: §1 실패 모델을 확정 모델로 재작성(암호화 제약·사전조건·직접실패 이유·attach 대안·의존성·harness 경계 + **A 전달용 `run_file_access_procedure` 계약**), §0 D-5 추가, §2 흐름·§4 C6 Replay(별도 실행 문맥·최초 artifact 미재사용·환경 미준비 NOT_RUN)·§9 NOT_RUN 갱신.
-- **NFR**: §2 tech-stack 3행(암호화 모델·표준 리더 직접실패·Excel attach 대안) + 확정 노트(pywin32+Excel, NFR-RUN-1 P1 예외) + §1 외부 의존(pywin32/Excel) + §3 실행 환경(암호화본·사전조건·read-only 경계) + U2-V1 갱신.
-- **coordination-blockers.md**: A(C-c) 통지에 `run_file_access_procedure` 실행 함수 계약(입력·출력·접근 성공 기준) 추가.
-- **최소 Code Plan 신규**(`construction/u2-p1-git/code-plan.md`): 파일·소유, 호출 계약, P1 모델 구현, 실행 명령(run-p1), 검증 방법(U2-V1~14·NOT_RUN 목록), 작업 순서 6단계. 미검증 독립 Replay는 구현 후 실제 검증 명시.
-- **불변 유지**: FR-P1-7 독립 Replay·게시 게이트, 기존 기록 보존, Inception 재시작 없음. CJ/A 소유 코드 미변경, README/EVALUATION 미커밋.
-- **진행 순서**: FD 확인 → NFR 확인 → Code Plan 승인 → 구현. 현재 개정본·Code Plan **승인 대기**(구현 미착수).
-**Context**: CONSTRUCTION / U2 Functional Design·NFR·Requirements(NFR-RUN-1 예외)·Stories·Code Plan / P1 실패 모델 확정((가)안) 반영. 로컬 커밋 후 push 진행.
 
 ---
 
@@ -613,6 +533,243 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 **User Input**: "CJ의 최우선 목표를 승인된 P0 자연어 수용 검증으로 정합. A/B 현재 승인 작업 유지. 이번 지시는 추가 구현 포괄 승인 아님. 1) 공식 규칙·승인 산출물 기준 C9/match CLI 대응 Code Plan·승인 근거 확인. 있으면 파일 경로·단계 제시. 누락됐다면 기존 승인·구현 이력 보존하고 누락 사실·현재 구현 상태를 지금 기록. 소급 작성 금지. 구현 결과 검토와 앞으로 수정 계획 구분. 2) P0 자연어 수용 검증 남은 작업을 FR-SURF-1/FR-P0-1~4/US-P0-1·승인 설계에 대응. 목표 요청='이 프로젝트 requirements.txt의 패키지를 설치하고 실제로 사용할 수 있는지 확인해줘.' 승인된 합성 패키지·환경 범위 검증. 임의 패키지 전체 지원·P1 일반화 선행 확대 금지. 기존 코드 재사용만으로 가능하다 단정 말고 실제 계약·실행 환경 차이 확인. 3) 가능한 검증과 추가 구현 구분. 추가 필요하면 설계 영향·수정 파일·소유자·검증 절차를 최소 수정 Code Plan으로 검토 요청. 승인 전 미착수. 기존 승인 검증은 반복 승인 없이 진행하되 발견 문제로 승인 범위 넘어 수정 금지. 4) 완료 기준=새 세션 업무 요청만→실제 실패→검색·적용→설치·버전·import 검증→C3 실적. run-p0 대체 금지. 기존 CLI PASS 보존·구분. 5) B 수정 종료 확인·8c7999a 확인 후 세 파일 CJ 소유권 이관을 Unit/계획/state 반영. 소유권 인수와 새 구현 승인 구분. CJ 해당 구현은 P0 자연어 수용보다 후순위. 전체 재시작·되돌림 금지. 공식 규칙·외부 Reference 미변경. audit 실제 시각 append·기존 보존. 다음 보고=①추적성 ②남은 작업 ③최소 Code Plan 검토요청 한 번에."
 **AI Response**: "① 추적성: C5 match.py 모듈=Code Plan 있음(p0-u0u1-code-generation-plan.md S7, A). U3=u3-minimal-design.md. **C9 SKILL.md·`match` CLI=Part 1 Code Plan 아티팩트 누락**(설계 근거·대화 승인은 있음, 계획은 audit/state 산문에만) → 누락 사실·현재 구현 상태를 지금 기록: `plans/c9-match-traceability.md`(구현 후 기록, 소급 아님). 기존 승인·구현(`810c9f6`, 66 passed) 보존. ② 남은 작업: match(검색)=기존 가능. **요청 기반 실패 재현(AC-1)·관찰 기반 적용+검증+카운트(AC-3/AC-5, 비-run-p0)=미구현.** 확인된 실제 차이: run-p0는 requirements.txt 미참조·대상 하드코딩·데모 호출; `reuse_service.apply_and_verify`는 harness 합성 상수(TARGET_VERSION/IMPORT)·index 이름 결합→합성 범위 한정; 무검증 카운트 CLI 금지(FR-USAGE-2). ③ 최소 수정 Code Plan(검토 요청, 착수 전): `plans/p0-nl-acceptance-plan.md` — 신규 `apply-requirements` 오케스트레이션+합성 픽스처(requirements.txt), 기존 C5/S1/C3/C7 **호출만**(로직 미복제), 중복 회피는 run_p0와 행위보존 헬퍼 공유(a)/독립 호출(b) 검토, A/B 미수정, NFR-SEC-4·FR-P0-2 합성 범위 유지, P1 일반화 제외. 완료=새 세션 업무 요청만→apply-requirements→실제 실패→검색→적용→검증→C3(사용자 확인 라이브). ⑤ 소유권: B 커밋 **8c7999a**(hanseokhun, 19:20 KST, envharness_p1) `origin/work/u2-p1-git` HEAD 확인. 세 파일(experience_service/publish_pipeline/gitsync)·replay.py는 **브랜치에 미생성** → 이관=구현 소유권 B→CJ(코드 이동 아님). unit-of-work.md·state 반영. **소유권 인수 ≠ 새 구현 승인.** CJ 해당 구현은 P0 자연어 수용보다 후순위. 코드 미착수(문서만). 기존 CLI PASS·구현 보존, 되돌림 없음."
 **Context**: 추적성 확인(C9/match Code Plan 누락 기록) + P0 자연어 수용 남은 작업(요청 기반 apply-requirements 미구현) + 최소 Code Plan 검토 요청 + 8c7999a 소유권 이관 반영. 구현 미착수(승인 대기).
+
+---
+
+
+---
+
+## CJ 메인 인계 수신 — Codex/Astra
+**Timestamp**: 2026-09-08T10:43:23Z
+**User Input**:
+
+인계 상태 확인 완료. 새 구현·계획 수정은 시작하지 않았습니다.
+
+- HEAD: a22e176 (main), origin/main과 동기화됨(ahead/behind 없음).
+- 미커밋 파일: EVALUATION.md, README.md 두 개뿐 — 보존(건드리지 않음). 다른 추적/미추적 변경 없음.
+- 실행 중 백그라운드 작업: 없음 (jobs 비어 있음).
+- CJ 파일 수정: 중단됨. p0-nl-acceptance-plan.md는 REVIEW REQUIRED 상태 그대로이며 승인 대기 — make_clean_venv/setup_failing이 사용자 요청 작업 환경을 별도 데모 환경으로 대체하는지에 대한 검토 지적은 미해결 항목으로 남겨둡니다. 제품 코드(cli.py 등) 미수정.
+- A/B의 승인된 병렬 작업은 그대로 유지됩니다.
+
+Codex/Astra로 메인 작업 인계 준비 완료 상태입니다.
+
+**AI Response**: 사용자 전달 인계 보고를 근거로 CJ 메인 역할을 인수했다. HEAD a22e176 및 README/EVALUATION만 미커밋임을 확인. 기존 .aidlc-rule-details/와 승인 문서·코드를 대조하고 P0 자연어 수용 계획을 개정 2 검토안으로 작성했다. 준비 단계와 지정 작업 venv의 업무 실행을 분리하고, 기존 run-p0 리팩터링 없이 기존 C5/S1/C3를 호출하도록 제안. state의 현재 단계·코드 존재·작업 우선순위만 정합화. 제품 코드·테스트는 미수정, 새 수용 실행 NOT_RUN. 기존 C9 계획 누락은 구현 후 추적성 기록으로 유지하며 소급 승인하지 않았다. Security/Resiliency 전체 baseline Disabled를 유지하고 핵심 NFR 적용. PBT Partial 02/03/07/08/09는 계획의 검증 단계에 반영. 간단한 PowerShell 조회 명령 구문 오류 1건은 쓰기 전에 발생하여 수정 후 조회했으며 제품 테스트 실패가 아니다.
+**Context**: CONSTRUCTION / U0-C9 P0 자연어 수용 Code Generation Part 1 REVIEW REQUIRED. CJ 메인=Codex/Astra. 과거 기록 보존, 제품 추가 구현 미착수.
+
+
+---
+
+## A/B 전달 수신 및 통합 전 코드 검토
+**Timestamp**: 2026-09-08T10:43:24Z
+**User Input**:
+
+P1 확장 구현 → PR 전달 완료
+
+구현 (승인 범위 그대로, 담당 4파일 중 3개만 변경):
+
+- skillloop/reuse\_service.py — apply\_and\_verify(..., \*, file\_access\_runner=None)가 procedure.action으로 분기. P0 본문은 \_apply\_pip\_install로 그대로 이동(동작 불변). 새 FileAccessResult는 로컬 artifact\_ref+근거만 반환(업무 원문 미포함). 실제 성공 = 접근 ok AND 근거 존재 AND 로컬 artifact 확보. B의 run\_file\_access\_procedure는 late-bind, 미확정 시 NotImplementedError로 실제 연결과 대역을 구분.
+- tests/test\_reuse\_service.py — P0 회귀 2개 보존 + P1 대역 4개.
+- tests/test\_match.py — 기존 3개 보존 + file-access-fail 신호 매칭 1개.
+- match.py는 검색이 신호 비의존(제네릭)이라 무변경.
+
+검증 (전부 실제 실행):
+
+- 담당 테스트 10 passed (P0 회귀 5 + P1 신규 5)
+- 전체 71 passed (최신 main 위, skip 0)
+- run-p0 reuse counted=True (pip 경로 실제성공 보존)
+
+전달 — git 권한이 승인돼 패치 대신 CJ 요청대로 push + PR:
+
+- PR #1: [https://github.com/THEGREATCJPark/ddthon/pull/1](https://github.com/THEGREATCJPark/ddthon/pull/1) (base main, 3파일 +249/-15 = P1 델타만)
+- CJ가 P0를 이미 main(810c9f6)에 통합해둬서, P1 커밋만 최신 main 위로 rebase → PR이 P1만 담아 리뷰가 깔끔합니다.
+
+CJ에게 보낼 것: PR #1 링크가 주 전달물입니다 (GitHub에서 리뷰/머지). 기록 파일은 D:\U1-P1-report-v2-PR-hogil.txt, fallback 패치는 D:\u1-p1-7a37743.patch.
+
+석훈(B) 대기: 실제 모듈 경로·시그니처 확정되면 \_default\_file\_access\_runner의 import 한 줄만 조정하면 연결됩니다.
+
+
+
+위가 A 답변과 PATCH 파일 첨부
+
+
+
+밑에가 B 답변 
+
+[B / U2 — ② replay.py 완료, 담당 범위 마무리]
+
+1. branch / 최종 SHA
+   work/u2-p1-git / 1760d32 (원격 반영 완료)
+   커밋 흐름: 711466f(① procedure 실사용 강화) → 2886a63(② replay.py + 테스트) → 1760d32(audit)
+
+2. 변경 파일
+
+- skillloop/replay.py (신규, C6 ReplayVerifier)
+- tests/test\_replay.py (신규, 9케이스)
+- skillloop/envharness\_p1.py, tests/test\_envharness\_p1.py (procedure 인자 실사용 강화)
+- aidlc-docs/audit.md (append)
+- 이관 3파일: 미수정 (CJ 인수 대상, 손대지 않음)
+
+3. 실행 명령과 결과
+   $ python -m pytest tests/test\_replay.py -p no:faulthandler -v
+   9 passed in 0.11s
+   $ python -m pip install "hypothesis>=6"
+   Successfully installed hypothesis-6.167.1
+   $ python -m pytest -p no:faulthandler
+   61 passed in 112.36s, skip 0
+
+※ 이전 "48 passed"는 hypothesis 미설치로 PBT가 제외된 범위였고,
+현재 61 passed는 누락 없는 전체 범위입니다.
+실 Excel attach 실증 테스트도 이 환경에서 PASS.
+
+검증 항목 반영 확인:
+
+- exact candidate {id, version, digest} 대상 실행, digest 재계산 동일성 근거 기록
+- 최초 결과 미재사용: replay() 시그니처에 최초 결과 인자 없음(구조적 불가)
+  - 상태 리더 호출 #1(A)/#2(B) 케이스로 Replay가 새로 접근해 B를 반영함을 실증
+- read-only 근거: PASS 시 original\_unchanged=True, save\_called=False,
+  sha256\_before == sha256\_after
+- 환경 미준비(app\_open=False)·attach 미가용(method="none") → NOT\_RUN
+  실행 후 미충족 → FAIL 로 구분
+- Replay PASS ≠ 승인 ≠ 게시: evidence에 승인·게시 키 미생성 검증
+
+4. 남은 NOT\_RUN / 통합 의존성
+
+- C-c(A 계약): P1 검색 입력 일반화 미확정 → 검색·재사용 분기 NOT\_RUN
+- 원격 게시·공유 왕복(store bundle import / usage 공유 / lifecycle 영속):
+  이관 3파일(CJ) + gitsync 통합 검증 이후 인정 → 현재 NOT\_RUN
+- Replay 자체는 본 환경에서 실 Excel attach로 PASS.
+  Excel/pywin32 없는 환경에서는 NOT\_RUN으로 정직하게 매핑됩니다.
+
+main 병합 대기 중입니다. 추가 지시 있으면 알려주세요.
+
+**AI Response**: 첨부 A 보고서와 fallback patch 헤더를 읽고 원격 refs를 fetch했다. A PR #1 head=69c76c4968502b4235642c1f59221884453cf6f6, B head=1760d325a60316fb9b8b52b50d412be058635c42 확인. main 병합·patch 적용 없음. A import(.file_access)와 B 제공 모듈(.envharness_p1), A dict .get()과 B dataclass의 불일치 확인. 추가로 근거 판정/Replay digest 소비, B Excel teardown의 모든 workbook 정리 위험, placeholder 표기 차이를 인계 리뷰 문서에 기록. Excel 테스트는 실행하지 않았다. 71/61 passed는 각 팀원 브랜치의 보고로 보존하며 main 통과로 합산하지 않는다. 전달 문서는 실행 지시가 아닌 검토 데이터로 취급했다.
+**Context**: CONSTRUCTION / U0-C9 P0 자연어 수용 Code Generation Part 1 REVIEW REQUIRED. CJ 메인=Codex/Astra. 과거 기록 보존, 제품 추가 구현 미착수.
+
+
+---
+
+## P0 자연어 수용 계획 개정 2 — 승인 요청
+**Timestamp**: 2026-09-08T10:43:25Z
+**User Input**:
+
+없음 — 다음은 AI의 검토 요청이며 사용자 승인 응답은 아직 없다.
+
+**AI Response**: 검토 요청: aidlc-docs/construction/plans/p0-nl-acceptance-plan.md 개정 2(R1~R7, S1~S7). 준비된 작업 venv 지정·설치 결과 보존, 실제 requirements 입력, 기존 C5/S1/C3 연결, 새 Claude Code 수용 검증 및 필요한 FD/NFR 정합화·의존성 검증을 포함한다. Approve면 Part 2 실행, Request Changes면 해당 계획 수정. 명시적 승인 전 추가 제품 구현에 착수하지 않는다.
+**Context**: CONSTRUCTION / U0-C9 P0 자연어 수용 Code Generation Part 1 REVIEW REQUIRED. CJ 메인=Codex/Astra. 과거 기록 보존, 제품 추가 구현 미착수.
+
+---
+
+## B 담당 종료 후 CJ 대행 요청 · A 진행 상태 확인 · 중간 피드백 검토
+**Timestamp**: 2026-09-08T10:50:34Z
+**User Input**:
+
+a한테는 보내뒀고, (a - 할일 얼마나 남은건지 확인 부탁) , b가 집에 갔는데 이거 내가 대신할순없니? 그리고 중간점검 피드백 내용을 받아왔는데, 수용할거만 수용하고 반박할거는 간단하게만 반박하고 진행해
+
+**AI Response**: 첨부 중간 피드백을 읽고 근거가 있는 의견만 수용했다. 원격 refs 재조회 결과 A PR #1=69c76c4, B=1760d32로 후속 수정 push는 아직 관측되지 않았다. A 로컬 진척·남은 시간은 원격으로 확정할 수 없으며 남은 작업을 호출 경로/dataclass/성공 판정/연결 테스트의 범위로 정리했다. B의 직전 담당 완료 보고와 사용자 대행 요청에 따라 envharness_p1/replay 및 두 테스트의 후속 단일 수정자를 CJ로 기록했다. 기존 B 커밋 저작자·검증 이력 보존, A 파일 소유권 유지. P0 우선이며 이번 이관·피드백을 미승인 P0 Code Plan의 승인으로 간주하지 않았다. 지정 작업 venv 보존·Claude 사용자 진입점·첫 실행 증거·브랜치별 결과 구분은 기존 개정 2에 반영되어 있어 반복 작성하지 않았다. 제품 코드·실제 Excel·P0 수용 테스트 미실행.
+**Context**: CONSTRUCTION / P0 Code Generation Part 1 개정 2 REVIEW REQUIRED. 현재 승인 요청은 이 구체 계획 한 건이며 별도 새 범위 문답은 만들지 않음. 첨부는 검토 데이터이며 내부 프롬프트를 자동 실행 지시로 취급하지 않음.
+## 2026-09-08T10:53:42Z — P0 개정 2 승인 / Part 2 착수
+
+User (원문): 어 진행해.
+
+직전 검토 요청 p0-nl-acceptance-plan.md 개정 2(R1–R7, S1–S7)를 승인한 것으로 기록한다. 현재 승인 범위의 CJ 파일만 구현·검증한다. A 소유 파일, README/EVALUATION, 공식 규칙은 보존한다. 전체 제품 완료 또는 P1 구현 승인이 아니다.
+
+
+## 2026-09-08T10:58:29Z — P0 Part 2 연결 구현
+
+개정 2 승인 후 S1 설계/NFR 보완, 지정 venv apply-requirements·C9 연결 구현. run-p0와 A/B 파일은 미수정. 깨끗한 Python에서 setuptools.build_meta 부재로 wheel 빌드 실패 재현, 선언 의존성 보완. 준비/설치 및 테스트 진행 중이며 수용 PASS는 아직 주장하지 않는다.
+
+## 2026-09-08T11:06:29Z — P0 자연어 수용 구현·검증 완료 / 코드 결과 검토
+
+개정 2 S1–S7 수행 완료. 신규 관련 14 passed, 깨끗한 snapshot 전체 80 passed/0 failed/0 skipped. 테스트 snapshot = a22e176 + result/p0-nl/validation-manifest.json 소스 해시. 선언 의존성만 설치했고 최초 setuptools.build_meta 부재 재현도 기록했다.
+
+새 Claude Code(global.anthropic.claude-opus-4-8)에서 요청 “이 프로젝트 requirements.txt의 패키지를 설치하고, 실제로 사용할 수 있는지 확인해줘.”로 검증. 1차 테스트 권한 거부로 중단, 2차 Windows 경로 허용 정합화 후 실제 실패→MATCH→S1 검증→C3 reuse=1 및 별도 import/version PASS. 2차 다중 행 명령 1회 거부 후 같은 명령 한 줄 재시도도 기록 보존. 3차 이미 설치된 환경은 INSTALL_OK_NO_REUSE/+0. 요구 파일/Skill store 해시 불변, venv 잔존, 이벤트 1건.
+
+result/p0-nl/에는 실제 도구 호출·출력·독립 확인·테스트 로그와 소스 해시를 보존했다. 개인정보 경로를 치환했고 비밀 설정/모델 thinking은 제출 증거에 넣지 않았다. UI 화면을 연출하거나 캡처 완료로 주장하지 않는다.
+
+직접 사용자 시험용 별도 신규 Desktop/skillloop-p0-work를 준비했다(미설치·실적 0). A/B 코드·기존 run-p0·README/EVALUATION·공식 규칙은 변경하지 않았다. 기존 계획 누락 기록도 소급 수정하지 않았다. 현재 Code Generation 결과 REVIEW REQUIRED이며 전체 P1/제품 Build and Test/제출 완료가 아니다. 이번 변경은 아직 커밋·push하지 않았다.
+
+## 2026-09-08T11:11:33Z — 하단 UI 누락 확인 / A 최신 PR 수신
+
+사용자 요청 요지: 약속한 팀명·기여·기여 1위·인기 Skill·데모/실제 구분의 여러 줄 하단 UI가 보이지 않음을 지적하고 A cb25a62 전달 보고를 제공했다.
+
+실제 확인: statusline.py는 한 줄 출력, 새 P0 작업 폴더에는 statusLine 설정 없음, 기존 status 기본 저장 경로와 새 작업 경로도 다름. P0 수용 PASS는 유지하되 하단 UI 완료로 승격하지 않는다.
+u3-statusline-followup-plan.md에 기존 승인 UI 범위의 최소 후속 Code Plan 작성. 네 줄 표현/프로젝트 설정/실데이터 경로/검증 범위를 구체화했고 아직 제품 코드·설정은 수정하지 않았다. 사용자 예시의 20회·게시 수·1위를 사실 없이 고정하지 않는다.
+
+공식 Claude Code statusline 사용 문서에서 multiple lines/project settings 지원 확인. 이는 도구 사용 문서이며 ttt 등 외부 사전 구현을 검색/참조한 것이 아니다.
+
+git fetch로 origin/review-pr-1 cb25a62 수신. 코드 diff에서 A 요청 3건 반영을 확인했다. A의 74 passed는 팀원 보고로 유지, CJ 통합·실 Excel 검증은 미실행. A 추가 설계 문답 대신 CJ 통합 검증 단계로 인수 가능하다. main 병합은 아직 하지 않았다.
+
+검토 요청: u3-statusline-followup-plan.md S1–S6 승인 후 구현. 기존 P0 코드 결과 REVIEW REQUIRED도 보존한다.
+
+## 2026-09-08T11:13:37Z — U3 하단 상태줄 보완 승인 / 구현 착수
+
+사용자 승인 원문: “어 구현하고”. 같은 메시지에서 사용자 P0 라이브 실행 로그와 A 답장 정리를 요청했다.
+u3-statusline-followup-plan.md S1–S6 승인으로 기록한다. C11 네 줄 표현, 명시적 데이터 경로, 프로젝트 설정과 검증을 구현한다. 팀 연결/게시/DEMO 수치를 만들지 않는다.
+사용자 로그: 일반 pip 실패, 잘못된 match 인자·기본 경로로 스캔 0건, 이어서 apply-requirements의 정확한 store 및 정규화 신호로 MATCH→검증→reuse=1, 별도 import/version 성공. 최종 성공과 중간 검색 혼선을 구분한다. 기존 승인 P0 C9 안내의 중복 지시를 정합화하고, match의 기존 store_path 계약도 CLI 인자로 연결한다(매칭 알고리즘·A 코드 변경 없음).
+
+## 2026-09-08T11:18:19Z — 하단 UI 사용자 화면 확인
+
+질문: 설정을 연결했습니다. 지금 skillloop-p0-work의 Claude Code 하단에 🧠 SkillLoop로 시작하는 네 줄 상태가 보이나요?
+사용자 응답 원문: 네, 네 줄이 보입니다
+
+실제 하단 표시를 사용자 확인으로 기록한다. 도구의 stdout 검증과 구분하며 스크린샷을 획득했다고 주장하지 않는다.
+
+## 2026-09-08T11:20:30Z — U3 후속 구현·검증 완료
+
+네 줄 상태줄 및 프로젝트별 고정 경로 설정 연결 완료. main/skillloop-p0-work의 .claude/settings.local.json만 보존 병합, 글로벌 설정/토큰 미접근. 준비 도구가 새 작업에도 설정을 생성한다.
+UI 관련 30 passed, 전체 86 passed/0 failed/0 skipped, pytest exit 0. 실제 Git Bash+Claude stdin JSON+프로젝트 밖 cwd에서 4줄/실제 1회 출력 확인. 별도 새 합성 환경 실제 설치로 표시 0→1 확인. 사용자가 네 줄 하단 표시도 확인했다.
+사용자 P0 venv import/version=1.0.0, 실적1/run_id 유지, requirements/store/usage 해시 보존. C9 중복 검색 지시 정정 및 match --store 연결. 새 C9 문구의 추가 fresh Agent 실행은 하지 않았으며 기존 사용자 성공과 구분한다.
+A 코드/main 병합은 이번에 수행하지 않았다. README/EVALUATION/공식 규칙 보존. result/statusline에 실제 증거, 계획 체크박스·state 정합화. 현재 코드 결과 REVIEW REQUIRED, 전체 제품 완료 아님. 아직 커밋·push하지 않았다.
+
+## 2026-09-08T11:26:24Z — P0 관찰/검색 결함 수정 요청 수용
+
+사용자 지시: “이 피드백을 참고해서 ai-dlc에 충실하게 수정을 진행해보자.” 및 AI-DLC 종료/후속 수정 절차 질문.
+피드백의 관찰값 정규화·불필요한 테스트 용어 제거·자연어 재검증을 수용한다. 전체 P0 e2e 실패 판정은 사용자 전체 로그의 apply-requirements MATCH/설치/검증/reuse=1 및 독립 확인과 충돌하므로 수용하지 않는다. 성공 이력은 보존하고 앞선 잘못된 별도 match 호출만 결함으로 기록한다.
+
+기존 승인 P0 Code Plan R3 실제 실패→FailureObservation→C5 범위의 결함 수정으로 처리한다. 새 제품 기능·Unit·P1 일반화를 추가하지 않는다. 구현 전 같은 계획에 관찰 정규화 helper/실제 stderr 입력 연결/회귀·새 Agent 1→2 검증 순서를 보완한다. match/reuse_service(A)는 미수정. 과거 기록 소급 변경·전체 Inception 재시작 없음.
+
+## 2026-09-08T11:33:59Z — P0 observation defect correction and acceptance verification
+
+- User explicitly requested AI-DLC-aligned correction. Existing P0 Code Plan D1-D5 completed; no new product scope or official workflow rule edits.
+- Actual pip exit/stderr/target normalization shared by C8 paths; explicit work-store observation input; raw signature misuse rejected without false NO_MATCH.
+- Targeted normalization/statusline tests 21 passed; existing P0 regression 22 passed, exit 0. Earlier full-suite results remain associated with their earlier source snapshots.
+- Fresh Claude natural-language request: real internal pip failure -> canonical observation -> MATCH -> install/version/import -> actual reuse 1 to 2. run_id 457588103ff547ed936309e715d30487. Original user venv remains installed; new work venv preserved; store/requirements hashes unchanged.
+- Initial standalone pip redirection request was permission-denied, not executed. Subsequent allowed product path performed actual pip failure observation; both facts preserved.
+- Current location: CONSTRUCTION code result REVIEW REQUIRED. P1 and overall Build and Test incomplete. Evidence: result/p0-observation/. No commit/push this step; README/EVALUATION preserved.
+
+## 2026-09-08T11:40:29Z — P0 generalization and environment review
+
+User requested overfitting/overconfiguration review and supplied a fresh Claude P0 result. Reviewed current code, local test context/settings and existing approved single-synthetic-package plan. Read-only probes confirmed alternate package/version/spelling rejection; same procedure with another identity fails the hardcoded approved digest equality; generic observation normalization itself handles another package. Existing work test run 09106bdcbd744149af3bc013690ab447 has one actual reuse event; independent import/version probe succeeded without reinstall or extra count.
+
+Verdict: existing synthetic P0 PASS remains valid; generalized package recovery and portable product setup are not established. Runtime fixture dependencies, session-local Python path, fixed version/import and example-bound approval are recorded in construction/U0-P0/code/p0-generalization-review.md. No product/configuration modifications, no scope approval inferred, no historical PASS overwritten. CONSTRUCTION code review remains open.
+
+## 2026-09-08T11:51:47Z — P0 reproducibility and conditional P1 authorization
+사용자 원문: 어 과적합으로 구현하는건 지양해야해. 그리고 현재까지의 피드백을 받아왔으니 확인하고 수용할것만 수용하고 멈추지말고 p0을 재현 가능하게 정리하고, 너가 직접 테스트를 3회 동작하고, 그 로그를 잘 기록해둬. 그리고 결과가 괜찮으면 p1 구현까지 돌입해도돼. ai-dlc 절차를 충실히 이행해.
+사전 계획: construction/plans/p0-repro-p1-continuation-plan.md. 기존 승인 P0 범위 재현과 3회 실제 실행; 통과 후 기존 승인 P1 진행을 허가한 것으로 적용. 새 범용 엔진/게시 게이트 완화 아님. 현재 순차 실행 시작.
+
+## 2026-09-08T12:08:43Z — P0 acceptance gate met; P1 continuation
+P0: fresh checkout-local runtime, 3 Claude work environments all actual PASS (0→1 each), full pytest 93 PASS/exit0. One permission/API interrupted attempt retained; no product code changed to force that result. result/p0-reproduction/. User conditional authorization now satisfied; continuing existing approved P1 under p1-cj-integration-contracts.md.
+Imported A cb25a62 and B 1760d32 handoff source; original source attribution in u2-p1-git/handoff-files.json. B audit/state preserved as handoff files; main audit append-only. This is working-tree integration, not a claimed GitHub PR merge.
+2026-09-08T12:19:48Z — Real Excel integration attempted with isolated DispatchEx; timed out (FAIL_TIMEOUT). Known test Python processes and only newly created test Excel PID were stopped after identity/time checks. No prior user Excel instance existed. Replay on real Excel remains unverified; mocked/Git results are separate.
+2026-09-08T12:25:56Z — P1 implementation progress: imported A/B contracts, fixed digest-before-Replay and owned Excel cleanup, implemented S2/S3/C4 and CLI/provider wiring. Targeted service tests 9 PASS (includes real local bare Git, not GitHub; Excel reads are test doubles). Real Excel attempt remains FAIL_TIMEOUT. PBT Partial retained (02/03/07/08/09); security/resiliency extension opt-outs retained while approved NFR protections remain enforced. No official rule modifications.
+2026-09-08T12:27:36Z — P1 integration results: full collected suite 130 PASS/2 SKIP, exit0; additional final services suite9 PASS including two later CLI/provider tests. Product source hashes and test timing in result/p1-integration/validation.json. Real Excel FAIL_TIMEOUT retained, GitHub and full Agent P1 lifecycle NOT_RUN. P0 original reproduction snapshot remains93 PASS and 3 successful work environments (interrupted attempt preserved). Code results REVIEW REQUIRED; no whole-product completion, no commit/push; README/EVALUATION and official rules unchanged.
+
+
+## P1 scenario correction approved continuation
+Timestamp: 2026-09-08T13:37:23.999089+00:00
+User (raw): 좋아 그럼 이제 계속해서 진행해봐.
+Approved preceding eight-step plan; NASCA(가상) display; no new product candidate approval. Backup: skillloop-preserved-20260908-223723.zip; plan: construction/plans/p1-scenario-correction-plan.md. Existing rules and old audit retained.
+
+
+## Scenario correction and real Excel investigation
+Timestamp: 2026-09-08T13:51:22.678590+00:00
+Approved plan implementation: capability/task split; integrity and reuse eligibility guards; COM error phases; chart generation. Probe reproduced timeout specifically in Workbooks.Open after successful encrypted SaveAs. Preparation now retains the already open saved workbook; real Excel integration test 1 PASS. Original timeout logs retained. Cold Agent observed failure/NO_MATCH and discovered Excel app access; procedure schema discoverability defect observed and error contract clarified during this diagnostic run. Final acceptance must identify this iteration. No human candidate approval recorded.
+
+
+## Preserved U2 branch audit during original-commit integration
+Integration timestamp: 2026-09-08T13:57:05.498661+00:00
+The entries below retain B branch event times; append order is integration order, not revised event time.
+
 ## U2 구현 착수 — 최신 main 병합 + 항목 1(A 계약)·2(CLI 진입점)·4(문구 정정) 확정
 **Timestamp**: 2026-09-08T10:04:34Z
 **User Input**: "CJ가 bb3ac2e의 FD·NFR·Code Plan을 승인했습니다. U2 구현에 착수하세요. 모델과 확정 조건은 다시 승인 요청하지 마세요. [먼저 할 일] 1. A 연결 계약 확정(run_file_access_procedure 실제 모듈 경로·시그니처). 2. CJ 전달용 CLI 진입점 명세(cli.py=CJ 소유; run-p1/store-init 직접 추가 금지, 서비스 진입점·인자 규격 정리). [구현 중] 3. 접근 검증(read-only 획득) vs 업무 입력 검증(S2, 3개월·month/total_output) 분리, S1 상위 반환은 로컬 artifact_ref+접근 근거 연결, 업무 내용 공유 제외. 4. 최신 기준 반영(A P0 검색 main 7256272 통합·검증 완료; match.search '스텁/NotImplementedError' 문구 정정, 필요한 P1 확장만 연결; 최신 main 반영·기존 커밋 보존). 5. NOT_RUN 해제(C-a/C-b/C-d 코드 제공됨→연결 후 실제 검증, 실행 항목 PASS/FAIL 갱신). [작업 순서] ①run_file_access_procedure+테스트 ②Replay ③publish_pipeline ④gitsync 각 단계 push. [소유 경계] B: envharness_p1/experience_service/publish_pipeline/replay/gitsync + 테스트. 수정 금지: descriptor/store/usage/envharness_p0/cli(CJ), match/reuse_service(A). [보고] 먼저 1·2 확정 보고 후 ①단계 착수. 각 단계 push마다 SHA·실제 테스트 결과. 미실행=NOT_RUN, 실행 실패=FAIL 정직 기록."
@@ -638,3 +795,13 @@ U0의 P0 필수 부분과 U1 산출물을 짧게 생성한 뒤, P0 착수에 필
 ## Merge provenance
 Timestamp: 2026-09-08T13:47:31.779741+00:00
 Merged A cb25a62 and B 1760d32 preserving their original commits/authors. Audit conflict resolved by retaining both sides in sequence, no historical entry rewritten. CJ integration code follows separately.
+
+
+## Current correction validation
+Timestamp: 2026-09-08T13:57:05.498711+00:00
+Cold Agent completed real file task and created exact candidate 359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af; human approval requested and pending. P0 two-package test and legacy failure regression: 2 PASS after preserving a failed compatibility test. No candidate human approval invented. README current behavior updated preserving team-hub section; EVALUATION only outdated weighting sentence corrected. Original user files remain in pre-change backup.
+
+
+## Final source regression for scenario correction
+Timestamp: 2026-09-08T14:01:24.215554+00:00
+python -m pytest --hypothesis-seed=20260908 -o addopts= -q: 139 PASS / 2 SKIP / exit0, 267.31s. Skips are opt-in Excel (separate actual test 1 PASS) and missing-B-module N/A after integration. P0 two-package + failed-service compatibility rerun 2 PASS. Cold actual chart/candidate available; human approval pending, no remote publish/Warm success claimed. A cb25a62 and B1760d32 original ancestry merged in integration branch; CJ changes recorded separately next.

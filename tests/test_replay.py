@@ -14,6 +14,7 @@ Excel/pywin32 미의존: 실제 attach는 _read_via_excel_attach 주입으로 �
 """
 
 from __future__ import annotations
+from tests.p1_helpers import snapshot, PROC, MAPPING
 
 import pytest
 
@@ -24,7 +25,7 @@ from skillloop.envharness_p1 import EnvContext
 
 
 _ROWS = [("2026-05", 1200), ("2026-06", 1350), ("2026-07", 1500)]
-_PROC = {"action": "read-open-workbook", "sheet": 1, "columns": ["month", "total_output"]}
+_PROC = dict(PROC)
 
 
 def _make_candidate(procedure=None) -> desc.Descriptor:
@@ -49,7 +50,7 @@ def _make_env(tmp_path, app_open=True) -> EnvContext:
 def test_replay_returns_exact_candidate_ref(tmp_path, monkeypatch):
     cand = _make_candidate()
     env = _make_env(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: list(_ROWS))
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: snapshot(_ROWS))
 
     res = rp.replay(cand, env)
 
@@ -62,7 +63,7 @@ def test_replay_returns_exact_candidate_ref(tmp_path, monkeypatch):
 def test_replay_pass_on_fresh_access_success(tmp_path, monkeypatch):
     cand = _make_candidate()
     env = _make_env(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: list(_ROWS))
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: snapshot(_ROWS))
 
     res = rp.replay(cand, env)
 
@@ -78,21 +79,20 @@ def test_replay_pass_on_fresh_access_success(tmp_path, monkeypatch):
 
 def test_replay_uses_candidate_procedure(tmp_path, monkeypatch):
     """전달받은 candidate.procedure가 실제 접근 실행에 사용됨(read_spec에 반영)."""
-    cand = _make_candidate(procedure={"action": "read-open-workbook",
-                                      "sheet": 2, "month_col": 3, "total_col": 4})
+    cand = _make_candidate()
     env = _make_env(tmp_path)
     seen = {}
 
     def _reader(e, proc):
         seen["proc"] = proc
-        return list(_ROWS)
+        return snapshot(_ROWS)
 
     monkeypatch.setattr(h, "_read_via_excel_attach", _reader)
     res = rp.replay(cand, env)
 
     assert seen["proc"] == cand.procedure           # candidate의 procedure를 그대로 실행
-    assert res.evidence["access_evidence"]["read_spec"] == {
-        "sheet": 2, "month_col": 3, "total_col": 4}
+    assert res.evidence['access_evidence']['workbook_readable']
+
 
 
 # --- ★ 최초 실행 결과 미재사용 검증(핵심) ---
@@ -112,7 +112,7 @@ def test_replay_does_not_reuse_first_run_result(tmp_path, monkeypatch):
 
     def _stateful_reader(e, proc):
         counter["n"] += 1
-        return list(call_rows[counter["n"]])
+        return snapshot(call_rows[counter["n"]])
 
     monkeypatch.setattr(h, "_read_via_excel_attach", _stateful_reader)
 
@@ -121,7 +121,7 @@ def test_replay_does_not_reuse_first_run_result(tmp_path, monkeypatch):
 
     # 최초 접근(S1 대역) — 호출#1 소비. 이 content/verdict를 Replay에 넘기지 않는다.
     first = h.run_file_access_procedure(cand.procedure, env)
-    assert first.content == call_rows[1]
+    assert first.content == snapshot(call_rows[1])
 
     # Replay는 최초 결과를 모른 채 스스로 새 접근(호출#2)을 수행한다.
     res = rp.replay(cand, env)
@@ -132,7 +132,7 @@ def test_replay_does_not_reuse_first_run_result(tmp_path, monkeypatch):
     assert res.evidence["replay_independent"] is True
     # Replay 근거는 최초(A)가 아니라 새로 얻은 B를 반영(행 수 3 동일하지만 값이 다름).
     assert first.content != call_rows[2]
-    assert res.evidence["replay_obtained_rows"] == 3
+    assert res.evidence["replay_obtained_sheets"] == 1
 
 
 # --- FAIL: 실행됐으나 접근 효과 미충족 ---
@@ -140,13 +140,13 @@ def test_replay_does_not_reuse_first_run_result(tmp_path, monkeypatch):
 def test_replay_fail_on_insufficient_rows(tmp_path, monkeypatch):
     cand = _make_candidate()
     env = _make_env(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: _ROWS[:2])  # 2개월
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: {'sheets': []})  # 2개월
 
     res = rp.replay(cand, env)
 
     assert res.verdict == rp.FAIL
     assert res.evidence["access_ok"] is False
-    assert res.evidence["access_evidence"]["completed_month_rows"] is False
+    assert res.evidence["access_evidence"]["workbook_readable"] is False
 
 
 def test_replay_fail_on_readonly_violation(tmp_path, monkeypatch):
@@ -157,7 +157,7 @@ def test_replay_fail_on_readonly_violation(tmp_path, monkeypatch):
     def _mutating_read(e, proc):
         with open(e.xlsx_path, "ab") as fp:
             fp.write(b"MUT")
-        return list(_ROWS)
+        return snapshot(_ROWS)
 
     monkeypatch.setattr(h, "_read_via_excel_attach", _mutating_read)
     res = rp.replay(cand, env)
@@ -176,7 +176,7 @@ def test_replay_not_run_when_app_not_open(tmp_path, monkeypatch):
 
     def _reader(e, proc):
         called["n"] += 1
-        return list(_ROWS)
+        return snapshot(_ROWS)
 
     monkeypatch.setattr(h, "_read_via_excel_attach", _reader)
     res = rp.replay(cand, env)
@@ -204,7 +204,7 @@ def test_replay_result_has_no_approval_or_publish_flags(tmp_path, monkeypatch):
     """ReplayResult는 접근 효과 verdict만 담고 승인·게시 상태를 만들지 않는다."""
     cand = _make_candidate()
     env = _make_env(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: list(_ROWS))
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: snapshot(_ROWS))
 
     res = rp.replay(cand, env)
 

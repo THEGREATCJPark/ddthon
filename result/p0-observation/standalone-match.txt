@@ -1,0 +1,7 @@
+match: observation=pip-install-fail:skillloop-demo-pkg target=skillloop-demo-pkg
+match: MATCH fix-skillloop-demo-pkg-install@1.0.0 digest=64bed7bf5bb6
+match: 적용 절차(참고) action=pip-install index=allow target=skillloop-demo-pkg
+match: MATCH fix-skillloop-demo-pkg-install@1.0.0 (fit=2) - 유효 후보 1건 중 결정적 선택[적합도 내림차순, version 내림차순, id 오름차순]. ranked=[fix-skillloop-demo-pkg-install@1.0.0(fit=2)]
+match: 이 절차를 실제 업무에 적용·검증한 뒤에만 실적으로 보고하세요(카운트는 검증 성공 경로에서만; 원격 Skill은 명시적 확인 후 실행).
+
+exit=0

@@ -1,0 +1,40 @@
+Obtaining file:///<reproduction-root>/checkout
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting setuptools>=61 (from skillloop==0.0.1)
+  Using cached setuptools-84.0.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting wheel (from skillloop==0.0.1)
+  Using cached wheel-0.48.0-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging>=24.0 (from wheel->skillloop==0.0.1)
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Using cached setuptools-84.0.0-py3-none-any.whl (818 kB)
+Using cached wheel-0.48.0-py3-none-any.whl (33 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Building wheels for collected packages: skillloop
+  Building editable for skillloop (pyproject.toml): started
+  Building editable for skillloop (pyproject.toml): finished with status 'done'
+  Created wheel for skillloop: filename=skillloop-0.0.1-0.editable-py3-none-any.whl size=3064 sha256=362892ba86b13ccc86c419c49ee5f6744c418c08b8c6c618180e9629d20f6c2d
+  Stored in directory: <temporary-build-path>
+Successfully built skillloop
+Installing collected packages: setuptools, packaging, wheel, skillloop
+
+Successfully installed packaging-26.3 setuptools-84.0.0 skillloop-0.0.1 wheel-0.48.0
+
+[notice] A new release of pip is available: 25.2 -> 26.2.1
+[notice] To update, run: <reproduction-root>\checkout\.venv\Scripts\python.exe -m pip install --upgrade pip
+{
+  "product_python": "<reproduction-root>\\checkout\\.venv\\Scripts\\python.exe",
+  "work_python": "<reproduction-root>\\work-1\\.venv\\Scripts\\python.exe",
+  "requirements": "<reproduction-root>\\work-1\\requirements.txt",
+  "store": "<reproduction-root>\\work-1\\.skillloop\\store.json",
+  "usage": "<reproduction-root>\\work-1\\.skillloop\\usage.json",
+  "scope": "synthetic P0 work project; existing local Skills preapproved by operator"
+}
+Prepared: <reproduction-root>\work-1
+Start Claude Code in that folder and request installation from requirements.txt.

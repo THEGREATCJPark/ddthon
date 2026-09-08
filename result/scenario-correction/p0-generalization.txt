@@ -1,0 +1,22 @@
+..............F........s                                                 [100%]
+================================== FAILURES ===================================
+________________ test_failed_service_verification_never_counts ________________
+tests\test_apply_requirements.py:139: in test_failed_service_verification_never_counts
+    assert invoke(empty_work) == 6
+E   AssertionError: assert 2 == 6
+E    +  where 2 = invoke({'product_python': 'C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe', 'work_python': 'C:\\Users\\ci...ppData\\Local\\Temp\\pytest-of-cik61\\pytest-47\\test_failed_service_verificati0\\errors\\.skillloop\\store.json', ...})
+---------------------------- Captured stdout call -----------------------------
+apply-requirements: run_id=logical-1
+apply-requirements: requirements=C:\Users\cik61\AppData\Local\Temp\pytest-of-cik61\pytest-47\test_failed_service_verificati0\errors\requirements.txt python=C:\Users\cik61\AppData\Local\Temp\pytest-of-cik61\pytest-47\test_failed_service_verificati0\errors\.venv\Scripts\python.exe
+apply-requirements: install exit=1
+Looking in links: c:\Users\cik61\Desktop\ddthon-main\tests\fixtures\indexes\failing
+ERROR: Could not find a version that satisfies the requirement skillloop-demo-pkg==1.0.0 (from versions: none)
+ERROR: No matching distribution found for skillloop-demo-pkg==1.0.0
+apply-requirements: observation=pip-install-fail:skillloop-demo-pkg target=skillloop-demo-pkg
+apply-requirements: MATCH MATCH fix-skillloop-demo-pkg-install@1.0.0 (fit=2) - ��ȿ �ĺ� 1�� �� ������ ����[���յ� ��������, version ��������, id ��������]. ranked=[fix-skillloop-demo-pkg-install@1.0.0(fit=2)]
+apply-requirements: selected=fix-skillloop-demo-pkg-install@1.0.0 digest=64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6
+apply-requirements: procedure={"action": "pip-install", "index": "allow", "target": "skillloop-demo-pkg"}
+apply-requirements: ERROR test_failed_service_verification_never_counts.<locals>.failed() got an unexpected keyword argument 'pip_task'; no reuse recorded; work environment preserved
+=========================== short test summary info ===========================
+FAILED tests/test_apply_requirements.py::test_failed_service_verification_never_counts
+1 failed, 22 passed, 1 skipped in 186.80s (0:03:06)

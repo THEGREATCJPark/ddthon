@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-09-08T12:19:48Z",
+  "status": "FAIL_TIMEOUT",
+  "test": "test_real_excel_attach_end_to_end",
+  "reason": "Excel COM integration did not return after several minutes",
+  "pytestProcesses": [
+    42012,
+    35816
+  ],
+  "ownedExcelProcess": 656,
+  "note": "Excel absent before test; PID 656 was created at test start by DispatchEx. No user workbook was requested."
+}

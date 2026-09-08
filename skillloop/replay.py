@@ -20,6 +20,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import hashlib
+import json
 
 from skillloop import descriptor as _desc
 from skillloop.envharness_p1 import EnvContext, run_file_access_procedure
@@ -59,7 +61,7 @@ def replay(candidate, env: EnvContext) -> ReplayResult:
     ref = _candidate_ref(candidate)
 
     # candidate 동일성 근거: 내용에서 digest를 재계산해 저장된 digest와 대조(게이트 소비용).
-    # 불일치해도 실행 자체는 수행하되 evidence에 표식(승인·게시 판정은 S3 몫).
+    # 불일치는 접근 전에 FAIL. S3도 exact ref와 무결성 근거를 검사한다.
     try:
         content = {k: getattr(candidate, k) for k in _desc.CONTENT_KEYS}
         recomputed = _desc.compute_digest(content)
@@ -76,6 +78,11 @@ def replay(candidate, env: EnvContext) -> ReplayResult:
         "app_open": env.app_open,
     }
 
+    if not digest_verified:
+        evidence["reason"] = "candidate digest mismatch; access not invoked"
+        evidence["ran"] = False
+        return ReplayResult(verdict=FAIL, candidate_ref=ref, evidence=evidence)
+
     # 환경 미준비 → 실행하지 않고 NOT_RUN(게시 금지). 강제 통과·연출 없음.
     if not env.app_open:
         evidence["reason"] = "environment not ready (app_open=False) — Excel not open/installed"
@@ -87,15 +94,24 @@ def replay(candidate, env: EnvContext) -> ReplayResult:
     evidence["access_ok"] = access.ok
     evidence["access_evidence"] = access.evidence
     # 새로 획득한 content의 형태 요약만 근거로 남긴다(최초 실행 content가 아님).
-    evidence["replay_obtained_rows"] = (
-        len(access.content) if isinstance(access.content, (list, tuple)) else 0
+    evidence["replay_obtained_sheets"] = (
+        len(access.content.get('sheets', [])) if isinstance(access.content, dict) else 0
     )
 
     # attach 미가용/미열림 → 실행 불가 → NOT_RUN(FAIL 아님).
-    if access.method == "none":
+    if access.method == "none" and access.evidence.get("ran") is not True:
         evidence["reason"] = "excel attach unavailable — access procedure could not run"
         return ReplayResult(verdict=NOT_RUN, candidate_ref=ref, evidence=evidence)
 
     # 실행됨: 실제 접근 효과 + read-only 근거로 PASS/FAIL 판정.
-    verdict = PASS if access.ok else FAIL
+    ae = access.evidence
+    valid = (access.ok is True and ae.get("original_unchanged") is True
+             and ae.get("workbook_readable") is True and ae.get("save_called") is False
+             and bool(ae.get("sha256_before"))
+             and ae.get("sha256_before") == ae.get("sha256_after")
+             and ae.get("mtime_before") is not None
+             and ae.get("mtime_before") == ae.get("mtime_after"))
+    evidence["fresh_content_digest"] = hashlib.sha256(
+        json.dumps(access.content, ensure_ascii=False).encode("utf-8")).hexdigest()
+    verdict = PASS if valid else FAIL
     return ReplayResult(verdict=verdict, candidate_ref=ref, evidence=evidence)

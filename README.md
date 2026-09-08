@@ -1,77 +1,77 @@
-# Agent SkillLoop
+# 노웨어 — Agent SkillLoop
 
 한 Agent의 해결 경험을 다음 Agent의 Skill로.
 
-코딩 Agent가 업무 환경에서 겪는 시행착오를 검증된 팀 Skill로 남겨, 다음 Agent가 같은 문제를 처음부터 다시 풀지 않도록 돕는 프로젝트입니다.
+코딩 경험이 적은 사내 엔지니어가 업무를 요청하면, Agent가 환경 제약으로 막힌 지점에서 검증된 팀 Skill을 재사용합니다. 처음 겪는 문제는 해결 절차를 후보로 남기고 사람 검토·독립 Replay를 거쳐 공유합니다.
 
-현재는 **개발 준비 단계**입니다. 컨셉, 평가 준비 기준, Claude Code용 AI-DLC v1.0.1 규칙만 있으며 제품 구현과 시연 결과는 아직 없습니다.
+## 문제와 해결
 
-## 문제와 대상 사용자
+사내 패키지 공급 경로와 문서 접근 제약 때문에 같은 실패·탐색이 개인 대화에서 반복됩니다. SkillLoop는 검색 결과 전달에 그치지 않고 실제 적용·검증·재사용 기록을 연결합니다. Skill의 불변 내용/digest와 usage를 분리하고, 검토한 exact candidate와 Replay 대상이 같을 때만 게시합니다.
 
-사내 패키지 공급 경로, 문서 접근 방식 등 환경마다 다른 제약 때문에 코딩 Agent가 같은 실패와 탐색을 반복할 수 있습니다. 해결 방법이 개인 대화에만 남으면 다른 작업이나 팀원이 재사용하기 어렵습니다.
+## 현재 동작과 확인 범위
 
-이러한 환경에서 코딩 Agent와 함께 일하는 개발자와 팀을 대상으로, 업무를 해결하며 검증한 환경 절차를 공유하는 것을 목표로 합니다.
+- **P0 기존 경험 재사용:** 자연어 설치 요청 → 실제 pip 공급 실패 → MATCH → 같은 작업 venv에 설치·버전/import 확인 → 실제 reuse +1. 다른 경로에서 Claude 3개 사례 성공. 추가로 다른 패키지 2종에 같은 환경 Skill을 적용하는 코드 검증을 진행했습니다.
+- **P1 새 경험:** NASCA(가상) 사내환경에서 직접 XLSX 읽기 실패 → NO_MATCH → 새 Claude의 실제 탐색 → 열린 Excel read-only 접근 → 현재 파일의 열 해석 → OLS 예측·PNG 차트 → 환경 절차만 후보화까지 실행했습니다.
+- **상태줄/대시보드:** 로컬 데이터와 실적을 표시합니다. 확인하지 못한 원격 상태는 게시 완료나 0건으로 위장하지 않습니다.
+- **아직 미완료:** 실제 후보 사람 승인 후 원격 게시 및 새 Agent Warm 종단 검증. 코드의 게이트·로컬 Git 왕복 테스트를 실제 원격 종단 완료로 대신하지 않습니다.
 
-## 해결 방식과 차별점
+![실제 P1 업무 결과](result/scenario-correction/cold-trend.png)
 
-기존 Skill을 실제 업무에 적용하고 결과를 확인합니다. 해결 방법이 없다면 새로운 방법을 탐색해 검증하고, 사람의 검토와 재실행을 거쳐 공유할 수 있도록 합니다.
+실제 실행 로그: [P0 3회 재현](result/p0-reproduction/README.md), [P1 시나리오 정정·Cold 결과](result/scenario-correction/README.md).
 
-문서를 검색해 전달하는 데서 끝나는 방식과 비교해, **업무 적용 → 결과 검증 → 사람 검토 → 재실행 → 다음 Agent의 재사용**으로 이어지는 경험의 순환을 목표로 합니다. 현재 구현된 기능이나 모든 기존 도구에 대한 우월성을 주장하는 것은 아닙니다.
-
-## 검토할 시연 시나리오
-
-아래 P0/P1은 제공받은 평가 준비 자료의 시나리오 후보입니다. 이름이 구현 순서나 완료 상태를 뜻하지 않으며, 실제 범위와 우선순위는 AI-DLC 요구사항 단계에서 결정합니다.
-
-- **P0 · 기존 경험 재사용:** 패키지 설치가 환경 제약으로 실패한 상황에서 팀 Skill을 찾아 적용하고, 실제 설치 성공과 사용 실적의 변화를 보여줍니다.
-- **P1 · 새로운 경험 축적:** 문서를 직접 읽지 못하고 일치하는 Skill도 없는 상황에서, 사용자에게 환경 사실을 확인하고 허용된 방법을 탐색해 업무 결과를 얻은 뒤 새 Skill 공유를 제안합니다.
-
-시연에는 합성 데이터와 통제된 모의 환경을 사용합니다. 초기 예시 사용 횟수와 실제 성공 실행으로 늘어난 횟수를 구분하고, 공유 Skill에는 업무 원문·계산 결과·인증정보를 넣지 않습니다.
-
-## 평가자가 확인할 내용
-
-제공받은 평가 요약에 맞춰, README에서 실제 AI-DLC 결정 기록·실행 결과·동작 화면으로 이어지도록 개발합니다. 항목별 준비 기준과 최종 README 구성은 [EVALUATION.md](EVALUATION.md)에 정리했습니다. 해당 문서는 공식 평가 원문을 대체하지 않습니다.
-
-| 확인 대상 | 현재 상태 |
-| --- | --- |
-| AI-DLC v1.0.1 규칙 설정 | 포함됨. [출처와 라이선스](AI-DLC-SOURCE.md) 참고 |
-| 제품 실행·의존성·테스트 | 미구현 / NOT_RUN |
-| P0/P1 시연·실제 스크린샷 | NOT_RUN / 미생성 |
-| AI-DLC 개발 산출물·추적 근거 | 개발 시작 후 실제 진행 과정에서 생성 |
-
-현재 제품 실행 명령이나 1분 데모 절차는 없습니다. 구현 후 검증한 진입점, 의존성 설치 방법, 실행 환경, 시연 절차, 스크린샷과 검증 결과를 이 README에 직접 추가합니다.
-
-## AI-DLC로 개발 시작
-
-팀원별 새 clone과 로컬 모델 인증을 준비한 뒤 저장소 루트에서 Claude Code를 실행합니다. 다음은 **개발 도구 실행 명령**이며 제품 실행 명령이 아닙니다.
+## 설치 및 P0 실행 (Windows PowerShell)
 
 ```powershell
-git clone https://github.com/THEGREATCJPark/ddthon.git ddthon-main
-cd ddthon-main
+git clone https://github.com/THEGREATCJPark/ddthon.git
+cd ddthon
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[p1]" -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m skillloop run-p0
+.\.venv\Scripts\python.exe -m pytest --hypothesis-seed=20260908
+```
+
+`run-p0`는 명시적인 자체 데모입니다. 실제 업무 요청을 이것으로 대체하지 않습니다. 자연어 P0는 새 작업 폴더를 준비하고 그 폴더에서 Claude Code를 시작합니다.
+
+```powershell
+.\scripts\prepare-p0.ps1 -Destination "$env:USERPROFILE\Desktop\skillloop-work-new" -Python .\.venv\Scripts\python.exe
+cd "$env:USERPROFILE\Desktop\skillloop-work-new"
 claude
 ```
 
-이미 최신 clone이 있다면 해당 폴더에서 `claude`만 실행합니다. 시작 프롬프트:
+요청: **이 프로젝트 requirements.txt의 패키지를 설치해줘.**
 
-```text
-Using AI-DLC, README.md와 EVALUATION.md를 읽고 Agent SkillLoop의 요구사항부터 함께 정리해 주세요. 평가 준비 기준과 아직 확인하지 못한 조건을 구분하고, 가용 시간과 팀 상황을 확인한 뒤 구현 범위를 제안해 주세요. 실제 결정과 검증 결과를 AI-DLC 산출물에 남기고, 실행 방법·스크린샷·시연 증거가 README에서 연결되도록 진행해 주세요.
+기본 준비 예제는 skillloop-demo-pkg 1.0.0입니다. 최소 일반화 경로는 `apply-requirements --policy <운영자-승인-설정>`을 사용합니다. 하나의 pinned 패키지·명시적 로컬 공급원·import 매핑을 지원하며, 임의 pip 옵션/URL/복수 패키지를 복구하는 범용 엔진은 아닙니다. Agent가 자신의 실행 승인 설정을 만들면 안 됩니다.
+
+## P1 실행 준비
+
+Windows Desktop Excel 설치·실행 및 pywin32가 필요합니다. Excel이 없는 환경의 P1 실접근은 NOT_RUN입니다. 일반 설치·단위 테스트에는 실제 회사 데이터나 토큰이 필요하지 않습니다. Claude 업무 테스트는 사용자가 설정한 Claude Code/Bedrock 인증을 사용합니다.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare-p1.py "$env:USERPROFILE\Desktop\skillloop-p1-new"
 ```
 
-공식 규칙은 원문을 유지하며, 프로젝트의 평가 준비 지침은 `.claude/rules/evaluation.md`에 별도로 둡니다. Claude Code의 `/context`에서 프로젝트 지침이 로드되었는지 확인할 수 있습니다. [Claude Code 프로젝트 규칙 안내](https://code.claude.com/docs/en/memory#organize-rules-with-clauderules)
+준비 터미널을 유지하고 다른 터미널에서 생성된 `cold` 폴더로 이동해 Claude를 시작합니다. 요청: **AAAAA01_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.** 환경 설명은 NASCA(가상)이며 실제 NASCA 제품 검증을 뜻하지 않습니다. 암호나 해결 방법은 Agent 작업 파일에 제공하지 않습니다. 작업 종료 시 준비 폴더에 `STOP` 파일을 만들면 준비한 workbook만 닫습니다.
 
-## 현재 프로젝트 구조
+사람 검토는 `skillloop review`, 새 접근 검증은 `replay`, 공유는 `publish` 명령으로 분리합니다. 각 명령의 `--help`에서 필수 인자를 확인합니다. 후보 생성은 승인·게시가 아니며, Agent가 review의 사람 확인을 대신 입력하지 않습니다. GitHub sync에는 별도 네트워크·write 인증이 필요합니다. `team-skill-store`는 공유 descriptor·비민감 reuse 이벤트만 전송하고 로컬 DB·업무 값·암호는 보내지 않습니다.
 
-```text
-README.md                  컨셉, 개발 시작, 현재 상태
-EVALUATION.md              평가 항목과 제출 증거 준비 기준
-CLAUDE.md                  공식 AI-DLC v1.0.1 핵심 규칙
-.aidlc-rule-details/       공식 상세 규칙과 라이선스
-.claude/rules/evaluation.md 프로젝트 평가 준비 지침
-AI-DLC-SOURCE.md           공식 규칙의 버전과 출처
-```
+## 사용한 AI 도구와 개발 기록
 
-## 한계와 미확정 사항
+Claude Code/Amazon Bedrock으로 요구사항·설계·Unit 구현 및 실제 업무 실행을 진행했고, Codex/Astra가 기존 승인 산출물을 인계받아 통합·결함 수정·검증을 진행했습니다. 공식 AI-DLC 규칙과 기존 audit 이력을 보존합니다. [현재 상태](aidlc-docs/aidlc-state.md), [audit](aidlc-docs/audit.md), [현재 수정 계획](aidlc-docs/construction/plans/p1-scenario-correction-plan.md).
 
-제품 코드는 아직 없고 실행·성능·사용성 검증도 수행하지 않았습니다. 기술 스택, 진입점, 팀 인원과 역할, Unit, 개발 일정, 제출할 기능 범위는 미확정입니다. 평가 배점·투표 비중·제출 방식은 제공받은 요약을 바탕으로 정리했으며 공식 원문 확인이 필요합니다.
+## 팀
+
+| 이름 | 담당 |
+| --- | --- |
+| 박찬준(CJ) | 공통 계약·통합·CLI·상태줄·P1 서비스 연결 |
+| 최호길(hogil) | U1 검색·P0 재사용·P1 적용 분기 |
+| 한석훈(hanseokhun) | U2 Excel 환경 접근·독립 Replay |
+| 윤여훈 | 독립 QA·사용성·실행 증거 검토 |
+
+## 검증과 한계
+
+실제 Excel의 재열기 시간 초과를 기록했고 준비 방법 수정 후 실제 읽기 검사를 통과했습니다. 실패·대역·실환경 검증은 로그에서 구분합니다. Python CI는 고정 Hypothesis seed로 일반 테스트를 실행하며, 실제 Excel 검사는 명시 opt-in으로 분리합니다. 소스 checkout의 fixture를 사용하는 해커톤 실행 형태이며 wheel만으로 모든 데모 자원이 제공되는 배포 형태는 아닙니다.
+
+제출에는 소스·의존성 선언·fixture·aidlc-docs·실행 증거를 포함합니다. .venv, .git, 개인 설정, 인증정보는 제출 ZIP에 넣지 않습니다.
 
 ## 팀 협업 공간
 

@@ -1,60 +1,46 @@
-"""C11 — StatuslineRenderer: OrgSnapshot → 상태줄 한 줄 문자열.
-
-소유(단일 수정자): CJ (U3)
-계약(U3 최소 설계 §2.2): render_statusline(snapshot) -> str
-
-성격: **순수 함수**(I/O·상태 변경 없음). C10 스냅샷만 소비.
-표시(FR-UI-1): 조직 Skill 수 · 내 기여 · 인기 Skill · 재사용 현황.
-    - 실제 검증 실적과 DEMO_SEED를 구분(FR-USAGE-3).
-    - lifecycle 미연결·동기화 미연결을 추정 없이 명시.
-"""
-
+"""C11 — read-only four-line Claude status surface. CJ owns this module."""
 from __future__ import annotations
 
 from .org_aggregator import PUBLISHED_UNKNOWN
 
 
-def render_statusline(snapshot: dict) -> str:
-    """스냅샷을 상태줄용 한 줄로 렌더링(비-ASCII 포함, 표시 전용)."""
+def _label(value: object) -> str:
+    """Untrusted labels must not inject terminal controls or extra status rows."""
+    return "".join(c for c in str(value) if c.isprintable()).strip()
+
+
+def render_statusline(snapshot: dict, *, team: str = "디디톤 기술혁신팀",
+                      skill_labels: dict | None = None) -> str:
     summary = snapshot.get("summary", {})
     accounting = snapshot.get("accounting", {})
     viewer = snapshot.get("viewer", {})
-    ranking = snapshot.get("ranking", [])
-    last_sync = snapshot.get("last_sync", {})
-
-    distinct = summary.get("distinct_skills_local", 0)
+    sync = snapshot.get("last_sync", {})
     published = summary.get("published_skills", PUBLISHED_UNKNOWN)
-    actual = accounting.get("actual_reuses", 0)
-    demo = accounting.get("demo_seed_reuses", 0)
-
-    parts = [f"SkillLoop"]
-    parts.append(f"로컬 Skill {distinct}")
-
-    # 게시 수: lifecycle 미연결이면 "확인불가(상태 미연결)"로 명시(0 추정 금지).
-    if isinstance(published, int):
-        parts.append(f"게시 {published}")
+    linked = isinstance(snapshot.get("states"), list) and bool(sync.get("synced_at"))
+    connection = "팀 동기화 확인" if linked else "로컬 모드"
+    publication = f"{published}개" if isinstance(published, int) else "확인 대기(상태 미연결)"
+    alias = _label(viewer.get("alias", "local"))
+    lines = [
+        f"🧠 SkillLoop · {connection} | 📚 '{_label(team)}' 공개 Skill {publication}"
+        f" · 로컬 {summary.get('distinct_skills_local', 0)}개 | {alias}",
+        f"✨ 내가 기여한 Skill {viewer.get('contributions', 0)}개 (로컬)"
+        " · 팀에 도움이 될 스킬을 공유해 보세요",
+    ]
+    people = sorted((p for p in snapshot.get("people", []) if p.get("contributions", 0) > 0),
+                    key=lambda p: (-p["contributions"], str(p.get("alias", ""))))
+    leaders = [p for p in people if p["contributions"] == people[0]["contributions"]] if people else []
+    leader = ", ".join(_label(p.get("alias", "")) for p in leaders) or "아직 없음"
+    leader_label = f"로컬 기여 1위: {leader}" if not linked else "팀 기여 순위: 집계 대기"
+    top = next((r for r in snapshot.get("ranking", [])
+                if not r.get("demo_seed") and r.get("reuse_count", 0) > 0), None)
+    if top:
+        title = (skill_labels or {}).get(top["id"], f"{top['id']}@{top['version']}")
+        popular = f"{_label(title)} · 실제 {top['reuse_count']}회 적용"
     else:
-        parts.append(f"게시 {published}(상태 미연결)")
-
-    alias = viewer.get("alias", "local")
-    parts.append(f"내 기여({alias}) {viewer.get('contributions', 0)}")
-
-    # 인기 Skill(실제 검증 재사용 1위).
-    top = next((r for r in ranking if r.get("reuse_count", 0) > 0), None)
-    if top is not None:
-        parts.append(f"인기 {top['id']}@{top['version']}(재사용 {top['reuse_count']})")
-    else:
-        parts.append("인기 없음")
-
-    reuse_str = f"실제 재사용 {actual}"
-    if demo:
-        reuse_str += f"(DEMO {demo} 제외)"
-    parts.append(reuse_str)
-
-    qrange = last_sync.get("queryable_range", "")
-    if last_sync.get("synced_at"):
-        parts.append(f"동기화 {last_sync['synced_at']}")
-    else:
-        parts.append(f"동기화 없음({qrange})")
-
-    return " | ".join(parts)
+        popular = "실제 검증 재사용 없음"
+    lines.append(f"👑 {leader_label} | 🔥 인기 스킬(로컬) - {popular}")
+    scope = f"마지막 동기화 {_label(sync['synced_at'])}" if sync.get("synced_at") else "팀 동기화 미연결"
+    lines.append(
+        f"데모 기준 {accounting.get('demo_seed_reuses', 0)}회"
+        f" + 실제 검증 {accounting.get('actual_reuses', 0)}회 · {scope}")
+    return "\n".join(lines)

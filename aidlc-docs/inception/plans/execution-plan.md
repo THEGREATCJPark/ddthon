@@ -197,6 +197,13 @@ Application Design/Units Generation에서 아래와 유사한 **독립 seam**으
 
 ---
 
+## 4.4 CJ 인계 후 우선순위 정합화 (2026-09-08)
+
+- 기존 단계 선택·요구 범위·A/B 병렬 승인은 유지한다. CJ 메인 작업은 **US-P0-1 일반 업무 요청 기반 자연어 수용 검증**을 우선한다. 코드 전체 롤백·Inception 재시작은 하지 않는다.
+- 현재 P0 개정 2는 승인 후 구현·수용 검증 완료, Code Generation 결과 REVIEW REQUIRED다. construction/U0-P0/code/p0-nl-acceptance.md 및 result/p0-nl/ 참조.
+- P0 코어 통합·Agent 데모 CLI 호출 성공과 자연어 업무 수용 완료를 구분한다. P1/조직 공유와 전체 Build and Test의 완료 지위는 별도로 유지한다.
+- A/B 인계 코드는 리뷰·통합 검증 대상으로 보존한다. CJ가 인수한 experience_service/publish_pipeline/gitsync 구현과 대시보드 추가 개선은 위 P0보다 후순위다. 기존 P1·UI 요구를 선택 기능으로 낮추지 않는다.
+
 ## 5. Package Change Sequence (Brownfield Only)
 - **N/A** — Greenfield.
 

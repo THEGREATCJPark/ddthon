@@ -1,0 +1,7 @@
+{
+  "before": "🧠 SkillLoop · 로컬 모드 | 📚 '디디톤 기술혁신팀' 공개 Skill 확인 대기(상태 미연결) · 로컬 2개 | cik61\n✨ 내가 기여한 Skill 0개 (로컬) · 팀에 도움이 될 스킬을 공유해 보세요\n👑 로컬 기여 1위: seed | 🔥 인기 스킬(로컬) - 실제 검증 재사용 없음\n데모 기준 0회 + 실제 검증 0회 · 팀 동기화 미연결\n",
+  "after": "🧠 SkillLoop · 로컬 모드 | 📚 '디디톤 기술혁신팀' 공개 Skill 확인 대기(상태 미연결) · 로컬 2개 | cik61\n✨ 내가 기여한 Skill 0개 (로컬) · 팀에 도움이 될 스킬을 공유해 보세요\n👑 로컬 기여 1위: seed | 🔥 인기 스킬(로컬) - python pip 사내환경 적용 방법 (합성) · 실제 1회 적용\n데모 기준 0회 + 실제 검증 1회 · 팀 동기화 미연결\n",
+  "real_apply_exit": 0,
+  "counted": true,
+  "scope": "fresh synthetic work project; real pip install via existing S1"
+}

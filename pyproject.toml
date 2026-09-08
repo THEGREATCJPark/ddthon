@@ -7,7 +7,10 @@ name = "skillloop"
 version = "0.0.1"
 description = "Agent SkillLoop — 한 Agent의 해결 경험을 다음 Agent의 Skill로 (MVP P0)"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ["setuptools>=61", "wheel"]
+
+[project.optional-dependencies]
+p1 = ["pywin32; sys_platform == 'win32'", "openpyxl>=3.1", "matplotlib>=3.9"]
 
 [project.scripts]
 skillloop = "skillloop.cli:main"

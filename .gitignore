@@ -20,6 +20,8 @@ venv/
 
 # run-p0 데모 런타임 작업 디렉터리(로컬 상태)
 .skillloop_demo/
+.skillloop/
+sync-config.local.json
 
 # Generated mock-index artifacts (prepare()가 오프라인 재생성)
 tests/fixtures/indexes/allow/*.whl

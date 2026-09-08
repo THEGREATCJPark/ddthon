@@ -16,7 +16,11 @@ run_id는 cli가 1회 발급해 S1→검증→C3까지 전달만. 재시도 시 
 from __future__ import annotations
 
 import argparse
+import getpass
+import json
 import os
+import re
+from pathlib import Path
 import subprocess
 import sys
 
@@ -66,6 +70,33 @@ def _seed_store(store: SkillStore) -> None:
     store.put(d)  # STORED 또는 DEDUP(재실행 시). 카운트 변경 없음.
 
 
+def _package_name(requirement: str) -> str:
+    """Normalize an observed distribution name, never a Skill identity."""
+    parsed = re.fullmatch(r"\s*([A-Za-z0-9][A-Za-z0-9._-]*)(?:==[^\s;]+)?\s*", requirement)
+    if not parsed:
+        raise ValueError("INVALID_TARGET: use a distribution name or name==version")
+    return re.sub(r"[-_.]+", "-", parsed.group(1)).lower()
+
+
+def _pip_failure_observation(command: str, target: str, exit_code: int, stderr: str):
+    """Actual pip supply failure -> stable FailureObservation; no Skill/solution lookup."""
+    name = _package_name(target)
+    if type(exit_code) is not int or exit_code == 0:
+        return None
+    pattern = (r"(?:no matching distribution found for|could not find a version that "
+               r"satisfies the requirement)\s+([^\s(]+)")
+    for found in re.finditer(pattern, stderr, re.IGNORECASE):
+        try:
+            failed_name = _package_name(found.group(1))
+        except ValueError:
+            continue
+        if failed_name == name:
+            return match_mod.FailureObservation(
+                command=command, target_pkg=name, error_signature=f"pip-install-fail:{name}",
+                exit_code=exit_code)
+    return None
+
+
 def _observe_failing_install(env, index_dir: str, target: str):
     """failing index로 실제 pip 설치를 시도해 실패를 관찰(비영점 종료코드)."""
     proc = subprocess.run(
@@ -73,13 +104,10 @@ def _observe_failing_install(env, index_dir: str, target: str):
          "--no-index", "--find-links", index_dir, target],
         capture_output=True, text=True,
     )
-    signature = f"pip-install-fail:{target}"
-    return match_mod.FailureObservation(
-        command=f"pip install {target}",
-        target_pkg=target,
-        error_signature=signature,
-        exit_code=proc.returncode,
-    )
+    obs = _pip_failure_observation(f"pip install {target}", target, proc.returncode, proc.stderr)
+    return obs or match_mod.FailureObservation(
+        command=f"pip install {target}", target_pkg=target,
+        error_signature="", exit_code=proc.returncode)
 
 
 def run_p0(store_path: str | None = None, usage_path: str | None = None,
@@ -144,6 +172,125 @@ def run_p0(store_path: str | None = None, usage_path: str | None = None,
         shutil.rmtree(env.venv_path, ignore_errors=True)
 
 
+def _parse_work_requirements(text: str) -> str:
+    """지원 밖의 입력을 무시하거나 다른 대상으로 바꾸지 않는다."""
+    lines = [line.split("#", 1)[0].strip() for line in text.splitlines()]
+    lines = [line for line in lines if line]
+    expected = f"{harness.TARGET_PKG}=={harness.TARGET_VERSION}"
+    if lines != [expected]:
+        raise ValueError("UNSUPPORTED_REQUIREMENTS: supported request is " + expected)
+    return harness.TARGET_PKG
+
+
+def apply_requirements(requirements: str, python: str, store_path: str,
+                       usage_path: str, run_id: str | None = None, policy_path: str | None = None) -> int:
+    """기존 작업 환경에 실제 설치. 환경 준비·seed·삭제는 하지 않는다."""
+    _ensure_utf8_stdout()
+    run_id = run_id or new_execution_id()
+    print(f"apply-requirements: run_id={run_id}")
+    try:
+        req = Path(requirements).resolve(strict=True)
+        text = req.read_text(encoding='utf-8-sig')
+        policy = json.loads(Path(policy_path).read_text(encoding='utf-8')) if policy_path else None
+        task = None
+        if policy is None:
+            target = _parse_work_requirements(text)
+        else:
+            lines = [line.split('#', 1)[0].strip() for line in text.splitlines()]
+            lines = [line for line in lines if line]
+            parsed = re.fullmatch(r'([A-Za-z0-9][A-Za-z0-9._-]*)==([A-Za-z0-9][A-Za-z0-9.!+_-]*)', lines[0]) if len(lines) == 1 else None
+            if not parsed:
+                raise ValueError('UNSUPPORTED_REQUIREMENTS: one pinned local distribution required')
+            target, version = _package_name(parsed.group(1)), parsed.group(2)
+            module = policy.get('imports', {}).get(target)
+            if not isinstance(module, str) or not re.fullmatch(r'[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*', module):
+                raise ValueError('POLICY_REQUIRED: approved import mapping missing')
+            task = {'name': target, 'version': version, 'import_module': module}
+        py = Path(python).absolute()
+        if not py.is_file():
+            raise ValueError("ENV_NOT_READY: target Python missing")
+        probe = subprocess.run(
+            [str(py), "-c", "import json,sys; print(json.dumps([sys.prefix,sys.base_prefix]))"],
+            capture_output=True, text=True, timeout=30)
+        if probe.returncode:
+            raise ValueError("ENV_NOT_READY: target Python unavailable")
+        prefix, base = json.loads(probe.stdout)
+        if prefix == base:
+            raise ValueError("ENV_NOT_READY: an existing work venv is required")
+        pip_probe = subprocess.run([str(py), "-m", "pip", "--version"],
+                                   capture_output=True, text=True, timeout=30)
+        if pip_probe.returncode:
+            raise ValueError("ENV_NOT_READY: target pip unavailable")
+        sp, up = Path(store_path).absolute(), Path(usage_path).absolute()
+        if not sp.is_file():
+            raise ValueError("STORE_NOT_READY: existing store required")
+        if up == sp or up == req or up == py:
+            raise ValueError("INVALID_USAGE_PATH: must not overwrite work inputs")
+        store = SkillStore(str(sp))
+        usage = UsageTracker(str(up))
+        env = harness.EnvCtx(venv_path=prefix, python_exe=str(py), kind="work")
+        print(f"apply-requirements: requirements={req} python={py}")
+        command = [str(py), "-m", "pip", "install", "-r", str(req)]
+        observed = subprocess.run(command, capture_output=True, text=True,
+                                  encoding="utf-8", errors="replace", timeout=120)
+        print(f"apply-requirements: install exit={observed.returncode}")
+        print(observed.stdout.strip())
+        print(observed.stderr.strip())
+        if observed.returncode == 0:
+            print("apply-requirements: INSTALL_OK_NO_REUSE reuse_delta=0; no Skill applied")
+            return 0
+        obs = _pip_failure_observation(
+            subprocess.list2cmdline(command), target, observed.returncode, observed.stderr)
+        if obs is None:
+            print("apply-requirements: INSTALL_ERROR (not a package-supply signal), reuse_delta=0")
+            return 4
+        print(f"apply-requirements: observation={obs.error_signature} target={obs.target_pkg}")
+        outcome = match_mod.search(obs, store)
+        print(f"apply-requirements: {outcome.status} {outcome.rationale}")
+        if outcome.status != "MATCH":
+            return 5
+        selected = outcome.descriptor
+        print(f"apply-requirements: selected={selected.id}@{selected.version} digest={selected.digest}")
+        print("apply-requirements: procedure=" + json.dumps(selected.procedure, ensure_ascii=False))
+        if descriptor_mod.compute_digest(vars(selected)) != selected.digest:
+            raise ValueError("INTEGRITY_ERROR: selected content digest mismatch")
+        cfg = selected.procedure
+        if policy is None:
+            if cfg.get('action') != 'pip-install' or cfg.get('target') != target:
+                raise ValueError('UNSUPPORTED_PROCEDURE: action/target does not match request')
+            if selected.digest != descriptor_mod.compute_digest(_DEMO_SKILL_CONTENT):
+                raise ValueError('CONFIRMATION_REQUIRED: Skill is outside the preapproved P0 content')
+        else:
+            ref = {key: getattr(selected, key) for key in ('id', 'version', 'digest')}
+            if ref not in policy.get('approved_skills', []):
+                raise ValueError('CONFIRMATION_REQUIRED: exact content not approved in local policy')
+            if set(cfg) != {'action', 'source'} or cfg['action'] != 'pip-install':
+                raise ValueError('UNSUPPORTED_PROCEDURE: environment-only package source required')
+            source = policy.get('sources', {}).get(cfg['source'])
+            if not isinstance(source, str) or not Path(source).is_dir():
+                raise ValueError('POLICY_REQUIRED: approved local source missing')
+            task['source_path'] = str(Path(source).resolve())
+        result = (reuse_service.apply_and_verify(selected, obs, env, run_id, pip_task=task) if task is not None
+                  else reuse_service.apply_and_verify(selected, obs, env, run_id))
+        print("apply-requirements: verification=" + json.dumps(vars(result), ensure_ascii=False))
+        if not result.is_real_success:
+            print("apply-requirements: VERIFICATION_FAILED reuse_delta=0")
+            return 6
+        rec = usage.record_actual_reuse(build_evidence(
+            {"id": selected.id, "version": selected.version, "digest": selected.digest},
+            vars(result), run_id, demo_seed=selected.demo_seed,
+            reuser_alias=os.environ.get("SKILLLOOP_ALIAS", "local")))
+        print(f"apply-requirements: reuse={rec.new_count} counted={rec.counted} reason={rec.reason}")
+        print("apply-requirements: WORK_ENV_PRESERVED candidate_delta=0")
+        return 0
+    except subprocess.TimeoutExpired:
+        print("apply-requirements: TIMEOUT; no reuse recorded; work environment preserved")
+        return 7
+    except (OSError, ValueError, KeyError, TypeError, RuntimeError) as exc:
+        print(f"apply-requirements: ERROR {exc}; no reuse recorded; work environment preserved")
+        return 2
+
+
 def share_export(out_path: str, usage_path: str | None = None) -> int:
     """C-d: VERIFIED_REUSE 공유 이벤트를 파일로 export(C4/gitsync가 전송할 원본)."""
     usage = UsageTracker(usage_path or os.path.join(_DEMO_DIR, "usage.json"))
@@ -192,36 +339,87 @@ def _build_local_snapshot(store_path: str | None = None, usage_path: str | None 
     store = SkillStore(sp)
     usage = UsageTracker(up)
     alias = os.environ.get("SKILLLOOP_ALIAS", "local")
+    lifecycle, sync = _lifecycle_providers(store)
     return org_aggregator.build_snapshot(
-        store, usage, lifecycle_view=None, sync_meta=None, my_alias=alias,
+        store, usage, lifecycle_view=lifecycle, sync_meta=sync, my_alias=alias,
     )
 
 
-def cmd_status(store_path: str | None = None, usage_path: str | None = None) -> int:
-    """`skillloop status` — 상태줄 한 줄을 stdout으로 출력(로컬 스냅샷 기준).
+def _lifecycle_providers(store):
+    from .publish_pipeline import PublishPipeline
+    from .gitsync import GitSyncAdapter
+    # A missing lifecycle source remains visibly unlinked for existing P0 workspaces.
+    lifecycle = PublishPipeline(store) if store.list_lifecycle_records() else None
+    config = Path(store.path).parent / 'sync-config.local.json'
+    data = json.loads(config.read_text(encoding='utf-8')) if config.is_file() else None
+    sync = GitSyncAdapter(data['mirror'], data['remote']) if data else None
+    return lifecycle, sync
+
+
+def cmd_status(store_path: str | None = None, usage_path: str | None = None,
+               team: str = "디디톤 기술혁신팀", alias: str | None = None) -> int:
+    """`skillloop status` — 상태줄 네 줄을 stdout으로 출력(명시 작업 경로/로컬 스냅샷 기준).
 
     이 출력은 그대로 Claude Code 하단 상태줄의 statusLine 커맨드로 연결할 수 있다(README 참조).
     """
-    snapshot = _build_local_snapshot(store_path, usage_path)
-    print(statusline_mod.render_statusline(snapshot))
-    return 0
+    try:
+        context_path = Path.cwd() / "skillloop-work.json"
+        context = json.loads(context_path.read_text(encoding="utf-8")) if context_path.is_file() else {}
+        def resolve_context_path(name):
+            value = context.get(name)
+            return str((context_path.parent / value).resolve()) if value else None
+        sp, up = _demo_paths(store_path or resolve_context_path("store"),
+                             usage_path or resolve_context_path("usage"))
+        store = SkillStore(sp)
+        lifecycle, sync = _lifecycle_providers(store)
+        snapshot = org_aggregator.build_snapshot(
+            store, UsageTracker(up), lifecycle_view=lifecycle, sync_meta=sync,
+            my_alias=alias or os.environ.get("SKILLLOOP_ALIAS") or getpass.getuser())
+        print(statusline_mod.render_statusline(snapshot, team=team, skill_labels={
+            "fix-skillloop-demo-pkg-install": "python pip 사내환경 적용 방법 (합성)",
+        }))
+        return 0
+    except (OSError, ValueError, KeyError, TypeError):
+        print("🧠 SkillLoop · 상태 데이터 읽기 실패\n📚 Skill 현황 확인 불가"
+              "\n✨ 기여·인기 집계 확인 불가\n데모/실제 검증 확인 불가")
+        return 2
 
 
-def cmd_match(signature: str, target: str = "", store_path: str | None = None) -> int:
+def cmd_match(signature: str | None, target: str = "", store_path: str | None = None,
+              pip_stderr: str | None = None, exit_code: int | None = None) -> int:
     """`skillloop match` — 실제 관찰된 실패 신호로 승인된 검색 계약(C5 match.search)을 호출.
 
     실제 업무 Agent가 관찰한 실패를 그대로 넘겨 재사용 가능한 Skill을 검색한다(FR-MATCH).
     **읽기전용**: 적용·검증·카운트를 하지 않는다 — 매칭 로직은 여기서 재구현하지 않고
     A 소유 `match.search`를 호출만 한다. 실적 카운트는 검증된 경로에서만 발생한다.
     """
+    if pip_stderr is not None and not store_path:
+        print("match: STORE_REQUIRED — specify the observed work's --store; search not invoked")
+        return 2
     sp, _ = _demo_paths(store_path, None)
     store = SkillStore(sp)
-    obs = match_mod.FailureObservation(
-        command=(f"pip install {target}" if target else signature),
-        target_pkg=target,
-        error_signature=signature,
-        exit_code=1,
-    )
+    if pip_stderr is not None:
+        if not target or exit_code is None:
+            print("match: INVALID_OBSERVATION — target and actual exit-code required; search not invoked")
+            return 2
+        try:
+            obs = _pip_failure_observation(
+                f"pip install {target}", target, exit_code,
+                Path(pip_stderr).read_text(encoding="utf-8-sig"))
+        except (OSError, ValueError) as exc:
+            print(f"match: INVALID_OBSERVATION — {exc}; search not invoked")
+            return 2
+        if obs is None:
+            print("match: NOT_INVOKED — not a recognized failed supply observation")
+            return 4
+        print(f"match: observation={obs.error_signature} target={obs.target_pkg}")
+    else:
+        if signature and re.search(r"no matching distribution|could not find a version", signature, re.I):
+            print("match: INVALID_SIGNAL — raw pip error requires --pip-stderr, --exit-code, --target; search not invoked")
+            return 2
+        obs = match_mod.FailureObservation(
+            command=(f"pip install {target}" if target else signature),
+            target_pkg=target, error_signature=signature or "", exit_code=1)
     outcome = match_mod.search(obs, store)
     if outcome.status == match_mod.STATUS_MATCH:
         d = outcome.descriptor
@@ -246,34 +444,132 @@ def cmd_dashboard(host: str = "127.0.0.1", port: int = 8765,
     return 0
 
 
+def cmd_p1(args):
+    """Explicit CLI boundaries: discovery belongs to Agent; review belongs to person."""
+    from .experience_service import run_p1
+    from .publish_pipeline import PublishPipeline
+    from .envharness_p1 import EnvContext
+    from .gitsync import GitSyncAdapter
+    try:
+        if args.command == 'run-p1':
+            procedure = json.loads(Path(args.procedure).read_text(encoding='utf-8')) if args.procedure else None
+            return run_p1(args.xlsx, args.store, args.usage, args.run_id, app_open=args.app_open,
+                          procedure=procedure, confirmed_digest=args.confirm_skill, author=args.author,
+                          task_mapping=json.loads(Path(args.task_mapping).read_text(encoding='utf-8')) if args.task_mapping else None)
+        store = SkillStore(args.store)
+        pipeline = PublishPipeline(store)
+        if args.command in ('store-init', 'sync'):
+            adapter = GitSyncAdapter(args.mirror, args.remote)
+            if args.command == 'store-init':
+                adapter.initialize()
+                config = Path(args.store).parent / 'sync-config.local.json'
+                config.parent.mkdir(parents=True, exist_ok=True)
+                config.write_text(json.dumps({'mirror': str(adapter.path), 'remote': args.remote}), encoding='utf-8')
+                print('store-init: isolated mirror prepared; no publication claimed')
+                return 0
+            usage = UsageTracker(args.usage)
+            result = adapter.pull(store, usage)
+            if result.get('ok') and args.push_usage:
+                result['usage_push'] = adapter.push_shared_usage(usage.export_shared_usage())
+            print(json.dumps(result, ensure_ascii=False))
+            return 0 if result.get('ok') and result.get('usage_push', {}).get('ok', True) else 2
+        candidate = store.get(args.id, args.version)
+        if candidate is None:
+            raise ValueError('Candidate not found')
+        if args.command == 'review':
+            print(json.dumps({'id': candidate.id, 'version': candidate.version, 'digest': candidate.digest,
+                              'procedure': candidate.procedure}, ensure_ascii=False, indent=2))
+            typed = input(f'Human review: type "{args.decision} {candidate.digest}" to confirm: ').strip()
+            if typed != f'{args.decision} {candidate.digest}':
+                print('Review not recorded')
+                return 2
+            result = pipeline.review(candidate, args.decision, args.reviewer)
+        elif args.command == 'replay':
+            result = pipeline.replay(candidate, EnvContext(args.xlsx, args.app_open))
+        else:
+            result = pipeline.publish(candidate, GitSyncAdapter(args.mirror, args.remote))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result['state'] not in ('BLOCKED', 'PUBLISH_PENDING', 'REJECTED') else 2
+    except (OSError, ValueError, RuntimeError, EOFError) as exc:
+        print(f'{args.command}: ERROR {exc}')
+        return 2
+
+
 def main(argv: list[str] | None = None) -> int:
     """콘솔 스크립트 진입점. 서브커맨드 라우팅."""
     _ensure_utf8_stdout()
     parser = argparse.ArgumentParser(prog="skillloop")
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("run-p0", help="P0 재사용 데모 실행")
+    pa = sub.add_parser("apply-requirements", help="기존 작업 venv의 합성 requirements 설치·Skill 재사용")
+    pa.add_argument("--requirements", required=True)
+    pa.add_argument("--python", required=True, help="기존 작업 venv Python")
+    pa.add_argument("--store", required=True, help="준비된 로컬 Skill store")
+    pa.add_argument("--usage", required=True)
+    pa.add_argument("--run-id")
+    pa.add_argument("--policy", help="운영자가 준비한 exact 승인·공급원·import 매핑 JSON")
     pe = sub.add_parser("share-export", help="VERIFIED_REUSE 공유 이벤트 export")
     pe.add_argument("out", help="export 파일 경로")
     pi = sub.add_parser("share-import", help="공유 이벤트 import(검증·dedup)")
     pi.add_argument("inp", help="import 파일 경로")
-    sub.add_parser("status", help="상태줄 한 줄 출력(조직 현황, 읽기전용)")
+    ps = sub.add_parser("status", help="Claude 하단 상태줄 네 줄(읽기전용)")
+    ps.add_argument("--store")
+    ps.add_argument("--usage")
+    ps.add_argument("--team", default="디디톤 기술혁신팀")
+    ps.add_argument("--alias")
     pm = sub.add_parser("match", help="관찰된 실패 신호로 재사용 Skill 검색(읽기전용, 적용·카운트 없음)")
-    pm.add_argument("--signature", required=True, help="관찰된 실패 신호(예: pip-install-fail:pkg)")
+    mg = pm.add_mutually_exclusive_group(required=True)
+    mg.add_argument("--signature", help="기존 정규화된 applicability 신호")
+    mg.add_argument("--pip-stderr", help="실제 pip stderr UTF-8 파일")
+    pm.add_argument("--exit-code", type=int, help="실제 pip 종료코드")
     pm.add_argument("--target", default="", help="대상 패키지(선택, 표시용)")
+    pm.add_argument("--store", help="실제 업무의 Skill store 경로")
     pd = sub.add_parser("dashboard", help="localhost 읽기전용 대시보드 기동")
     pd.add_argument("--host", default="127.0.0.1", help="바인딩 호스트(기본 127.0.0.1)")
     pd.add_argument("--port", type=int, default=8765, help="포트(기본 8765)")
+    p1 = sub.add_parser('run-p1', help='실제 XLSX 실패·검색·Agent 절차 적용·업무·후보화')
+    p1.add_argument('--xlsx', required=True)
+    p1.add_argument('--store', required=True)
+    p1.add_argument('--usage', required=True)
+    p1.add_argument('--run-id')
+    p1.add_argument('--app-open', action='store_true')
+    p1.add_argument('--procedure', help='Agent가 발견한 명시적 read-only procedure JSON')
+    p1.add_argument('--task-mapping', help='현재 업무의 시트·열·시작행 JSON (공유 Skill 아님)')
+    p1.add_argument('--confirm-skill', help='명시적으로 실행 확인한 exact digest')
+    p1.add_argument('--author', default='local')
+    for command in ('review', 'replay', 'publish', 'store-init', 'sync'):
+        p = sub.add_parser(command)
+        p.add_argument('--store', required=True)
+        if command in ('review', 'replay', 'publish'):
+            p.add_argument('--id', required=True)
+            p.add_argument('--version', required=True)
+        if command == 'review':
+            p.add_argument('--decision', choices=['approve', 'reject'], required=True)
+            p.add_argument('--reviewer', required=True)
+        if command == 'replay':
+            p.add_argument('--xlsx', required=True)
+            p.add_argument('--app-open', action='store_true')
+        if command in ('publish', 'store-init', 'sync'):
+            p.add_argument('--mirror', required=True)
+            p.add_argument('--remote', required=True)
+        if command == 'sync':
+            p.add_argument('--usage', required=True)
+            p.add_argument('--push-usage', action='store_true')
     args = parser.parse_args(argv)
+    if args.command in ('run-p1', 'review', 'replay', 'publish', 'store-init', 'sync'):
+        return cmd_p1(args)
     if args.command == "run-p0":
         return run_p0()
+    if args.command == "apply-requirements":
+        return apply_requirements(args.requirements, args.python, args.store, args.usage, args.run_id, args.policy)
     if args.command == "share-export":
         return share_export(args.out)
     if args.command == "share-import":
         return share_import(args.inp)
     if args.command == "status":
-        return cmd_status()
+        return cmd_status(args.store, args.usage, team=args.team, alias=args.alias)
     if args.command == "match":
-        return cmd_match(args.signature, args.target)
+        return cmd_match(args.signature, args.target, args.store, args.pip_stderr, args.exit_code)
     if args.command == "dashboard":
         return cmd_dashboard(host=args.host, port=args.port)
     parser.print_help()

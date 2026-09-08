@@ -191,3 +191,6 @@ serve_readonly(snapshot_provider: () -> OrgSnapshot, host="127.0.0.1") -> None
 
 ## 서비스 오케스트레이션 메서드
 S1~S3 서비스의 메서드·흐름은 `services.md` 참조. C10~C12(집계·표현)는 읽기전용 파생으로 서비스 오케스트레이션 밖에서 스냅샷을 소비한다.
+
+## Current contract correction — scenario continuation
+The approved `construction/plans/p1-scenario-correction-plan.md` supersedes earlier task-specific access schema in this document. Shared procedure contains only action=file-access and method=excel-com-attach. C7/S1/C6 validate workbook accessibility and read-only evidence (workbook_readable), independent of production rows. C7 returns a local workbook snapshot preserving sheet names and UsedRange origins. S2 receives a separate local task mapping, interprets current columns/rows, verifies OLS and creates the actual3+forecast1 PNG. No task schema, chart or content is shared. S3 owns reuse eligibility as well as publication state; explicit execution confirmation does not replace integrity or lifecycle eligibility. CJ now integrates A/B completed handoffs; original authors and prior validation are preserved.

@@ -1,0 +1,22 @@
+{
+  "baseline": "a22e176 + prior approved P0 changes",
+  "source_sha256": {
+    "skillloop/cli.py": "e1a99672a9338963ad80476fdc12cf96e2407963e2ccad6cb16e5c97f681b7d5",
+    "skillloop/statusline.py": "641a0903d9f0c24a1eac6b9a54f04c06835f80ce7b7ea9da5ca4efa2d27a3f95",
+    "tests/prepare_p0_work.py": "8c6b4cd482ab39b9b7224df8e37a26a9d12209b25ebc588162edc41fbf4b645c",
+    ".claude/skills/skillloop/SKILL.md": "2abf28df4ac3517854157e1a362748ce0d934ddcf02522ca4ff52f096005fbf9",
+    "tests/test_statusline.py": "980e12d7603f96d99f7586dcbfc2415e0af0e3e0f0b644e9cbc7bf4ab8b14cf9",
+    "tests/test_cli_match.py": "b10c1d7106745d9f9138603a3cff61cce2afb36db370bf67c21e14aa22a980c6"
+  },
+  "focused_tests": 30,
+  "focused_failed": 0,
+  "real_status_transition": "0 -> 1, real pip",
+  "user_work_data_preserved": true,
+  "native_footer_visual": "USER_CONFIRMED",
+  "native_footer_visual_check": "USER_CONFIRMED: 네, 네 줄이 보입니다",
+  "screenshot_captured": false,
+  "full_tests": 86,
+  "failed": 0,
+  "skipped": 0,
+  "pytest_exit": 0
+}

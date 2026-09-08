@@ -126,3 +126,6 @@ OrgSnapshot = {
 - `python -m skillloop dashboard` (127.0.0.1 읽기전용 서버 기동; 수동 확인은 로컬 브라우저)
 
 **제공 순서**: 1→2→3→4 각 단계 구현·검증·commit → 완료 SHA 기록. lifecycle/last_sync 실데이터 연결·조직 시연은 계약7·C4 제공 후(그 전 NOT_RUN). **Code Plan 승인 후 착수.**
+
+## 승인된 하단 표현 보완
+u3-statusline-followup-plan.md 사용자 승인 후 C11을 네 줄로 변경하고 status의 명시 경로/표시 옵션, 프로젝트 statusLine 설정을 연결한다. C10 집계·S3/C4 상태 근거·읽기전용·DEMO/actual 분리는 유지한다. 잘못된 별도 match 호출을 유도한 C9 안내는 기존 P0 호출 계약으로 정합화한다.

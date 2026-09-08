@@ -1,0 +1,44 @@
+{
+  "base": "a22e176",
+  "working_tree": true,
+  "full_regression": {
+    "passed": 130,
+    "skipped": 2,
+    "exit": 0,
+    "skip_reasons": [
+      "real Excel opt-in, separate actual attempt FAIL_TIMEOUT",
+      "A missing-module scenario N/A after B integration"
+    ],
+    "note": "Collected before the two additional CLI/provider tests were added; product implementation unchanged afterward."
+  },
+  "additional_service_suite": {
+    "passed": 9,
+    "exit": 0,
+    "includes_two_new_cli_provider_tests": true
+  },
+  "real_excel": "FAIL_TIMEOUT; isolated owned instance; not hidden by subsequent opt-in skip",
+  "real_git": "local bare repository push/pull/event-dedup PASS; GitHub NOT_RUN",
+  "sha256": {
+    "skillloop/__init__.py": "6621009b0c195a101683b29eccaa3a0aa6dc49e35990a66f1569eea265398ecd",
+    "skillloop/__main__.py": "a12778ec7d3b13fca45e789f711292caa4c2642b15475a516f2d9b854b64ba62",
+    "skillloop/cli.py": "69d391223fd97d58556bb08ae04a665f924a40138812b23af835b83e95bf13d3",
+    "skillloop/dashboard.py": "97db5ad10b21ab2efb668bde85480eec1b1dda7da62056190a48ada5733145d0",
+    "skillloop/descriptor.py": "49bf0fbf77e34cef63c0dca42fc8eb25a9d6a0f200b7186a4d84e2a5b3c5b699",
+    "skillloop/envharness_p0.py": "dc694363585b91c10885da72974d33c592a470f39325318e0a69b3ed9ab1adf2",
+    "skillloop/envharness_p1.py": "c8228e28507b7a7117fb1e8d05ec91845f524982866027da33414800fc38985e",
+    "skillloop/experience_service.py": "5b650af43ad0fa7b75cc40df13f73602e26581a8a24cb7afc9d5788872dd1c4d",
+    "skillloop/gitsync.py": "726a149c075f2d4a9d42cfa38f92c27543568ad55b31531cd4483642772da05e",
+    "skillloop/match.py": "0a028f68290de76b543440cf0b18ba4ae158ca1929ab6a6a9c1382fb6913d1bd",
+    "skillloop/org_aggregator.py": "708ec801a9700367eef6758ffe5c98bfe394b8030e787a009fc684882a6fca24",
+    "skillloop/publish_pipeline.py": "211ef6a0215f5051d38e561640b55b7d9d3c14b36fc8462e216f98900b6ac070",
+    "skillloop/replay.py": "c05aa4e100d1103f4927cb947644988834a757b5f5401103667a4778e5f38f8e",
+    "skillloop/reuse_service.py": "adc848f9bd898cada6a7c04bb5fc42064a9ea0f9148cf7a73626183ef687c8f8",
+    "skillloop/statusline.py": "641a0903d9f0c24a1eac6b9a54f04c06835f80ce7b7ea9da5ca4efa2d27a3f95",
+    "skillloop/store.py": "0a811ef336a5cce3fd45f9e7f740e28f5167af2517b154f39cc689e57befd200",
+    "skillloop/usage.py": "cd2832c872bff60cd93dd7d8c7dc38674f5387e0ee440cc5f9d4a1fbf5119004",
+    "tests/test_p1_services.py": "e608e90e857faaa39771492ad4f9ee1c10b5e0a4fc2ff31b2c1ac2773b880b18",
+    "tests/test_p1_integrity.py": "519ca4301e58f7c8c78b97e315f52ea34c437254d7fd31701f43386b74942cdc",
+    "tests/test_envharness_p1.py": "fed53368e029532770c9f048e26b7710ef1ac62a7ea88ee5d38ac6f09e51981f",
+    "pyproject.toml": "74892b4d8b84bc7f869988f95043f8b6184e39f785b8bdf340d1382bcc04ed1c"
+  }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "file": "skillloop/reuse_service.py",
+    "source_commit": "cb25a62d865fda405e5b051438dc53db32e4b990",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "tests/test_reuse_service.py",
+    "source_commit": "cb25a62d865fda405e5b051438dc53db32e4b990",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "tests/test_match.py",
+    "source_commit": "cb25a62d865fda405e5b051438dc53db32e4b990",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "skillloop/envharness_p1.py",
+    "source_commit": "1760d325a60316fb9b8b52b50d412be058635c42",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "skillloop/replay.py",
+    "source_commit": "1760d325a60316fb9b8b52b50d412be058635c42",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "tests/test_envharness_p1.py",
+    "source_commit": "1760d325a60316fb9b8b52b50d412be058635c42",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  },
+  {
+    "file": "tests/test_replay.py",
+    "source_commit": "1760d325a60316fb9b8b52b50d412be058635c42",
+    "method": "exact handoff file import; not a GitHub PR merge"
+  }
+]

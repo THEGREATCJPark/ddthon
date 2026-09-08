@@ -1,3 +1,4 @@
+from tests.p1_helpers import snapshot, PROC, MAPPING
 """V7, V8 — 실제 성공 정의·index 비강제. 소유: A. 구현: S8.
 
 P1 확장(승인 2026-09-08): procedure.action="file-access" 분기, B 실행결과 검증 +
@@ -98,11 +99,11 @@ except Exception:  # 미통합 브랜치: B AccessResult와 동일 계약(ok/con
 
 
 # B의 실제 접근 성공 content 형태: [(month:str, total_output:int|float), ...] (완료월 3행).
-_FA_CONTENT = [("2026-06", 1200), ("2026-07", 1350), ("2026-08", 1500)]
+_FA_CONTENT = snapshot([("2026-06", 1200), ("2026-07", 1350), ("2026-08", 1500)])
 # B가 실제 성공 시 채우는 evidence(원본 무변경 + 최소형태 + read-only) 재현.
 _FA_EVIDENCE_OK = {
     "original_unchanged": True,
-    "completed_month_rows": True,
+    "workbook_readable": True,
     "save_called": False,
     "sha256_before": "abc", "sha256_after": "abc",
 }
@@ -124,7 +125,7 @@ def _fa_skill():
         "version": "1.0.0",
         "origin": {"author": "seed"},
         "applicability": {"signals": ["file-access-fail:encrypted-xlsx"]},
-        "procedure": {"action": "file-access", "sheet": 1, "month_col": 1, "total_col": 2},
+        "procedure": dict(PROC),
     }
     return D.make_descriptor(content)
 
@@ -186,7 +187,7 @@ def test_file_access_ok_but_no_unchanged_evidence_is_not_success():
     # ok·content가 있어도 원본 무변경 근거가 없으면(빈 근거) 성공 처리하지 않는다.
     runner = _runner(AccessResult(
         ok=True, content=_FA_CONTENT, method="excel-com-attach",
-        evidence={"save_called": False},   # original_unchanged/completed_month_rows 없음
+        evidence={"save_called": False},   # original_unchanged/workbook_readable 없음
     ))
     res = RS.apply_and_verify(
         _fa_skill(), _fa_obs(), env=None, run_id="run-fa-noev",

@@ -259,3 +259,6 @@ status() -> SyncStatus
   - **C-d**: 이벤트 공유 왕복 실검증(event_id 재발급 없이 전송, pull 시 정확한 로컬 Skill 존재 확인 연결, 저장·검증·dedup=CJ).
 - **C-c(A 대기 유지)**: `match.search` P1 입력 + 파일접근 적용·검증 계약 확정 전 **검색·파일접근 재사용 분기는 NOT_RUN**(미구현 검색을 NO_MATCH로 간주 금지).
 - **CJ 공통 계약 승인 ≠ U2 전체 구현 승인** — U2 구현은 승인된 Code Plan 범위로 한정.
+
+## Current contract correction — scenario continuation
+The approved `construction/plans/p1-scenario-correction-plan.md` supersedes earlier task-specific access schema in this document. Shared procedure contains only action=file-access and method=excel-com-attach. C7/S1/C6 validate workbook accessibility and read-only evidence (workbook_readable), independent of production rows. C7 returns a local workbook snapshot preserving sheet names and UsedRange origins. S2 receives a separate local task mapping, interprets current columns/rows, verifies OLS and creates the actual3+forecast1 PNG. No task schema, chart or content is shared. S3 owns reuse eligibility as well as publication state; explicit execution confirmation does not replace integrity or lifecycle eligibility. CJ now integrates A/B completed handoffs; original authors and prior validation are preserved.

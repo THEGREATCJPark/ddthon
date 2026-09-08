@@ -1,0 +1,59 @@
+[
+  {
+    "run": 1,
+    "prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘",
+    "started_at": "2026-09-08T11:54:31.944852+00:00",
+    "completed_at": "2026-09-08T11:55:15.867378+00:00",
+    "agent_exit": 0,
+    "independent_probe_exit": 0,
+    "independent_probe": "1.0.0\nIMPORT_OK\n",
+    "count": 1,
+    "events": 1,
+    "work_preserved": true,
+    "unchanged": {
+      "store": true,
+      "requirements": true
+    },
+    "product_python": "<reproduction-root>\\checkout\\.venv\\Scripts\\python.exe",
+    "work": "<reproduction-root>\\work-1",
+    "pass": true
+  },
+  {
+    "run": 2,
+    "prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘",
+    "started_at": "2026-09-08T12:05:46.768748+00:00",
+    "completed_at": "2026-09-08T12:06:31.711689+00:00",
+    "agent_exit": 0,
+    "independent_probe_exit": 0,
+    "independent_probe": "1.0.0\nIMPORT_OK\n",
+    "count": 1,
+    "events": 1,
+    "work_preserved": true,
+    "unchanged": {
+      "store": true,
+      "requirements": true
+    },
+    "product_python": "<reproduction-root>\\checkout\\.venv\\Scripts\\python.exe",
+    "work": "<reproduction-root>\\work space 2",
+    "pass": true
+  },
+  {
+    "run": 3,
+    "prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘",
+    "started_at": "2026-09-08T12:06:39.536666+00:00",
+    "completed_at": "2026-09-08T12:07:27.612829+00:00",
+    "agent_exit": 0,
+    "independent_probe_exit": 0,
+    "independent_probe": "1.0.0\nIMPORT_OK\n",
+    "count": 1,
+    "events": 1,
+    "work_preserved": true,
+    "unchanged": {
+      "store": true,
+      "requirements": true
+    },
+    "product_python": "<reproduction-root>\\checkout\\.venv\\Scripts\\python.exe",
+    "work": "<reproduction-root>\\업무-3",
+    "pass": true
+  }
+]

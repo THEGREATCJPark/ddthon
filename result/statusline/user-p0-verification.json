@@ -1,0 +1,13 @@
+{
+  "source": "user supplied Claude transcript + read-only independent verification",
+  "pip_import_version_exit": 0,
+  "version": "1.0.0",
+  "counts": {
+    "fix-skillloop-demo-pkg-install\u001f1.0.0": 1
+  },
+  "run_ids": [
+    "27dd984514ab4f6ca4e0d206985449f0"
+  ],
+  "intermediate_match": "wrong/default store (scanned 0) and raw error as signature; not accepted as work-store search evidence",
+  "final_apply": "exact work store MATCH, actual success and count recorded"
+}

@@ -20,6 +20,13 @@
 
 ---
 
+## 현재 수정자 정정 — B 담당 종료 후 CJ 인수 (2026-09-08)
+
+- 사용자 대행 요청과 B의 담당 범위 완료 보고(`1760d32`)에 따라 **envharness_p1.py / replay.py / tests/test_envharness_p1.py / tests/test_replay.py의 후속 단일 수정자를 CJ로 이관**한다. 앞서 인수한 experience_service/publish_pipeline/gitsync도 CJ 유지.
+- B의 기존 커밋·작성자·검증 보고는 보존한다. 아래 기존 B 담당 표기는 원래 분담 이력이며 현재 수정자 판단에는 이 정정과 앞선 세 파일 이관 기록을 적용한다.
+- **A의 match.py / reuse_service.py 및 담당 테스트 소유권은 유지**한다. A PR #1 후속 수정과 동시에 편집하지 않는다.
+- 업무 우선순위는 CJ의 P0 자연어 수용 검증이 먼저다. 이번 소유권 이관은 P0 미승인 Code Plan을 승인하거나 새 P1 기능을 추가하는 결정이 아니다.
+
 ## Unit 상세
 
 ### U0 — 공통·계약·통합 (CJ) — **선행, P0 blocking**

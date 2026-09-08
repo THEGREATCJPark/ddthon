@@ -1,0 +1,19 @@
+{
+  "independent_exit": 0,
+  "independent_output": {
+    "python": "[TEST_ROOT]\\agent-work\\.venv\\Scripts\\python.exe",
+    "version": "1.0.0",
+    "import_ok": true,
+    "module_path": "[TEST_ROOT]\\agent-work\\.venv\\Lib\\site-packages\\skillloop_demo_pkg.py"
+  },
+  "requirements_unchanged": true,
+  "store_unchanged": true,
+  "counts": {
+    "fix-skillloop-demo-pkg-install\u001f1.0.0": 1
+  },
+  "events": 1,
+  "run_ids": [
+    "340f9e660ff0483c947ae0c113199a82"
+  ],
+  "work_python_exists": true
+}
