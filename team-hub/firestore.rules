@@ -3,6 +3,36 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function owner(id) { return signedIn() && get(/databases/$(database)/documents/messageOwners/$(id)).data.uid == request.auth.uid; }
+    match /captures/{id} {
+      allow get: if true;
+      allow list: if request.query.limit != null && request.query.limit <= 50;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['scenario','title','uid','mime','chunks','hasText','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.scenario in ['p0','p1']
+        && request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 80
+        && request.resource.data.mime in ['', 'image/png','image/jpeg','image/gif','image/webp']
+        && request.resource.data.chunks is int && request.resource.data.chunks >= 0 && request.resource.data.chunks <= 28
+        && ((request.resource.data.chunks == 0 && request.resource.data.mime == '') || (request.resource.data.chunks > 0 && request.resource.data.mime != ''))
+        && request.resource.data.hasText is bool
+        && (request.resource.data.hasText || request.resource.data.chunks > 0)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      match /content/{part} {
+        allow get: if exists(/databases/$(database)/documents/captures/$(id));
+        allow list: if exists(/databases/$(database)/documents/captures/$(id)) && request.query.limit != null && request.query.limit <= 29;
+        allow create: if signedIn()
+          && getAfter(/databases/$(database)/documents/captures/$(id)).data.uid == request.auth.uid
+          && getAfter(/databases/$(database)/documents/captures/$(id)).data.createdAt == request.time
+          && ((part == 'transcript' && request.resource.data.keys().hasOnly(['text'])
+            && request.resource.data.text is string && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 60000)
+            || (part.matches('image-(0[0-9]|1[0-9]|2[0-7])') && request.resource.data.keys().hasOnly(['data'])
+            && request.resource.data.data is string && request.resource.data.data.size() > 0 && request.resource.data.data.size() <= 200000));
+        allow delete: if signedIn() && get(/databases/$(database)/documents/captures/$(id)).data.uid == request.auth.uid;
+        allow update: if false;
+      }
+    }
     match /messages/{id} {
       allow get: if true;
       allow list: if request.query.limit != null && request.query.limit <= 200;

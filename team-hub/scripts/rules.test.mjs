@@ -129,3 +129,33 @@ test("rules enforce cooldown and reject writes without ownership/rate batch", as
     }),
   );
 });
+
+function capture(db, uid, id, patch = {}) {
+  const batch = writeBatch(db);
+  batch.set(doc(db, 'captures', id), { scenario: 'p0', title: '실행 캡처 검증', uid, mime: 'image/gif', chunks: 1, hasText: true, createdAt: serverTimestamp(), ...patch });
+  batch.set(doc(db, 'captures', id, 'content', 'image-00'), { data: 'R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' });
+  batch.set(doc(db, 'captures', id, 'content', 'transcript'), { text: '질문과 실제 실행 답변' });
+  return batch.commit();
+}
+test('capture image/text are shared; only original author can remove or write content', async () => {
+  const a = env.authenticatedContext('capture-author').firestore();
+  const b = env.authenticatedContext('capture-other').firestore();
+  const publicDb = env.unauthenticatedContext().firestore();
+  await assertFails(capture(publicDb, 'nobody', 'capture-no-auth'));
+  await assertFails(capture(b, 'capture-author', 'capture-forged'));
+  await assertFails(capture(a, 'capture-author', 'capture-html', { mime: 'text/html' }));
+  await assertSucceeds(capture(a, 'capture-author', 'capture-good'));
+  await assertSucceeds(getDocs(query(collection(publicDb, 'captures'), limit(50))));
+  await assertFails(getDocs(collection(publicDb, 'captures')));
+  await assertSucceeds(getDoc(doc(publicDb, 'captures', 'capture-good', 'content', 'transcript')));
+  await assertSucceeds(getDocs(query(collection(publicDb, 'captures', 'capture-good', 'content'), limit(29))));
+  await assertFails(updateDoc(doc(a, 'captures', 'capture-good'), { title: '변조' }));
+  await assertFails(setDoc(doc(b, 'captures', 'capture-good', 'content', 'image-01'), { data: 'tamper' }));
+  await assertFails(deleteDoc(doc(b, 'captures', 'capture-good')));
+  await assertFails(deleteDoc(doc(b, 'captures', 'capture-good', 'content', 'transcript')));
+  const batch = writeBatch(a);
+  batch.delete(doc(a, 'captures', 'capture-good', 'content', 'image-00'));
+  batch.delete(doc(a, 'captures', 'capture-good', 'content', 'transcript'));
+  batch.delete(doc(a, 'captures', 'capture-good'));
+  await assertSucceeds(batch.commit());
+});
