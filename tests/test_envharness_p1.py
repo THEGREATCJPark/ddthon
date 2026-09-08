@@ -79,7 +79,7 @@ def _make_env_with_file(tmp_path, app_open=True):
 
 def test_run_procedure_success_readonly(tmp_path, monkeypatch):
     env = _make_env_with_file(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e: list(_ROWS))
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: list(_ROWS))
 
     res = h.run_file_access_procedure(_PROC, env)
 
@@ -95,7 +95,7 @@ def test_run_procedure_success_readonly(tmp_path, monkeypatch):
 def test_run_procedure_app_not_open_is_none(tmp_path, monkeypatch):
     env = _make_env_with_file(tmp_path, app_open=False)
     # app_open=False면 주입 리더까지 가지 않고 None 처리되어야 한다(실제 함수는 app_open 가드).
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e: None)
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: None)
 
     res = h.run_file_access_procedure(_PROC, env)
 
@@ -106,7 +106,7 @@ def test_run_procedure_app_not_open_is_none(tmp_path, monkeypatch):
 
 def test_run_procedure_insufficient_rows(tmp_path, monkeypatch):
     env = _make_env_with_file(tmp_path)
-    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e: _ROWS[:2])  # 2개월
+    monkeypatch.setattr(h, "_read_via_excel_attach", lambda e, proc: _ROWS[:2])  # 2개월
 
     res = h.run_file_access_procedure(_PROC, env)
 
@@ -118,7 +118,7 @@ def test_run_procedure_readonly_gate_catches_modification(tmp_path, monkeypatch)
     """읽기 경로가 원본을 변경하면 mtime/sha256 무변경 기준 위반 → ok=False로 잡힌다."""
     env = _make_env_with_file(tmp_path)
 
-    def _mutating_read(e):
+    def _mutating_read(e, proc):
         with open(e.xlsx_path, "ab") as fp:  # 원본 변경(위반 시뮬레이션)
             fp.write(b"MUT")
         return list(_ROWS)

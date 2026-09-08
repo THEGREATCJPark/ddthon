@@ -155,13 +155,31 @@ def _try_com_create_encrypted(data_rows, password: str, path: str) -> bool:
         return False
 
 
+def _procedure_read_spec(procedure: dict) -> tuple[int, int, int]:
+    """procedure(서술적 접근 절차)에서 실제 읽기 위치를 취득. 인자를 무시하지 않는다.
+
+    반환: (sheet_index_1based, month_col_1based, total_col_1based).
+    기본값(sheet=1, month=1열, total=2열)은 procedure가 명시하지 않을 때만 사용한다.
+    """
+    if not isinstance(procedure, dict):
+        return 1, 1, 2
+    sheet = procedure.get("sheet", 1)
+    month_col = procedure.get("month_col", 1)
+    total_col = procedure.get("total_col", 2)
+    try:
+        return int(sheet), int(month_col), int(total_col)
+    except (TypeError, ValueError):
+        return 1, 1, 2
+
+
 # 테스트 주입 지점: 실제 Excel attach 대신 monkeypatch 가능(Excel 미가용 시 read-only 로직 검증용).
-def _read_via_excel_attach(env: EnvContext):
-    """실행 중 Excel 인스턴스에 attach → 셀 값 read-only 읽기. 미가용이면 None.
+def _read_via_excel_attach(env: EnvContext, procedure: dict):
+    """실행 중 Excel 인스턴스에 attach → procedure가 지정한 시트·열을 read-only 읽기. 미가용이면 None.
 
     반환: content=[(month, total_output), ...] 또는 None(attach/읽기 불가).
     **Save 계열을 호출하지 않는다**(read-only). 원본 파일 바이트를 직접 열지 않고,
-    애플리케이션이 이미 복호화한 문서를 매개로 값만 읽는다.
+    애플리케이션이 이미 복호화한 문서를 매개로 값만 읽는다. 읽기 대상(시트/열)은
+    전달받은 procedure에서 취득한다(인자 무시 금지).
     """
     if not env.app_open:
         return None
@@ -174,16 +192,17 @@ def _read_via_excel_attach(env: EnvContext):
     except Exception:
         return None
     try:
+        sheet_idx, month_col, total_col = _procedure_read_spec(procedure)
         target = os.path.normcase(os.path.abspath(env.xlsx_path))
         for wb in excel.Workbooks:
             if os.path.normcase(os.path.abspath(wb.FullName)) != target:
                 continue
-            ws = wb.Worksheets(1)
+            ws = wb.Worksheets(sheet_idx)
             used = ws.UsedRange
             rows = []
             for r in range(1, used.Rows.Count + 1):
-                month = ws.Cells(r, 1).Value
-                total = ws.Cells(r, 2).Value
+                month = ws.Cells(r, month_col).Value
+                total = ws.Cells(r, total_col).Value
                 if month is None:
                     continue
                 # COM은 정수도 float로 줄 수 있음 → 정수형은 int로 정규화(값 보존).
@@ -291,15 +310,17 @@ def run_file_access_procedure(procedure: dict, env: EnvContext) -> AccessResult:
     """
     sha_before = _sha256_of(env.xlsx_path)
     mtime_before = _mtime_of(env.xlsx_path)
+    read_spec = _procedure_read_spec(procedure)
     evidence: dict = {
         "procedure_keys": sorted(procedure.keys()) if isinstance(procedure, dict) else None,
+        "read_spec": {"sheet": read_spec[0], "month_col": read_spec[1], "total_col": read_spec[2]},
         "app_open": env.app_open,
         "sha256_before": sha_before,
         "mtime_before": mtime_before,
         "save_called": False,   # attach 읽기 경로는 Save를 호출하지 않는다.
     }
 
-    content = _read_via_excel_attach(env)
+    content = _read_via_excel_attach(env, procedure)
     if content is None:
         evidence["error"] = "excel attach unavailable or not open"
         return AccessResult(ok=False, content=None, method="none", evidence=evidence)
