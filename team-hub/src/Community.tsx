@@ -258,7 +258,7 @@ export default function Community({ board }: { board: Board }) {
           <p>
             {board === "team"
               ? "길게 정리하지 않아도 괜찮아요. 댓글로 이야기해요."
-              : "다른 팀도 환영합니다. 아이템에 날카로운 한마디를 남겨주세요."}
+              : "맵게 한마디 남겨주세요."}
           </p>
         </div>
         {board === "challenge" ? (

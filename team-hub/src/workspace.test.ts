@@ -8,28 +8,32 @@ import {
   decodeProgress,
   emptyProgress,
 } from "./workspace.ts";
-test("scenario names explain Python and Excel without requiring P0/P1 knowledge", () => {
+test("AI-DLC stages name inception, three parallel units, and evaluation", () => {
   assert.equal(STAGES.length, 6);
-  assert.match(STAGES[1].name, /Python 설치/);
-  assert.match(STAGES[2].name, /Excel 설치/);
+  assert.match(STAGES[0].name, /INCEPTION.*아이템 기획/);
+  assert.match(STAGES[1].name, /U1.*Python 설치/);
+  assert.match(STAGES[2].name, /U2.*Excel 분석/);
+  assert.match(STAGES[3].name, /U3.*협업 Web/);
+  assert.match(STAGES[4].name, /평가 담당.*팀원 1명/);
 });
 test("progress links preserve independent parallel stages", () => {
   const p = emptyProgress();
-  p.python = 1;
-  p.excel = 2;
-  p.plan = 3;
+  p.u1 = 1;
+  p.u2 = 2;
+  p.u3 = 3;
   assert.deepEqual(decodeProgress(encodeProgress(p)), p);
-  assert.equal(p.verify, 0);
+  assert.equal(p.evaluation, 0);
 });
 test("unrecognized link versions and invalid statuses never invent progress", () => {
   for (const v of [
     null,
     "",
     "v1.01230123",
-    "v2.01230",
-    "v2.012304",
-    "v2.0123012",
-    "v2.<script>",
+    "v2.012301",
+    "v3.01230",
+    "v3.012304",
+    "v3.0123012",
+    "v3.<script>",
   ])
     assert.equal(decodeProgress(v), null);
 });

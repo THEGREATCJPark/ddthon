@@ -1,23 +1,80 @@
 {
   "schema_version": 2,
   "diagram_type": "workflow",
-  "meta": { "title": "Agent Skillloop 개발 흐름", "quality_profile": "showcase", "animation": "none" },
-  "lanes": [{"id":"prepare","label":"준비"},{"id":"scenarios","label":"두 가지 시나리오"},{"id":"finish","label":"연결하고 시연하기"}],
-  "mainPath": ["plan","python","share","verify","demo"],
+  "meta": {
+    "title": "AI-DLC 활용 개발 진행 순서도",
+    "quality_profile": "showcase",
+    "animation": "none"
+  },
+  "lanes": [
+    { "id": "inception", "label": "INCEPTION" },
+    { "id": "construction", "label": "CONSTRUCTION · U1 / U2 / U3 병렬 진행" },
+    { "id": "evaluation", "label": "EVALUATION · 팀원 1명 전담" }
+  ],
+  "mainPath": ["inception", "u1", "evaluation", "demo"],
   "nodes": [
-    {"id":"plan","lane":"prepare","col":0,"type":"frontend","label":"아이템 기획","sublabel":"무엇을 해결할지 정하기","width":170},
-    {"id":"python","lane":"scenarios","col":0,"type":"backend","label":"Python 설치 시나리오","sublabel":"P0 · 기존 해결법 다시 쓰기","width":220},
-    {"id":"excel","lane":"scenarios","col":1,"type":"backend","label":"Excel 설치 시나리오","sublabel":"P1 · 새 해결법 배우기","width":220},
-    {"id":"share","lane":"finish","col":1,"type":"database","label":"팀에 해결법 공유","sublabel":"다른 팀원도 사용할 수 있게","width":190},
-    {"id":"verify","lane":"finish","col":2,"type":"security","label":"실제로 되는지 확인","sublabel":"다른 환경에서도 다시 실행","width":190},
-    {"id":"demo","lane":"finish","col":3,"type":"external","label":"시연 준비","sublabel":"한 번에 보여주는 데모","width":160}
+    {
+      "id": "inception",
+      "lane": "inception",
+      "col": 0,
+      "type": "frontend",
+      "label": "INCEPTION · 아이템 기획",
+      "sublabel": "문제 · 사용자 · 성공 기준 정의",
+      "width": 230
+    },
+    {
+      "id": "u1",
+      "lane": "construction",
+      "col": 0,
+      "type": "backend",
+      "label": "U1 · Python 설치",
+      "sublabel": "P0 · 기존 Skill 재사용",
+      "width": 205
+    },
+    {
+      "id": "u2",
+      "lane": "construction",
+      "col": 1,
+      "type": "database",
+      "label": "U2 · Excel 분석",
+      "sublabel": "P1 · 새 Skill 발견",
+      "width": 205
+    },
+    {
+      "id": "u3",
+      "lane": "construction",
+      "col": 2,
+      "type": "frontend",
+      "label": "U3 · 협업 Web",
+      "sublabel": "순서도 · 의견 · 시연 연결",
+      "width": 205
+    },
+    {
+      "id": "evaluation",
+      "lane": "evaluation",
+      "col": 1,
+      "type": "security",
+      "label": "평가 담당 · 팀원 1명",
+      "sublabel": "U1 · U2 · U3 독립 확인",
+      "width": 220
+    },
+    {
+      "id": "demo",
+      "lane": "evaluation",
+      "col": 2,
+      "type": "external",
+      "label": "통합 시연",
+      "sublabel": "평가 결과 반영 후 연결",
+      "width": 175
+    }
   ],
   "edges": [
-    {"from":"plan","to":"python"},
-    {"from":"plan","to":"excel","role":"branch"},
-    {"from":"python","to":"share"},
-    {"from":"excel","to":"share","role":"branch"},
-    {"from":"share","to":"verify"},
-    {"from":"verify","to":"demo"}
+    { "from": "inception", "to": "u1" },
+    { "from": "inception", "to": "u2", "role": "branch" },
+    { "from": "inception", "to": "u3", "role": "branch" },
+    { "from": "u1", "to": "evaluation" },
+    { "from": "u2", "to": "evaluation", "role": "branch" },
+    { "from": "u3", "to": "evaluation", "role": "branch" },
+    { "from": "evaluation", "to": "demo" }
   ]
 }

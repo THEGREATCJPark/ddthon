@@ -1,34 +1,39 @@
 export const STAGES = [
   {
-    id: "plan",
-    name: "아이템 기획",
-    description: "어떤 문제를 해결할지, 시연에서 무엇을 보여줄지 정합니다.",
-  },
-  {
-    id: "python",
-    name: "Python 설치 시나리오",
-    description: "P0 · 설치가 막히면 팀이 이미 해결한 방법을 찾아 적용합니다.",
-  },
-  {
-    id: "excel",
-    name: "Excel 설치 시나리오",
+    id: "inception",
+    name: "INCEPTION · 아이템 기획",
     description:
-      "P1 · 처음 만난 문제를 해결하고, 다음에도 쓸 수 있는 방법으로 남깁니다.",
+      "AI-DLC의 시작 단계입니다. 해결할 문제, 사용자, 성공 기준과 시연 범위를 함께 정합니다.",
   },
   {
-    id: "share",
-    name: "팀에 해결법 공유",
-    description: "한 사람이 알아낸 해결법을 다른 팀원에게 전달합니다.",
+    id: "u1",
+    name: "U1 · Python 설치",
+    description:
+      "CONSTRUCTION 병렬 작업 · 설치가 막히면 팀이 이미 해결한 방법을 찾아 적용합니다.",
   },
   {
-    id: "verify",
-    name: "실제로 되는지 확인",
-    description: "다른 환경에서도 같은 방법이 통하는지 확인합니다.",
+    id: "u2",
+    name: "U2 · Excel 분석",
+    description:
+      "CONSTRUCTION 병렬 작업 · 합성 제약 환경의 Excel을 분석하고 새 해결법을 남깁니다.",
+  },
+  {
+    id: "u3",
+    name: "U3 · 협업 Web",
+    description:
+      "CONSTRUCTION 병렬 작업 · 진행 순서도, 의견, 딴지와 시연 화면을 하나의 Web으로 연결합니다.",
+  },
+  {
+    id: "evaluation",
+    name: "평가 담당 · 팀원 1명",
+    description:
+      "구현과 분리된 팀원 한 명이 U1·U2·U3 결과와 시연 흐름을 확인하고 피드백합니다.",
   },
   {
     id: "demo",
-    name: "시연 준비",
-    description: "Python과 Excel 시나리오를 처음부터 끝까지 보여줍니다.",
+    name: "통합 시연",
+    description:
+      "평가를 통과한 U1·U2·U3를 연결해 Agent SkillLoop의 전체 흐름을 보여줍니다.",
   },
 ] as const;
 export type StageId = (typeof STAGES)[number]["id"];
@@ -39,10 +44,10 @@ export function emptyProgress(): Progress {
   return Object.fromEntries(STAGES.map((s) => [s.id, 0])) as Progress;
 }
 export function encodeProgress(p: Progress) {
-  return `v2.${STAGES.map((s) => p[s.id]).join("")}`;
+  return `v3.${STAGES.map((s) => p[s.id]).join("")}`;
 }
 export function decodeProgress(value: string | null): Progress | null {
-  if (!value || !/^v2\.[0-3]{6}$/.test(value)) return null;
+  if (!value || !/^v3\.[0-3]{6}$/.test(value)) return null;
   return Object.fromEntries(
     STAGES.map((s, i) => [s.id, Number(value[i + 3])]),
   ) as Progress;

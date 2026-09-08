@@ -10,7 +10,7 @@ import {
   type StageId,
   type StageStatus,
 } from "./workspace";
-const KEY = "nowhere.progress.v2";
+const KEY = "nowhere.progress.v3";
 function initial() {
   const shared = decodeProgress(
     new URL(location.href).searchParams.get("flow"),
@@ -69,7 +69,7 @@ export default function Flow() {
     graphic.querySelector("[data-legend]")?.remove();
     graphic.setAttribute("role", "group");
     graphic.removeAttribute("aria-labelledby");
-    graphic.setAttribute("aria-label", "Agent Skillloop 진행 순서도");
+    graphic.setAttribute("aria-label", "AI-DLC 활용 개발 진행 순서도");
     for (const stage of STAGES) {
       const node = graphic.querySelector<SVGGElement>(
         `[data-node-id="${stage.id}"]`,
@@ -152,8 +152,8 @@ export default function Flow() {
     <section className="flow-page">
       <div className="page-heading">
         <div>
-          <h2>지금, 여기까지.</h2>
-          <p>박스를 눌러 진행 상태를 표시하세요.</p>
+          <h2>AI-DLC 활용 개발 진행 순서도</h2>
+          <p>박스를 눌러 각 단계의 진행 상태를 표시하세요.</p>
         </div>
         <button className="button" onClick={copy}>
           <LinkIcon size={18} />
