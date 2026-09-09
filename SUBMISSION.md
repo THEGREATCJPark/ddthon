@@ -22,7 +22,7 @@
 
 ## Git 제출과 필터 한도
 
-공개 저장소 https://github.com/THEGREATCJPark/ddthon 의 **기본 main 브랜치**가 Git 제출 대상이다. 통합 작업 브랜치만 push한 상태는 제출본 갱신이 아니다. 최종 수용 후 main 반영 및 SHA/CI 확인이 필요하다. 특정 SHA 고정 제출은 그 SHA의 source ZIP을 사용한다.
+공개 저장소 https://github.com/THEGREATCJPark/ddthon 의 **기본 main 브랜치**가 Git 제출 대상이다. PR #4를 main에 반영하고 병합 SHA `0a23c49`의 CI/Pages를 확인했다. 이후 문서 마감 커밋은 같은 코드 트리를 유지한다. 사이트 최종 제출 버튼은 사용자가 수행한다. 특정 SHA 고정 제출은 그 SHA의 source ZIP을 사용한다.
 
 사용자 제공 한도: source ZIP 200MB, 압축 해제 1GB/10,000개; 평가 필터는 개별 10MB/전체 100MB/1,000개. 정확한 현재 파일 수·크기는 [inventory](result/development-closeout-20260909/submission-inventory.json) 참조.
 

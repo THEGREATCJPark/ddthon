@@ -1,14 +1,12 @@
 {
-  "captured_at": "2026-09-09T06:13:54.138811+00:00",
-  "source_head_before_docs_commit": "1ac639acbab15f01b64ee44024e29f5034164e36",
+  "captured_at": "2026-09-09T06:26:40.088246+00:00",
+  "verified_main_sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
   "repo": {
-    "html_url": "https://github.com/THEGREATCJPark/ddthon",
-    "private": false,
     "visibility": "public",
     "default_branch": "main"
   },
-  "file_count": 698,
-  "total_bytes": 48546567,
+  "file_count": 701,
+  "total_bytes": 48636026,
   "over_10MB": [
     {
       "path": "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
@@ -188,19 +186,19 @@
     },
     {
       "path": "README.md",
-      "bytes": 13128
+      "bytes": 13287
     },
     {
       "path": "SUBMISSION.md",
-      "bytes": 4393
+      "bytes": 4462
     },
     {
       "path": "aidlc-docs/aidlc-state.md",
-      "bytes": 4071
+      "bytes": 4902
     },
     {
       "path": "aidlc-docs/audit.md",
-      "bytes": 219072
+      "bytes": 220979
     },
     {
       "path": "aidlc-docs/construction/P0/nfr-requirements/nfr-requirements.md",
@@ -252,7 +250,7 @@
     },
     {
       "path": "aidlc-docs/construction/build-and-test/build-and-test-summary.md",
-      "bytes": 2744
+      "bytes": 3811
     },
     {
       "path": "aidlc-docs/construction/build-and-test/build-instructions.md",
@@ -308,7 +306,7 @@
     },
     {
       "path": "aidlc-docs/construction/plans/development-closeout-plan.md",
-      "bytes": 11293
+      "bytes": 11797
     },
     {
       "path": "aidlc-docs/construction/plans/dialogue-ux-live-demo-code-generation-plan.md",
@@ -700,7 +698,7 @@
     },
     {
       "path": "result/development-closeout-20260909/README.md",
-      "bytes": 8852
+      "bytes": 9610
     },
     {
       "path": "result/development-closeout-20260909/bundle-line-ending-comparison.json",
@@ -709,6 +707,14 @@
     {
       "path": "result/development-closeout-20260909/delivery-inspection.json",
       "bytes": 1434
+    },
+    {
+      "path": "result/development-closeout-20260909/final-delivery-ci.json",
+      "bytes": 9543
+    },
+    {
+      "path": "result/development-closeout-20260909/final-python-ci-summary.json",
+      "bytes": 498
     },
     {
       "path": "result/development-closeout-20260909/history-hashes.json",
@@ -720,7 +726,7 @@
     },
     {
       "path": "result/development-closeout-20260909/manifest.json",
-      "bytes": 2423
+      "bytes": 4043
     },
     {
       "path": "result/development-closeout-20260909/python-cli-help.json",
@@ -777,6 +783,10 @@
     {
       "path": "result/development-closeout-20260909/remote-web-jobs.json",
       "bytes": 6506
+    },
+    {
+      "path": "result/development-closeout-20260909/submission-inventory.json",
+      "bytes": 72503
     },
     {
       "path": "result/development-closeout-20260909/web-build.json",

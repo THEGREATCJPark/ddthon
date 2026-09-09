@@ -8,7 +8,7 @@
 
 [최신 검증·제한](result/development-closeout-20260909/README.md) · [AI-DLC 현재 상태](aidlc-docs/aidlc-state.md) · [제출 구조·갤러리 안내](SUBMISSION.md)
 
-현재 통합 검증은 **Python 200 PASS / 2 SKIP, 웹 10 PASS / build PASS**입니다. P0 WITH_SKILL 3회, P1 Cold 4회 업무 성공을 확인했고, 별도 수동 P1 회차에서 사람 승인 → 독립 Replay → Git 게시를 확인했습니다. 서로 다른 회차의 영상과 성능 측정값을 구분합니다. 최종 사용자 수용·main 전달 상태는 위 현재 상태 문서에 표시합니다.
+현재 통합 검증은 **Python 200 PASS / 2 SKIP, 웹 10 PASS / build PASS**입니다. P0 WITH_SKILL 3회, P1 Cold 4회 업무 성공을 확인했고, 별도 수동 P1 회차에서 사람 승인 → 독립 Replay → Git 게시를 확인했습니다. 서로 다른 회차의 영상과 성능 측정값을 구분합니다. 최종 사용자 수용과 main 반영을 완료했고, 병합 커밋 `0a23c49`의 Python CI·웹 테스트/권한 규칙/빌드·Pages 배포를 확인했습니다. [최종 전달 근거](result/development-closeout-20260909/final-delivery-ci.json).
 
 ## P1 실제 시연 영상
 

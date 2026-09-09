@@ -11,6 +11,14 @@
     "bytes": 1434,
     "sha256": "b8be6a40e8ca6bbc75fde641472e83a7f362e2025c24a5140d17f9cfedb2e765"
   },
+  "final-delivery-ci.json": {
+    "bytes": 9543,
+    "sha256": "281fbb62ede148e1f0537d802d37af1af90528b64e2ec31c01798cd58eea2a8c"
+  },
+  "final-python-ci-summary.json": {
+    "bytes": 498,
+    "sha256": "4372661b3ebcb05180abc314fb7ff6a0d67841693169a8b0ae016ae155206a22"
+  },
   "history-hashes.json": {
     "bytes": 228,
     "sha256": "187100ee46589950b0c50bee3d5296d4a0d1633a41310743228eb694d8907ef5"
@@ -68,8 +76,8 @@
     "sha256": "95862a48ef852e182de8f3654ad83962a9d8e47e2b25435d6eb3536565b38e4f"
   },
   "README.md": {
-    "bytes": 8852,
-    "sha256": "11a1ccfc4241824022f3aa92a6d50bc89b92f9453ef41439c747f3e06f2dd27c"
+    "bytes": 9610,
+    "sha256": "f2608bb404dab198bfad1c7984a2dba4e2dc86b805c65773704851f896d955cf"
   },
   "remote-ci.json": {
     "bytes": 14936,
@@ -80,8 +88,8 @@
     "sha256": "14e4c600845dff818a5e2852da3c8b3be00ea8a89757f6eee9be722460860007"
   },
   "submission-inventory.json": {
-    "bytes": 72368,
-    "sha256": "d9bfc5aa9afb1b76790d2cd9970370ca835199ee9f0278a51d120a2db4097223"
+    "bytes": 72622,
+    "sha256": "6cfc1604076ae257cf832f2549baf7271fb214ebe2288030d58d86807bf99989"
   },
   "web-build.json": {
     "bytes": 427,

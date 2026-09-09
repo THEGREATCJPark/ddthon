@@ -1,0 +1,263 @@
+{
+  "captured_at": "2026-09-09T06:26:37.281888+00:00",
+  "verified_main_sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
+  "user_acceptance": "최종 결과와 알려진 제한을 수용합니다. main 반영과 CI 확인 후 개발 완료로 마감해주세요.",
+  "runs": [
+    {
+      "id": 34318706589,
+      "name": "Deploy Nowhere Workspace",
+      "sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
+      "url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34318706589",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 102360382101,
+          "name": "build",
+          "conclusion": "success",
+          "started_at": "2026-09-09T06:21:42Z",
+          "completed_at": "2026-09-09T06:22:30Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-09T06:21:43Z",
+              "completed_at": "2026-09-09T06:21:44Z"
+            },
+            {
+              "name": "Checkout workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-09T06:21:44Z",
+              "completed_at": "2026-09-09T06:21:46Z"
+            },
+            {
+              "name": "Run actions/setup-node@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-09T06:21:46Z",
+              "completed_at": "2026-09-09T06:21:51Z"
+            },
+            {
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-09T06:21:51Z",
+              "completed_at": "2026-09-09T06:21:51Z"
+            },
+            {
+              "name": "Run npm ci",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-09T06:21:51Z",
+              "completed_at": "2026-09-09T06:21:55Z"
+            },
+            {
+              "name": "Run npm test",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-09-09T06:21:55Z",
+              "completed_at": "2026-09-09T06:21:56Z"
+            },
+            {
+              "name": "Verify comment security rules in isolated emulator",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-09-09T06:21:56Z",
+              "completed_at": "2026-09-09T06:22:18Z"
+            },
+            {
+              "name": "Run npm run build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-09-09T06:22:18Z",
+              "completed_at": "2026-09-09T06:22:24Z"
+            },
+            {
+              "name": "Run actions/upload-pages-artifact@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-09-09T06:22:24Z",
+              "completed_at": "2026-09-09T06:22:25Z"
+            },
+            {
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-09-09T06:22:25Z",
+              "completed_at": "2026-09-09T06:22:25Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-09-09T06:22:25Z",
+              "completed_at": "2026-09-09T06:22:28Z"
+            },
+            {
+              "name": "Post Checkout workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18,
+              "started_at": "2026-09-09T06:22:28Z",
+              "completed_at": "2026-09-09T06:22:28Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19,
+              "started_at": "2026-09-09T06:22:28Z",
+              "completed_at": "2026-09-09T06:22:28Z"
+            }
+          ]
+        },
+        {
+          "id": 102360568023,
+          "name": "deploy",
+          "conclusion": "success",
+          "started_at": "2026-09-09T06:22:46Z",
+          "completed_at": "2026-09-09T06:22:56Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-09T06:22:47Z",
+              "completed_at": "2026-09-09T06:22:48Z"
+            },
+            {
+              "name": "Deploy GitHub Pages",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-09T06:22:48Z",
+              "completed_at": "2026-09-09T06:22:54Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-09T06:22:54Z",
+              "completed_at": "2026-09-09T06:22:54Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34318706218,
+      "name": "SkillLoop Python verification",
+      "sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
+      "url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34318706218",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 102360380081,
+          "name": "test",
+          "conclusion": "success",
+          "started_at": "2026-09-09T06:21:42Z",
+          "completed_at": "2026-09-09T06:25:54Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-09T06:21:42Z",
+              "completed_at": "2026-09-09T06:21:43Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-09T06:21:43Z",
+              "completed_at": "2026-09-09T06:21:55Z"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-09T06:21:55Z",
+              "completed_at": "2026-09-09T06:21:56Z"
+            },
+            {
+              "name": "Run python -m pip install -e \".[p1]\" -r requirements-dev.txt",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-09T06:21:56Z",
+              "completed_at": "2026-09-09T06:22:28Z"
+            },
+            {
+              "name": "Run python -m pytest --hypothesis-seed=20260908 -o addopts='' -q",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-09T06:22:28Z",
+              "completed_at": "2026-09-09T06:25:50Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-09-09T06:25:50Z",
+              "completed_at": "2026-09-09T06:25:51Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-09-09T06:25:51Z",
+              "completed_at": "2026-09-09T06:25:53Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-09-09T06:25:53Z",
+              "completed_at": "2026-09-09T06:25:53Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "url": "https://github.com/THEGREATCJPark/ddthon/pull/4",
+    "merged_at": "2026-09-09T06:21:36Z",
+    "merge_commit_sha": "0a23c49748107279139d240275b1e0cadf9db9ce"
+  },
+  "pages": {
+    "url": "https://thegreatcjpark.github.io/ddthon/",
+    "http": 200,
+    "entrypoint": "https://thegreatcjpark.github.io/ddthon/assets/index-BUpab3mP.js",
+    "entrypoint_sha256": "c586379a19339bd6b0f380a8a55cc3f7fed95eb78940fc21a9b4272cc264bbe4",
+    "bytes": 905966
+  },
+  "source_trees": {
+    "skillloop": "941be5ae9cc6a9f5ab333f19b99915d7319b0578",
+    "tests": "80ac88eca63f56145cd1ebd34e5195c5e9434389",
+    "scripts": "8b27d594d87e0339323dd8346fa62c90835fb377",
+    "team-hub": "0c5dc791d647e7ff2c96298a283b96eb38428491",
+    ".github/workflows": "a1d1e856b9d81e909fda20be8f997bc8c84106bd"
+  }
+}

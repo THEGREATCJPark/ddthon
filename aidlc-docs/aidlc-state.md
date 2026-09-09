@@ -1,12 +1,12 @@
 # Agent SkillLoop — 현재 AI-DLC 상태
 
-갱신: 2026-09-09T06:00:22.502539+00:00. **CONSTRUCTION / Build & Test, 최종 마감 검토 중. 전체 개발 완료·최종 사용자 수용은 아직 아니다.**
+갱신: 2026-09-09T06:26:40.005992+00:00. **해커톤 MVP 개발 완료 / Build & Test 최종 사용자 수용 완료.**
 
 ## 현재 기준
 
 - 통합 브랜치: `codex/development-closeout-20260909`; Python 검증 코드 `6197a97` 이후 제품/Python 테스트 동일. 웹은 원격 `3b2c19d` UI를 통합하고 승인된 테스트 보완 후 재검증했다.
-- 원본 작업 폴더와 미커밋 변경 보존. 원격 `3b2c19d`까지 통합. 이 브랜치는 아직 main에 전달하지 않았다.
-- [마감 계획](construction/plans/development-closeout-plan.md)은 사용자 ‘그래 그럼 진행해’로 실행 승인됨. 계획 승인과 최종 결과 수용은 구분한다.
+- 원본 작업 폴더와 미커밋 변경 보존. 원격 `3b2c19d`까지 통합. PR #4로 main에 전달했고 병합 SHA `0a23c49748107279139d240275b1e0cadf9db9ce`의 Python CI·웹 rules/build·Pages 배포 SUCCESS를 확인했다.
+- [마감 계획](construction/plans/development-closeout-plan.md)은 사용자 ‘그래 그럼 진행해’로 실행 승인됨. 계획 승인과 최종 결과 수용은 구분하며, 최종 수용 원문은 audit에 추가했다.
 
 ## 단계와 완료 근거
 
@@ -21,14 +21,17 @@
 | 사람 승인/Replay/Git 게시 | 별도 수동 실제 PASS e302bf2 |
 | 원격 수신/Warm/실적 dedup | 기존 실제 PASS, 독립 workspace 기준 |
 | 별도 물리 B-PC 전체 종단 | 독립 재현 NOT_RUN; 수신 검증과 구분 |
-| 전체 Build & Test 수용 | 필수 보완 해소, 최종 결과 수용·main 전달 대기 |
+| 전체 Build & Test 수용 | 사용자 수용 완료, main CI·Pages SUCCESS |
 | Operations | 승인된 MVP 범위 밖 / placeholder |
 
-## 지금 남은 일
+## 마감 결과
 
-1. 웹 입력 PBT: 승인 후 구현, 3개 생성 검사 포함 웹 10 PASS/build PASS. 해당 미해결 항목 해소.
-2. 웹 신규 쓰기: 사용자 “어 수용할게”로 현재 수용. 사전 승인 근거 미확인 이력 보존. 운영 rules exact hash PASS 유지.
-3. README·SUBMISSION.md·현재 검증 정리 완료. 최종 결과 수용 후 Git main 전달 및 CI 확인.
+- 사용자 최종 수용: “최종 결과와 알려진 제한을 수용합니다. main 반영과 CI 확인 후 개발 완료로 마감해주세요.”
+- 검증·배포 코드 SHA: `0a23c49748107279139d240275b1e0cadf9db9ce`, PR #4 병합 완료. Python CI와 웹 테스트·Firestore emulator·빌드·Pages 배포 SUCCESS.
+- 웹 입력 PBT·현재 웹 기능 수용·README/제출 구조 정리 완료. 이 마감 기록 커밋은 위 검증 코드의 문서/근거만 추가하며 소스 트리 동일성을 전달 확인에서 검사한다.
+- 알려진 제한: 실제 Excel opt-in CI 제외, 별도 물리 B-PC 전체 종단 독립 재현 NOT_RUN, 과거 절차 누락 보존. 사용자가 이를 수용했다. Operations는 기존 승인 범위 밖.
+- 해커톤 제출 사이트의 최종 제출 버튼/manifest 업로드는 수행하지 않았다. Git 기본 main 소스 준비 완료와 사이트 제출 완료를 구분한다.
+- 이후 피드백은 완료한 MVP 기준을 보존하고 변경 영향→필요한 계획/승인→구현→검증으로 이어간다. 자동으로 모든 후속 작업이 승인된 것은 아니다.
 
 실제 로그·조건·제한: [최종 Build & Test 요약](construction/build-and-test/build-and-test-summary.md), [마감 검토 보고](../result/development-closeout-20260909/README.md). 추가 원격 P0 비교는 [적용 전6회/후3회 원문](../result/p0-six-before-three-after-20260909/README.md); 선정/실패/권한 대기와 비용 증가를 보존한다.
 

@@ -1,0 +1,11 @@
+{
+  "source": "GitHub Actions job 102360380081",
+  "url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34318706218",
+  "verified_main_sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
+  "type": "selected_exact_log_lines",
+  "lines": [
+    "2026-09-09T06:21:55.9876388Z   python-version: 3.12",
+    "2026-09-09T06:22:28.5637766Z ##[group]Run python -m pytest --hypothesis-seed=20260908 -o addopts='' -q",
+    "2026-09-09T06:25:50.6510919Z 200 passed, 2 skipped in 199.89s (0:03:19)"
+  ]
+}
