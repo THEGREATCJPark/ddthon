@@ -1,0 +1,17 @@
+{
+  "protected_before": {
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\store.json": "1ea99ffbdebb51e0832666fdae22bad6887e7875257e47d7612ca09141eda892",
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\usage.json": "f3463fcfabf7e95a9a76006baf7ebfaf19f4e082c69bc9c3d519af3fc86baea4",
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.claude\\settings.local.json": "37c12a6a64a57d9c951801259669b24bacb6d1c7b44bc7b3b798632a4a4d0e82"
+  },
+  "protected_after": {
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\store.json": "1ea99ffbdebb51e0832666fdae22bad6887e7875257e47d7612ca09141eda892",
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\usage.json": "f3463fcfabf7e95a9a76006baf7ebfaf19f4e082c69bc9c3d519af3fc86baea4",
+    "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.claude\\settings.local.json": "37c12a6a64a57d9c951801259669b24bacb6d1c7b44bc7b3b798632a4a4d0e82"
+  },
+  "unchanged": true,
+  "skill_before": "577602a08b9ce369b782d25318769599efb0a1e5f7d6a4f27a7f57452a63feaf",
+  "skill_after": "c6788ef72a4c7c6410595488263291620a0ca87492faeb4b99d19e9d8e60ed11",
+  "status_exit": 0,
+  "note": "Only project-local C9 instructions refreshed. Current user session may have already loaded old instructions; no new Agent run or screenshot claimed."
+}

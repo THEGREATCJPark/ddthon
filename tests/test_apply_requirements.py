@@ -42,7 +42,7 @@ def count(ctx):
     return UsageTracker(ctx["usage"]).current_count("fix-skillloop-demo-pkg-install", "1.0.0")
 
 
-def test_real_work_persists_and_counts_exactly_once(tmp_path, monkeypatch):
+def test_real_work_persists_and_counts_exactly_once(tmp_path, monkeypatch, capsys):
     first = setup.prepare_work(tmp_path / "first")
     second = setup.prepare_work(tmp_path / "second")
     # One shared Skill/usage store, two distinct requested work environments.
@@ -56,6 +56,9 @@ def test_real_work_persists_and_counts_exactly_once(tmp_path, monkeypatch):
     monkeypatch.setattr(cli, "_seed_store", forbidden)
     assert invoke(first) == 0
     assert count(first) == 1
+    output = capsys.readouterr().out
+    assert "‘python pip 사내환경 적용 방법’ Skill로 설치와 사용 확인을 마쳤습니다." in output
+    assert "성공 기록이 1회 추가됐습니다(로컬 누적 1회)" in output
     check = subprocess.run([first["work_python"], "-c",
                             "import skillloop_demo_pkg; import importlib.metadata as m; "
                             "assert m.version('skillloop-demo-pkg') == '1.0.0'"],
@@ -64,6 +67,9 @@ def test_real_work_persists_and_counts_exactly_once(tmp_path, monkeypatch):
     assert invoke(first) == 0  # same id, already installed: no forced failure
     assert invoke(first, "new-id-same-installed-work") == 0
     assert count(first) == 1
+    repeated = capsys.readouterr().out
+    assert "INSTALL_OK_NO_REUSE" in repeated
+    assert "성공 기록이 1회 추가" not in repeated
     assert invoke(second, "logical-2") == 0
     assert count(first) == 2
     assert Path(first["work_python"]).is_file()
@@ -137,5 +143,7 @@ def test_failed_service_verification_never_counts(empty_work, monkeypatch, capsy
         return cli.reuse_service.ApplicationResult(1, False, False, False, "allow", False, "logical-1")
     monkeypatch.setattr(cli.reuse_service, "apply_and_verify", failed)
     assert invoke(empty_work) == 6
-    assert "VERIFICATION_FAILED" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert "VERIFICATION_FAILED" in output
+    assert "성공 기록이 1회 추가" not in output
     assert count(empty_work) == 0

@@ -1,5 +1,13 @@
 # AI-DLC State Tracking
 
+## 최신 / P0 live feedback correction (2026-09-09)
+
+- Existing CONSTRUCTION / Build & Test. User requested C9 narration, visible preloaded inventory and named verified-reuse success feedback; amendment recorded before implementation. Web excluded.
+- Presentation corrections tested:37 targeted +10 P1 regression; final actual P0 repeat1 PASS (overlaps targeted coverage, not a new total). PYTHONUTF8=1 inherited check has no warnings; earlier2 decoding warnings preserved.
+- User P0 work has actual reuse1 and independent import/version1.0.0 confirmed. Full UI transcript/captures not obtained; prior automated NOT_RUN remains historical. Updated work Skill instructions; settings/store/usage preserved.
+- New work skillloop-p0-feedback-20260909 PREPARED_NOT_RUN with fresh venv and existing real local history1. New Agent dialogue verification pending. No invented historical counts, proxy failures, remote publication or web changes.
+
+
 ## 현재 우선 작업 — B-PC 공용 Skill 왕복 검증 (2026-09-09)
 
 - 기존 CONSTRUCTION / Build & Test를 이어간다. B 보고 기준 main fff0ffa, Python 3.12.2 제품 설치·import 성공. 개발 의존성 설치는 cp949 오류 후 `python -X utf8`로 성공했다.

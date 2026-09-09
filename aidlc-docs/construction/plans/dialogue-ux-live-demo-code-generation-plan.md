@@ -72,3 +72,17 @@ Steps1–5 and7 complete. Step6 attempted preparation/launch only: actual UI pro
 ## Final remote receipt
 
 Python CI success at 9065a72284d93eb2fffdda51401f34638457e681 (run34295654337). Pages success at6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a (run34295561705). Current Python tree equals testedfff0ffa; current web source tree equals deployed6fefa6b. Public browser confirmed index-Da_E1P2H.js and the user environment-fact turn. Initial cached response used the previous bundle; cache-distinct navigation verified the current bundle. Local full flow evidence is retained. Step8 complete; Step6 remains NOT_RUN, not waived or passed. Overall final acceptance and B-PC remain pending.
+
+## P0 live feedback amendment — bounded presentation correction
+
+User requested natural observed-error guidance, visible preloaded Skills at zero reuse, and a named verified-success message. This is a Request Changes within existing C9/C11/CLI presentation scope; current request authorizes the corrections. It is not approval to invent proxy/timeout failures, historical success events or PUBLISHED evidence. No website changes.
+
+- [x] C9: explain observed package-not-found in ordinary Korean, announce search intent; report selected display name and actual counted delta only. Do not infer blocking/timeout from package-not-found.
+- [x] C11: show local stored Skill title even at zero reuse; label it stored rather than popular. Distinguish local storage from verified remote publication and no success from no Skill. Keep four lines, readonly state and terminal-label sanitization.
+- [x] CLI: reuse the presentation title lookup and emit success wording only after S1 success and C3 counted=True. Explicit no-addition wording when not counted. No digest/content/approval changes.
+- [x] Validate zero-use inventory, empty inventory, real popularity, counts/readonly and real install/repeat-no-reuse messages; run relevant regression. Copy only updated Skill instructions to the known P0 work folder, preserve settings/store/usage and original live result.
+- [x] Record actual validation and user-report vs locally-read usage evidence, commit/push product/docs only. Remote Skill preload/publication remains a separate transport scenario; no remote data mutation.
+
+Current local evidence: user-provided prompt/early pip error is incomplete as a full transcript. Work usage contains one verified event at2026-09-09T00:54:57Z; that is recorded evidence, not an observed full UI capture. Existing NOT_RUN receipt for the earlier automation attempt remains historical.
+
+Validation receipt: targeted37 PASS, P1 services10 PASS, final real P0 repeat1 PASS with inherited PYTHONUTF8=1. Initial parent-only UTF-8 run passed with2 reader warnings, preserved separately. Known P0 work C9 refreshed, protected settings/store/usage unchanged. New skillloop-p0-feedback-20260909 work venv is PREPARED_NOT_RUN and points to existing actual local history1; no new event created. Latest dialogue phrasing is not yet independently validated in a fresh Agent session. Web and remote data unchanged.

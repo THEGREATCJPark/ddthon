@@ -127,3 +127,30 @@ def test_project_status_configuration_preserves_settings_and_quotes_paths(tmp_pa
     argv = shlex.split(result["statusLine"]["command"])
     assert argv[0] == Path(ctx["product_python"]).as_posix()
     assert argv[argv.index("--store") + 1] == Path(ctx["store"]).as_posix()
+
+
+def test_preloaded_inventory_visible_before_first_reuse_without_fake_popularity():
+    snap = _snapshot(0, 0, 0, 0)
+    snap["skills"] = [{"id": "fix-skillloop-demo-pkg-install", "version": "1.0.0"}]
+    text = render_statusline(snap)
+    assert "저장된 Skill(로컬) - python pip 사내환경 적용 방법" in text
+    assert "공개 Skill 0개" in text
+    assert "실제 검증 0회" in text
+    assert "인기 스킬" not in text
+    assert len(text.splitlines()) == 4
+
+
+def test_empty_inventory_does_not_invent_preloaded_title():
+    snap = _snapshot(0, 0, 0, 0)
+    snap["skills"] = []
+    text = render_statusline(snap)
+    assert "저장된 Skill 없음" in text
+    assert "python pip" not in text
+
+
+def test_stored_untrusted_title_cannot_inject_status_rows():
+    snap = _snapshot(0, 0, 0, 0)
+    snap["skills"] = [{"id": "unknown", "version": "1"}]
+    text = render_statusline(snap, skill_labels={"unknown": "label\n\x1b[31m"})
+    assert len(text.splitlines()) == 4
+    assert "\x1b" not in text

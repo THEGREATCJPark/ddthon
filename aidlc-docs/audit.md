@@ -900,3 +900,15 @@ Original HEAD requirements bytes fail cp949 decoding locally. Updated file decod
 ## 2026-09-09T00:40:02.9066767Z — Dialogue UX remote verification receipt
 Python CI9065a72 and Pages6fefa6b succeeded. Public browser verified final bundle index-Da_E1P2H.js and user-fact turn; web simulation screenshot saved separately. Existing records retained. Code Plan step8 complete; actual P0 UI step6 remains NOT_RUN because no targetable terminal was provided, no prompt/capture executed. B-PC and whole-product final acceptance remain pending. No new candidate approval or publication. Fresh OS UTC captured for this entry.
 
+
+## 2026-09-09T01:00:42.2581897Z — P0 user live feedback / before correction
+User explicitly requests natural failure/search narration, visible existing Skill inventory and named successful reuse feedback. Bounded amendment recorded before C9/C11/CLI changes under existing approved presentation plan. Current request authorizes correction; no fabricated approval, new proxy scenario, remote publication or fake historical count. Web excluded. Local P0 usage has one event; full interactive transcript not obtained. Preserve prior evidence.
+
+
+## 2026-09-09T01:04:14.3390099Z — Presentation test source adjustment
+Added observed-failure search-intent CLI prose within the same approved feedback amendment. Targeted tests already running were launched before this one output-only line; their result will identify that boundary and a focused output check will validate the final line. No failure-classification or business-logic change.
+
+
+## 2026-09-09T01:07:15.0855051Z — P0 live feedback validation
+C9/C11/CLI presentation fixes:37 targeted PASS,10 P1 service PASS; final focused real P0 PASS with inherited PYTHONUTF8=1. Earlier parent-only UTF8 run had2 decoder warnings; preserved and no warnings suppressed. Work store/usage/settings hashes unchanged. User work import/version1.0.0 confirmed with existing actual event1. Fresh feedback work venv prepared against same real local history, PREPARED_NOT_RUN; no fabricated history or remote publication. Agent prose not revalidated live. Web untouched. Records under result/p0-live-feedback-20260909.
+

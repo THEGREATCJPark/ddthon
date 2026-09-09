@@ -1,0 +1,14 @@
+{
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p0-feedback-20260909",
+  "context": {
+    "product_python": "C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe",
+    "work_python": "C:\\Users\\cik61\\Desktop\\skillloop-p0-feedback-20260909\\.venv\\Scripts\\python.exe",
+    "requirements": "C:\\Users\\cik61\\Desktop\\skillloop-p0-feedback-20260909\\requirements.txt",
+    "store": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\store.json",
+    "usage": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\usage.json",
+    "scope": "synthetic P0 work project; existing local Skills preapproved by operator"
+  },
+  "initial_actual_reuse": 1,
+  "status": "PREPARED_NOT_RUN",
+  "history": "Existing real user-run local Skill/usage; no invented counts; new package-uninstalled venv."
+}

@@ -245,6 +245,7 @@ def apply_requirements(requirements: str, python: str, store_path: str,
             print("apply-requirements: INSTALL_ERROR (not a package-supply signal), reuse_delta=0")
             return 4
         print(f"apply-requirements: observation={obs.error_signature} target={obs.target_pkg}")
+        print("현재 설정으로 패키지를 설치하지 못했습니다. Skill 저장소에서 해결 방법을 찾아보겠습니다.")
         outcome = match_mod.search(obs, store)
         print(f"apply-requirements: {outcome.status} {outcome.rationale}")
         if outcome.status != "MATCH":
@@ -281,6 +282,12 @@ def apply_requirements(requirements: str, python: str, store_path: str,
             vars(result), run_id, demo_seed=selected.demo_seed,
             reuser_alias=os.environ.get("SKILLLOOP_ALIAS", "local")))
         print(f"apply-requirements: reuse={rec.new_count} counted={rec.counted} reason={rec.reason}")
+        title = statusline_mod.skill_title(selected.id, selected.version)
+        if rec.counted:
+            print(f"‘{title}’ Skill로 설치와 사용 확인을 마쳤습니다. "
+                  f"검증된 재사용 성공 기록이 1회 추가됐습니다(로컬 누적 {rec.new_count}회).")
+        else:
+            print(f"‘{title}’ Skill의 적용 결과를 확인했습니다. 이번 처리로 재사용 기록은 추가되지 않았습니다.")
         print("apply-requirements: WORK_ENV_PRESERVED candidate_delta=0")
         return 0
     except subprocess.TimeoutExpired:
@@ -375,9 +382,7 @@ def cmd_status(store_path: str | None = None, usage_path: str | None = None,
         snapshot = org_aggregator.build_snapshot(
             store, UsageTracker(up), lifecycle_view=lifecycle, sync_meta=sync,
             my_alias=alias or os.environ.get("SKILLLOOP_ALIAS") or getpass.getuser())
-        print(statusline_mod.render_statusline(snapshot, team=team, skill_labels={
-            "fix-skillloop-demo-pkg-install": "python pip 사내환경 적용 방법 (합성)",
-        }))
+        print(statusline_mod.render_statusline(snapshot, team=team))
         return 0
     except (OSError, ValueError, KeyError, TypeError):
         print("🧠 SkillLoop · 상태 데이터 읽기 실패\n📚 Skill 현황 확인 불가"
