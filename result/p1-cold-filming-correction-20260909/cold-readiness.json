@@ -1,0 +1,32 @@
+{
+  "prepared_at": "2026-09-09T12:55:23.274850+09:00",
+  "root": "C:\\Users\\cik61\\Desktop\\skillloop-p1-cold-filming-20260909-125519",
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p1-cold-filming-20260909-125519\\cold",
+  "mode": "FULL_PRODUCT_COLD_FILMING",
+  "branch": "team-skill-demo-20260909",
+  "sync": {
+    "ok": true,
+    "commit": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+    "branch": "team-skill-demo-20260909",
+    "synced_at": "2026-09-09T03:55:23.231153+00:00",
+    "branch_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "queryable_range": "shared Git bundles",
+    "imported": 1,
+    "conflicts": 0,
+    "events": 0
+  },
+  "p1_skill_count": 0,
+  "all_skill_count": 1,
+  "search_contract_check": "SearchOutcome(status='NO_MATCH', descriptor=None, rationale='유효 후보 없음(스캔 1건, 유효 0건)', candidates_considered=0)",
+  "search_observation": "operator test query only; not actual task failure",
+  "agent_calls": 0,
+  "task_run": "NOT_RUN",
+  "document_opened_by_setup": false,
+  "usage": {
+    "counts": {},
+    "seen_run_ids": [],
+    "events": {}
+  },
+  "previous_workspaces_preserved": true
+}

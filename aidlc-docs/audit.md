@@ -1037,3 +1037,12 @@ New operator-only Python3.13.14 installed with uv0.12.11; exact proposed openpyx
 Timestamp: 2026-09-09T03:53:28.3704460Z
 User: 어 그리고 진행중에 ai-dlc를 위반한게 있는지 검토하고 , 앞으로도 꼭 이행할수있게 해. 슬슬 마무리를 하고 시연으로 넘어가야해. 그리고 이제 시연을 진행하면 되는지도 판단
 Review: detailed plans in recent preparation were recorded after conversation go-ahead, before code; no separate review of the exact written artifact occurred. Preserve that distinction rather than backfilling approval. Official workflow rules/product gates unchanged. Comparative infrastructure expansion deferred by user steering, not marked complete. Read-only filming readiness: launcher/workbook/work configuration exist; current Claude auth status loggedIn=true, third_party, bedrock, exit0 (no model call). Existing capture-start/end report prior exit1 and no copied logs; not a completed filmed run. Local count map remains empty with two imported historical events; no reset. Filming task is FULL_PRODUCT_WARM, not NO_SKILL. Original failure/NOT_RUN evidence retained. Final user acceptance of observed output and submission remains pending.
+
+## Cold versus Warm filming correction
+Timestamp: 2026-09-09T03:55:19.1824996Z
+User: 잠시만., 현재 인기 스킬 - NASCA 환경 Excel 읽기 방법 · 실제 2회 적용 이렇게떠있는데. skill에 없어야되잖아;
+Assistant acknowledged incorrect Warm instruction. Actual existing warm imports P1; old org cold also has local P1 candidate. Remote demo branch remains75b6e542 P0-only. Approved existing Cold scope: new workspace and real sync, preserve old runs. No product-policy change or reset of shared history.
+
+## Fresh Cold filming workspace verified
+Timestamp: 2026-09-09T03:55:50.9589640Z
+New Desktop/skillloop-p1-cold-filming-20260909-125519/cold prepared from real team-skill-demo-20260909 sync. Skill count1 (P0), P1 count0, usage/events0. Operator contract search file-access-fail:xlsx returns NO_MATCH (not an Agent task run). Actual statusLine command in workspace exits0, displays pip Skill only and actual reuse0; no NASCA P1 popularity. Launcher parsed; no auto Excel opening/model call. Original Warm/P1 candidate/shared2-event history preserved. User must exit Warm session and launch this new Cold path; manually open this exact new workbook later.

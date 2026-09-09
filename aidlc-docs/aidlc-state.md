@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **시연 경로 정정: P1 Cold가 사용자 의도**. 기존 Warm 안내는 잘못이었음. 새 Desktop/skillloop-p1-cold-filming-20260909-125519/cold 준비: 실제 team-skill-demo-20260909 동기화, P0 Skill1/P1 Skill0/events0, operator 검색 NO_MATCH 및 실제 상태줄 pip만/재사용0 확인. 현재 Warm 세션을 나가 새 Cold launcher 사용. 파일은 해당 새 경로에서 사용자가 도중에 직접 열기. 이전 Warm/old Cold 후보/공유 실적은 삭제하지 않음. Agent 시연은 아직 NOT_RUN.
+
+
 - **시연 우선 / 비교 추가 개발 보류**: 사용자 지시에 따라 추가 비교 인프라 개발은 중단하고 기존 P1 실제 시연·로그 확보를 우선한다. 비교 계획 미완료를 완료로 변경하지 않는다. 상세 계획 문서별 사전 승인과 대화 진행 승인은 구분해 기록; 과거 승인 소급 없음. 준비된 FULL_PRODUCT_WARM 폴더/문서/설정 존재 및 Claude Bedrock 인증 상태 확인(모델 미호출). 이전 capture 종료1·수집로그0이므로 새 촬영 성공은 아직 미확인. 사용자가 대상 문서를 도중에 열며 진행, Warm은 실제 MATCH/재사용으로 표시. 최종 수용·제출 완료 아님.
 
 
