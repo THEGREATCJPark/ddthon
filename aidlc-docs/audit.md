@@ -1203,3 +1203,20 @@ First docs-only push rejected non-fast-forward because independent web session p
 **Timestamp**: 2026-09-09T06:57:46.612803+00:00
 **Action**: Preserved B PR #2/#3 documents with exact bytes/author/commit/blob/hash metadata. Current approved scenario plan explains the snapshot/task-mapping split. Current product code contains exact-path ROT lookup. Accepted and corrected only the stale read_spec test docstring; executable test AST and product/rules/web/CI trees unchanged.
 **Validation**: Existing Replay/access tests exit 0; full output in history/u2-pr-review-20260909/targeted-tests.txt. Live Excel NOT_RUN, no new runtime success claim. Remote PR closure and branch removal remain pending until these records reach main.
+
+
+## Repository cleanup — remote PR and branch completion
+**Timestamp**: 2026-09-09T06:59:07.886737+00:00
+**Action**: PR #2 and #3 closed with disposition comments after originals and current decisions were preserved on main 481d7a0ed8442d78433c37344b8b4da3fc34fc01. Nine reviewed remote development/QA/documentation branches removed atomically with exact SHA leases. Nine existing Skill storage/demo heads unchanged, main retained. Original local checkouts and their edits untouched; stale origin tracking refs pruned in the isolated maintenance checkout.
+**Evidence**: history/u2-pr-review-20260909/remote-cleanup.json. Open PR count at verification: 0. No runtime security fix included.
+
+
+## Repository cleanup — final validation and delivery record
+**Timestamp**: 2026-09-09T07:00:07.518852+00:00
+**Result**: Nine remote branch deletions and two PR closures verified. Nine Skill/demo heads retain their exact prior SHAs. Original PR bytes verified in delivered main, generated document links checked, existing local tests PASS with real Excel opt-in SKIP. Product and executable test behavior unchanged.
+**Evidence**: history/u2-pr-review-20260909/maintenance-result.md and associated JSON receipts. CI state is recorded as observed, not inferred. All cleanup plan actions completed; this final record is delivered as a documentation-only follow-up. Existing accepted MVP and separate unimplemented pip issue unchanged.
+
+
+## Repository cleanup — CI completion
+**Timestamp**: 2026-09-09T07:03:31.430769+00:00
+**Result**: GitHub Python verification run34321513133 / job102368988226 SUCCESS for481d7a0. Actual job log: 200 passed, 2 skipped in197.83s, Python3.12.10. No source correction was needed after CI. The final maintenance receipt is documentation-only; current product behavior, accepted MVP and separate pip follow-up status are unchanged.
