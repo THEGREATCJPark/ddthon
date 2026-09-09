@@ -1197,3 +1197,9 @@ First docs-only push rejected non-fast-forward because independent web session p
 **User Input**: "어 다 정리해줘"
 **Context**: User approves the immediately preceding branch/PR cleanup review. Plan recorded before file corrections/deletions at construction/plans/repository-cleanup-plan-20260909.md. Current main 123fb49b6b4b02190d6074baba11a6e44e24d155; seven merged development/QA heads, two outdated documentation PRs, nine retained data/demo heads. No product behavior change or pip security fix authorization inferred. Existing Security/Resiliency extension opt-outs preserved; Partial PBT unchanged and not applicable to the documentation/reference cleanup.
 **Action**: Preserve historical PR documents and attribution, correct one stale test explanation, verify and deliver main; then close two superseded PRs and delete only reviewed disposable heads with SHA checks. Current MVP remains accepted.
+
+
+## Repository cleanup — PR findings preserved and reviewed
+**Timestamp**: 2026-09-09T06:57:46.612803+00:00
+**Action**: Preserved B PR #2/#3 documents with exact bytes/author/commit/blob/hash metadata. Current approved scenario plan explains the snapshot/task-mapping split. Current product code contains exact-path ROT lookup. Accepted and corrected only the stale read_spec test docstring; executable test AST and product/rules/web/CI trees unchanged.
+**Validation**: Existing Replay/access tests exit 0; full output in history/u2-pr-review-20260909/targeted-tests.txt. Live Excel NOT_RUN, no new runtime success claim. Remote PR closure and branch removal remain pending until these records reach main.

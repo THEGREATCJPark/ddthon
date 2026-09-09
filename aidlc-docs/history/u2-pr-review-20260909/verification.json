@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-09-09T06:57:46.608000+00:00",
+  "started_at": "2026-09-09T06:57:43.866284+00:00",
+  "base_main": "123fb49b6b4b02190d6074baba11a6e44e24d155",
+  "command": "python -m pytest -q tests/test_replay.py tests/test_envharness_p1.py",
+  "exit_code": 0,
+  "output": "..................s                                                      [100%]\n",
+  "live_excel": "NOT_RUN; opt-in flag removed for this documentation cleanup",
+  "test_executable_ast_unchanged": true,
+  "product_rules_web_ci_unchanged_from_base": true,
+  "archive_bytes_verified": true
+}

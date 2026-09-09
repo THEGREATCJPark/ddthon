@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-09-09T06:57:43.350749+00:00",
+  "reviewed_main": "123fb49b6b4b02190d6074baba11a6e44e24d155",
+  "status": "historical_findings_preserved_current_disposition_separate",
+  "sources": [
+    {
+      "pr": 2,
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/2",
+      "branch": "docs/u2-integration-contract-diff",
+      "commit": "43282aab483bd12ff08c17b55323359ba4ad9df9",
+      "author": "hanseokhun",
+      "authored_at": "2026-09-09T11:43:57+09:00",
+      "source_path": "aidlc-docs/construction/u2-p1-git/integration-contract-diff.md",
+      "source_blob": "29691dca6ef8d3eca91f232d291f139c07023b45",
+      "archive_file": "pr2-integration-contract-diff.md",
+      "sha256": "09e684acb8770a6cc1ac9565199ea7d9fc9c72653fddd755b5024f5e8254fa38",
+      "bytes": 6396
+    },
+    {
+      "pr": 3,
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/3",
+      "branch": "docs/u2-known-limitations",
+      "commit": "c53158c001d88710d076138bd383d9a395c35a16",
+      "author": "hanseokhun",
+      "authored_at": "2026-09-09T11:45:25+09:00",
+      "source_path": "aidlc-docs/construction/u2-p1-git/known-limitations.md",
+      "source_blob": "e70749bdf628e31ed7b0a7d97cab5217ab25df7b",
+      "archive_file": "pr3-known-limitations.md",
+      "sha256": "5aa734a258d38ce21133202000d0853efdc5e772640f0ee0aca73a2574e40d25",
+      "bytes": 4516
+    }
+  ]
+}

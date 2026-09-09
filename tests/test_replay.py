@@ -78,7 +78,7 @@ def test_replay_pass_on_fresh_access_success(tmp_path, monkeypatch):
 
 
 def test_replay_uses_candidate_procedure(tmp_path, monkeypatch):
-    """전달받은 candidate.procedure가 실제 접근 실행에 사용됨(read_spec에 반영)."""
+    """candidate.procedure 전달과 대역 접근 결과를 확인한다(실 Excel/시트·열 선택 검증 아님)."""
     cand = _make_candidate()
     env = _make_env(tmp_path)
     seen = {}

@@ -18,7 +18,7 @@ Security/resiliency extensions remain disabled as recorded in state; normal pres
 ## Execution sequence
 
 - [x] 1. Read existing state/rules/approved contracts, verify branch ancestry and capture remote heads plus user authorization.
-- [ ] 2. Preserve original PR documents in `aidlc-docs/history/u2-pr-review-20260909/`; write current disposition in `aidlc-docs/construction/u2-p1-git/pr-review-disposition.md`; correct the one test docstring.
+- [x] 2. Preserve original PR documents in `aidlc-docs/history/u2-pr-review-20260909/`; write current disposition in `aidlc-docs/construction/u2-p1-git/pr-review-disposition.md`; correct the one test docstring.
 - [ ] 3. Validate unchanged executable behavior and historical bytes, run existing relevant tests, and deliver documentation/test-comment changes to main with concurrent work preserved.
 - [ ] 4. Comment and close PR #2/#3 as superseded after main preservation. Delete the seven merged branches and the two archived documentation branches only while each remote SHA still equals the reviewed SHA. Preserve all nine Skill/demo branches and every local checkout.
 - [ ] 5. Verify remote PR/branch state, record actual results and update audit/state; deliver the final maintenance receipt to main.
