@@ -2192,3 +2192,6 @@ footer > span:last-child {
   .qa-runs li { align-items: flex-start; }
   .qa-runs b { margin-left: 0; }
 }
+
+.capture-log-note { margin: 0; padding: 18px 26px; color: var(--muted); font-size: 14px; line-height: 1.8; border-top: 1px solid var(--border); }
+.capture-log-note a { color: var(--blue); text-decoration: underline; }
