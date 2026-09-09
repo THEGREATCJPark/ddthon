@@ -11,6 +11,15 @@ const metrics = {
 } as const;
 const SOURCE = "https://github.com/THEGREATCJPark/ddthon/blob/81ecad4/result/p0-six-before-three-after-20260909";
 const fmt = (value: number, decimals=0) => value.toLocaleString("ko-KR", {maximumFractionDigits:decimals});
+const groups = [
+  {condition: "NO_SKILL", title: "Skill 없음"},
+  {condition: "WITH_SKILL", title: "Skill 연결"},
+] as const;
+
+function ResultBadge({result}: {result: string}) {
+  return <span className={`impact-result ${result === "PASS" ? "" : "is-blocked"}`}>{result === "PASS" ? "성공" : "중단"}</span>;
+}
+
 export default function P0Comparison() {
   const [metric, setMetric] = useState<keyof typeof metrics>("final_text_timestamp_seconds");
   const selected = rows.filter(r => r.selected_display === "True").map((r, i): Record<string, string> => ({...r, displayRun: String(i % 3 + 1)}));
@@ -24,10 +33,19 @@ export default function P0Comparison() {
     <div className="impact-stats"><div><span>Skill 없이 · 비교 3회</span><strong>2 / 3 <small>성공</small></strong><p>1회는 추가 정보 요청 후 중단</p></div><div><span>팀 Skill 연결 · 새 작업 환경</span><strong>3 / 3 <small>성공</small></strong><p>설치·버전·import 확인, 재사용 기록 +1씩</p></div><div><span>이번 관측의 토큰·비용</span><strong className="impact-stat-text">출력 ↓ · 캐시 ↑</strong><p>전체 추정 비용 절감은 확인되지 않았습니다.</p></div></div>
     <div className="impact-chart-controls"><div role="group" aria-label="P0 비교 지표">{Object.entries(metrics).map(([key,m]) => <button key={key} aria-pressed={metric===key} onClick={() => setMetric(key as keyof typeof metrics)}>{m.label}</button>)}</div></div>
     <p className="impact-metric-note">{metrics[metric].note}</p>
-    <div className="impact-bar-chart" aria-label={`${metrics[metric].label} 회차별 관측값`}>
-      {selected.map(r => <div className={`impact-bar-row ${r.condition === "WITH_SKILL" ? "with-skill" : ""}`} key={`${r.condition}-${r.run}`}><span>{r.condition === "WITH_SKILL" ? "Skill 연결" : "Skill 없음"} · {r.displayRun}회 <b>{r.result === "PASS" ? "성공" : "중단"}</b></span><div className="impact-bar-track"><i style={{width:`${Number(r[metric])/max*100}%`}}/></div><strong>{fmt(Number(r[metric]),metric === "final_text_timestamp_seconds" ? 1 : 0)} <small>{metrics[metric].unit}</small></strong></div>)}
+    <div className="impact-bar-chart" role="group" aria-label={`${metrics[metric].label} 회차별 관측값 · 두 구역 동일 눈금`}>
+      {groups.map(group => <section className={`impact-bar-section ${group.condition === "WITH_SKILL" ? "with-skill" : ""}`} key={group.condition} aria-labelledby={`p0-${group.condition}-heading`}>
+        <header><h4 id={`p0-${group.condition}-heading`}>{group.title}</h4><span>비교 3회</span></header>
+        <div className="impact-bar-rows">
+          {selected.filter(r => r.condition === group.condition).map(r => <div className={`impact-bar-row ${r.result === "PASS" ? "" : "is-blocked"}`} key={r.run}>
+            <span>{r.displayRun}회 <ResultBadge result={r.result}/></span>
+            <div className="impact-bar-track"><i style={{width:`${Number(r[metric])/max*100}%`}}/></div>
+            <strong>{fmt(Number(r[metric]),metric === "final_text_timestamp_seconds" ? 1 : 0)} <small>{metrics[metric].unit}</small></strong>
+          </div>)}
+        </div>
+      </section>)}
     </div>
     <p className="impact-caveat">동일한 작업·패키지의 관측이며 PC·Python·승인 방식은 달랐습니다. 화면은 선정된 각 3회를 1~3회로 표시합니다. 사후 선정이며 원본 이력은 아래 링크에 보존했습니다. 스킬 없는 3회차에는 89.862초의 운영·승인 지연이 포함돼, Skill만의 개선율로 해석하지 않습니다.</p>
-    <details className="impact-source"><summary>시간·토큰 상세와 원본 근거</summary><div className="impact-table-scroll"><table><caption>비교 3회씩 · 전체 세션 토큰과 시간</caption><thead><tr>{["조건·회차","결과","설치 확인 / 제품 검증(초)","최종 응답(초)","입력","출력","캐시 생성","캐시 읽기","CLI 추정 USD"].map(t=><th key={t}>{t}</th>)}</tr></thead><tbody>{selected.map(r=><tr key={`${r.condition}-${r.run}`}><th>{r.condition === "WITH_SKILL" ? "Skill 연결" : "Skill 없음"} {r.displayRun}</th><td>{r.result === "PASS" ? "성공" : "중단"} · <a href={`${SOURCE}/${r.condition === "WITH_SKILL" ? "after" : "before"}/run-${r.run}-result.json`} target="_blank" rel="noreferrer">원본</a></td><td>{r.agent_import_version_seconds || r.product_verified_reuse_seconds || "미완료"}</td><td>{r.final_text_timestamp_seconds}</td><td>{fmt(Number(r.full_native_input_tokens))}</td><td>{fmt(Number(r.full_native_output_tokens))}</td><td>{fmt(Number(r.full_native_cache_creation_input_tokens))}</td><td>{fmt(Number(r.full_native_cache_read_input_tokens))}</td><td>{Number(r.estimated_full_cost_usd).toFixed(6)}</td></tr>)}</tbody></table></div><p>적용 전은 Agent의 import·버전 확인, 적용 후는 제품 검증·재사용 기록 시점입니다. 종료점이 달라 하나의 평균 성공시간으로 합치지 않습니다. 스킬 없는 2회차의 엄격한 metadata 확인은 종료 후 운영자가 197.784초에 수행했습니다. CLI 추정 비용은 실제 청구액이 아닙니다.</p><a href={SOURCE+"/README.md"} target="_blank" rel="noreferrer">조건·한계 원문 ↗</a> · <a href={SOURCE+"/comparison.csv"} target="_blank" rel="noreferrer">전체 측정 CSV ↗</a></details>
+    <details className="impact-source"><summary>시간·토큰 상세와 원본 근거</summary><div className="impact-table-scroll"><table><caption>비교 3회씩 · 전체 세션 토큰과 시간</caption><thead><tr>{["조건·회차","결과","설치 확인 / 제품 검증(초)","최종 응답(초)","입력","출력","캐시 생성","캐시 읽기","CLI 추정 USD"].map(t=><th key={t}>{t}</th>)}</tr></thead><tbody>{selected.map(r=><tr key={`${r.condition}-${r.run}`}><th>{r.condition === "WITH_SKILL" ? "Skill 연결" : "Skill 없음"} {r.displayRun}</th><td><ResultBadge result={r.result}/> · <a href={`${SOURCE}/${r.condition === "WITH_SKILL" ? "after" : "before"}/run-${r.run}-result.json`} target="_blank" rel="noreferrer">원본</a></td><td>{r.agent_import_version_seconds || r.product_verified_reuse_seconds || "미완료"}</td><td>{r.final_text_timestamp_seconds}</td><td>{fmt(Number(r.full_native_input_tokens))}</td><td>{fmt(Number(r.full_native_output_tokens))}</td><td>{fmt(Number(r.full_native_cache_creation_input_tokens))}</td><td>{fmt(Number(r.full_native_cache_read_input_tokens))}</td><td>{Number(r.estimated_full_cost_usd).toFixed(6)}</td></tr>)}</tbody></table></div><p>적용 전은 Agent의 import·버전 확인, 적용 후는 제품 검증·재사용 기록 시점입니다. 종료점이 달라 하나의 평균 성공시간으로 합치지 않습니다. 스킬 없는 2회차의 엄격한 metadata 확인은 종료 후 운영자가 197.784초에 수행했습니다. CLI 추정 비용은 실제 청구액이 아닙니다.</p><a href={SOURCE+"/README.md"} target="_blank" rel="noreferrer">조건·한계 원문 ↗</a> · <a href={SOURCE+"/comparison.csv"} target="_blank" rel="noreferrer">전체 측정 CSV ↗</a></details>
   </article>;
 }
