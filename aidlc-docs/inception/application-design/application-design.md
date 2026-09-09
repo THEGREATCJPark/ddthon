@@ -101,3 +101,6 @@
 ## Approved operator/org demo alignment (2026-09-09)
 
 Existing product scope maintained. The live demonstration may select explicit team-skill-demo-20260909 on the same ddthon remote, while preserving original team-skill-store history. New live database starts with validated P0 only; P1 Cold searches it and the user approves newly discovered P1 publication. Exact human review, independent Replay and confirmed push remain required. Operator-only no-prompt viewing is environment preparation, not Agent discovery. End-of-task candidate triggers a publication permission invitation; no separate user publish request is required. No S3 adapter or general NASCA detection is claimed.
+
+## P0 자동 재사용 승인 정정 (2026-09-09)
+NFR-SEC-4의 P0 한정 예외를 C8 기존 apply-requirements 경계에 구현한다. C9는 사용자의 설치 요청과 운영자 정책을 전달만 하고 승인 값을 생성하지 않는다. C8은 실제 실패/C5 MATCH, exact content 무결성, 운영자가 고정한 workspace/source/remote/branch/exact ref, S3 게시·재사용 상태를 확인한다. C5/S1/C3 및 P1 게시 파이프라인 역할은 그대로다. 다른 원격 Skill 및 P1에는 기존 명시적 확인을 유지한다. 상세 절차/검증: construction/plans/p0-scoped-auto-reuse-code-generation-plan.md. 이전 문단의 포괄적 자동 실행 금지는 이 좁은 예외 외에서 유효하다.

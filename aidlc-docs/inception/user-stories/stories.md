@@ -23,7 +23,7 @@
 - **AC-1** — GIVEN 공개 모의 index에 대상 패키지가 없고 허용된 사내 모의 index에만 무해한 wheel이 있는 상태에서, WHEN PER-1이 자연어로 설치를 요청하면, THEN Agent가 얇은 Skill→CLI로 실제 pip 설치를 시도해 **먼저 실패**를 재현한다. `[FR-SURF-1, FR-P0-1, FR-P0-2]`
 - **AC-2** — GIVEN 설치 실패 상태에서, WHEN Agent가 결정적 키워드·태그 검색으로 후보를 만들고 **applicability를 확인**하면, THEN 현재 문제에 맞는 Skill만 선택되고 매칭 근거(키워드/조건)가 제시된다(무관한 Skill 오선택 방지). `[FR-MATCH-1, FR-MATCH-2, FR-MATCH-3]`
 - **AC-3** — WHEN 선택된 Skill의 절차를 적용하면, THEN 허용된 index/옵션으로 **실제 설치가 성공**하고 결과가 검증된다(import/존재 확인 등 실제 효과). `[FR-P0-3]`
-- **AC-4** — WHEN 원격에서 받은 Skill을 적용할 때, THEN 자동 실행하지 않고 서술적 절차를 명시적 확인 하에 수행한다. `[NFR-SEC-4]`
+- **AC-4** — WHEN 원격에서 받은 Skill을 적용할 때, THEN 원칙적으로 명시적 확인 하에 수행한다. 단 사용자 요청과 동일한 P0 설치 범위에서 운영자 정책의 exact Skill·공급원·작업 경로·조직 출처 및 게시 상태가 검증되면 추가 질문 없이 적용한다. 범위/무결성/출처 불일치는 예외를 적용하지 않는다. P1 실행 및 후보 게시 승인은 유지한다. `[NFR-SEC-4, 2026-09-09 승인 정정]`
 - **AC-5 (카운트)** — WHEN 검증된 적용이 실제 성공한 경우에만, THEN `actual_reuse += 1` 한다. 실패·단순 검색·retry는 집계하지 않으며, 시연용 `DEMO_SEED`는 실제 증가분과 **구분 표시**된다. `[FR-USAGE-1, FR-USAGE-2, FR-USAGE-3]`
 
 ---
@@ -91,7 +91,7 @@
 - **AC-4 (승인 무승계)** — WHEN 사람 승인 후 candidate의 내용/version/digest가 바뀌면, THEN 기존 승인을 승계하지 않고 **재검토·재Replay 대상**이 된다. `[FR-P1-7]`
 - **AC-5 (원격 동기화)** — WHEN 게시가 확정되면, THEN **Git 공유 대상(이번 시연: 동일 저장소 `team-skill-store` branch)**에 clone/pull/push로 동기화되며, 별도 서버 없이 Git만으로 동작한다. 공유 대상에는 **descriptor + 비민감 재사용 이력만** 반영하고 **로컬 DB 파일 자체는 전달하지 않는다**. `[FR-SYNC-1, FR-SYNC-2, FR-SYNC-5]`
 - **AC-6 (충돌·무결성)** — WHEN sync 시, THEN descriptor `digest`를 확인하고 **동일 `(id, version)`에 서로 다른 digest/content가 들어오는 경우만 CONFLICT**로 감지·표시하며 자동 overwrite/파괴적 병합을 금지한다(다른 version은 conflict 아님). sync 실패 시 로컬 상태를 손상시키지 않고 재시도 가능 상태를 남긴다. `[FR-SYNC-3, FR-SYNC-4, NFR-RES-2, NFR-RES-3]`
-- **AC-7 (자동 실행 금지)** — THEN 게시·수신된 Skill은 자동 실행되지 않는다. `[NFR-SEC-4]`
+- **AC-7 (수신만으로 실행 금지)** — THEN 게시·수신만으로 Skill을 실행하지 않는다. 사용자 업무 요청 이후 P0의 승인된 동일 범위 정책 예외는 US-P0-1 AC-4를 따르며, P1은 명시적 실행 확인을 유지한다. `[NFR-SEC-4]`
 - **AC-8 (게시 완료 표시 — 범위 변경)** — WHEN 원격 push가 성공 확인되면 THEN에만 **PUBLISHED(공유 완료)**로 표시한다. 게이트는 충족했으나 원격 전송이 실패하면 **로컬 확정(SHAREABLE) 상태를 보존**하고 재시도 근거를 남기며 PUBLISHED로 보고하지 않는다. 최초 게시와 실패 후 재시도 모두 가능하다. `[FR-P1-7, FR-SYNC-4]`
 
 ---

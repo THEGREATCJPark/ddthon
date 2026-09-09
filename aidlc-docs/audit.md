@@ -978,3 +978,12 @@ User requested connected status simplification, no redundant Skill storage insta
 
 ## 2026-09-09T02:31:26.1126459Z — Capture UX implementation and verification
 Bounded amendment complete: connected C11 simplified; organization source and last-sync retained; storage setup question prohibited in C9; remote exact execution and P1 review gates unchanged. Actual P0 verified-counted output communicates team reuse. P0 14 tests passed in initial focused run, final display/accounting 24 passed after updating old-label assertions (38 unique checks). Earlier stale-label failures preserved. Three prepared workspace C9 copies refreshed; actual P0 status displays published1/contribution1/verified1. User data, website and official rule files unchanged. New Agent conversational wording awaits its next run; no fabricated live confirmation.
+
+## 2026-09-09T02:46:36.7122134Z — User-approved P0 scoped automatic reuse change
+Exact request: 위 피드백을 참고해서 p0 과정 변경을 ai-dlc 과정에 충실히 이행하면서 변경해줘. Narrow same-request trusted exact P0 reuse exception accepted; NFR-SEC-4/US-P0-1 amendment and five-step Code Plan recorded before implementation. Operator-pinned exact Skill, source, workspace and remote provenance required. P1 execution/publication gates unchanged. Prior universal-policy history retained.
+
+## 2026-09-09T02:50:34.7601530Z — Scoped P0 implementation and actual GitHub verification
+Requirements/US-P0-1/Design/P0 NFR and five-step Code Plan updated under explicit user decision. C8 operator-scoped exact Team policy now permits same-request pip reuse without an extra question. Existing ordinary sync and P1 gates unchanged. Initial24 PASS/1 SKIP/1 frozen-test-fixture failure retained; corrected scope13 PASS, P1 gates24 PASS. Actual generic-package test plus real GitHub Cold automatic installation/version/import/+1/retry+0 PASS, no confirm digest supplied and no live events pushed. Two existing P0 workspace policies/C9 refreshed without changing data. Current user Cold folder was already installed; fresh Cold preparation follows, not a reset.
+
+## 2026-09-09T02:50:57.4223352Z — Fresh user Cold workspace ready
+Prepared Desktop/skillloop-p0-auto-cold-20260909-115024 from live Git branch75b6e542 with P0 only. Package absent, scoped policy valid, P1 count0. Did not execute installation in this user workspace. Next Agent conversation NOT_RUN. Existing user's installed Cold folder retained.

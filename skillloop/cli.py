@@ -182,6 +182,39 @@ def _parse_work_requirements(text: str) -> str:
     return harness.TARGET_PKG
 
 
+def _p0_team_scope_authorized(policy, selected, store, requirements, python):
+    """Operator-pinned request scope, not trust inferred merely from a Git import."""
+    from .publish_pipeline import PublishPipeline, exact_ref, remote_matches
+    scope = policy.get('scoped_auto_apply')
+    if not isinstance(scope, dict) or scope.get('mode') != 'same-request-p0':
+        return False
+    try:
+        cfg = selected.procedure
+        if (selected.demo_seed or set(cfg) != {'action', 'source'}
+                or cfg['action'] != 'pip-install'
+                or exact_ref(selected) not in scope.get('skills', [])
+                or descriptor_mod.compute_digest(vars(selected)) != selected.digest):
+            return False
+        if (Path(scope['requirements']).resolve() != Path(requirements).resolve()
+                or Path(scope['work_python']).resolve() != Path(python).resolve()):
+            return False
+        source = Path(policy['sources'][cfg['source']]).resolve()
+        if (str(source).startswith('\\\\') or not source.is_dir()
+                or source != Path(scope['sources'][cfg['source']]).resolve()):
+            return False
+        pipeline = PublishPipeline(store)
+        context = pipeline.transport_context
+        if (not scope.get('remote') or not scope.get('branch')
+                or any(context.get(k) != scope[k] for k in ('remote', 'branch'))):
+            return False
+        state = pipeline.query_lifecycle_state(exact_ref(selected)) or {}
+        return bool(state.get('state') == 'PUBLISHED'
+                    and remote_matches(state.get('remote_publish_evidence') or {}, scope)
+                    and pipeline.reuse_eligible(selected))
+    except (KeyError, TypeError, ValueError, OSError):
+        return False
+
+
 def apply_requirements(requirements: str, python: str, store_path: str,
                        usage_path: str, run_id: str | None = None, policy_path: str | None = None,
                        confirmed_digest: str | None = None) -> int:
@@ -264,14 +297,20 @@ def apply_requirements(requirements: str, python: str, store_path: str,
                 raise ValueError('CONFIRMATION_REQUIRED: Skill is outside the preapproved P0 content')
         else:
             ref = {key: getattr(selected, key) for key in ('id', 'version', 'digest')}
-            if ref not in policy.get('approved_skills', []) and confirmed_digest != selected.digest:
-                raise ValueError('CONFIRMATION_REQUIRED: exact content not approved in local policy')
             if set(cfg) != {'action', 'source'} or cfg['action'] != 'pip-install':
                 raise ValueError('UNSUPPORTED_PROCEDURE: environment-only package source required')
             source = policy.get('sources', {}).get(cfg['source'])
             if not isinstance(source, str) or not Path(source).is_dir():
                 raise ValueError('POLICY_REQUIRED: approved local source missing')
             task['source_path'] = str(Path(source).resolve())
+            scoped = _p0_team_scope_authorized(policy, selected, store, req, py)
+            if (ref not in policy.get('approved_skills', [])
+                    and confirmed_digest != selected.digest and not scoped):
+                raise ValueError('CONFIRMATION_REQUIRED: exact content not approved for this request scope')
+            if scoped:
+                title = statusline_mod.skill_title(selected.id, selected.version)
+                print(f"검증된 팀 Skill ‘{title}’을 찾았습니다. 기존 요청 범위 안에서 적용해 설치를 계속하겠습니다.")
+                print('apply-requirements: authorization=SCOPED_TEAM_POLICY')
         result = (reuse_service.apply_and_verify(selected, obs, env, run_id, pip_task=task) if task is not None
                   else reuse_service.apply_and_verify(selected, obs, env, run_id))
         print("apply-requirements: verification=" + json.dumps(vars(result), ensure_ascii=False))

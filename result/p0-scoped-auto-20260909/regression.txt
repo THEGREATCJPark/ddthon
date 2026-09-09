@@ -1,0 +1,39 @@
+.........F...............s                                               [100%]
+================================== FAILURES ===================================
+__________________ test_invalid_scope_never_authorizes[demo] __________________
+
+tmp_path = WindowsPath('C:/Users/cik61/AppData/Local/Temp/pytest-of-cik61/pytest-75/test_invalid_scope_never_autho9')
+change = 'demo'
+
+    @pytest.mark.parametrize('change', [
+        'missing-policy', 'digest', 'remote', 'branch', 'python', 'requirements',
+        'source', 'missing-evidence', 'rejected', 'demo', 'action', 'extra-command', 'corrupt-content',
+    ])
+    def test_invalid_scope_never_authorizes(tmp_path, change):
+        d, store, policy, req, py = setup_scope(tmp_path)
+        assert _p0_team_scope_authorized(policy, d, store, req, py)
+        scope = policy['scoped_auto_apply']
+        if change == 'missing-policy': policy.pop('scoped_auto_apply')
+        elif change == 'digest': scope['skills'][0]['digest'] = 'different'
+        elif change in ('remote', 'branch'): scope[change] = 'different'
+        elif change == 'python': py = tmp_path / 'other-python'
+        elif change == 'requirements': req = tmp_path / 'other-requirements'
+        elif change == 'source': scope['sources']['packages'] = str(tmp_path / 'other-source')
+        elif change == 'missing-evidence': store.save_lifecycle_state(exact_ref(d), 'PUBLISHED', {})
+        elif change == 'rejected': PublishPipeline(store).review(d, 'reject', 'test-reviewer')
+>       elif change == 'demo': d.demo_seed = True
+                               ^^^^^^^^^^^
+
+tests\test_p0_scoped_auto_reuse.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Descriptor(id='team-source', version='3', digest='3a7992b53bbbe42400c5b9e0d5c3f0d7d5c7dabd795bedf7800ab2b2bff8683d', o...ls': ['pip-install-fail']}, procedure={'action': 'pip-install', 'source': 'packages'}, actual_reuse=0, demo_seed=False)
+name = 'demo_seed', value = True
+
+>   ???
+E   dataclasses.FrozenInstanceError: cannot assign to field 'demo_seed'
+
+<string>:22: FrozenInstanceError
+=========================== short test summary info ===========================
+FAILED tests/test_p0_scoped_auto_reuse.py::test_invalid_scope_never_authorizes[demo]
+1 failed, 24 passed, 1 skipped in 50.00s

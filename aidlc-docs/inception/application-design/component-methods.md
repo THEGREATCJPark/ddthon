@@ -151,7 +151,7 @@ skillloop sync     --pull|--push        -> C4. push=이미 SHAREABLE 인 descrip
 ```
 handle_natural_language(request: str) -> CliInvocation   # 의도 → CLI 명령 매핑만
 ```
-- **제품 로직(검증·카운트·게시 판단·매칭 규칙)** 중복 없음. 실행은 명시적 CLI 호출(원격 자동 실행 금지 NFR-SEC-4).
+- **제품 로직(검증·카운트·게시 판단·매칭 규칙)** 중복 없음. 실행은 명시적 CLI 호출이며 NFR-SEC-4의 승인된 P0 동일 요청 범위 예외를 C8 정책 검사에 위임한다. C9는 승인 값을 생성하지 않으며 P1 확인은 유지한다.
 - **경계(명확화)**: "얇은 wrapper"는 **제품 로직 중복 금지**를 뜻하며, **실제 업무 Agent의 탐색 역할을 제거하지 않는다.** P1에서 **환경 관찰·허용 대안 선택·코드 작성·실행**은 Agent가 수행하고, 그 실행을 CLI 명령(`run-p1` 등)에 **연결**한다. 즉 Agent = 탐색·실행 주체, CLI/서비스 = 재현 가능한 제품 로직·검증·상태 관리, Wrapper = 자연어→CLI 연결.
 
 ## C10 — OrgAggregator (집계 read-model — 읽기 전용 파생, 범위 변경)

@@ -18,9 +18,22 @@ Claude에:
 
 > 이 프로젝트 requirements.txt의 패키지를 설치해줘.
 
-예상 흐름: 현재 작업 venv 실제 설치 실패 → 동기화된 팀 Skill 검색 → 선택한 원격 Skill 실행 확인 → 허락 후 같은 작업 venv 설치·버전·import 검증 → 로컬 실적 +1 → GitHub에 이벤트 공유. 원격에서 받았다는 이유만으로 실행 허락을 자동 생성하지 않는다. 이번 준비는 실제 사용자 설치를 대신하지 않았으며 작업 패키지는 아직 미설치 상태다.
+예상 흐름: 현재 작업 venv 실제 설치 실패 → 동기화된 팀 Skill 검색 → 운영자 정책의 exact Skill·동일 요청 범위·조직 출처 확인 → 추가 질문 없이 같은 작업 venv 설치·버전·import 검증 → 실적 +1 → GitHub에 이벤트 공유. 2026-09-09 승인된 P0 한정 자동 적용 예외이며 원격 수신만으로 모든 Skill을 신뢰하지 않는다. 준비 시점에는 미설치였으나 실행 후에는 설치돼 있으므로 Cold 재시연은 새 폴더를 준비한다.
 
-하단 초기 상태: 팀 공개 Skill 1개, 박찬준 기여 1개, 실제 재사용 0회. 명시적 실행 확인은 Claude 대화에서 한다. 같은 설치를 다시 요청해 이미 설치된 상태라면 추가 reuse가 발생하지 않는 것이 정상이다.
+하단 초기 상태는 팀 공개 Skill 1개, 박찬준 기여 1개였으며 실제 실적은 동기화된 누적값이다. P0의 승인된 정책 범위 안에서는 실행 확인 질문을 생략한다. 다른 Skill/범위는 확인한다. 같은 설치를 다시 요청해 이미 설치된 상태라면 추가 reuse가 발생하지 않는 것이 정상이다.
+
+새 Cold 환경을 준비하려면 저장소 루트 PowerShell에서 실행한다. 기존 데이터는 보존한다.
+
+```powershell
+$env:PYTHONUTF8 = '1'
+$p0Work = Join-Path ([Environment]::GetFolderPath('Desktop')) ('skillloop-p0-cold-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+& .\.venv\Scripts\python.exe scripts/prepare-org-demo.py p0 $p0Work --remote 'https://github.com/THEGREATCJPark/ddthon.git' --branch 'team-skill-demo-20260909' --reviewer '박찬준'
+if ($LASTEXITCODE -ne 0) { throw '환경 준비 실패' }
+Set-Location $p0Work
+& 'C:\Users\cik61\.local\bin\claude.exe'
+```
+
+기존 미설치 P0 폴더에 정책만 연결할 때는 운영자가 `scripts/prepare-org-demo.py authorize-p0 <work-folder>`를 실행한다. 패키지·Skill·실적을 초기화하지 않는다. 업무 Agent는 이 운영자 명령으로 실행 확인을 우회하지 않는다.
 
 ## 2. P1 Cold — 없는 해결책 발견 후 승인·게시
 

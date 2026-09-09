@@ -2,6 +2,8 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **P0 한정 자동 적용 승인 반영**: NFR-SEC-4 → US-P0-1 → Design/NFR → p0-scoped-auto-reuse-code-generation-plan.md → C8/C9/운영자 준비에 반영. 실제 GitHub 수신 후 추가 확인 인자 없이 설치·버전·import/+1, 동일 실행 +0 검증 PASS. 범위 반례13 PASS, P1 관련24 PASS. 후보 게시 승인과 P1 실행 확인 불변. 준비된 기존 P0 정책만 갱신, 패키지/실적 보존. result/p0-scoped-auto-20260909/.
+
 - **Capture UX 보완**: 연결 상태줄의 중복 로컬/팀 기준 문구 제거, 조직 실적·마지막 동기화 유지. 저장소 재설치 질문 금지, 필요한 exact Skill 실행 확인은 적용 목적 질문으로 구분. P0 실제 성공 시 기존 팀 지식 재사용 가치 안내. P0 14 tests 및 최종 표시/집계 24 tests PASS(38개 고유 검사), 이전 표시 기대문구 실패 기록 보존. result/capture-ux-20260909/.
 
 - **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 구현5fff0c4 origin/main push 완료. 최종 제품/사용자 시연 승인 아님.

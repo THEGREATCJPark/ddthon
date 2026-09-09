@@ -35,7 +35,7 @@
 | V12 | run-p0 실제 샘플 실행 = 실패→적용→검증→reuse+1 (17:30 목표) | US-P0-1 | e2e 데모, 실행 증거 |
 
 ## 4. 보안·복원력 (반영, 신규 아님)
-- NFR-SEC-1(secret·원본 비표시), SEC-2(읽기전용 경계 — P0 범위 밖이나 유지), SEC-3(입력·무결성 검증), SEC-4(원격 Skill 자동 실행 금지).
+- NFR-SEC-1(secret·원본 비표시), SEC-2(읽기전용 경계 — P0 범위 밖이나 유지), SEC-3(입력·무결성 검증), SEC-4(원칙적으로 원격 Skill 명시적 확인; 2026-09-09 승인된 P0 동일 요청/exact 정책 예외는 p0-scoped-auto-reuse-code-generation-plan.md 참조).
 - NFR-RES-1(중복 방지=run_id dedup), RES-2~4(충돌·재시작 보존 — P0는 로컬 저장 무결성 중심).
 
 ## 5. 성능·규모

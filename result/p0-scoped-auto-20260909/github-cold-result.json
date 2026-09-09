@@ -1,0 +1,12 @@
+{
+  "install_exit": 0,
+  "retry_exit": 0,
+  "before": 0,
+  "after": 1,
+  "after_retry": 1,
+  "import_exit": 0,
+  "version": "1.0.0",
+  "confirmed_digest_supplied": false,
+  "live_events_pushed": false,
+  "git_pull_ok": true
+}

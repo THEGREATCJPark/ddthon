@@ -43,7 +43,35 @@ def bootstrap(destination, remote, branch):
     return exact_ref(candidate)
 
 
-def connect_work(work, remote, branch, reviewer='박찬준'):
+def authorize_p0(work):
+    """Explicit operator action: authorize only the already-reviewed known P0 content."""
+    work = Path(work).resolve()
+    context = json.loads((work / 'skillloop-work.json').read_text(encoding='utf-8'))
+    store = SkillStore(context['store'])
+    expected = make_descriptor(P0_CONTENT)
+    candidate = store.get(expected.id, expected.version)
+    pipeline = PublishPipeline(store)
+    state = pipeline.query_lifecycle_state(exact_ref(expected)) or {}
+    if (candidate is None or exact_ref(candidate) != exact_ref(expected)
+            or state.get('state') != 'PUBLISHED' or not pipeline.reuse_eligible(candidate)
+            or any(pipeline.transport_context.get(k) != context.get(k) for k in ('remote', 'branch'))):
+        raise ValueError('Known reviewed P0 must be received from the configured organization first')
+    policy_path = Path(context['policy'])
+    policy = json.loads(policy_path.read_text(encoding='utf-8'))
+    source = Path(policy['sources'][candidate.procedure['source']]).resolve(strict=True)
+    if not source.is_dir() or str(source).startswith('\\\\'):
+        raise ValueError('Approved local package source required')
+    scope = {'mode': 'same-request-p0', 'skills': [exact_ref(candidate)],
+             'remote': context['remote'], 'branch': context['branch'],
+             'requirements': str(Path(context['requirements']).resolve(strict=True)),
+             'work_python': str(Path(context['work_python']).resolve(strict=True)),
+             'sources': {candidate.procedure['source']: str(source)}}
+    policy['scoped_auto_apply'] = scope
+    write_json(policy_path, policy)
+    return {'operator_scope': scope, 'data_preserved': True}
+
+
+def connect_work(work, remote, branch, reviewer='박찬준', *, authorize_request=False):
     work = Path(work).resolve()
     context_path = work / 'skillloop-work.json'
     context = json.loads(context_path.read_text(encoding='utf-8'))
@@ -77,4 +105,6 @@ def connect_work(work, remote, branch, reviewer='박찬준'):
     write_json(settings_path, settings)
     write_json(state / 'organization-preparation.json', {'sync': receipt,
                 'skills': [exact_ref(d) for d in store.list()], 'p1_present': False})
+    if authorize_request and context.get('requirements'):
+        authorize_p0(work)
     return receipt

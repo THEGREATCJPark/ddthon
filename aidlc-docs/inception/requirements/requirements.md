@@ -132,7 +132,7 @@
 - **NFR-SEC-1**: 공유 Skill 및 제출 증거에 **secret·인증정보·원본 업무 데이터**를 포함하지 않는다.
 - **NFR-SEC-2**: 승인된 대상에 대해서만 **read-only** 접근을 수행한다(DRM 우회·비허용 접근 금지).
 - **NFR-SEC-3**: 입력 및 descriptor에 대한 **입력/무결성 검증**(digest 확인 포함)을 수행한다.
-- **NFR-SEC-4**: **원격에서 받은 Skill을 자동 실행하지 않는다**(절차는 서술적, 실행은 사람/명시적 확인 하에).
+- **NFR-SEC-4**: 원격 Skill 실행은 원칙적으로 사람/명시적 확인 하에 수행한다. **2026-09-09 사용자 승인 P0 한정 예외**: 사용자가 요청한 requirements 설치에서 실제 실패 후 MATCH한, 운영자가 사전 신뢰한 조직의 게시·검증된 exact Skill은 동일 작업 Python/requirements 및 승인된 공급원 범위에서 추가 실행 질문 없이 적용할 수 있다. 운영자 정책에 exact id/version/digest·작업 경로·remote/branch를 고정하고 실제 게시 출처와 무결성을 확인한다. 새 digest·미검증/출처 불명 Skill·추가 권한/자원·P1 파일접근은 예외 밖이다. 수신만으로 승인을 생성하지 않으며, 후보 사람 검토·독립 Replay·게시 게이트는 불변이다. 이전 포괄적 자동 실행 금지에서의 승인된 변경 이력은 audit와 p0-scoped-auto-reuse-code-generation-plan.md에 보존한다.
 
 ### 5.4 복원력 (Q13=B — 범용 복원력 미확대, 아래만)
 - **NFR-RES-1**: 중복 등록 방지(dedup, digest 기반).
