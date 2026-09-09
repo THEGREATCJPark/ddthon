@@ -1022,3 +1022,13 @@ Timestamp: 2026-09-09T03:41:47.4219685Z
 20 preparation tests PASS; real Excel on new non-measurement setup data PASS (read-only, values/hash/mtime). Original ZIP 79 payloads verified. Derived textual procedure and original descriptor provenance remain distinct. New operator kit has 30 files and delivery hash fda61ad9051776d386c47116bd61ad0ebc6b8e5ee0bce6b3275b48c064382699. Portable doctor returns PREPARED_NOT_READY / exit 2. Windows Home non-elevated; protected recorder/OS isolation/live bridge not implemented, input keys absent, runtime alignment and both-PC freeze pending. Model calls 0. No source reference imported, old runner executed, product changed, account provisioned, or historical result relabelled. Existing B receipt directory untouched. See result/p1-comparison-preparation-20260909 and preparation plan step5 remaining.
 
 - Preparation receipts are evidence of offline setup only; live comparison remains blocked.
+
+## P1 runtime alignment continuation
+Timestamp: 2026-09-09T03:45:34.2111926Z
+User: 어 진행해. Authorized continuing setup without model calls. New isolated operator runtime only; product venv and global Python unchanged. No new peer runner or encrypted key payload found in Downloads at this check. See approved preparation plan continuation.
+
+
+## P1 aligned runtime and COM preparation correction
+Timestamp: 2026-09-09T03:50:39.8057121Z
+New operator-only Python3.13.14 installed with uv0.12.11; exact proposed openpyxl/msoffcrypto/cryptography/pywin32/matplotlib versions installed. Product venv/default Python unchanged. pip check PASS, preparation20 PASS on this runtime (same tests, not additive). First actual Excel setup hit dynamic COM password dialog: cancel only owned dialog PID24512; process cleaned up, BLOCKED evidence preserved. Applied existing operator launcher's generated COM wrapper to validation script; new setup data then PASS direct BadZipFile/read-only/exact values/hash/mtime, Excel16.0 build20326.0. No measurement input/key/model used. Common major runtime gaps resolved; full lock supplied for peer agreement. Recorder isolation/bridge and original input keys still absent. r2 operator ZIP sha25690074b4949437d4f85b1efea9108f244a4c45fedc736774985084feaadf433f9 excludes runtime binaries, keys and unrelated files. Previous ZIP/receipts preserved.
+- Actual state: LOCAL_RUNTIME_ALIGNED, comparison PREPARED_NOT_READY pending peer integration and freeze.

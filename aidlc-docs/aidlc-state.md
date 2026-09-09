@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **P1 비교 런타임 정합 후속 완료**: 별도 운영자 Python3.13.14와 공통안 명시 라이브러리 설치·pip check·동일 준비검사20 PASS. 새 Excel검사 첫 암호창 BLOCKED 보존, 기존 운영자 launcher와 같은 generated COM wrapper로 정정 후 새 데이터 PASS. 제품 .venv 미변경. r2 전달 ZIP/전체 의존성 lock 준비. 원본 입력 키, 외부 recorder/격리 연결, 양쪽 동결은 여전히 대기이며 모델호출0. 기존 Python 불일치 기록은 과거이며 현재 runtime_gaps는 비어 있음. result/p1-comparison-preparation-20260909/local-runtime-aligned.json 참조.
+
+
 - **P1 비교 준비 진행(새 측정 미실행)**: 사용자 준비 승인으로 p1-paired-measurement-preparation-plan.md를 구현. 새 운영자 kit Desktop/P1-Paired-Preparation-20260909, 79개 수신 payload/조건 hash 검증, 독립 검증기 준비20 PASS, 별도 데이터 실제 Excel read-only 절차 검사 PASS. 파생 Skill은 기계적 검증만, 원본 게시 승인 자동 승계 없음. 상태 PREPARED_NOT_READY: 비관리자 Windows Home의 recorder 격리/live bridge 미구성, 원본 입력 키 미수신, Python3.14 대 공통안3.13.14 및 라이브러리 불일치, 양쪽 동결 대기. 모델 호출0. 원본 v1/v2 및 SAFETY_STOP 보존. 제품 촬영과 새 NO_SKILL/WARM_SKILL_ONLY 비교 분리; 전체 Build & Test 완료 아님. result/p1-comparison-preparation-20260909 참조.
 
 

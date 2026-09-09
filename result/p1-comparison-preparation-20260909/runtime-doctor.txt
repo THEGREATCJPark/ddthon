@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-09-09T03:47:49.842195+00:00",
+  "study_id": "p1-paired-002947cddc214ddfb4257be09d848f32",
+  "status": "PREPARED_NOT_READY",
+  "payload_checks": "PASS",
+  "integrity_errors": [],
+  "runtime_gaps": {},
+  "model_calls": 0,
+  "blockers": [
+    "OS containment and external recorder bridge not integrated/verified",
+    "Exact-input operator keys and cross-PC read-only opening not verified",
+    "Both-PC runtime, CLI, Excel build and authentication not frozen",
+    "Derived treatment acceptance and peer common freeze pending"
+  ],
+  "measurement_ready": false
+}
