@@ -1,5 +1,5 @@
 {
-  "reviewedSha": "57dfa1f",
+  "reviewedSha": "81ecad4c",
   "reviewedAt": "2026-09-09",
   "reviewer": "팀 내부 독립 QA",
   "headline": "독립 QA 검증 통과",
@@ -15,22 +15,22 @@
         "openpyxl · matplotlib · setuptools · wheel 설치까지 추가 조작 없이 완료",
         "같은 트리 재실행은 잔여물로 거짓 통과를 만들 수 있어, 매 측정마다 새 트리에서 1회만 수행"
       ],
-      "verifiedRound": 7,
-      "verifiedSha": "57dfa1f"
+      "verifiedRound": 8,
+      "verifiedSha": "81ecad4c"
     },
     {
       "id": "tests",
       "name": "자동화 테스트",
       "state": "검증됨",
       "pct": 100,
-      "summary": "180 passed · 2 skipped, 빈 환경에서 독립적으로 재현됨 (exit 0)",
+      "summary": "200 passed · 2 skipped, 빈 환경에서 독립적으로 재현됨 (exit 0)",
       "evidence": [
-        "위 설치 직후 시드 고정 pytest 실행 → 180 passed, 2 skipped (182 collected, exit 0)",
+        "위 설치 직후 시드 고정 pytest 실행 → 200 passed, 2 skipped (202 collected, exit 0)",
         "리포트만 있고 재현이 안 되는 경우가 아니라, 받은 사람이 같은 명령으로 같은 수치를 냄",
         "실패 기록도 지우지 않고 보존되어 있음 (최초 1건 실패 로그 포함)"
       ],
-      "verifiedRound": 7,
-      "verifiedSha": "57dfa1f"
+      "verifiedRound": 8,
+      "verifiedSha": "81ecad4c"
     },
     {
       "id": "cli",
@@ -44,8 +44,8 @@
         "match — 읽기 전용으로 동작, 조회만으로 실적이 올라가지 않음을 확인 (exit 0)",
         "run-p1 — 입력 계약 도움말까지 확인 (exit 0). 전체 실행은 실제 Excel 환경이 필요해 이번 회차 미수행"
       ],
-      "verifiedRound": 7,
-      "verifiedSha": "57dfa1f"
+      "verifiedRound": 8,
+      "verifiedSha": "81ecad4c"
     },
     {
       "id": "integrity",
@@ -62,8 +62,8 @@
         "미실행 항목을 통과로 바꾸지 않고 미실행 그대로 공개",
         "이번 회차 새로 바뀐 코드 변경분도 재감사 — 통과를 가짜로 만드는 새 경로가 생기지 않았음"
       ],
-      "verifiedRound": 7,
-      "verifiedSha": "57dfa1f"
+      "verifiedRound": 8,
+      "verifiedSha": "81ecad4c"
     },
     {
       "id": "aidlc",
@@ -76,8 +76,8 @@
         "audit.md에 범위 변경과 단계별 결정이 요약이 아닌 원문으로 남아 있음",
         "문서상의 결정에서 실제 구현 코드까지 끊김 없이 추적됨"
       ],
-      "verifiedRound": 7,
-      "verifiedSha": "57dfa1f"
+      "verifiedRound": 8,
+      "verifiedSha": "81ecad4c"
     }
   ],
   "runs": [
@@ -88,7 +88,7 @@
     },
     {
       "cmd": "pytest --hypothesis-seed=20260908",
-      "result": "180 passed, 2 skipped (182 collected)",
+      "result": "200 passed, 2 skipped (202 collected)",
       "exit": 0
     },
     {
@@ -103,9 +103,9 @@
     }
   ],
   "findings": {
-    "total": 19,
-    "resolved": 10,
-    "tracking": 9,
+    "total": 21,
+    "resolved": 11,
+    "tracking": 10,
     "note": "아래는 그중 제품에 관한 해소 항목입니다. 나머지는 QA 진행 자체에 대한 항목이라 생략했습니다."
   },
   "resolvedItems": [
@@ -172,6 +172,14 @@
       "round": 6,
       "at": "09-09 09:57",
       "kind": "문서 정합"
+    },
+    {
+      "id": "F16",
+      "found": "제품의 핵심 동작 — 재사용 카운트가 실제로 증가하는 순간 — 이 대표 미디어에서 정지 화면으로만 제시되어, 변화 그 자체를 실행 화면으로 확인할 수 없었음",
+      "fixed": "연속 실행의 0회→1회 전·후 프레임(본문 동일 · 상태줄만 전환)과 카운트 변화 합성, 58초 실행 영상을 추가하고 대표 미디어로 전진 배치 — 카운트가 바뀌는 순간이 실물로 확인됨",
+      "round": 8,
+      "at": "09-09 15:15",
+      "kind": "실행 증거"
     }
   ],
   "scoreNote": "공식 배점(6항목)에 QA가 자체적으로 매긴 추정치입니다. 공식 심사 결과가 아니며, 회차마다 같은 기준으로 다시 매겨 비교합니다. 1·2회차는 이 채점 형식 이전이라 값이 없습니다.",
@@ -215,6 +223,14 @@
       "total": 83,
       "lo": 77,
       "hi": 90
+    },
+    {
+      "n": 8,
+      "at": "09-09 15:15",
+      "sha": "81ecad4c",
+      "total": 89,
+      "lo": 83,
+      "hi": 94
     }
   ],
   "compareNote": "같은 배포물 커밋을 다른 방식(제출물 심사 렌즈 + 공개 카드 첫인상 렌즈)으로 다시 매긴 별도 추정입니다. 심사 기준 추정을 대체하지 않으며, 밴드가 넓을수록 추정이 불확실하다는 뜻입니다.",
@@ -250,6 +266,14 @@
       "total": 83.2,
       "lo": 68,
       "hi": 91
+    },
+    {
+      "n": 5,
+      "at": "09-09 14:59",
+      "sha": "81ecad4c",
+      "total": 91.9,
+      "lo": 79.9,
+      "hi": 100
     }
   ],
   "rounds": [
@@ -307,6 +331,15 @@
       "resolved": 10,
       "tracking": 9,
       "opened": 1
+    },
+    {
+      "n": 8,
+      "at": "09-09 15:15",
+      "sha": "81ecad4c",
+      "counted": true,
+      "resolved": 11,
+      "tracking": 10,
+      "opened": 2
     }
   ],
   "source": {
