@@ -1,0 +1,62 @@
+apply-requirements: run_id=preflight-independent-1
+apply-requirements: requirements=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\requirements.txt python=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\.venv\Scripts\python.exe
+apply-requirements: install exit=1
+Looking in links: c:\Users\cik61\Desktop\ddthon-main\tests\fixtures\indexes\failing
+ERROR: Could not find a version that satisfies the requirement skillloop-demo-pkg==1.0.0 (from versions: none)
+ERROR: No matching distribution found for skillloop-demo-pkg==1.0.0
+apply-requirements: observation=pip-install-fail:skillloop-demo-pkg target=skillloop-demo-pkg
+현재 설정으로 패키지를 설치하지 못했습니다. Skill 저장소에서 해결 방법을 찾아보겠습니다.
+apply-requirements: MATCH MATCH fix-skillloop-demo-pkg-install@2.0.0 (fit=1) - 유효 후보 1건 중 결정적 선택[적합도 내림차순, version 내림차순, id 오름차순]. ranked=[fix-skillloop-demo-pkg-install@2.0.0(fit=1)]
+apply-requirements: selected=fix-skillloop-demo-pkg-install@2.0.0 digest=a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03
+apply-requirements: procedure={"action": "pip-install", "source": "internal-packages"}
+apply-requirements: ERROR CONFIRMATION_REQUIRED: exact content not approved in local policy; no reuse recorded; work environment preserved
+apply-requirements: run_id=preflight-independent-1
+apply-requirements: requirements=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\requirements.txt python=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\.venv\Scripts\python.exe
+apply-requirements: install exit=1
+Looking in links: c:\Users\cik61\Desktop\ddthon-main\tests\fixtures\indexes\failing
+ERROR: Could not find a version that satisfies the requirement skillloop-demo-pkg==1.0.0 (from versions: none)
+ERROR: No matching distribution found for skillloop-demo-pkg==1.0.0
+apply-requirements: observation=pip-install-fail:skillloop-demo-pkg target=skillloop-demo-pkg
+현재 설정으로 패키지를 설치하지 못했습니다. Skill 저장소에서 해결 방법을 찾아보겠습니다.
+apply-requirements: MATCH MATCH fix-skillloop-demo-pkg-install@2.0.0 (fit=1) - 유효 후보 1건 중 결정적 선택[적합도 내림차순, version 내림차순, id 오름차순]. ranked=[fix-skillloop-demo-pkg-install@2.0.0(fit=1)]
+apply-requirements: selected=fix-skillloop-demo-pkg-install@2.0.0 digest=a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03
+apply-requirements: procedure={"action": "pip-install", "source": "internal-packages"}
+apply-requirements: verification={"pip_exit_code": 0, "installed_check": true, "version_check": true, "import_check": true, "index_source": "internal-packages", "is_real_success": true, "run_id": "preflight-independent-1"}
+apply-requirements: reuse=1 counted=True reason=ok
+‘python pip 사내환경 적용 방법’ Skill로 설치와 사용 확인을 마쳤습니다. 검증된 재사용 성공 기록이 1회 추가됐습니다(로컬 누적 1회).
+apply-requirements: WORK_ENV_PRESERVED candidate_delta=0
+apply-requirements: run_id=preflight-independent-1
+apply-requirements: requirements=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\requirements.txt python=C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\.venv\Scripts\python.exe
+apply-requirements: install exit=0
+Looking in links: c:\Users\cik61\Desktop\ddthon-main\tests\fixtures\indexes\failing
+Requirement already satisfied: skillloop-demo-pkg==1.0.0 in c:\users\cik61\appdata\local\temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\.venv\lib\site-packages (from -r C:\Users\cik61\AppData\Local\Temp\skillloop-org-preflight-parent-wkty8hge\different-work-path\requirements.txt (line 1)) (1.0.0)
+
+apply-requirements: INSTALL_OK_NO_REUSE reuse_delta=0; no Skill applied
+{
+  "remote_p0_only": true,
+  "remote_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+  "unconfirmed_denied": true,
+  "unconfirmed_zero_events": true,
+  "confirmed_real_apply": true,
+  "one_event": true,
+  "repeat_no_addition": true,
+  "independent_import_version": true,
+  "cold": {
+    "direct_failed": true,
+    "team_search": "NO_MATCH",
+    "existing_p0": true,
+    "exact_excel_readiness": true,
+    "original_unchanged": true,
+    "candidate_created": false
+  },
+  "warm": {
+    "direct_failed": true,
+    "team_search": "NO_MATCH",
+    "existing_p0": true,
+    "exact_excel_readiness": true,
+    "original_unchanged": true,
+    "candidate_created": false
+  },
+  "live_p0_events": 0,
+  "scope": "Automated operator preflight; isolated P0 work. No usage pushed, no P1 candidate/publication, no Agent dialogue claim."
+}

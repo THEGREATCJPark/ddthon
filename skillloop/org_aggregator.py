@@ -176,6 +176,8 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
         last_sync = {
             "synced_at": ls.get("synced_at"),
             "branch_revision": ls.get("branch_revision"),
+            "remote": ls.get("remote"),
+            "branch": ls.get("branch"),
             "queryable_range": ls.get("queryable_range", "synced"),
         }
 
@@ -183,12 +185,14 @@ def build_snapshot(store, usage, lifecycle_view: LifecycleView | None = None,
     viewer_reuse = sum(1 for ev in events if ev.get("reuser_alias") == my_alias)
 
     org_available = lifecycle_linked and bool(last_sync.get("synced_at"))
+    from .publish_pipeline import remote_matches
+    transport_context = last_sync if last_sync.get("remote") else None
     published_refs = {
         tuple(rec.get("ref", {}).get(k) for k in ("id", "version", "digest"))
         for rec in raw_states
         if rec.get("lifecycle_state") == "PUBLISHED"
         and (rec.get("remote_publish_evidence") or {}).get("commit")
-        and (rec.get("remote_publish_evidence") or {}).get("branch") == "team-skill-store"
+        and remote_matches(rec.get("remote_publish_evidence") or {}, transport_context)
     } & exact_descriptors.keys()
     org_people = {}
     org_ranking = []

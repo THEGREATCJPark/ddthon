@@ -1,0 +1,88 @@
+.F.........................                                              [100%]
+================================== FAILURES ===================================
+______ test_conversation_receipt_requires_exact_ref_and_actual_response _______
+
+tmp_path = WindowsPath('C:/Users/cik61/AppData/Local/Temp/pytest-of-cik61/pytest-67/test_conversation_receipt_requ0')
+
+    def test_conversation_receipt_requires_exact_ref_and_actual_response(tmp_path):
+        from skillloop import cli
+        import json
+        store = SkillStore(str(tmp_path / 'store.json')); d = candidate()
+        PublishPipeline(store).propose(d)
+        receipt = {'source': 'claude-code-user', 'candidate_ref': exact_ref(d),
+                   'decision': 'approve', 'reviewer': 'test-only', 'user_response': ''}
+        file = tmp_path / 'approval.json'
+        args = ['review', '--store', store.path, '--id', d.id, '--version', d.version,
+                '--decision', 'approve', '--reviewer', 'test-only', '--approval-file', str(file)]
+        file.write_text(json.dumps(receipt), encoding='utf-8')
+        assert cli.main(args) == 2
+        assert PublishPipeline(store).query_lifecycle_state(exact_ref(d))['state'] == 'PROPOSED'
+        receipt['user_response'] = 'Approve this displayed candidate (test receipt only)'
+        receipt['candidate_ref']['digest'] = 'wrong'
+        file.write_text(json.dumps(receipt), encoding='utf-8')
+        assert cli.main(args) == 2
+        receipt['candidate_ref'] = exact_ref(d)
+        file.write_text(json.dumps(receipt), encoding='utf-8')
+        assert cli.main(args) == 0
+        recorded = PublishPipeline(store).query_lifecycle_state(exact_ref(d))
+>       assert recorded['local_review_evidence']['user_response'] == receipt['user_response']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'NoneType' object is not subscriptable
+
+tests\test_p0_publication.py:70: TypeError
+---------------------------- Captured stdout call -----------------------------
+{
+  "id": "pip-source-test",
+  "version": "1.0",
+  "digest": "d81f6a1d5d9a99091f4d9d153051e41fedacd8d164d2e26a455f6131d71805b2",
+  "procedure": {
+    "action": "pip-install",
+    "source": "custom-alias"
+  }
+}
+review: ERROR Exact candidate and explicit user response required
+{
+  "id": "pip-source-test",
+  "version": "1.0",
+  "digest": "d81f6a1d5d9a99091f4d9d153051e41fedacd8d164d2e26a455f6131d71805b2",
+  "procedure": {
+    "action": "pip-install",
+    "source": "custom-alias"
+  }
+}
+review: ERROR Exact candidate and explicit user response required
+{
+  "id": "pip-source-test",
+  "version": "1.0",
+  "digest": "d81f6a1d5d9a99091f4d9d153051e41fedacd8d164d2e26a455f6131d71805b2",
+  "procedure": {
+    "action": "pip-install",
+    "source": "custom-alias"
+  }
+}
+{
+  "ref": {
+    "id": "pip-source-test",
+    "version": "1.0",
+    "digest": "d81f6a1d5d9a99091f4d9d153051e41fedacd8d164d2e26a455f6131d71805b2"
+  },
+  "state": "APPROVED",
+  "lifecycle_state": "APPROVED",
+  "local_review_evidence": {
+    "ref": {
+      "id": "pip-source-test",
+      "version": "1.0",
+      "digest": "d81f6a1d5d9a99091f4d9d153051e41fedacd8d164d2e26a455f6131d71805b2"
+    },
+    "decision": "approve",
+    "reviewer": "test-only",
+    "reviewed_at": "2026-09-09T02:12:47.355217+00:00",
+    "approval_source": "claude-code-user",
+    "user_response": "Approve this displayed candidate (test receipt only)"
+  },
+  "remote_publish_evidence": null,
+  "replay": null
+}
+=========================== short test summary info ===========================
+FAILED tests/test_p0_publication.py::test_conversation_receipt_requires_exact_ref_and_actual_response
+1 failed, 26 passed in 21.38s

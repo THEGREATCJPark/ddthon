@@ -39,7 +39,7 @@ def read_operator_password():
     return password
 
 
-def prepare(destination, *, operator_password=None):
+def prepare(destination, *, operator_password=None, organization=None):
     demo_default = operator_password is None
     if demo_default:
         operator_password = DEMO_PASSWORD
@@ -52,6 +52,8 @@ def prepare(destination, *, operator_password=None):
         raise ValueError('New destination required')
     destination.mkdir(parents=True)
     excel = win32com.client.DispatchEx('Excel.Application')
+    if hasattr(win32com.client, 'gencache'):
+        excel = win32com.client.gencache.EnsureDispatch(excel)
     books = []
     try:
         excel.Visible = True
@@ -79,7 +81,8 @@ def prepare(destination, *, operator_password=None):
             wb.SaveAs(str(work / filename), FileFormat=51,
                       Password=operator_password)
             store = SkillStore(str(state / 'store.json'))
-            store.put(make_descriptor(_DEMO_SKILL_CONTENT))
+            if organization is None:
+                store.put(make_descriptor(_DEMO_SKILL_CONTENT))
             (state / 'usage.json').write_text('{"counts":{},"seen_run_ids":[],"events":{}}', encoding='utf-8')
             skilldir = work / '.claude/skills/skillloop'; skilldir.mkdir(parents=True)
             shutil.copyfile(ROOT / '.claude/skills/skillloop/SKILL.md', skilldir / 'SKILL.md')
@@ -88,9 +91,16 @@ def prepare(destination, *, operator_password=None):
                    'environment_context': str(state / 'context.json')}
             (work / 'skillloop-work.json').write_text(json.dumps(ctx, ensure_ascii=False, indent=2), encoding='utf-8')
             configure_statusline(work, ctx)
+            if organization is not None:
+                from org_demo import connect_work
+                connect_work(work, **organization)
             contexts.append({'work': str(work), 'xlsx': str(work / filename)})
         (destination / 'ready.json').write_text(json.dumps({'workspaces': contexts,
             'owned_excel_pid': win32process.GetWindowThreadProcessId(excel.Hwnd)[1]}, ensure_ascii=False), encoding='utf-8')
+        for profile in contexts:
+            name = Path(profile['work']).name
+            command = '@echo off\r\nchcp 65001 >nul\r\n"' + sys.executable + '" "' + str(ROOT / 'scripts/open-p1-document.py') + '" "' + profile['xlsx'] + '"\r\n'
+            (destination / f'Open-{name}.cmd').write_text(command, encoding='utf-8')
         books[0].Activate()
         excel.Visible = True
         print('READY: workbooks are open; create STOP file to finish', flush=True)
@@ -98,7 +108,7 @@ def prepare(destination, *, operator_password=None):
         if not demo_default:
             print('파일을 다시 열 때는 방금 정한 운영자 암호를 직접 입력하세요. Agent에게 전달하지 마세요.', flush=True)
         else:
-            print('공개 데모 파일 암호: nowhere. 파일을 다시 열 때 운영자가 입력하세요.', flush=True)
+            print('다시 열기: 상위 폴더의 Open-cold.cmd / Open-warm.cmd를 실행하세요 (암호 입력 없음).', flush=True)
         deadline = time.monotonic() + 7200
         while time.monotonic() < deadline and not (destination / 'STOP').exists():
             time.sleep(1)
@@ -116,5 +126,10 @@ if __name__ == '__main__':
     parser.add_argument('destination')
     parser.add_argument('--ask-password', action='store_true',
                         help='운영자가 재열람할 암호를 숨김 입력합니다. 암호를 인자·파일·로그에 기록하지 않습니다.')
+    parser.add_argument('--remote')
+    parser.add_argument('--branch', default='team-skill-store')
+    parser.add_argument('--reviewer', default='박찬준')
     args = parser.parse_args()
-    prepare(args.destination, operator_password=read_operator_password() if args.ask_password else None)
+    organization = {'remote': args.remote, 'branch': args.branch, 'reviewer': args.reviewer} if args.remote else None
+    prepare(args.destination, operator_password=read_operator_password() if args.ask_password else None,
+            organization=organization)

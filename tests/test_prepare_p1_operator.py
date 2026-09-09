@@ -51,7 +51,7 @@ def test_operator_password_is_only_used_for_save_not_exposed(tmp_path, monkeypat
     if custom_password:
         assert password not in output
     else:
-        assert password == 'nowhere' and 'nowhere' in output
+        assert password == 'nowhere' and 'Open-cold.cmd' in output
     for path in dest.rglob('*'):
         if path.is_file(): assert password.encode() not in path.read_bytes()
     import json

@@ -932,3 +932,39 @@ User explicitly requests direct NASCA presentation wording and demo password now
 ## 2026-09-09T01:31:39.4916128Z — P1 path correction and demo-profile validation
 Interrupted request resumed from recorded plan, not restarted. Actual requested cold/warm folders now created with public nowhere password; ready.json owned Excel6756, user workspace kept open.27 targeted tests PASS. Separate actual operator reopen prompted for password; Computer Use field targeting failed, Escape cancelled only separate owned check. Preserve FAIL receipt; do not claim manual reopen or Agent PASS. Direct NASCA line applies only as configured fictional demo narration; Office encryption/virtual provenance retained. Official rule files unchanged; no website/B changes.
 
+
+## 2026-09-09T01:42:43.2704597Z — Operator viewing and organization Cold workflow plan (REVIEW REQUIRED)
+
+User request (raw):
+어 둘다 진행할건데 계획먼저세워줘. 1번은 구현하되, 출력과정이 짜치거나 과적합하지 않았으면 좋겠고
+
+2번은 구현할거고 테스트 과정은
+- p0 test = DB 가상환경 구성 후 진행으로 DB 가상환경도 잘 적용되어있는지 보여주기
+- p1 cold test = skill이 없는 상태에서 진행하여 loop를 통해 해결하고 적재할거야.
+
+이렇게야. 그러니까 공용 db에는 p1용 skill이 적재되지 않아야하고 내가 적재해야하는거지.
+그리고 p1 시나리오 진행로그 줄테니, 참고하고. 1,2번 구현할 준비해.
+
+Read user attachment 338812f9-dd1e-4d6f-a0f0-c20962fab5ce/pasted-text.txt and current code/rules/state. User transcript reports successful July lookup/candidate but review EOF, incorrect digest transcription and missing remote configuration. Not independently rerun. Existing remote-receipt file shows prior P1 sharing; preserve that branch/history. Found hard-coded branch checks in C4/S3/C10 and Excel-specific publication gate; organization P0 requires real pip Replay, not mere configuration.
+
+Created construction/plans/operator-open-org-cold-code-generation-plan.md: bounded FD/NFR/contract alignment, no-prompt operator open proof, isolated live organization branch with P0 only, real P0 publication, user-led Cold P1 publication, concise discovery and exact human review. Code Generation Part 1 only. Review request: approve bounded impact decisions and steps1–9 or request changes. No candidate approval implied. Security/Resiliency opt-out preserved; Partial PBT remains enabled. Historical C9 plan omission is not erased or retroactively approved. No product/workspace/Excel/Git remote/website changes, no test executed; unrelated B receipt preserved.
+
+## 2026-09-09T02:05:26.8989448Z — Approved operator/org Cold plan; implementation resumes
+User approves AI-DLC continuation/GitHub demo and requests proactive end-of-P1 publication permission. Read feedback76b215f7; accept setup/reopen, current-state clarity and evidence boundaries, retain user-directed NASCA demo wording. Recorded bounded native-review-prompt amendment before code. Prior interruption performed no code change. Baseline0041d87; preserve untracked B receipt and web. Actual exact candidate approval is still required; no automated yes.
+
+
+## 2026-09-09T02:11:28.7147405Z — User correction: Claude Code conversational approval, not native GUI
+User explicitly: 이런 window gui로 나오는게 아니라 claude code cli에서 물어봐야하는거야. Supersedes native prompt design. Terminate only owned review --prompt process without responding. Implement explicit conversation approval receipt bound to exact candidate/full digest with actual user response, session source and reviewer; Agent presents candidate and uses Claude Code question UI. No automatic yes, no reuse of generic development approval. CLI is the trusted agent boundary, not an independent identity/authentication service. Preserve interactive terminal compatibility and fresh Replay/push gates.
+
+
+## 2026-09-09T02:12:15.3509046Z — Pending review process outcome correction
+Process70269 had already completed with actual operator approval before cancellation inspection. Exact P0 ref a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03 approved at02:10:20.029853+00:00 by 박찬준; process exit0 retained. No Agent click/input occurred. Earlier cancellation note described intended action, not completed cancellation. Preserve this valid review; future approvals use requested Claude conversation, no GUI. Source receipt inspection without PYTHONUTF8 displayed mojibake; original process UTF8 receipt contains correct reviewer.
+
+
+## 2026-09-09T02:15:45.0652092Z — Real validation and conversational correction results
+Real operator open proof2/2: protected direct parse BadZipFile, closed workbook reopened without password input through generated COM wrapper, exact read-only data/original hash verified. Human-visible inspection separate. Native P0 approval completed before user correction; preserve it, future flow conversational. Initial full suite overlapped explicit GUI-removal request and failed1 old test import (163PASS/2SKIP), retained as superseded run, not final regression. Conversation target initially failed stale test-store snapshot; fresh-store receipt query fixed, plus on-disk identity recheck added for genuine review race. Final targeted47PASS. Real Git P0 publish75b6e54225a9fa4e71e7174168161d61fa923e31 and three receivers initial P0-only confirmed; status integration exposed dropped transport context in aggregation, now fixed with regression. No final live P1 candidate/publication.
+
+
+## 2026-09-09T02:21:06.2087928Z — Approved organization demo implementation validated
+Final full regression165PASS/2SKIP (277.06s), scoped setup15PASS; counts overlap. Actual operator Excel reopen2/2; live Git P0-only publication75b6e54225a9fa4e71e7174168161d61fa923e31; isolated P0 unconfirmed-denied/confirmed-install/import/event1/repeat+0 PASS. Live P0 and P1 Cold/Warm stores retain P0-only/events0. P1 direct fail/actual team NO_MATCH/exact Excel readiness/hash preservation checked without candidate/publication. Claude conversational approval code and C9 ready, real new Agent approval dialogue remains USER_PENDING. Current state headings clarified; historical audit/failed receipts retained. Official rules/web/B receipt unchanged. Commit/push scoped implementation and evidence next.
+

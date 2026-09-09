@@ -183,7 +183,8 @@ def _parse_work_requirements(text: str) -> str:
 
 
 def apply_requirements(requirements: str, python: str, store_path: str,
-                       usage_path: str, run_id: str | None = None, policy_path: str | None = None) -> int:
+                       usage_path: str, run_id: str | None = None, policy_path: str | None = None,
+                       confirmed_digest: str | None = None) -> int:
     """기존 작업 환경에 실제 설치. 환경 준비·seed·삭제는 하지 않는다."""
     _ensure_utf8_stdout()
     run_id = run_id or new_execution_id()
@@ -263,7 +264,7 @@ def apply_requirements(requirements: str, python: str, store_path: str,
                 raise ValueError('CONFIRMATION_REQUIRED: Skill is outside the preapproved P0 content')
         else:
             ref = {key: getattr(selected, key) for key in ('id', 'version', 'digest')}
-            if ref not in policy.get('approved_skills', []):
+            if ref not in policy.get('approved_skills', []) and confirmed_digest != selected.digest:
                 raise ValueError('CONFIRMATION_REQUIRED: exact content not approved in local policy')
             if set(cfg) != {'action', 'source'} or cfg['action'] != 'pip-install':
                 raise ValueError('UNSUPPORTED_PROCEDURE: environment-only package source required')
@@ -359,7 +360,7 @@ def _lifecycle_providers(store):
     lifecycle = PublishPipeline(store) if store.list_lifecycle_records() else None
     config = Path(store.path).parent / 'sync-config.local.json'
     data = json.loads(config.read_text(encoding='utf-8')) if config.is_file() else None
-    sync = GitSyncAdapter(data['mirror'], data['remote']) if data else None
+    sync = GitSyncAdapter(data['mirror'], data['remote'], data.get('branch', 'team-skill-store')) if data else None
     return lifecycle, sync
 
 
@@ -464,12 +465,12 @@ def cmd_p1(args):
         store = SkillStore(args.store)
         pipeline = PublishPipeline(store)
         if args.command in ('store-init', 'sync'):
-            adapter = GitSyncAdapter(args.mirror, args.remote)
+            adapter = GitSyncAdapter(args.mirror, args.remote, args.branch)
             if args.command == 'store-init':
                 adapter.initialize()
                 config = Path(args.store).parent / 'sync-config.local.json'
                 config.parent.mkdir(parents=True, exist_ok=True)
-                config.write_text(json.dumps({'mirror': str(adapter.path), 'remote': args.remote}), encoding='utf-8')
+                config.write_text(json.dumps({'mirror': str(adapter.path), **adapter.context}), encoding='utf-8')
                 print('store-init: isolated mirror prepared; no publication claimed')
                 return 0
             usage = UsageTracker(args.usage)
@@ -484,15 +485,31 @@ def cmd_p1(args):
         if args.command == 'review':
             print(json.dumps({'id': candidate.id, 'version': candidate.version, 'digest': candidate.digest,
                               'procedure': candidate.procedure}, ensure_ascii=False, indent=2))
-            typed = input(f'Human review: type "{args.decision} {candidate.digest}" to confirm: ').strip()
-            if typed != f'{args.decision} {candidate.digest}':
+            receipt = None
+            if args.approval_file:
+                receipt = json.loads(Path(args.approval_file).read_text(encoding='utf-8'))
+                confirmed = True  # S3 validates the exact conversational receipt below.
+            else:
+                typed = input(f'Human review: type "{args.decision} {candidate.digest}" to confirm: ').strip()
+                confirmed = typed == f'{args.decision} {candidate.digest}'
+            if not confirmed:
                 print('Review not recorded')
                 return 2
-            result = pipeline.review(candidate, args.decision, args.reviewer)
+            result = pipeline.review(candidate, args.decision, args.reviewer, approval_evidence=receipt)
         elif args.command == 'replay':
-            result = pipeline.replay(candidate, EnvContext(args.xlsx, args.app_open))
+            if candidate.procedure.get('action') == 'pip-install':
+                from .replay import PipReplayContext
+                if not args.pip_context:
+                    raise ValueError('Pip Replay requires explicit --pip-context')
+                data = json.loads(Path(args.pip_context).read_text(encoding='utf-8'))
+                env = PipReplayContext(**data)
+            else:
+                if not args.xlsx:
+                    raise ValueError('XLSX Replay requires --xlsx')
+                env = EnvContext(args.xlsx, args.app_open)
+            result = pipeline.replay(candidate, env)
         else:
-            result = pipeline.publish(candidate, GitSyncAdapter(args.mirror, args.remote))
+            result = pipeline.publish(candidate, GitSyncAdapter(args.mirror, args.remote, args.branch))
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result['state'] not in ('BLOCKED', 'PUBLISH_PENDING', 'REJECTED') else 2
     except (OSError, ValueError, RuntimeError, EOFError) as exc:
@@ -512,6 +529,7 @@ def main(argv: list[str] | None = None) -> int:
     pa.add_argument("--store", required=True, help="준비된 로컬 Skill store")
     pa.add_argument("--usage", required=True)
     pa.add_argument("--run-id")
+    pa.add_argument("--confirm-skill", help="사용자가 실행 승인한 exact digest")
     pa.add_argument("--policy", help="운영자가 준비한 exact 승인·공급원·import 매핑 JSON")
     pe = sub.add_parser("share-export", help="VERIFIED_REUSE 공유 이벤트 export")
     pe.add_argument("out", help="export 파일 경로")
@@ -566,12 +584,15 @@ def main(argv: list[str] | None = None) -> int:
         if command == 'review':
             p.add_argument('--decision', choices=['approve', 'reject'], required=True)
             p.add_argument('--reviewer', required=True)
+            p.add_argument('--approval-file', help='Claude 대화에서 사용자가 직접 답한 exact 후보 승인 JSON (자동 승인 금지)')
         if command == 'replay':
-            p.add_argument('--xlsx', required=True)
+            p.add_argument('--xlsx')
+            p.add_argument('--pip-context', help='운영자 pip Replay 환경 JSON')
             p.add_argument('--app-open', action='store_true')
         if command in ('publish', 'store-init', 'sync'):
             p.add_argument('--mirror', required=True)
             p.add_argument('--remote', required=True)
+            p.add_argument('--branch', default='team-skill-store')
         if command == 'sync':
             p.add_argument('--usage', required=True)
             p.add_argument('--push-usage', action='store_true')
@@ -581,7 +602,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "run-p0":
         return run_p0()
     if args.command == "apply-requirements":
-        return apply_requirements(args.requirements, args.python, args.store, args.usage, args.run_id, args.policy)
+        return apply_requirements(args.requirements, args.python, args.store, args.usage, args.run_id, args.policy, args.confirm_skill)
     if args.command == "share-export":
         return share_export(args.out)
     if args.command == "share-import":

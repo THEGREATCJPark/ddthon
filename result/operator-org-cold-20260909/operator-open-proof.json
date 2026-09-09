@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "direct": "BadZipFile",
+      "value": 121.0,
+      "expected": 121,
+      "readonly": true,
+      "exact": true,
+      "owned_pid": 28736,
+      "unchanged": true,
+      "prompt_input": false
+    },
+    {
+      "direct": "BadZipFile",
+      "value": 122.0,
+      "expected": 122,
+      "readonly": true,
+      "exact": true,
+      "owned_pid": 29124,
+      "unchanged": true,
+      "prompt_input": false
+    }
+  ],
+  "method": "real Excel COM; not independent human-visible confirmation"
+}

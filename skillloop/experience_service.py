@@ -181,6 +181,9 @@ def execute_p1(xlsx_path, store, usage, run_id, *, app_open=False, procedure=Non
     PublishPipeline(store).propose(candidate)
     return {**task, 'reused': False, 'reuse_delta': 0,
             'candidate_delta': 0 if previous else 1, 'candidate': exact_ref(candidate),
+            'next_action': {'type': 'REQUEST_HUMAN_PUBLICATION_REVIEW',
+                            'candidate_ref': exact_ref(candidate),
+                            'message': '이 해결 방법을 팀 Skill로 공유할까요? 승인 후 독립 재검증을 거쳐 게시합니다.'},
             'trace': trace}
 
 

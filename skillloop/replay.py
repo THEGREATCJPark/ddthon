@@ -22,6 +22,12 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import hashlib
 import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+import subprocess
+import sys
+from dataclasses import asdict
 
 from skillloop import descriptor as _desc
 from skillloop.envharness_p1 import EnvContext, run_file_access_procedure
@@ -38,6 +44,42 @@ class ReplayResult:
     verdict: str                       # PASS | FAIL | NOT_RUN
     candidate_ref: dict                # {id, version, digest} — exact candidate 동일성
     evidence: dict = field(default_factory=dict)
+
+
+@dataclass
+class PipReplayContext:
+    name: str
+    version: str
+    import_module: str
+    sources: dict
+
+
+def _replay_pip(candidate, env):
+    from . import envharness_p0, reuse_service, match
+    ref = _candidate_ref(candidate)
+    evidence = {'action': 'pip-install', 'replay_independent': True,
+                'reused_first_run_result': False,
+                'candidate_digest_verified': _desc.compute_digest(vars(candidate)) == candidate.digest}
+    if not evidence['candidate_digest_verified'] or not isinstance(env, PipReplayContext):
+        return ReplayResult(FAIL, ref, {**evidence, 'reason': 'Invalid candidate or pip context'})
+    cfg = candidate.procedure
+    if set(cfg) != {'action', 'source'} or cfg.get('action') != 'pip-install':
+        return ReplayResult(FAIL, ref, {**evidence, 'reason': 'Unsupported environment-only procedure'})
+    source = env.sources.get(cfg['source'])
+    if not source or not Path(source).is_dir():
+        return ReplayResult(NOT_RUN, ref, {**evidence, 'reason': 'Approved source unavailable'})
+    # A new verification venv is intentional here; task application never replaces its work venv.
+    with TemporaryDirectory(prefix='skillloop-pip-replay-') as directory:
+        subprocess.run([sys.executable, '-m', 'venv', directory], check=True, capture_output=True, timeout=90)
+        python = Path(directory) / ('Scripts/python.exe' if sys.platform == 'win32' else 'bin/python')
+        work = envharness_p0.EnvCtx(venv_path=directory, python_exe=str(python), kind='replay')
+        evidence['clean_before'] = envharness_p0.is_clean(work, env.name)
+        obs = match.FailureObservation('pip replay', env.name, 'pip-install-fail:' + env.name, 1)
+        result = reuse_service.apply_and_verify(candidate, obs, work, 'independent-replay', pip_task={
+            'name': env.name, 'version': env.version, 'import_module': env.import_module,
+            'source_path': str(Path(source).resolve())})
+        evidence['pip_verification'] = asdict(result)
+        return ReplayResult(PASS if result.is_real_success and evidence['clean_before'] else FAIL, ref, evidence)
 
 
 def _candidate_ref(candidate) -> dict:
@@ -58,6 +100,8 @@ def replay(candidate, env: EnvContext) -> ReplayResult:
     - 실행됐으나 접근 효과·read-only 기준 미충족 → FAIL.
     - 접근 성공(AccessResult.ok=True) → PASS.
     """
+    if candidate.procedure.get('action') == 'pip-install':
+        return _replay_pip(candidate, env)
     ref = _candidate_ref(candidate)
 
     # candidate 동일성 근거: 내용에서 digest를 재계산해 저장된 digest와 대조(게이트 소비용).

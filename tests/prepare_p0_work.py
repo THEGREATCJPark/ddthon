@@ -38,7 +38,7 @@ def configure_statusline(project: Path, context: dict) -> dict:
     return settings["statusLine"]
 
 
-def prepare_work(destination: Path) -> dict:
+def prepare_work(destination: Path, *, seed_local=True) -> dict:
     destination = destination.resolve()
     if destination.exists():
         raise ValueError("Use a new work directory; existing work is never overwritten")
@@ -61,10 +61,12 @@ def prepare_work(destination: Path) -> dict:
     state = destination / ".skillloop"
     state.mkdir()
     store = SkillStore(str(state / "store.json"))
-    store.put(make_descriptor(_DEMO_SKILL_CONTENT))
+    if seed_local:
+        store.put(make_descriptor(_DEMO_SKILL_CONTENT))
     unrelated = copy.deepcopy(_DEMO_SKILL_CONTENT)
     unrelated.update(id="unrelated-compile", applicability={"signals": ["compile-fail:unrelated"]})
-    store.put(make_descriptor(unrelated))
+    if seed_local:
+        store.put(make_descriptor(unrelated))
     (state / "usage.json").write_text(
         json.dumps({"counts": {}, "seen_run_ids": [], "events": {}}), encoding="utf-8")
     skills = destination / ".claude/skills/skillloop"

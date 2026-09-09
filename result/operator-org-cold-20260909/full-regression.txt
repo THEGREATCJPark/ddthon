@@ -1,0 +1,19 @@
+...................................................s.................... [ 43%]
+...F........................................s........................... [ 86%]
+......................                                                   [100%]
+================================== FAILURES ===================================
+______ test_prompt_cancel_does_not_review_and_exact_mutation_is_rejected ______
+
+tmp_path = WindowsPath('C:/Users/cik61/AppData/Local/Temp/pytest-of-cik61/pytest-66/test_prompt_cancel_does_not_re0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000026610E1D470>
+
+    def test_conversation_receipt_requires_exact_ref_and_actual_response(tmp_path):
+>       from skillloop import cli
+E       ImportError: cannot import name 'review_prompt' from 'skillloop' (C:\Users\cik61\Desktop\ddthon-main\skillloop\__init__.py)
+
+tests\test_p0_publication.py:50: ImportError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_envharness_p1.py:155: Interactive Excel integration requires explicit SKILLLOOP_RUN_EXCEL_TESTS=1; see recorded real timeout
+SKIPPED [1] tests\test_reuse_service.py:259: envharness_p1(B) 통합됨 — 기본 runner 실제 연결(미연결 대역 케이스 없음)
+FAILED tests/test_p0_publication.py::test_prompt_cancel_does_not_review_and_exact_mutation_is_rejected
+1 failed, 163 passed, 2 skipped in 268.71s (0:04:28)

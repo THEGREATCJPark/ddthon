@@ -147,3 +147,7 @@
 | US-P1-4 | PER-2 | FR-P1-7, FR-SYNC-1~5, NFR-RES-2/3, NFR-SEC-4 |
 | US-UI-1 | PER-1, PER-3 | FR-UI-1/3, FR-USAGE-3/4, FR-ORG-1~5 |
 | US-UI-2 | PER-1, PER-2, PER-3 | FR-UI-2/3, FR-ORG-1~5, FR-USAGE-3/4, NFR-SEC-1/2 |
+
+## Approved operator/org demo alignment (2026-09-09)
+
+Existing product scope maintained. The live demonstration may select explicit team-skill-demo-20260909 on the same ddthon remote, while preserving original team-skill-store history. New live database starts with validated P0 only; P1 Cold searches it and the user approves newly discovered P1 publication. Exact human review, independent Replay and confirmed push remain required. Operator-only no-prompt viewing is environment preparation, not Agent discovery. End-of-task candidate triggers a publication permission invitation; no separate user publish request is required. No S3 adapter or general NASCA detection is claimed.

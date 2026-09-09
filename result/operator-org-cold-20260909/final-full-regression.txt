@@ -1,0 +1,7 @@
+...................................................s.................... [ 43%]
+.............................................s.......................... [ 86%]
+.......................                                                  [100%]
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_envharness_p1.py:155: Interactive Excel integration requires explicit SKILLLOOP_RUN_EXCEL_TESTS=1; see recorded real timeout
+SKIPPED [1] tests\test_reuse_service.py:259: envharness_p1(B) 통합됨 — 기본 runner 실제 연결(미연결 대역 케이스 없음)
+165 passed, 2 skipped in 277.06s (0:04:37)

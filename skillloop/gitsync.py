@@ -10,11 +10,17 @@ BRANCH = 'team-skill-store'
 
 
 class GitSyncAdapter:
-    def __init__(self, mirror_path, remote):
+    def __init__(self, mirror_path, remote, branch=BRANCH):
         self.path = Path(mirror_path).resolve()
         self.remote = str(remote)
         if not self.remote or self.remote.startswith('-'):
             raise ValueError('Explicit remote required')
+        self.branch = str(branch)
+        valid = subprocess.run(['git', 'check-ref-format', '--branch', self.branch],
+                               capture_output=True, timeout=10)
+        if valid.returncode or self.branch.startswith('-') or self.branch in ('main', 'master', 'HEAD'):
+            raise ValueError('Explicit non-source Git data branch required')
+        self.context = {'remote': self.remote, 'branch': self.branch}
 
     def _git(self, *args, check=True):
         p = subprocess.run(['git', '-C', str(self.path), *args], capture_output=True,
@@ -26,10 +32,13 @@ class GitSyncAdapter:
 
     def _validate(self):
         marker = self.path / '.git/skillloop-mirror.json'
-        if not marker.is_file() or json.loads(marker.read_text(encoding='utf-8')).get('remote') != self.remote:
+        registered = json.loads(marker.read_text(encoding='utf-8')) if marker.is_file() else {}
+        if registered.get('remote') != self.remote or registered.get('branch', BRANCH) != self.branch:
             raise ValueError('Not the registered isolated SkillLoop mirror')
-        if self._git('branch', '--show-current').stdout.strip() != BRANCH:
-            raise ValueError('Mirror must be on team-skill-store')
+        if self._git('remote', 'get-url', 'origin').stdout.strip() != self.remote:
+            raise ValueError('Mirror origin changed')
+        if self._git('branch', '--show-current').stdout.strip() != self.branch:
+            raise ValueError('Mirror must be on the registered data branch')
         if self._git('status', '--porcelain').stdout.strip():
             raise ValueError('Mirror has uncommitted changes; retained for inspection')
 
@@ -40,21 +49,21 @@ class GitSyncAdapter:
         if self.path.exists() and any(self.path.iterdir()):
             raise ValueError('Use a new empty mirror directory')
         self.path.mkdir(parents=True, exist_ok=True)
-        self._git('init', '-b', BRANCH)
+        self._git('init', '-b', self.branch)
         self._git('config', 'user.name', 'SkillLoop transport')
         self._git('config', 'user.email', 'skillloop@example.invalid')
         self._git('remote', 'add', 'origin', self.remote)
-        (self.path / '.git/skillloop-mirror.json').write_text(json.dumps({'remote': self.remote}), encoding='utf-8')
-        refs = self._git('ls-remote', '--heads', 'origin', BRANCH).stdout.strip()
+        (self.path / '.git/skillloop-mirror.json').write_text(json.dumps(self.context), encoding='utf-8')
+        refs = self._git('ls-remote', '--heads', 'origin', self.branch).stdout.strip()
         if refs:
-            self._git('fetch', 'origin', BRANCH)
+            self._git('fetch', 'origin', self.branch)
             self._git('reset', '--hard', 'FETCH_HEAD')  # only the just-created, empty mirror
 
     def _fetch(self):
         self.initialize()
         self._validate()
-        if self._git('ls-remote', '--heads', 'origin', BRANCH).stdout.strip():
-            self._git('fetch', 'origin', BRANCH)
+        if self._git('ls-remote', '--heads', 'origin', self.branch).stdout.strip():
+            self._git('fetch', 'origin', self.branch)
             self._git('merge', '--no-edit', 'FETCH_HEAD')
 
     def _push(self, kind, blob):
@@ -72,18 +81,18 @@ class GitSyncAdapter:
             self._git('add', '--', f'{kind}/{digest}.json')
             if self._git('diff', '--cached', '--quiet', check=False).returncode:
                 self._git('commit', '-m', f'Share {kind} {digest[:12]}')
-            self._git('push', 'origin', f'HEAD:refs/heads/{BRANCH}')
+            self._git('push', 'origin', f'HEAD:refs/heads/{self.branch}')
             commit = self._git('rev-parse', 'HEAD').stdout.strip()
-            remote_commit = self._git('ls-remote', '--heads', 'origin', BRANCH).stdout.split()[0]
+            remote_commit = self._git('ls-remote', '--heads', 'origin', self.branch).stdout.split()[0]
             if remote_commit != commit:
                 raise RuntimeError('Remote confirmation differs; retry required')
-            evidence = {'ok': True, 'commit': commit, 'branch': BRANCH,
+            evidence = {'ok': True, 'commit': commit, **self.context,
                         'synced_at': now(), 'branch_revision': commit,
                         'queryable_range': 'shared Git bundles', 'bundle': f'{kind}/{digest}.json'}
             self._save_meta(evidence)
             return evidence
         except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as exc:
-            return {'ok': False, 'branch': BRANCH, 'error': type(exc).__name__, 'retryable': True}
+            return {'ok': False, 'branch': self.branch, 'error': type(exc).__name__, 'retryable': True}
 
     def push_descriptors(self, blob):
         return self._push('skills', blob)
@@ -102,10 +111,10 @@ class GitSyncAdapter:
         try:
             self._fetch()
             commit = self._git('rev-parse', 'HEAD').stdout.strip()
-            evidence = {'ok': True, 'commit': commit, 'branch': BRANCH, 'synced_at': now(),
+            evidence = {'ok': True, 'commit': commit, **self.context, 'synced_at': now(),
                         'branch_revision': commit, 'queryable_range': 'shared Git bundles'}
             imported, conflicts, events = 0, 0, 0
-            pipeline = PublishPipeline(store)
+            pipeline = PublishPipeline(store, transport_context=self.context)
             for kind in ('skills', 'reuse'):
                 for p in sorted((self.path / kind).glob('*.json')):
                     if p.is_symlink() or not p.resolve().is_relative_to(self.path):
@@ -134,8 +143,8 @@ class GitSyncAdapter:
             return {'ok': False, 'error': type(exc).__name__, 'retryable': True}
 
 
-def init_team_store(mirror_path=None, remote=None):
+def init_team_store(mirror_path=None, remote=None, branch=BRANCH):
     if not mirror_path or not remote:
         raise ValueError('Explicit separate mirror path and remote required')
-    GitSyncAdapter(mirror_path, remote).initialize()
+    GitSyncAdapter(mirror_path, remote, branch).initialize()
     return 0

@@ -5,6 +5,8 @@ CJ continuation of the approved U2 contracts. C2 persists; only S3 decides state
 from copy import deepcopy
 from dataclasses import asdict
 from datetime import datetime, timezone
+import json
+from pathlib import Path
 
 from .descriptor import compute_digest
 from . import replay as verifier
@@ -18,14 +20,25 @@ def exact_ref(candidate):
     return {key: getattr(candidate, key) for key in ('id', 'version', 'digest')}
 
 
+def remote_matches(evidence, context=None):
+    context = context or {'branch': 'team-skill-store'}
+    return bool(evidence.get('commit') and evidence.get('branch') == context.get('branch', 'team-skill-store')
+                and (not context.get('remote') or evidence.get('remote') == context['remote']))
+
+
 class PublishPipeline:
-    def __init__(self, store):
+    def __init__(self, store, transport_context=None):
         self.store = store
+        config = Path(store.path).parent / 'sync-config.local.json'
+        self.transport_context = (transport_context or
+            (json.loads(config.read_text(encoding='utf-8')) if config.is_file() else {'branch': 'team-skill-store'}))
 
     def _check(self, candidate):
         if compute_digest(vars(candidate)) != candidate.digest:
             raise ValueError('INTEGRITY_ERROR: candidate content changed')
-        current = self.store.get(candidate.id, candidate.version)
+        # Re-read disk after a human response; a cached snapshot must not approve
+        # content replaced while the candidate was on screen.
+        current = type(self.store)(self.store.path).get(candidate.id, candidate.version)
         if current is None or exact_ref(current) != exact_ref(candidate):
             raise ValueError('CONFLICT: current stored candidate differs')
 
@@ -49,7 +62,7 @@ class PublishPipeline:
             return self.query_lifecycle_state(exact_ref(candidate))
         return self._save(candidate, 'PROPOSED', {})
 
-    def review(self, candidate, decision, reviewer):
+    def review(self, candidate, decision, reviewer, approval_evidence=None):
         if decision not in ('approve', 'reject') or not reviewer.strip():
             raise ValueError('Explicit reviewer and approve/reject required')
         evidence = self._evidence(candidate)
@@ -57,6 +70,16 @@ class PublishPipeline:
             'ref': exact_ref(candidate), 'decision': decision,
             'reviewer': reviewer, 'reviewed_at': now(),
         }
+        if approval_evidence is not None:
+            receipt = approval_evidence
+            if (receipt.get('source') != 'claude-code-user'
+                    or receipt.get('candidate_ref') != exact_ref(candidate)
+                    or receipt.get('decision') != decision or receipt.get('reviewer') != reviewer
+                    or not isinstance(receipt.get('user_response'), str)
+                    or not receipt['user_response'].strip()):
+                raise ValueError('Exact candidate and explicit user response required')
+            evidence['local_review_evidence']['approval_source'] = receipt['source']
+            evidence['local_review_evidence']['user_response'] = receipt['user_response']
         evidence.pop('replay', None)  # A new review never inherits an earlier Replay.
         return self._save(candidate, 'APPROVED' if decision == 'approve' else 'REJECTED', evidence)
 
@@ -74,12 +97,20 @@ class PublishPipeline:
         replay = evidence.get('replay', {})
         ev = replay.get('evidence', {})
         access = ev.get('access_evidence', {})
-        return (approval.get('decision') == 'approve' and bool(approval.get('reviewer'))
+        identity_ok = (approval.get('decision') == 'approve' and bool(approval.get('reviewer'))
                 and approval.get('ref') == replay.get('candidate_ref') == exact_ref(candidate)
                 and replay.get('verdict') == 'PASS'
                 and ev.get('candidate_digest_verified') is True
                 and ev.get('replay_independent') is True
-                and ev.get('reused_first_run_result') is False
+                and ev.get('reused_first_run_result') is False)
+        if candidate.procedure.get('action') == 'pip-install':
+            pip = ev.get('pip_verification', {})
+            return bool(identity_ok and ev.get('action') == 'pip-install'
+                        and pip.get('pip_exit_code') == 0
+                        and all(pip.get(k) is True for k in
+                                ('installed_check', 'version_check', 'import_check', 'is_real_success'))
+                        and ev.get('clean_before') is True)
+        return (identity_ok and candidate.procedure.get('action') == 'file-access'
                 and access.get('original_unchanged') is True
                 and access.get('save_called') is False
                 and access.get('workbook_readable') is True
@@ -94,7 +125,8 @@ class PublishPipeline:
         blob = self.store.export_bundle([exact_ref(candidate)])
         result = transport.push_descriptors(blob)
         evidence['last_publish_attempt'] = result
-        if result.get('ok') is True and result.get('commit') and result.get('branch') == 'team-skill-store':
+        context = getattr(transport, 'context', self.transport_context)
+        if result.get('ok') is True and remote_matches(result, context):
             evidence['remote_publish_evidence'] = result
             state = 'PUBLISHED'
         else:
@@ -104,7 +136,7 @@ class PublishPipeline:
     def record_remote_publication(self, candidate, transport_evidence):
         """Called after actual fetch+content import, not from a remote state string."""
         evidence = self._evidence(candidate)
-        if not transport_evidence.get('commit') or transport_evidence.get('branch') != 'team-skill-store':
+        if not remote_matches(transport_evidence, self.transport_context):
             raise ValueError('Missing actual transport evidence')
         evidence['remote_publish_evidence'] = deepcopy(transport_evidence)
         # Remote origin is evidence of sharing, never this environment's review/Replay.
@@ -119,8 +151,7 @@ class PublishPipeline:
             return False
         remote = evidence.get('remote_publish_evidence', {})
         return bool(self._gate(candidate, evidence) or
-                    (record.get('state') == 'PUBLISHED' and remote.get('commit')
-                     and remote.get('branch') == 'team-skill-store'))
+                    (record.get('state') == 'PUBLISHED' and remote_matches(remote, self.transport_context)))
 
     def query_lifecycle_state(self, ref):
         record = self.store.load_lifecycle_state(ref)

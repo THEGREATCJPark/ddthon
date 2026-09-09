@@ -1,0 +1,53 @@
+{
+  "ref": {
+    "id": "fix-skillloop-demo-pkg-install",
+    "version": "2.0.0",
+    "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03"
+  },
+  "state": "PUBLISHED",
+  "lifecycle_state": "PUBLISHED",
+  "local_review_evidence": {
+    "decision": "approve",
+    "ref": {
+      "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03",
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "2.0.0"
+    },
+    "reviewed_at": "2026-09-09T02:10:20.029853+00:00",
+    "reviewer": "박찬준"
+  },
+  "remote_publish_evidence": {
+    "ok": true,
+    "commit": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+    "branch": "team-skill-demo-20260909",
+    "synced_at": "2026-09-09T02:13:46.410747+00:00",
+    "branch_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "queryable_range": "shared Git bundles",
+    "bundle": "skills/cc66b594b7fb55df02c451dde3394c60ed5fea104bce55c2e0a27dcaa38aa948.json"
+  },
+  "replay": {
+    "candidate_ref": {
+      "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03",
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "2.0.0"
+    },
+    "evidence": {
+      "action": "pip-install",
+      "candidate_digest_verified": true,
+      "clean_before": true,
+      "pip_verification": {
+        "import_check": true,
+        "index_source": "internal-packages",
+        "installed_check": true,
+        "is_real_success": true,
+        "pip_exit_code": 0,
+        "run_id": "independent-replay",
+        "version_check": true
+      },
+      "replay_independent": true,
+      "reused_first_run_result": false
+    },
+    "verdict": "PASS"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "scenario_branch": "team-skill-demo-20260909",
+  "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+  "initial_remote_sha": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+  "user_work": [
+    {
+      "path": "C:\\Users\\cik61\\Desktop\\skillloop-org-p0-20260909",
+      "context_exists": true,
+      "skill_count": 1,
+      "p1_count": 0,
+      "actual_events": 0,
+      "store_sha256": "b28ae3d8b2014748934fd5b98f8f9c5797cbf5a7423da744d452c053339ac643",
+      "c9_sha256": "c6d352fad172c6b2442ed9c06d815138521b7cfe972a6119c5bb559673b427a8"
+    },
+    {
+      "path": "C:\\Users\\cik61\\Desktop\\skillloop-org-p1-20260909\\cold",
+      "context_exists": true,
+      "skill_count": 1,
+      "p1_count": 0,
+      "actual_events": 0,
+      "store_sha256": "0f36bd2ddae0c3bc9effe8d67b7b0aa081fd91fd9c15bc33341e106416f61faf",
+      "c9_sha256": "c6d352fad172c6b2442ed9c06d815138521b7cfe972a6119c5bb559673b427a8"
+    },
+    {
+      "path": "C:\\Users\\cik61\\Desktop\\skillloop-org-p1-20260909\\warm",
+      "context_exists": true,
+      "skill_count": 1,
+      "p1_count": 0,
+      "actual_events": 0,
+      "store_sha256": "e2e8d81e3590d60e45461bfa3bca21c50f0f89fe6a312ccbec72a2eb02121049",
+      "c9_sha256": "c6d352fad172c6b2442ed9c06d815138521b7cfe972a6119c5bb559673b427a8"
+    }
+  ],
+  "p1_final_publication": "USER_PENDING",
+  "approval_ui": "Claude Code conversation; no native prompt",
+  "code_files_sha256": {
+    "skillloop\\__init__.py": "6621009b0c195a101683b29eccaa3a0aa6dc49e35990a66f1569eea265398ecd",
+    "skillloop\\__main__.py": "a12778ec7d3b13fca45e789f711292caa4c2642b15475a516f2d9b854b64ba62",
+    "skillloop\\cli.py": "be2d4ac4175f47e16df42d2e23df3b8caad676502baaca4b433fcda98a234041",
+    "skillloop\\dashboard.py": "998306b4a3ef38c753865e1d6621a9483cd29924c0b73b8d3b3b5abdd03d1ebb",
+    "skillloop\\descriptor.py": "49bf0fbf77e34cef63c0dca42fc8eb25a9d6a0f200b7186a4d84e2a5b3c5b699",
+    "skillloop\\envharness_p0.py": "dc694363585b91c10885da72974d33c592a470f39325318e0a69b3ed9ab1adf2",
+    "skillloop\\envharness_p1.py": "089dec98317b285757763347cc937742b4b637d2c27ebee2e188880196db4ab6",
+    "skillloop\\experience_service.py": "dbc893905aa7e53e0120facb2efcd58bcbe4274efbc309cd7f5e025d934f111f",
+    "skillloop\\gitsync.py": "57573d6955ac397d6f621362999fab5a592938627780fefb3816defc803f54c4",
+    "skillloop\\match.py": "0a028f68290de76b543440cf0b18ba4ae158ca1929ab6a6a9c1382fb6913d1bd",
+    "skillloop\\org_aggregator.py": "ac25bef585f8ae9f49f40f90733e94c455fabcfa2627b21d8d7efb89315bd93c",
+    "skillloop\\publish_pipeline.py": "cdd4a3bfba16efd8c578e6af6dce4087190a8d88a7a1b37f87090771891060b8",
+    "skillloop\\replay.py": "5403ab8f8fb338147dfddb5012e91b0d5914d8783df02e10d80d5f426202a7da",
+    "skillloop\\reuse_service.py": "868b69f1c81013899ecf1df52870090b8a3aaf54b9a6a334eb2b1912cf3d04ed",
+    "skillloop\\statusline.py": "1b7e4ad320492cc25b403a5ee6328ecde402d4aa072fa363e83f3b41adb17dc2",
+    "skillloop\\store.py": "0a811ef336a5cce3fd45f9e7f740e28f5167af2517b154f39cc689e57befd200",
+    "skillloop\\usage.py": "cd2832c872bff60cd93dd7d8c7dc38674f5387e0ee440cc5f9d4a1fbf5119004"
+  }
+}

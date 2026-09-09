@@ -188,3 +188,7 @@
 
 ## 10. 핵심 요구사항 요약
 Agent SkillLoop MVP는 **Python/Windows-native CLI + 얇은 Claude Code Skill**로, **구조화 descriptor** 기반 Team Skill을 **Git 공유 대상(이번 시연: 동일 저장소 `team-skill-store` branch, 합성·비민감)**로 공유하고, 결정적 검색으로 재사용한다. **P0**(합성 이중 index로 pip 실패→Skill 적용→실제 설치 성공·검증·reuse+1)와 **P1**(보호 XLSX 직접 접근 실패→환경 사실 확인→허용 read-only 대안 탐색→업무 완료→환경 절차만 새 Skill 후보→사람 검토·독립 Replay·게시)을 통제된 합성 환경에서 실제로 동작시키는 것이 목표다. **상태줄 + 로컬 읽기전용 대시보드**(FR-UI)로 동일 집계 기준의 조직 현황을 표시하되 실제 검증 실적과 `DEMO_SEED`를 구분하며, 조직 집계에는 공유 usage 동기화·dedup·last-sync 계약(FR-USAGE-4, FR-ORG)이 필요하다. 보안·복원력은 제품 의미상 핵심 항목만, 테스트는 PBT(Partial)+실제 프로세스/계약/회귀로 한정한다. 통합 위험은 공유 state 동시 수정 최소화 제약으로 다룬다.
+
+## Approved operator/org demo alignment (2026-09-09)
+
+Existing product scope maintained. The live demonstration may select explicit team-skill-demo-20260909 on the same ddthon remote, while preserving original team-skill-store history. New live database starts with validated P0 only; P1 Cold searches it and the user approves newly discovered P1 publication. Exact human review, independent Replay and confirmed push remain required. Operator-only no-prompt viewing is environment preparation, not Agent discovery. End-of-task candidate triggers a publication permission invitation; no separate user publish request is required. No S3 adapter or general NASCA detection is claimed.

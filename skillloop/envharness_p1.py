@@ -198,13 +198,31 @@ def _read_via_excel_attach(env: EnvContext, procedure: dict):
         raise AccessUnavailable('dependency: pywin32 unavailable') from exc
     try:
         excel = _excel_app if _excel_app is not None else win32com.client.GetActiveObject('Excel.Application')
-    except Exception as exc:
-        raise AccessUnavailable('attach: running Excel unavailable') from exc
+    except Exception:
+        excel = None  # A target workbook may still be registered separately in ROT.
     # Errors after attachment are real failed execution, not NOT_RUN.
     target = os.path.normcase(os.path.abspath(env.xlsx_path))
-    for wb in excel.Workbooks:
+    for wb in (excel.Workbooks if excel is not None else []):
         if os.path.normcase(os.path.abspath(wb.FullName)) == target:
             return _snapshot_workbook(wb)
+    # Other running Excel instances may own the target. Enumerate ROT only;
+    # GetObject(path) is deliberately not used because it can open a closed file.
+    try:
+        import pythoncom
+        rot = pythoncom.GetRunningObjectTable()
+        ctx = pythoncom.CreateBindCtx(0)
+        for moniker in rot.EnumRunning():
+            try:
+                name = moniker.GetDisplayName(ctx, None)
+                if os.path.normcase(os.path.abspath(name)) != target:
+                    continue
+                wb = win32com.client.Dispatch(rot.GetObject(moniker).QueryInterface(pythoncom.IID_IDispatch))
+                if os.path.normcase(os.path.abspath(wb.FullName)) == target:
+                    return _snapshot_workbook(wb)
+            except Exception:
+                continue
+    except ImportError:
+        pass
     raise AccessUnavailable('workbook: target is not open in attached Excel')
 
 

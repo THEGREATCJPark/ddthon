@@ -99,3 +99,7 @@
 - lifecycle 저장·로드는 **CJ `store` 계약**(C-a 확정, 제공 ①)에 연결(자체 파일 저장 없음). CLI 명령 문자열 연결(cli.py=CJ 계약).
 - OLS·게이트·digest 불변식 PBT 구체화.
 - CJ 공통 계약(C-a/C-b/C-d) **확정** — 검증 commit SHA(제공 ①②) 수신 시 stub→실연동 전환 및 해당 NOT_RUN 해제. A 계약(C-c)은 대기 유지.
+
+## Approved implementation alignment — operator/org Cold
+
+See construction/plans/operator-open-org-cold-code-generation-plan.md, approved 2026-09-09. Operator open/activate uses public fixture password outside Agent workspace; exact full path identifies the workbook across Excel instances. Preparation never counts as discovery or Replay. Git context binds explicit remote/branch/mirror, preserving legacy default; new live branch starts P0-only. C6 supports action-specific pip install/version/import evidence and file read-only evidence; S3 retains exact review+fresh Replay+confirmed push gates. Claude Code conversational review records the actual user response and exact candidate; no native GUI or automatic yes; candidate completion invites user approval proactively. Technical prerequisites remain Windows Excel/pywin32, Python venv/pip and authenticated Git for remote transport. Local workflow remains offline except Git sync. PBT partial scope and existing security/resiliency requirements unchanged.

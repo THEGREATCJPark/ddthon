@@ -1,0 +1,28 @@
+{
+  "remote_p0_only": true,
+  "remote_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+  "unconfirmed_denied": true,
+  "unconfirmed_zero_events": true,
+  "confirmed_real_apply": true,
+  "one_event": true,
+  "repeat_no_addition": true,
+  "independent_import_version": true,
+  "cold": {
+    "direct_failed": true,
+    "team_search": "NO_MATCH",
+    "existing_p0": true,
+    "exact_excel_readiness": true,
+    "original_unchanged": true,
+    "candidate_created": false
+  },
+  "warm": {
+    "direct_failed": true,
+    "team_search": "NO_MATCH",
+    "existing_p0": true,
+    "exact_excel_readiness": true,
+    "original_unchanged": true,
+    "candidate_created": false
+  },
+  "live_p0_events": 0,
+  "scope": "Automated operator preflight; isolated P0 work. No usage pushed, no P1 candidate/publication, no Agent dialogue claim."
+}

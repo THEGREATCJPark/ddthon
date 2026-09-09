@@ -1,20 +1,38 @@
 # AI-DLC State Tracking
 
-## 최신 / 실제 P1 작업 폴더 준비 및 데모 설정
+## 현재 상태 — 2026-09-09 Git 조직 시연 준비
+
+- **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 코드/기록 push 진행. 최종 제품/사용자 시연 승인 아님.
+- **현재 시연 DB**: ddthon/team-skill-demo-20260909, 초기 데이터75b6e54225a9fa4e71e7174168161d61fa923e31. P0 Skill1·P1 Skill0·공유 실적0. 기존 team-skill-store/P1 이력 보존.
+- **사용자 작업**: skillloop-org-p0-20260909, skillloop-org-p1-20260909/cold 및 warm 준비. 같은 조직 DB 수신, 사용자 실적0. warm도 P1 게시 후 sync해야 Warm이 된다.
+- **검증**: 실제 Excel 닫기/암호 입력 없는 재열기2건, 다른 layout/path와 원본 불변 PASS. 실제 Git P0 수신→미승인 차단→허용 후 설치/import→1회 기록→반복+0 PASS(별도 임시 작업, live 이벤트 미전송). live P1 문서는 준비 접근 확인만; 후보·게시 없음.
+- **승인 UX**: 사용자 정정에 따라 Windows GUI 제거. C9가 업무 완료 시 Claude Code 대화로 공유 승인을 먼저 요청. 실제 사용자 답변/exact 후보/검토자를 기록한 뒤 독립 Replay·Git push. 초기 P0에 이미 받은 native 승인 이력은 보존; 이후 native 창 사용 안 함.
+- **남은 것**: 코드 push 확인, 사용자의 실제 P0 및 P1 Cold 대화 승인/게시, 게시 후 동료 Warm. 새 대화 UX 사용자 실행까지 완료했다고 하지 않는다.
+- **근거**: construction/plans/operator-open-org-cold-code-generation-plan.md, construction/build-and-test/org-demo-user-guide.md, result/operator-org-cold-20260909/. 웹/공식 규칙/기존 감사 기록 및 별도 B 수신 파일 미변경.
+- 아래 절은 당시의 과거 기록이다. 현재 판정은 이 절과 연결된 최신 실행 근거를 따른다.
+
+## 最新 / Operator open + organization P0/P1 Cold plan — REVIEW REQUIRED
+
+- Continue CONSTRUCTION / integrated Build & Test with a bounded Code Generation Part 1 correction plan: construction/plans/operator-open-org-cold-code-generation-plan.md. User requested planning first; Part 2 not started.
+- Plan proposes operator no-prompt exact Excel open, a new live Git data branch containing only P0 before user P1 discovery/publication, real action-specific pip Replay, consistent Agent/statusline transport context and one exact human review confirmation. Existing P1 shared history remains preserved.
+- Latest user-provided P1 transcript reports July1500/candidate, then review EOF and missing mirror/remote. User report is not new independent PASS; publication incomplete. Planned branch and no-prompt opening have not been created/proven.
+- Official rules and prior approval/audit history unchanged. No product code, remote, user workbooks or website changed this turn. Existing untracked B receipt preserved. Plan approval and later exact candidate human review are separate gates.
+
+## 과거 결과 / 실제 P1 작업 폴더 준비 및 데모 설정
 
 - 사용자 요청으로 공개 데모 암호 nowhere와 NASCA 직접 시연 문구 반영. 실제 NASCA 탐지 증거가 아닌 시연 설정이며, metadata의 virtual/scenario 출처와 Office 암호화 구현 기록 유지.
 - skillloop-p1-feedback-20260909/cold·warm 실제 생성, owned Excel 열림. 이전 안내 경로가 생성 전이었던 오류를 보정. 현재 PREPARED_NOT_RUN, 새 Agent 성공 미주장.
 - 관련27 tests PASS. 별도 COM 재열람은 암호 대기창에서 자동 입력 제어가 되지 않아 미통과; 해당 검사창만 취소. 사용자 Excel 재열람은 확인 필요. 웹/B자료 불변.
 
 
-## 최신 / P1 live feedback (2026-09-09)
+## 과거 결과 / P1 live feedback (2026-09-09)
 
 - Existing CONSTRUCTION / Build & Test. User requested first-turn failure/search report without direct Excel question; C9/S2/help and US-P1-2 AC-1 aligned. Next user-provided fact still precedes discovery. NASCA(가상) is environment label, not verified real NASCA diagnosis. August actual data must not be fabricated from a forecast.
 - Operator preparation adds hidden interactive --ask-password (1–15 chars, no file/log/argv secret), Cold activation and clear viewing guidance.26 targeted checks PASS. Existing XLSX/store/usage/settings unchanged; only C9 refreshed.
 - Actual operator COM reopen tests did not pass; Excel password dialog required cancellation. Workbooks were created/opened and direct parser failure confirmed, but manual chosen-password reopening remains unverified.3 failed attempts retained. No fresh Agent dialogue/UI result claimed. Web untouched.
 
 
-## 최신 / P0 live feedback correction (2026-09-09)
+## 과거 결과 / P0 live feedback correction (2026-09-09)
 
 - Existing CONSTRUCTION / Build & Test. User requested C9 narration, visible preloaded inventory and named verified-reuse success feedback; amendment recorded before implementation. Web excluded.
 - Presentation corrections tested:37 targeted +10 P1 regression; final actual P0 repeat1 PASS (overlaps targeted coverage, not a new total). PYTHONUTF8=1 inherited check has no warnings; earlier2 decoding warnings preserved.
@@ -22,14 +40,14 @@
 - New work skillloop-p0-feedback-20260909 PREPARED_NOT_RUN with fresh venv and existing real local history1. New Agent dialogue verification pending. No invented historical counts, proxy failures, remote publication or web changes.
 
 
-## 현재 우선 작업 — B-PC 공용 Skill 왕복 검증 (2026-09-09)
+## 과거 우선 작업 — B-PC 공용 Skill 왕복 검증 (2026-09-09)
 
 - 기존 CONSTRUCTION / Build & Test를 이어간다. B 보고 기준 main fff0ffa, Python 3.12.2 제품 설치·import 성공. 개발 의존성 설치는 cp949 오류 후 `python -X utf8`로 성공했다.
 - CJ는 requirements-dev.txt 첫 주석만 ASCII로 정정했다. 기존 파일 cp949 decode 실패 재현, 변경 파일 ASCII/UTF-8/cp949 해석 동일·4개 선언 불변·로컬 pip 파싱 PASS. B PC에서 수정 파일 재실행 완료로 주장하지 않는다.
 - B는 설치를 반복하지 않고 Excel 준비 → 원격 Skill pull → exact 실행 확인 → Warm → usage push를 진행한다. B-PC 업무 성공과 CJ 수신·중복 방지 검증은 아직 NOT_RUN.
 - 대화 UX의 미커밋 웹 변경·실행 증거는 보존하며 기존 계획 완료로 승격하지 않는다. 공식 규칙·제품 범위·게시 게이트 불변.
 
-## 최신 결과 — 대화 UX 검증 (2026-09-09)
+## 과거 결과 결과 — 대화 UX 검증 (2026-09-09)
 
 - **현재 단계**: CONSTRUCTION / 통합 Build & Test. 승인된 대화 정합화 구현 완료, P1 실제2-turn PASS, Python144 PASS/2 SKIP, 웹7 tests/build PASS. Python/C9 검증 소스fff0ffa. 웹 완료 시 마지막 대화 스크롤 보완도 검증됨.
 - **실제 P0 UI**: RUN #1 NOT_RUN. 새 폴더/Claude 프로세스 준비 후 Computer Use의 대상 창이 제공되지 않아 입력·캡처 미실행, 실제 reuse0. `result/live-demo-p0-20260909/`의4단계 사용자 안내 참조. 이전 headless 성공과 구분.
@@ -40,7 +58,7 @@
 - **게이트**: CONSTRUCTION / Code Generation 보완 Part 2 진행 — 사용자 전체 계획 승인(어 승인). `construction/plans/dialogue-ux-live-demo-code-generation-plan.md`의8단계 승인됨. 승인 시각은 audit/계획에 기록. 수정→회귀→실제 시연→원격 검증 순서로 수행.
 - **판단**: P1 환경 사실 대화는 기존 FR-P1-3/US-P1-2의 누락 복원. C9 한국어·도구 안내·차트 경로·웹 설명 정합화, 실제 검색 범위 표시. 새로운 요구사항/lifecycle/Unit 없음. 기존 Code Plan 승인은 과거 구현에 대한 것이며 이번 새 계획 승인으로 꾸미지 않는다.
 - **기준**: main8bd731b / origin 동일, 시작 clean. A/B 인수 완료 기록 유지. Computer Use 초기화·앱 조회 성공; 실제 Claude UI 시연은 회귀 후1회만 예정. B-PC NOT_RUN 유지.
-## 최신 상태 — 2026-09-09 오전 인계
+## 과거 결과 상태 — 2026-09-09 오전 인계
 
 - **추가 Cold/응답 검토**: 제품/C9 d8c45cb 고정, 새 P0 1+P1 Cold2 기능PASS(1650/2550). CLI 사내환경·NASCA(가상) 표시는2/2, Agent 설명·한국어·입력계약 안내는 개선 필요. 전체 원문·판정 `result/cold-review-20260909/`; 기능 성공을 UX 완료로 합치지 않는다. 이번에는 테스트·기록만, 응답 개선 구현은 아직 하지 않았다.
 
@@ -72,7 +90,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-09-08T14:45:14Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. U3 표현 정정·142PASS/2SKIP 완료. CI/Pages success 확인. B PC 재현·최종 제출 검토 남음.
+- **Historical Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. U3 표현 정정·142PASS/2SKIP 완료. CI/Pages success 확인. B PC 재현·최종 제출 검토 남음.
 - **(이전) Current Stage**: **CONSTRUCTION 진입 — Units Generation 승인됨(정정 3건 반영, 2026-09-08)**. 다음: U0 P0 필수 + U1 최소 Functional Design → NFR Requirements(minimal) → Code Plan. **정정**: (1) U3 소유자=**CJ**('여력' 폐기), UI·조직 집계는 승인된 **필수 범위**(P0 비블로킹 ≠ 선택 기능); **U2(B) Day2 대기 해제**(계약+게이트 충족 시 즉시 병행 착수). (2) **파일별 단일 수정자**: usage.py=CJ(카운트+공유 이벤트), cli.py=CJ, gitsync.py=B(전송; 검증·dedup은 usage.py=CJ), envharness_p0.py=CJ/envharness_p1.py=B('함수별 분담' 폐기); U3 집계·표현=읽기전용, C3 공유 이벤트 import=상태 변경(쓰기). (3) 계약 5 **비블로킹**으로 정정, U0 전체 완료 대기 없이 P0 최소 계약+로컬 저장·카운트·환경 인터페이스 확정 후 U0/U1 **병렬**. **코드 작성은 설계·Code Plan 승인 + 공통 기준 SHA·작업 경로 확인 후.**
 - **(이전) Units Generation (minimal) — 산출물 생성 완료**: Unit 정의(U0 공통·계약·통합/CJ, U1 P0 재사용 실행/A 최호길, U2 P1 경험·후보화·게시/B 한석훈, U3 조직 집계·표현·재사용 이벤트 공유, Q1 독립 QA 횡단/C 윤여훈), 의존성·계약 동결(1~8, P0 최소셋=1·3·4)·착수 순서(17:30 P0 앵커)·스토리 매핑(7개 전부 배정). 산출물: `application-design/unit-of-work.md`, `unit-of-work-dependency.md`, `unit-of-work-story-map.md`, `plans/unit-of-work-plan.md`.
 - **(이전) Application Design Request Changes(2건 계약 보완)**: (1) **C10 상태 조회 경로**: S3에 읽기전용 상태 조회 계약(`list_lifecycle_states`/`query_lifecycle_state`, `remote_publish_evidence`/`local_review_evidence`) 신설, C10은 이를 통해서만 상태 조회(추정·게이트 재구현 금지). (2) **재사용 이벤트 공유 자격 분리**: `export_shared_usage(scope=VERIFIED_REUSE)`로 Skill 게시 게이트(SHAREABLE)와 분리, C3가 검증·event_id dedup, `sync`→C3/C4.push_shared_usage 경로는 S3.publish와 독립(A게시→B import→B 검증 성공→B 공유→A 1회 반영). 의존성 매트릭스·다이어그램·텍스트대안(C4→C3, C10→S3, localhost HTTP)·"네트워크 서비스 없음" 범위·UI 프레임워크 단계 표기·채택 repo/branch vs 미정 로컬 경로 정합화. **Application Design 전체 승인·Units Generation은 재검토 후 결정**(REVIEW REQUIRED).

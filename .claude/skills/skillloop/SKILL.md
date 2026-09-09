@@ -103,3 +103,16 @@ python -m skillloop dashboard    # http://127.0.0.1:8765/ 로컬 읽기전용 �
 - 접근 결과 `NEEDS_TASK_MAPPING`은 로컬 artifact의 문서 값/시트/UsedRange를 읽고 현재 업무의 월/생산량 열과 시작 행을 판단하라는 뜻이다. 로컬 task-mapping JSON을 `--task-mapping`으로 전달한다. 이 정보를 shared procedure에 넣지 않는다.
 - task-mapping의 필수 key는 정확히 `sheet`(문자열), `month_col`, `total_col`, `first_row`다. 좌표는 **1-based 양의 integer, worksheet 절대 좌표**다(UsedRange 상대 좌표 아님). `month_col != total_col`. 실제 snapshot의 first_col/first_row와 현재 문서를 근거로 정한다. 도움말은 형식만 제공하며 특정 시트/열/행/예측값을 정답으로 주지 않는다.
 - 업무가 완료되면 chart_ref PNG 경로를 명시한다. 공유 후보에는 업무 값·열·시트·차트·암호를 넣지 않는다. Replay는 새 접근이고 항상 다른 PC/Agent를 강제하는 것은 아니다. 실제로 수행된 독립성만 보고한다.
+
+
+## 조직 연결과 자연스러운 게시 승인 (2026-09-09 승인 보완)
+- skillloop-work.json의 remote/mirror/branch/reviewer/author가 있으면 그대로 사용한다. 다른 브랜치나 로컬 빈 저장소로 바꾸지 않는다. 상태줄과 같은 store/usage로 검색한다. 준비된 조직 DB는 sync 결과/마지막 동기화 범위로 확인하며, 동기화 실패를 NO_MATCH로 바꾸지 않는다.
+- P0 연결에 policy가 있으면 apply-requirements에 --policy <policy>를 반드시 전달한다. CONFIRMATION_REQUIRED라면 출력된 정확한 후보 내용·이름과 적용 목적을 보여주고 실행 허락을 받는다. 사용자가 동의한 그 digest만 --confirm-skill로 전달한다. Agent가 approved_skills를 쓰거나 수정하지 않는다. 확인한 run_id를 유지하며 실제 검증 성공 뒤 sync --push-usage로 연결된 조직에 이력을 공유한다. 공유 실패 시 로컬 성공과 전송 대기를 구분한다.
+- P1 NO_MATCH 이후 해결법을 찾을 때 제품 소스/fixture/지원 어댑터 목록에서 정답을 찾지 않는다. 사용자가 알려준 환경 사실과 실제 실행 중인 앱/파일 상태를 먼저 조사하고, 접근 가설을 세워 실제로 확인한다. 발견한 방법을 제품 API에 연결할 때만 입력 형식 도움말을 읽는다. 운영자 문서 열기 도구와 암호를 Agent 복구에 사용하지 않는다.
+- 특정 월 실적 요청에는 그 월의 실제 값을 우선 답한다. 요청하지 않은 예측/차트 설명은 생략하고 생성된 artifact는 로그에 보존한다. 사용자가 예측·추세를 요청한 경우에만 결과와 차트 링크를 함께 전달한다.
+- Cold 업무 성공 후 candidate가 있으면 '게시해줘'라는 별도 사용자 요청을 기다리지 않는다. 실제 후보의 환경 절차를 짧게 요약하고 “이 해결 방법을 팀 Skill로 공유할까요? 승인하시면 별도로 다시 검증한 뒤 게시하겠습니다.”라고 안내한다. Claude Code의 AskUserQuestion(사용 가능 시) 또는 대화 질문으로 승인/보류를 묻는다. Windows GUI, 별도 터미널, 수동 digest 입력은 요구하지 않는다. 연결 설정의 reviewer를 표시하고 없으면 이름을 확인한다. 답변 전에는 승인 파일을 생성하거나 review를 실행하지 않는다.
+- 사용자가 명시적으로 답한 후에만 로컬 approval JSON을 만든다: source="claude-code-user", candidate_ref={id,version,digest}(보여준 실제 후보 그대로), decision="approve" 또는 "reject", reviewer=사용자 검토자, user_response=사용자 실제 답변 원문. review --approval-file <file> --decision <decision> --reviewer <reviewer> --store <store> --id <id> --version <version>으로 기록한다. 개발 계획 승인, 과거의 다른 후보 승인, Agent 자신의 문구를 user_response로 넣지 않는다. 이 파일은 신뢰된 Agent가 대화의 사람 응답을 전달하는 기록이지 사람 신원을 독립 인증하는 장치는 아니다. 보류/취소에는 승인 기록을 만들지 않는다. 사용자 승인 기록을 확인한 뒤, 동일 exact 후보에 replay를 실행한다. 독립 접근 PASS일 때에만 publish --store <store> --id <id> --version <version> --mirror <mirror> --remote <remote> --branch <branch>를 실행한다. 이어 sync로 원격 게시·조직 상태를 확인한다. 거절/취소/미승인/FAIL/NOT_RUN에서는 게시하지 않는다. 사용자에게 digest를 손으로 옮겨 적게 하지 말고 조회 결과의 실제 값을 사용한다.
+- remote/mirror가 누락됐다면 연결 미준비라고 알린다. 후보 생성은 유지하되 임의 목적지를 선택하거나 이미 게시됐다고 하지 않는다. Claude 대화에서 승인 질문을 하기 전에 사람이 검토할 내용과 게시 목적을 안내하고, 새 후보나 변경 digest에 과거 승인을 승계하지 않는다.
+- 기본 응답에는 '제품 CLI', '지원 어댑터', 'procedure/task-mapping' 같은 구현 설명을 나열하지 않는다. 실제 오류/선택/검증 원문은 상세 로그에 남긴다. NASCA 직접 시연 표현은 앞의 승인된 데모 문구를 유지한다.
+
+- 첫 실패 보고 뒤에는 사용자가 정해진 대사를 외워야 하지 않도록 “평소 이 파일을 열 때의 상황을 알려주시면 다른 접근 방법을 이어서 확인하겠습니다”처럼 다음 행동만 짧게 안내할 수 있다. 특정 앱/라이브러리를 정답으로 묻지 않는다.

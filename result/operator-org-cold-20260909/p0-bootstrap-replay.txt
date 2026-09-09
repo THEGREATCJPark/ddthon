@@ -1,0 +1,44 @@
+{
+  "ref": {
+    "id": "fix-skillloop-demo-pkg-install",
+    "version": "2.0.0",
+    "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03"
+  },
+  "state": "LOCALLY_APPROVED",
+  "lifecycle_state": "LOCALLY_APPROVED",
+  "local_review_evidence": {
+    "decision": "approve",
+    "ref": {
+      "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03",
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "2.0.0"
+    },
+    "reviewed_at": "2026-09-09T02:10:20.029853+00:00",
+    "reviewer": "박찬준"
+  },
+  "remote_publish_evidence": null,
+  "replay": {
+    "verdict": "PASS",
+    "candidate_ref": {
+      "id": "fix-skillloop-demo-pkg-install",
+      "version": "2.0.0",
+      "digest": "a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03"
+    },
+    "evidence": {
+      "action": "pip-install",
+      "replay_independent": true,
+      "reused_first_run_result": false,
+      "candidate_digest_verified": true,
+      "clean_before": true,
+      "pip_verification": {
+        "pip_exit_code": 0,
+        "installed_check": true,
+        "version_check": true,
+        "import_check": true,
+        "index_source": "internal-packages",
+        "is_real_success": true,
+        "run_id": "independent-replay"
+      }
+    }
+  }
+}

@@ -97,3 +97,7 @@
 ## 7. 다음 단계 (제안)
 
 **Units Generation** — 위 컴포넌트·계약을 근거로 **실제 Unit 경계·Unit 간 의존성·Unit↔스토리 매핑·병렬화·사람별 배정**을 결정. (컴포넌트 9개/서비스 3개는 그대로 Unit이 되지 않을 수 있음 — 공통 lifecycle은 통합.)
+
+## Approved operator/org demo alignment (2026-09-09)
+
+Existing product scope maintained. The live demonstration may select explicit team-skill-demo-20260909 on the same ddthon remote, while preserving original team-skill-store history. New live database starts with validated P0 only; P1 Cold searches it and the user approves newly discovered P1 publication. Exact human review, independent Replay and confirmed push remain required. Operator-only no-prompt viewing is environment preparation, not Agent discovery. End-of-task candidate triggers a publication permission invitation; no separate user publish request is required. No S3 adapter or general NASCA detection is claimed.
