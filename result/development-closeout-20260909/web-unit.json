@@ -1,0 +1,14 @@
+{
+  "name": "web-unit",
+  "start": "2026-09-09T05:52:10.488676+00:00",
+  "end": "2026-09-09T05:52:11.758132+00:00",
+  "seconds": 1.2694683000008808,
+  "command": [
+    "C:\\Program Files\\nodejs\\npm.cmd",
+    "test"
+  ],
+  "cwd": "C:\\Users\\cik61\\Desktop\\skillloop-closeout-20260909\\repo\\team-hub",
+  "exit_code": 0,
+  "error": null,
+  "source_sha": "6197a975b020768cc29bcd92dd27553406da268e"
+}

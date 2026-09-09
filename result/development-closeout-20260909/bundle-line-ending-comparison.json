@@ -1,0 +1,7 @@
+{
+  "exact_bytes_match": false,
+  "equal_after_embedded_subtitle_and_raw_log_line_endings_only": true,
+  "remote_sha256": "82e5ddcaa0aa1bcce613ce0ef5ac4cba9917cfd8079ef61dd22010fba9d52072",
+  "local_sha256": "5b3d7411fb4a74f550e9e438b37968b3fe377d29caeb24bdf107adc03a2ce68d",
+  "scope": "Observed build differences are embedded P0 subtitle CRLF and raw P0 transcript escaped carriage returns. Normalized equality is not exact byte identity."
+}

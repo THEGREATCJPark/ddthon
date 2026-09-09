@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-09-09T06:01:50.499Z",
+  "project": "nowhere-skillloop-ddthon",
+  "read_only": true,
+  "release": {
+    "name": "projects/nowhere-skillloop-ddthon/releases/cloud.firestore",
+    "rulesetName": "projects/nowhere-skillloop-ddthon/rulesets/836ca28c-cc11-49e6-af0f-5105ef8a1ed4",
+    "createTime": "2026-09-08T07:49:14.539731Z",
+    "updateTime": "2026-09-09T05:17:25.760878Z"
+  },
+  "files": [
+    {
+      "name": "firestore.rules",
+      "sha256": "4aebd59f992b3d09e74f70a2ad714cf26e3fdc46a4776c19e440694d503dbaa5",
+      "normalized_sha256": "a5ce6428c447a5a19bbf977caa16eef1a0d19e00f9eb46afb5d6743338f1627d",
+      "matches_local_normalized": true
+    }
+  ],
+  "local_sha256": "4aebd59f992b3d09e74f70a2ad714cf26e3fdc46a4776c19e440694d503dbaa5",
+  "local_normalized_sha256": "a5ce6428c447a5a19bbf977caa16eef1a0d19e00f9eb46afb5d6743338f1627d",
+  "pass": true
+}

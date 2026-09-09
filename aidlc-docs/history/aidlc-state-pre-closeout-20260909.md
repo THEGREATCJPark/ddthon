@@ -1,0 +1,279 @@
+## Latest / Development closeout plan ready — 2026-09-09T05:44:56.6362369Z
+
+Current phase remains CONSTRUCTION / Build & Test, final acceptance pending. User requested planning after demonstrations. Plan: construction/plans/development-closeout-plan.md. Remaining closeout: preserve/integrate local5 and remote16 divergent commits (fetch origin/main1d6824f vs localba5f4cf), resolve web write-feature approval provenance without backdating, reconcile latest P0/P1/publication evidence, validate frozen submission code once, present final user acceptance, verify Git/CI/deployment delivery. Existing tests and historical omissions remain valid in their documented scope; no whole-workflow PASS claim. This turn plans only: no web/product changes, merge, tests or push. Older state entries below are historical.
+## Latest / P0 WITH_SKILL3 actual PASS — 2026-09-09T05:37:17.6202369Z
+
+CONSTRUCTION / Build & Test. Three independent fresh-work-env Agent trials complete: task31.788/35.757/36.358s (mean34.634s), final42.663/47.237/46.890s; actual initial failure → Git P0v2 MATCH → scoped-auto installation/version/import → reuse+1 each, candidate+0, independent verification PASS. Before-PC NO_SKILL2 PASS/1 BLOCKED retained. Runtime/manual-auto differences and higher after cost explicitly disclosed; no causal speedup/cost saving claim. Report result/p0-with-skill-three-20260909/README.md, metrics and original logs saved; verified Desktop ZIP available. No new model runs scheduled, no publication/events push, remote P0 branch unchanged. No product/rule/web changes, no video recorded, local evidence not yet committed/pushed. Final overall acceptance still separate.
+## Latest / P1 consolidated judging evidence saved — 2026-09-09T05:25:17.0707391Z
+
+Build & Test evidence: before3 unresolved vs after4 work/chart PASS retained in result/p1-evaluation-comparison-20260909. Full comparison CSV/JSON, rubric mapping and actual charts packaged to verified versioned Desktop ZIP; receipt result/p1-evaluation-comparison-delivery.json. Official criteria basis=user-provided guide and local CON-3/EVALUATION, no new web verification. No selective3-run replacement, no causal speed/cost claims. Website/README unmodified for owning session. No new model run; final submission/SHA audit not completed by this packaging step.
+
+## Latest / Additional Cold round4 PASS — 2026-09-09T05:20:08.2755983Z
+
+Build & Test: extra1 requested after earlier3 completed. Same-condition fourth work87.836s, output4782, task/chart PASS. All4 observed successes retained; primary mean167.140s, recent2-4 post-hoc mean101.156s labelled separately. No protocol/product/gate change; narration unit error preserved. Result p1-preopened-three-20260909/ROUND4.md and four-run metrics. Extra run request complete; no further tests launched. Earlier3-run report remains historical valid dataset.
+
+## Latest / Preopened full-product Cold3 PASS — 2026-09-09T05:14:38.8861212Z
+
+CONSTRUCTION / Build & Test. Requested3 operator-run trials complete, no selective replacement: task365.093/105.093/110.539s, all3 work/chart/input-integrity PASS. Fresh P1-absent stores, exact same encrypted file, Excel preopened and upfront user fact; auto/print differs from before-PC no-hint manual pilots. Each candidate+1/reuse+0; no approval/Replay/publish performed in work-only measurement. Existing gate remains. Report result/p1-preopened-three-20260909/README.md; raw/native logs in Desktop/skillloop-p1-preopened-three-20260909-140109/operator. Mean193.575s, median110.539s; no causal speedup/cost saving claim; narration/long first-run discovery issues preserved. Cold3 data request complete, Warm sharing/reuse is separate next evidence. No new film; local receipt uncommitted. Historical pending manual3 notes below do not negate this separately labelled completed dataset.
+## Latest / P1 observational comparison received — 2026-09-09T04:56:48.2210287Z
+
+CONSTRUCTION / Build & Test. Before PC3 NO_SKILL pilots validated:0/3 tasks complete, elapsed to unsuccessful reply340.160/133.451/418.307s. Latest accepted here FULL_PRODUCT_COLD1 task PASS156.826s, user-facing175.737s, approval/Replay/Git publication confirmed. This is NOT Warm or controlled3-vs-3 evidence; user environment hint/opening/supervision/runtime differ and previous after attempts remain preserved. Token savings/cost savings/causal speedup unsupported. Report result/p1-before-after-comparison-20260909/README.md with raw-native metrics and65 payload checks. No new model or product changes; remaining planned Cold runs not completed by this analysis.
+## Latest / P1 Cold134050 task and publication PASS — 2026-09-09T04:53:34.3793299Z
+
+CONSTRUCTION / Build & Test. Actual user session e518ab42 completed task156.826s (including user wait19.420s), user result175.737s, Git publish228.255s, final240.735s. Chart reviewed; real human selector approval + Replay PASS + remote e302bf2 verified. Candidate+1/reuse+0. Task tokens input28/output6950/cache-create24463/cache-read451854, native message-id dedup; full evidence in result/p1-cold-manual-134050. Prior incomplete session and Replay argument error retained. One successful Cold, three-run collection incomplete. This round-1 now contains P1 Skill and must not be reused as Cold. No new model run/product mutation; local result receipt not yet committed. Historical readiness/user-pending entries below are superseded for this session only.
+## Latest / Fresh Cold134050 ready — 2026-09-09T04:41:29.7109353Z
+
+Current phase CONSTRUCTION / Build & Test. User requested restart with already-open-only C9. Use Desktop/skillloop-p1-cold-ready-20260909-134050, manual permissions, P0 Skill1/P1 Skill0/usage0, actual Git/status/preflight verified. No task/model/Excel launched. User opens exact workbook via operator Open-Document.cmd during dialogue. Previous Agent reopen violation preserved; live correction USER_PENDING. Human review+Replay+confirmed push unchanged. Measurement ends at real task result; approval/publication separate. Earlier rounds/notes below are historical, not current setup. Operator/readiness.json is evidence. Worktree changes not yet committed; hashes pin current instructions.
+
+## Latest / P1 CLI approval selector correction
+
+CONSTRUCTION / Build & Test continues. User round1 task/candidate dialogue reported success but only a prose approval question. C9 now requires actual AskUserQuestion approval/hold selector invocation, no automatic reply or prose fallback. Exact review/Replay/publication gates unchanged. Three prepared round Skill copies refreshed; original copies and data hashes preserved in operator/approval-ui-correction. Existing gate regression exit0. Actual selector display USER_VERIFICATION_PENDING; round1 contains a mid-session instruction correction, not an unchanged-protocol run. Plan: construction/plans/p1-cli-approval-ui-correction.md. No candidate approved or published by operator.
+
+
+## Latest / P0 관측 결과 집계 / P0 comparison evidence — 2026-09-09T05:54:03.0649887Z
+
+CONSTRUCTION / Build & Test. 기존 실제 실행 근거를 Git 제출용으로 정리했다. 적용 전 추가4/5/6회 전체(2 PASS/1 BLOCKED)를 비교용으로 선택하고, 이전1/2/3 포함 전체6회(4 PASS/2 BLOCKED)를 보존했다. 적용 후 기존3회는 모두 실제 설치·독립 검증·reuse+1 PASS, 업무 평균34.634초. 보고서 result/p0-six-before-three-after-20260909/README.md, 전체9행 CSV, 원본 해시·공개 도구/응답·검증 근거가 연결된다. 조건·manual/auto·runtime·검증 종료점 차이와6회 승인 지연으로 인과적 속도/비용 개선 주장은 하지 않는다. 결과 원본을 최신 제출 SHA에서 재실행한 것으로 승격하지 않는다. 신규 모델/제품/웹 변경 없음. 이번 사용자 승인은 보고서 commit/push 범위이며, 전체 개발 완료/Build & Test 최종 수용과 이전 마감 계획 실행은 별도 대기다. 아래 상태들은 당시 기록이다.
+# AI-DLC State Tracking
+
+## 현재 상태 — 2026-09-09 Git 조직 시연 준비
+
+- **적용 전 PC 회신 반영**: response ZIP10 payload 확인. 검증기가 실제 transcript/event를 확인하지 않는다는 지적 수용, 자동 업무성공 판정기로 사용하지 않음. operator/runtime과 실제 Agent runtime 구분. 현재 thisPC FULL_PRODUCT_COLD 수동3회 / peer NO_SKILL 수동3회로 재정리; peer용 같은 현재 XLSX/task만 포함한 P1-Manual-NoSkill-Handoff-20260909.zip 준비(실제 채택/실행 미확인). 과거 Paired/SAFETY_STOP 보존, VM/검증 adapter 신규개발 보류. 다른조건/사람개입/PC차이는 공개, 과거시간 합산 금지.
+
+
+- **사용자 직접 P1 Cold3회 준비 완료**: Desktop/skillloop-p1-cold-3runs-20260909-125935, Round1/2/3과 분리 Git 브랜치. 모두 P0 Skill1/P1 Skill0/실적0, 동일 XLSX, 실제 check-only 3회 PASS. Claude opus4-8 medium 새 UUID 세션, 종료 시 원본 로그/시간/store/usage 보관. 모델/시연은 아직 NOT_RUN. 적용 전 데이터는 다른 PC 제공; 별도 정밀 비교 도구/VM 추가 작업 없음. 사용자는 동일 요청→해당회차 파일 직접 열기→탐색/업무→사람 승인→게시→/cost 캡처→/exit 순서. 현재 권장 시연 경로는 이3회 폴더이며 이전 Cold/Warm은 보존.
+
+
+- **시연 경로 정정: P1 Cold가 사용자 의도**. 기존 Warm 안내는 잘못이었음. 새 Desktop/skillloop-p1-cold-filming-20260909-125519/cold 준비: 실제 team-skill-demo-20260909 동기화, P0 Skill1/P1 Skill0/events0, operator 검색 NO_MATCH 및 실제 상태줄 pip만/재사용0 확인. 현재 Warm 세션을 나가 새 Cold launcher 사용. 파일은 해당 새 경로에서 사용자가 도중에 직접 열기. 이전 Warm/old Cold 후보/공유 실적은 삭제하지 않음. Agent 시연은 아직 NOT_RUN.
+
+
+- **시연 우선 / 비교 추가 개발 보류**: 사용자 지시에 따라 추가 비교 인프라 개발은 중단하고 기존 P1 실제 시연·로그 확보를 우선한다. 비교 계획 미완료를 완료로 변경하지 않는다. 상세 계획 문서별 사전 승인과 대화 진행 승인은 구분해 기록; 과거 승인 소급 없음. 준비된 FULL_PRODUCT_WARM 폴더/문서/설정 존재 및 Claude Bedrock 인증 상태 확인(모델 미호출). 이전 capture 종료1·수집로그0이므로 새 촬영 성공은 아직 미확인. 사용자가 대상 문서를 도중에 열며 진행, Warm은 실제 MATCH/재사용으로 표시. 최종 수용·제출 완료 아님.
+
+
+- **P1 비교 런타임 정합 후속 완료**: 별도 운영자 Python3.13.14와 공통안 명시 라이브러리 설치·pip check·동일 준비검사20 PASS. 새 Excel검사 첫 암호창 BLOCKED 보존, 기존 운영자 launcher와 같은 generated COM wrapper로 정정 후 새 데이터 PASS. 제품 .venv 미변경. r2 전달 ZIP/전체 의존성 lock 준비. 원본 입력 키, 외부 recorder/격리 연결, 양쪽 동결은 여전히 대기이며 모델호출0. 기존 Python 불일치 기록은 과거이며 현재 runtime_gaps는 비어 있음. result/p1-comparison-preparation-20260909/local-runtime-aligned.json 참조.
+
+
+- **P1 비교 준비 진행(새 측정 미실행)**: 사용자 준비 승인으로 p1-paired-measurement-preparation-plan.md를 구현. 새 운영자 kit Desktop/P1-Paired-Preparation-20260909, 79개 수신 payload/조건 hash 검증, 독립 검증기 준비20 PASS, 별도 데이터 실제 Excel read-only 절차 검사 PASS. 파생 Skill은 기계적 검증만, 원본 게시 승인 자동 승계 없음. 상태 PREPARED_NOT_READY: 비관리자 Windows Home의 recorder 격리/live bridge 미구성, 원본 입력 키 미수신, Python3.14 대 공통안3.13.14 및 라이브러리 불일치, 양쪽 동결 대기. 모델 호출0. 원본 v1/v2 및 SAFETY_STOP 보존. 제품 촬영과 새 NO_SKILL/WARM_SKILL_ONLY 비교 분리; 전체 Build & Test 완료 아님. result/p1-comparison-preparation-20260909 참조.
+
+
+- **P1 촬영 시작 상태 정정**: 대상 문서를 닫고 시작. Start-filming.ps1 자동 열기 제거, 운영자 준비 Excel만 종료 확인. 사용자가 도중에 문서를 직접 열고 “이상하네, 나는 열리는데”라고 입력한다. 기존 열린 상태 사전점검은 보존.
+
+- **P1 적용 후 촬영 준비 완료**: Desktop/skillloop-p1-after-video-20260909/warm, 기존 team-skill-store에서 게시 P1 수신. 원본 검토/Replay/게시 provenance 연결, 실제 직접 읽기 실패·MATCH·앱 접근·원본 보존 및 신규 재사용0 확인. Start-filming.ps1과 촬영/로그 가이드 준비. FULL_PRODUCT_WARM_FILMING이며 실제 촬영/Agent 실행은 NOT_RUN. 다른 PC 최신 Excel 비교 ZIP 미수신, WARM_SKILL_ONLY 측정은 대기. P0-only demo branch 미변경.
+
+- **P1 첫 응답 UX 정정**: 실제 실패·NO_MATCH 뒤 “Agent SkillLoop를 통해 방법을 탐색해볼까요?”로 질문. 파일을 평소 어떻게 여는지 질문 삭제, 환경 사실 응답은 탐색에 활용. 게시 승인과는 별개. 기존 P1 작업 폴더 지침 갱신 완료; 새 대화 실제 표현은 사용자 확인 대기.
+
+- **P0 한정 자동 적용 승인 반영**: NFR-SEC-4 → US-P0-1 → Design/NFR → p0-scoped-auto-reuse-code-generation-plan.md → C8/C9/운영자 준비에 반영. 실제 GitHub 수신 후 추가 확인 인자 없이 설치·버전·import/+1, 동일 실행 +0 검증 PASS. 범위 반례13 PASS, P1 관련24 PASS. 후보 게시 승인과 P1 실행 확인 불변. 준비된 기존 P0 정책만 갱신, 패키지/실적 보존. result/p0-scoped-auto-20260909/.
+
+- **Capture UX 보완**: 연결 상태줄의 중복 로컬/팀 기준 문구 제거, 조직 실적·마지막 동기화 유지. 저장소 재설치 질문 금지, 필요한 exact Skill 실행 확인은 적용 목적 질문으로 구분. P0 실제 성공 시 기존 팀 지식 재사용 가치 안내. P0 14 tests 및 최종 표시/집계 24 tests PASS(38개 고유 검사), 이전 표시 기대문구 실패 기록 보존. result/capture-ux-20260909/.
+
+- **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 구현5fff0c4 origin/main push 완료. 최종 제품/사용자 시연 승인 아님.
+- **현재 시연 DB**: ddthon/team-skill-demo-20260909, 초기 데이터75b6e54225a9fa4e71e7174168161d61fa923e31. P0 Skill1·P1 Skill0·공유 실적0. 기존 team-skill-store/P1 이력 보존.
+- **사용자 작업**: skillloop-org-p0-20260909, skillloop-org-p1-20260909/cold 및 warm 준비. 같은 조직 DB 수신, 사용자 실적0. warm도 P1 게시 후 sync해야 Warm이 된다.
+- **검증**: 실제 Excel 닫기/암호 입력 없는 재열기2건, 다른 layout/path와 원본 불변 PASS. 실제 Git P0 수신→미승인 차단→허용 후 설치/import→1회 기록→반복+0 PASS(별도 임시 작업, live 이벤트 미전송). live P1 문서는 준비 접근 확인만; 후보·게시 없음.
+- **승인 UX**: 사용자 정정에 따라 Windows GUI 제거. C9가 업무 완료 시 Claude Code 대화로 공유 승인을 먼저 요청. 실제 사용자 답변/exact 후보/검토자를 기록한 뒤 독립 Replay·Git push. 초기 P0에 이미 받은 native 승인 이력은 보존; 이후 native 창 사용 안 함.
+- **남은 것**: 사용자의 실제 P0 및 P1 Cold 대화 승인/게시, 게시 후 동료 Warm. 새 대화 UX 사용자 실행까지 완료했다고 하지 않는다.
+- **근거**: construction/plans/operator-open-org-cold-code-generation-plan.md, construction/build-and-test/org-demo-user-guide.md, result/operator-org-cold-20260909/. 웹/공식 규칙/기존 감사 기록 및 별도 B 수신 파일 미변경.
+- 아래 절은 당시의 과거 기록이다. 현재 판정은 이 절과 연결된 최신 실행 근거를 따른다.
+
+## 最新 / Operator open + organization P0/P1 Cold plan — REVIEW REQUIRED
+
+- Continue CONSTRUCTION / integrated Build & Test with a bounded Code Generation Part 1 correction plan: construction/plans/operator-open-org-cold-code-generation-plan.md. User requested planning first; Part 2 not started.
+- Plan proposes operator no-prompt exact Excel open, a new live Git data branch containing only P0 before user P1 discovery/publication, real action-specific pip Replay, consistent Agent/statusline transport context and one exact human review confirmation. Existing P1 shared history remains preserved.
+- Latest user-provided P1 transcript reports July1500/candidate, then review EOF and missing mirror/remote. User report is not new independent PASS; publication incomplete. Planned branch and no-prompt opening have not been created/proven.
+- Official rules and prior approval/audit history unchanged. No product code, remote, user workbooks or website changed this turn. Existing untracked B receipt preserved. Plan approval and later exact candidate human review are separate gates.
+
+## 과거 결과 / 실제 P1 작업 폴더 준비 및 데모 설정
+
+- 사용자 요청으로 공개 데모 암호 nowhere와 NASCA 직접 시연 문구 반영. 실제 NASCA 탐지 증거가 아닌 시연 설정이며, metadata의 virtual/scenario 출처와 Office 암호화 구현 기록 유지.
+- skillloop-p1-feedback-20260909/cold·warm 실제 생성, owned Excel 열림. 이전 안내 경로가 생성 전이었던 오류를 보정. 현재 PREPARED_NOT_RUN, 새 Agent 성공 미주장.
+- 관련27 tests PASS. 별도 COM 재열람은 암호 대기창에서 자동 입력 제어가 되지 않아 미통과; 해당 검사창만 취소. 사용자 Excel 재열람은 확인 필요. 웹/B자료 불변.
+
+
+## 과거 결과 / P1 live feedback (2026-09-09)
+
+- Existing CONSTRUCTION / Build & Test. User requested first-turn failure/search report without direct Excel question; C9/S2/help and US-P1-2 AC-1 aligned. Next user-provided fact still precedes discovery. NASCA(가상) is environment label, not verified real NASCA diagnosis. August actual data must not be fabricated from a forecast.
+- Operator preparation adds hidden interactive --ask-password (1–15 chars, no file/log/argv secret), Cold activation and clear viewing guidance.26 targeted checks PASS. Existing XLSX/store/usage/settings unchanged; only C9 refreshed.
+- Actual operator COM reopen tests did not pass; Excel password dialog required cancellation. Workbooks were created/opened and direct parser failure confirmed, but manual chosen-password reopening remains unverified.3 failed attempts retained. No fresh Agent dialogue/UI result claimed. Web untouched.
+
+
+## 과거 결과 / P0 live feedback correction (2026-09-09)
+
+- Existing CONSTRUCTION / Build & Test. User requested C9 narration, visible preloaded inventory and named verified-reuse success feedback; amendment recorded before implementation. Web excluded.
+- Presentation corrections tested:37 targeted +10 P1 regression; final actual P0 repeat1 PASS (overlaps targeted coverage, not a new total). PYTHONUTF8=1 inherited check has no warnings; earlier2 decoding warnings preserved.
+- User P0 work has actual reuse1 and independent import/version1.0.0 confirmed. Full UI transcript/captures not obtained; prior automated NOT_RUN remains historical. Updated work Skill instructions; settings/store/usage preserved.
+- New work skillloop-p0-feedback-20260909 PREPARED_NOT_RUN with fresh venv and existing real local history1. New Agent dialogue verification pending. No invented historical counts, proxy failures, remote publication or web changes.
+
+
+## 과거 우선 작업 — B-PC 공용 Skill 왕복 검증 (2026-09-09)
+
+- 기존 CONSTRUCTION / Build & Test를 이어간다. B 보고 기준 main fff0ffa, Python 3.12.2 제품 설치·import 성공. 개발 의존성 설치는 cp949 오류 후 `python -X utf8`로 성공했다.
+- CJ는 requirements-dev.txt 첫 주석만 ASCII로 정정했다. 기존 파일 cp949 decode 실패 재현, 변경 파일 ASCII/UTF-8/cp949 해석 동일·4개 선언 불변·로컬 pip 파싱 PASS. B PC에서 수정 파일 재실행 완료로 주장하지 않는다.
+- B는 설치를 반복하지 않고 Excel 준비 → 원격 Skill pull → exact 실행 확인 → Warm → usage push를 진행한다. B-PC 업무 성공과 CJ 수신·중복 방지 검증은 아직 NOT_RUN.
+- 대화 UX의 미커밋 웹 변경·실행 증거는 보존하며 기존 계획 완료로 승격하지 않는다. 공식 규칙·제품 범위·게시 게이트 불변.
+
+## 과거 결과 결과 — 대화 UX 검증 (2026-09-09)
+
+- **현재 단계**: CONSTRUCTION / 통합 Build & Test. 승인된 대화 정합화 구현 완료, P1 실제2-turn PASS, Python144 PASS/2 SKIP, 웹7 tests/build PASS. Python/C9 검증 소스fff0ffa. 웹 완료 시 마지막 대화 스크롤 보완도 검증됨.
+- **실제 P0 UI**: RUN #1 NOT_RUN. 새 폴더/Claude 프로세스 준비 후 Computer Use의 대상 창이 제공되지 않아 입력·캡처 미실행, 실제 reuse0. `result/live-demo-p0-20260909/`의4단계 사용자 안내 참조. 이전 headless 성공과 구분.
+- **UX 잔여**: 입력 형식 재시도0·환경 사실 질문·실제 chart 경로는 개선. 일부 내부 용어/긴 설명, Agent 자체 NASCA 명칭 누락은 남음(CLI 표시는 있음). 완벽한 표현 준수로 과장하지 않는다.
+- **gate**: 전체 제품/최종 제출 승인 아님. B-PC NOT_RUN. Python CI9065a72·Pages6fefa6b 성공 및 공개 번들 확인 완료. 실제 P0 UI 단계는 미실행 유지. 기존 exact lifecycle 승인과 과거 테스트 이력 유지.
+## 과거 검토 — 대화 UX / 실제 UI 시연 계획 (2026-09-09)
+
+- **게이트**: CONSTRUCTION / Code Generation 보완 Part 2 진행 — 사용자 전체 계획 승인(어 승인). `construction/plans/dialogue-ux-live-demo-code-generation-plan.md`의8단계 승인됨. 승인 시각은 audit/계획에 기록. 수정→회귀→실제 시연→원격 검증 순서로 수행.
+- **판단**: P1 환경 사실 대화는 기존 FR-P1-3/US-P1-2의 누락 복원. C9 한국어·도구 안내·차트 경로·웹 설명 정합화, 실제 검색 범위 표시. 새로운 요구사항/lifecycle/Unit 없음. 기존 Code Plan 승인은 과거 구현에 대한 것이며 이번 새 계획 승인으로 꾸미지 않는다.
+- **기준**: main8bd731b / origin 동일, 시작 clean. A/B 인수 완료 기록 유지. Computer Use 초기화·앱 조회 성공; 실제 Claude UI 시연은 회귀 후1회만 예정. B-PC NOT_RUN 유지.
+## 과거 결과 상태 — 2026-09-09 오전 인계
+
+- **추가 Cold/응답 검토**: 제품/C9 d8c45cb 고정, 새 P0 1+P1 Cold2 기능PASS(1650/2550). CLI 사내환경·NASCA(가상) 표시는2/2, Agent 설명·한국어·입력계약 안내는 개선 필요. 전체 원문·판정 `result/cold-review-20260909/`; 기능 성공을 UX 완료로 합치지 않는다. 이번에는 테스트·기록만, 응답 개선 구현은 아직 하지 않았다.
+
+- **현재 단계**: CONSTRUCTION / 통합 Build & Test. P0 자연어 재현 및 P1 Cold→사람 승인→독립 Replay→GitHub 게시→새 Agent Warm 실제 검증 완료. 전체 제품·제출 최종 승인 아님.
+- **이번 추가 검증**: 동일 제품 소스 `96f3c85`에서 새 Claude Cold 3회 PASS(1100/600/0), 원격 Warm 1회 PASS(2550/reuse+1/candidate0). 코드 변경 없이 수행. 중간 권한/스키마 재시도와 Warm 설명 오류는 로그 보존.
+- **사람 승인**: 사용자가 exact 후보 `file-access-8738e696cff8bbb20c98@1.0.0`, digest `359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af`의 검토·Replay PASS 후 게시·새 Agent 실행을 명시 승인. 실제 S3 기록 후 다른 문서 Replay PASS.
+- **공유 근거**: `team-skill-store` Skill 게시 `28809464218e7328c7184a20bcafebb0e1b18916`, 재사용 이벤트 `04d831066e0fcdae3217412385e37dc0f08cae58`. 별도 mirror/store 수신, receiver local approval/Replay=null. 이벤트 첫 import1/반복0, 조직 총계1.
+- **기존 회귀**: 139 PASS/2 SKIP 및 별도 실제 Excel 1 PASS; GitHub CI run34235737366(91dcf82) success. 최신 검토 main75ef7e0도 run34242335266 success 확인. 로컬 테스트 수·CI·추가 사용자 시나리오 수는 합산하지 않음.
+- **A/B 인수**: A PR#1 실제 merge `58adce9`, B 원작성 이력 merge `99cc4e5`. CJ가 완료 인수 코드 통합을 담당; A/B 동시 수정 대기 없음. B 다음 역할은 별도 PC Git 공유 시연 재현.
+- **U3 표현 정합화**: 수신 환경 팀1/로컬0, exact 게시 기반 기여/인기 순위, 이벤트 중복 제외 검증 완료. 전체142 PASS/2 SKIP. 웹 설명 P0 4단계/P1 8단계·실제 차트·버튼 이전/초기화 검증 완료. 웹 소스main 포함·기존 Pages 배포 완료. 검증 소스935b8ec Python CI34287993633/Pages34287993826 모두success.
+- **남은 것**: B PC 실제 재현 NOT_RUN, 최종 갤러리/제출 검토. GitHub CI/Pages는935b8ec에서success 확인 완료. 현재 제품 lifecycle 변경 없이 U3 읽기 표현만 정정했다.
+- **기록**: `result/p1-acceptance/`, `construction/build-and-test/`. 추가 Cold/Warm 시험 당시 제품 코드/C9 불변. 이후 승인된 U3 표현 정정은 별도 기록. 공식 AI-DLC 규칙 불변. 기존 audit append-only, UTC 시각 매번 취득. S3/DB adapter는 구현 아닌 확장안.
+
+
+## 과거 인계 상태 — 2026-09-08 초기 Codex/Astra 인수 기록
+
+- **현재 게이트**: CONSTRUCTION / P0 3회 재현·전체93 PASS 기준 확정 후 사용자 조건부 허가로 P1 구현 진행. A/B 인수 코드와 CJ S2/S3/C4 연결·검증 중. 실제 Excel 시도 FAIL_TIMEOUT, 전체 P1 완료 아님.
+- **CJ 메인 수정자**: Claude Code가 수정 중단·백그라운드 작업 없음으로 인계 보고한 후 Codex/Astra가 인수. main 기준 `a22e1764527e89d73c648f890fa173527d99900e`. 도구 교체는 새 구현·계획 승인으로 간주하지 않는다.
+- **P0 수용 결과**: 새 Claude Code 일반 업무 요청 → 기존 작업 venv 실제 실패 → C5/S1/C3 → reuse=1 → 독립 import/version PASS. 신규 14 tests, 깨끗한 snapshot 전체 80 passed/0 skipped. 설치 후 재요청 +0. result/p0-nl/ 참조.
+- **보존**: README.md/EVALUATION.md 사용자 미커밋 변경, 모든 기존 승인·audit·팀원 코드 이력. 이 절은 당시 인수 기록이며, 현재 판단에는 문서 최상단의 최신 상태를 우선한다.
+- **A 전달 수신**: PR #1 cb25a62의 3파일을 작업 트리에 원문 인수. GitHub PR merge는 미수행. P0 회귀와 P1 실제 연결을 현재 소스에서 검증 중.
+- **B 전달 수신**: 1760d32 코드·U2문서 인수, B audit/state는 handoff 파일로 보존. CJ가 인수한 envharness/replay 무결성·정리 결함 수정. B환경61 PASS와 이번 PC Excel FAIL_TIMEOUT을 구분.
+- **파일 소유권(최신)**: A=match/reuse_service와 담당 테스트 유지. B는 담당 범위 완료(`1760d32`) 보고 후 작업 종료, 사용자 대행 요청(2026-09-08)에 따라 envharness_p1/replay와 담당 테스트도 CJ가 인수. CJ=공통부·cli·C9·U3 및 experience_service/publish_pipeline/gitsync. B의 과거 작성 이력·저작자는 보존한다. P1 수정·통합은 P0보다 후순위이며 새 범위 추가는 별도 계획 검토 대상이다.
+- **P1 통합 검토**: A 경로/dataclass 수정 인수, B digest mismatch 접근 전 차단·소유 Excel만 정리·placeholder 정직 표기 수정. 테스트 대역/로컬 Git 통과, 실제 Excel COM 시도 시간 초과 미해결.
+- **전체 Build and Test**: 미완료. P0 수용 검증은 완료했으며 전체 제품 완료·제출 승인은 아니다.
+
+## Project Information
+- **Project Name**: Agent SkillLoop (MVP)
+- **Project Type**: Greenfield
+- **Start Date**: 2026-09-08T14:45:14Z
+- **Current Phase**: CONSTRUCTION
+- **Historical Current Stage**: CONSTRUCTION / 통합 Build & Test — P1 추가 Cold3/Warm1, 사람 승인·독립 Replay·GitHub 게시/usage 왕복 PASS. U3 표현 정정·142PASS/2SKIP 완료. CI/Pages success 확인. B PC 재현·최종 제출 검토 남음.
+- **(이전) Current Stage**: **CONSTRUCTION 진입 — Units Generation 승인됨(정정 3건 반영, 2026-09-08)**. 다음: U0 P0 필수 + U1 최소 Functional Design → NFR Requirements(minimal) → Code Plan. **정정**: (1) U3 소유자=**CJ**('여력' 폐기), UI·조직 집계는 승인된 **필수 범위**(P0 비블로킹 ≠ 선택 기능); **U2(B) Day2 대기 해제**(계약+게이트 충족 시 즉시 병행 착수). (2) **파일별 단일 수정자**: usage.py=CJ(카운트+공유 이벤트), cli.py=CJ, gitsync.py=B(전송; 검증·dedup은 usage.py=CJ), envharness_p0.py=CJ/envharness_p1.py=B('함수별 분담' 폐기); U3 집계·표현=읽기전용, C3 공유 이벤트 import=상태 변경(쓰기). (3) 계약 5 **비블로킹**으로 정정, U0 전체 완료 대기 없이 P0 최소 계약+로컬 저장·카운트·환경 인터페이스 확정 후 U0/U1 **병렬**. **코드 작성은 설계·Code Plan 승인 + 공통 기준 SHA·작업 경로 확인 후.**
+- **(이전) Units Generation (minimal) — 산출물 생성 완료**: Unit 정의(U0 공통·계약·통합/CJ, U1 P0 재사용 실행/A 최호길, U2 P1 경험·후보화·게시/B 한석훈, U3 조직 집계·표현·재사용 이벤트 공유, Q1 독립 QA 횡단/C 윤여훈), 의존성·계약 동결(1~8, P0 최소셋=1·3·4)·착수 순서(17:30 P0 앵커)·스토리 매핑(7개 전부 배정). 산출물: `application-design/unit-of-work.md`, `unit-of-work-dependency.md`, `unit-of-work-story-map.md`, `plans/unit-of-work-plan.md`.
+- **(이전) Application Design Request Changes(2건 계약 보완)**: (1) **C10 상태 조회 경로**: S3에 읽기전용 상태 조회 계약(`list_lifecycle_states`/`query_lifecycle_state`, `remote_publish_evidence`/`local_review_evidence`) 신설, C10은 이를 통해서만 상태 조회(추정·게이트 재구현 금지). (2) **재사용 이벤트 공유 자격 분리**: `export_shared_usage(scope=VERIFIED_REUSE)`로 Skill 게시 게이트(SHAREABLE)와 분리, C3가 검증·event_id dedup, `sync`→C3/C4.push_shared_usage 경로는 S3.publish와 독립(A게시→B import→B 검증 성공→B 공유→A 1회 반영). 의존성 매트릭스·다이어그램·텍스트대안(C4→C3, C10→S3, localhost HTTP)·"네트워크 서비스 없음" 범위·UI 프레임워크 단계 표기·채택 repo/branch vs 미정 로컬 경로 정합화. **Application Design 전체 승인·Units Generation은 재검토 후 결정**(REVIEW REQUIRED).
+
+## Workspace State
+- **Existing Code**: Yes — P0 코어, U3 로컬 UI, C9 및 match CLI 구현됨. 자연어 P0 수용 및 P1 핵심 lifecycle 통합 검증 완료. 공용 상태줄 정정 검증 완료. 별도 B PC 재현·최종 제출 검토는 남아 있음.
+- **Programming Languages**: Python >=3.10 (Windows-native)
+- **Build System**: pyproject.toml / setuptools, pytest + Hypothesis. 깨끗한 환경의 wheel 빌드 의존성 정합성은 P0 계획의 검증 항목.
+- **Project Structure**: skillloop/ (소스), tests/, .claude/skills/skillloop/, aidlc-docs/
+- **Reverse Engineering Needed**: No (Greenfield)
+- **Workspace Root**: C:\Users\cik61\Desktop\ddthon-main
+
+## Code Location Rules
+- **Application Code**: Workspace root (NEVER in aidlc-docs/)
+- **Documentation**: aidlc-docs/ only
+- **Structure patterns**: See code-generation.md Critical Rules
+
+## Extension Configuration
+| Extension | Enabled | Mode / Note | Decided At |
+|---|---|---|---|
+| Security Baseline | No | 전체 강제 미적용(Q12=X). 단, 핵심 보안 요구(secret·원본 데이터 비공유, read-only 승인 접근, 입력/무결성 검증, 원격 Skill 자동 실행 금지)는 일반 요구사항(NFR-SEC-*)으로 유지 | Requirements Analysis |
+| Resiliency Baseline | No | 전체 강제 미적용(Q13=B). 단, 중복 방지·충돌 처리·sync 실패·재시작 보존만 요구사항(NFR-RES-*)으로 유지 | Requirements Analysis |
+| Property-Based Testing | Yes | **Partial** 모드(Q14=B) — 강제: PBT-02, PBT-03, PBT-07, PBT-08, PBT-09 (round-trip/invariant/generator/shrinking·reproducibility/framework). 그 외 advisory. 적용 대상: 직렬화 round-trip, digest·dedup 등 순수·불변 로직 | Requirements Analysis |
+
+## Stage Progress
+### 🔵 INCEPTION PHASE
+- [x] Workspace Detection
+- [x] Reverse Engineering — SKIP (N/A, Greenfield)
+- [x] Requirements Analysis (승인됨)
+- [x] Workflow Planning (승인됨)
+- [x] User Stories — EXECUTE (minimal) — 승인됨 (stories.md/personas.md)
+- [x] Application Design — EXECUTE — **승인됨**(2026-09-08). Request Changes 2건 반영 + S3→C3 제외 판단 사용자 동의.
+- [x] Units Generation — EXECUTE (minimal) — **승인됨**(2026-09-08, 정정 3건 반영: U3=CJ·필수 범위, 파일별 단일 수정자, 계약5 비블로킹·P0 병렬)
+
+### 🟢 CONSTRUCTION PHASE (진입, per-unit loop 시작: U0 P0 필수 → U1)
+- [x] Functional Design — EXECUTE (per-unit) — **P0(U0 P0 필수 + U1) 승인됨(2026-09-08, 정합화 3건 반영: 카운트 쓰기=C3 단독, run_id=실행 식별, 허용 index는 descriptor.procedure 근거)**. U2/U3 Functional Design은 이후 별도.
+- [x] NFR Requirements — EXECUTE (per-unit, minimal) — **P0 승인됨(2026-09-08)**: pytest+Hypothesis 채택·의존성 명시, "네트워크 미의존"=외부 인터넷 미의존, mock index 제공 방식은 Code Plan 구체화.
+- [ ] NFR Requirements — EXECUTE (per-unit, minimal)
+- [ ] NFR Design — SKIP
+- [ ] Infrastructure Design — SKIP
+- [ ] Code Generation — EXECUTE (per-unit) — **Part 1(Code Plan) 승인됨(2026-09-08)**. **Part 2**: S0 `8ccbfdc` → S6 스텁 `b0ee495` → CJ S2~S5+cli `986d1cc` → e2e 본문 `c811316` → **C-a/C-b(store.py) `ef03b3a`, C-d(usage.py+cli.py) `cfc62e9`** → **U1(P0) A 인계 통합·실제 검증 완료 `e07af72`(main)**. **A 인계**: 패치 2파일 sha256 동일 → 중복 미적용, 별도 통합 branch `integ/u1-p0-875c97e`에서 `git am` → `9dea075`(저작자 hogil 보존, match.py/reuse_service.py). CJ `e07af72`: e2e unskip + 실제 Windows 버그 수정(run-p0 출력 유니코드가 cp949 콘솔에서 UnicodeEncodeError로 카운트 직전 크래시 → `_ensure_utf8_stdout()` UTF-8 reconfigure). **실제 검증: pytest 42 passed / 0 skipped(회귀 없음) + 실제 run-p0 2회 reuse=1→2, usage.json counts=2·events 2건·seen_run_ids 2건·share-export 동작.** **P0 실제 재사용 루프 완료(파일 존재 아닌 실행 결과로 판정).** 병합: `integ/u1-p0-875c97e`(9dea075→e07af72)→main fast-forward. README/EVALUATION 로컬 변경 미커밋 보존. **B 대기 정합화**: "구현 SHA 대기"→"실제 계약 연결·검증 대기"(P0 SHA=e07af72). 잔여: U2(B) Code Plan, U3(CJ), Build and Test.
+- [ ] Build and Test — EXECUTE
+
+### 🟡 OPERATIONS PHASE
+- [ ] Operations — PLACEHOLDER
+
+## Execution Plan Summary
+- **실행**: User Stories(minimal), Application Design, Units Generation, Functional Design(per-unit), NFR Requirements(per-unit, minimal), Code Generation, Build and Test
+- **생략**: Reverse Engineering(N/A), NFR Design, Infrastructure Design, Operations(placeholder)
+- **다음 단계**: B PC에서 게시 Skill 가져오기·Warm·usage 공유 시연, 최종 결과 검토. 기존 Application Design/Units 승인을 재요청하지 않는다.
+- **문서**: aidlc-docs/inception/plans/execution-plan.md
+
+## 승인된 SKIP 경계 (Workflow Planning 승인 시 확정)
+- **SKIP-BOUNDARY-1**: NFR Design 생략 ≠ 요구 면제. 승인된 핵심 보안(NFR-SEC-1~4)·무결성(digest, FR-SKILL-4)·복원력(NFR-RES-1~4)은 해당 Unit의 Functional Design과 테스트에 반드시 반영한다. **(범위 변경 확장)** UI·동기화 Unit: 읽기전용 경계(NFR-SEC-2)·secret/원본 비표시(NFR-SEC-1)·동일 집계와 실적/DEMO_SEED 구분(FR-UI-3)·공유 usage dedup(FR-USAGE-4, FR-ORG-3)도 설계·테스트에 반영.
+- **SKIP-BOUNDARY-2**: Infrastructure Design 생략 ≠ Git 원격 동기화 축소. 채택된 원격 sync 요구(FR-SYNC-1, Q3=A + 범위 변경으로 team-skill-store branch 채택)는 유지되며 로컬 Git만으로 축소하지 않는다. 원격 clone/pull/push·무결성·CONFLICT·실패 보존 유지. 실제 branch·Git 경로·세부 운용은 미결정(설계 승인 + Units 담당 확정 후 초기 구현 준비).
+
+## 범위 변경 이력 (Scope Changes)
+- **SCOPE-CHANGE-1 (2026-09-08, 승인됨)**: UI 추가(상태줄 FR-UI-1 + 로컬 읽기전용 대시보드 FR-UI-2, 동일 집계 FR-UI-3) + 조직 집계(FR-ORG-1~5, FR-USAGE-4) + Git 공유 방식 변경(별도 private 저장소 전제 → 동일 저장소 `team-skill-store` branch, 로컬 DB 미전송 FR-SYNC-5). 근거·영향: `plans/change-impact-ui.md`. **과거 Q3=A("별도 private 저장소")·기존 승인 이력은 보존**하고 이번 변경으로 일반화. 표현 참고=ttt(상태줄, organization.html; 백엔드 중앙 API 미채택, 소스≠렌더링). export=SHAREABLE 유지(최초게시·재시도 가능), PUBLISHED=원격 push 성공 후에만.
+
+## Notes
+- **U2 공통 의존성 계약 — 승인·구현 진행(2026-09-08)**: 산출물 `construction/plans/u2-shared-dependency-contracts.md`(승인 조건·최소 Code Plan 포함). **이 승인은 CJ 공통 의존성 계약·구현에 한정 — B의 U2 전체 설계/Code Plan 승인 아님.**
+  - **C-a/C-b 구현 완료(store.py, C2)**: lifecycle `save/load_lifecycle_state`·`list_lifecycle_records`(저장만·전이 미판단, 키=id/version/digest); descriptor `export_bundle(refs 허용목록·3자 digest 일치·content만)`/`import_bundle(digest 재계산·위조 거부·DEDUP/CONFLICT·content만·승인/Replay 미생성)`. **검증: 전체 26 passed / 8 skipped**(기존 19→26). commit/push·SHA 보고 진행.
+  - **C-d 구현 완료(usage.py C3 + cli.py C8)**: 스키마 `{counts,seen_run_ids,events}`(하위호환); `compute_event_id`(결정적·재전송 dedup 키); `record_actual_reuse`가 counted=True & digest 있을 때만 이벤트 생성(카운트·run_id dedup 불변); `export_shared_usage`(VERIFIED_REUSE만)/`import_shared_usage(blob, local_ref_exists)`(재검증·event_id dedup·로컬 존재 확인, counts 미변경); exact 참조·reuser_alias는 호출자(cli, env `SKILLLOOP_ALIAS`) 제공; CLI `share-export`/`share-import` 추가. **역산 금지**(digest 없는 evidence는 이벤트 미생성). **검증: 전체 34 passed / 8 skipped**(26→34). commit/push·SHA 보고 진행.
+  - **제공 순서(B)**: ①store.py(C-a+C-b, 완료) ②usage.py+cli.py(C-d, 완료) ③P1 A·B 조율(P0 독립, B·A 합의 대기).
+- **A(U1) 인계 상태 — 통합·검증 완료(2026-09-08)**: A push 403 차단 → 패치 전달. 패치 2파일 sha256 동일(중복 미적용). 최신 main 기준 별도 통합 branch `integ/u1-p0-875c97e`에서 `git am` → `9dea075`(저작자 hogil 보존). CJ 통합 `e07af72`(e2e unskip + Windows UTF-8 출력 버그 수정) → main fast-forward. **실제 검증 완료: pytest 42 passed/0 skipped + run-p0 실제 2회 reuse=1→2.** V5~V8·V12(run-p0 e2e) **NOT_RUN → PASS.** P0 통합 SHA=`e07af72`(docs `7256272`)를 B에게 전달(B 대기="실제 계약 연결·검증 대기"로 정합화).
+- **P0 CLI 사용 확인(2026-09-08)**: 사용자 직접 `python -m skillloop run-p0` 실행 → 실패 관찰→MATCH→reuse=3(counted=True). **변경·오류 없으면 P0 반복 테스트 중단.**
+- **P1 환경 모델 승인(2026-09-08)**: 사용자 승인 = B의 **Office 암호화 합성 파일 + 열린 Excel read-only 접근 모델** + **P1 한정 Excel 의존성 예외** → A/B 전달. **독립 Replay·게시 게이트 유지.** "환경 모델 선택 대기"로 **되돌리지 않음** — A/B의 구체 계약·계획 반영·구현을 기다린다. (이전 "의존성 미설치 재현" 대안은 철회됨.)
+- **U3(CJ) 최소 설계 준비(2026-09-08)**: 승인된 필수 범위(조직 집계 C10·상태줄 C11·읽기전용 대시보드 C12) 최소 Functional Design+NFR(minimal)+Code Plan 작성 → `construction/plans/u3-minimal-design.md`(REVIEW REQUIRED). CJ 단일 수정자(org_aggregator.py/statusline.py/dashboard.py + cli.py), B 파일 미수정 → P1과 독립 병렬. **열린 결정 2건 확정(2026-09-08)**: ①lifecycle 상태=**보류형** — `LifecycleView`(계약7 형태) provider에만 의존, 미연결 시 "상태 조회 미연결"(0·추정 금지), **실제 경로 store 직접 읽기 우회 금지**, 테스트는 계약7 형태 명시적 test 대역, B 제공 시 연결; 이 결정으로 나머지 U3 대기 안 함. ②대시보드=**stdlib http.server** 127.0.0.1·정의된 GET 경로만·파일 임의 노출 금지.
+  - **U3 Code Plan 승인·구현·검증 완료(2026-09-08)**: 신규 `org_aggregator.py`(C10)·`statusline.py`(C11)·`dashboard.py`(C12) + `cli.py` `status`/`dashboard` 서브커맨드(P0와 동일 `.skillloop_demo/` 경로 연결). 정직성 기준 반영(게시=lifecycle만·미연결시 "확인 불가", 원격 게시=remote_publish_evidence 있을 때만, 로컬 vs 조직 구분, 실적/DEMO 구분). **검증: U3 단위 21 passed + 전체 63 passed(42→63, 회귀 없음); `skillloop status` 실데이터(reuse=3) 확인; 대시보드 실 HTTP(127.0.0.1) GET 200·정의외 404·POST 405·본문 정직성 확인.** **하단 상태줄 연결은 사용자 settings 필요 → 실제 확인 전이므로 연결완료 보고 안 함.** lifecycle/last_sync 실데이터·조직 시연=계약7·C4 연결 후 **NOT_RUN**.
+- **사용자 화면·Agent 연결 마무리(2026-09-08)**:
+  - **대시보드 실 HTML 검증**: 브라우저 렌더링 도구 없음(WebFetch=http→https 강제, localhost 미도달) → 각 경로(/,/skills,/skill,/people,/activity)의 실제 서빙 HTML을 UTF-8로 취득해 **실데이터(top_skill=fix-skillloop-demo-pkg-install, 재사용 3, actual_reuses=3, demo=0) 표시·정의외 404·traversal 404·POST 405** 확인. /skill 상세 **procedure 미노출 재확인**(word 'procedure'/action/index:'allow' 부재; applicability 신호 'pip-install-fail'만=의도된 비민감 매칭 값). **HTTP/HTML 바이트 확인 완료 ≠ 브라우저 육안 가독성 확인(=사용자 몫).**
+  - **statusLine 실제 연결**: 사용자 `~/.claude/settings.json`(Bedrock 토큰 포함) **무수정 보존**. 프로젝트 **`.claude/settings.json` 신설**(`statusLine`: type=command, command=`python -m skillloop status`). 실행 Python=3.14(/c/Python314), cwd=프로젝트 루트, 데이터=`os.getcwd()/.skillloop_demo`(P0 동일). Claude Code 호출 형태(stdin JSON 주입) 시뮬레이션: **exit 0·단일 라인·재사용 3 출력**. **현재 창 하단 바 실제 표시=세션 재적용 필요·직접 관측 불가 → 사용자 확인 항목(연결완료 미보고).**
+  - **C9 AgentSkillWrapper**: **미구현**(`agent_skill/`·`.claude/skills/` 부재) 확인. 승인 범위(handle_natural_language(request)->CliInvocation, 얇은 wrapper, 로직 중복·원격 자동실행 금지 NFR-SEC-4) **최소 구현 계획 제시**(파일·호출 흐름·검증) — **승인 전 미구현**. **상태줄 출력만으로 Agent 연결 완료 보고하지 않음.** 수용 기준=자연어 요청→CLI 매핑→명시적 CLI 실행(run-p0)→검증 성공 시 C3 카운트 갱신(라이브 장면=사용자 확인). **wrapper는 카운트 경로 미추가**(실제 재사용 성공과 무관한 카운트 증가 없음).
+  - **C9 조정 범위 구현·검증 완료(2026-09-08)**: 사용자 조정 승인 반영 — **별도 wrapper.py 키워드 매핑기·그 매핑 검사 테스트 미생성.** 진입점=`.claude/skills/skillloop/SKILL.md`(자연어 해석=Claude, 제품 로직=기존 CLI/서비스). 구현: (a) **`.claude/skills/skillloop/SKILL.md`**(신규) — 요청 3분류: 명시적 P0 데모→`run-p0`(자체완결·"실제 업무 적용" 보고 금지), 실제 설치·업무→**run-p0 대체 금지**·실제 관찰→`skillloop match` 검색→절차 적용·실제 검증→**검증 성공 시에만 실적 보고**, 조직 현황→`status`/`dashboard`. 원격 자동실행 금지(NFR-SEC-4)·게시 게이트·비밀 미포함 유지. (b) **`cli.py` `match` 서브커맨드**(신규) — 승인된 검색 계약 **C5 `match.search` 호출만**(읽기전용, 적용·검증·카운트 없음, 매칭 로직 미복제). (c) **`tests/test_cli_match.py`** 3건(MATCH/NO_MATCH/읽기전용 usage 미생성). **검증: 전체 66 passed(63→66, 회귀 없음); 실제 `skillloop match --signature pip-install-fail:skillloop-demo-pkg` → MATCH fix-skillloop-demo-pkg-install@1.0.0(fit=2) exit 0; 미관련 신호 → NO_MATCH exit 0.** **남은 차단**: 임의 실제 업무 대상의 **일반화된 적용·검증·카운트**는 A의 **P1/RU4 확장 대기**(`reuse_service.apply_and_verify`가 P0 harness 타깃 TARGET_PKG/VERSION/IMPORT에 결합) → 실제 업무 **실적 반영은 그 연결 후 NOT_RUN**. **새 Agent 라이브 사용 장면**(합성 업무 환경+업무 요청만 제공→Skill 사용→실적)=**사용자 확인**. 카운트는 검증 성공 경로(C3)만 — match/CLI에 카운트 경로 미추가.
+- **소유권 이관 대기(2026-09-08)**: B에게 `envharness_p1.py`/`replay.py` **유지**, `experience_service.py`/`publish_pipeline.py`/`gitsync.py`를 **CJ 이관하는 안 전달**됨. **B의 작업 종료 확인 + 현재 커밋 수령 후에만** 해당 파일 소유권을 기록·인수한다. 그 전까지 **현재 B 소유 유지**(CJ 미수정). A는 승인된 P1 연결 구현 계속.
+- **CJ 최우선 목표 정합(2026-09-08)**: **CJ 최우선 = 승인된 P0 자연어 수용 검증**(US-P0-1). A/B의 현재 승인 작업 유지. 아래 항목은 추가 구현 포괄 승인이 아니다.
+  - **C9/`match` 추적성 확인(구현 후 기록, 소급 아님)**: `skillloop match` CLI와 `.claude/skills/skillloop/SKILL.md`(C9)는 설계 근거(components/component-methods/unit-of-work U0·AD-Q6)와 **대화/audit 승인**은 있으나 **`construction/plans/`의 Part 1 Code Plan 아티팩트는 없이(누락)** 구현되었다(계획 내용은 audit·state 산문에만 존재). 누락 사실·현재 구현 상태를 지금 기록 → `plans/c9-match-traceability.md`. **기존 승인·구현 이력(`810c9f6`, 66 passed) 보존, 소급 작성 없음.** C5 `match.py` 모듈·U3는 Code Plan 아티팩트 있음(각각 p0-u0u1-code-generation-plan.md S7, u3-minimal-design.md).
+  - **P0 자연어 수용 검증 남은 작업**: `match`(검색)는 기존 코드로 가능. **요청 기반 실패 재현(AC-1)·관찰 기반 적용+검증+카운트(AC-3/AC-5, 비-run-p0)**는 미구현 — run-p0는 자체완결(requirements.txt 미참조·대상 하드코딩)이라 대체 불가. **실제 계약 차이 확인**: `reuse_service.apply_and_verify`가 harness 합성 상수(TARGET_VERSION/IMPORT)·index 이름에 결합 → 합성 범위 한정. **최소 수정 Code Plan(검토 요청, 착수 전)** → `plans/p0-nl-acceptance-plan.md`(신규 `apply-requirements` 오케스트레이션 + 합성 픽스처, 기존 C5/S1/C3/C7 **호출만**, A/B 미수정). **승인 전 미착수.**
+  - **소유권 이관 확인(8c7999a)**: B 커밋 **`8c7999a`**(hanseokhun, 2026-09-08 19:20 KST, "feat(u2): ① envharness_p1 run_file_access_procedure + 실제 Excel attach 검증") `origin/work/u2-p1-git` HEAD로 **확인**. 해당 브랜치에는 `envharness_p1.py`+테스트만 존재하고 **`experience_service.py`/`publish_pipeline.py`/`gitsync.py`·`replay.py`는 아직 미생성** → 이관은 **(미생성) 파일의 구현 소유권을 B→CJ로** 넘기는 것. **소유권 인수 ≠ 해당 파일 새 구현 승인**(구현은 별도 승인). **CJ의 해당 구현은 P0 자연어 수용 검증보다 후순위.** B는 `envharness_p1.py`(8c7999a 구현)·`replay.py`(미생성, 책임 유지) 보유.
+- **Process/provenance 정합성 정정(제품 scope change 아님)**: 이 시점 이후 구현 기준은 현재 `ddthon`에서 본선 중 생성·승인된 Requirements/User Stories/Workflow Plan/Application Design 및 이후 승인될 Units/Functional Design/Code Plan과 현재 실제 실행 증거다. Application Design 전체 승인 대기 상태는 유지한다. UI는 사용자 승인 FR-UI/FR-ORG 자체를 근거로 유지한다.
+- **외부 사전 구현 Reference 사용 중단**: `ttt`를 포함한 사전 구현의 검색/Fetch/Open/Read/비교/코드 복사/테스트 결과 참조를 중단한다. 필요 시 이유·범위를 먼저 제시하고 사용자 승인을 기다린다. 현재 산출물·실제 오류부터 조사하며 과거 외부 PASS/코드 구조를 본선 완료 근거로 사용하지 않는다. 과거 audit/chat/변경 검토 및 위 SCOPE-CHANGE-1의 참고 사실은 보존한다.
+- **Audit timestamp correction**: 과거 일부 entry의 workflow 시작 timestamp 반복은 capture 오류이며 동일 시각의 이벤트를 뜻하지 않는다. 기존 entry는 수정하지 않고 correction note를 append한다. 이후 각 entry 작성 직전에 PowerShell `Get-Date`로 OS 현재 시각을 새로 취득해 UTC ISO 8601(`Z`)로 기록하고 고정 timestamp를 재사용하지 않는다. 취득 실패 시 `timestamp unavailable`로 표시한다.
+- 사용자 제약: 팀 4명, 개발 시간 제한(9/8 오후 ~ 9/9 오후), Windows-native 목표.
+- 통합 위험 회피: 공통 state/lifecycle을 여러 세션이 동시 수정하는 구조 지양 (Workflow Planning/Units 단계에서 반영).
+- 평가 제출 요건: 실제 source + aidlc-docs 전체 + README + 동작 screenshots/result 보존. Inception 과확장 지양.
+- seam (a)~(g)는 **후보**이며 Unit 수·담당자·상세 구조는 Application Design/Units Generation에서 확정. seam (g)=조직 집계 read-model + 재사용 이벤트 공유(VERIFIED_REUSE, 게시와 독립) + 표현 표면(상태줄/대시보드, 범위 변경).
+- **Units Generation 참고 방향(확정 아님)**: "CJ 통합·공통부 / A·B 개발 / C 독립 QA 운영" 방향을 우선 참고하되 **4명을 4개 개발 Unit으로 고정하지 않는다.** 실제 Unit 경계·사람 배정은 Units Generation에서 계약을 근거로 결정.
+- **Request Changes(2건) 처리 계약 요약**: (1) S3 읽기전용 상태 조회 계약 신설 → C10이 유일 경로로 상태 조회(추정·게이트 재구현 금지, 원격 게시본은 remote_publish_evidence/local_review_evidence 분리·수신 환경 승인/Replay 미생성). (2) 재사용 이벤트 공유 자격 VERIFIED_REUSE(정확한 Skill 참조+실제 성공 근거+비-DEMO)를 SHAREABLE 게시 게이트와 분리, C3 검증·event_id dedup, sync 경로는 S3.publish와 독립. 신규 Skill 게시 게이트는 유지. 반영 파일: components/component-methods/services/component-dependency/application-design/execution-plan.
+
+## 후속 검토 — 하단 상태줄 / A 전달 갱신
+- 하단 상태줄 여러 줄 표현·새 작업 설정/데이터 경로 누락 확인. u3-statusline-followup-plan.md 사전 계획 REVIEW REQUIRED. 제품 코드/설정 미수정.
+- A PR #1 최신 수신 cb25a62: 요청 3건 코드 반영 확인. 아직 main 미병합, 실 Excel 통합 NOT_RUN. 이전 A SHA는 과거 수신 기록으로 보존.
+
+## 하단 상태줄 구현 완료
+- 승인 계획 S1–S6 완료. 관련 30 tests, 전체 86 passed/0 failed/0 skipped. 실제 하단 네 줄 표시는 사용자 확인 완료. result/statusline/ 참조.
+- 사용자 P0 실제 작업 venv import/version 1.0.0 및 run_id 27dd984514ab4f6ca4e0d206985449f0, 실적 1을 독립 확인했다. 중간 잘못된 match 안내/경로 연결 정정.
+- A cb25a62는 리뷰 수신 완료, 아직 main 미병합. 추가 A 개발 요청 없이 CJ 통합 검증으로 넘길 수 있다. 이 변경은 아직 commit/push하지 않았다.
+
+## P0 관찰 계약 결함 재검증 완료
+
+사용자 피드백 중 초기 raw signature 및 작업 store 혼선은 수용, 후속 apply-requirements 성공까지 FAIL로 변경하는 판정은 미수용. 공통 정규화와 관찰 입력을 보완하고 21+22 대상 검사 PASS, 새 Claude 업무 요청 실제 count 1→2 확인. 기존 사용자 venv·store·requirements 보존. result/p0-observation/ 참조. 최초 별도 pip 호출은 권한 거절, 이후 제품 내부 실제 pip 실행과 명확히 구분. 변경은 미커밋이며 공식 규칙·README/EVALUATION 미변경.
+
+## P0 재현 기준 및 P1 인수 구현 결과
+
+P0: 새로운 checkout-local Python으로 Claude3개 작업 환경 재현PASS, 같은 범위 전체93 PASS. 2번 첫 시도 권한/API 중단을 보존하고 재시도PASS, result/p0-reproduction/ 참조. 이는 단일 합성 패키지 범위다.
+
+P1: 사용자 조건부 허가 충족 후 A cb25a62/B1760d32 인수 및 S2/S3/C4·CLI·S3/C4 조회 연결 구현. 통합 회귀130 PASS/2 SKIP. 그 뒤 추가된 CLI/조회2건을 포함한 서비스9 PASS. 이 수치를 단순 합산하지 않는다. 실Excel 시도는 FAIL_TIMEOUT으로 남겼고 이후 자동suite의 live opt-in 제외와 구분한다. Git 전송은 실제 local bare 왕복PASS, GitHub게시/ClaudeP1탐색·사람검토·Warm 종단은 NOT_RUN. 전체 Build and Test·제출 완료 아님. 사용자 README/EVALUATION·공식 규칙 보존, 현재 미커밋/미푸시.
+
+## 2026-09-09T04:12:49.6277995Z — Round1 retry COLD_READY (preflight only)
+Prepared C:/Users/cik61/Desktop/skillloop-p1-cold-round1-retry-20260909-131227 with same input SHA fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935, current C9 selector instructions, remote codex/p1-cold-r1-retry-20260909-131227 at baseline75b6e54225a9fa4e71e7174168161d61fa923e31. Actual Git sync completed. Launcher CheckOnly passed: P1 skills0, usage empty; operator search NO_MATCH(scanned1). No Claude process started, no workbook opened/closed. Original round1 and rounds2/3 retained. User must exit old Claude and close old round1 workbook before fresh run. Original result remains historical, retry separate.
+
+## 2026-09-09T04:22:23.2565862Z — Auto-mode round1 retry ready (no measured execution)
+User-authorized fresh setup: C:/Users/cik61/Desktop/skillloop-p1-auto-cold-20260909-132154. P0-only remote codex/p1-auto-cold-r1-20260909-132154 at75b6e54225a9fa4e71e7174168161d61fa923e31. Actual Git sync and CheckOnly PASS, P1 Skill0/usage0, operator search NO_MATCH. Same input hash retained. Local Claude2.1.266 help supports --permission-mode auto; launcher pins mode and per-session askUserQuestionTimeout=never, clears process AFK timeout override during launch and restores afterward. Native selector/provider auto eligibility remains live user verification, not claimed PASS. PowerShell AST parse passed; relative SetupRoot normalized to absolute for evidence/settings paths. Open-Document.cmd targets exact new workbook with existing operator opener, outside Agent workspace. No model or Excel launched. Existing rounds, stores, branches and logs preserved. Runtime/permission mode difference recorded rather than pooled as identical runs.
+
+## 2026-09-09T04:30:43.9251859Z — P1 task cutoff and publication bottleneck review
+User requests removing Replay for faster demo publication and measuring only through task resolution. Actual source ae179f5e-1cd8-49ee-9ef0-ac9024f5bfbd checked: task result113.154s, user-facing result127.613s, environment reply wait17.825s, Replay tool2.699s, classifier denial roundtrip51.833s. Native AskUserQuestion actual approval confirmed. Publish denied before execution; no operator retry or permission bypass. Original log snapshot preserved under active setup operator/task-cutoff-review. First log extraction hit cp949 output error; UTF8 rerun succeeded, original unchanged.
+Measurement boundary now task request through real work/chart result; publication stages excluded and separately recorded, endpoint chosen retrospectively here. Token messages deduplicated by ID, cache separated. Chart visually inspected; no new model or workbook execution. Replay removal conflicts with FR-P1-7 and is documented as a scope/contract review in construction/plans/p1-publication-speed-review.md, not silently implemented. Recommended keep2.7s Replay and resolve host approval normally. Requirements/product gates unchanged; existing implementation/candidate approvals preserved.
+
+## 2026-09-09T04:33:02.4298676Z — Manual Cold ready, real status checked
+New root C:/Users/cik61/Desktop/skillloop-p1-cold-manual-20260909-133215; manual permission mode, human AskUserQuestion + Replay retained. New Git branch codex/p1-cold-manual-r1-20260909-133215 at P0-only baseline, input same. CheckOnly PASS and actual P1 search NO_MATCH. User reported old NASCA stored-Skill label: new store inspected contains only pip-install descriptor1, no file-access candidate, usage0. Initial status showed local mode because operator setup omitted sync-config.local.json; corrected via existing store-init against the already initialized mirror, no remote publication or data hiding. Re-rendered status reads actual Git metadata, no NASCA/Excel Skill. Receipt in new root/operator/status-before.txt. Old attempts/remote and round2/3 unchanged. PowerShell parse PASS; measured Agent/UI run NOT_RUN. No actual Excel opened by operator, Open-Document.cmd prepared for user.
+
+## 2026-09-09T04:39:42.8129861Z — Already-open-only instruction correction validated
+Current C9 and manual133215 round1 copy updated; original Skill/native transcript snapshot retained operator-only. Existing9 non-live envharness tests PASS(exit0), no live Excel calls. Agent-written Workbooks.Open fallback and basename matching now explicitly forbidden; existing product exact-path read-only attach unchanged. Live continuation USER_PENDING, no claim of enforcement by an OS sandbox; prior UI wait preserved as observed defect. User should cancel only password dialog, reload Skill in existing session and continue already-open exact document. No store/usage/candidate modification or prior run reset. Current phase remains CONSTRUCTION / Build & Test.
