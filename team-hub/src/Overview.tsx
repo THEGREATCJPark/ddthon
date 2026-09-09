@@ -73,52 +73,6 @@ const steps = [
 export default function Overview() {
   return (
     <section className="overview-page">
-      <div className="overview-hero">
-        <div>
-          <span className="overview-eyebrow">NOWHERE · AGENT SKILLLOOP</span>
-          <h2>
-            한 Agent의 해결 경험을,
-            <br />
-            <em>다음 Agent의 Skill로.</em>
-          </h2>
-          <p>
-            AI에게 맡긴 일이 사내 환경에서 막혔을 때.
-            <br />
-            조직의 경험을 꺼내 쓰고, 새로운 해결 방법은 함께 쌓습니다.
-          </p>
-          <div className="overview-actions">
-            <a className="button primary" href="#demo-p0">
-              시연 보기 <ArrowRight size={18} />
-            </a>
-            <a className="button" href="#captures">
-              실제 실행 기록 보기
-            </a>
-          </div>
-        </div>
-        <div
-          className="overview-loop"
-          aria-label="기존 Skill이 있으면 재사용하고 없으면 LOOP로 해결 후 검토와 검증을 거쳐 Skill로 공유합니다"
-        >
-          <div className="overview-loop-request">엔지니어의 업무 요청</div>
-          <div className="overview-loop-path">
-            <span>Skill이 있다면</span>
-            <strong>찾아서 적용</strong>
-            <small>성공 검증 → 재사용 기록</small>
-          </div>
-          <div className="overview-loop-path">
-            <span>Skill이 없다면</span>
-            <strong>LOOP로 해결</strong>
-            <small>환경 확인 → 탐색 → 실행·검증</small>
-          </div>
-          <div className="overview-loop-return">
-            <Database size={20} />
-            <div>
-              <strong>조직 Skill Storage</strong>
-              <small>새 해결 절차는 검토·Replay 후 공유 ↺</small>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="overview-section-title">
         <div>
           <span className="overview-eyebrow">BUILT DURING THE HACKATHON</span>
@@ -148,11 +102,9 @@ export default function Overview() {
                 </span>
               ))}
             </div>
-            <details className="overview-evidence">
-              <summary>
-                AI-DLC 문답 원문 · {step.question} · 답변 {step.answer}
-              </summary>
-              <blockquote>{step.quote}</blockquote>
+            <div className="overview-evidence">
+              <span>AI-DLC 문답 원문 · {step.question}</span>
+              <blockquote><strong>답변 {step.answer} — </strong>{step.quote}</blockquote>
               <a
                 href={`${SOURCE}/aidlc-docs/audit.md`}
                 target="_blank"
@@ -160,7 +112,7 @@ export default function Overview() {
               >
                 사용자 답변 원문 보기 ↗
               </a>
-            </details>
+            </div>
           </article>
         ))}
       </div>
