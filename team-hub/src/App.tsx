@@ -46,7 +46,7 @@ export default function App() {
     return () => window.removeEventListener("hashchange", change);
   }, []);
   return (
-    <div className={`site ${tab === "demo" ? "demo-site" : ""}`}>
+    <div className="site">
       <header className="masthead">
         <div className="event-banner">
           <div className="event-banner-copy">

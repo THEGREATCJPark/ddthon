@@ -156,25 +156,6 @@ main {
   padding-top: 36px;
   min-height: 560px;
 }
-.demo-site {
-  padding-top: 22px;
-}
-.demo-site .masthead {
-  padding-bottom: 16px;
-}
-.demo-site .identity h1 {
-  font-size: 36px;
-  margin: 11px 0 6px;
-}
-.demo-site .event-art {
-  width: 310px;
-}
-.demo-site .tabs a {
-  padding-block: 17px;
-}
-.demo-site main {
-  padding-top: 22px;
-}
 .page-heading {
   display: flex;
   justify-content: space-between;
@@ -1651,9 +1632,6 @@ main {
     box-shadow: 0 0 10px #d97757;
   }
 }
-.site.demo-site {
-  max-width: 1800px;
-}
 .claude-demo {
   max-width: 1660px;
 }
@@ -1780,10 +1758,6 @@ main {
   margin-top: 14px;
 }
 @media (max-width: 800px) {
-  .demo-site .tabs {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
   .claude-demo .demo-heading {
     flex-wrap: wrap;
   }
