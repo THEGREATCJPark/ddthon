@@ -26,7 +26,7 @@
 
 사용자 제공 한도: source ZIP 200MB, 압축 해제 1GB/10,000개; 평가 필터는 개별 10MB/전체 100MB/1,000개. 정확한 현재 파일 수·크기는 [inventory](result/development-closeout-20260909/submission-inventory.json) 참조.
 
-원본 `result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip`은 10MB를 넘어 평가에서 제외될 수 있다. 원본·해시를 보존하면서, 10MB 이하의 추출 MP4·PNG·SRT·텍스트에 README가 직접 연결된다. 평가기가 ZIP 내부를 읽을 것이라고 기대하지 않는다. `.venv`, `node_modules`, `.git`, 개인 인증 설정은 추적 소스에 포함하지 않는다.
+원본 `result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip`은 10MB를 넘어 평가에서 제외될 수 있다. 원본·해시를 보존하면서, 10MB 이하의 추출 MP4·PNG·SRT·텍스트에 README가 직접 연결된다. 웹의 선택적 원본 ZIP 다운로드는 해당 파일을 보존한 GitHub 커밋의 URL을 사용하며 ZIP을 빌드 입력으로 import하지 않는다. 원본 다운로드에는 인터넷 연결이 필요하며, 영상·자막·로그 표시는 개별 파일을 사용한다. 평가기가 ZIP 내부를 읽을 것이라고 기대하지 않는다. `.venv`, `node_modules`, `.git`, 개인 인증 설정은 추적 소스에 포함하지 않는다.
 
 ## 갤러리에 직접 입력할 내용
 

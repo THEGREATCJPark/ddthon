@@ -1,11 +1,13 @@
 import video from "../../result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_90s.mp4?url";
 import srt from "../../result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_ko.srt?url";
-import videoZip from "../../result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip?url";
 import logZip from "../../result/p1-web-delivery-20260909/P1-Web-Log-Round3.zip?url";
 import responses from "../../result/p1-web-delivery-20260909/log-round3/responses.public.md?raw";
 import transcript from "../../result/p1-web-delivery-20260909/log-round3/transcript.public.md?raw";
 import transcriptUrl from "../../result/p1-web-delivery-20260909/log-round3/transcript.public.md?url";
 import chart from "../../result/p1-web-delivery-20260909/log-round3/actual-trend.png";
+
+// Optional original download; the >10MB archive is not a build dependency.
+const videoZip = "https://raw.githubusercontent.com/THEGREATCJPark/ddthon/bd7eb987915f17721bf3c29ff6349a45e8fdc64e/result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip";
 
 export default function P1Media() {
   return <>
