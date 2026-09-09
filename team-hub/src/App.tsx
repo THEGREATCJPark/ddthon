@@ -21,7 +21,7 @@ const tabs = [
   { id: "team", name: "팀 의견", icon: MessageCircle },
   { id: "challenge", name: "태클 걸기", icon: Flame },
   { id: "demo", name: "시연", icon: Play },
-  { id: "captures", name: "캡처 정리", icon: Images },
+  { id: "captures", name: "실제 시행 화면", icon: Images },
   { id: "qa", name: "QA 검증", icon: BadgeCheck },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];

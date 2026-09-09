@@ -2195,3 +2195,14 @@ footer > span:last-child {
 
 .capture-log-note { margin: 0; padding: 18px 26px; color: var(--muted); font-size: 14px; line-height: 1.8; border-top: 1px solid var(--border); }
 .capture-log-note a { color: var(--blue); text-decoration: underline; }
+
+.p0-media > header p { margin: 6px 0 0; color: var(--muted); }
+.p0-media video { display: block; width: 100%; max-height: 680px; background: #111; }
+.p0-media-links { display: flex; flex-wrap: wrap; gap: 12px 26px; padding: 20px 26px; }
+.p0-media-links a { color: var(--blue); text-decoration: underline; font-weight: 600; }
+.p0-evidence { padding: 20px 26px; border-top: 1px solid var(--border); }
+.p0-evidence summary { cursor: pointer; font-weight: 700; }
+.p0-evidence img { display: block; max-width: 100%; max-height: 540px; margin: 20px auto; }
+.p0-frame-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.p0-frame-grid figure { margin: 0; }
+.p0-frame-grid figcaption { color: var(--muted); font-size: 14px; }
