@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **적용 전 PC 회신 반영**: response ZIP10 payload 확인. 검증기가 실제 transcript/event를 확인하지 않는다는 지적 수용, 자동 업무성공 판정기로 사용하지 않음. operator/runtime과 실제 Agent runtime 구분. 현재 thisPC FULL_PRODUCT_COLD 수동3회 / peer NO_SKILL 수동3회로 재정리; peer용 같은 현재 XLSX/task만 포함한 P1-Manual-NoSkill-Handoff-20260909.zip 준비(실제 채택/실행 미확인). 과거 Paired/SAFETY_STOP 보존, VM/검증 adapter 신규개발 보류. 다른조건/사람개입/PC차이는 공개, 과거시간 합산 금지.
+
+
 - **사용자 직접 P1 Cold3회 준비 완료**: Desktop/skillloop-p1-cold-3runs-20260909-125935, Round1/2/3과 분리 Git 브랜치. 모두 P0 Skill1/P1 Skill0/실적0, 동일 XLSX, 실제 check-only 3회 PASS. Claude opus4-8 medium 새 UUID 세션, 종료 시 원본 로그/시간/store/usage 보관. 모델/시연은 아직 NOT_RUN. 적용 전 데이터는 다른 PC 제공; 별도 정밀 비교 도구/VM 추가 작업 없음. 사용자는 동일 요청→해당회차 파일 직접 열기→탐색/업무→사람 승인→게시→/cost 캡처→/exit 순서. 현재 권장 시연 경로는 이3회 폴더이며 이전 Cold/Warm은 보존.
 
 
