@@ -1,0 +1,1 @@
+{"skills":[{"content":{"applicability":{"signals":["pip-install-fail"]},"id":"fix-skillloop-demo-pkg-install","origin":{"author":"박찬준"},"procedure":{"action":"pip-install","source":"internal-packages"},"version":"2.0.0"},"declared_digest":"a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03"}]}
