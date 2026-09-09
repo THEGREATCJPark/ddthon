@@ -1,0 +1,78 @@
+{
+  "intervals": [
+    {
+      "tool_id": "toolu_bdrk_01SWz7mdkm2B5gU8hEU42oB2",
+      "request_at": "2026-09-09T05:38:01.309Z",
+      "decision_recorded_at": "2026-09-09T05:38:10.840699+00:00",
+      "request_to_decision_seconds": 9.532
+    },
+    {
+      "tool_id": "toolu_bdrk_01QqbVpRwkXGBt5J89kfLQAw",
+      "request_at": "2026-09-09T05:38:00.324Z",
+      "decision_recorded_at": "2026-09-09T05:38:16.117898+00:00",
+      "request_to_decision_seconds": 15.794
+    },
+    {
+      "tool_id": "toolu_bdrk_018fWuDxVoDtBxbg34ocEuUk",
+      "request_at": "2026-09-09T05:38:19.602Z",
+      "decision_recorded_at": "2026-09-09T05:38:29.910039+00:00",
+      "request_to_decision_seconds": 10.308
+    },
+    {
+      "tool_id": "toolu_bdrk_01KzR4m7iV2xZrCRVYwvgf34",
+      "request_at": "2026-09-09T05:38:33.017Z",
+      "decision_recorded_at": "2026-09-09T05:38:43.379944+00:00",
+      "request_to_decision_seconds": 10.363
+    },
+    {
+      "tool_id": "toolu_bdrk_01QxUFYujQWg8cRqzq1zwprk",
+      "request_at": "2026-09-09T05:38:46.533Z",
+      "decision_recorded_at": "2026-09-09T05:38:57.625795+00:00",
+      "request_to_decision_seconds": 11.093
+    },
+    {
+      "tool_id": "toolu_bdrk_015ZTy1zFmpjSgRtWNvstk7e",
+      "request_at": "2026-09-09T05:39:02.069Z",
+      "decision_recorded_at": "2026-09-09T05:39:11.261707+00:00",
+      "request_to_decision_seconds": 9.193
+    },
+    {
+      "tool_id": "toolu_bdrk_01TyC3BYZssktZP9vFyB677c",
+      "request_at": "2026-09-09T05:39:13.678Z",
+      "decision_recorded_at": "2026-09-09T05:39:24.620276+00:00",
+      "request_to_decision_seconds": 10.942
+    },
+    {
+      "tool_id": "toolu_bdrk_012eX4yr3owGNRB5RDNXrWnw",
+      "request_at": "2026-09-09T05:39:29.076Z",
+      "decision_recorded_at": "2026-09-09T05:39:40.102609+00:00",
+      "request_to_decision_seconds": 11.027
+    },
+    {
+      "tool_id": "toolu_bdrk_01NMkZUycNb5arvVvn7LYyAi",
+      "request_at": "2026-09-09T05:39:50.279Z",
+      "decision_recorded_at": "2026-09-09T05:40:01.244603+00:00",
+      "request_to_decision_seconds": 10.966
+    },
+    {
+      "tool_id": "toolu_bdrk_01MpLY53V79SSGxbK4zAWgV8",
+      "request_at": "2026-09-09T05:40:05.357Z",
+      "decision_recorded_at": "2026-09-09T05:40:20.323138+00:00",
+      "request_to_decision_seconds": 14.966
+    },
+    {
+      "tool_id": "toolu_bdrk_014pLmYw1H6edBQR9ULcXQy1",
+      "request_at": "2026-09-09T05:40:24.866Z",
+      "decision_recorded_at": "2026-09-09T05:40:34.862779+00:00",
+      "request_to_decision_seconds": 9.997
+    },
+    {
+      "tool_id": "toolu_bdrk_01XrNY32PEqurfFCuX1v7sVr",
+      "request_at": "2026-09-09T05:40:39.086Z",
+      "decision_recorded_at": "2026-09-09T05:40:50.351766+00:00",
+      "request_to_decision_seconds": 11.266
+    }
+  ],
+  "unlinked_approval_count": 0,
+  "caveat": "Reviewed against displayed command and operator notes; R5 first approval selects second pending cat tool. Intervals include request scheduling, polling, operator processing and latency before Enter. Concurrent pending intervals can overlap; sum is NOT total elapsed waiting and must not be subtracted."
+}

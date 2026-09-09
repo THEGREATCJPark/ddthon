@@ -1,0 +1,30 @@
+{
+  "intervals": [
+    {
+      "tool_id": "toolu_bdrk_01GMqPCLyYRkJSVeQdTPb9eo",
+      "request_at": "2026-09-09T05:36:08.876Z",
+      "decision_recorded_at": "2026-09-09T05:36:20.670760+00:00",
+      "request_to_decision_seconds": 11.795
+    },
+    {
+      "tool_id": "toolu_bdrk_01Gjfzj8CeZb1hagqZLzZcee",
+      "request_at": "2026-09-09T05:36:25.478Z",
+      "decision_recorded_at": "2026-09-09T05:36:32.739808+00:00",
+      "request_to_decision_seconds": 7.262
+    },
+    {
+      "tool_id": "toolu_bdrk_015dR8d6dmniDNgT6hBCBjTo",
+      "request_at": "2026-09-09T05:36:41.759Z",
+      "decision_recorded_at": "2026-09-09T05:36:58.171468+00:00",
+      "request_to_decision_seconds": 16.412
+    },
+    {
+      "tool_id": "toolu_bdrk_01PLuwN9WofN7WcMQLKoAMgD",
+      "request_at": "2026-09-09T05:37:03.069Z",
+      "decision_recorded_at": "2026-09-09T05:37:12.538504+00:00",
+      "request_to_decision_seconds": 9.47
+    }
+  ],
+  "unlinked_approval_count": 0,
+  "caveat": "Reviewed against displayed command and operator notes; R5 first approval selects second pending cat tool. Intervals include request scheduling, polling, operator processing and latency before Enter. Concurrent pending intervals can overlap; sum is NOT total elapsed waiting and must not be subtracted."
+}

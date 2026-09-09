@@ -1,0 +1,13 @@
+{
+  "started_at": "2026-09-09T05:37:42.973756+00:00",
+  "ended_at": "2026-09-09T05:37:43.087014+00:00",
+  "command": [
+    "<USER_HOME>\\Desktop\\P0-NoSkill-Runs-20260909\\run-4\\.venv\\Scripts\\python.exe",
+    "-I",
+    "-c",
+    "import sys,json,importlib.metadata as m; import skillloop_demo_pkg as p; v=m.version('skillloop-demo-pkg'); print(json.dumps({'python':sys.executable,'prefix':sys.prefix,'version':v,'module':p.__file__,'import_ok':True,'ok':p.ok()})); assert v=='1.0.0'; assert p.ok()"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys,json,importlib.metadata as m; import skillloop_demo_pkg as p; v=m.version('skillloop-demo-pkg'); print(json.dumps({'python':sys.executable,'prefix':sys.prefix,'version':v,'module':p.__file__,'import_ok':True,'ok':p.ok()})); assert v=='1.0.0'; assert p.ok()\n                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'skillloop_demo_pkg'\n"
+}

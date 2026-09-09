@@ -1,0 +1,121 @@
+{
+  "run": 3,
+  "condition": "NO_SKILL",
+  "status": "BLOCKED",
+  "blocked_reason": "Agent requested package location or project index authorization and stopped; available sibling supplier was not explored. No tool permission was denied. Independent import failed.",
+  "session_id": "66461718-305c-4211-8a48-3ed1f31f3176",
+  "model_requested": "claude-opus-4-8",
+  "models_observed": [
+    "claude-opus-4-8"
+  ],
+  "effort_observed": [
+    "medium"
+  ],
+  "cli_version": "2.1.266",
+  "python_version": "3.13.14",
+  "permission_mode_requested": "manual",
+  "permission_mode_raw_events": [
+    {
+      "type": "permission-mode",
+      "permissionMode": "default",
+      "sessionId": "66461718-305c-4211-8a48-3ed1f31f3176"
+    },
+    {
+      "type": "permission-mode",
+      "permissionMode": "default",
+      "sessionId": "66461718-305c-4211-8a48-3ed1f31f3176"
+    }
+  ],
+  "permission_mode_note": "CLI banner showed manual; raw event serializes default. Both retained, no bypass used.",
+  "first_task_at": "2026-09-09T05:15:59.606Z",
+  "first_actual_install_failure_at": "2026-09-09T05:16:56.943Z",
+  "first_install_success_at": null,
+  "first_agent_import_version_evidence_at": null,
+  "first_agent_importlib_metadata_success_at": null,
+  "strict_verification_at": null,
+  "strict_verification_source": null,
+  "final_response_at": "2026-09-09T05:17:20.857Z",
+  "failure_or_blocked_at": "2026-09-09T05:17:20.857Z",
+  "process_end_at": "2026-09-09T05:17:32.292061+00:00",
+  "elapsed_to_final_seconds": 81.251,
+  "elapsed_to_agent_import_version_seconds": null,
+  "elapsed_to_strict_verification_seconds": null,
+  "elapsed_to_process_end_seconds": 92.686,
+  "independent_verification_started_at": "2026-09-09T05:17:32.298248+00:00",
+  "independent_verification_ended_at": "2026-09-09T05:17:32.403687+00:00",
+  "independent_verification_exit_code": 1,
+  "initial_absence_exit_code": 0,
+  "initial_setup_valid": true,
+  "limit_seconds": 600,
+  "timeout": false,
+  "raw_tokens": {
+    "input_tokens": 14,
+    "output_tokens": 2422,
+    "cache_creation_input_tokens": 4811,
+    "cache_read_input_tokens": 50678
+  },
+  "raw_tokens_including_caches_total": 57925,
+  "cli_usage": {
+    "session_matches": true,
+    "values": {
+      "lastSessionId": "66461718-305c-4211-8a48-3ed1f31f3176",
+      "lastCost": 0.12178775,
+      "lastAPIDuration": 39339,
+      "lastAPIDurationWithoutRetries": 39190,
+      "lastDuration": 104238,
+      "lastTotalInputTokens": 1031,
+      "lastTotalOutputTokens": 2449,
+      "lastTotalCacheCreationInputTokens": 4811,
+      "lastTotalCacheReadInputTokens": 50678,
+      "lastModelUsage": {
+        "claude-opus-4-8": {
+          "inputTokens": 1031,
+          "outputTokens": 2449,
+          "thinkingTokens": 529,
+          "cacheReadInputTokens": 50678,
+          "cacheCreationInputTokens": 4811,
+          "webSearchRequests": 0,
+          "costUSD": 0.12178775
+        }
+      }
+    }
+  },
+  "cli_minus_raw_tokens": {
+    "input_tokens": 1017,
+    "output_tokens": 27,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "usage_difference_explanation": "Observed difference retained; CLI includes additional accounting not identified by this capture. No invented reconciliation.",
+  "estimated_cost_usd": 0.12178775,
+  "cost_note": "CLI estimate, not actual bill",
+  "tool_calls": 8,
+  "tool_calls_by_name": {
+    "Bash": 4,
+    "Read": 4
+  },
+  "web_search_tool_calls": 0,
+  "web_fetch_tool_calls": 0,
+  "install_attempts": 1,
+  "operator_approval_count": 5,
+  "operator_denial_count": 0,
+  "intermediate_hints": 0,
+  "permission_wait_seconds_exact": null,
+  "request_to_approval_record_seconds_sum": 40.986,
+  "linked_approval_count": 5,
+  "unlinked_approval_count": 0,
+  "additional_user_messages": [],
+  "requirements_hash_before": "0124a81bcc80c1a33a10a5595dbf43ba061eafdddb80afb9c51d14f43d067726",
+  "requirements_hash_after": "0124a81bcc80c1a33a10a5595dbf43ba061eafdddb80afb9c51d14f43d067726",
+  "pip_ini_hash_before": "3d3e0d9ff48c598f0beb7b051fbc695e9b60089c851825fb2df370ef3582649f",
+  "pip_ini_hash_after": "3d3e0d9ff48c598f0beb7b051fbc695e9b60089c851825fb2df370ef3582649f",
+  "skills_mcp_disabled_evidence": "start.json argv; observed CLI Safe mode banner; no Skill/MCP tool invocation in trace. No separate runtime inventory API captured.",
+  "video": null,
+  "cost_screenshot": null,
+  "replayed_or_replaced": false,
+  "final_response_observed_at": "2026-09-09T05:17:31.725619+00:00",
+  "elapsed_to_final_observed_seconds": 92.12,
+  "timestamp_caveat": "final_response_at is raw assistant text-block timestamp, not separately instrumented stream completion. observed_at is operator observation before Ctrl+D; includes polling/reaction delay.",
+  "raw_tool_execution_errors": 1,
+  "permission_denials_in_tool_results": 0
+}

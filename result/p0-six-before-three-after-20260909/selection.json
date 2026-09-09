@@ -1,0 +1,18 @@
+{
+  "selected_before": [
+    4,
+    5,
+    6
+  ],
+  "selected_after": [
+    1,
+    2,
+    3
+  ],
+  "reason": "Use all three consecutive additional trials requested by user; complete comparable source protocol and records. No outcome/speed/token filtering. Post-hoc choice, not preregistered. All six baseline trials retained.",
+  "all_before_successes": 4,
+  "all_before_n": 6,
+  "selected_successes": 2,
+  "after_successes": 3,
+  "comparison": "observational, not controlled causal estimate"
+}
