@@ -2224,3 +2224,8 @@ footer > span:last-child {
 .example-free-summary .example-body-preview { grid-column: 2 / 4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
 .example-free-body { grid-column: 1 / -1; padding-top: 20px; }
 @media(max-width:900px) { .example-free-summary .example-body-preview { grid-column: 1 / -1; } }
+
+.p1-responses h4, .p1-chart h4 { margin: 24px 26px 16px; font-size: 18px; }
+.p1-chart img { display: block; max-width: 100%; max-height: 600px; margin: auto; }
+.p1-chart p { padding: 0 26px; color: var(--muted); font-size: 14px; }
+.p1-log summary { cursor: pointer; }
