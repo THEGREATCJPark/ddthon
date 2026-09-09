@@ -87,7 +87,8 @@ export default function Demo({
 
   useEffect(() => {
     const panel = history.current;
-    const latest = panel?.querySelector<HTMLElement>(".demo-conversation:last-of-type");
+    const turns = panel?.querySelectorAll<HTMLElement>(".demo-conversation");
+    const latest = turns?.item(turns.length - 1);
     if (panel) panel.scrollTop = latest ? latest.offsetTop - panel.offsetTop : 0;
   }, [completed]);
 

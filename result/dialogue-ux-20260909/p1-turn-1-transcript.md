@@ -1,0 +1,308 @@
+# P1 turn 1 — operator supplied user input
+BBBBB02_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.
+
+Tool Skill
+```json
+{
+  "skill": "skillloop",
+  "args": "Excel/XLSX 문서 읽기·생산량 분석·예측 추세선 작성: BBBBB02_직전_3달_생산량.xlsx"
+}
+```
+
+Tool result (error=False)
+```text
+Launching skill: skillloop
+```
+
+user:
+Base directory for this skill: C:\Users\cik61\Desktop\skillloop-two-turn-20260909-092209\warm\.claude\skills\skillloop
+
+# SkillLoop — Agent 진입점 (C9)
+
+한국어 업무 요청에는 **진행 설명부터 최종 답변까지 한국어**를 사용한다. 한 번에 현재 작업과 관찰 결과를 1~2문장으로 설명한다. 도구 원문과 사용자 설명을 구분한다.
+
+원칙: **자연어 해석은 Claude가, 제품 로직(매칭·적용·검증·카운트)은 기존 CLI/서비스가.**
+별도의 키워드 매핑 코드는 두지 않는다. 모든 동작은 사용자가 동일한 `python -m skillloop ...`
+명령으로 **단독 재현**할 수 있어야 한다(FR-SURF-3).
+
+## 요청 유형 구분 (중요)
+
+### 1) 명시적 P0 재사용 데모
+사용자가 "P0 데모", "run-p0", "재사용 데모 보여줘"처럼 **데모를 명시**한 경우에만:
+```
+python -m skillloop run-p0
+```
+- 이것은 **자체완결 데모**다(합성 실패를 스스로 만들어 적용·검증·카운트).
+- 보고는 실제 출력의 `reuse=N (counted=..., reason=...)` 그대로. **"실제 업무에 적용했다"고 말하지 않는다.**
+
+### 2) 실제 설치/업무 요청
+작업 프로젝트에 `skillloop-work.json`이 있으면 먼저 읽어 제품 Python과 **작업 Python**,
+requirements, store, usage 경로를 확인한다. 이 파일은 환경 연결 정보이며 해결 절차가 아니다.
+requirements 파일을 실제로 읽고 아래 명령으로 **그 작업 환경**의 설치를 요청한다.
+
+```text
+<product_python> -m skillloop apply-requirements --requirements <requirements> --python <work_python> --store <store> --usage <usage>
+```
+
+- 일반 pip 설치를 먼저 시도해도 된다. 실패 후에는 위 명령으로 실제 관찰·C5 검색·S1 적용/검증·C3 기록을 이어간다.
+- CLI는 기존 공급 경로로 실제 설치를 시도하며, 패키지 공급 실패를 관찰한 경우에만 검색한다.
+- 기본 연결은 준비된 `skillloop-demo-pkg==1.0.0`을 지원한다. 운영자가 별도로 제공한 `--policy`가 있으면 그 안의 exact 승인·로컬 공급원·import 매핑 범위에서 단일 고정 버전 패키지를 처리한다. Agent가 정책/승인을 만들거나 지원 밖 대상을 다른 패키지로 바꾸지 않는다. 범용 패키지 설치 지원은 아니다.
+- 작업 venv를 만들거나 교체·삭제하지 않는다. 답을 찾기 위해 제품 소스/fixture를 뒤지거나 허용 index를 직접 고르지 않는다.
+- 완료 후 **같은 work_python**으로 별도 프로세스에서 import와 importlib.metadata.version을 확인한다.
+- 실제 install exit, 선택된 Skill과 digest, 검증 결과, counted/reason을 **판정 근거로 확인**한다. 사용자 기본 답변에 내부 필드/전체 digest/run_id를 열거하지 않는다. 설치된 패키지·버전, 사용 확인, 검증된 재사용 증가 여부만 간결하게 알린다.
+  INSTALL_OK_NO_REUSE는 설치 성공일 뿐 Skill 재사용은 아니다. 동일 실행을 재시도하면 출력된 run_id를 전달한다.
+- 자동 실행 범위는 정확히 승인된 로컬 합성 Skill뿐이다. CONFIRMATION_REQUIRED이면 멈추고 사용자 확인을 받는다.
+- 이는 합성 환경에서 실제 업무 요청을 수용한 결과이며, 임의의 사내 패키지나 원격 공유까지 검증한 것으로 말하지 않는다.
+- 연결 파일이 없거나 현재 지원 범위 밖이면 다음 일반 탐색/검색 원칙을 따른다. 임의 경로나 데모를 대입하지 않는다.
+
+위 작업 연결 파일이 있는 지원 대상 요청에서는 **apply-requirements가 관찰·검색까지 수행하므로 별도의 match를 먼저 호출하지 않는다.** 앞의 흐름을 수행한 뒤 아래 일반 검색 절차를 다시 수행하지 않는다.
+
+작업 연결 파일이 없는 일반 업무에서 별도 검색이 필요한 경우에만:
+1. 실제 실패와 대상·환경을 확인한다.
+2. pip 공급 실패는 실제 stderr를 UTF-8 파일로 보존하고, 실제 종료코드와 요청 대상을 제품에 전달한다.
+   match --pip-stderr <실제-stderr-파일> --exit-code <실제-종료코드> --target <요청-패키지> --store <작업-store>
+   정규화·분류는 제품이 수행한다. Agent가 오류를 canonical 문자열로 조립하거나 정답 Skill 이름을 지정하지 않는다.
+3. stderr/종료코드를 만들어내지 않는다. 원문 오류를 --signature에 넣지 않는다. 기본 데모 store를 다른 작업의 store라고 가정하지 않는다.
+4. 검색만으로 적용·검증·카운트 성공을 주장하지 않는다. 지원 범위 밖의 복구는 미구현으로 구분한다.
+
+### 3) 조직 현황 / 상태
+```
+python -m skillloop status       # 네 줄 요약(하단 상태줄과 동일 소스)
+python -m skillloop dashboard    # http://127.0.0.1:8765/ 로컬 읽기전용 대시보드
+```
+- 게시(PUBLISHED)는 lifecycle 조회(계약7)가 연결됐을 때만. 미연결이면 "확인 불가/상태 조회 미연결"로
+  표시하며 0건·특정 상태로 **추정하지 않는다**. 실제 재사용과 DEMO_SEED를 구분해 읽는다.
+
+### 4) XLSX 환경 제약과 새 경험(P1)
+
+- 사용자 작업 파일·허용된 접근 범위·실행 중인 애플리케이션 등의 환경 사실을 확인한다. 원본 암호를 요구하거나 후보에 포함하지 않는다.
+- `run-p1 --xlsx <작업파일> --store <store> --usage <usage>`가 실제 직접 접근과 검색을 수행한다. 애플리케이션이 열려 있음을 확인한 경우에만 `--app-open`을 전달한다.
+- 첫 `NEEDS_AGENT_DISCOVERY`(실제 실패 + NO_MATCH)에서 **사용자가 현재 대화로 Excel 열람 사실을 아직 알려주지 않았다면 여기서 멈추고 질문으로 턴을 끝낸다**. “일반적인 XLSX 읽기로는 열리지 않았고, 팀 Skill에서도 맞는 절차를 찾지 못했습니다. 사용자 환경에서는 이 파일을 Excel로 열어 볼 수 있나요?”처럼 실제 관찰 후 묻는다. 이는 정상적인 환경 확인 대기이며 업무 실패 완료가 아니다. metadata/잠금 파일로 사용자 답변을 대신하거나 그 전에 앱 접근 방법을 탐색·적용하지 않는다.
+- 사용자 답변으로 열람 가능 사실을 얻은 다음 Windows·대상 workbook·현재 애플리케이션·허용 read-only 대안을 조사한다. 이미 대화에서 제공된 사실은 재질문하지 않는다. `--app-open`은 보고된 전제이고 실제 대상 workbook이 열렸다는 증명은 앱/대상 확인과 실제 접근 근거로 얻는다. 잠금 파일만으로 확정하지 않는다.
+- 실제 발견한 접근에 맞는 procedure만 `--procedure <파일>`로 전달한다. 제출 전 `run-p1 --help`에서 지원 계약을 확인한다. CLI 도움말의 어댑터 규격은 탐색 성공의 증거가 아니다. 성공을 연출하거나 제품 소스/harness에서 정답을 가져오지 않는다. 사용자는 API 이름 대신 “이미 Excel에서 볼 수 있다”는 환경 사실만 제공해도 된다.
+- MATCH 후 `CONFIRMATION_REQUIRED`는 exact Skill의 실행에 대한 사용자 확인이 필요하다는 뜻이다. 동의받은 digest만 `--confirm-skill`로 전달한다. 그 결과로 실제 업무 계산까지 검증해야 한다.
+- 후보 생성은 게시가 아니다. 사람이 내용을 검토하는 review CLI의 확인 입력을 Agent가 대신 자동 입력하지 않는다. 명시적 사람 검토 이후 replay, publish 순으로 진행하며 FAIL/NOT_RUN/미완료를 성공으로 바꾸지 않는다.
+- P1 전체 자연어 탐색·사람 승인·원격 게시가 실제로 실행되지 않았다면 해당 장면은 NOT_RUN으로 보고한다.
+
+## 안전·게이트 (항상 유지)
+- **원격 Skill 자동 실행 금지**(NFR-SEC-4): 원격/타 환경에서 온 Skill은 **명시적 사용자 확인 후에만** 실행.
+- **게시 게이트 유지**: 검증 없이 SHAREABLE/PUBLISHED로 승격하지 않는다.
+- **비밀·원본 업무 데이터**를 Skill/출력에 포함하지 않는다(합성만, NFR-SEC-1).
+
+## 사용자 안내 방식
+- 한국어 요청에는 모든 진행 설명과 최종 답변도 한국어로 유지한다. 도구 명령·원문 오류는 그대로 둘 수 있다.
+- “제품 CLI”, “procedure schema”, “coordinate correction”, “harness”, 내부 필드/run_id/count 문자열을 진행 멘트로 반복하지 않는다. 입력을 고치면 필요한 경우 “문서의 실제 배치를 다시 확인하겠습니다” 정도로 알리며 실패 원문을 삭제하지 않는다.
+- 예: “현재 프로젝트의 Python 환경과 requirements.txt를 확인했습니다. 기존 설정으로 설치해 보겠습니다.”
+- 실패 후에는 관찰된 원인과 기존 해결 경험을 확인한다는 목적을 설명한다. 실행하지 않은 검색·적용을 했다고 말하지 않는다.
+- 미구현·권한 거부 등 결과 해석에 필요한 한계는 짧게 알린다. 성공한 부분과 남은 부분을 구분한다. 실행 전부터 성공 대사를 선언하거나 실제 공급 실패를 proxy 오류로 꾸미지 않는다.
+- 예측 결과는 실제 3개월/예상 1개월·대상 월·값·문서에서 확인한 단위를 구분한다. 단위를 모르면 생산량 수치라고 표현하며 임의의 단위를 만들지 않는다. **최종 답변에 실제 chart_ref의 절대 파일 경로나 클릭 가능한 링크를 반드시 제공한다.** “위 차트”만으로 대체하거나 이미지 Read만 하고 사용자 화면에 보였다고 주장하지 않는다.
+- 업무 완료와 후보/게시를 구분한다. 후보가 이미 생성됐다면 “환경 접근 방법만 후보로 남겼습니다. 아직 게시 전입니다”라고 알린다. 새 후보를 남길 수 있다는 제안을 이미 생성된 사실 대신 쓰지 않는다. 사람 검토가 필요한 exact 식별자는 그 검토 시점에 제시한다.
+
+
+## P1 현재 업무와 공유 환경 절차의 분리 (승인 정정)
+- workspace `.skillloop/context.json`이 있으면 제공된 환경 설명으로 참고한다. 표시는 `사내환경 · NASCA(가상)`이다. metadata는 실제 관찰/원인 진단/실행 승인이 아니다.
+- 실제 직접 읽기 실패를 확인한 뒤 환경 설명과 함께 짧게 안내한다. 특정 보안 제품이 실패 원인이라고 단정하지 않는다.
+- 해결 방법은 환경 metadata에서 제공하지 않는다. NO_MATCH 뒤 위의 사용자 환경 사실 턴을 거쳐 실제 환경을 조사한다. 잠금 파일은 단서이며 OLE header만으로 암호화나 실제 보안제품을 진단하지 않는다.
+- 검색 trace에 기록된 scope만 보고한다. 이번 실행에 Org Knowledge가 제공되지 않았다면 “현재 검색 범위는 Team Skill이며 별도 조직 지식은 제공되지 않았습니다”로 구분한다. 제공됐지만 읽지 못한 자료를 미제공이나 NO_MATCH로 위장하지 않는다.
+- 접근 결과 `NEEDS_TASK_MAPPING`은 로컬 artifact의 문서 값/시트/UsedRange를 읽고 현재 업무의 월/생산량 열과 시작 행을 판단하라는 뜻이다. 로컬 task-mapping JSON을 `--task-mapping`으로 전달한다. 이 정보를 shared procedure에 넣지 않는다.
+- task-mapping의 필수 key는 정확히 `sheet`(문자열), `month_col`, `total_col`, `first_row`다. 좌표는 **1-based 양의 integer, worksheet 절대 좌표**다(UsedRange 상대 좌표 아님). `month_col != total_col`. 실제 snapshot의 first_col/first_row와 현재 문서를 근거로 정한다. 도움말은 형식만 제공하며 특정 시트/열/행/예측값을 정답으로 주지 않는다.
+- 업무가 완료되면 chart_ref PNG 경로를 명시한다. 공유 후보에는 업무 값·열·시트·차트·암호를 넣지 않는다. Replay는 새 접근이고 항상 다른 PC/Agent를 강제하는 것은 아니다. 실제로 수행된 독립성만 보고한다.
+
+
+ARGUMENTS: Excel/XLSX 문서 읽기·생산량 분석·예측 추세선 작성: BBBBB02_직전_3달_생산량.xlsx
+
+assistant:
+작업 파일과 환경 연결 정보를 먼저 확인하겠습니다.
+
+Tool Bash
+```json
+{
+  "command": "cd \"C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\" && ls -la && echo \"---context---\" && ls -la .skillloop 2>/dev/null && echo \"---workfind---\" && ls skillloop-work.json 2>/dev/null; find . -maxdepth 2 -iname \"*.xlsx\" 2>/dev/null",
+  "description": "List workspace files and locate xlsx and connection files"
+}
+```
+
+Tool result (error=False)
+```text
+total 26
+drwxr-xr-x 1 cik61 197609     0 Sep  9 09:22 .
+drwxr-xr-x 1 cik61 197609     0 Sep  9 09:22 ..
+drwxr-xr-x 1 cik61 197609     0 Sep  9 09:22 .claude
+drwxr-xr-x 1 cik61 197609     0 Sep  9 09:22 .skillloop
+-rw-r--r-- 1 cik61 197609 15360 Sep  9 09:22 BBBBB02_직전_3달_생산량.xlsx
+-rw-r--r-- 1 cik61 197609   519 Sep  9 09:22 skillloop-work.json
+-rw-r--r-- 1 cik61 197609   165 Sep  9 09:22 ~$BBBBB02_직전_3달_생산량.xlsx
+---context---
+total 11
+drwxr-xr-x 1 cik61 197609   0 Sep  9 09:22 .
+drwxr-xr-x 1 cik61 197609   0 Sep  9 09:22 ..
+-rw-r--r-- 1 cik61 197609 129 Sep  9 09:22 context.json
+-rw-r--r-- 1 cik61 197609 479 Sep  9 09:22 store.json
+-rw-r--r-- 1 cik61 197609  43 Sep  9 09:22 usage.json
+---workfind---
+skillloop-work.json
+./BBBBB02_직전_3달_생산량.xlsx
+./~$BBBBB02_직전_3달_생산량.xlsx
+```
+
+assistant:
+환경 연결 정보와 컨텍스트를 확인하겠습니다.
+
+Tool Read
+```json
+{
+  "file_path": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\skillloop-work.json"
+}
+```
+
+Tool result (error=False)
+```text
+1	{
+2	  "product_python": "C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe",
+3	  "work_python": "C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe",
+4	  "store": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\store.json",
+5	  "usage": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\usage.json",
+6	  "environment_context": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\context.json"
+7	}
+```
+
+Tool Read
+```json
+{
+  "file_path": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\context.json"
+}
+```
+
+Tool result (error=False)
+```text
+1	{
+2	  "environment_class": "internal-managed-document",
+3	  "display_label": "사내환경 · NASCA(가상)",
+4	  "virtual": true
+5	}
+```
+
+Tool Read
+```json
+{
+  "file_path": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\store.json"
+}
+```
+
+Tool result (error=False)
+```text
+1	{"lifecycle": {}, "skills": {"fix-skillloop-demo-pkg-install\u001f1.0.0": {"actual_reuse": 0, "applicability": {"signals": ["pip-install-fail:skillloop-demo-pkg"]}, "demo_seed": false, "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6", "id": "fix-skillloop-demo-pkg-install", "origin": {"author": "seed", "note": "preloaded P0 demo skill"}, "procedure": {"action": "pip-install", "index": "allow", "target": "skillloop-demo-pkg"}, "version": "1.0.0"}}}
+```
+
+Tool Read
+```json
+{
+  "file_path": "C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\\.skillloop\\usage.json"
+}
+```
+
+Tool result (error=False)
+```text
+1	{"counts":{},"seen_run_ids":[],"events":{}}
+```
+
+assistant:
+XLSX 작업이므로 `run-p1`의 지원 계약을 먼저 확인하겠습니다.
+
+Tool Bash
+```json
+{
+  "command": "cd \"C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\" && \"C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe\" -m skillloop run-p1 --help",
+  "description": "Show run-p1 help contract"
+}
+```
+
+Tool result (error=False)
+```text
+usage: skillloop run-p1 [-h] --xlsx XLSX --store STORE --usage USAGE
+                        [--run-id RUN_ID] [--app-open] [--procedure PROCEDURE]
+                        [--task-mapping TASK_MAPPING]
+                        [--confirm-skill CONFIRM_SKILL] [--author AUTHOR]
+
+options:
+  -h, --help            show this help message and exit
+  --xlsx XLSX
+  --store STORE
+  --usage USAGE
+  --run-id RUN_ID
+  --app-open            사용자가 보고/실제 확인한 열람 전제; 잠금 파일만으로 확정 금지
+  --procedure PROCEDURE
+                        Agent가 발견한 명시적 read-only procedure JSON
+  --task-mapping TASK_MAPPING
+                        현재 업무의 시트·열·시작행 JSON (공유 Skill 아님)
+  --confirm-skill CONFIRM_SKILL
+                        명시적으로 실행 확인한 exact digest
+  --author AUTHOR
+
+입력 계약 (현재 문서의 정답 배치를 제공하는 것이 아닙니다):
+  --task-mapping: JSON object, 정확히 sheet/month_col/total_col/first_row 네 key.
+    sheet: 실제 snapshot에서 확인한 시트 이름(string).
+    month_col, total_col, first_row: 1-based positive integer.
+    UsedRange 상대 좌표가 아닌 worksheet 절대 좌표. month_col != total_col.
+  --procedure: 실제 발견한 접근이 지원 어댑터와 일치하는 경우에만
+    {"action":"file-access","method":"excel-com-attach"}를 전달.
+    업무 데이터/시트/열/행/예측식/암호/파일 경로는 procedure에 포함하지 않음.
+  NEEDS_AGENT_DISCOVERY: 실제 실패·검색 후 정상적인 환경 사실 확인 대기.
+    사용자에게 Excel 열람 가능 여부를 확인하고 답변 뒤 탐색합니다.
+  NEEDS_TASK_MAPPING: 로컬 artifact_ref를 읽어 현재 문서의 실제 배치를 판단.
+  --app-open은 보고된 전제이며 실제 workbook 접근 성공의 증명이 아닙니다.
+  WORK_COMPLETE의 chart_ref는 최종 답변에 실제 파일 경로/링크로 전달합니다.
+  검색 범위는 Team Skill. 별도 Org Knowledge 입력은 현재 제공되지 않습니다.
+```
+
+assistant:
+이제 실제 직접 접근을 시도하겠습니다. (아직 `--app-open` 등 전제는 붙이지 않고 실제 결과를 관찰합니다.)
+
+Tool Bash
+```json
+{
+  "command": "cd \"C:\\Users\\cik61\\Desktop\\skillloop-two-turn-20260909-092209\\warm\" && \"C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe\" -m skillloop run-p1 --xlsx \"BBBBB02_직전_3달_생산량.xlsx\" --store \".skillloop\\store.json\" --usage \".skillloop\\usage.json\"",
+  "description": "Attempt direct P1 xlsx read"
+}
+```
+
+Tool result (error=True)
+```text
+Exit code 2
+작업 환경: 사내환경 · NASCA(가상) (작업 공간에 제공된 환경 정보)
+{
+  "status": "NEEDS_AGENT_DISCOVERY",
+  "trace": [
+    {
+      "step": "direct-access",
+      "ran": true,
+      "ok": false,
+      "error": "BadZipFile: File is not a zip file"
+    },
+    {
+      "step": "search",
+      "scope": "Team Skill",
+      "query": "file-access-fail:xlsx",
+      "org_knowledge": {
+        "status": "not_provided",
+        "searched": false
+      },
+      "status": "NO_MATCH",
+      "rationale": "유효 후보 없음(스캔 1건, 유효 0건)"
+    }
+  ],
+  "facts_needed": "사용자 환경에서 이 파일을 Excel로 열어 볼 수 있는지 확인해 주세요. 아직 대화로 확인하지 않았다면 답변을 기다린 뒤 허용 read-only 대안을 탐색합니다."
+}
+```
+
+assistant:
+일반적인 XLSX 직접 읽기를 시도했으나 파일이 정상적인 zip(xlsx) 형식으로 열리지 않았습니다(`BadZipFile`). 팀 Skill 검색에서도 이 상황에 맞는 절차를 찾지 못했습니다(NO_MATCH). 현재 검색 범위는 Team Skill이며, 별도 조직 지식은 제공되지 않았습니다.
+
+이 상태는 업무 실패가 아니라 환경 확인 대기입니다. 한 가지 확인이 필요합니다:
+
+**사용자 환경에서는 이 파일(`BBBBB02_직전_3달_생산량.xlsx`)을 Excel로 열어서 볼 수 있나요?**
+
+- 열 수 있다면(예: 지금 Excel에서 열려 있는 상태 등), 그 사실을 알려주시면 Windows·해당 workbook·현재 애플리케이션 상황과 허용된 read-only 접근 방법을 조사해서 3개월 실제 생산량을 읽고 다음 달 예상치를 포함한 추세선 차트를 만들겠습니다.
+- 열 수 없다면, 파일이 손상되었거나 다른 형식일 가능성을 함께 살펴봐야 합니다.
+
+답변 주시면 이어서 진행하겠습니다.

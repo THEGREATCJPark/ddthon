@@ -1,0 +1,69 @@
+{
+  "name": "P0 LIVE DEMO RUN #1",
+  "source_sha": "fff0ffac97fd52bd36995265c9ed14b12e2961c0",
+  "prepared_at": "2026-09-09T00:26:40.170440+00:00",
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909",
+  "session_id": "fbfcb0e8-2055-4cb7-95a2-048624832856",
+  "input_prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘.",
+  "context": {
+    "product_python": "C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe",
+    "work_python": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.venv\\Scripts\\python.exe",
+    "requirements": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\requirements.txt",
+    "store": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\store.json",
+    "usage": "C:\\Users\\cik61\\Desktop\\skillloop-live-p0-20260909\\.skillloop\\usage.json",
+    "scope": "synthetic P0 work project; existing local Skills preapproved by operator"
+  },
+  "initial_usage": {
+    "counts": {},
+    "seen_run_ids": [],
+    "events": {}
+  },
+  "initial_store": {
+    "lifecycle": {},
+    "skills": {
+      "fix-skillloop-demo-pkg-install\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "pip-install-fail:skillloop-demo-pkg"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "64bed7bf5bb69f819ec76b9351b122a73a70719044a148b19521f17f164b75e6",
+        "id": "fix-skillloop-demo-pkg-install",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      },
+      "unrelated-compile\u001f1.0.0": {
+        "actual_reuse": 0,
+        "applicability": {
+          "signals": [
+            "compile-fail:unrelated"
+          ]
+        },
+        "demo_seed": false,
+        "digest": "f345cd7a77d6ff051cbe40e66f3ba109900ac5577baa5505d32dbb79b64e65b4",
+        "id": "unrelated-compile",
+        "origin": {
+          "author": "seed",
+          "note": "preloaded P0 demo skill"
+        },
+        "procedure": {
+          "action": "pip-install",
+          "index": "allow",
+          "target": "skillloop-demo-pkg"
+        },
+        "version": "1.0.0"
+      }
+    }
+  },
+  "verdict": "NOT_RUN"
+}

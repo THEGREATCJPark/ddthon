@@ -1,6 +1,6 @@
 # C9 대화·도구 안내 정합화와 실제 P0 UI 시연 — Code Plan
 
-상태: **Part 1 완료 / REVIEW REQUIRED / Part 2 미착수**.
+상태: **Part 2 수정·회귀 완료 / 실제 P1 2-turn PASS / P0 LIVE UI NOT_RUN / 원격 최종 검증 중**.
 기준: main `8bd731b4f3c085577604712bc3783117abfcd426`. 시작 작업 트리 clean, origin/main 일치. 기존 CONSTRUCTION / 통합 Build & Test에서 발견한 결함의 보완이다. Inception과 기존 승인을 재시작하지 않는다.
 
 ## 1. 요청과 승인 경계
@@ -42,9 +42,9 @@
 - [x] 2. `skillloop/cli.py`: run-p1 도움말의 정확한 JSON key/type/절대 좌표와 정상 대기 상태 안내. `skillloop/experience_service.py`: search trace에 실제 Team Skill scope/query/result와 Org Knowledge 미제공을 명시하고, facts_needed에 환경 사실 확인을 안내. candidate/계산/게이트/적용 선택 로직은 변경하지 않는다. `envharness_p1.py`/`replay.py`는 이번에 읽기 검토만, 결함 없는 실행 코드를 재작성하지 않는다.
 - [x] 3. `tests/test_p1_services.py`, 필요시 `tests/test_cli_match.py` 또는 신규 `tests/test_cli_p1_help.py`: NO_MATCH 대기 시 reader 미호출·후보/usage 무변경, 실제 검색 scope, 도움말 필수 계약 검사. 기존 mapping/digest/OLS/approval 테스트 재사용. 문구 전체 일치나 강제 Agent 성공 대사 테스트는 만들지 않는다.
 - [x] 4. `team-hub/src/demoScenarios.ts`, `Demo.tsx`, `demoScenarios.test.ts` 및 필요한 기존 CSS: P0 4단계 유지, P1 NO_MATCH 이후 사용자 환경 사실 턴 추가; Cold 차트/후보/사람 검토/Replay/게시/새 Agent Warm 보존. 기존 사용 가능 Skill·이번 신규 게시·실제 검증 0→1을 구분. 20 baseline 신설 없음. 설명용 시뮬레이션·보관 실제 차트·증거 링크 유지. Firebase 커뮤니티 동작 변경 없음.
-- [ ] 5. 변경 경로 targeted 회귀 후 Python 전체/PBT seed20260908, web tests/production build. 기존 테스트 개수를 목표로 수정하지 않는다. P0 retry +0는 기존 실환경/단위 검사로 확인. P1은 새 독립 작업공간에서 **한 번의 2-turn Cold**를 실제 실행: 첫 자연어 업무 요청 → 관찰·검색·환경 질문 → 제공된 두 번째 사용자 문장 → 탐색·다른 layout·업무·차트·후보1/reuse0. 테스트 운영자가 두 번째 문장을 넣는 경우 operator-assisted test라고 명시하고 실제 사용자가 입력했다고 하지 않는다. 원본 해시와 별도 expected값 대조. 새 후보를 자동 승인/게시하지 않는다.
+- [x] 5. 변경 경로 targeted 회귀 후 Python 전체/PBT seed20260908, web tests/production build. 기존 테스트 개수를 목표로 수정하지 않는다. P0 retry +0는 기존 실환경/단위 검사로 확인. P1은 새 독립 작업공간에서 **한 번의 2-turn Cold**를 실제 실행: 첫 자연어 업무 요청 → 관찰·검색·환경 질문 → 제공된 두 번째 사용자 문장 → 탐색·다른 layout·업무·차트·후보1/reuse0. 테스트 운영자가 두 번째 문장을 넣는 경우 operator-assisted test라고 명시하고 실제 사용자가 입력했다고 하지 않는다. 원본 해시와 별도 expected값 대조. 새 후보를 자동 승인/게시하지 않는다.
 - [ ] 6. 제품 소스를 commit하여 SHA 고정 후 **P0 LIVE DEMO RUN #1**: 새 isolated work venv/기존 승인 Skill/시작 usage 기록, 실제 Claude Code interactive UI에 사용자 업무 문장 한 번만 Computer Use로 입력. headless 대체 금지. 동일 세션에서 요청/실패·검색/성공·상태줄 캡처, 중간 오류 보존. 사전 준비는 기존 도구로 하고 UI에는 셸 명령 대신 Claude 업무 요청만 입력. 정상적인 권한 확인은 현재 허용 범위 내에서 처리하고 환경 파손 시 추가 성공 세션을 임의 생성하지 않는다.
-- [ ] 7. `result/dialogue-ux-20260909/`에 targeted/full/web/2-turn Cold 증거. `result/live-demo-p0-20260909/`에 README, run-context.json, verification.json, visible-transcript.md, 실제로 취득한 01/02/03 PNG와 가능한 대표 00 PNG. private reasoning/secret 제외. UI 불가 시 정확한 원인의 NOT_RUN과 사용자 3~4단계만 남기고 가짜 파일 미생성. 실제 성공/캡처가 있을 때만 웹에 별도 실제 P0 증거 카드 연결.
+- [x] 7. `result/dialogue-ux-20260909/`에 targeted/full/web/2-turn Cold 증거. `result/live-demo-p0-20260909/`에 README, run-context.json, verification.json, visible-transcript.md, 실제로 취득한 01/02/03 PNG와 가능한 대표 00 PNG. private reasoning/secret 제외. UI 불가 시 정확한 원인의 NOT_RUN과 사용자 3~4단계만 남기고 가짜 파일 미생성. 실제 성공/캡처가 있을 때만 웹에 별도 실제 P0 증거 카드 연결.
 - [ ] 8. `README.md`, `aidlc-docs/aidlc-state.md`, `construction/build-and-test/build-and-test-summary.md`, 본 계획 상태, audit append-only 정합화. 기존 파이프라인으로 push/deploy, 최종 제품/web exact SHA의 CI/Pages와 public 브라우저 확인. 문서·증거 후속 SHA와 검증 제품 SHA를 구분. B-PC 미준비는 NOT_RUN 유지. 요청한 12항목 결과 형식으로 보고.
 
 ## 5. 재사용 가능한 증거와 새 증거
@@ -57,9 +57,13 @@
 
 위 8단계 전체(최소 수정 → 회귀 → P1 2-turn → 실제 P0 UI 1회 → 증거·웹 연결·CI/Pages)를 승인받은 후 구현한다. 기존 확정 기술·담당·lifecycle에 대한 추가 질문은 없다.
 
-[Answer]: 승인 대기
+[Answer]: 어 승인 (실제 승인 기록은 아래 절 참조)
 
 ## Actual approval / Part 2 started
 
 2026-09-09T00:15:59.7512103Z — User (raw): 어 승인. Eight-step plan approved before code changes. Earlier review text is preserved as history.
 
+
+## Execution receipt (local)
+
+Steps1–5 and7 complete. Step6 attempted preparation/launch only: actual UI prompt and capture NOT_RUN due target not exposed. User fallback guide provided; not marked as successful execution. Step8 final remote verification underway. Minor narrative limitations are documented; no new candidate human approval.

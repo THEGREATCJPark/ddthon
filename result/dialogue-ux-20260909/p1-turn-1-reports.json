@@ -1,0 +1,25 @@
+[
+  {
+    "status": "NEEDS_AGENT_DISCOVERY",
+    "trace": [
+      {
+        "step": "direct-access",
+        "ran": true,
+        "ok": false,
+        "error": "BadZipFile: File is not a zip file"
+      },
+      {
+        "step": "search",
+        "scope": "Team Skill",
+        "query": "file-access-fail:xlsx",
+        "org_knowledge": {
+          "status": "not_provided",
+          "searched": false
+        },
+        "status": "NO_MATCH",
+        "rationale": "유효 후보 없음(스캔 1건, 유효 0건)"
+      }
+    ],
+    "facts_needed": "사용자 환경에서 이 파일을 Excel로 열어 볼 수 있는지 확인해 주세요. 아직 대화로 확인하지 않았다면 답변을 기다린 뒤 허용 read-only 대안을 탐색합니다."
+  }
+]

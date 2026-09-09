@@ -33,3 +33,8 @@ Build/install instructions, unit instructions, integration/acceptance instructio
 ## Additional Cold / language review (2026-09-09 morning)
 
 Fresh P0 1 and P1 Cold2 functional PASS at frozen d8c45cb; not part of142 unit/integration tests. Values/forecasts1650 and2550, hash preserved, candidate1/reuse0. Product label2/2 correct; Agent narrative/Korean/schema ergonomics need improvement. Full raw-visible traces and manual findings: result/cold-review-20260909. No new review/publish, B-PC remains NOT_RUN; overall final review is not auto-approved.
+
+## 2026-09-09 Dialogue UX verification
+
+Approved Code Plan executed at fff0ffa. Targeted39 PASS, full144 PASS/2 SKIP (Hypothesis seed20260908), web7 tests/build PASS. P1 operator-assisted same-session two-turn Cold PASS: true user-fact pause, actual different-layout read, independent expected2550, chart path, candidate1/reuse0, original unchanged. Existing lifecycle content unchanged; prior human/Replay/publish evidence remains historical. Source logs under result/dialogue-ux-20260909. P0 interactive LIVE RUN #1 NOT_RUN (terminal not targetable by Computer Use); no prompt/screenshots, no substituted headless run. Minor narrative issues retained. B-PC NOT_RUN. Web completion-scroll correction checked separately; final remote receipts pending.
+

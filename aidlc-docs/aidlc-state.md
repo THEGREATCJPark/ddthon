@@ -1,6 +1,12 @@
 # AI-DLC State Tracking
 
-## 현재 검토 — 대화 UX / 실제 UI 시연 계획 (2026-09-09)
+## 최신 결과 — 대화 UX 검증 (2026-09-09)
+
+- **현재 단계**: CONSTRUCTION / 통합 Build & Test. 승인된 대화 정합화 구현 완료, P1 실제2-turn PASS, Python144 PASS/2 SKIP, 웹7 tests/build PASS. Python/C9 검증 소스fff0ffa. 웹 완료 시 마지막 대화 스크롤 보완도 검증됨.
+- **실제 P0 UI**: RUN #1 NOT_RUN. 새 폴더/Claude 프로세스 준비 후 Computer Use의 대상 창이 제공되지 않아 입력·캡처 미실행, 실제 reuse0. `result/live-demo-p0-20260909/`의4단계 사용자 안내 참조. 이전 headless 성공과 구분.
+- **UX 잔여**: 입력 형식 재시도0·환경 사실 질문·실제 chart 경로는 개선. 일부 내부 용어/긴 설명, Agent 자체 NASCA 명칭 누락은 남음(CLI 표시는 있음). 완벽한 표현 준수로 과장하지 않는다.
+- **gate**: 전체 제품/최종 제출 승인 아님. B-PC NOT_RUN. 마지막 web revision의 Pages 확인 후 결과 보고. 기존 exact lifecycle 승인과 과거 테스트 이력 유지.
+## 과거 검토 — 대화 UX / 실제 UI 시연 계획 (2026-09-09)
 
 - **게이트**: CONSTRUCTION / Code Generation 보완 Part 2 진행 — 사용자 전체 계획 승인(어 승인). `construction/plans/dialogue-ux-live-demo-code-generation-plan.md`의8단계 승인됨. 승인 시각은 audit/계획에 기록. 수정→회귀→실제 시연→원격 검증 순서로 수행.
 - **판단**: P1 환경 사실 대화는 기존 FR-P1-3/US-P1-2의 누락 복원. C9 한국어·도구 안내·차트 경로·웹 설명 정합화, 실제 검색 범위 표시. 새로운 요구사항/lifecycle/Unit 없음. 기존 Code Plan 승인은 과거 구현에 대한 것이며 이번 새 계획 승인으로 꾸미지 않는다.

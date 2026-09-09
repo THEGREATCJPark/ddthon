@@ -1,0 +1,19 @@
+{
+  "name": "P0 LIVE DEMO RUN #1",
+  "source_sha": "fff0ffac97fd52bd36995265c9ed14b12e2961c0",
+  "input_prompt": "이 프로젝트 requirements.txt의 패키지를 설치해줘.",
+  "prompt_submitted": false,
+  "initial_count": 0,
+  "final_count": 0,
+  "expected_delta": 1,
+  "actual_delta": 0,
+  "install_exit": null,
+  "version_verified": false,
+  "import_verified": false,
+  "package_still_absent": true,
+  "candidate_delta": 0,
+  "screenshots": [],
+  "verdict": "NOT_RUN",
+  "reason": "Computer Use initialized and app/window enumeration succeeded, but launched Claude Code terminal was not exposed as a targetable window. No user prompt was typed. No headless replacement.",
+  "checked_at": "2026-09-09T00:29:23.931120+00:00"
+}

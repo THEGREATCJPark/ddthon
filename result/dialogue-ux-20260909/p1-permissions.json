@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Skill",
+      "Write",
+      "Edit",
+      "Bash(pwd)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(echo *)",
+      "Bash(python *)",
+      "Bash(\"C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe\" *)",
+      "Bash(C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe *)",
+      "Bash(\"C:/Users/cik61/Desktop/ddthon-main/.venv/Scripts/python.exe\" *)",
+      "Bash(C:/Users/cik61/Desktop/ddthon-main/.venv/Scripts/python.exe *)"
+    ]
+  }
+}

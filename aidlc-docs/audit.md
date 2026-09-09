@@ -880,3 +880,10 @@ User (raw): 어 승인
 
 Approves all eight steps of construction/plans/dialogue-ux-live-demo-code-generation-plan.md as presented: bounded corrections, regression, two-turn P1, one interactive P0 session, evidence, push/CI/Pages. This is development approval, not a new candidate human review or remote execution approval. Existing CONSTRUCTION continues.
 
+
+## 2026-09-09T00:33:58.8367400Z — Approved dialogue correction local verification
+
+Source fff0ffa: targeted39 PASS, full144 PASS/2 SKIP, seed20260908. P1 same-session operator-assisted two-turn Cold PASS: first real failure/search NO_MATCH and user-fact wait; after supplied second turn actual workbook access/layout/2550/chart/candidate1/reuse0. Original unchanged; no new approval/publication. Input schema errors0; minor mixed jargon and missing Agent environment-name prose remain, CLI label present. First web build missing node_modules retained; npm ci then7 tests/build PASS. Browser found last-of-type scroll defect after completion; bounded Demo.tsx fix and7 tests/build rerun, final turn position/images confirmed. Python unchanged by this web fix.
+
+P0 LIVE DEMO RUN #1 NOT_RUN: fresh environment prepared at fff0ffa and Claude Code launched, but actual sky list_windows/list_apps did not expose the terminal. No prompt sent, no screenshots or visible dialogue acquired, usage0 remains. No headless/fake UI substitute. Existing window kept for user continuation. Computer Use itself initialized successfully; limitation is target availability. B-PC still NOT_RUN; owned P1 Excel PID21296 cleanup confirmed absent. First fff0ffa PythonCI34294753220/Pages34294753194 success; final web scroll revision pipeline pending.
+

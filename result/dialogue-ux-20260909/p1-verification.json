@@ -1,0 +1,21 @@
+{
+  "source_sha": "fff0ffac97fd52bd36995265c9ed14b12e2961c0",
+  "functional": "PASS",
+  "checks": {
+    "same_session": true,
+    "first_wait": true,
+    "first_state_unchanged": true,
+    "original_unchanged": true,
+    "work_complete": true,
+    "oracle_values": true,
+    "oracle_forecast": true,
+    "candidate_one": true,
+    "reuse_zero": true,
+    "chart_path_in_final": true,
+    "chart_exists": true,
+    "no_review_publish": true
+  },
+  "expected_oracle": "operator-only fixed expected values; independent of product self-check",
+  "operator_assisted": true,
+  "two_device": false
+}
