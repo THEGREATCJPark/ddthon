@@ -1,5 +1,5 @@
 export const fields = [
-  {key: "title", label: "사례 제목", max: 100, placeholder: "예: 특정 PC에서만 S3 업로드가 403으로 실패"},
+  {key: "title", label: "어떤 스킬인가요?", max: 100, placeholder: "예: 사내 S3 스토리지 연결 오류 해결"},
   {key: "author", label: "공유한 사람", max: 30, placeholder: "이름 또는 팀명"},
   {key: "problem", label: "겪었던 문제", max: 4000, placeholder: "어떤 작업에서, 무엇이 막혔나요?"},
   {key: "cause", label: "찾아낸 원인", max: 4000, placeholder: "처음 예상과 실제 원인이 어떻게 달랐나요?"},
@@ -7,18 +7,24 @@ export const fields = [
   {key: "procedure", label: "해결 절차", max: 6000, placeholder: "팀원이 따라 할 수 있는 순서로 작성해 주세요."},
   {key: "verification", label: "성공 확인 방법", max: 4000, placeholder: "무엇을 확인하면 해결됐다고 볼 수 있나요?"},
 ] as const;
-export type SkillDraft = Record<(typeof fields)[number]["key"], string>;
+export const valueFields = [
+  {key: "benefit", label: "조직에 주는 도움", max: 240, placeholder: "예: 장비 PC의 업로드 장애 대응 방법을 팀이 함께 사용"},
+  {key: "effect", label: "기대효과", max: 240, placeholder: "예: 같은 오류의 원인을 다시 탐색하는 시간 감소"},
+] as const;
+export type SkillDraft = Record<(typeof fields)[number]["key"], string> & Partial<Record<(typeof valueFields)[number]["key"], string>>;
 export type ExampleSkill = SkillDraft & {id: string; uid: string; createdAt: number};
-export const emptyDraft = Object.fromEntries(fields.map(f => [f.key, ""])) as SkillDraft;
+export const emptyDraft = Object.fromEntries([...fields, ...valueFields].map(f => [f.key, ""])) as SkillDraft;
 export function validateExample(input: SkillDraft): SkillDraft {
-  return Object.fromEntries(fields.map(f => {
-    const value = input[f.key].trim();
+  return Object.fromEntries([...fields, ...valueFields].map(f => {
+    const value = (input[f.key] || "").trim();
     if (!value || value.length > f.max) throw new Error(`${f.label}: 1~${f.max}자로 입력해 주세요.`);
     return [f.key, value];
   })) as SkillDraft;
 }
 export const featured: SkillDraft = {
-  title: "권한은 맞는데, 특정 PC에서만 S3 업로드가 403?",
+  title: "사내 S3 스토리지 연결 오류 해결",
+  benefit: "장비 PC의 403 오류 대응 지식을 공유해, 담당자가 바뀌어도 원인 확인과 복구에 활용합니다.",
+  effect: "권한·프록시를 반복 조사하는 시행착오를 줄이고, 같은 환경의 업로드 장애에 더 빠르게 대응할 수 있습니다.",
   author: "팀원 B · 실제 개발 경험 공유",
   problem: "장비 PC를 모니터링해 파일을 사내 S3 호환 스토리지(S3Drive)로 자동 업로드하는 프로그램에서, 특정 PC만 403 오류가 발생했습니다. access key·secret key·endpoint·bucket과 권한을 확인하고 프록시도 조사했지만 원인은 다른 곳에 있었습니다.",
   cause: "그 PC의 시계가 어긋나 요청 서명이 거부됐습니다. 이 사례의 오류는 RequestTimeTooSkewed였습니다. 403이라는 증상만 보고 권한 문제로 접근하면 시간 오차를 놓칠 수 있습니다.",

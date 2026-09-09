@@ -168,6 +168,9 @@ test("skill examples are public, bounded and deletable only by their author", as
   await assertFails(setDoc(doc(publicDb,"skillExamples","anon"),data));
   await assertFails(setDoc(doc(other,"skillExamples","spoof"),data));
   await assertFails(setDoc(doc(author,"skillExamples","large"),{...data,procedure:"x".repeat(6001)}));
+  await assertFails(setDoc(doc(author,"skillExamples","oversize-benefit"),{...data,benefit:"x".repeat(241)}));
+  await assertFails(setDoc(doc(author,"skillExamples","invalid-effect"),{...data,effect:123}));
+  await assertSucceeds(setDoc(doc(author,"skillExamples","with-value"),{...data,benefit:"Shared troubleshooting",effect:"Less repeated diagnosis"}));
   await assertSucceeds(setDoc(doc(author,"skillExamples","valid"),data));
   await assertSucceeds(getDocs(query(collection(publicDb,"skillExamples"),limit(100))));
   await assertFails(getDocs(collection(publicDb,"skillExamples")));

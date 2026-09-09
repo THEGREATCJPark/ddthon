@@ -1,8 +1,8 @@
 import {useEffect, useState, type FormEvent} from "react";
-import {Plus, BookOpen} from "lucide-react";
+import {Plus, Search, ChevronDown} from "lucide-react";
 import {session} from "./communityApi";
 import {watchExamples, saveExample, removeExample} from "./exampleSkillApi";
-import {fields, emptyDraft, featured, type SkillDraft, type ExampleSkill} from "./exampleSkillData";
+import {fields, valueFields, emptyDraft, featured, type SkillDraft, type ExampleSkill} from "./exampleSkillData";
 
 function SkillCard({item, sample = false, mine = false}: {item: SkillDraft & {id?: string}; sample?: boolean; mine?: boolean}) {
   const [confirm, setConfirm] = useState(false);
@@ -13,22 +13,24 @@ function SkillCard({item, sample = false, mine = false}: {item: SkillDraft & {id
     try { await removeExample(item.id!); }
     catch { setError("삭제하지 못했습니다. 다시 시도해 주세요."); setBusy(false); }
   }
-  return <article className="example-card">
-    <header><span className="capture-kind">{sample ? "공유된 실제 사례" : "팀원이 공유한 사례"} · Skill 후보</span><h3>{item.title}</h3><p>{item.author}</p></header>
-    <div className="example-summary">
-      <section><h4>겪었던 문제</h4><p>{item.problem}</p></section>
-      <section><h4>찾아낸 원인</h4><p>{item.cause}</p></section>
-    </div>
-    {sample && <div className="example-payoff"><BookOpen size={22}/><div><strong>다음 팀원은 ‘403’에서 시계 오차까지 다시 헤매지 않도록.</strong><p>증상·적용 조건·해결 절차·확인 방법을 함께 남기면, 같은 환경의 다음 요청에 활용할 지식이 됩니다.</p></div></div>}
-    <details className="example-detail" open={sample}>
-      <summary>Skill로 남길 내용</summary>
-      {fields.slice(4).map(f => <section key={f.key}><h4>{f.label}</h4><p>{item[f.key]}</p></section>)}
+  return <article className="example-row">
+    <details>
+      <summary className="example-row-summary">
+        <div className="example-row-name"><span className="capture-kind">{sample ? "실제 사례" : "공유 사례"} · Skill 후보</span><h3>{item.title}</h3><small>{item.author}</small></div>
+        <div><span className="example-cell-label">조직에 주는 도움</span><p>{item.benefit || "아직 작성되지 않았습니다. 상세 사례를 확인해 주세요."}</p></div>
+        <div><span className="example-cell-label">기대효과</span><p>{item.effect || "아직 작성되지 않았습니다."}</p></div>
+        <span className="example-expand-label">상세 <ChevronDown size={18}/></span>
+      </summary>
+      <div className="example-row-detail">
+        {fields.slice(2).map(f => <section key={f.key}><h4>{f.label}</h4><p>{item[f.key]}</p></section>)}
+        {mine && <div className="example-actions">{confirm ? <><span>이 사례를 삭제할까요?</span><button disabled={busy} onClick={remove}>삭제</button><button disabled={busy} onClick={() => setConfirm(false)}>취소</button></> : <button onClick={() => setConfirm(true)}>내 사례 삭제</button>}</div>}
+        {error && <p role="alert" className="notice">{error}</p>}
+      </div>
     </details>
-    {mine && <div className="example-actions">{confirm ? <><span>이 사례를 삭제할까요?</span><button disabled={busy} onClick={remove}>삭제</button><button disabled={busy} onClick={() => setConfirm(false)}>취소</button></> : <button onClick={() => setConfirm(true)}>내 사례 삭제</button>}</div>}
-    {error && <p role="alert" className="notice">{error}</p>}
   </article>;
 }
 export default function ExampleSkills() {
+  const [search, setSearch] = useState("");
   const [items, setItems] = useState<ExampleSkill[]>([]);
   const [uid, setUid] = useState("");
   const [loading, setLoading] = useState(true);
@@ -49,21 +51,25 @@ export default function ExampleSkills() {
     catch {setFormError("등록하지 못했습니다. 입력 내용은 유지됩니다. 연결을 확인하고 다시 시도해 주세요.");}
     finally {setBusy(false);}
   }
+  const allItems = [{...featured, id:"featured-s3", uid:""}, ...items];
+  const needle = search.trim().toLocaleLowerCase();
+  const visible = allItems.filter(item => [...fields, ...valueFields].some(f => (item[f.key] || "").toLocaleLowerCase().includes(needle)));
   return <section className="examples-page">
-    <div className="page-heading"><div><h2>예시 스킬</h2><p>한 사람이 찾아낸 환경 지식, 다음 팀원의 해결 출발점.</p></div><button className="button primary" disabled={busy} onClick={() => {setOpen(!open); setSuccess("");}}><Plus size={18}/>{open ? "등록 닫기" : "사례 추가"}</button></div>
+    <div className="page-heading"><div><h2>예시 스킬</h2><p>어떤 문제를 풀고, 우리 조직에 어떤 도움이 될까요?</p></div><button className="button primary" disabled={busy} onClick={() => {setOpen(!open); setSuccess("");}}><Plus size={18}/>{open ? "등록 닫기" : "사례 추가"}</button></div>
+    <div className="example-intro"><strong>쌓인 Skill이 다음 LOOP를 더 짧게.</strong><p>새로운 환경에서도 축적된 스킬을 해결의 단서로 활용하면 탐색·시행착오를 줄일 수 있습니다. 새로 찾은 해결법을 검토·검증해 다시 쌓으면, 재사용과 지식 축적이 서로를 가속할 수 있습니다.</p><div>환경 문제 <span>→</span> Skill 활용 <span>→</span> 더 짧은 LOOP <span>→</span> 새 Skill 축적</div></div>
     {success && <p role="status" className="notice">{success}</p>}
     {open && <form className="capture-form example-form" onSubmit={submit}>
       <h3>우리 팀이 겪은 문제 공유하기</h3>
       <p>방문자에게 공개되는 사례입니다. 비밀번호·키·내부 주소·업무 데이터는 제외해 주세요. 조직 Skill 게시 전 검토·Replay는 별도입니다.</p>
-      {fields.map(f => <label key={f.key}>{f.label}{f.key === "title" || f.key === "author" ? <input required maxLength={f.max} disabled={busy} value={draft[f.key]} placeholder={f.placeholder} onChange={e => setDraft({...draft, [f.key]:e.target.value})}/> : <textarea required rows={f.key === "procedure" ? 6 : 3} maxLength={f.max} disabled={busy} value={draft[f.key]} placeholder={f.placeholder} onChange={e => setDraft({...draft, [f.key]:e.target.value})}/>}</label>)}
+      {[...fields.slice(0,2), ...valueFields, ...fields.slice(2)].map(f => <label key={f.key}>{f.label}{f.key === "title" || f.key === "author" ? <input required maxLength={f.max} disabled={busy} value={draft[f.key] || ""} placeholder={f.placeholder} onChange={e => setDraft({...draft, [f.key]:e.target.value})}/> : <textarea required rows={f.key === "procedure" ? 6 : 3} maxLength={f.max} disabled={busy} value={draft[f.key] || ""} placeholder={f.placeholder} onChange={e => setDraft({...draft, [f.key]:e.target.value})}/>}</label>)}
       <div className="form-bottom"><span>등록한 브라우저에서 삭제할 수 있습니다.</span><button className="button primary" disabled={busy}>{busy ? "공유 중…" : "사례 공유"}</button></div>
       {formError && <p className="notice" role="alert">{formError}</p>}
     </form>}
-    <SkillCard item={featured} sample/>
-    <h3 className="example-community-title">팀원이 더한 사례 <span>{items.length}</span></h3>
+    <div className="example-list-toolbar"><h3>스킬 목록 <span>{visible.length}</span></h3><label><Search size={18}/><input type="search" aria-label="스킬 검색" placeholder="스킬·문제·기대효과 검색" value={search} onChange={e => setSearch(e.target.value)}/></label></div>
+    <div className="example-list-head" aria-hidden="true"><span>어떤 스킬인가요?</span><span>조직에 주는 도움</span><span>기대효과</span><span/></div>
+    <div className="example-list">{visible.map(item => <SkillCard key={item.id} item={item} sample={item.id === "featured-s3"} mine={!!uid && item.uid === uid}/>)}</div>
+    {!visible.length && <p className="example-empty">검색 결과가 없습니다. 다른 단어로 찾아보세요.</p>}
     {loading && <p role="status">공유 사례를 불러오는 중…</p>}
     {error && <p role="alert" className="notice">{error}</p>}
-    {!loading && !error && !items.length && <p className="example-empty">설치, 인증, 네트워크, 보안 환경에서 찾아낸 해결법을 남겨 주세요.</p>}
-    {items.map(item => <SkillCard key={item.id} item={item} mine={item.uid === uid}/>)}
   </section>;
 }
