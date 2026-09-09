@@ -32,7 +32,7 @@ function readTab(): Tab {
   const hash = location.hash.slice(1);
   if (hash === "demo" || hash === "demo-p0" || hash === "demo-p1")
     return "demo";
-  if (hash === "captures") return "captures";
+  if (["captures", "captures-p0", "captures-p1"].includes(hash)) return "captures";
   if (hash === "qa") return "qa";
   if (hash === "skills") return "skills";
   if (hash === "flow" || hash === "team" || hash === "challenge") return hash;
@@ -107,7 +107,7 @@ export default function App() {
         ) : tab === "demo" ? (
           <Demo initialScenario={location.hash === "#demo-p1" ? "p1" : "p0"} />
         ) : tab === "captures" ? (
-          <Captures />
+          <Captures initialScenario={location.hash === "#captures-p1" ? "p1" : "p0"} />
         ) : tab === "qa" ? (
           <QA />
         ) : tab === "skills" ? (
