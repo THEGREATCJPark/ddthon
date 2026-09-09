@@ -1,0 +1,16 @@
+{
+  "zip_path": "C:\\Users\\cik61\\Desktop\\P1-Paired-Preparation-20260909.zip",
+  "sha256": "fda61ad9051776d386c47116bd61ad0ebc6b8e5ee0bce6b3275b48c064382699",
+  "file_count": 30,
+  "delivery": "OPERATOR_ONLY_CONTAINS_ORACLE_NO_KEYS",
+  "status": "PREPARED_NOT_READY",
+  "model_calls": 0,
+  "preparation_tests": 20,
+  "mechanical_excel_check": "PASS",
+  "remaining": [
+    "Protected recorder/isolation integration",
+    "Exact input operator key provisioning",
+    "Common runtime and both-PC freeze",
+    "Treatment acceptance before model measurement"
+  ]
+}

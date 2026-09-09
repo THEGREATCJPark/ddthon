@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-09-09T03:41:26.796280+00:00",
+  "study_id": "p1-paired-002947cddc214ddfb4257be09d848f32",
+  "status": "PREPARED_NOT_READY",
+  "payload_checks": "PASS",
+  "integrity_errors": [],
+  "runtime_gaps": {
+    "python": {
+      "actual": "3.14.0",
+      "proposed": "3.13.14"
+    },
+    "msoffcrypto-tool": {
+      "actual": null,
+      "proposed": "5.4.2"
+    },
+    "cryptography": {
+      "actual": null,
+      "proposed": "46.0.6"
+    },
+    "pywin32": {
+      "actual": "312",
+      "proposed": "311"
+    },
+    "matplotlib": {
+      "actual": "3.11.1",
+      "proposed": "3.10.8"
+    }
+  },
+  "model_calls": 0,
+  "blockers": [
+    "OS containment and external recorder bridge not integrated/verified",
+    "Exact-input operator keys and cross-PC read-only opening not verified",
+    "Both-PC runtime, CLI, Excel build and authentication not frozen",
+    "Derived treatment acceptance and peer common freeze pending"
+  ],
+  "measurement_ready": false
+}
+
+EXIT=2

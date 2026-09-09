@@ -1,0 +1,47 @@
+{
+  "study_id": "p1-paired-002947cddc214ddfb4257be09d848f32",
+  "status": "DRAFT_NOT_FROZEN",
+  "historical_study_id": "d73f4b8132154e719aa7d74f96460792",
+  "common": {
+    "model": "claude-opus-4-8",
+    "effort": "medium",
+    "timeout_seconds": 600,
+    "tools": "Bash,Read,Write,Edit,Glob,Grep",
+    "cli_version": "2.1.266 (Claude Code)",
+    "python": "3.13.14",
+    "dependencies": {
+      "openpyxl": "3.1.5",
+      "msoffcrypto-tool": "5.4.2",
+      "cryptography": "46.0.6",
+      "pywin32": "311",
+      "matplotlib": "3.10.8"
+    },
+    "preparation": "Exact synthetic workbook opened read-only in Excel BEFORE timing; no environment fact sent to Agent. Original repo opens after operator help.",
+    "cache": "provider default, not guaranteed cold cache",
+    "task_sha256": "827d80b4c538467ae85ae4d4bb4b7dd5d8ea1b248d4623ab3d892cfc00513474",
+    "boundary_sha256": "6faa367e39f4c89fe9430187f1e749eb4ee87d999b641b70e278f7059e0d8569",
+    "inputs": [
+      {
+        "trial": 1,
+        "sha256": "26fe87e8e32351d400bc6607bad3709596fe4dc21a4e7d07de58baff7df8caf9"
+      },
+      {
+        "trial": 2,
+        "sha256": "0b88f2ecb879f792c8e9f69768a00c66a8e9adfb2969267fe66c88c14b17f1f6"
+      },
+      {
+        "trial": 3,
+        "sha256": "408bf641ce76cee46cc613f28209603cad83bd8f83db8e03fa3c0e74857632f0"
+      }
+    ],
+    "tooling_sha256": "e3c9808522438fd36a9674c26d25ad6b5a4166cb2f38a78544bb652e9de990ff",
+    "verifier_contract": "Independent rows/arithmetic, source-bound manual chart and safety review. Never execute submitted analysis code."
+  },
+  "conditions": [
+    "NO_SKILL",
+    "WARM_SKILL_ONLY"
+  ],
+  "trials_per_condition": 3,
+  "treatment_sha256": "f4593d89eeae88803d946172b58b24ca1cfb24705942c7039c9e37f1b8fe4dcb",
+  "live_execution_enabled": false
+}

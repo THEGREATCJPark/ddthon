@@ -1005,3 +1005,20 @@ Exact intent: 도중에 내가 이상하네 를 입력하기 전에 열어야 ..
 
 ## 2026-09-09T03:23:04.3468327Z — Closed-start filming correction verified
 Owned preparation exited normally after STOP; owned Excel17796 absent. No other Excel process terminated. Launcher syntax PASS and auto-open call removed. User manually opens target after actual failure/search and before environment-fact reply. Filmed run still NOT_RUN.
+
+## P1 paired measurement preparation approval
+Timestamp: 2026-09-09T03:37:08.9736476Z
+User: 그렇다면 진행해. 테스트 이행 전까지 구성완료를 목표로
+Recorded before code generation: construction/plans/p1-paired-measurement-preparation-plan.md. Continue integrated Build & Test; approved offline setup/verification, no model calls. Received manifest 79 payload files verified. Non-elevated Windows Home and missing input keys/peer containment are readiness prerequisites, not assumed complete. Historical SAFETY_STOP and product filming are preserved.
+
+
+## P1 operator public-certificate handoff preparation
+Timestamp: 2026-09-09T03:40:05.0290788Z
+User supplied before-PC request for public PEM/certificate. Created RSA-3072 document-encryption certificate in CurrentUser Windows store, non-exportable private key, expires 2026-09-16. Public-only package Downloads/P1-CJ-public-key-20260909.zip. Public certificate SHA256 9f33d5dca5fc6f0c7abd2d8b09d13d0e9ee70e542001d24ceb843f4957ccbc16. Harmless CMS encryption/decryption probe PASS. No actual input keys received or read; cross-PC decrypt/open NOT_RUN. Certificate is not isolation against same-user Agent; operator envelopes must be protected separately. No model calls, accounts, elevated services or product changes. Measurement setup remains incomplete.
+
+
+## P1 comparison offline preparation outcome
+Timestamp: 2026-09-09T03:41:47.4219685Z
+20 preparation tests PASS; real Excel on new non-measurement setup data PASS (read-only, values/hash/mtime). Original ZIP 79 payloads verified. Derived textual procedure and original descriptor provenance remain distinct. New operator kit has 30 files and delivery hash fda61ad9051776d386c47116bd61ad0ebc6b8e5ee0bce6b3275b48c064382699. Portable doctor returns PREPARED_NOT_READY / exit 2. Windows Home non-elevated; protected recorder/OS isolation/live bridge not implemented, input keys absent, runtime alignment and both-PC freeze pending. Model calls 0. No source reference imported, old runner executed, product changed, account provisioned, or historical result relabelled. Existing B receipt directory untouched. See result/p1-comparison-preparation-20260909 and preparation plan step5 remaining.
+
+- Preparation receipts are evidence of offline setup only; live comparison remains blocked.

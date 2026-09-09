@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-09-09T03:39:58.038586+00:00",
+  "kind": "MECHANICAL_DERIVED_PROCEDURE_VALIDATION_NOT_AGENT_MEASUREMENT",
+  "model_calls": 0,
+  "measurement_inputs_used": false,
+  "injected_skill_sha256": "f4593d89eeae88803d946172b58b24ca1cfb24705942c7039c9e37f1b8fe4dcb",
+  "validation_code_sha256": "5668d77e887e2ba4644b9fd397539b2ae5fd117ec11275bb7c537e6f496205f9",
+  "verdict": "PASS",
+  "direct_exception": "BadZipFile",
+  "checks": {
+    "direct_parser_failed": true,
+    "actual_values_equal": true,
+    "original_unchanged": true,
+    "read_only_open": true
+  },
+  "excel_version": "16.0",
+  "excel_build": "20326.0",
+  "input_sha256": "40d247c56c6c1c1fdec53508d204a8e47aedad63de42a25a8ccacdaec95db8e9",
+  "finished_at": "2026-09-09T03:40:02.877378+00:00"
+}

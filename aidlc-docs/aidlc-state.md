@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **P1 비교 준비 진행(새 측정 미실행)**: 사용자 준비 승인으로 p1-paired-measurement-preparation-plan.md를 구현. 새 운영자 kit Desktop/P1-Paired-Preparation-20260909, 79개 수신 payload/조건 hash 검증, 독립 검증기 준비20 PASS, 별도 데이터 실제 Excel read-only 절차 검사 PASS. 파생 Skill은 기계적 검증만, 원본 게시 승인 자동 승계 없음. 상태 PREPARED_NOT_READY: 비관리자 Windows Home의 recorder 격리/live bridge 미구성, 원본 입력 키 미수신, Python3.14 대 공통안3.13.14 및 라이브러리 불일치, 양쪽 동결 대기. 모델 호출0. 원본 v1/v2 및 SAFETY_STOP 보존. 제품 촬영과 새 NO_SKILL/WARM_SKILL_ONLY 비교 분리; 전체 Build & Test 완료 아님. result/p1-comparison-preparation-20260909 참조.
+
+
 - **P1 촬영 시작 상태 정정**: 대상 문서를 닫고 시작. Start-filming.ps1 자동 열기 제거, 운영자 준비 Excel만 종료 확인. 사용자가 도중에 문서를 직접 열고 “이상하네, 나는 열리는데”라고 입력한다. 기존 열린 상태 사전점검은 보존.
 
 - **P1 적용 후 촬영 준비 완료**: Desktop/skillloop-p1-after-video-20260909/warm, 기존 team-skill-store에서 게시 P1 수신. 원본 검토/Replay/게시 provenance 연결, 실제 직접 읽기 실패·MATCH·앱 접근·원본 보존 및 신규 재사용0 확인. Start-filming.ps1과 촬영/로그 가이드 준비. FULL_PRODUCT_WARM_FILMING이며 실제 촬영/Agent 실행은 NOT_RUN. 다른 PC 최신 Excel 비교 ZIP 미수신, WARM_SKILL_ONLY 측정은 대기. P0-only demo branch 미변경.
