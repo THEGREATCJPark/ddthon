@@ -2,12 +2,12 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
-- **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 코드/기록 push 진행. 최종 제품/사용자 시연 승인 아님.
+- **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 구현5fff0c4 origin/main push 완료. 최종 제품/사용자 시연 승인 아님.
 - **현재 시연 DB**: ddthon/team-skill-demo-20260909, 초기 데이터75b6e54225a9fa4e71e7174168161d61fa923e31. P0 Skill1·P1 Skill0·공유 실적0. 기존 team-skill-store/P1 이력 보존.
 - **사용자 작업**: skillloop-org-p0-20260909, skillloop-org-p1-20260909/cold 및 warm 준비. 같은 조직 DB 수신, 사용자 실적0. warm도 P1 게시 후 sync해야 Warm이 된다.
 - **검증**: 실제 Excel 닫기/암호 입력 없는 재열기2건, 다른 layout/path와 원본 불변 PASS. 실제 Git P0 수신→미승인 차단→허용 후 설치/import→1회 기록→반복+0 PASS(별도 임시 작업, live 이벤트 미전송). live P1 문서는 준비 접근 확인만; 후보·게시 없음.
 - **승인 UX**: 사용자 정정에 따라 Windows GUI 제거. C9가 업무 완료 시 Claude Code 대화로 공유 승인을 먼저 요청. 실제 사용자 답변/exact 후보/검토자를 기록한 뒤 독립 Replay·Git push. 초기 P0에 이미 받은 native 승인 이력은 보존; 이후 native 창 사용 안 함.
-- **남은 것**: 코드 push 확인, 사용자의 실제 P0 및 P1 Cold 대화 승인/게시, 게시 후 동료 Warm. 새 대화 UX 사용자 실행까지 완료했다고 하지 않는다.
+- **남은 것**: 사용자의 실제 P0 및 P1 Cold 대화 승인/게시, 게시 후 동료 Warm. 새 대화 UX 사용자 실행까지 완료했다고 하지 않는다.
 - **근거**: construction/plans/operator-open-org-cold-code-generation-plan.md, construction/build-and-test/org-demo-user-guide.md, result/operator-org-cold-20260909/. 웹/공식 규칙/기존 감사 기록 및 별도 B 수신 파일 미변경.
 - 아래 절은 당시의 과거 기록이다. 현재 판정은 이 절과 연결된 최신 실행 근거를 따른다.
 

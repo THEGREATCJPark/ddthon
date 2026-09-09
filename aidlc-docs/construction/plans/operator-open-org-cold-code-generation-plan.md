@@ -1,6 +1,6 @@
 # Operator open + organization-backed P0/P1 Cold — Code Generation Part 1
 
-Status: APPROVED — Part 2 implemented; actual organization setup complete. Final regression165 PASS/2 SKIP; setup checks15 PASS. Commit/push receipt pending. Historical planning decisions below are qualified by the actual approval/correction sections at the end.
+Status: APPROVED — Part 2 implemented; actual organization setup complete. Final regression165 PASS/2 SKIP; setup checks15 PASS. Implementation5fff0c4 pushed. User live P1 acceptance pending. Historical planning decisions below are qualified by the actual approval/correction sections at the end.
 
 ## 1. Request and current baseline
 
@@ -83,7 +83,7 @@ Preserve requested NASCA presentation only for the configured demo, with true pr
 - [x] 6. .claude/skills/skillloop/SKILL.md: concise discovery/review handoff, correct exact digest retrieval, requested-month response and transport-context usage. No product-code solution discovery, password/operator-opener access or staged success claims. Tests check behavioral boundaries rather than full fixed prose.
 - [x] 7. Run focused tests, enabled PBT and full Python regression once final code is stable. Run automated integration against isolated test Git remotes and separately retained operator Excel workbooks. Preserve original errors and distinguish real Excel, substitutes, Agent transcript and transport evidence.
 - [x] 8. After exact P0 human approval + pip Replay, initialize the final live branch with P0 only. Verify fresh P0 and P1 receivers: remote P0 present, P1 absent, hashes/last-sync/usage baselines recorded, statusline same context. Do not run the final P1 discovery or publication on behalf of the user during preparation. Deliver a verified-path command guide for P0 and the user-led P1 Cold -> review -> Replay -> publish flow.
-- [ ] 9. Save logs and run manifest under result/operator-org-cold-20260909/, update aidlc-docs/construction/build-and-test/build-and-test-summary.md and aidlc-state.md, append audit with fresh UTC for each event. Commit/push scoped product/docs/evidence after review of the diff; do not change website or unrelated B receipt. Identify pending user steps and do not claim overall acceptance.
+- [x] 9. Save logs and run manifest under result/operator-org-cold-20260909/, update aidlc-docs/construction/build-and-test/build-and-test-summary.md and aidlc-state.md, append audit with fresh UTC for each event. Commit/push scoped product/docs/evidence after review of the diff; do not change website or unrelated B receipt. Identify pending user steps and do not claim overall acceptance.
 
 ## 6. Acceptance and anti-overfit checks
 
@@ -119,3 +119,5 @@ Steps1–9 approved. Part2 starts now. Keep direct NASCA demo presentation. Acce
 ## Implementation validation receipt
 
 165 passed/2 skipped in final full regression (seed20260909); skipped interactive Excel and obsolete unlinked-runner condition are explicit. Separate real Excel open2/2 and Git-backed P0 preflight pass. Setup follow-up15PASS covers final operator launcher/help behavior. Native GUI implementation removed per user correction, conversation receipt validates exact candidate and source response. New live branch75b6e54225a9fa4e71e7174168161d61fa923e31 has P0-only; all three user stores P1 count0/events0. Final live P1 approval/publication remains USER_PENDING. Full earlier failure and stale-store test failure retained.
+
+Remote implementation receipt: 5fff0c4 pushed to origin/main. All nine implementation/preparation steps complete; final live P1 candidate permission/publication belongs to the user and is not marked PASS by this plan.
