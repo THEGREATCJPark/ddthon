@@ -1148,3 +1148,7 @@ Approval applies to development-closeout-plan.md integration/evidence reconcilia
 
 ## 2026-09-09T05:51:09.3254732Z — Isolated closeout integration
 Snapshot27c6f38 merges origin/main1d6824f. Audit conflict resolved by retaining both branches in original per-branch line order; programmatically checked both sequences. Original root worktree/index remain untouched. Web source is remote unchanged; no approval inferred from merge. Final verification follows this integrated snapshot.
+
+
+## 2026-09-09T05:55:00.3001443Z — Evidence byte preservation correction
+Fresh worktree checkout converted one report README LF to CRLF, causing its existing manifest mismatch. Restored exact original bytes from preserved operator workspace and added directory-local -text attributes for the three hashed report bundles. No result or original manifest hash changed; this is transport preservation, not metric editing. All original payloads rechecked below.
