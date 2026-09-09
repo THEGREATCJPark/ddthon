@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Plus, Trash2, ImagePlus, FileText } from "lucide-react";
-import p0Capture from "../../P0캡처.png";
+import p0Capture from "../../result/p0-demo-20260909/p0-claude-code.png";
+import P0Media from "./P0Media";
+import P1Media from "./P1Media";
 import p0Log from "./p0-execution-log.txt?raw";
 import { session } from "./communityApi";
 import {
@@ -220,7 +222,7 @@ export default function Captures() {
     <section className="captures-page">
       <div className="page-heading">
         <div>
-          <h2>캡처 정리</h2>
+          <h2>시연 영상 및 캡쳐</h2>
           <p>실제 실행 화면과 실행 로그</p>
         </div>
         <button
@@ -340,17 +342,13 @@ export default function Captures() {
           {error}
         </p>
       )}
-      {loading && scenario !== "p0" ? (
-        <p className="capture-empty">기록을 불러오는 중…</p>
-      ) : !visible.length && scenario !== "p0" && !error ? (
-        <div className="capture-empty">
-          <ImagePlus size={32} />
-          <h3>아직 {scenario.toUpperCase()} 실행 기록이 없습니다</h3>
-          <p>이미지/GIF와 실행 전문을 등록해 주세요.</p>
-        </div>
-      ) : null}
+      {loading && <p role="status">추가 기록을 불러오는 중…</p>}
       <div className="capture-list">
-        {scenario === "p0" && <CaptureCard item={repositoryP0} mine={false} bundled />}
+        {scenario === "p0" && <>
+          <P0Media />
+          <CaptureCard item={repositoryP0} mine={false} bundled />
+        </>}
+        {scenario === "p1" && <P1Media />}
         {visible.map((item) => (
           <CaptureCard key={item.id} item={item} mine={uid === item.uid} />
         ))}

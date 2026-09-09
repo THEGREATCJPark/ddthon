@@ -8,6 +8,7 @@ import {
   Images,
   House,
   BadgeCheck,
+  BookOpen,
 } from "lucide-react";
 import Flow from "./Flow";
 import Community from "./Community";
@@ -15,14 +16,16 @@ import Demo from "./Demo";
 import Captures from "./Captures";
 import Overview from "./Overview";
 import QA from "./QA";
+import ExampleSkills from "./ExampleSkills";
 const tabs = [
   { id: "overview", name: "개요", icon: House },
   { id: "flow", name: "진행 순서도", icon: GitBranch },
+  { id: "captures", name: "시연 영상 및 캡쳐", icon: Images },
+  { id: "qa", name: "QA 검증", icon: BadgeCheck },
+  { id: "skills", name: "예시 스킬", icon: BookOpen },
   { id: "team", name: "팀 의견", icon: MessageCircle },
   { id: "challenge", name: "태클 걸기", icon: Flame },
-  { id: "demo", name: "시연", icon: Play },
-  { id: "captures", name: "캡처 정리", icon: Images },
-  { id: "qa", name: "QA 검증", icon: BadgeCheck },
+  { id: "demo", name: "모의 진행", icon: Play },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 function readTab(): Tab {
@@ -31,6 +34,7 @@ function readTab(): Tab {
     return "demo";
   if (hash === "captures") return "captures";
   if (hash === "qa") return "qa";
+  if (hash === "skills") return "skills";
   if (hash === "flow" || hash === "team" || hash === "challenge") return hash;
   return "overview";
 }
@@ -42,7 +46,7 @@ export default function App() {
     return () => window.removeEventListener("hashchange", change);
   }, []);
   return (
-    <div className={`site ${tab === "demo" ? "demo-site" : ""}`}>
+    <div className="site">
       <header className="masthead">
         <div className="event-banner">
           <div className="event-banner-copy">
@@ -106,6 +110,8 @@ export default function App() {
           <Captures />
         ) : tab === "qa" ? (
           <QA />
+        ) : tab === "skills" ? (
+          <ExampleSkills />
         ) : (
           <Community key={tab} board={tab} />
         )}

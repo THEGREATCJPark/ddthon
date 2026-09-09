@@ -3,6 +3,34 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function owner(id) { return signedIn() && get(/databases/$(database)/documents/messageOwners/$(id)).data.uid == request.auth.uid; }
+    match /skillExamples/{id} {
+      allow get: if true;
+      allow list: if request.query.limit != null && request.query.limit <= 100;
+      allow create: if signedIn()
+        && (
+          (request.resource.data.keys().hasOnly(['title','author','body','uid','createdAt'])
+            && request.resource.data.uid == request.auth.uid
+            && request.resource.data.createdAt == request.time
+            && request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 100
+            && request.resource.data.author is string && request.resource.data.author.size() > 0 && request.resource.data.author.size() <= 30
+            && request.resource.data.body is string && request.resource.data.body.size() > 0 && request.resource.data.body.size() <= 60000)
+          || (
+        request.resource.data.keys().hasOnly(['title','author','problem','cause','applicability','procedure','verification','benefit','effect','uid','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 100
+        && request.resource.data.author is string && request.resource.data.author.size() > 0 && request.resource.data.author.size() <= 30
+        && request.resource.data.problem is string && request.resource.data.problem.size() > 0 && request.resource.data.problem.size() <= 4000
+        && request.resource.data.cause is string && request.resource.data.cause.size() > 0 && request.resource.data.cause.size() <= 4000
+        && request.resource.data.applicability is string && request.resource.data.applicability.size() > 0 && request.resource.data.applicability.size() <= 4000
+        && request.resource.data.procedure is string && request.resource.data.procedure.size() > 0 && request.resource.data.procedure.size() <= 6000
+        && (!('benefit' in request.resource.data) || (request.resource.data.benefit is string && request.resource.data.benefit.size() > 0 && request.resource.data.benefit.size() <= 240))
+        && (!('effect' in request.resource.data) || (request.resource.data.effect is string && request.resource.data.effect.size() > 0 && request.resource.data.effect.size() <= 240))
+        && request.resource.data.verification is string && request.resource.data.verification.size() > 0 && request.resource.data.verification.size() <= 4000)
+        );
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
     match /captures/{id} {
       allow get: if true;
       allow list: if request.query.limit != null && request.query.limit <= 50;
