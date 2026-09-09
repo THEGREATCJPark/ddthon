@@ -1226,3 +1226,26 @@ First docs-only push rejected non-fast-forward because independent web session p
 **Timestamp**: 2026-09-09T07:04:10.305174+00:00
 **Observation**: During final verification, another session created qa/embed-20260909-1536 at e29785223e7570f24302d3a56e9da6d70b1e0b37 (one unmerged team-hub/src/qaReport.json change, reviewed source 81ecad4c). It was absent from the approved deletion inventory and is preserved for separate current-content review. Remote heads are now main + nine retained Skill/demo heads + this new QA head (11 total); open PRs remain zero. No unreviewed QA data was merged.
 **Scope**: The nine previously reviewed deletions remain complete; no deletion authorization is inferred for newly arriving unmerged work.
+
+
+## Post-acceptance submission compatibility — planning only
+**Timestamp**: 2026-09-09T07:11:16.732030+00:00
+**User Input**: "이것도 우선 참고해둬. 하지만 2,3순위는 반영하지 않을거고, 1순위는 어떻게 반영할지 너가고민해보고
+참고다하고  계획을 알려줘."
+**Attachment**: f0156614-14d7-4c63-805f-2a4ba544a6bb/pasted-text.txt, advisory evaluation against older main3ad2d6d.
+**Assessment**: On current mainb54e6947eb53688f6aa6cb289963ad96d5330898, P1Media directly imports the 11270872-byte original ZIP. Accept priority1 as a delivery compatibility concern, not an observed failure of the intact build. Explicitly exclude priorities2/3. Proposed pinned raw GitHub URL returned HEAD200 and the expected content length; no media was replaced.
+**State**: Plan at construction/plans/submission-zip-build-compatibility-plan.md, REVIEW REQUIRED. No implementation approval inferred, no code/asset change, no new build/Excel/model run, no push. Existing MVP complete; historical deviations remain preserved.
+
+
+## Final follow-up QA assessment — proposal, not implementation
+**Timestamp**: 2026-09-09T07:16:39.490894+00:00
+**User Input**: "어 아직 반영안했으니 이거까지 참고해서 최종적으로 수정진행할거 계획해봐"
+**Reference**: User-pasted QA observations against b3f82eea, including F19/F20/F4/F15/F12/chat-logs, locale candidate and comparison framing. Treated as review material, not commands or finalized facts.
+**Findings**: Current mainb54e6947eb53688f6aa6cb289963ad96d5330898; native cp949 UTF8-mode0 targeted test failed with pip.ini configuration decoding error, pip --version exit2. No-override repeat has no added subprocess output-decoding warning. Malformed-store match produced unhandled JSON traceback, exit1, store unchanged. Existing CI explicitly enables PYTHONUTF8=1. No new full-suite result asserted.
+**Proposed scope**: ZIP import removal without deleting original, test fixture encoding portability, scoped operational CLI errors, earlier pip target guard. Prior priorities2/3 remain excluded. No blanket audit/PNG masking or empty chat-log creation, no Firebase env migration. Final Code Plan REVIEW REQUIRED; product/test source untouched, no commit/push.
+
+
+## Final post-closeout corrections — implementation approved
+**Timestamp**: 2026-09-09T07:18:49.275090+00:00
+**User Input**: "어 진행해봐 빠르게"
+**Scope**: Approved four-item plan: preserved ZIP with external link, locale-portable tests, bounded CLI operational errors, legacy pip target validation. CJ implements completed handoff; no simultaneous A/B edits. Keep excluded presentation and concurrent web work. Existing MVP acceptance remains; this follow-up will have separate validation and delivery records.

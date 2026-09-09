@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\cik61\Desktop\skillloop-closeout-20260909\repo\skillloop\__main__.py", line 8, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\cik61\Desktop\skillloop-closeout-20260909\repo\skillloop\cli.py", line 653, in main
+    return cmd_match(args.signature, args.target, args.store, args.pip_stderr, args.exit_code)
+  File "C:\Users\cik61\Desktop\skillloop-closeout-20260909\repo\skillloop\cli.py", line 446, in cmd_match
+    store = SkillStore(sp)
+  File "C:\Users\cik61\Desktop\skillloop-closeout-20260909\repo\skillloop\store.py", line 66, in __init__
+    self._load()
+    ~~~~~~~~~~^^
+  File "C:\Users\cik61\Desktop\skillloop-closeout-20260909\repo\skillloop\store.py", line 71, in _load
+    data = json.load(f)
+  File "C:\Python314\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Python314\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Python314\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)

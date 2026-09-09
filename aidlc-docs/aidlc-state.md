@@ -63,3 +63,13 @@
 - [정리 결과](history/u2-pr-review-20260909/maintenance-result.md), [현재 PR 판단](construction/u2-p1-git/pr-review-disposition.md), [승인 계획](construction/plans/repository-cleanup-plan-20260909.md). pip 입력 검증 보완은 이번 범위 밖이며 미반영이다.
 
 정리 변경 CI 최종 확인: 481d7a0 / run34321513133 SUCCESS, Python 3.12.10에서 200 PASS / 2 SKIP(197.83초). 후속 정리 기록은 문서만 변경한다.
+
+
+## 제출 ZIP 보완 검토
+
+2026-09-09T07:11:16.732451+00:00: [P1 ZIP 빌드 호환성 계획](construction/plans/submission-zip-build-compatibility-plan.md) 작성, REVIEW REQUIRED. 사용자가 요청한 1순위만 포함하며 2·3순위는 제외한다. 이번 단계는 계획이며 구현·테스트·main 반영은 미실행. 기존 MVP 개발 완료 상태 유지.
+
+
+## 최종 후속 수정안 — 검토 대기
+
+2026-09-09T07:16:39.491231+00:00: [최종 수정 계획](construction/plans/final-post-closeout-corrections-plan.md) 작성. ZIP 전달·테스트 인코딩·CLI 오류 경계·기존 pip target 검증의 4개 최소안을 제안하며 구현 승인은 아직 없다. 사전 진단에서 단일 테스트의 cp949 실패와 손상 JSON의 traceback만 재현했고, 전체 재검증이나 수정은 하지 않았다. 기존 MVP 완료/조건별 CI PASS 기록은 유지한다. 이전 2·3순위 표현 변경은 제외한다.

@@ -1,0 +1,46 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_git_received_generic_skill_actual_cold_install_without_confirmation ___
+
+tmp_path = WindowsPath('C:/Users/cik61/Desktop/skillloop-closeout-20260909/qa-review-071348/pytest/test_git_received_generic_skil0')
+capsys = <_pytest.capture.CaptureFixture object at 0x000001BC23F486E0>
+
+    def test_git_received_generic_skill_actual_cold_install_without_confirmation(tmp_path, capsys):
+        d, sender_store, policy, req, unused_py = setup_scope(tmp_path)
+        remote = tmp_path / 'remote.git'
+        subprocess.run(['git', 'init', '--bare', str(remote)], check=True, capture_output=True)
+        sender = GitSyncAdapter(tmp_path / 'sender', str(remote), 'trusted-team')
+        # Transport test only; never claim this test fixture as a human-reviewed publication.
+        assert sender.push_descriptors(sender_store.export_bundle([exact_ref(d)]))['ok']
+        receiver_dir = tmp_path / '공백 작업'; receiver_dir.mkdir()
+        store = SkillStore(str(receiver_dir / 'store.json'))
+        usage = UsageTracker(str(receiver_dir / 'usage.json'))
+        receiver = GitSyncAdapter(receiver_dir / 'mirror', str(remote), 'trusted-team')
+        (receiver_dir / 'sync-config.local.json').write_text(json.dumps(receiver.context), encoding='utf-8')
+        assert receiver.pull(store, usage)['ok']
+        source = Path(policy['sources']['packages'])
+        wheel(source, 'different-example', '4.2.0')
+        subprocess.run([sys.executable, '-m', 'venv', str(receiver_dir / '.venv')], check=True, capture_output=True)
+        py = receiver_dir / '.venv' / ('Scripts/python.exe' if sys.platform == 'win32' else 'bin/python')
+        empty = receiver_dir / 'empty'; empty.mkdir()
+        config = py.parent.parent / 'pip.ini' if sys.platform == 'win32' else py.parent.parent / 'pip.conf'
+        config.write_text(f'[global]\nno-index=true\nfind-links={empty}\ndisable-pip-version-check=true\n', encoding='utf-8')
+        req = receiver_dir / 'requirements.txt'; req.write_text('different-example==4.2.0\n', encoding='utf-8')
+        policy['imports'] = {'different-example': 'different_example'}
+        policy['scoped_auto_apply'].update(receiver.context, requirements=str(req), work_python=str(py))
+        policy_path = receiver_dir / 'policy.json'
+        policy_path.write_text(json.dumps(policy), encoding='utf-8')
+        # Real failure with scope removed must stop before installation/counting.
+        denied = copy.deepcopy(policy); denied.pop('scoped_auto_apply')
+        denied_path = receiver_dir / 'denied.json'; denied_path.write_text(json.dumps(denied), encoding='utf-8')
+        assert apply_requirements(str(req), str(py), store.path, usage.path, 'same-run', str(denied_path)) == 2
+>       assert 'CONFIRMATION_REQUIRED' in capsys.readouterr().out
+E       AssertionError: assert 'CONFIRMATION_REQUIRED' in 'apply-requirements: run_id=same-run\napply-requirements: ERROR ENV_NOT_READY: target pip unavailable; no reuse recorded; work environment preserved\n'
+E        +  where 'apply-requirements: run_id=same-run\napply-requirements: ERROR ENV_NOT_READY: target pip unavailable; no reuse recorded; work environment preserved\n' = CaptureResult(out='apply-requirements: run_id=same-run\napply-requirements: ERROR ENV_NOT_READY: target pip unavailable; no reuse recorded; work environment preserved\n', err='').out
+E        +    where CaptureResult(out='apply-requirements: run_id=same-run\napply-requirements: ERROR ENV_NOT_READY: target pip unavailable; no reuse recorded; work environment preserved\n', err='') = readouterr()
+E        +      where readouterr = <_pytest.capture.CaptureFixture object at 0x000001BC23F486E0>.readouterr
+
+tests\test_p0_scoped_auto_reuse.py:90: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_p0_scoped_auto_reuse.py::test_git_received_generic_skill_actual_cold_install_without_confirmation
+1 failed in 11.62s

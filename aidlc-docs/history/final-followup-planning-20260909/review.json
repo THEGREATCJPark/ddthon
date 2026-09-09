@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-09-09T07:14:01.188809+00:00",
+  "cp949_test_exit": 1,
+  "cp949_test_log": "C:\\Users\\cik61\\Desktop\\skillloop-closeout-20260909\\qa-review-071348\\pytest-cp949-native.txt",
+  "pip_config_probe": [
+    {
+      "path": "C:\\Users\\cik61\\Desktop\\skillloop-closeout-20260909\\qa-review-071348\\pytest\\test_git_received_generic_skil0\\공백 작업\\.venv\\pip.ini",
+      "exit_code": 2,
+      "stderr": "Configuration file contains invalid cp949 characters in C:\\Users\\cik61\\Desktop\\skillloop-closeout-20260909\\qa-review-071348\\pytest\\test_git_received_generic_skil0\\공백 작업\\.venv\\pip.ini."
+    }
+  ],
+  "cli_malformed_store": {
+    "exit_code": 1,
+    "raw_traceback": true,
+    "store_unchanged": true,
+    "log": "C:\\Users\\cik61\\Desktop\\skillloop-closeout-20260909\\qa-review-071348\\cli-malformed-store.txt"
+  },
+  "product_files_modified": false
+}
