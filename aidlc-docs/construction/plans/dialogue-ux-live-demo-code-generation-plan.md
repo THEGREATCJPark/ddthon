@@ -86,3 +86,22 @@ User requested natural observed-error guidance, visible preloaded Skills at zero
 Current local evidence: user-provided prompt/early pip error is incomplete as a full transcript. Work usage contains one verified event at2026-09-09T00:54:57Z; that is recorded evidence, not an observed full UI capture. Existing NOT_RUN receipt for the earlier automation attempt remains historical.
 
 Validation receipt: targeted37 PASS, P1 services10 PASS, final real P0 repeat1 PASS with inherited PYTHONUTF8=1. Initial parent-only UTF-8 run passed with2 reader warnings, preserved separately. Known P0 work C9 refreshed, protected settings/store/usage unchanged. New skillloop-p0-feedback-20260909 work venv is PREPARED_NOT_RUN and points to existing actual local history1; no new event created. Latest dialogue phrasing is not yet independently validated in a fresh Agent session. Web and remote data unchanged.
+
+## P1 live feedback amendment — operator viewing and user-led second turn
+
+Current user requests correction to operator file opening and first-turn phrasing. Implement bounded changes within existing P1 environment/FR-P1-3/C9 workflow. User's explicit Request Changes replaces the prior mandatory direct-question wording; conversational environment fact is still required before discovery. Existing approval/replay/publication gates remain. Web excluded.
+
+- [x] C9 + facts_needed: after actual direct failure + real NO_MATCH, report context as NASCA(가상) and observed failure, end turn without asking if Excel opens. Wait for unsolicited user environment fact; do not invent actual NASCA diagnosis or app-open evidence. For an August actual-data request, distinguish missing actual data from forecast and do not silently treat forecast as actual.
+- [x] Operator preparation: add explicit interactive --ask-password (hidden input, memory only, never argv/workspace/log), enabling the operator to reopen their own sample. Preserve default random-password behavior, open-workbook prerequisite, new-destination restriction and owned cleanup. Show first Cold workbook and explain already-open vs reopening. No decryption added to Agent/products.
+- [x] Test operator-password handling with COM test double, no password exposure in generated artifacts/output, zero empty password, and unchanged Cold wait/no side effects. Keep mocks separate from actual Excel evidence.
+- [x] Refresh only C9 in known current P1 work folders; preserve existing XLSX/store/usage/settings. Record current operator viewing investigation: Excel process31792 exists but cold workbook not found in read-only ROT enumeration; cannot conclude whether closed or unregistered. No forced open/save/kill. Publish guide for a new operator-chosen-password workspace. Run relevant checks; record and push only owned files.
+
+Do not retrospectively remove the earlier two-turn question-based evidence. New first-turn prose must be tested in a later fresh user session; no such live result is claimed by unit tests.
+
+Traceability clarification before edits: US-P1-2 AC-1 currently assumes an Agent question. Align only that trigger with the user's new failure-report → user-provided fact turn, retaining FR-P1-3 and actual user input. Also align CLI help; no new requirement or changed publication gate.
+
+
+Additional validation within operator-preparation step: one isolated real Excel fixture, memory-only generated operator password; close/reopen owned Cold workbook read-only with that password, verify values/hash unchanged and direct parser still fails. No existing user workbook or password touched. Separate from Agent Cold acceptance.
+
+
+Outcome: implementation and26 targeted checks completed. Actual reopen automation FAILED/blocked on password dialog despite supplied password; preserved3 attempts and cancelled only owned test prompt. Manual operator reopen and new Agent prose remain unverified, not passed. No overall completion/acceptance claimed.

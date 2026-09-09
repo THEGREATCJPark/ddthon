@@ -543,7 +543,7 @@ def main(argv: list[str] | None = None) -> int:
     {"action":"file-access","method":"excel-com-attach"}를 전달.
     업무 데이터/시트/열/행/예측식/암호/파일 경로는 procedure에 포함하지 않음.
   NEEDS_AGENT_DISCOVERY: 실제 실패·검색 후 정상적인 환경 사실 확인 대기.
-    사용자에게 Excel 열람 가능 여부를 확인하고 답변 뒤 탐색합니다.
+    실패·검색 결과를 알리고 사용자가 환경 사실을 제공한 뒤 탐색합니다.
   NEEDS_TASK_MAPPING: 로컬 artifact_ref를 읽어 현재 문서의 실제 배치를 판단.
   --app-open은 보고된 전제이며 실제 workbook 접근 성공의 증명이 아닙니다.
   WORK_COMPLETE의 chart_ref는 최종 답변에 실제 파일 경로/링크로 전달합니다.

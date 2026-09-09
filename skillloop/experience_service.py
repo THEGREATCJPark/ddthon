@@ -166,8 +166,9 @@ def execute_p1(xlsx_path, store, usage, run_id, *, app_open=False, procedure=Non
         return {'status': outcome.status, 'trace': trace}
     if procedure is None:
         return {'status': 'NEEDS_AGENT_DISCOVERY', 'trace': trace,
-                'facts_needed': '사용자 환경에서 이 파일을 Excel로 열어 볼 수 있는지 확인해 주세요. '
-                                '아직 대화로 확인하지 않았다면 답변을 기다린 뒤 허용 read-only 대안을 탐색합니다.'}
+                'facts_needed': '직접 읽기 실패와 팀 Skill 검색 결과만 알리고, '
+                                '사용자가 환경 사실을 이어서 제공할 때까지 기다립니다. '
+                                '이미 대화에서 제공된 사실은 재질문하지 않습니다.'}
     procedure = candidate_procedure(procedure)  # never choose or default the solution
     access = harness.run_file_access_procedure(procedure, env)
     if not access.ok:

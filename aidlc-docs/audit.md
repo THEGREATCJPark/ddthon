@@ -912,3 +912,15 @@ Added observed-failure search-intent CLI prose within the same approved feedback
 ## 2026-09-09T01:07:15.0855051Z — P0 live feedback validation
 C9/C11/CLI presentation fixes:37 targeted PASS,10 P1 service PASS; final focused real P0 PASS with inherited PYTHONUTF8=1. Earlier parent-only UTF8 run had2 decoder warnings; preserved and no warnings suppressed. Work store/usage/settings hashes unchanged. User work import/version1.0.0 confirmed with existing actual event1. Fresh feedback work venv prepared against same real local history, PREPARED_NOT_RUN; no fabricated history or remote publication. Agent prose not revalidated live. Web untouched. Records under result/p0-live-feedback-20260909.
 
+
+## 2026-09-09T01:11:26.4189580Z — P1 live feedback amendment before changes
+User requests operator reopening and a factual first response without direct Excel question. Plan amendment recorded within current P1/C9 correction; no new failure model or web changes. Current process31792 exists but exact Cold workbook absent from read-only ROT enumeration; no unknown workbook data inspected. Default random unretained password explains why a separate open can require a password; exact current visibility cause unconfirmed. Add operator-hidden password choice, not Agent decryption. Preserve prior evidence and actual-vs-forecast boundary.
+
+
+## 2026-09-09T01:15:57.6890169Z — Operator reopen execution found COM failure
+Actual owned-workbook reopen attempt failed with com_error; retained excel-reopen-verification.json (not PASS). Microsoft primary API documentation https://learn.microsoft.com/en-us/office/vba/api/excel.workbook.saveas specifies Password at most15 characters. Consulted API contract only, no external preimplementation/code reference. Enforce explicit limit before any environment mutation; default generated password reduced to14 chars. Do not silently truncate a user's password. Repeat actual test with contract-valid memory-only password; original failure retained.
+
+
+## 2026-09-09T01:23:25.6541210Z — P1 feedback validation and remaining operator check
+26 targeted tests PASS. Actual Excel operator reopen did not pass:3 attempts preserved, valid-length and positional calls still prompted for password. Computer Use inspected the unique owned test workbook window and Escape cancelled only its dialog for cleanup; no unrelated user Excel killed. API length guard not claimed as proven cause. Existing work XLSX/store/usage/settings hashes unchanged; C9 refreshed. User manual reopening and revised Agent first-turn prose remain unverified. No new candidate approval/publication, no website changes. Implementation complete within correction scope; overall Build & Test remains open.
+

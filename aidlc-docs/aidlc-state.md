@@ -1,5 +1,12 @@
 # AI-DLC State Tracking
 
+## 최신 / P1 live feedback (2026-09-09)
+
+- Existing CONSTRUCTION / Build & Test. User requested first-turn failure/search report without direct Excel question; C9/S2/help and US-P1-2 AC-1 aligned. Next user-provided fact still precedes discovery. NASCA(가상) is environment label, not verified real NASCA diagnosis. August actual data must not be fabricated from a forecast.
+- Operator preparation adds hidden interactive --ask-password (1–15 chars, no file/log/argv secret), Cold activation and clear viewing guidance.26 targeted checks PASS. Existing XLSX/store/usage/settings unchanged; only C9 refreshed.
+- Actual operator COM reopen tests did not pass; Excel password dialog required cancellation. Workbooks were created/opened and direct parser failure confirmed, but manual chosen-password reopening remains unverified.3 failed attempts retained. No fresh Agent dialogue/UI result claimed. Web untouched.
+
+
 ## 최신 / P0 live feedback correction (2026-09-09)
 
 - Existing CONSTRUCTION / Build & Test. User requested C9 narration, visible preloaded inventory and named verified-reuse success feedback; amendment recorded before implementation. Web excluded.

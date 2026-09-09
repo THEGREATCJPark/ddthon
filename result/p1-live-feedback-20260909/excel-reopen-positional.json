@@ -1,0 +1,9 @@
+{
+  "kind": "actual Excel operator reopen with explicit positional Open arguments",
+  "root": "C:\\Users\\cik61\\AppData\\Local\\Temp\\skillloop-reopen-positional-cfd9n7x_\\work",
+  "direct_parser_failed": true,
+  "checks_pass": false,
+  "error_type": "com_error",
+  "error": "(-2147352567, '예외가 발생했습니다.', (0, 'Microsoft Excel', 'Workbooks 클래스 중 Open 메서드에 오류가 있습니다.', 'xlmain11.chm', 0, -2146827284), None)",
+  "recorded_at": "2026-09-09T01:21:31.699829+00:00"
+}

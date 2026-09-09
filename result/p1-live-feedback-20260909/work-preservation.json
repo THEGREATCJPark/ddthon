@@ -1,0 +1,24 @@
+[
+  {
+    "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\cold",
+    "protected_hashes": {
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\cold\\AAAAA01_직전_3달_생산량.xlsx": "3d8d112bb07eea0febcab1a56c02757be1bc4229a40cb58587d7d2b73a4bbe10",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\cold\\.skillloop\\store.json": "e7da859476894a9faed66bb837b5aee48eec9ab6358d31141cab5f42206fd926",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\cold\\.skillloop\\usage.json": "5e56ac493e27e4c30909fa7eca061dc85c00df0ce2f4947a9bf1d03624b620d6",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\cold\\.claude\\settings.local.json": "275532baecbde7e52af1e837eb825c65bac97bd381a28647f537694c358e22a0"
+    },
+    "unchanged": true,
+    "updated": "C9 instructions only; active conversation may retain already-loaded text"
+  },
+  {
+    "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\warm",
+    "protected_hashes": {
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\warm\\BBBBB02_직전_3달_생산량.xlsx": "f7509b2a3bb972c6b37f688678b030483fd58b03d9c1f284bfe2fb8046d09e9a",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\warm\\.skillloop\\store.json": "e7da859476894a9faed66bb837b5aee48eec9ab6358d31141cab5f42206fd926",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\warm\\.skillloop\\usage.json": "5e56ac493e27e4c30909fa7eca061dc85c00df0ce2f4947a9bf1d03624b620d6",
+      "C:\\Users\\cik61\\Desktop\\skillloop-live-p1-20260909\\warm\\.claude\\settings.local.json": "6e05e3dcfc706c060c14aaa0f0194f0bf67c5178979020f76c6f8378cf9cc2c5"
+    },
+    "unchanged": true,
+    "updated": "C9 instructions only; active conversation may retain already-loaded text"
+  }
+]
