@@ -987,3 +987,9 @@ Requirements/US-P0-1/Design/P0 NFR and five-step Code Plan updated under explici
 
 ## 2026-09-09T02:50:57.4223352Z — Fresh user Cold workspace ready
 Prepared Desktop/skillloop-p0-auto-cold-20260909-115024 from live Git branch75b6e542 with P0 only. Package absent, scoped policy valid, P1 count0. Did not execute installation in this user workspace. Next Agent conversation NOT_RUN. Existing user's installed Cold folder retained.
+
+## 2026-09-09T02:55:22.8816505Z — P1 first-turn wording correction approved
+User requests 'Agent Skillloop를 통해 방법을 탐색해볼까요?' after actual failure/NO_MATCH. Plan amendment recorded before C9 update. No direct Excel question or solution hint. P0 pasted transcript reports automatic reuse success; user-reported evidence, not an independently re-run test. Existing counts/workspaces preserved.
+
+## 2026-09-09T02:55:33.9911115Z — P1 prompt amendment applied
+C9 now asks 'Agent SkillLoop를 통해 방법을 탐색해볼까요?' only after actual direct failure and NO_MATCH. Three instructions aligned; former file-opening question removed. Eight existing P1 workspace Skill copies refreshed; no workbook/store/usage changes. Text checks passed; instruction-only change, live Agent response not newly executed. P0 scope and P1 publication approval preserved.

@@ -130,3 +130,11 @@ User explicitly requests removing connected status labels '팀 동기화 확인'
 Approval: latest user '얼른 수정해줘봐' plus specific requested text; bounded amendment proceeds under existing approved plan. P1 candidate approval remains separate.
 
 Validation: initial focused run 37 passed/1 stale-display assertion failure (P0 14 tests passed). After aligning only requested text assertions, display/accounting rerun 24 passed. Three intermediate stale-text failures retained. No runtime behavior changed during assertion corrections. Prepared C9 copies refreshed; live status observed; no user-work counters reset.
+
+## Approved P1 conversation wording amendment — 2026-09-09T02:55:22.8343603Z
+User requests replacing the first failure follow-up with 'Agent SkillLoop를 통해 방법을 탐색해볼까요?' instead of asking how the file is normally opened. Bounded C9 presentation change: actual direct failure + actual NO_MATCH first, invite exploration and wait for response; do not supply Excel/COM as the answer. User may provide environment facts directly; do not ask an additional yes/no question after such a response. Neither exploration consent nor environment facts constitute candidate publication approval. P0 automatic reuse policy unchanged.
+1. [x] Align all three C9 first-response instructions, superseding 'question-free stop' and former environment-question wording.
+2. [x] Refresh existing P1 workspace Skill copies only; validate text consistency; preserve data and approval gates. Record user-reported P0 automatic run separately from independent tests. Provide existing operator fresh-Cold command, no destructive reset.
+Approval: current explicit user request; proceed within existing CONSTRUCTION plan, no new component/functionality.
+
+Validation: three first-response rules consistent; previous prompt absent; existing P1 copies refreshed. Instruction-only correction, no new runtime tests. Live Agent wording awaits user run.
