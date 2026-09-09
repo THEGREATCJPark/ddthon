@@ -1,0 +1,10 @@
+﻿condition,run,selected_display,result,agent_import_version_seconds,strict_verified_seconds,strict_source,product_verified_reuse_seconds,final_text_timestamp_seconds,full_native_input_tokens,full_native_output_tokens,full_native_cache_creation_input_tokens,full_native_cache_read_input_tokens,estimated_full_cost_usd,tool_calls
+NO_SKILL,1,False,PASS,120.495,153.685,post_exit_operator,,142.538,24,3392,11529,97931,0.21170174999999997,13
+NO_SKILL,2,False,PASS,101.947,101.947,agent_tool_result,,124.371,18,3406,7220,75313,0.17378150000000003,11
+NO_SKILL,3,False,BLOCKED,,,,,81.251,14,2422,4811,50678,0.12178775,8
+NO_SKILL,4,True,BLOCKED,,,,,86.385,12,2735,9314,37927,0.151371,8
+NO_SKILL,5,True,PASS,173.231,197.784,post_exit_operator,,184.764,24,3822,7479,102763,0.19955525000000002,12
+NO_SKILL,6,True,PASS,213.595,213.595,agent_tool_results_combined_same_venv,,236.66,20,3623,7652,87378,0.18794899999999998,13
+WITH_SKILL,1,True,PASS,,42.904527,operator_after_session,31.788,42.663,12,1785,24107,98116,0.25019175000000005,5
+WITH_SKILL,2,True,PASS,,47.420142,operator_after_session,35.757,47.237,14,1958,19402,123860,0.23799249999999997,8
+WITH_SKILL,3,True,PASS,,47.107826,operator_after_session,36.358,46.89,14,2037,19492,124130,0.24066499999999996,8

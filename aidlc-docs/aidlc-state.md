@@ -1,3 +1,6 @@
+## Latest / P0 관측 결과 집계 / P0 comparison evidence — 2026-09-09T05:54:03.0649887Z
+
+CONSTRUCTION / Build & Test. 기존 실제 실행 근거를 Git 제출용으로 정리했다. 적용 전 추가4/5/6회 전체(2 PASS/1 BLOCKED)를 비교용으로 선택하고, 이전1/2/3 포함 전체6회(4 PASS/2 BLOCKED)를 보존했다. 적용 후 기존3회는 모두 실제 설치·독립 검증·reuse+1 PASS, 업무 평균34.634초. 보고서 result/p0-six-before-three-after-20260909/README.md, 전체9행 CSV, 원본 해시·공개 도구/응답·검증 근거가 연결된다. 조건·manual/auto·runtime·검증 종료점 차이와6회 승인 지연으로 인과적 속도/비용 개선 주장은 하지 않는다. 결과 원본을 최신 제출 SHA에서 재실행한 것으로 승격하지 않는다. 신규 모델/제품/웹 변경 없음. 이번 사용자 승인은 보고서 commit/push 범위이며, 전체 개발 완료/Build & Test 최종 수용과 이전 마감 계획 실행은 별도 대기다. 아래 상태들은 당시 기록이다.
 # AI-DLC State Tracking
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비

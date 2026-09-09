@@ -1,0 +1,13 @@
+{
+  "started_at": "2026-09-09T05:41:15.306444+00:00",
+  "ended_at": "2026-09-09T05:41:15.425480+00:00",
+  "command": [
+    "<USER_HOME>\\Desktop\\P0-NoSkill-Runs-20260909\\run-5\\.venv\\Scripts\\python.exe",
+    "-I",
+    "-c",
+    "import sys,json,importlib.metadata as m; import skillloop_demo_pkg as p; v=m.version('skillloop-demo-pkg'); print(json.dumps({'python':sys.executable,'prefix':sys.prefix,'version':v,'module':p.__file__,'import_ok':True,'ok':p.ok()})); assert v=='1.0.0'; assert p.ok()"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"python\": \"C:\\\\Users\\\\cik61\\\\Desktop\\\\P0-NoSkill-Runs-20260909\\\\run-5\\\\.venv\\\\Scripts\\\\python.exe\", \"prefix\": \"C:\\\\Users\\\\cik61\\\\Desktop\\\\P0-NoSkill-Runs-20260909\\\\run-5\\\\.venv\", \"version\": \"1.0.0\", \"module\": \"C:\\\\Users\\\\cik61\\\\Desktop\\\\P0-NoSkill-Runs-20260909\\\\run-5\\\\.venv\\\\Lib\\\\site-packages\\\\skillloop_demo_pkg.py\", \"import_ok\": true, \"ok\": true}\n",
+  "stderr": ""
+}
