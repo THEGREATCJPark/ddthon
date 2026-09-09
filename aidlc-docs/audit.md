@@ -1249,3 +1249,22 @@ First docs-only push rejected non-fast-forward because independent web session p
 **Timestamp**: 2026-09-09T07:18:49.275090+00:00
 **User Input**: "어 진행해봐 빠르게"
 **Scope**: Approved four-item plan: preserved ZIP with external link, locale-portable tests, bounded CLI operational errors, legacy pip target validation. CJ implements completed handoff; no simultaneous A/B edits. Keep excluded presentation and concurrent web work. Existing MVP acceptance remains; this follow-up will have separate validation and delivery records.
+
+## Follow-up AI-DLC execution audit — 2026-09-09T07:27:09.5518404Z
+
+User request: “지금 작업중인 항목들이 ai-dlc 충실성을 위반하지않는지 점검해봐”
+
+Scope/approval check: the four-item final-post-closeout-corrections-plan was approved by “어 진행해봐 빠르게” and recorded in commit 45e3275 before product edits. Seven tracked files and one new test file match that scope. Official CLAUDE.md/rule files are unchanged. Previous MVP acceptance remains in effect; this follow-up is not complete or delivered.
+
+Actual deviations: plan step 3 specified per-item implementation/validation before proceeding and separate reviewable commits. The four modifications were applied as a batch before validation and have not yet been split into commits. This did not follow that execution sequence. Progress/state updates also lagged actual implementation and completed web checks, contrary to code-generation.md Step 12 and the immediate-checkbox rule. This record acknowledges the deviations now; it is not retrospective approval or evidence that sequential execution occurred.
+
+Correction: retain the original plan/approval/history and incomplete overall checkboxes; distinguish historical planning statements from current implementation. Before delivery, finish actual verification, inspect each item separately, create reviewable commits, and record actual results. Do not call this full procedural compliance or mark the follow-up complete prematurely.
+
+Verified now: normal and >10MB-filtered web copies passed npm ci/test/build; recorded output hashes are identical. Original ZIP SHA256 = fe2abcd51a1d1e53e73b40b2ec96eeaf9c86b7a2149ffca6e4acf335e995a879. Python native-cp949 full regression is still running (no final result file); UTF8 run/full counts and P1 rendered-media acceptance are not confirmed. Current product edits remain uncommitted; no follow-up implementation push/main delivery has occurred.
+
+Evidence currently retained in operator folders final-web-validation-072048 and final-followup-validation-072005; publish the completed evidence bundle with the follow-up result. No past evidence or score was overwritten. Security/Resiliency extension opt-outs remain unchanged, existing partial PBT obligations remain enabled; their current run is not yet complete.
+
+
+## Implementation checkpoint correction — 2026-09-09T07:28:30.014343+00:00
+
+The concurrently recorded 07:27 review used an earlier workspace snapshot. Four implementation commits now exist: 02857b9 (locale fixture), 02e16f7 (pip target), 4734406 (CLI errors), a906565 (ZIP build). Native cp949 full suite finished at 07:26:42Z with 228 passed / 2 skipped; UTF8 full suite is still running. The sequential-validation deviation remains acknowledged; separate commit review and full regression do not retroactively erase it. Main push was rejected because concurrent web commit 50ffe71 advanced main; preserve and integrate that commit before retry. No force push. Original media/rules remain unchanged.

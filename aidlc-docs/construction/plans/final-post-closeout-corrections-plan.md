@@ -64,3 +64,7 @@ Security/Resiliency extension opt-outs stay as recorded; ordinary input integrit
 Pre-fix diagnostic evidence: [planning diagnostics](../../history/final-followup-planning-20260909/README.md). No product/test implementation changes, commit or push have been performed for this proposal.
 
 Approval received 2026-09-09T07:18:49.269422+00:00: user “어 진행해봐 빠르게” approves this four-item plan. CJ performs the already-transferred maintenance; original A/B authorship remains preserved. Concurrent main70387ef web presentation edits are retained, not reworked by this task.
+
+### Current execution checkpoint — 2026-09-09T07:27:09.5518404Z
+
+The earlier 'no implementation' sentence describes the pre-approval planning checkpoint only. All four scoped edits are now in the working tree, uncommitted. Step 3's sequential per-item validation was not followed: edits were batched before verification. This deviation and delayed state/checklist update are explicitly recorded in audit.md; no retroactive approval is claimed. Steps 3–6 remain incomplete until their remaining validation/review/delivery obligations are actually satisfied. Web tests and both builds passed; Python final regression and P1 rendered acceptance remain pending.
