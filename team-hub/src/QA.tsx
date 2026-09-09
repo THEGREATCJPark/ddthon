@@ -23,6 +23,13 @@ const rounds = report.rounds as Round[];
 const areas = report.areas as Area[];
 const counted = rounds.filter((r) => r.counted);
 
+/* 앞뒤로 붙은 미집계 회차는 그릴 점이 없으므로 축에서 뺀다 — 표와 회차 수에는 남는다.
+   사이에 낀 미집계 회차는 그대로 눈금을 유지하고 선을 끊는다(보간 금지). */
+const first = rounds.findIndex((r) => r.counted);
+const lastIdx = rounds.length - 1 - [...rounds].reverse().findIndex((r) => r.counted);
+const plot = rounds.slice(first, lastIdx + 1);
+const trimmed = rounds.length - plot.length;
+
 const W = 640;
 const H = 244;
 const PAD = { top: 18, right: 104, bottom: 52, left: 44 };
@@ -31,7 +38,7 @@ const top = Math.max(
 );
 const yMax = Math.ceil((top + 1) / 2) * 2;
 const x = (i: number) =>
-  PAD.left + (i * (W - PAD.left - PAD.right)) / Math.max(rounds.length - 1, 1);
+  PAD.left + (i * (W - PAD.left - PAD.right)) / Math.max(plot.length - 1, 1);
 const y = (v: number) =>
   H - PAD.bottom - (v / yMax) * (H - PAD.top - PAD.bottom);
 
@@ -39,7 +46,7 @@ const y = (v: number) =>
 function segments(key: "resolved" | "tracking") {
   const out: { i: number; v: number }[][] = [];
   let run: { i: number; v: number }[] = [];
-  rounds.forEach((r, i) => {
+  plot.forEach((r, i) => {
     const v = r[key];
     if (r.counted && typeof v === "number") run.push({ i, v });
     else if (run.length) {
@@ -58,7 +65,7 @@ const series = [
 
 function RoundChart() {
   const [hover, setHover] = useState<number | null>(null);
-  const active = hover === null ? null : rounds[hover];
+  const active = hover === null ? null : plot[hover];
   const last = counted[counted.length - 1];
   return (
     <div className="qa-chart">
@@ -67,11 +74,11 @@ function RoundChart() {
       <svg
         viewBox={`0 0 ${W} ${H}`}
         role="img"
-        aria-label={`QA 라운드별 지적 처리 추이. ${rounds.length}회차, ${rounds[0].at}부터 ${rounds[rounds.length - 1].at}까지. 마지막 회차 누적 해소 ${last.resolved}건, 추적 중 ${last.tracking}건.`}
+        aria-label={`QA 라운드별 지적 처리 추이. 집계된 ${counted.length}개 회차, ${plot[0].at}부터 ${plot[plot.length - 1].at}까지. 마지막 회차 누적 해소 ${last.resolved}건, 추적 중 ${last.tracking}건.`}
       >
         <title>QA 라운드별 지적 처리 추이</title>
         <desc>
-          {`${rounds.length}개 회차. 누적 해소는 ${counted[0].resolved}건에서 ${last.resolved}건으로, 추적 중은 ${counted[0].tracking}건에서 ${last.tracking}건으로 변화. 집계가 없는 회차는 선이 끊어져 있다.`}
+          {`${counted.length}개 회차. 누적 해소는 ${counted[0].resolved}건에서 ${last.resolved}건으로, 추적 중은 ${counted[0].tracking}건에서 ${last.tracking}건으로 변화. 집계가 없는 회차는 선이 끊어져 있다.`}
         </desc>
 
         {Array.from({ length: yMax / 2 + 1 }, (_, k) => k * 2).map((v) => (
@@ -91,10 +98,10 @@ function RoundChart() {
 
         {/* 날짜는 바뀌는 눈금에만 — 같은 날짜를 6번 반복하면 축이 넘친다.
             양 끝 눈금은 start/end로 붙여 카드 밖으로 밀려나지 않게 한다. */}
-        {rounds.map((r, i) => {
+        {plot.map((r, i) => {
           const [day, time] = r.at.split(" ");
-          const newDay = i === 0 || rounds[i - 1].at.split(" ")[0] !== day;
-          const side = i === 0 ? " start" : i === rounds.length - 1 ? " end" : "";
+          const newDay = i === 0 || plot[i - 1].at.split(" ")[0] !== day;
+          const side = i === 0 ? " start" : i === plot.length - 1 ? " end" : "";
           return (
             <g key={r.n}>
               <text className={`qa-axis qa-xtick${side}`} x={x(i)} y={H - 30}>
@@ -125,7 +132,7 @@ function RoundChart() {
         )}
 
         {series.map((s) =>
-          rounds.map((r, i) => {
+          plot.map((r, i) => {
             const v = r[s.key];
             if (!r.counted || typeof v !== "number") return null;
             return (
@@ -163,18 +170,6 @@ function RoundChart() {
           );
         })}
 
-        {rounds.map((r, i) =>
-          r.counted ? null : (
-            <text
-              key={`nc-${r.n}`}
-              className={`qa-nocount${i === 0 ? " start" : ""}`}
-              x={x(i)}
-              y={y(0) - 10}
-            >
-              집계 없음
-            </text>
-          ),
-        )}
       </svg>
       </div>
 
@@ -199,8 +194,11 @@ function RoundChart() {
         ))}
       </ul>
       <p className="qa-axisnote">
-        QA 자체 집계 · 지적 처리 건수이며 심사 점수가 아닙니다. 집계가 없는
-        회차는 앞뒤 값으로 잇지 않고 끊어 둡니다.
+        QA 자체 집계 · 지적 처리 건수이며 심사 점수가 아닙니다.
+        {trimmed > 0 &&
+          ` 초기 ${trimmed}개 회차는 집계 형식 이전이라 그래프에는 없고 아래 표에만 있습니다.`}
+        {plot.some((r) => !r.counted) &&
+          " 중간의 미집계 회차는 앞뒤 값으로 잇지 않고 선을 끊어 둡니다."}
       </p>
 
       <details className="qa-table">
@@ -325,53 +323,147 @@ export default function QA() {
         </ul>
       </div>
 
-      <div className="qa-card qa-findings">
-        <div className="qa-card-head">
-          <h3>
-            <ShieldCheck size={18} /> 지적 현황
-          </h3>
-        </div>
-        <div className="qa-counts">
-          <div>
-            <b>{report.findings.total}</b>
-            <span>누적 지적</span>
-          </div>
-          <div>
-            <b>{report.findings.resolved}</b>
-            <span>해소</span>
-          </div>
-          <div>
-            <b>{report.findings.tracking}</b>
-            <span>추적 중</span>
-          </div>
-        </div>
-        <p className="muted">{report.findings.note}</p>
-
-        <ol className="qa-fixlog">
-          {report.resolvedItems.map((f) => (
-            <li key={f.id}>
-              <div className="qa-fix-meta">
-                <span className="qa-fix-id">{f.id}</span>
-                <span className="qa-fix-round">
-                  {f.round}회차 · {f.at}
-                </span>
-              </div>
-              <p className="qa-fix-found">
-                <span>지적</span>
-                {f.found}
-              </p>
-              <p className="qa-fix-fixed">
-                <span>해소</span>
-                {f.fixed}
-              </p>
-            </li>
-          ))}
-        </ol>
-        <p className="muted qa-fix-note">
-          추적 중인 {report.findings.tracking}건은 아직 닫히지 않았으므로 여기에
-          싣지 않습니다. 닫히면 다음 회차에 같은 형식으로 올라갑니다.
-        </p>
-      </div>
+      <Findings />
     </section>
+  );
+}
+
+type View = "all" | "resolved" | "tracking";
+
+function Findings() {
+  const [view, setView] = useState<View>("resolved");
+  const { total, resolved, tracking } = report.findings;
+  /* 목록에 실리지 않은 해소분 — 제품이 아니라 QA 진행 자체에 대한 항목이라 뺐다.
+     빼놓고 말하지 않으면 숫자가 안 맞고, 안 맞는 숫자는 나머지 전부를 의심하게 만든다. */
+  const unlisted = resolved - report.resolvedItems.length;
+
+  const tiles: { id: View; n: number; label: string }[] = [
+    { id: "all", n: total, label: "누적 지적" },
+    { id: "resolved", n: resolved, label: "해소" },
+    { id: "tracking", n: tracking, label: "추적 중" },
+  ];
+
+  return (
+    <div className="qa-card qa-findings">
+      <div className="qa-card-head">
+        <h3>
+          <ShieldCheck size={18} /> 지적 현황
+        </h3>
+        <p>숫자를 누르면 해당 항목만 봅니다</p>
+      </div>
+
+      <div className="qa-counts" role="group" aria-label="지적 현황 보기 선택">
+        {tiles.map((t) => (
+          <button
+            key={t.id}
+            className={view === t.id ? "on" : ""}
+            aria-pressed={view === t.id}
+            onClick={() => setView(t.id)}
+          >
+            <b>{t.n}</b>
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div
+        className="qa-findings-panel"
+        role="region"
+        aria-label={tiles.find((t) => t.id === view)!.label}
+      >
+        {view === "all" && (
+          <div className="qa-breakdown">
+            <div
+              className="qa-stack"
+              role="img"
+              aria-label={`누적 ${total}건의 구성: 공개된 해소 ${report.resolvedItems.length}건, 비공개 해소 ${unlisted}건, 추적 중 ${tracking}건`}
+            >
+              <i
+                className="b-listed"
+                style={{ flexGrow: report.resolvedItems.length }}
+              />
+              <i className="b-unlisted" style={{ flexGrow: unlisted }} />
+              <i className="b-tracking" style={{ flexGrow: tracking }} />
+            </div>
+            <ul className="qa-buckets">
+              <li>
+                <i className="b-listed" />
+                <b>{report.resolvedItems.length}건</b>
+                <span>해소 · 수정 이력 공개</span>
+                <button onClick={() => setView("resolved")}>보기</button>
+              </li>
+              <li>
+                <i className="b-unlisted" />
+                <b>{unlisted}건</b>
+                <span>해소 · 제품이 아니라 QA 진행 자체에 대한 항목이라 생략</span>
+              </li>
+              <li>
+                <i className="b-tracking" />
+                <b>{tracking}건</b>
+                <span>아직 닫히지 않아 건수로만 공개</span>
+                <button onClick={() => setView("tracking")}>이유</button>
+              </li>
+            </ul>
+            <p className="muted">
+              {report.resolvedItems.length} + {unlisted} + {tracking} = {total}건
+              · 회차마다 새로 발견된 지적과 닫힌 지적이 위 그래프의 두 선입니다.
+            </p>
+          </div>
+        )}
+
+        {view === "resolved" && (
+          <>
+            <p className="muted">{report.findings.note}</p>
+            <ol className="qa-fixlog">
+              {report.resolvedItems.map((f) => (
+                <li key={f.id}>
+                  <div className="qa-fix-meta">
+                    <span className="qa-fix-id">{f.id}</span>
+                    <span className="qa-fix-round">
+                      {f.round}회차 · {f.at}
+                    </span>
+                  </div>
+                  <p className="qa-fix-found">
+                    <span>지적</span>
+                    {f.found}
+                  </p>
+                  <p className="qa-fix-fixed">
+                    <span>해소</span>
+                    {f.fixed}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
+
+        {view === "resolved" && unlisted > 0 && (
+          <p className="qa-unlisted">
+            <b>{unlisted}건</b>은 해소되었으나 제품이 아니라 QA 진행 자체에 대한
+            항목이라 위 목록에서 뺐습니다 — 그래서 여기 {report.resolvedItems.length}
+            건이고 타일은 {resolved}건입니다.
+          </p>
+        )}
+
+        {view === "tracking" && (
+          <div className="qa-rest qa-tracking">
+            <h4>추적 중 {tracking}건 — 제목을 싣지 않습니다</h4>
+            <p>
+              닫히지 않은 지적을 요약해 올리면, 읽는 사람은 그것을 이미 처리된
+              것으로 받아들이게 됩니다. QA에서 미실행은 서술로 닫지 않고 실행으로
+              닫기 때문에, 여기서는 <b>건수만</b> 공개합니다.
+            </p>
+            <p>
+              닫히는 대로 <b>해소</b> 목록에 같은 형식(지적 · 해소 · 닫힌 회차)으로
+              올라갑니다. 지금까지 {report.resolvedItems.length}건이 그렇게
+              올라왔습니다.
+            </p>
+            <p className="muted">
+              상세 내역은 팀 내부 QA 저장소의 회차별 리포트에서 관리합니다.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
