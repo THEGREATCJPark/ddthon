@@ -2057,6 +2057,16 @@ footer > span:last-child {
 .qa-endlabel { fill: var(--navy); font-size: 12px; font-weight: 700; }
 .qa-nocount { fill: var(--muted); font-size: 10.5px; text-anchor: middle; }
 .qa-nocount.start { text-anchor: start; }
+.qa-score-hero { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 4px; }
+.qa-score-hero b { font-size: 46px; font-weight: 800; letter-spacing: -2px; line-height: 1; font-variant-numeric: tabular-nums; }
+.qa-score-hero > span { font-size: 15px; color: var(--muted); }
+.qa-score-hero em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--muted); background: #eef0f4; border-radius: 5px; padding: 3px 7px; margin-left: 4px; }
+.qa-score-band { margin-left: auto; font-size: 13px; }
+.qa-score-band code { color: var(--navy); }
+.qa-scoreband { fill: #10244914; stroke: none; }
+.qa-scoreline { fill: none; stroke: var(--navy); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.qa-scoredot { fill: var(--navy); }
+.qa-sha { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 11.5px; fill: var(--navy); font-weight: 600; }
 .qa-tip { margin-top: 10px; font-size: 13px; color: var(--navy); background: #f5f7fb; border-radius: 8px; padding: 10px 14px; }
 .qa-tip code { margin-left: 8px; color: var(--muted); font-size: 12px; }
 .qa-legend { display: flex; gap: 18px; list-style: none; padding: 0; margin: 14px 0 0; font-size: 13px; color: var(--muted); }

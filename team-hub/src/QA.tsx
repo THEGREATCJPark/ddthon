@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { BadgeCheck, ShieldCheck, Terminal, ChevronDown } from "lucide-react";
+import {
+  BadgeCheck,
+  ShieldCheck,
+  Terminal,
+  ChevronDown,
+  TrendingUp,
+} from "lucide-react";
 import report from "./qaReport.json";
 
 type Round = {
@@ -62,6 +68,173 @@ const series = [
   { key: "resolved" as const, name: "누적 해소", color: "var(--blue)" },
   { key: "tracking" as const, name: "추적 중", color: "var(--gold)" },
 ];
+
+type Score = {
+  n: number;
+  at: string;
+  sha: string;
+  total: number;
+  lo: number;
+  hi: number;
+};
+const scores = report.scores as Score[];
+
+/* 점수 차트는 0~100 고정 축이다. 자체 추정이라 밴드를 함께 그리고, 밴드 없이
+   점 하나만 찍지 않는다 — 추정을 확정처럼 보이게 하는 가장 흔한 방법이다. */
+const SPAD = { top: 20, right: 60, bottom: 54, left: 40 };
+const sx = (i: number) =>
+  SPAD.left + (i * (W - SPAD.left - SPAD.right)) / Math.max(scores.length - 1, 1);
+const sy = (v: number) =>
+  H - SPAD.bottom - (v / 100) * (H - SPAD.top - SPAD.bottom);
+
+function ScoreChart() {
+  const [hover, setHover] = useState<number | null>(null);
+  const active = hover === null ? null : scores[hover];
+  const last = scores[scores.length - 1];
+  const band =
+    scores.map((s, i) => `${sx(i)},${sy(s.hi)}`).join(" ") +
+    " " +
+    [...scores]
+      .map((s, i) => ({ s, i }))
+      .reverse()
+      .map(({ s, i }) => `${sx(i)},${sy(s.lo)}`)
+      .join(" ");
+  return (
+    <div className="qa-chart">
+      <div className="qa-score-hero">
+        <b>{last.total}</b>
+        <span>
+          / 100 <em>추정</em>
+        </span>
+        <span className="qa-score-band">
+          밴드 {last.lo}~{last.hi} · <code>{last.sha}</code>
+        </span>
+      </div>
+      <div className="qa-chart-scroll">
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          role="img"
+          aria-label={`회차별 QA 자체 추정 점수. ${scores.length}개 회차, ${scores[0].sha} ${scores[0].total}점에서 ${last.sha} ${last.total}점까지. 각 회차 추정 밴드 함께 표시.`}
+        >
+          <title>회차별 QA 자체 추정 점수</title>
+          <desc>
+            {scores
+              .map((s) => `${s.n}회차 ${s.sha} ${s.total}점(${s.lo}~${s.hi})`)
+              .join(", ")}
+          </desc>
+
+          {[0, 25, 50, 75, 100].map((v) => (
+            <g key={v}>
+              <line
+                className="qa-grid"
+                x1={SPAD.left}
+                x2={W - SPAD.right}
+                y1={sy(v)}
+                y2={sy(v)}
+              />
+              <text className="qa-axis qa-ytick" x={SPAD.left - 10} y={sy(v) + 4}>
+                {v}
+              </text>
+            </g>
+          ))}
+
+          <polygon className="qa-scoreband" points={band} />
+          <polyline
+            className="qa-scoreline"
+            points={scores.map((s, i) => `${sx(i)},${sy(s.total)}`).join(" ")}
+          />
+
+          {scores.map((s, i) => (
+            <g key={s.n}>
+              <circle
+                className="qa-dot qa-scoredot"
+                cx={sx(i)}
+                cy={sy(s.total)}
+                r={hover === i ? 7 : 5}
+                tabIndex={0}
+                role="button"
+                aria-label={`${s.n}회차 커밋 ${s.sha} · 추정 ${s.total}점 (밴드 ${s.lo}~${s.hi})`}
+                onMouseEnter={() => setHover(i)}
+                onMouseLeave={() => setHover(null)}
+                onFocus={() => setHover(i)}
+                onBlur={() => setHover(null)}
+              />
+              {/* 사용자 요청: 각 점을 어느 커밋에서 매겼는지 축에 그대로 노출 */}
+              <text
+                className={`qa-axis qa-sha qa-xtick${i === 0 ? " start" : i === scores.length - 1 ? " end" : ""}`}
+                x={sx(i)}
+                y={H - 32}
+              >
+                {s.sha}
+              </text>
+              <text
+                className={`qa-axis qa-xtick${i === 0 ? " start" : i === scores.length - 1 ? " end" : ""}`}
+                x={sx(i)}
+                y={H - 16}
+              >
+                {s.at}
+              </text>
+            </g>
+          ))}
+
+          <text
+            className="qa-endlabel"
+            x={W - SPAD.right + 10}
+            y={sy(last.total) + 4}
+          >
+            {last.total}점
+          </text>
+        </svg>
+      </div>
+
+      {active && (
+        <p className="qa-tip" role="status">
+          <b>
+            {active.n}회차 · {active.at}
+          </b>
+          {` — 추정 ${active.total}점 · 밴드 ${active.lo}~${active.hi}`}
+          <code>{active.sha}</code>
+        </p>
+      )}
+
+      <p className="qa-axisnote">{report.scoreNote}</p>
+
+      <details className="qa-table">
+        <summary>
+          같은 수치를 표로 보기 <ChevronDown size={16} />
+        </summary>
+        <div className="qa-table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>회차</th>
+                <th>시각</th>
+                <th>채점한 커밋</th>
+                <th>추정 점수</th>
+                <th>밴드</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scores.map((s) => (
+                <tr key={s.n}>
+                  <td>{s.n}</td>
+                  <td>{s.at}</td>
+                  <td>
+                    <code>{s.sha}</code>
+                  </td>
+                  <td>{s.total}점</td>
+                  <td>
+                    {s.lo}~{s.hi}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  );
+}
 
 function RoundChart() {
   const [hover, setHover] = useState<number | null>(null);
@@ -255,6 +428,16 @@ export default function QA() {
       </div>
 
       <p className="notice">{report.disclaimer}</p>
+
+      <div className="qa-card">
+        <div className="qa-card-head">
+          <h3>
+            <TrendingUp size={18} /> 스코어 트래킹
+          </h3>
+          <p>회차마다 같은 기준으로 다시 매긴 QA 자체 추정 · 공식 점수가 아닙니다</p>
+        </div>
+        <ScoreChart />
+      </div>
 
       <div className="qa-card">
         <div className="qa-card-head">
