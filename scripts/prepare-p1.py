@@ -39,7 +39,9 @@ def read_operator_password():
     return password
 
 
-def prepare(destination, *, operator_password=None, organization=None):
+def prepare(destination, *, operator_password=None, organization=None, warm_only=False):
+    if warm_only and organization is None:
+        raise ValueError('Warm filming requires an explicit organization connection')
     demo_default = operator_password is None
     if demo_default:
         operator_password = DEMO_PASSWORD
@@ -60,6 +62,8 @@ def prepare(destination, *, operator_password=None, organization=None):
         excel.DisplayAlerts = False
         profiles = [('cold', 'AAAAA01_직전_3달_생산량.xlsx', '생산현황', 5, 3, 1200),
                     ('warm', 'BBBBB02_직전_3달_생산량.xlsx', '월별실적', 8, 2, 2100)]
+        if warm_only:
+            profiles = [profiles[1]]
         contexts = []
         for name, filename, sheet, row, col, base in profiles:
             work = destination / name; work.mkdir()
@@ -93,7 +97,10 @@ def prepare(destination, *, operator_password=None, organization=None):
             configure_statusline(work, ctx)
             if organization is not None:
                 from org_demo import connect_work
-                connect_work(work, **organization)
+                connect_work(work, **organization, require_p1_absent=not warm_only)
+                if warm_only and not any(d.procedure.get('action') == 'file-access'
+                                         for d in SkillStore(str(state / 'store.json')).list()):
+                    raise ValueError('Warm filming requires a received P1 Skill; data preserved')
             contexts.append({'work': str(work), 'xlsx': str(work / filename)})
         (destination / 'ready.json').write_text(json.dumps({'workspaces': contexts,
             'owned_excel_pid': win32process.GetWindowThreadProcessId(excel.Hwnd)[1]}, ensure_ascii=False), encoding='utf-8')
@@ -104,11 +111,12 @@ def prepare(destination, *, operator_password=None, organization=None):
         books[0].Activate()
         excel.Visible = True
         print('READY: workbooks are open; create STOP file to finish', flush=True)
-        print('Cold 문서는 이미 열린 Excel 창에서 확인하세요. 이 터미널은 유지하세요.', flush=True)
+        print('시연 문서는 이미 열린 Excel 창에서 확인하세요. 이 터미널은 유지하세요.', flush=True)
         if not demo_default:
             print('파일을 다시 열 때는 방금 정한 운영자 암호를 직접 입력하세요. Agent에게 전달하지 마세요.', flush=True)
         else:
-            print('다시 열기: 상위 폴더의 Open-cold.cmd / Open-warm.cmd를 실행하세요 (암호 입력 없음).', flush=True)
+            launchers = 'Open-warm.cmd' if warm_only else 'Open-cold.cmd / Open-warm.cmd'
+            print(f'다시 열기: 상위 폴더의 {launchers}를 실행하세요 (암호 입력 없음).', flush=True)
         deadline = time.monotonic() + 7200
         while time.monotonic() < deadline and not (destination / 'STOP').exists():
             time.sleep(1)
@@ -129,7 +137,9 @@ if __name__ == '__main__':
     parser.add_argument('--remote')
     parser.add_argument('--branch', default='team-skill-store')
     parser.add_argument('--reviewer', default='박찬준')
+    parser.add_argument('--warm-only', action='store_true',
+                        help='촬영용 Warm 하나만 준비하고 조직의 기존 P1 Skill 수신을 허용합니다.')
     args = parser.parse_args()
     organization = {'remote': args.remote, 'branch': args.branch, 'reviewer': args.reviewer} if args.remote else None
     prepare(args.destination, operator_password=read_operator_password() if args.ask_password else None,
-            organization=organization)
+            organization=organization, warm_only=args.warm_only)

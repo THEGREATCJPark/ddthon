@@ -1,0 +1,14 @@
+{
+  "files": {
+    "C:\\Users\\cik61\\Desktop\\ddthon-main\\scripts\\prepare-p1.py": "5da6fba8de9d79ea842a49a3d185bbc5748aed94c2416b0328dece9bbd921b52",
+    "C:\\Users\\cik61\\Desktop\\ddthon-main\\scripts\\org_demo.py": "def63cdd1b6ddc34f152816f38c34107e32b45ff919fefb7f84c31ead41192a5",
+    "C:\\Users\\cik61\\Desktop\\ddthon-main\\skillloop\\statusline.py": "509cc24101a627c955391a94e40d7ad907c999f9d89699623385214430b12e00",
+    "C:\\Users\\cik61\\Desktop\\skillloop-p1-after-video-20260909\\Start-filming.ps1": "7bb721eb28b437cf9f1186754e1a7d00936ed200768ba64fbe7e0174ba417ab9",
+    "C:\\Users\\cik61\\Desktop\\skillloop-p1-after-video-20260909\\warm\\.claude\\skills\\skillloop\\SKILL.md": "954774337bf1dcfdfd6cc1c39d179ddec0f6250f598bea35e9382fa6fafa7931"
+  },
+  "product_filming": "READY_NOT_RECORDED",
+  "controlled_benchmark": "WAITING_FINAL_EXCEL_KIT",
+  "live_agent_execution": "NOT_RUN",
+  "raw_capture_collection": "PREPARED_NOT_RUN",
+  "excel_hold": "operator-owned preparation process; reopen launcher available"
+}

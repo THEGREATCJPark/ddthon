@@ -71,7 +71,8 @@ def authorize_p0(work):
     return {'operator_scope': scope, 'data_preserved': True}
 
 
-def connect_work(work, remote, branch, reviewer='박찬준', *, authorize_request=False):
+def connect_work(work, remote, branch, reviewer='박찬준', *, authorize_request=False,
+                 require_p1_absent=True):
     work = Path(work).resolve()
     context_path = work / 'skillloop-work.json'
     context = json.loads(context_path.read_text(encoding='utf-8'))
@@ -84,7 +85,7 @@ def connect_work(work, remote, branch, reviewer='박찬준', *, authorize_reques
     receipt = transport.pull(store, usage)
     if not receipt.get('ok'):
         raise RuntimeError('Organization sync failed; inspect receipt and retry')
-    if any(d.procedure.get('action') == 'file-access' for d in store.list()):
+    if require_p1_absent and any(d.procedure.get('action') == 'file-access' for d in store.list()):
         raise ValueError('P1 already present: not a Cold preparation; data preserved')
     context.update(config, reviewer=reviewer, author=reviewer, organization='디디톤 기술혁신팀')
     context['scope'] = 'Git 동기화 조직 Skill; 원격 절차는 exact 실행 확인 후 사용'
@@ -104,7 +105,8 @@ def connect_work(work, remote, branch, reviewer='박찬준', *, authorize_reques
     settings['statusLine']['command'] += ' --alias ' + shlex.quote(reviewer)
     write_json(settings_path, settings)
     write_json(state / 'organization-preparation.json', {'sync': receipt,
-                'skills': [exact_ref(d) for d in store.list()], 'p1_present': False})
+                'skills': [exact_ref(d) for d in store.list()],
+                'p1_present': any(d.procedure.get('action') == 'file-access' for d in store.list())})
     if authorize_request and context.get('requirements'):
         authorize_p0(work)
     return receipt

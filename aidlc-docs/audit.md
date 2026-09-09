@@ -993,3 +993,9 @@ User requests 'Agent Skillloop를 통해 방법을 탐색해볼까요?' after ac
 
 ## 2026-09-09T02:55:33.9911115Z — P1 prompt amendment applied
 C9 now asks 'Agent SkillLoop를 통해 방법을 탐색해볼까요?' only after actual direct failure and NO_MATCH. Three instructions aligned; former file-opening question removed. Eight existing P1 workspace Skill copies refreshed; no workbook/store/usage changes. Text checks passed; instruction-only change, live Agent response not newly executed. P0 scope and P1 publication approval preserved.
+
+## 2026-09-09T03:12:58.2704603Z — P1 after filming setup authorized
+User asks to finish after-filming preparation. Five-step operator-only plan recorded before edits. Existing published P1 source review/Replay checked in retained operator store; final benchmark ZIP missing, WARM_SKILL_ONLY measurement deferred. Use existing team-skill-store for product Warm; preserve P0-only demo branch and user datasets. No candidate approval fabricated.
+
+## 2026-09-09T03:15:25.1801930Z — P1 product Warm filming preparation complete
+Fresh Desktop/skillloop-p1-after-video-20260909/warm prepared with owned open Excel, received original exact P1 from team-skill-store e50c6ac. Retained initial human review/Replay PASS/publication linked in operator provenance. Actual direct parser failure, C5 MATCH, P1 confirmation gate, operator read-only access and byte/mtime/store/usage preservation verified; no task artifacts/new reuse. Setup tests15 PASS and final21 PASS overlap; not summed. Launcher parsed but interactive launch/log collection NOT_RUN. Product descriptor friendly title only; author local displayed as unregistered, not falsely attributed. Full-product footage READY; WARM_SKILL_ONLY comparison deferred for final Excel protocol ZIP. No data branch write, publication or benchmark run.

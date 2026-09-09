@@ -1,0 +1,97 @@
+{
+  "exact_ref": {
+    "id": "file-access-8738e696cff8bbb20c98",
+    "version": "1.0.0",
+    "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+  },
+  "content_digest_valid": true,
+  "source_artifact_sha256": "102a553a89a4c458b0b3a78774e6b525a7630305931e3b41b111fbef20948337",
+  "original_lifecycle_evidence": {
+    "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+    "evidence": {
+      "last_publish_attempt": {
+        "branch": "team-skill-store",
+        "branch_revision": "28809464218e7328c7184a20bcafebb0e1b18916",
+        "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json",
+        "commit": "28809464218e7328c7184a20bcafebb0e1b18916",
+        "ok": true,
+        "queryable_range": "shared Git bundles",
+        "synced_at": "2026-09-08T14:48:30.362291+00:00"
+      },
+      "local_review_evidence": {
+        "decision": "approve",
+        "ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reviewed_at": "2026-09-08T14:48:25.115029+00:00",
+        "reviewer": "cik61 (explicit human approval in current chat)"
+      },
+      "remote_publish_evidence": {
+        "branch": "team-skill-store",
+        "branch_revision": "04d831066e0fcdae3217412385e37dc0f08cae58",
+        "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json",
+        "commit": "04d831066e0fcdae3217412385e37dc0f08cae58",
+        "ok": true,
+        "queryable_range": "shared Git bundles",
+        "synced_at": "2026-09-08T14:52:16.752579+00:00"
+      },
+      "replay": {
+        "candidate_ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "evidence": {
+          "access_evidence": {
+            "app_open": true,
+            "mtime_after": 1788875135.398,
+            "mtime_before": 1788875135.398,
+            "original_unchanged": true,
+            "ran": true,
+            "save_called": false,
+            "sha256_after": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+            "sha256_before": "04ce744b99ac0f45e1793bc122c455e9d2411702cdefca0c1411e9a3335795dd",
+            "stage": "read-complete",
+            "workbook_readable": true
+          },
+          "access_method": "excel-com-attach",
+          "access_ok": true,
+          "app_open": true,
+          "candidate_digest_verified": true,
+          "fresh_content_digest": "c748b7d97cdf86286554fe0c5b1983dca9f35579cb0e58e9138f3a66e054d536",
+          "recomputed_digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "replay_independent": true,
+          "replay_obtained_sheets": 1,
+          "reused_first_run_result": false
+        },
+        "verdict": "PASS"
+      }
+    },
+    "id": "file-access-8738e696cff8bbb20c98",
+    "state": "PUBLISHED",
+    "updated_at": "2026-09-08T14:52:16Z",
+    "version": "1.0.0"
+  },
+  "received_lifecycle_evidence": {
+    "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+    "evidence": {
+      "remote_publish_evidence": {
+        "branch": "team-skill-store",
+        "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+        "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json",
+        "commit": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+        "ok": true,
+        "queryable_range": "shared Git bundles",
+        "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+        "synced_at": "2026-09-09T03:13:22.286612+00:00"
+      }
+    },
+    "id": "file-access-8738e696cff8bbb20c98",
+    "state": "PUBLISHED",
+    "updated_at": "2026-09-09T03:13:22Z",
+    "version": "1.0.0"
+  },
+  "meaning": "Product descriptor + executor; NOT independent WARM_SKILL_ONLY Markdown; no benchmark injection prepared."
+}

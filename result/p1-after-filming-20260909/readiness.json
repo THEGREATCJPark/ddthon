@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-09-09T03:13:52.528980+00:00",
+  "source_sha": "6900f9b686706b8e18a1e9cf02d5eca2d822bd95",
+  "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p1-after-video-20260909\\warm",
+  "xlsx": "C:\\Users\\cik61\\Desktop\\skillloop-p1-after-video-20260909\\warm\\BBBBB02_직전_3달_생산량.xlsx",
+  "direct_access": {
+    "ran": true,
+    "ok": false,
+    "error": "BadZipFile: File is not a zip file",
+    "evidence": {
+      "reader": "openpyxl"
+    }
+  },
+  "search": "MATCH",
+  "selected": {
+    "id": "file-access-8738e696cff8bbb20c98",
+    "version": "1.0.0",
+    "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+  },
+  "default_gate": "CONFIRMATION_REQUIRED",
+  "operator_access_ok": true,
+  "operator_access_evidence": {
+    "sha256_before": "372a241dfdd779ac9fee7459c7bdc17f9d339207c6c3a00bbd1d5171c48a3ff2",
+    "mtime_before": 1788923598.699,
+    "save_called": false,
+    "ran": true,
+    "stage": "read-complete",
+    "app_open": true,
+    "sha256_after": "372a241dfdd779ac9fee7459c7bdc17f9d339207c6c3a00bbd1d5171c48a3ff2",
+    "mtime_after": 1788923598.699,
+    "original_unchanged": true,
+    "workbook_readable": true
+  },
+  "user_files_unchanged": true,
+  "preflight_reuse_delta": 0,
+  "task_artifacts_created": false,
+  "initial_local_count": 0,
+  "comparison_status": "WAITING_FINAL_ZIP",
+  "filmed_agent_status": "NOT_RUN",
+  "instruction_sha256": "954774337bf1dcfdfd6cc1c39d179ddec0f6250f598bea35e9382fa6fafa7931",
+  "input_sha256": "372a241dfdd779ac9fee7459c7bdc17f9d339207c6c3a00bbd1d5171c48a3ff2"
+}

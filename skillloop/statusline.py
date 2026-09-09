@@ -5,6 +5,7 @@ from .org_aggregator import PUBLISHED_UNKNOWN
 
 SKILL_LABELS = {
     "fix-skillloop-demo-pkg-install": "python pip 사내환경 적용 방법",
+    "file-access-8738e696cff8bbb20c98": "NASCA 환경 Excel 읽기 방법",
 }
 
 
@@ -40,7 +41,8 @@ def render_statusline(snapshot: dict, *, team: str = "디디톤 기술혁신팀"
     people = sorted((p for p in (org.get("people", []) if linked else snapshot.get("people", [])) if p.get("contributions", 0) > 0),
                     key=lambda p: (-p["contributions"], str(p.get("alias", ""))))
     leaders = [p for p in people if p["contributions"] == people[0]["contributions"]] if people else []
-    leader = ", ".join(_label(p.get("alias", "")) for p in leaders) or "아직 없음"
+    leader = ", ".join("작성자 미등록" if p.get("alias") in (None, "", "local")
+                       else _label(p["alias"]) for p in leaders) or "아직 없음"
     leader_label = f"우리팀 스킬 적재왕: {leader}" if linked else f"로컬 기여 1위: {leader}"
     top = next((r for r in (org.get("ranking", []) if linked else snapshot.get("ranking", []))
                 if not r.get("demo_seed") and r.get("reuse_count", 0) > 0), None)
