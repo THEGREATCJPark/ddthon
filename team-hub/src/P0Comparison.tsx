@@ -19,8 +19,8 @@ export default function P0Comparison() {
   const mean = (group: typeof rows) => group.reduce((sum,r) => sum+Number(r.final_text_timestamp_seconds),0)/group.length;
   const before = rows.filter(r => r.condition === "NO_SKILL" && r.selected_display === "True");
   return <article className="impact-evidence" id="p0-results">
-    <div className="impact-evidence-heading"><div><span className="overview-eyebrow">P0 · 이미 팀이 해결한 Python 설치 문제</span><h3>스킬 있으면 약 {fmt(mean(after))}초, 없으면 약 {fmt(mean(before))}초.</h3></div><a href="#captures-p0">실제 영상·로그 ↗</a></div>
-    <p>선정한 각 3회의 <strong>최종 응답까지 평균</strong>입니다. 스킬 없는 쪽은 중단 1회를 포함하며, 성공 소요시간이나 순수 탐색 시간의 비교는 아닙니다.</p>
+    <div className="impact-evidence-heading"><div><span className="overview-eyebrow">P0 · 이미 팀이 해결한 Python 설치 문제</span><h3>팀 Skill이 있으면 해결 시간이 약 {fmt((1 - mean(after) / mean(before)) * 100)}% 줄어듭니다.</h3></div><a href="#captures-p0">실제 영상·로그 ↗</a></div>
+    <p>Skill 없음 약 {fmt(mean(before))}초 → 연결 후 약 {fmt(mean(after))}초. 선정한 각 3회의 <strong>최종 응답까지 평균 차이</strong>입니다. 스킬 없는 쪽은 중단 1회를 포함하며, 성공 소요시간이나 순수 탐색 시간의 비교는 아닙니다.</p>
     <div className="impact-stats"><div><span>Skill 없이 · 비교 3회</span><strong>2 / 3 <small>성공</small></strong><p>1회는 추가 정보 요청 후 중단</p></div><div><span>팀 Skill 연결 · 새 작업 환경</span><strong>3 / 3 <small>성공</small></strong><p>설치·버전·import 확인, 재사용 기록 +1씩</p></div><div><span>이번 관측의 토큰·비용</span><strong className="impact-stat-text">출력 ↓ · 캐시 ↑</strong><p>전체 추정 비용 절감은 확인되지 않았습니다.</p></div></div>
     <div className="impact-chart-controls"><div role="group" aria-label="P0 비교 지표">{Object.entries(metrics).map(([key,m]) => <button key={key} aria-pressed={metric===key} onClick={() => setMetric(key as keyof typeof metrics)}>{m.label}</button>)}</div></div>
     <p className="impact-metric-note">{metrics[metric].note}</p>
