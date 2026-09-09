@@ -2206,3 +2206,21 @@ footer > span:last-child {
 .p0-frame-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .p0-frame-grid figure { margin: 0; }
 .p0-frame-grid figcaption { color: var(--muted); font-size: 14px; }
+
+.example-card { margin-top: 24px; border: 1px solid var(--border); border-radius: 14px; background: white; overflow: hidden; }
+.example-card > header { padding: 26px 30px 18px; }
+.example-card h3 { font-size: 25px; margin: 10px 0; }
+.example-card header p, .example-form > p { color: var(--muted); line-height: 1.7; }
+.example-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 30px 26px; }
+.example-card h4 { margin: 12px 0; font-size: 16px; color: var(--blue); }
+.example-card section p { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.85; margin: 0; }
+.example-payoff { display: flex; gap: 16px; padding: 24px 30px; background: #eef3fa; color: var(--navy); }
+.example-payoff svg { flex-shrink: 0; }
+.example-payoff p { margin: 8px 0 0; line-height: 1.7; }
+.example-detail { padding: 24px 30px; border-top: 1px solid var(--border); }
+.example-detail summary { cursor: pointer; font-weight: 700; }
+.example-detail section { margin-top: 24px; }
+.example-actions { display: flex; gap: 20px; padding: 16px 30px; border-top: 1px solid var(--border); color: var(--muted); }
+.example-community-title { margin-top: 38px; }.example-community-title span { color: var(--muted); }
+.example-empty { color: var(--muted); padding: 20px 0; }
+.tabs { flex-wrap: wrap; }

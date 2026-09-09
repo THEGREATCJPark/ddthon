@@ -159,3 +159,19 @@ test('capture image/text are shared; only original author can remove or write co
   batch.delete(doc(a, 'captures', 'capture-good'));
   await assertSucceeds(batch.commit());
 });
+
+test("skill examples are public, bounded and deletable only by their author", async () => {
+  const author = env.authenticatedContext("example-author").firestore();
+  const other = env.authenticatedContext("example-other").firestore();
+  const publicDb = env.unauthenticatedContext().firestore();
+  const data = {title:"Example",author:"Team",problem:"403",cause:"Clock",applicability:"Confirmed skew",procedure:"Adjust signing time",verification:"List bucket",uid:"example-author",createdAt:serverTimestamp()};
+  await assertFails(setDoc(doc(publicDb,"skillExamples","anon"),data));
+  await assertFails(setDoc(doc(other,"skillExamples","spoof"),data));
+  await assertFails(setDoc(doc(author,"skillExamples","large"),{...data,procedure:"x".repeat(6001)}));
+  await assertSucceeds(setDoc(doc(author,"skillExamples","valid"),data));
+  await assertSucceeds(getDocs(query(collection(publicDb,"skillExamples"),limit(100))));
+  await assertFails(getDocs(collection(publicDb,"skillExamples")));
+  await assertFails(updateDoc(doc(author,"skillExamples","valid"),{title:"changed"}));
+  await assertFails(deleteDoc(doc(other,"skillExamples","valid")));
+  await assertSucceeds(deleteDoc(doc(author,"skillExamples","valid")));
+});
