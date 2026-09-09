@@ -14,3 +14,5 @@ The two source documents and author/commit metadata are in this directory. `remo
 The pip target security candidate remains a separate unimplemented follow-up. Branch cleanup does not alter its status or make a new security/compliance score claim.
 
 Final CI receipt: Python verification run 34321513133 SUCCESS on 481d7a0, Python 3.12.10, 200 passed / 2 skipped in 197.83s. See ci-tests-excerpt.txt and ci-status.json. The final follow-up commit changes only maintenance documentation and receipts.
+
+Follow-up observation 2026-09-09T07:04:10.305174+00:00: During final verification, another session created qa/embed-20260909-1536 at e29785223e7570f24302d3a56e9da6d70b1e0b37 (one unmerged team-hub/src/qaReport.json change, reviewed source 81ecad4c). It was absent from the approved deletion inventory and is preserved for separate current-content review. Remote heads are now main + nine retained Skill/demo heads + this new QA head (11 total); open PRs remain zero. No unreviewed QA data was merged.
