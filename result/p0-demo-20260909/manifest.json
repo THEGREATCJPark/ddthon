@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-09T03:39:07.675954+00:00",
+  "source": "User-supplied P0 demonstration media; no new Agent run performed during packaging",
+  "video": {
+    "duration_seconds": 58,
+    "width": 1920,
+    "height": 1080,
+    "validation": "MP4 box metadata parsed; no playback/frame-by-frame validation in this packaging task"
+  },
+  "subtitles": {
+    "cues": 11,
+    "end_seconds": 58,
+    "encoding": "UTF-8",
+    "validation": "ordered non-overlapping valid cue times within video duration"
+  },
+  "files": [
+    {
+      "file": "p0-demo.mp4",
+      "original_name": "Agent_SkillLoop_P0_58s (1).mp4",
+      "bytes": 2851951,
+      "sha256": "db86ab8a32d2da23142ed4d5ba9344b89c0bdedf7fb635b37d10483a1c9a15e3"
+    },
+    {
+      "file": "p0-demo.ko.srt",
+      "original_name": "Agent_SkillLoop_ko (1).srt",
+      "bytes": 1269,
+      "sha256": "f632897ee4ae1ac12f4d401ad397923a7d2a4dd026e13f9a0d65b4b4f14afa7f"
+    },
+    {
+      "file": "p0-claude-code.png",
+      "original_name": "P0캡처.png",
+      "bytes": 267875,
+      "sha256": "3c60c2e2a9e696245bb84762578f4905aab8fe33288d350926e22ed62bab2305"
+    }
+  ],
+  "compatibility": "Root P0캡처.png retained because team-hub/src/Captures.tsx imports it"
+}

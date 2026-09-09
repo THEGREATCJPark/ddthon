@@ -4,13 +4,23 @@
 
 코딩 경험이 적은 사내 엔지니어가 업무를 요청하면, Agent가 환경 제약으로 막힌 지점에서 검증된 팀 Skill을 재사용합니다. 처음 겪는 문제는 해결 절차를 후보로 남기고 사람 검토·독립 Replay를 거쳐 공유합니다.
 
+## P0 실제 시연 영상
+
+**업무 요청 한 문장 → 팀의 검증된 해결 방법 적용 → 설치·사용 검증 → 재사용 기록 +1**
+
+[▶ 58초 시연 영상](result/p0-demo-20260909/p0-demo.mp4) · [한국어 자막](result/p0-demo-20260909/p0-demo.ko.srt) · [캡처·실행 근거 모음](result/p0-demo-20260909/README.md)
+
+[![실제 Claude Code P0 시연](result/p0-demo-20260909/p0-claude-code.png)](result/p0-demo-20260909/p0-demo.mp4)
+
+사용자 제공 실제 시연 자료입니다. 58초는 편집 영상 길이이며 성능 측정값이 아닙니다.
+
 ## 문제와 해결
 
 사내 패키지 공급 경로와 문서 접근 제약 때문에 같은 실패·탐색이 개인 대화에서 반복됩니다. SkillLoop는 검색 결과 전달에 그치지 않고 실제 적용·검증·재사용 기록을 연결합니다. Skill의 불변 내용/digest와 usage를 분리하고, 검토한 exact candidate와 Replay 대상이 같을 때만 게시합니다.
 
 ## 현재 동작과 확인 범위
 
-2026-09-09 추가 검증: 한국어 대화·도구 도움말을 보완하고 **P1 실패/NO_MATCH → 사용자 Excel 열람 사실 확인 → 탐색/업무 완료**를 같은 Claude 세션의 두 턴으로 실행했습니다. 예상2550·차트·후보1/reuse0, 전체 Python144 PASS/2 SKIP. [대화 UX 검증](result/dialogue-ux-20260909/README.md)을 참고하세요. **실제 P0 interactive UI 캡처는 NOT_RUN**입니다. Computer Use에 Claude 터미널이 제어 대상으로 제공되지 않아 요청을 입력하지 않았으며, [사용자 직접 실행 안내](result/live-demo-p0-20260909/README.md)를 남겼습니다.
+2026-09-09 추가 검증: 한국어 대화·도구 도움말을 보완하고 **P1 실패/NO_MATCH → 사용자 Excel 열람 사실 확인 → 탐색/업무 완료**를 같은 Claude 세션의 두 턴으로 실행했습니다. 예상2550·차트·후보1/reuse0, 전체 Python144 PASS/2 SKIP. [대화 UX 검증](result/dialogue-ux-20260909/README.md)을 참고하세요. 당시 자동 조작으로 시도한 P0 interactive 실행은 [NOT_RUN 기록](result/live-demo-p0-20260909/README.md)으로 보존했습니다. **이후 사용자가 직접 실행한 P0 영상·캡처를 확보했으며 [실제 시연 자료](result/p0-demo-20260909/README.md)에서 확인할 수 있습니다.** 과거 미실행과 이후 사용자 실행은 별개의 기록입니다.
 
 - **P0 기존 경험 재사용:** 자연어 설치 요청 → 실제 pip 공급 실패 → MATCH → 같은 작업 venv에 설치·버전/import 확인 → 실제 reuse +1. 다른 경로에서 Claude 3개 사례 성공. 추가로 다른 패키지 2종에 같은 환경 Skill을 적용하는 코드 검증을 진행했습니다.
 - **P1 새 경험:** NASCA(가상) 사내환경에서 직접 XLSX 읽기 실패 → NO_MATCH → 새 Claude의 실제 탐색 → 열린 Excel read-only 접근 → 현재 파일의 열 해석 → OLS 예측·PNG 차트 → 환경 절차만 후보화까지 실행했습니다.
