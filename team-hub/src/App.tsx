@@ -7,12 +7,14 @@ import {
   Play,
   Images,
   House,
+  BadgeCheck,
 } from "lucide-react";
 import Flow from "./Flow";
 import Community from "./Community";
 import Demo from "./Demo";
 import Captures from "./Captures";
 import Overview from "./Overview";
+import QA from "./QA";
 const tabs = [
   { id: "overview", name: "개요", icon: House },
   { id: "flow", name: "진행 순서도", icon: GitBranch },
@@ -20,6 +22,7 @@ const tabs = [
   { id: "challenge", name: "태클 걸기", icon: Flame },
   { id: "demo", name: "시연", icon: Play },
   { id: "captures", name: "캡처 정리", icon: Images },
+  { id: "qa", name: "QA 검증", icon: BadgeCheck },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 function readTab(): Tab {
@@ -27,6 +30,7 @@ function readTab(): Tab {
   if (hash === "demo" || hash === "demo-p0" || hash === "demo-p1")
     return "demo";
   if (hash === "captures") return "captures";
+  if (hash === "qa") return "qa";
   if (hash === "flow" || hash === "team" || hash === "challenge") return hash;
   return "overview";
 }
@@ -100,6 +104,8 @@ export default function App() {
           <Demo initialScenario={location.hash === "#demo-p1" ? "p1" : "p0"} />
         ) : tab === "captures" ? (
           <Captures />
+        ) : tab === "qa" ? (
+          <QA />
         ) : (
           <Community key={tab} board={tab} />
         )}
