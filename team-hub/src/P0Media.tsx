@@ -1,5 +1,4 @@
 import video from "../../result/p0-demo-20260909/p0-demo.mp4?url";
-import subtitles from "./p0-demo.ko.vtt?url";
 import srt from "../../result/p0-demo-20260909/p0-demo.ko.srt?url";
 import evaluationZip from "../../result/p0-demo-20260909/ai-evaluation/p0-ai-evaluation.zip?url";
 import counter from "../../result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_카운트변화.png";
@@ -16,11 +15,10 @@ export default function P0Media() {
     <header><div>
       <span className="capture-kind">P0 · 시연 영상</span>
       <h3>팀 Skill로 Python 패키지 설치하기</h3>
-      <p>58초 · 한국어 자막</p>
+      <p>58초 · 영상 내 한국어 자막</p>
     </div></header>
     <video controls preload="metadata" playsInline aria-label="P0 실제 시연 영상">
       <source src={video} type="video/mp4" />
-      <track kind="subtitles" src={subtitles} srcLang="ko" label="한국어" default />
       영상을 재생할 수 없습니다. 아래 영상 다운로드를 이용해 주세요.
     </video>
     <div className="p0-media-links">
