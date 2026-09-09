@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-09-09T03:47:50.063000+00:00",
+  "python": "3.13.14",
+  "python_executable": "C:\\Users\\cik61\\Desktop\\P1-Paired-Preparation-20260909\\operator\\runtime\\Scripts\\python.exe",
+  "os": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "openpyxl": "3.1.5",
+    "msoffcrypto-tool": "5.4.2",
+    "cryptography": "46.0.6",
+    "pywin32": "311",
+    "matplotlib": "3.10.8",
+    "Pillow": "12.3.0"
+  },
+  "excel_build": null,
+  "cli_version": null,
+  "authentication_verified": false,
+  "containment_verified": false
+}

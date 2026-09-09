@@ -1,52 +1,25 @@
-# Integrated validation summary — review pending
+# Build & Test — 최종 결과 검토 진행 중
 
-## Current result
+**기술 검증 실행 완료 / 전체 단계 완료·사용자 최종 수용은 아직 아님.**
 
-P0 natural-language reuse and P1 discovery-to-remote-Warm lifecycle have actual execution evidence. Formal whole-product completion is not declared: B-PC reproduction and final submission/gallery review remain. Team-facing status correction and local browser validation are complete; main935b8ec Python CI34287993633 and Pages34287993826 success; public browser P0/P1 progression PASS.
+- Python 테스트 대상 코드: `6197a975b020768cc29bcd92dd27553406da268e`. 이후 Python 제품/테스트 동일. 웹은 원격 `3b2c19d`와 승인된 입력 PBT 보완을 포함해 재검증했다.
+- 새 환경 설치·pip check·CLI 진입 PASS. **Python200 PASS/2 SKIP**, Hypothesis seed20260908, 319.60초.
+- SKIP: 실제 Excel opt-in 1건, 통합된 B 모듈의 미연결 대역 시나리오 N/A 1건.
+- 웹 의존성 설치, **10 tests PASS**, build PASS. 변경되지 않은 Firestore rules는 기존 GitHub CI34315865105의 emulator PASS 및 운영 API 조회 exact hash 일치 근거를 유지한다. 최신 웹의 Pages 배포는 main 전달 후 CI 확인 대상이다.
+- P0 WITH_SKILL3/3, P1 추가 Cold4/4 업무·차트 PASS. 수동 P1 승인/Replay/Git 게시도 별도 실제 증거로 완료. 이전 ‘사용자 게시 대기’는 해당 과거 시점의 기록이다.
+- Git 수신/Warm/usage 왕복은 독립 workspace의 실제 원격 검증. 다른 물리 PC의 전체 제품 실행을 독립 확인했다고 주장하지 않는다.
+- 공개 영상 P0/P1 HTTP200. 편집 영상과 자동 측정 세션은 별개다.
 
-| Evidence | Result | Scope |
-| --- | --- | --- |
-| Existing fixed-seed regression | 139 PASS / 2 SKIP | baseline 96f3c85; seed 20260908; combined unit/local integration |
-| Existing opt-in Excel check | 1 PASS | actual Desktop Excel on CJ PC |
-| GitHub Python CI | success | final product/main935b8ec: run34287993633, Windows; older75ef7e0:34242335266 and91dcf82:34235737366 retained |
-| GitHub Pages | success | main935b8ec:34287993826; team-hubbe3013f:34287992312, same web tree |
-| Existing P0 Claude reproductions | 3 completed cases | one earlier transport/permission attempt failed and was preserved |
-| P0 two-package same-Skill test | PASS | pinned local-package minimum generalization, not arbitrary pip |
-| Additional P1 Cold sessions | 3 PASS | different layouts/values; chart; candidate+1/reuse0 each |
-| Human approval / fresh Replay / Git publication | PASS | exact approved candidate; actual remote confirmation |
-| New Agent remote Warm | PASS | forecast2550, reuse+1, candidate0, unchanged original |
-| Usage Git roundtrip / duplicate pull | PASS | first import1, repeat0, organization total1 |
-| Separate B PC | NOT_RUN | next morning reproduction |
-| U3 final regression | 142 PASS / 2 SKIP | seed20260908; actual Excel opt-in separate; first broad-assertion failure preserved |
-| Web explanation | 6 tests PASS / build PASS / browser PASS | P0/P1 all steps, real archived charts, back/reset; no live Firebase writes |
-| Full submission review | incomplete | separate B PC and final gallery review remain |
+## 현재 검토 상태
 
-Product/C9 code was frozen during the four additional Agent sessions. Permission/schema retries and one inaccurate Warm narrative sentence are retained and documented in result/p1-acceptance/README.md. All four charts were visually inspected and agree with the numerical output. Full-suite coverage percentage, quantitative performance and production deployment are not claimed.
+1. 신규 웹 예시 입력 PBT — 승인 후 구현·검증 완료. 해당 blocking finding 해소.
+2. 신규 웹 쓰기 — 사전 근거 미확인 보존, 사용자의 현재 기능 수용 기록 완료. 소급 승인 아님.
+3. README 최신 상태·제출 구조 연결 완료. 최종 사용자 결과 수용 및 main 전달·CI 확인 대기.
 
-## AI-DLC compliance
+[최종 검토 보고·명령·실행 로그](../../../result/development-closeout-20260909/README.md)에서 범위와 근거를 확인한다. [이전 요약 원문](../../history/build-and-test-pre-closeout-20260909.md)은 당시 기록으로 보존했다. 최신 미해결 사항을 숨기거나 과거 테스트 개수를 합산하지 않는다.
 
-User-approved continuation recorded before tests; actual exact-candidate human decision preceded S3 review; fresh Replay preceded actual Git publication. Failed/intermediate outputs remain. Timestamp is captured anew for each audit entry in UTC ISO 8601. Existing requirements, plan, Unit ownership, team Git ancestry and official rules are preserved. This run does not invent new features or retroactive approval. Enabled partial PBT baseline remains satisfied; no new pure product algorithm was added. Disabled extension suites remain disabled while core NFRs are observed.
+Operations는 승인된 MVP에서 placeholder다. 후속 변경은 기존 완료 SHA를 보존하고 영향 확인·해당 계획/승인·수정·검증으로 진행한다.
 
-Build/install instructions, unit instructions, integration/acceptance instructions and B handoff are in this directory. Operations remains skipped/placeholder in the approved workflow. Approved final-presentation-alignment-plan governs the U3/web correction and deployment. Deployment/CI receipts are saved in result/final-alignment. Next is B-PC reproduction and final submission review; no new Inception or unrestricted change period.
+## 승인된 마감 보완 결과 — 2026-09-09T06:13:53.688628+00:00
 
-
-## Additional Cold / language review (2026-09-09 morning)
-
-Fresh P0 1 and P1 Cold2 functional PASS at frozen d8c45cb; not part of142 unit/integration tests. Values/forecasts1650 and2550, hash preserved, candidate1/reuse0. Product label2/2 correct; Agent narrative/Korean/schema ergonomics need improvement. Full raw-visible traces and manual findings: result/cold-review-20260909. No new review/publish, B-PC remains NOT_RUN; overall final review is not auto-approved.
-
-## 2026-09-09 Dialogue UX verification
-
-Approved Code Plan executed at fff0ffa. Targeted39 PASS, full144 PASS/2 SKIP (Hypothesis seed20260908), web7 tests/build PASS. P1 operator-assisted same-session two-turn Cold PASS: true user-fact pause, actual different-layout read, independent expected2550, chart path, candidate1/reuse0, original unchanged. Existing lifecycle content unchanged; prior human/Replay/publish evidence remains historical. Source logs under result/dialogue-ux-20260909. P0 interactive LIVE RUN #1 NOT_RUN (terminal not targetable by Computer Use); no prompt/screenshots, no substituted headless run. Minor narrative issues retained. B-PC NOT_RUN. Web completion-scroll correction checked separately; final remote receipts pending.
-
-
-
-## Remote completion receipt
-
-- Python CI: 9065a72284d93eb2fffdda51401f34638457e681, run34295654337, success. Latest change was an ASCII requirements comment; product tree equals the locally testedfff0ffa.
-- Pages: 6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a, run34295561705, success. Current web tree is identical.
-- Public browser: https://thegreatcjpark.github.io/ddthon/?verify=6fefa6b#demo-p1 — index-Da_E1P2H.js; first actual-failure/NO_MATCH explanation and the second user-fact turn confirmed. public-environment-turn.txt/png are WEB SIMULATION evidence, not an actual Claude UI capture. Initial cached navigation showed the previous bundle; final navigation verified the updated bundle. A click tool timed out although the page advanced; preserved as a tool limitation, not a product failure.
-- Local P0 four-step/P1 nine-step, counts/reset/back/scroll and chart loading checks remain in this folder.
-- P0 interactive UI NOT_RUN; B-PC verification NOT_RUN. No new candidate approval/publish. Final evidence-only commit is distinct from tested/deployed source SHAs.
-
-## Latest — Git organization demo (2026-09-09)
-Final Python165PASS/2SKIP; setup15PASS overlaps. Real operator open2/2 and Git-backed isolated P0 acceptance PASS. Shared branch team-skill-demo-20260909 starts P0-only at75b6e54225a9fa4e71e7174168161d61fa923e31. User live P1 candidate/approval/Replay/publication and subsequent colleague Warm remain pending. Conversational approval replaces native GUI. [User guide](org-demo-user-guide.md); [receipts](../../../result/operator-org-cold-20260909/README.md). Prior failures are historical, not erased.
+웹 예시 등록·삭제는 사용자가 현재 시점에서 수용했다(사전 근거 미확인 보존). 입력 PBT3개(각200회, seed20260909, 기본 shrinking) 추가, 웹10 PASS/0 SKIP 및 최신 원격3b2c19d 포함 build PASS. 운영 Firestore 규칙은 변경되지 않았다. Python 소스/테스트도 기존6197a97과 동일하여 200 PASS/2 SKIP 근거 유지. README·제출 구조·필터 점검 완료. 과거 이 문서의 웹 PBT·승인 대기는 이 항목으로 해소. 최종 결과 사용자 수용 및 main 전달/CI는 아직 대기한다.

@@ -1,0 +1,36 @@
+{
+  "session_id": "6b648caa-91c4-4830-8a00-aa42c40566be",
+  "time_basis": "seconds since actual initial prompt, not edited video time",
+  "events": [
+    {
+      "id": "request",
+      "seconds": 0,
+      "editorial_caption": "Excel 생산량 조회와 다음 달 추세선 요청"
+    },
+    {
+      "id": "direct_failure_no_match",
+      "seconds": 27.523,
+      "editorial_caption": "직접 읽기 실패 · 기존 P1 Skill 없음"
+    },
+    {
+      "id": "exact_workbook",
+      "seconds": 67.774,
+      "editorial_caption": "동일 파일명 중 정확한 작업 경로의 열린 문서 선택"
+    },
+    {
+      "id": "data_observed",
+      "seconds": 88.11,
+      "editorial_caption": "실제 생산량과 문서 배치 확인"
+    },
+    {
+      "id": "work_complete",
+      "seconds": 110.539,
+      "editorial_caption": "예측·차트 검증 완료 · 환경 절차 후보 생성"
+    },
+    {
+      "id": "final_response",
+      "seconds": 127.155,
+      "editorial_caption": "실적·예측을 구분해 결과 안내 · 게시 전"
+    }
+  ]
+}

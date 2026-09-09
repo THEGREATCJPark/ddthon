@@ -1,0 +1,2814 @@
+{
+  "captured_at": "2026-09-09T06:13:54.138811+00:00",
+  "source_head_before_docs_commit": "1ac639acbab15f01b64ee44024e29f5034164e36",
+  "repo": {
+    "html_url": "https://github.com/THEGREATCJPark/ddthon",
+    "private": false,
+    "visibility": "public",
+    "default_branch": "main"
+  },
+  "file_count": 698,
+  "total_bytes": 48546567,
+  "over_10MB": [
+    {
+      "path": "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
+      "bytes": 11270872
+    }
+  ],
+  "under_100MB": true,
+  "under_1000_files": true,
+  "files": [
+    {
+      "path": ".aidlc-rule-details/LICENSE",
+      "bytes": 964
+    },
+    {
+      "path": ".aidlc-rule-details/common/ascii-diagram-standards.md",
+      "bytes": 3377
+    },
+    {
+      "path": ".aidlc-rule-details/common/content-validation.md",
+      "bytes": 2766
+    },
+    {
+      "path": ".aidlc-rule-details/common/depth-levels.md",
+      "bytes": 3112
+    },
+    {
+      "path": ".aidlc-rule-details/common/error-handling.md",
+      "bytes": 13909
+    },
+    {
+      "path": ".aidlc-rule-details/common/overconfidence-prevention.md",
+      "bytes": 4431
+    },
+    {
+      "path": ".aidlc-rule-details/common/process-overview.md",
+      "bytes": 7157
+    },
+    {
+      "path": ".aidlc-rule-details/common/question-format-guide.md",
+      "bytes": 9827
+    },
+    {
+      "path": ".aidlc-rule-details/common/session-continuity.md",
+      "bytes": 3142
+    },
+    {
+      "path": ".aidlc-rule-details/common/terminology.md",
+      "bytes": 7498
+    },
+    {
+      "path": ".aidlc-rule-details/common/welcome-message.md",
+      "bytes": 5045
+    },
+    {
+      "path": ".aidlc-rule-details/common/workflow-changes.md",
+      "bytes": 11000
+    },
+    {
+      "path": ".aidlc-rule-details/construction/build-and-test.md",
+      "bytes": 9656
+    },
+    {
+      "path": ".aidlc-rule-details/construction/code-generation.md",
+      "bytes": 9557
+    },
+    {
+      "path": ".aidlc-rule-details/construction/functional-design.md",
+      "bytes": 6034
+    },
+    {
+      "path": ".aidlc-rule-details/construction/infrastructure-design.md",
+      "bytes": 5186
+    },
+    {
+      "path": ".aidlc-rule-details/construction/nfr-design.md",
+      "bytes": 4602
+    },
+    {
+      "path": ".aidlc-rule-details/construction/nfr-requirements.md",
+      "bytes": 5131
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/resiliency/baseline/resiliency-baseline.md",
+      "bytes": 28428
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/resiliency/baseline/resiliency-baseline.opt-in.md",
+      "bytes": 1792
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/security/baseline/security-baseline.md",
+      "bytes": 18457
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/security/baseline/security-baseline.opt-in.md",
+      "bytes": 617
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/testing/property-based/property-based-testing.md",
+      "bytes": 18395
+    },
+    {
+      "path": ".aidlc-rule-details/extensions/testing/property-based/property-based-testing.opt-in.md",
+      "bytes": 912
+    },
+    {
+      "path": ".aidlc-rule-details/inception/application-design.md",
+      "bytes": 7492
+    },
+    {
+      "path": ".aidlc-rule-details/inception/requirements-analysis.md",
+      "bytes": 8493
+    },
+    {
+      "path": ".aidlc-rule-details/inception/reverse-engineering.md",
+      "bytes": 8717
+    },
+    {
+      "path": ".aidlc-rule-details/inception/units-generation.md",
+      "bytes": 9547
+    },
+    {
+      "path": ".aidlc-rule-details/inception/user-stories.md",
+      "bytes": 15932
+    },
+    {
+      "path": ".aidlc-rule-details/inception/workflow-planning.md",
+      "bytes": 15813
+    },
+    {
+      "path": ".aidlc-rule-details/inception/workspace-detection.md",
+      "bytes": 3463
+    },
+    {
+      "path": ".aidlc-rule-details/operations/operations.md",
+      "bytes": 631
+    },
+    {
+      "path": ".claude/rules/evaluation.md",
+      "bytes": 1288
+    },
+    {
+      "path": ".claude/settings.json",
+      "bytes": 99
+    },
+    {
+      "path": ".claude/skills/skillloop/SKILL.md",
+      "bytes": 25209
+    },
+    {
+      "path": ".github/workflows/python.yml",
+      "bytes": 814
+    },
+    {
+      "path": ".github/workflows/team-hub.yml",
+      "bytes": 1648
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 895
+    },
+    {
+      "path": "AI-DLC-SOURCE.md",
+      "bytes": 981
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 25570
+    },
+    {
+      "path": "EVALUATION.md",
+      "bytes": 11038
+    },
+    {
+      "path": "P0캡처.png",
+      "bytes": 267875
+    },
+    {
+      "path": "README.md",
+      "bytes": 13128
+    },
+    {
+      "path": "SUBMISSION.md",
+      "bytes": 4393
+    },
+    {
+      "path": "aidlc-docs/aidlc-state.md",
+      "bytes": 4071
+    },
+    {
+      "path": "aidlc-docs/audit.md",
+      "bytes": 219072
+    },
+    {
+      "path": "aidlc-docs/construction/P0/nfr-requirements/nfr-requirements.md",
+      "bytes": 3672
+    },
+    {
+      "path": "aidlc-docs/construction/P0/nfr-requirements/tech-stack-decisions.md",
+      "bytes": 2544
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/code/p0-generalization-review.md",
+      "bytes": 5275
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/code/p0-nl-acceptance.md",
+      "bytes": 5612
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/code/p0-reproduction.md",
+      "bytes": 2464
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/functional-design/business-logic-model.md",
+      "bytes": 5540
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/functional-design/business-rules.md",
+      "bytes": 3393
+    },
+    {
+      "path": "aidlc-docs/construction/U0-P0/functional-design/domain-entities.md",
+      "bytes": 4524
+    },
+    {
+      "path": "aidlc-docs/construction/U1/functional-design/business-logic-model.md",
+      "bytes": 3514
+    },
+    {
+      "path": "aidlc-docs/construction/U1/functional-design/business-rules.md",
+      "bytes": 2933
+    },
+    {
+      "path": "aidlc-docs/construction/U1/functional-design/domain-entities.md",
+      "bytes": 2759
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/b-github-demo-guide.md",
+      "bytes": 9011
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/build-and-test-summary.md",
+      "bytes": 2744
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/build-instructions.md",
+      "bytes": 1153
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/cold-response-review-plan.md",
+      "bytes": 2806
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/integration-test-instructions.md",
+      "bytes": 2483
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/org-demo-user-guide.md",
+      "bytes": 6295
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/p1-after-filming-guide.md",
+      "bytes": 5352
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/p1-before-pc-manual-handoff.md",
+      "bytes": 4092
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/p1-paired-preparation-guide.md",
+      "bytes": 7296
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/p1-pilot-and-final-qa-intake.md",
+      "bytes": 4341
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/p1-three-manual-cold-guide.md",
+      "bytes": 4161
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/team-update.txt",
+      "bytes": 4175
+    },
+    {
+      "path": "aidlc-docs/construction/build-and-test/unit-test-instructions.md",
+      "bytes": 1213
+    },
+    {
+      "path": "aidlc-docs/construction/plans/c9-match-traceability.md",
+      "bytes": 3754
+    },
+    {
+      "path": "aidlc-docs/construction/plans/cj-handoff-20260908.md",
+      "bytes": 7924
+    },
+    {
+      "path": "aidlc-docs/construction/plans/development-closeout-plan.md",
+      "bytes": 11293
+    },
+    {
+      "path": "aidlc-docs/construction/plans/dialogue-ux-live-demo-code-generation-plan.md",
+      "bytes": 19652
+    },
+    {
+      "path": "aidlc-docs/construction/plans/dialogue-ux-live-demo-request.md",
+      "bytes": 28481
+    },
+    {
+      "path": "aidlc-docs/construction/plans/final-presentation-alignment-plan.md",
+      "bytes": 7193
+    },
+    {
+      "path": "aidlc-docs/construction/plans/operator-open-org-cold-code-generation-plan.md",
+      "bytes": 24470
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-evidence-publication-plan.md",
+      "bytes": 1937
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-integration-readiness.md",
+      "bytes": 3261
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-nl-acceptance-plan.md",
+      "bytes": 22643
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-repro-p1-continuation-plan.md",
+      "bytes": 4805
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-scoped-auto-reuse-code-generation-plan.md",
+      "bytes": 3980
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-u0u1-code-generation-plan.md",
+      "bytes": 14281
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-u0u1-functional-design-plan.md",
+      "bytes": 6897
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p0-with-skill-three-observation-plan.md",
+      "bytes": 2252
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-after-filming-setup-plan.md",
+      "bytes": 7942
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-cj-integration-contracts.md",
+      "bytes": 5748
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-cli-approval-ui-correction.md",
+      "bytes": 2968
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-lifecycle-acceptance-plan.md",
+      "bytes": 1776
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-paired-measurement-preparation-plan.md",
+      "bytes": 7924
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-preopened-three-observation-plan.md",
+      "bytes": 2650
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-publication-speed-review.md",
+      "bytes": 6087
+    },
+    {
+      "path": "aidlc-docs/construction/plans/p1-scenario-correction-plan.md",
+      "bytes": 5279
+    },
+    {
+      "path": "aidlc-docs/construction/plans/u2-shared-dependency-contracts.md",
+      "bytes": 17408
+    },
+    {
+      "path": "aidlc-docs/construction/plans/u3-minimal-design.md",
+      "bytes": 12507
+    },
+    {
+      "path": "aidlc-docs/construction/plans/u3-statusline-followup-plan.md",
+      "bytes": 5206
+    },
+    {
+      "path": "aidlc-docs/construction/plans/web-example-validation-closeout-plan.md",
+      "bytes": 3323
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/cj-implementation.md",
+      "bytes": 5246
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/code-plan.md",
+      "bytes": 4862
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/coordination-blockers.md",
+      "bytes": 12948
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/functional-design/functional-design.md",
+      "bytes": 30341
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/handoff-aidlc-state.md",
+      "bytes": 18152
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/handoff-audit.md",
+      "bytes": 127187
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/handoff-files.json",
+      "bytes": 1287
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/nfr-requirements/nfr-requirements.md",
+      "bytes": 12714
+    },
+    {
+      "path": "aidlc-docs/construction/u2-p1-git/scenario-correction-results.md",
+      "bytes": 2528
+    },
+    {
+      "path": "aidlc-docs/history/.gitattributes",
+      "bytes": 9
+    },
+    {
+      "path": "aidlc-docs/history/aidlc-state-pre-closeout-20260909.md",
+      "bytes": 58537
+    },
+    {
+      "path": "aidlc-docs/history/build-and-test-pre-closeout-20260909.md",
+      "bytes": 6306
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/application-design.md",
+      "bytes": 13120
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/component-dependency.md",
+      "bytes": 12288
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/component-methods.md",
+      "bytes": 15950
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/components.md",
+      "bytes": 15060
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/services.md",
+      "bytes": 15193
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/unit-of-work-dependency.md",
+      "bytes": 7616
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/unit-of-work-story-map.md",
+      "bytes": 3334
+    },
+    {
+      "path": "aidlc-docs/inception/application-design/unit-of-work.md",
+      "bytes": 12093
+    },
+    {
+      "path": "aidlc-docs/inception/plans/application-design-plan.md",
+      "bytes": 8514
+    },
+    {
+      "path": "aidlc-docs/inception/plans/change-impact-ui.md",
+      "bytes": 15919
+    },
+    {
+      "path": "aidlc-docs/inception/plans/execution-plan.md",
+      "bytes": 18408
+    },
+    {
+      "path": "aidlc-docs/inception/plans/story-generation-plan.md",
+      "bytes": 6809
+    },
+    {
+      "path": "aidlc-docs/inception/plans/unit-of-work-plan.md",
+      "bytes": 4303
+    },
+    {
+      "path": "aidlc-docs/inception/plans/user-stories-assessment.md",
+      "bytes": 3044
+    },
+    {
+      "path": "aidlc-docs/inception/requirements/requirement-clarification-questions.md",
+      "bytes": 2831
+    },
+    {
+      "path": "aidlc-docs/inception/requirements/requirement-verification-questions.md",
+      "bytes": 9680
+    },
+    {
+      "path": "aidlc-docs/inception/requirements/requirements.md",
+      "bytes": 25543
+    },
+    {
+      "path": "aidlc-docs/inception/user-stories/personas.md",
+      "bytes": 3086
+    },
+    {
+      "path": "aidlc-docs/inception/user-stories/stories.md",
+      "bytes": 14044
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 704
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bytes": 132
+    },
+    {
+      "path": "result/b-github-receive-20260909/verification.json",
+      "bytes": 9455
+    },
+    {
+      "path": "result/capture-ux-20260909/display-final.txt",
+      "bytes": 2443
+    },
+    {
+      "path": "result/capture-ux-20260909/display-rerun.txt",
+      "bytes": 2407
+    },
+    {
+      "path": "result/capture-ux-20260909/display-verified.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/capture-ux-20260909/status-p0.txt",
+      "bytes": 371
+    },
+    {
+      "path": "result/capture-ux-20260909/tests.txt",
+      "bytes": 2326
+    },
+    {
+      "path": "result/capture-ux-20260909/workspace-refresh.json",
+      "bytes": 750
+    },
+    {
+      "path": "result/cold-review-20260909/README.md",
+      "bytes": 4087
+    },
+    {
+      "path": "result/cold-review-20260909/excel-prepare.txt",
+      "bytes": 55
+    },
+    {
+      "path": "result/cold-review-20260909/p0-permissions.json",
+      "bytes": 1374
+    },
+    {
+      "path": "result/cold-review-20260909/p0-product-reports.json",
+      "bytes": 2
+    },
+    {
+      "path": "result/cold-review-20260909/p0-responses.md",
+      "bytes": 1757
+    },
+    {
+      "path": "result/cold-review-20260909/p0-status.json",
+      "bytes": 4685
+    },
+    {
+      "path": "result/cold-review-20260909/p0-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/cold-review-20260909/p0-trace.json",
+      "bytes": 47009
+    },
+    {
+      "path": "result/cold-review-20260909/p0-transcript.md",
+      "bytes": 16579
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-5a9542d9fd387f278987-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-permissions.json",
+      "bytes": 1256
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-product-reports.json",
+      "bytes": 2460
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-responses.md",
+      "bytes": 4472
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-status.json",
+      "bytes": 3442
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-trace.json",
+      "bytes": 243862
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-1-transcript.md",
+      "bytes": 92941
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-671eb11e3375f902583d-trend.png",
+      "bytes": 46100
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-permissions.json",
+      "bytes": 1256
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-product-reports.json",
+      "bytes": 1905
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-responses.md",
+      "bytes": 3731
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-status.json",
+      "bytes": 3443
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-trace.json",
+      "bytes": 241986
+    },
+    {
+      "path": "result/cold-review-20260909/p1-cold-2-transcript.md",
+      "bytes": 93844
+    },
+    {
+      "path": "result/cold-review-20260909/response-review.md",
+      "bytes": 4283
+    },
+    {
+      "path": "result/cold-review-20260909/run-context.json",
+      "bytes": 301
+    },
+    {
+      "path": "result/cold-review-20260909/run.py",
+      "bytes": 7672
+    },
+    {
+      "path": "result/cold-review-20260909/runner.txt",
+      "bytes": 194
+    },
+    {
+      "path": "result/cold-review-20260909/validation.json",
+      "bytes": 4138
+    },
+    {
+      "path": "result/cold-review-20260909/verification-output.json",
+      "bytes": 4140
+    },
+    {
+      "path": "result/cold-review-20260909/verify.py",
+      "bytes": 6405
+    },
+    {
+      "path": "result/development-closeout-20260909/.gitattributes",
+      "bytes": 9
+    },
+    {
+      "path": "result/development-closeout-20260909/README.md",
+      "bytes": 8852
+    },
+    {
+      "path": "result/development-closeout-20260909/bundle-line-ending-comparison.json",
+      "bytes": 449
+    },
+    {
+      "path": "result/development-closeout-20260909/delivery-inspection.json",
+      "bytes": 1434
+    },
+    {
+      "path": "result/development-closeout-20260909/history-hashes.json",
+      "bytes": 228
+    },
+    {
+      "path": "result/development-closeout-20260909/live-firestore-rules.json",
+      "bytes": 881
+    },
+    {
+      "path": "result/development-closeout-20260909/manifest.json",
+      "bytes": 2423
+    },
+    {
+      "path": "result/development-closeout-20260909/python-cli-help.json",
+      "bytes": 491
+    },
+    {
+      "path": "result/development-closeout-20260909/python-cli-help.log",
+      "bytes": 1003
+    },
+    {
+      "path": "result/development-closeout-20260909/python-install.json",
+      "bytes": 669
+    },
+    {
+      "path": "result/development-closeout-20260909/python-install.log",
+      "bytes": 7231
+    },
+    {
+      "path": "result/development-closeout-20260909/python-pip-check.json",
+      "bytes": 485
+    },
+    {
+      "path": "result/development-closeout-20260909/python-pip-check.log",
+      "bytes": 31
+    },
+    {
+      "path": "result/development-closeout-20260909/python-regression.json",
+      "bytes": 548
+    },
+    {
+      "path": "result/development-closeout-20260909/python-regression.log",
+      "bytes": 287
+    },
+    {
+      "path": "result/development-closeout-20260909/python-venv.json",
+      "bytes": 520
+    },
+    {
+      "path": "result/development-closeout-20260909/python-venv.log",
+      "bytes": 0
+    },
+    {
+      "path": "result/development-closeout-20260909/python-versions.json",
+      "bytes": 485
+    },
+    {
+      "path": "result/development-closeout-20260909/python-versions.log",
+      "bytes": 577
+    },
+    {
+      "path": "result/development-closeout-20260909/remote-ci.json",
+      "bytes": 14936
+    },
+    {
+      "path": "result/development-closeout-20260909/remote-web-jobs.json",
+      "bytes": 6506
+    },
+    {
+      "path": "result/development-closeout-20260909/web-build.json",
+      "bytes": 427
+    },
+    {
+      "path": "result/development-closeout-20260909/web-build.log",
+      "bytes": 1572
+    },
+    {
+      "path": "result/development-closeout-20260909/web-final-build.log",
+      "bytes": 1602
+    },
+    {
+      "path": "result/development-closeout-20260909/web-npm-ci.json",
+      "bytes": 411
+    },
+    {
+      "path": "result/development-closeout-20260909/web-npm-ci.log",
+      "bytes": 144
+    },
+    {
+      "path": "result/development-closeout-20260909/web-pbt-test.log",
+      "bytes": 1150
+    },
+    {
+      "path": "result/development-closeout-20260909/web-unit.json",
+      "bytes": 413
+    },
+    {
+      "path": "result/development-closeout-20260909/web-unit.log",
+      "bytes": 808
+    },
+    {
+      "path": "result/dialogue-ux-20260909/README.md",
+      "bytes": 6655
+    },
+    {
+      "path": "result/dialogue-ux-20260909/github-actions.json",
+      "bytes": 1135
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-4ad186cd583ab7835e1f-trend.png",
+      "bytes": 46100
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-permissions.json",
+      "bytes": 588
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-prepare.txt",
+      "bytes": 55
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-runner.txt",
+      "bytes": 64
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-status.json",
+      "bytes": 11939
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-1-reports.json",
+      "bytes": 784
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-1-responses.md",
+      "bytes": 1417
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-1-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-1-trace.json",
+      "bytes": 57383
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-1-transcript.md",
+      "bytes": 21175
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-2-reports.json",
+      "bytes": 1586
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-2-responses.md",
+      "bytes": 2205
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-2-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-2-trace.json",
+      "bytes": 181866
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-turn-2-transcript.md",
+      "bytes": 71779
+    },
+    {
+      "path": "result/dialogue-ux-20260909/p1-verification.json",
+      "bytes": 612
+    },
+    {
+      "path": "result/dialogue-ux-20260909/public-environment-turn.png",
+      "bytes": 58133
+    },
+    {
+      "path": "result/dialogue-ux-20260909/public-environment-turn.txt",
+      "bytes": 4901
+    },
+    {
+      "path": "result/dialogue-ux-20260909/pytest-full.txt",
+      "bytes": 287
+    },
+    {
+      "path": "result/dialogue-ux-20260909/pytest-targeted.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/dialogue-ux-20260909/run-two-turn.py",
+      "bytes": 7107
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-build-after-scroll.txt",
+      "bytes": 420
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-build-before-install.txt",
+      "bytes": 153
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-build.txt",
+      "bytes": 420
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-environment-turn.txt",
+      "bytes": 4901
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-install.txt",
+      "bytes": 151
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-p0-final.txt",
+      "bytes": 5304
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-p1-final.png",
+      "bytes": 68189
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-p1-scroll-fixed.png",
+      "bytes": 40618
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-tests-after-scroll.txt",
+      "bytes": 827
+    },
+    {
+      "path": "result/dialogue-ux-20260909/web-tests.txt",
+      "bytes": 825
+    },
+    {
+      "path": "result/final-alignment/README.md",
+      "bytes": 3783
+    },
+    {
+      "path": "result/final-alignment/chart-provenance.json",
+      "bytes": 476
+    },
+    {
+      "path": "result/final-alignment/deployed-p0-dom.txt",
+      "bytes": 5373
+    },
+    {
+      "path": "result/final-alignment/deployed-p0.png",
+      "bytes": 95872
+    },
+    {
+      "path": "result/final-alignment/deployed-p1-dom.txt",
+      "bytes": 8784
+    },
+    {
+      "path": "result/final-alignment/deployed-p1.png",
+      "bytes": 97633
+    },
+    {
+      "path": "result/final-alignment/github-actions.json",
+      "bytes": 1338
+    },
+    {
+      "path": "result/final-alignment/pytest-final.txt",
+      "bytes": 206
+    },
+    {
+      "path": "result/final-alignment/pytest-first-failure.txt",
+      "bytes": 2681
+    },
+    {
+      "path": "result/final-alignment/receiver-org-snapshot.json",
+      "bytes": 4066
+    },
+    {
+      "path": "result/final-alignment/receiver-status.txt",
+      "bytes": 478
+    },
+    {
+      "path": "result/final-alignment/web-build.txt",
+      "bytes": 420
+    },
+    {
+      "path": "result/final-alignment/web-p0-complete.png",
+      "bytes": 95876
+    },
+    {
+      "path": "result/final-alignment/web-p0-dom.txt",
+      "bytes": 5373
+    },
+    {
+      "path": "result/final-alignment/web-p1-candidate.png",
+      "bytes": 96451
+    },
+    {
+      "path": "result/final-alignment/web-p1-dom.txt",
+      "bytes": 8784
+    },
+    {
+      "path": "result/final-alignment/web-p1-warm.png",
+      "bytes": 97633
+    },
+    {
+      "path": "result/live-demo-p0-20260909/README.md",
+      "bytes": 2716
+    },
+    {
+      "path": "result/live-demo-p0-20260909/run-context.json",
+      "bytes": 2438
+    },
+    {
+      "path": "result/live-demo-p0-20260909/verification.json",
+      "bytes": 750
+    },
+    {
+      "path": "result/live-demo-p0-20260909/visible-transcript.md",
+      "bytes": 262
+    },
+    {
+      "path": "result/operator-org-cold-20260909/README.md",
+      "bytes": 2894
+    },
+    {
+      "path": "result/operator-org-cold-20260909/conversation-targeted.txt",
+      "bytes": 3755
+    },
+    {
+      "path": "result/operator-org-cold-20260909/final-full-regression.txt",
+      "bytes": 657
+    },
+    {
+      "path": "result/operator-org-cold-20260909/final-setup-check.txt",
+      "bytes": 102
+    },
+    {
+      "path": "result/operator-org-cold-20260909/final-targeted.txt",
+      "bytes": 102
+    },
+    {
+      "path": "result/operator-org-cold-20260909/full-regression.txt",
+      "bytes": 1435
+    },
+    {
+      "path": "result/operator-org-cold-20260909/initial-targeted.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/operator-org-cold-20260909/operator-open-proof.json",
+      "bytes": 542
+    },
+    {
+      "path": "result/operator-org-cold-20260909/operator-open-proof.py",
+      "bytes": 1577
+    },
+    {
+      "path": "result/operator-org-cold-20260909/organization-preflight.json",
+      "bytes": 858
+    },
+    {
+      "path": "result/operator-org-cold-20260909/organization-preflight.py",
+      "bytes": 3169
+    },
+    {
+      "path": "result/operator-org-cold-20260909/organization-preflight.txt",
+      "bytes": 4970
+    },
+    {
+      "path": "result/operator-org-cold-20260909/p0-bootstrap-publish.txt",
+      "bytes": 1770
+    },
+    {
+      "path": "result/operator-org-cold-20260909/p0-bootstrap-replay.txt",
+      "bytes": 1338
+    },
+    {
+      "path": "result/operator-org-cold-20260909/p0-status.txt",
+      "bytes": 502
+    },
+    {
+      "path": "result/operator-org-cold-20260909/p1-status.txt",
+      "bytes": 502
+    },
+    {
+      "path": "result/operator-org-cold-20260909/prepare-p0.txt",
+      "bytes": 394
+    },
+    {
+      "path": "result/operator-org-cold-20260909/prepare-p1.txt",
+      "bytes": 246
+    },
+    {
+      "path": "result/operator-org-cold-20260909/run-manifest.json",
+      "bytes": 3173
+    },
+    {
+      "path": "result/operator-org-cold-20260909/targeted.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/p0-demo-20260909/README.md",
+      "bytes": 3876
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/.gitattributes",
+      "bytes": 9
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_AI_평가데이터.json",
+      "bytes": 19467
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_AI_평가자료.md",
+      "bytes": 11199
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_P0_58s.mp4",
+      "bytes": 2851951
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_ko.srt",
+      "bytes": 1269
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_카운트변화.png",
+      "bytes": 251446
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/README_평가순서.txt",
+      "bytes": 904
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/SHA256SUMS.json",
+      "bytes": 1588
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E01_request.png",
+      "bytes": 127460
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E02_apply_command.png",
+      "bytes": 234186
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E03_counter_last_zero.png",
+      "bytes": 241869
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E04_counter_first_one.png",
+      "bytes": 242265
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E05_verify_command.png",
+      "bytes": 256825
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E06_final_response.png",
+      "bytes": 272679
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E07_edited_last_zero.png",
+      "bytes": 328350
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/evidence/E08_edited_first_one.png",
+      "bytes": 326386
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/p0-ai-evaluation.zip",
+      "bytes": 4847188
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/package-receipt.json",
+      "bytes": 466
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/references/independent_p0_log.txt",
+      "bytes": 3256
+    },
+    {
+      "path": "result/p0-demo-20260909/ai-evaluation/references/independent_p0_result.json",
+      "bytes": 226
+    },
+    {
+      "path": "result/p0-demo-20260909/manifest.json",
+      "bytes": 1262
+    },
+    {
+      "path": "result/p0-demo-20260909/p0-claude-code.png",
+      "bytes": 267875
+    },
+    {
+      "path": "result/p0-demo-20260909/p0-demo.ko.srt",
+      "bytes": 1321
+    },
+    {
+      "path": "result/p0-demo-20260909/p0-demo.mp4",
+      "bytes": 2851951
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/README.md",
+      "bytes": 2994
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/current-status.txt",
+      "bytes": 457
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/next-work-context.json",
+      "bytes": 855
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/pytest-final-p0-utf8-env.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/pytest-final-p0.txt",
+      "bytes": 2541
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/pytest-p1-regression.txt",
+      "bytes": 102
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/pytest-targeted.txt",
+      "bytes": 113
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/user-work-independent-check.txt",
+      "bytes": 18
+    },
+    {
+      "path": "result/p0-live-feedback-20260909/work-preservation.json",
+      "bytes": 1377
+    },
+    {
+      "path": "result/p0-nl/acceptance-evidence.md",
+      "bytes": 2666
+    },
+    {
+      "path": "result/p0-nl/agent-sessions.json",
+      "bytes": 27102
+    },
+    {
+      "path": "result/p0-nl/clean-pytest.txt",
+      "bytes": 162
+    },
+    {
+      "path": "result/p0-nl/independent-verification.json",
+      "bytes": 522
+    },
+    {
+      "path": "result/p0-nl/missing-dependency-reproduction.txt",
+      "bytes": 5750
+    },
+    {
+      "path": "result/p0-nl/targeted-pytest.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/p0-nl/validation-dependencies.txt",
+      "bytes": 269
+    },
+    {
+      "path": "result/p0-nl/validation-manifest.json",
+      "bytes": 1279
+    },
+    {
+      "path": "result/p0-observation/README.md",
+      "bytes": 3955
+    },
+    {
+      "path": "result/p0-observation/agent-session.json",
+      "bytes": 18678
+    },
+    {
+      "path": "result/p0-observation/independent-verification.json",
+      "bytes": 592
+    },
+    {
+      "path": "result/p0-observation/observed-pip-errors.txt",
+      "bytes": 181
+    },
+    {
+      "path": "result/p0-observation/regression.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/p0-observation/standalone-match.txt",
+      "bytes": 654
+    },
+    {
+      "path": "result/p0-observation/status-after.txt",
+      "bytes": 431
+    },
+    {
+      "path": "result/p0-observation/validation.json",
+      "bytes": 1243
+    },
+    {
+      "path": "result/p0-reproduction/README.md",
+      "bytes": 2801
+    },
+    {
+      "path": "result/p0-reproduction/agent-1.json",
+      "bytes": 16294
+    },
+    {
+      "path": "result/p0-reproduction/agent-2.json",
+      "bytes": 17648
+    },
+    {
+      "path": "result/p0-reproduction/agent-3.json",
+      "bytes": 17841
+    },
+    {
+      "path": "result/p0-reproduction/attempt1-agent-2.json",
+      "bytes": 15262
+    },
+    {
+      "path": "result/p0-reproduction/attempt1-three-results.json",
+      "bytes": 1214
+    },
+    {
+      "path": "result/p0-reproduction/dev-install.log",
+      "bytes": 2601
+    },
+    {
+      "path": "result/p0-reproduction/full-pytest-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/p0-reproduction/full-pytest.txt",
+      "bytes": 162
+    },
+    {
+      "path": "result/p0-reproduction/setup.log",
+      "bytes": 2410
+    },
+    {
+      "path": "result/p0-reproduction/three-results.json",
+      "bytes": 1844
+    },
+    {
+      "path": "result/p0-reproduction/validation.json",
+      "bytes": 1907
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/github-cold-full.txt",
+      "bytes": 3281
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/github-cold-result.json",
+      "bytes": 236
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/next-cold-folder.txt",
+      "bytes": 63
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/next-cold-readiness.json",
+      "bytes": 210
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/p1-gates.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/regression.txt",
+      "bytes": 2351
+    },
+    {
+      "path": "result/p0-scoped-auto-20260909/scope-final.txt",
+      "bytes": 115
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/.gitattributes",
+      "bytes": 14
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/README.md",
+      "bytes": 7775
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-1-result.json",
+      "bytes": 8225
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-1-visible.json",
+      "bytes": 36677
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-2-result.json",
+      "bytes": 8265
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-2-visible.json",
+      "bytes": 38055
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-3-result.json",
+      "bytes": 8273
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/after/run-3-visible.json",
+      "bytes": 38070
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-1-independent.json",
+      "bytes": 977
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-1-result.json",
+      "bytes": 4720
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-1-visible.json",
+      "bytes": 16039
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-2-independent.json",
+      "bytes": 977
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-2-result.json",
+      "bytes": 4731
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-2-visible.json",
+      "bytes": 16857
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-3-independent.json",
+      "bytes": 1044
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-3-result.json",
+      "bytes": 4789
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-3-visible.json",
+      "bytes": 10447
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-4-independent.json",
+      "bytes": 1044
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-4-permission-observations.json",
+      "bytes": 1277
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-4-result.json",
+      "bytes": 5192
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-4-visible.json",
+      "bytes": 11753
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-5-independent.json",
+      "bytes": 977
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-5-permission-observations.json",
+      "bytes": 3093
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-5-result.json",
+      "bytes": 5513
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-5-visible.json",
+      "bytes": 17092
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-6-independent.json",
+      "bytes": 977
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-6-permission-observations.json",
+      "bytes": 3088
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-6-result.json",
+      "bytes": 5474
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/before/run-6-visible.json",
+      "bytes": 17935
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/comparison.csv",
+      "bytes": 1252
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/comparison.json",
+      "bytes": 60918
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/manifest.json",
+      "bytes": 3263
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/selection.json",
+      "bytes": 494
+    },
+    {
+      "path": "result/p0-six-before-three-after-20260909/source-integrity.json",
+      "bytes": 21451
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/.gitattributes",
+      "bytes": 8
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/README.md",
+      "bytes": 7363
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/comparison.csv",
+      "bytes": 688
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/manifest.json",
+      "bytes": 1320
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/metrics.csv",
+      "bytes": 323
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/operator-evidence-hashes.json",
+      "bytes": 2646
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/package_report.py",
+      "bytes": 10742
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-1-responses.md",
+      "bytes": 1328
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-1-result.json",
+      "bytes": 8423
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-2-responses.md",
+      "bytes": 1354
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-2-result.json",
+      "bytes": 8463
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-3-responses.md",
+      "bytes": 1368
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/round-3-result.json",
+      "bytes": 8471
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/summary.json",
+      "bytes": 45701
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/transcript-visible-1.json",
+      "bytes": 36184
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/transcript-visible-2.json",
+      "bytes": 37301
+    },
+    {
+      "path": "result/p0-with-skill-three-20260909/transcript-visible-3.json",
+      "bytes": 37316
+    },
+    {
+      "path": "result/p1-acceptance/README.md",
+      "bytes": 5063
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-c29f3edfa94889094fdb-trend.png",
+      "bytes": 47681
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-operator-profile.json",
+      "bytes": 258
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-product-reports.json",
+      "bytes": 2452
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-status.json",
+      "bytes": 3216
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/p1-acceptance/cold-1-trace.json",
+      "bytes": 247392
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-8029167536851dcc7039-trend.png",
+      "bytes": 48719
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-operator-profile.json",
+      "bytes": 263
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-product-reports.json",
+      "bytes": 2452
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-status.json",
+      "bytes": 3218
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/p1-acceptance/cold-2-trace.json",
+      "bytes": 272560
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-28c65c15b149012ecd1a-trend.png",
+      "bytes": 46336
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-operator-profile.json",
+      "bytes": 255
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-product-reports.json",
+      "bytes": 2443
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-status.json",
+      "bytes": 3218
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/p1-acceptance/cold-3-trace.json",
+      "bytes": 268472
+    },
+    {
+      "path": "result/p1-acceptance/lifecycle.json",
+      "bytes": 6154
+    },
+    {
+      "path": "result/p1-acceptance/receiver-org-snapshot.json",
+      "bytes": 3468
+    },
+    {
+      "path": "result/p1-acceptance/receiver-status.txt",
+      "bytes": 410
+    },
+    {
+      "path": "result/p1-acceptance/usage-roundtrip.json",
+      "bytes": 1201
+    },
+    {
+      "path": "result/p1-acceptance/validation.json",
+      "bytes": 4605
+    },
+    {
+      "path": "result/p1-acceptance/warm-4d443bc76d6c80a37de3-trend.png",
+      "bytes": 46100
+    },
+    {
+      "path": "result/p1-acceptance/warm-product-reports.json",
+      "bytes": 2820
+    },
+    {
+      "path": "result/p1-acceptance/warm-status.json",
+      "bytes": 6049
+    },
+    {
+      "path": "result/p1-acceptance/warm-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/p1-acceptance/warm-trace.json",
+      "bytes": 195543
+    },
+    {
+      "path": "result/p1-after-filming-20260909/Start-filming.ps1",
+      "bytes": 1705
+    },
+    {
+      "path": "result/p1-after-filming-20260909/closed-start-correction.json",
+      "bytes": 244
+    },
+    {
+      "path": "result/p1-after-filming-20260909/final-setup-checks.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-after-filming-20260909/preparation-regression.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-after-filming-20260909/readiness.json",
+      "bytes": 1610
+    },
+    {
+      "path": "result/p1-after-filming-20260909/setup-manifest.json",
+      "bytes": 1043
+    },
+    {
+      "path": "result/p1-after-filming-20260909/skill-provenance.json",
+      "bytes": 4155
+    },
+    {
+      "path": "result/p1-after-filming-20260909/status-final.txt",
+      "bytes": 376
+    },
+    {
+      "path": "result/p1-after-filming-20260909/status.txt",
+      "bytes": 368
+    },
+    {
+      "path": "result/p1-auto-cold-task-cutoff/round1-measurement.json",
+      "bytes": 3630
+    },
+    {
+      "path": "result/p1-before-after-comparison-20260909/README.md",
+      "bytes": 10140
+    },
+    {
+      "path": "result/p1-before-after-comparison-20260909/comparison.csv",
+      "bytes": 518
+    },
+    {
+      "path": "result/p1-before-after-comparison-20260909/comparison.json",
+      "bytes": 19607
+    },
+    {
+      "path": "result/p1-before-pc-pilot-intake/intake.json",
+      "bytes": 926
+    },
+    {
+      "path": "result/p1-cold-filming-correction-20260909/Start-filming.ps1",
+      "bytes": 1705
+    },
+    {
+      "path": "result/p1-cold-filming-correction-20260909/cold-readiness.json",
+      "bytes": 1244
+    },
+    {
+      "path": "result/p1-cold-filming-correction-20260909/statusline.txt",
+      "bytes": 385
+    },
+    {
+      "path": "result/p1-cold-manual-134050/README.md",
+      "bytes": 3665
+    },
+    {
+      "path": "result/p1-cold-manual-134050/actual-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-cold-manual-134050/measurement.json",
+      "bytes": 7442
+    },
+    {
+      "path": "result/p1-cold-manual-134050/metrics.csv",
+      "bytes": 365
+    },
+    {
+      "path": "result/p1-cold-three-manual-20260909/manual-before-handoff.json",
+      "bytes": 323
+    },
+    {
+      "path": "result/p1-cold-three-manual-20260909/peer-response-review.json",
+      "bytes": 722
+    },
+    {
+      "path": "result/p1-cold-three-manual-20260909/rounds.json",
+      "bytes": 2960
+    },
+    {
+      "path": "result/p1-cold-three-manual-20260909/setup-validation.json",
+      "bytes": 416
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/bundle-integrity.json",
+      "bytes": 226
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/delivery-r2.json",
+      "bytes": 236
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/delivery.json",
+      "bytes": 576
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/derived-skill-mechanical-validation.json",
+      "bytes": 791
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/local-runtime-aligned.json",
+      "bytes": 727
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/machine.json",
+      "bytes": 516
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/portable-doctor.txt",
+      "bytes": 1019
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/preparation-tests.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/protocol-runtime-aligned.json",
+      "bytes": 2041
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/protocol.json",
+      "bytes": 1833
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/readiness.json",
+      "bytes": 1011
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-doctor.txt",
+      "bytes": 601
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-excel-first-blocked.json",
+      "bytes": 685
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-excel-pass.json",
+      "bytes": 791
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-handoff.md",
+      "bytes": 1451
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-lock.txt",
+      "bytes": 437
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-machine.json",
+      "bytes": 555
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-pip-check.txt",
+      "bytes": 31
+    },
+    {
+      "path": "result/p1-comparison-preparation-20260909/runtime-tests.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-demo-profile-20260909/README.md",
+      "bytes": 2066
+    },
+    {
+      "path": "result/p1-demo-profile-20260909/excel-nowhere-reopen.json",
+      "bytes": 293
+    },
+    {
+      "path": "result/p1-demo-profile-20260909/preparation.json",
+      "bytes": 846
+    },
+    {
+      "path": "result/p1-demo-profile-20260909/pytest.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/.gitattributes",
+      "bytes": 8
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/README.md",
+      "bytes": 10369
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/charts/after-1-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/charts/after-2-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/charts/after-3-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/charts/after-4-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/comparison.csv",
+      "bytes": 992
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/comparison.json",
+      "bytes": 7615
+    },
+    {
+      "path": "result/p1-evaluation-comparison-20260909/manifest.json",
+      "bytes": 960
+    },
+    {
+      "path": "result/p1-evaluation-comparison-delivery.json",
+      "bytes": 224
+    },
+    {
+      "path": "result/p1-integration/excel-timeout.json",
+      "bytes": 400
+    },
+    {
+      "path": "result/p1-integration/p1-full-pytest-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/p1-integration/p1-full-pytest.txt",
+      "bytes": 162
+    },
+    {
+      "path": "result/p1-integration/p1-integration-first.txt",
+      "bytes": 11
+    },
+    {
+      "path": "result/p1-integration/p1-services-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/p1-integration/p1-services-final-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/p1-integration/p1-services-final.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/p1-integration/p1-services.txt",
+      "bytes": 81
+    },
+    {
+      "path": "result/p1-integration/validation.json",
+      "bytes": 2831
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/README.md",
+      "bytes": 5213
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/excel-reopen-positional.json",
+      "bytes": 518
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/excel-reopen-valid-password.json",
+      "bytes": 528
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/excel-reopen-verification.json",
+      "bytes": 304
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/pytest-final-terminal-guard.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/pytest-final.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/pytest-targeted.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/p1-live-feedback-20260909/work-preservation.json",
+      "bytes": 1817
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/README.md",
+      "bytes": 8687
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/ROUND4.md",
+      "bytes": 3016
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/four-run-metrics.csv",
+      "bytes": 309
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/four-run-summary.json",
+      "bytes": 46261
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/metrics.csv",
+      "bytes": 342
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-1-responses.md",
+      "bytes": 4294
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-1-result.json",
+      "bytes": 9843
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-1-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-2-responses.md",
+      "bytes": 2807
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-2-result.json",
+      "bytes": 11168
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-2-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-3-responses.md",
+      "bytes": 3192
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-3-result.json",
+      "bytes": 8712
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-3-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-4-responses.md",
+      "bytes": 2216
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-4-result.json",
+      "bytes": 9776
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round-4-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round4-metrics.csv",
+      "bytes": 194
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/round4-summary.json",
+      "bytes": 10752
+    },
+    {
+      "path": "result/p1-preopened-three-20260909/summary.json",
+      "bytes": 35416
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/.gitattributes",
+      "bytes": 9
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
+      "bytes": 11270872
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/P1-Web-Log-Round3.zip",
+      "bytes": 79232
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/README.md",
+      "bytes": 2890
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/delivery-manifest.json",
+      "bytes": 4431
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/README.md",
+      "bytes": 3347
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/actual-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/manifest.json",
+      "bytes": 936
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/metadata.json",
+      "bytes": 847
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/responses.public.md",
+      "bytes": 3174
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/timeline.json",
+      "bytes": 1094
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/transcript.public.json",
+      "bytes": 50984
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/log-round3/transcript.public.md",
+      "bytes": 46296
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/source-archives.json",
+      "bytes": 472
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_90s.mp4",
+      "bytes": 5163626
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_ko.srt",
+      "bytes": 2178
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_게시전후.png",
+      "bytes": 237199
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_편집표.md",
+      "bytes": 6400
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_평가데이터.json",
+      "bytes": 14923
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/README.txt",
+      "bytes": 305
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/SHA256SUMS.json",
+      "bytes": 1518
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E01.png",
+      "bytes": 313079
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E02.png",
+      "bytes": 490722
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E03.png",
+      "bytes": 629121
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E04.png",
+      "bytes": 793468
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E05.png",
+      "bytes": 836291
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E06.png",
+      "bytes": 714161
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E07.png",
+      "bytes": 774951
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E08.png",
+      "bytes": 819104
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E09.png",
+      "bytes": 867031
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E10.png",
+      "bytes": 878157
+    },
+    {
+      "path": "result/p1-web-delivery-20260909/video/evidence/E11.png",
+      "bytes": 695944
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/.gitattributes",
+      "bytes": 8
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/README.md",
+      "bytes": 3347
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/actual-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/manifest.json",
+      "bytes": 936
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/metadata.json",
+      "bytes": 847
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/responses.public.md",
+      "bytes": 3174
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/timeline.json",
+      "bytes": 1094
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/transcript.public.json",
+      "bytes": 50984
+    },
+    {
+      "path": "result/p1-web-log-round3-20260909/transcript.public.md",
+      "bytes": 46296
+    },
+    {
+      "path": "result/scenario-correction/README.md",
+      "bytes": 1102
+    },
+    {
+      "path": "result/scenario-correction/candidate-review.json",
+      "bytes": 317
+    },
+    {
+      "path": "result/scenario-correction/cold-agent-status.json",
+      "bytes": 270
+    },
+    {
+      "path": "result/scenario-correction/cold-agent-stderr.txt",
+      "bytes": 73
+    },
+    {
+      "path": "result/scenario-correction/cold-agent-trace.json",
+      "bytes": 122879
+    },
+    {
+      "path": "result/scenario-correction/cold-trend.png",
+      "bytes": 45723
+    },
+    {
+      "path": "result/scenario-correction/excel-probe-status.json",
+      "bytes": 73
+    },
+    {
+      "path": "result/scenario-correction/excel-probe.json",
+      "bytes": 723
+    },
+    {
+      "path": "result/scenario-correction/excel-probe.py",
+      "bytes": 1267
+    },
+    {
+      "path": "result/scenario-correction/final-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/scenario-correction/final-regression.txt",
+      "bytes": 206
+    },
+    {
+      "path": "result/scenario-correction/full-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/scenario-correction/full-regression.txt",
+      "bytes": 206
+    },
+    {
+      "path": "result/scenario-correction/p0-generalization-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/scenario-correction/p0-generalization-fixed-exit.txt",
+      "bytes": 3
+    },
+    {
+      "path": "result/scenario-correction/p0-generalization-fixed.txt",
+      "bytes": 101
+    },
+    {
+      "path": "result/scenario-correction/p0-generalization.txt",
+      "bytes": 2422
+    },
+    {
+      "path": "result/scenario-correction/prepare-p1-error.txt",
+      "bytes": 0
+    },
+    {
+      "path": "result/scenario-correction/prepare-p1.txt",
+      "bytes": 55
+    },
+    {
+      "path": "result/scenario-correction/real-excel.txt",
+      "bytes": 100
+    },
+    {
+      "path": "result/scenario-correction/targeted.txt",
+      "bytes": 112
+    },
+    {
+      "path": "result/scenario-correction/validation.json",
+      "bytes": 7948
+    },
+    {
+      "path": "result/statusline/README.md",
+      "bytes": 2683
+    },
+    {
+      "path": "result/statusline/actual-status.txt",
+      "bytes": 431
+    },
+    {
+      "path": "result/statusline/full-pytest.txt",
+      "bytes": 162
+    },
+    {
+      "path": "result/statusline/hook-verification.json",
+      "bytes": 382
+    },
+    {
+      "path": "result/statusline/real-transition.json",
+      "bytes": 983
+    },
+    {
+      "path": "result/statusline/user-p0-verification.json",
+      "bytes": 489
+    },
+    {
+      "path": "result/statusline/validation.json",
+      "bytes": 1057
+    },
+    {
+      "path": "result/statusline/work-data-before.json",
+      "bytes": 286
+    },
+    {
+      "path": "scripts/Start-P1-Cold.ps1",
+      "bytes": 6005
+    },
+    {
+      "path": "scripts/open-p1-document.py",
+      "bytes": 2652
+    },
+    {
+      "path": "scripts/org_demo.py",
+      "bytes": 6164
+    },
+    {
+      "path": "scripts/p1_comparison.py",
+      "bytes": 16035
+    },
+    {
+      "path": "scripts/p1_comparison_skill.md",
+      "bytes": 2311
+    },
+    {
+      "path": "scripts/prepare-org-demo.py",
+      "bytes": 1184
+    },
+    {
+      "path": "scripts/prepare-p0.ps1",
+      "bytes": 963
+    },
+    {
+      "path": "scripts/prepare-p1.py",
+      "bytes": 8027
+    },
+    {
+      "path": "scripts/run-p1-acceptance.py",
+      "bytes": 6234
+    },
+    {
+      "path": "scripts/validate_p1_comparison_skill.py",
+      "bytes": 5477
+    },
+    {
+      "path": "scripts/verify-p1-acceptance.py",
+      "bytes": 4480
+    },
+    {
+      "path": "skillloop/__init__.py",
+      "bytes": 205
+    },
+    {
+      "path": "skillloop/__main__.py",
+      "bytes": 131
+    },
+    {
+      "path": "skillloop/cli.py",
+      "bytes": 36644
+    },
+    {
+      "path": "skillloop/dashboard.py",
+      "bytes": 11270
+    },
+    {
+      "path": "skillloop/descriptor.py",
+      "bytes": 3834
+    },
+    {
+      "path": "skillloop/envharness_p0.py",
+      "bytes": 4352
+    },
+    {
+      "path": "skillloop/envharness_p1.py",
+      "bytes": 14894
+    },
+    {
+      "path": "skillloop/experience_service.py",
+      "bytes": 12020
+    },
+    {
+      "path": "skillloop/gitsync.py",
+      "bytes": 8135
+    },
+    {
+      "path": "skillloop/match.py",
+      "bytes": 6329
+    },
+    {
+      "path": "skillloop/org_aggregator.py",
+      "bytes": 11930
+    },
+    {
+      "path": "skillloop/publish_pipeline.py",
+      "bytes": 9101
+    },
+    {
+      "path": "skillloop/replay.py",
+      "bytes": 8433
+    },
+    {
+      "path": "skillloop/reuse_service.py",
+      "bytes": 12189
+    },
+    {
+      "path": "skillloop/statusline.py",
+      "bytes": 4091
+    },
+    {
+      "path": "skillloop/store.py",
+      "bytes": 9225
+    },
+    {
+      "path": "skillloop/usage.py",
+      "bytes": 11757
+    },
+    {
+      "path": "team-hub/.firebaserc",
+      "bytes": 69
+    },
+    {
+      "path": "team-hub/README.md",
+      "bytes": 7869
+    },
+    {
+      "path": "team-hub/VERIFICATION.md",
+      "bytes": 4837
+    },
+    {
+      "path": "team-hub/diagrams/archify-receipt.json",
+      "bytes": 552
+    },
+    {
+      "path": "team-hub/diagrams/development.workflow.json",
+      "bytes": 3031
+    },
+    {
+      "path": "team-hub/firebase.json",
+      "bytes": 356
+    },
+    {
+      "path": "team-hub/firestore.indexes.json",
+      "bytes": 347
+    },
+    {
+      "path": "team-hub/firestore.rules",
+      "bytes": 8147
+    },
+    {
+      "path": "team-hub/index.html",
+      "bytes": 622
+    },
+    {
+      "path": "team-hub/package-lock.json",
+      "bytes": 108270
+    },
+    {
+      "path": "team-hub/package.json",
+      "bytes": 922
+    },
+    {
+      "path": "team-hub/public/archify/LICENSE.txt",
+      "bytes": 1124
+    },
+    {
+      "path": "team-hub/public/archify/THIRD_PARTY_NOTICES.md",
+      "bytes": 4599
+    },
+    {
+      "path": "team-hub/public/archify/development.html",
+      "bytes": 721565
+    },
+    {
+      "path": "team-hub/public/archify/development.svg",
+      "bytes": 14939
+    },
+    {
+      "path": "team-hub/public/evidence/README.md",
+      "bytes": 738
+    },
+    {
+      "path": "team-hub/public/evidence/p1-cold.png",
+      "bytes": 45723
+    },
+    {
+      "path": "team-hub/public/evidence/p1-warm.png",
+      "bytes": 46100
+    },
+    {
+      "path": "team-hub/public/favicon.svg",
+      "bytes": 252
+    },
+    {
+      "path": "team-hub/public/images/ddthon-banner.png",
+      "bytes": 773327
+    },
+    {
+      "path": "team-hub/public/images/nowhere-logo.png",
+      "bytes": 1558096
+    },
+    {
+      "path": "team-hub/scripts/build-diagram.mjs",
+      "bytes": 2224
+    },
+    {
+      "path": "team-hub/scripts/rules.test.mjs",
+      "bytes": 8575
+    },
+    {
+      "path": "team-hub/src/App.tsx",
+      "bytes": 4243
+    },
+    {
+      "path": "team-hub/src/Captures.tsx",
+      "bytes": 12674
+    },
+    {
+      "path": "team-hub/src/Community.tsx",
+      "bytes": 10067
+    },
+    {
+      "path": "team-hub/src/Demo.tsx",
+      "bytes": 11825
+    },
+    {
+      "path": "team-hub/src/ExampleSkills.tsx",
+      "bytes": 7064
+    },
+    {
+      "path": "team-hub/src/Flow.tsx",
+      "bytes": 9454
+    },
+    {
+      "path": "team-hub/src/Modal.tsx",
+      "bytes": 823
+    },
+    {
+      "path": "team-hub/src/Overview.tsx",
+      "bytes": 7078
+    },
+    {
+      "path": "team-hub/src/P0Comparison.tsx",
+      "bytes": 6103
+    },
+    {
+      "path": "team-hub/src/P0Media.tsx",
+      "bytes": 2587
+    },
+    {
+      "path": "team-hub/src/P1Media.tsx",
+      "bytes": 3345
+    },
+    {
+      "path": "team-hub/src/ProductIntro.tsx",
+      "bytes": 5016
+    },
+    {
+      "path": "team-hub/src/QA.tsx",
+      "bytes": 30535
+    },
+    {
+      "path": "team-hub/src/captureApi.ts",
+      "bytes": 4210
+    },
+    {
+      "path": "team-hub/src/communityApi.ts",
+      "bytes": 2763
+    },
+    {
+      "path": "team-hub/src/demoScenarios.test.ts",
+      "bytes": 1467
+    },
+    {
+      "path": "team-hub/src/demoScenarios.ts",
+      "bytes": 7814
+    },
+    {
+      "path": "team-hub/src/exampleSkillApi.ts",
+      "bytes": 953
+    },
+    {
+      "path": "team-hub/src/exampleSkillData.test.ts",
+      "bytes": 2259
+    },
+    {
+      "path": "team-hub/src/exampleSkillData.ts",
+      "bytes": 10282
+    },
+    {
+      "path": "team-hub/src/main.tsx",
+      "bytes": 245
+    },
+    {
+      "path": "team-hub/src/p0-execution-log.txt",
+      "bytes": 1505
+    },
+    {
+      "path": "team-hub/src/qaReport.json",
+      "bytes": 10723
+    },
+    {
+      "path": "team-hub/src/style.css",
+      "bytes": 68915
+    },
+    {
+      "path": "team-hub/src/workspace.test.ts",
+      "bytes": 1523
+    },
+    {
+      "path": "team-hub/src/workspace.ts",
+      "bytes": 3077
+    },
+    {
+      "path": "team-hub/tsconfig.json",
+      "bytes": 414
+    },
+    {
+      "path": "team-hub/vite.config.ts",
+      "bytes": 204
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 0
+    },
+    {
+      "path": "tests/fixtures/indexes/allow/.gitkeep",
+      "bytes": 57
+    },
+    {
+      "path": "tests/fixtures/indexes/failing/.gitkeep",
+      "bytes": 57
+    },
+    {
+      "path": "tests/fixtures/synthetic_pkg/pyproject.toml",
+      "bytes": 327
+    },
+    {
+      "path": "tests/fixtures/synthetic_pkg/skillloop_demo_pkg.py",
+      "bytes": 154
+    },
+    {
+      "path": "tests/fixtures/work/requirements.txt",
+      "bytes": 27
+    },
+    {
+      "path": "tests/p1_helpers.py",
+      "bytes": 328
+    },
+    {
+      "path": "tests/prepare_p0_work.py",
+      "bytes": 4265
+    },
+    {
+      "path": "tests/test_apply_requirements.py",
+      "bytes": 6994
+    },
+    {
+      "path": "tests/test_cli_match.py",
+      "bytes": 5200
+    },
+    {
+      "path": "tests/test_cli_p1_help.py",
+      "bytes": 631
+    },
+    {
+      "path": "tests/test_dashboard.py",
+      "bytes": 4770
+    },
+    {
+      "path": "tests/test_descriptor_pbt.py",
+      "bytes": 3246
+    },
+    {
+      "path": "tests/test_envharness_p0.py",
+      "bytes": 1111
+    },
+    {
+      "path": "tests/test_envharness_p1.py",
+      "bytes": 7906
+    },
+    {
+      "path": "tests/test_match.py",
+      "bytes": 5948
+    },
+    {
+      "path": "tests/test_org_aggregator.py",
+      "bytes": 9493
+    },
+    {
+      "path": "tests/test_org_demo_transport.py",
+      "bytes": 2828
+    },
+    {
+      "path": "tests/test_p0_publication.py",
+      "bytes": 4462
+    },
+    {
+      "path": "tests/test_p0_scoped_auto_reuse.py",
+      "bytes": 6536
+    },
+    {
+      "path": "tests/test_p0_two_packages.py",
+      "bytes": 3573
+    },
+    {
+      "path": "tests/test_p1_comparison.py",
+      "bytes": 5564
+    },
+    {
+      "path": "tests/test_p1_integrity.py",
+      "bytes": 2355
+    },
+    {
+      "path": "tests/test_p1_services.py",
+      "bytes": 9143
+    },
+    {
+      "path": "tests/test_prepare_p1_operator.py",
+      "bytes": 4344
+    },
+    {
+      "path": "tests/test_replay.py",
+      "bytes": 8700
+    },
+    {
+      "path": "tests/test_reuse_service.py",
+      "bytes": 10502
+    },
+    {
+      "path": "tests/test_run_p0_e2e.py",
+      "bytes": 2048
+    },
+    {
+      "path": "tests/test_scenario_correction.py",
+      "bytes": 4534
+    },
+    {
+      "path": "tests/test_statusline.py",
+      "bytes": 7586
+    },
+    {
+      "path": "tests/test_store.py",
+      "bytes": 6912
+    },
+    {
+      "path": "tests/test_usage.py",
+      "bytes": 7555
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "comparison.csv": {
+    "sha256": "7b20dee929cd06c4cdaf1a078abadc31f32916bab2b8776bf947ce38f20f0a22",
+    "bytes": 992
+  },
+  "comparison.json": {
+    "sha256": "91a2722a08c236dfed1d58bd98d6b00f453600def029eaf71beae016f633c986",
+    "bytes": 7615
+  },
+  "README.md": {
+    "sha256": "a616b6838fdebd3cc0c1cdf6f3a64c92875b3250468df1c90b7ab1a6db05c5f5",
+    "bytes": 10369
+  },
+  "charts/after-1-trend.png": {
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "bytes": 45723
+  },
+  "charts/after-2-trend.png": {
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "bytes": 45723
+  },
+  "charts/after-3-trend.png": {
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "bytes": 45723
+  },
+  "charts/after-4-trend.png": {
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "bytes": 45723
+  }
+}

@@ -138,3 +138,10 @@ User requests replacing the first failure follow-up with 'Agent SkillLoop를 통
 Approval: current explicit user request; proceed within existing CONSTRUCTION plan, no new component/functionality.
 
 Validation: three first-response rules consistent; previous prompt absent; existing P1 copies refreshed. Instruction-only correction, no new runtime tests. Live Agent wording awaits user run.
+
+## 2026-09-09T04:39:27.0597163Z — User-approved already-open workbook discovery correction
+User: 내가 cmd로 열테니까 직접 열려고 시도하지말고 열려있는걸 기준으로 가져오게하면되잖아. 물론 ai-dlc를 건너뛰지말고. 지금은 또 내가열ㅇ어뒀는데 직접열어서 암호창으 ㄹ대기하고있엇어
+Actual native session815c9efa-a886-4d59-bbb6-c0c25feb5e24 toolu_bdrk_01MeaV5ddr7W4UJPk1hmRG1e at04:36:18.376Z generated fallback Workbooks.Open after checking only GetActiveObject; filename-only OR match also present. Product _read_via_excel_attach already prohibits opening and resolves full path across registered running objects. Existing operator-open plan and FR-P1-3/read-only boundary apply. Bounded correction: C9 prohibits reopening in Agent-written code, exact full path not basename, inspect existing instances only after user fact; unavailable remains unavailable. Preserve old Skill/log before refreshing active workspace, run existing non-live access regression, record actual continuation pending. No new feature, no operator Excel manipulation, no candidate approval.
+
+## 2026-09-09T04:39:42.8129861Z — Already-open-only instruction correction validated
+Current C9 and manual133215 round1 copy updated; original Skill/native transcript snapshot retained operator-only. Existing9 non-live envharness tests PASS(exit0), no live Excel calls. Agent-written Workbooks.Open fallback and basename matching now explicitly forbidden; existing product exact-path read-only attach unchanged. Live continuation USER_PENDING, no claim of enforcement by an OS sandbox; prior UI wait preserved as observed defect. User should cancel only password dialog, reload Skill in existing session and continue already-open exact document. No store/usage/candidate modification or prior run reset. Current phase remains CONSTRUCTION / Build & Test.

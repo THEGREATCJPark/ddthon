@@ -1,0 +1,4 @@
+﻿condition,round,verdict,task_verified_and_counted_seconds,user_final_seconds,input_tokens_at_task,output_tokens_at_task,cache_creation_at_task,cache_read_at_task
+WITH_SKILL,1,PASS,31.788,42.663,8,1279,22273,52022
+WITH_SKILL,2,PASS,35.757,47.237,10,1420,17503,77699
+WITH_SKILL,3,PASS,36.358,46.89,10,1502,17617,77767

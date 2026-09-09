@@ -1,0 +1,4 @@
+﻿session_id,cutoff,elapsed_seconds,input_tokens,output_tokens,cache_creation_input_tokens,cache_read_input_tokens
+e518ab42-7679-4726-849b-252f64fbcd99,work_result,156.826,28,6950,24463,451854
+e518ab42-7679-4726-849b-252f64fbcd99,user_facing_result,175.737,32,8152,26890,532610
+e518ab42-7679-4726-849b-252f64fbcd99,final_response,240.735,46,10628,32841,844565

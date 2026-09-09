@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-09-09T05:56:53.774804+00:00",
+  "source_sha": "6197a975b020768cc29bcd92dd27553406da268e",
+  "official_rules_diff": "",
+  "product_code_diff_from_remote": "",
+  "web_tree": "532d203e7561e403656965d3bc70f2fface43674",
+  "known_credential_patterns": [],
+  "credential_scan_limit": "Pattern scan only, not a security certification. Public Firebase identifiers are not secrets.",
+  "manifest_checks": [
+    {
+      "folder": "p0-with-skill-three-20260909",
+      "payloads": 14,
+      "mismatches": []
+    },
+    {
+      "folder": "p1-evaluation-comparison-20260909",
+      "payloads": 7,
+      "mismatches": []
+    },
+    {
+      "folder": "p1-web-log-round3-20260909",
+      "payloads": 7,
+      "mismatches": []
+    }
+  ],
+  "public_asset_paths": [
+    "/ddthon/assets/index-ChZwBxhE.js",
+    "/ddthon/assets/index-qtdPwsDf.css"
+  ],
+  "local_asset_paths": [
+    "/ddthon/assets/index-DD1QWUHh.js",
+    "/ddthon/assets/index-qtdPwsDf.css"
+  ],
+  "public_local_bundle_match": false,
+  "media_headers": [
+    {
+      "asset": "Agent_SkillLoop_P1_90s-BjOT1hCv.mp4",
+      "status": 200,
+      "bytes_header": "5163626",
+      "local_bytes": 5163626,
+      "content_type": "video/mp4"
+    },
+    {
+      "asset": "p0-demo-LdLpGJAt.mp4",
+      "status": 200,
+      "bytes_header": "2851951",
+      "local_bytes": 2851951,
+      "content_type": "video/mp4"
+    }
+  ]
+}

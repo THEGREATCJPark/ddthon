@@ -1,0 +1,21 @@
+{
+  "three_rounds_cold_preflight": "PASS",
+  "p1_counts": [
+    0,
+    0,
+    0
+  ],
+  "reuse_counts": [
+    0,
+    0,
+    0
+  ],
+  "input_hashes_equal": true,
+  "native_model_calls": 0,
+  "session_collection": "IMPLEMENTED_NOT_YET_LIVE_VALIDATED",
+  "remote_branches": [
+    "codex/p1-cold-20260909-125935-r1",
+    "codex/p1-cold-20260909-125935-r2",
+    "codex/p1-cold-20260909-125935-r3"
+  ]
+}

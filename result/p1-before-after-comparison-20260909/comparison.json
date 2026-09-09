@@ -1,0 +1,598 @@
+{
+  "zip_path": "C:\\Users\\cik61\\Downloads\\P1-Cold-Three-Pilots-Results.zip",
+  "zip_sha256": "b5251c26f83ca545f022a363127ba1048ee8e82b25621993f99572085e72deba",
+  "manifest_count": 65,
+  "manifest_all_valid": true,
+  "payload_checks": [
+    {
+      "path": "round-1/result.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/metrics.csv",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/conversation.md",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/pilot.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/task.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/versions.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/manual-settings.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/empty-mcp.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/start.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/end.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/raw-session-0.jsonl",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/tool-events.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/agent-final-response.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/cli-final-metrics.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/RESULTS.md",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/evidence/excel-readonly-confirmed.png",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/workspace/AAAAA01_직전_3달_생산량.xlsx",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/workspace/cfb.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/workspace/decrypt.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-1/workspace/read_xls.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/result.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/metrics.csv",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/conversation.md",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/pilot.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/task.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/versions.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/manual-settings.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/empty-mcp.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/start.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/end.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/raw-session-0.jsonl",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/tool-events.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/agent-final-response.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/cli-final-metrics.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/review.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/excel-preopened.png",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/evidence/excel-after.png",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-2/workspace/AAAAA01_직전_3달_생산량.xlsx",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/result.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/metrics.csv",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/conversation.md",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/pilot.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/task.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/versions.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/manual-settings.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/empty-mcp.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/start.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/end.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/raw-session-0.jsonl",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/tool-events.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/agent-final-response.txt",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/cli-final-metrics.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/review.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/excel-preopened.png",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/evidence/excel-after.png",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/workspace/AAAAA01_직전_3달_생산량.xlsx",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/workspace/read_xls.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "round-3/workspace/try_decrypt.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "comparison.csv",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "comparison.json",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "RESULTS.md",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "operator-source/pilot_session.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "operator-source/summarize_cold_repeat.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "operator-source/package_cold_three.py",
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    {
+      "path": "package-checks.json",
+      "sha256_ok": true,
+      "size_ok": true
+    }
+  ],
+  "before": [
+    {
+      "round": 1,
+      "session_id": "50c4e8e3-a156-48d7-9cbb-e7a186767316",
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "verdict": "TASK_NOT_COMPLETED",
+      "endpoint": "final unsuccessful task response",
+      "seconds": 340.16,
+      "native_usage": {
+        "input_tokens": 34,
+        "output_tokens": 14591,
+        "cache_creation_input_tokens": 24903,
+        "cache_read_input_tokens": 222380
+      },
+      "tokens_match_report": true,
+      "tool_requests": 16,
+      "tool_errors": 7,
+      "input_sha256": [
+        "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935"
+      ],
+      "raw_sha256": "c3e1f8aec85116fccb850bc4ac5f022bfdcfb1807d1d78ce80db0b7870857105",
+      "cli_usage": {
+        "input_tokens": 1062,
+        "output_tokens": 14619,
+        "cache_creation_input_tokens": 24903,
+        "cache_read_input_tokens": 222380
+      },
+      "cli_estimated_cost_usd": 0.63761875,
+      "cli_vs_native_delta": {
+        "input_tokens": 1028,
+        "output_tokens": 28,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      }
+    },
+    {
+      "round": 2,
+      "session_id": "86a1a738-0034-4161-a462-fea1c1c12499",
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "verdict": "TASK_NOT_COMPLETED",
+      "endpoint": "final unsuccessful task response",
+      "seconds": 133.451,
+      "native_usage": {
+        "input_tokens": 16,
+        "output_tokens": 2281,
+        "cache_creation_input_tokens": 9189,
+        "cache_read_input_tokens": 50823
+      },
+      "tokens_match_report": true,
+      "tool_requests": 7,
+      "tool_errors": 2,
+      "input_sha256": [
+        "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935"
+      ],
+      "raw_sha256": "95c2f17915b5923d5dc886f7643583a9d57cbd4d6268d5ba7f22a49fef8fa1dc",
+      "cli_usage": {
+        "input_tokens": 1044,
+        "output_tokens": 2309,
+        "cache_creation_input_tokens": 9189,
+        "cache_read_input_tokens": 50823
+      },
+      "cli_estimated_cost_usd": 0.14578775,
+      "cli_vs_native_delta": {
+        "input_tokens": 1028,
+        "output_tokens": 28,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      }
+    },
+    {
+      "round": 3,
+      "session_id": "3014628c-991b-46b2-8ba3-955970699061",
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "verdict": "TASK_NOT_COMPLETED",
+      "endpoint": "final unsuccessful task response",
+      "seconds": 418.307,
+      "native_usage": {
+        "input_tokens": 32,
+        "output_tokens": 17724,
+        "cache_creation_input_tokens": 25174,
+        "cache_read_input_tokens": 221279
+      },
+      "tokens_match_report": true,
+      "tool_requests": 15,
+      "tool_errors": 5,
+      "input_sha256": [
+        "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935"
+      ],
+      "raw_sha256": "2768368a9f52e37300b0e555a9a88904e9766a7199936c4e181d7d7687e108aa",
+      "cli_usage": {
+        "input_tokens": 1060,
+        "output_tokens": 17752,
+        "cache_creation_input_tokens": 25174,
+        "cache_read_input_tokens": 221279
+      },
+      "cli_estimated_cost_usd": 0.717077,
+      "cli_vs_native_delta": {
+        "input_tokens": 1028,
+        "output_tokens": 28,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      }
+    }
+  ],
+  "after": {
+    "session_id": "e518ab42-7679-4726-849b-252f64fbcd99",
+    "condition": "FULL_PRODUCT_COLD_MANUAL",
+    "source_log_sha256": "44ffdb2249004832ee81b3ed9753b5dec90be36cf92b5929145cf48575ae5c8f",
+    "start_utc": "2026-09-09T04:45:35.163Z",
+    "work_result_utc": "2026-09-09T04:48:11.989Z",
+    "user_facing_result_utc": "2026-09-09T04:48:30.900Z",
+    "publication_utc": "2026-09-09T04:49:23.418Z",
+    "final_response_utc": "2026-09-09T04:49:35.898Z",
+    "task_result_seconds": 156.826,
+    "user_facing_task_seconds": 175.737,
+    "task_to_publish_seconds": 228.255,
+    "task_to_final_seconds": 240.735,
+    "user_environment_reply_wait_seconds": 19.42,
+    "task_interval_usage": {
+      "message_count": 14,
+      "tool_calls": 13,
+      "tokens": {
+        "input_tokens": 28,
+        "output_tokens": 6950,
+        "cache_creation_input_tokens": 24463,
+        "cache_read_input_tokens": 451854
+      },
+      "message_ids": [
+        "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+        "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+        "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+        "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+        "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+        "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+        "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+        "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+        "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+        "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+        "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+        "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+        "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+        "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq"
+      ]
+    },
+    "user_facing_task_usage": {
+      "message_count": 16,
+      "tool_calls": 14,
+      "tokens": {
+        "input_tokens": 32,
+        "output_tokens": 8152,
+        "cache_creation_input_tokens": 26890,
+        "cache_read_input_tokens": 532610
+      },
+      "message_ids": [
+        "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+        "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+        "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+        "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+        "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+        "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+        "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+        "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+        "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+        "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+        "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+        "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+        "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+        "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq",
+        "msg_bdrk_fmbuvv4f46q7pf6iher7dq6qnn2lp67mqoltvufzs22tuxnfkzgq",
+        "msg_bdrk_r45wx75gboryxiamdfufd3vmohp3bfe7eikqg6y75grprrz24zja"
+      ]
+    },
+    "through_final_usage": {
+      "message_count": 23,
+      "tool_calls": 21,
+      "tokens": {
+        "input_tokens": 46,
+        "output_tokens": 10628,
+        "cache_creation_input_tokens": 32841,
+        "cache_read_input_tokens": 844565
+      },
+      "message_ids": [
+        "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+        "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+        "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+        "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+        "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+        "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+        "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+        "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+        "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+        "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+        "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+        "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+        "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+        "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq",
+        "msg_bdrk_fmbuvv4f46q7pf6iher7dq6qnn2lp67mqoltvufzs22tuxnfkzgq",
+        "msg_bdrk_r45wx75gboryxiamdfufd3vmohp3bfe7eikqg6y75grprrz24zja",
+        "msg_bdrk_hlhvezdlkmu2qxmzx5uwhrpahy5peucot6xhvisgzj5dojs5jfkq",
+        "msg_bdrk_4vhziwvf2zno23zjne2ijo3n7lrcouts26oelww5duiw2zjw6jkq",
+        "msg_bdrk_hyea5hcgjjhqnxavxc37vamahb4x64pciqy747jzzwrv2bauv4jq",
+        "msg_bdrk_ash6aqijefzpqtii2hwauhzm5o66tgcst7s7u3ewc2lwayaapqwq",
+        "msg_bdrk_bdd6uftnbi43ddunt24i55aaxeo2p3mkfs3oirszrmiiqwdryiaa",
+        "msg_bdrk_kge6bcxvtrj62ju7yiauohast5dcf7v6m25kaqrkmgc4txklojhq",
+        "msg_bdrk_hfvyolv6yxparpdglt2riiyicykr76a5f5iutam45gjc5muhzgqq"
+      ]
+    },
+    "success": {
+      "task_runtime": "WORK_COMPLETE/work_verified=true",
+      "forecast": "2026-08 / 1650; actual1200,1350,1500",
+      "chart": "PASS: visual review of actual chart; May/June/July 1200/1350/1500, August forecast1650 distinguished by dashed forecast segment",
+      "human_review": {
+        "approval_source": "claude-code-user",
+        "decision": "approve",
+        "ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reviewed_at": "2026-09-09T04:48:51.073116+00:00",
+        "reviewer": "박찬준",
+        "user_response": "승인하고 공유"
+      },
+      "replay_verdict": "PASS",
+      "publication_state": "PUBLISHED",
+      "remote_commit": "e302bf213679a038fea04e5058188096cb96c24b",
+      "remote_current_tip": "e302bf213679a038fea04e5058188096cb96c24b",
+      "remote_tip_matches_recorded_commit": true,
+      "reuse": {},
+      "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+      "task_verdict": "PASS (runtime evidence and actual chart review; not a new Excel execution)",
+      "candidate_delta": 1,
+      "actual_reuse_delta": 0
+    },
+    "errors_preserved": [
+      "First replay omitted --xlsx and exited2; retry with argument PASS",
+      "PowerShell sheet-name encoding required UTF8 read-back"
+    ],
+    "prior_attempt_same_workspace": {
+      "session_id": "b1770452-1aaf-4573-bc30-deceb5aa5514",
+      "status": "Stopped after initial failure/search question; not included in this successful session totals; preserved"
+    },
+    "limits": [
+      "Task cutoff is first completed work+chart tool result, includes user waiting; not pure inference time",
+      "Message usage deduplicated by message.id; cached tokens separate; not provider bill or whole-session /cost",
+      "User-facing result message includes sharing invitation; tokens not exactly separable",
+      "One successful Cold trial, not three and not Warm speed evidence",
+      "Raw log copied operator-only; no private thinking or full raw log exported to repository"
+    ]
+  },
+  "before_mean_seconds_to_unsuccessful_response": 297.30600000000004,
+  "before_median_seconds_to_unsuccessful_response": 340.16,
+  "assessment": {
+    "observed_outcomes": "NO_SKILL 0/3 complete; selected latest FULL_PRODUCT_COLD 1/1 complete, not all historical after attempts",
+    "causal_speedup_supported": false,
+    "token_or_cost_reduction_supported": false,
+    "warm_skill_reuse_measured": false,
+    "differences": [
+      "Before preopened without user fact; after opened during conversation with explicit user fact",
+      "Different PC/Python/libraries, permission review and interventions",
+      "After has bootstrap workflow, product adapter and calculation functions; not a skill-text-only ablation",
+      "Different task endpoints; after user-facing response includes candidate invitation",
+      "After prior incomplete and defect attempts not pooled into current success"
+    ]
+  }
+}
