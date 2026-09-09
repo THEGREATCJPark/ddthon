@@ -1,5 +1,21 @@
 [
   {
+    "id": 34295654337,
+    "name": "SkillLoop Python verification",
+    "head_sha": "9065a72284d93eb2fffdda51401f34638457e681",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34295654337"
+  },
+  {
+    "id": 34295561705,
+    "name": "Deploy Nowhere Workspace",
+    "head_sha": "6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34295561705"
+  },
+  {
     "id": 34294753220,
     "name": "SkillLoop Python verification",
     "head_sha": "fff0ffac97fd52bd36995265c9ed14b12e2961c0",

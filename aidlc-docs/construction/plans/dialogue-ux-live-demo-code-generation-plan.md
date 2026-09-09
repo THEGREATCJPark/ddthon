@@ -1,6 +1,6 @@
 # C9 대화·도구 안내 정합화와 실제 P0 UI 시연 — Code Plan
 
-상태: **Part 2 수정·회귀 완료 / 실제 P1 2-turn PASS / P0 LIVE UI NOT_RUN / 원격 최종 검증 중**.
+상태: **Part 2 수정·회귀 완료 / 실제 P1 2-turn PASS / P0 LIVE UI NOT_RUN / 원격 CI/Pages 확인 완료**.
 기준: main `8bd731b4f3c085577604712bc3783117abfcd426`. 시작 작업 트리 clean, origin/main 일치. 기존 CONSTRUCTION / 통합 Build & Test에서 발견한 결함의 보완이다. Inception과 기존 승인을 재시작하지 않는다.
 
 ## 1. 요청과 승인 경계
@@ -45,7 +45,7 @@
 - [x] 5. 변경 경로 targeted 회귀 후 Python 전체/PBT seed20260908, web tests/production build. 기존 테스트 개수를 목표로 수정하지 않는다. P0 retry +0는 기존 실환경/단위 검사로 확인. P1은 새 독립 작업공간에서 **한 번의 2-turn Cold**를 실제 실행: 첫 자연어 업무 요청 → 관찰·검색·환경 질문 → 제공된 두 번째 사용자 문장 → 탐색·다른 layout·업무·차트·후보1/reuse0. 테스트 운영자가 두 번째 문장을 넣는 경우 operator-assisted test라고 명시하고 실제 사용자가 입력했다고 하지 않는다. 원본 해시와 별도 expected값 대조. 새 후보를 자동 승인/게시하지 않는다.
 - [ ] 6. 제품 소스를 commit하여 SHA 고정 후 **P0 LIVE DEMO RUN #1**: 새 isolated work venv/기존 승인 Skill/시작 usage 기록, 실제 Claude Code interactive UI에 사용자 업무 문장 한 번만 Computer Use로 입력. headless 대체 금지. 동일 세션에서 요청/실패·검색/성공·상태줄 캡처, 중간 오류 보존. 사전 준비는 기존 도구로 하고 UI에는 셸 명령 대신 Claude 업무 요청만 입력. 정상적인 권한 확인은 현재 허용 범위 내에서 처리하고 환경 파손 시 추가 성공 세션을 임의 생성하지 않는다.
 - [x] 7. `result/dialogue-ux-20260909/`에 targeted/full/web/2-turn Cold 증거. `result/live-demo-p0-20260909/`에 README, run-context.json, verification.json, visible-transcript.md, 실제로 취득한 01/02/03 PNG와 가능한 대표 00 PNG. private reasoning/secret 제외. UI 불가 시 정확한 원인의 NOT_RUN과 사용자 3~4단계만 남기고 가짜 파일 미생성. 실제 성공/캡처가 있을 때만 웹에 별도 실제 P0 증거 카드 연결.
-- [ ] 8. `README.md`, `aidlc-docs/aidlc-state.md`, `construction/build-and-test/build-and-test-summary.md`, 본 계획 상태, audit append-only 정합화. 기존 파이프라인으로 push/deploy, 최종 제품/web exact SHA의 CI/Pages와 public 브라우저 확인. 문서·증거 후속 SHA와 검증 제품 SHA를 구분. B-PC 미준비는 NOT_RUN 유지. 요청한 12항목 결과 형식으로 보고.
+- [x] 8. `README.md`, `aidlc-docs/aidlc-state.md`, `construction/build-and-test/build-and-test-summary.md`, 본 계획 상태, audit append-only 정합화. 기존 파이프라인으로 push/deploy, 최종 제품/web exact SHA의 CI/Pages와 public 브라우저 확인. 문서·증거 후속 SHA와 검증 제품 SHA를 구분. B-PC 미준비는 NOT_RUN 유지. 요청한 12항목 결과 형식으로 보고.
 
 ## 5. 재사용 가능한 증거와 새 증거
 
@@ -67,3 +67,8 @@
 ## Execution receipt (local)
 
 Steps1–5 and7 complete. Step6 attempted preparation/launch only: actual UI prompt and capture NOT_RUN due target not exposed. User fallback guide provided; not marked as successful execution. Step8 final remote verification underway. Minor narrative limitations are documented; no new candidate human approval.
+
+
+## Final remote receipt
+
+Python CI success at 9065a72284d93eb2fffdda51401f34638457e681 (run34295654337). Pages success at6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a (run34295561705). Current Python tree equals testedfff0ffa; current web source tree equals deployed6fefa6b. Public browser confirmed index-Da_E1P2H.js and the user environment-fact turn. Initial cached response used the previous bundle; cache-distinct navigation verified the current bundle. Local full flow evidence is retained. Step8 complete; Step6 remains NOT_RUN, not waived or passed. Overall final acceptance and B-PC remain pending.

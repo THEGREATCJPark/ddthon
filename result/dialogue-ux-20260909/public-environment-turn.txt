@@ -1,0 +1,107 @@
+- banner:
+  - link "노웨어 · 진행 순서도":
+    - /url: "#flow"
+    - img "노웨어 NOWHERE 로고"
+  - generic: 노웨어
+  - heading "Agent Skillloop" [level=1]
+  - paragraph: 한 번 푼 문제, 팀의 다음 해결법으로.
+  - strong: 제4회 디디톤
+  - img "제4회 디디톤 행사 배너"
+- navigation "주 메뉴":
+  - link "진행 순서도":
+    - /url: "#flow"
+    - text: 진행 순서도
+  - link "팀 의견":
+    - /url: "#team"
+    - text: 팀 의견
+  - link "태클 걸기":
+    - /url: "#challenge"
+    - text: 태클 걸기
+  - link "시연":
+    - /url: "#demo-p0"
+    - text: 시연
+  - link "캡처 정리":
+    - /url: "#captures"
+    - text: 캡처 정리
+- main:
+  - generic: MANUAL SIMULATION
+  - heading "Claude Code에서 보는 Agent SkillLoop" [level=2]
+  - text: 설명용 시뮬레이션
+  - paragraph: 실제 구현 흐름을 따라가는 설명용 시연입니다. 다음 단계 버튼은 설명만 진행하며, 설치·게시·실적을 실행하거나 변경하지 않습니다.
+  - tablist "시연 시나리오":
+    - tab "P0 Python 설치 · 기존 Skill 재사용":
+      - generic: P0
+      - generic: Python 설치 · 기존 Skill 재사용
+    - tab "P1 Excel 분석 · 새로운 Skill 발견" [selected]:
+      - generic: P1
+      - generic: Excel 분석 · 새로운 Skill 발견
+  - generic: NO_MATCH·사용자 환경 확인
+  - generic: →
+  - text: 탐색·차트·후보
+  - generic: →
+  - text: 검토·Replay
+  - generic: →
+  - text: Git 게시·다음 팀원 재사용
+  - generic: Claude Code
+  - emphasis: SIMULATION
+  - generic: ─
+  - generic: □
+  - generic: ×
+  - img "Claude 마스코트"
+  - strong: Claude Code v2.1.263
+  - generic: P1
+  - generic: "2"
+  - text: / 9
+  - article:
+    - generic: ❯
+    - paragraph: AAAAA01_직전_3달_생산량.xlsx를 읽고 다음달 예상 생산량을 포함한 추세선을 보여줘.
+    - heading "업무 요청 → 직접 읽기 실패 → 관련 Skill 없음" [level=3]
+    - paragraph: 일반적인 XLSX 읽기를 시도한 뒤 현재 팀 Skill을 검색합니다. ‘사내환경 · NASCA(가상)’은 작업 공간에 제공된 환경 설명입니다.
+    - strong: ● openpyxl · 실제 직접 읽기 경로
+    - code: "⎿ BadZipFile: File is not a zip file"
+    - strong: ● SkillLoop · 현재 팀 Skill 검색
+    - code: ⎿ NO_MATCH · 관련 해결 절차 없음
+    - paragraph: 일반적인 XLSX 읽기로는 파일을 열 수 없었고, 팀 Skill에서도 맞는 절차를 찾지 못했습니다. 사용자 환경에서는 이 파일을 Excel로 열어 볼 수 있나요?
+  - article:
+    - generic: ❯
+    - paragraph: 이상하네, 난 엑셀을 열어서 데이터를 볼 수 있는데? 한번 다른 방법으로 진행해봐.
+    - heading "사용자가 환경 사실을 알려줌" [level=3]
+    - paragraph: Excel에서는 볼 수 있다는 점을 확인했습니다. 현재 실행 중인 애플리케이션과 대상 문서를 확인하고, 원본을 저장하지 않는 다른 읽기 방법을 찾아보겠습니다.
+  - generic: ❯
+  - textbox "Claude Code 프롬프트":
+    - /placeholder: 다음 단계에서 요청 또는 Agent 진행을 표시합니다
+  - button "다음 단계 보기":
+  - text: 🧠 SkillLoop · 설명용 현황 | 📚 사용 가능 Skill
+  - status:
+    - generic: 1개
+  - text: (기존 로컬 승인 1개 포함)
+  - text: ✨ 미게시 후보 0개 · 이번에 새로 팀 게시
+  - status:
+    - generic: 0개
+  - text: 🔥 실제 검증 재사용 흐름
+  - status:
+    - generic: 0회
+  - text: · 다음 팀원의 중복 후보 아직 재사용 전
+  - generic: 위 숫자는 설명용 상태 · 실제 로컬/팀 실적 변경 없음
+  - paragraph: 후보 생성은 게시가 아닙니다. 정확한 내용의 사람 검토와 독립 Replay PASS 뒤 공유하며, 새 Agent는 가져온 Skill의 실행을 확인받습니다. 현재 P1은 지원된 Excel 접근 어댑터 범위입니다.
+  - paragraph:
+    - text: "실제 실행 기록:"
+    - link "P0 자연어 3개 사례":
+      - /url: https://github.com/THEGREATCJPark/ddthon/blob/main/result/p0-reproduction/README.md
+    - text: ·
+    - link "P1 Cold 3회·Git 공유·Warm":
+      - /url: https://github.com/THEGREATCJPark/ddthon/blob/main/result/p1-acceptance/README.md
+    - text: ·
+    - link "실제 공용 Skill 저장소":
+      - /url: https://github.com/THEGREATCJPark/ddthon/tree/team-skill-store
+  - button "이전":
+    - text: 이전
+  - button "처음부터":
+    - text: 처음부터
+  - generic: 실제 Claude·SkillLoop 실행 및 검증 증거가 아닙니다.
+  - button "다음 단계 ↵":
+    - text: 다음 단계
+    - generic: ↵
+- contentinfo:
+  - generic: NOWHERE · Agent Skillloop
+  - text: 제4회 디디톤

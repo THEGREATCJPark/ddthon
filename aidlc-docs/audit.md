@@ -896,3 +896,7 @@ B reports main fff0ffa, Python 3.12.2: product installation/imports succeeded; d
 
 Original HEAD requirements bytes fail cp949 decoding locally. Updated file decodes identically as ASCII, UTF-8 and cp949; four dependency declarations unchanged and local pip parse_requirements returns all four. No package install or B-PC rerun claimed. Updated B guide fallback/path-copy note and current state. Comment/documentation-only correction; full product suite not repeated. Existing unrelated web/evidence changes preserved.
 
+
+## 2026-09-09T00:40:02.9066767Z — Dialogue UX remote verification receipt
+Python CI9065a72 and Pages6fefa6b succeeded. Public browser verified final bundle index-Da_E1P2H.js and user-fact turn; web simulation screenshot saved separately. Existing records retained. Code Plan step8 complete; actual P0 UI step6 remains NOT_RUN because no targetable terminal was provided, no prompt/capture executed. B-PC and whole-product final acceptance remain pending. No new candidate approval or publication. Fresh OS UTC captured for this entry.
+

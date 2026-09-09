@@ -36,3 +36,12 @@ AI-DLC 기존 CONSTRUCTION의 승인된 `dialogue-ux-live-demo-code-generation-p
 [`../live-demo-p0-20260909/README.md`](../live-demo-p0-20260909/README.md): **NOT_RUN**. 프로세스는 열렸으나 Computer Use 대상 창이 제공되지 않아 prompt를 입력하지 못했다. 실제 캡처 없음. 웹/이전 headless를 대체 증거로 쓰지 않았다. 사용자 직접 실행 안내4단계를 제공했다.
 
 B-PC Warm/Git 왕복은 NOT_RUN 유지. 이번에 원격 게시·새 후보 승인·usage push를 재실행하지 않았다. Python CI/Pages exact SHA와 status는 `github-actions.json`, public 검토는 후속 completion receipt에 기록한다.
+
+
+## Remote completion receipt
+
+- Python CI: 9065a72284d93eb2fffdda51401f34638457e681, run34295654337, success. Latest change was an ASCII requirements comment; product tree equals the locally testedfff0ffa.
+- Pages: 6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a, run34295561705, success. Current web tree is identical.
+- Public browser: https://thegreatcjpark.github.io/ddthon/?verify=6fefa6b#demo-p1 — index-Da_E1P2H.js; first actual-failure/NO_MATCH explanation and the second user-fact turn confirmed. public-environment-turn.txt/png are WEB SIMULATION evidence, not an actual Claude UI capture. Initial cached navigation showed the previous bundle; final navigation verified the updated bundle. A click tool timed out although the page advanced; preserved as a tool limitation, not a product failure.
+- Local P0 four-step/P1 nine-step, counts/reset/back/scroll and chart loading checks remain in this folder.
+- P0 interactive UI NOT_RUN; B-PC verification NOT_RUN. No new candidate approval/publish. Final evidence-only commit is distinct from tested/deployed source SHAs.

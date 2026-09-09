@@ -38,3 +38,12 @@ Fresh P0 1 and P1 Cold2 functional PASS at frozen d8c45cb; not part of142 unit/i
 
 Approved Code Plan executed at fff0ffa. Targeted39 PASS, full144 PASS/2 SKIP (Hypothesis seed20260908), web7 tests/build PASS. P1 operator-assisted same-session two-turn Cold PASS: true user-fact pause, actual different-layout read, independent expected2550, chart path, candidate1/reuse0, original unchanged. Existing lifecycle content unchanged; prior human/Replay/publish evidence remains historical. Source logs under result/dialogue-ux-20260909. P0 interactive LIVE RUN #1 NOT_RUN (terminal not targetable by Computer Use); no prompt/screenshots, no substituted headless run. Minor narrative issues retained. B-PC NOT_RUN. Web completion-scroll correction checked separately; final remote receipts pending.
 
+
+
+## Remote completion receipt
+
+- Python CI: 9065a72284d93eb2fffdda51401f34638457e681, run34295654337, success. Latest change was an ASCII requirements comment; product tree equals the locally testedfff0ffa.
+- Pages: 6fefa6bbfd3c2614771a81e9c7d5aba0ab19187a, run34295561705, success. Current web tree is identical.
+- Public browser: https://thegreatcjpark.github.io/ddthon/?verify=6fefa6b#demo-p1 — index-Da_E1P2H.js; first actual-failure/NO_MATCH explanation and the second user-fact turn confirmed. public-environment-turn.txt/png are WEB SIMULATION evidence, not an actual Claude UI capture. Initial cached navigation showed the previous bundle; final navigation verified the updated bundle. A click tool timed out although the page advanced; preserved as a tool limitation, not a product failure.
+- Local P0 four-step/P1 nine-step, counts/reset/back/scroll and chart loading checks remain in this folder.
+- P0 interactive UI NOT_RUN; B-PC verification NOT_RUN. No new candidate approval/publish. Final evidence-only commit is distinct from tested/deployed source SHAs.
