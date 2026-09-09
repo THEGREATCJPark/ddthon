@@ -87,3 +87,8 @@
 ## 현재 상태 — 최종 후속 수정 완료
 
 2026-09-09T07:33:34.985768+00:00: 승인된 4건을 main d77177b에 반영했고 Python cp949/UTF8 각 228 PASS / 2 SKIP, 웹 일반/ZIP 제외 각 10 PASS·build PASS, GitHub Python/웹 CI SUCCESS를 확인했다. 기존 MVP 개발 완료 유지. 위 검토 대기/미커밋/실행 중 문단은 각 당시 기록이며 현재 상태가 아니다. 실행 순서·체크박스 갱신 이탈은 audit에 남아 있고 완전 준수로 소급하지 않는다. [최종 결과와 제한](../result/post-closeout-corrections-20260909/README.md).
+
+
+## 현재 후속 보완 — 소개 영상/검증 안내
+
+2026-09-09T07:39:09.889871+00:00: 사용자 승인으로 [최소 계획](construction/plans/intro-filter-docs-plan.md) Part1 완료, Part2 시작 전. 기존 MVP 완료 유지. 소개 영상의 대용량 정적 import와 과거 검증 안내만 수정한다.

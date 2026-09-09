@@ -1273,3 +1273,8 @@ The concurrently recorded 07:27 review used an earlier workspace snapshot. Four 
 ## Final follow-up result — 2026-09-09T07:33:34.985768+00:00
 
 Approved four-item correction delivered on main d77177b after preserving concurrent main50ffe71. Local cp949 and UTF8 full suites each 228 passed / 2 skipped; normal/filtered web test/build PASS and identical dist; original media unchanged. GitHub runs34324030846 and34324030843 SUCCESS. P1 filtered-browser links/content confirmed. Existing plan-order deviation retained, not retroactively closed as full compliance. No new Agent/Excel trial, QA-score reassignment or submission-site action. [Evidence](../result/post-closeout-corrections-20260909/README.md).
+
+
+## Intro filter/docs approval — 2026-09-09T07:39:09.889871+00:00
+
+User: “어 그것만 반영해봐 ai-dlc 위배된다면 하지말고”. Approves the previously proposed pinned intro-video URL and current-vs-historical validation pointers only. Plan intro-filter-docs-plan.md written before implementation. Existing MVP acceptance and extension configuration retained; no restart or new product scope.
