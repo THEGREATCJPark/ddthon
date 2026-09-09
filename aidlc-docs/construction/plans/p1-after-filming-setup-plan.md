@@ -21,3 +21,6 @@ Presentation clarification within step2: give the existing exact P1 descriptor a
 
 ## Validation
 Initial preparation/Git15 PASS; final preparation/status21 PASS (overlap, not summed). Actual new Excel workbook direct read fails, actual C5 MATCH identifies original exact P1, explicit execution gate still required. Operator-only application read succeeds with original hash/mtime unchanged. No task artifact or new reuse created. Launcher PowerShell syntax PASS; actual interactive capture/collection NOT_RUN. Full product Warm ready; controlled benchmark waits for final ZIP.
+
+## Approved opening-timing correction — 2026-09-09T03:22:50.0737075Z
+User clarifies they will open the document manually during the demonstration, immediately before saying '이상하네'. Start with target workbook closed; remove automatic open from Start-filming.ps1. Close only this preparation's owned workbook via STOP signal. Retain Open-warm.cmd as an explicitly user-run operator action. Actual failure/search remains truthful: Warm still MATCH, not fake NO_MATCH. No P1 permission/publication change. Prior open-workbook preflight retained as setup evidence, not filmed starting state. Update guides, validate launcher and target close state; no new product implementation.

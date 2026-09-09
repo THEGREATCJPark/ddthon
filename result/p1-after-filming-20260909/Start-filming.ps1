@@ -2,11 +2,8 @@
 $env:PYTHONUTF8 = "1"
 $work = Join-Path $PSScriptRoot "warm"
 $op = Join-Path $PSScriptRoot "operator"
-$py = "C:\Users\cik61\Desktop\ddthon-main\.venv\Scripts\python.exe"
 $claude = "C:\Users\cik61\.local\bin\claude.exe"
-$xlsx = Join-Path $work "BBBBB02_직전_3달_생산량.xlsx"
-& $py "C:\Users\cik61\Desktop\ddthon-main\scripts\open-p1-document.py" $xlsx
-if ($LASTEXITCODE -ne 0) { throw "문서 열기 실패. 출력 확인 후 다시 시작하세요." }
+# Start closed. The user opens the document manually later in the demonstration.
 $started = Get-Date
 @{started_at=$started.ToUniversalTime().ToString("o");workspace=$work;mode="FULL_PRODUCT_WARM_FILMING";benchmark=$false} | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $op "capture-start.json")
 Set-Location $work

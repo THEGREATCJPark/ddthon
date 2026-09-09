@@ -2,6 +2,8 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **P1 촬영 시작 상태 정정**: 대상 문서를 닫고 시작. Start-filming.ps1 자동 열기 제거, 운영자 준비 Excel만 종료 확인. 사용자가 도중에 문서를 직접 열고 “이상하네, 나는 열리는데”라고 입력한다. 기존 열린 상태 사전점검은 보존.
+
 - **P1 적용 후 촬영 준비 완료**: Desktop/skillloop-p1-after-video-20260909/warm, 기존 team-skill-store에서 게시 P1 수신. 원본 검토/Replay/게시 provenance 연결, 실제 직접 읽기 실패·MATCH·앱 접근·원본 보존 및 신규 재사용0 확인. Start-filming.ps1과 촬영/로그 가이드 준비. FULL_PRODUCT_WARM_FILMING이며 실제 촬영/Agent 실행은 NOT_RUN. 다른 PC 최신 Excel 비교 ZIP 미수신, WARM_SKILL_ONLY 측정은 대기. P0-only demo branch 미변경.
 
 - **P1 첫 응답 UX 정정**: 실제 실패·NO_MATCH 뒤 “Agent SkillLoop를 통해 방법을 탐색해볼까요?”로 질문. 파일을 평소 어떻게 여는지 질문 삭제, 환경 사실 응답은 탐색에 활용. 게시 승인과는 별개. 기존 P1 작업 폴더 지침 갱신 완료; 새 대화 실제 표현은 사용자 확인 대기.

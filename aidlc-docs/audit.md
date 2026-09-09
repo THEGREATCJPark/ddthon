@@ -999,3 +999,9 @@ User asks to finish after-filming preparation. Five-step operator-only plan reco
 
 ## 2026-09-09T03:15:25.1801930Z — P1 product Warm filming preparation complete
 Fresh Desktop/skillloop-p1-after-video-20260909/warm prepared with owned open Excel, received original exact P1 from team-skill-store e50c6ac. Retained initial human review/Replay PASS/publication linked in operator provenance. Actual direct parser failure, C5 MATCH, P1 confirmation gate, operator read-only access and byte/mtime/store/usage preservation verified; no task artifacts/new reuse. Setup tests15 PASS and final21 PASS overlap; not summed. Launcher parsed but interactive launch/log collection NOT_RUN. Product descriptor friendly title only; author local displayed as unregistered, not falsely attributed. Full-product footage READY; WARM_SKILL_ONLY comparison deferred for final Excel protocol ZIP. No data branch write, publication or benchmark run.
+
+## 2026-09-09T03:22:50.1171215Z — User corrects P1 document opening timing
+Exact intent: 도중에 내가 이상하네 를 입력하기 전에 열어야 ... 내가 시연에서 직접열려고해. Remove launcher auto-open; stop only owned filming preparation to close its workbook. Keep Skill/usage/provenance. This manual-opening video protocol is separate from the other PC's not-yet-frozen benchmark.
+
+## 2026-09-09T03:23:04.3468327Z — Closed-start filming correction verified
+Owned preparation exited normally after STOP; owned Excel17796 absent. No other Excel process terminated. Launcher syntax PASS and auto-open call removed. User manually opens target after actual failure/search and before environment-fact reply. Filmed run still NOT_RUN.
