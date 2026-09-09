@@ -1,0 +1,126 @@
+{
+  ".gitattributes": {
+    "bytes": 9,
+    "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+  },
+  "Agent-SkillLoop-P1-Video.zip": {
+    "bytes": 11270872,
+    "sha256": "fe2abcd51a1d1e53e73b40b2ec96eeaf9c86b7a2149ffca6e4acf335e995a879"
+  },
+  "log-round3/actual-trend.png": {
+    "bytes": 45723,
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+  },
+  "log-round3/manifest.json": {
+    "bytes": 936,
+    "sha256": "17dab75446be5b583696c3bccbc7c70ec99b2368338cd754d3aaf6bcb6f28e57"
+  },
+  "log-round3/metadata.json": {
+    "bytes": 847,
+    "sha256": "815a586f9a586f9bb1ba910a2680611da315e5b78a5609605309b00fddd24fe9"
+  },
+  "log-round3/README.md": {
+    "bytes": 3347,
+    "sha256": "0797a0b30c3c69d6508a8e7bdde78374d767b17f50c398d06274c3c67dedb5a9"
+  },
+  "log-round3/responses.public.md": {
+    "bytes": 3174,
+    "sha256": "35ce1105b7d1f94b60c03f2080cbc83acd1b8b234559de43fa1bd136bdb80839"
+  },
+  "log-round3/timeline.json": {
+    "bytes": 1094,
+    "sha256": "5b89369489e6704500734862b9bbc700de8d1a30c4e788a2859b4a5c36decd26"
+  },
+  "log-round3/transcript.public.json": {
+    "bytes": 50984,
+    "sha256": "cd15e80941046e4300051b43561b94ee2cbf161c46de16d29e590748a2d5fc35"
+  },
+  "log-round3/transcript.public.md": {
+    "bytes": 46296,
+    "sha256": "6b7df5ad172ddd56a4c474308bacd67b9785b992ccbc7dffe220bcb7a7fc0506"
+  },
+  "P1-Web-Log-Round3.zip": {
+    "bytes": 79232,
+    "sha256": "85aac8546a4310f96ee31a29048a5c69cdef47c6ceccb3bce15291bc3f3d5c18"
+  },
+  "README.md": {
+    "bytes": 2890,
+    "sha256": "b516e2633d3109e8012b41726e54b781057fb3821c532abb6d9dde8668360c86"
+  },
+  "source-archives.json": {
+    "bytes": 472,
+    "sha256": "d1ada7f97c0d1501095b2e1f3feda98a4454cfb4d8fd28c3be16263ac54ce6a2"
+  },
+  "video/Agent_SkillLoop_P1_90s.mp4": {
+    "bytes": 5163626,
+    "sha256": "fc81e850ccdd2462833866f3db4cc0938173375e5d1c5512a3362c37a55a4a88"
+  },
+  "video/Agent_SkillLoop_P1_ko.srt": {
+    "bytes": 2178,
+    "sha256": "d0c828972e5f3d338fab99bf7d8269e18ba6d71b3f5d8c64f03153611a9ea169"
+  },
+  "video/Agent_SkillLoop_P1_게시전후.png": {
+    "bytes": 237199,
+    "sha256": "7312c7025673d9131c58b134338868f097b6ce8c235862eeec8e21c86cd9bb53"
+  },
+  "video/Agent_SkillLoop_P1_편집표.md": {
+    "bytes": 6400,
+    "sha256": "f0761be7072a17dc51d87f429ff308ed7f5700c401e1e93f308b4d55a1c218c9"
+  },
+  "video/Agent_SkillLoop_P1_평가데이터.json": {
+    "bytes": 14923,
+    "sha256": "9f2eb8e46ed42317f0fdefd659504c998938ea9b4b8d8a7ea1afdcc851af35cc"
+  },
+  "video/evidence/E01.png": {
+    "bytes": 313079,
+    "sha256": "4473ef41c89a1eb1b0516b49d06618ed7358492dfe4849bed096f86ddefae24c"
+  },
+  "video/evidence/E02.png": {
+    "bytes": 490722,
+    "sha256": "8e4f592dec07b0cee23f0db1c0c0eac36c48b9c43348d0db8e15bfdcb0ffb130"
+  },
+  "video/evidence/E03.png": {
+    "bytes": 629121,
+    "sha256": "96b1eac5d4a2f54f72d265962b338668788770b1d3ebca6aa8b63b4e39ec8816"
+  },
+  "video/evidence/E04.png": {
+    "bytes": 793468,
+    "sha256": "2a4cbc8cab96d2797f92408d872515d55a4153ee42452141b2004839bcf45982"
+  },
+  "video/evidence/E05.png": {
+    "bytes": 836291,
+    "sha256": "8b24710d9dff00361dc8a830fa709515a5abfda503f0950452baf2d95b9bfcbc"
+  },
+  "video/evidence/E06.png": {
+    "bytes": 714161,
+    "sha256": "44bb7e702d1b1f5efbf461b74a82cdccc1fc928e7571c7cf5ddb7fc905d67a78"
+  },
+  "video/evidence/E07.png": {
+    "bytes": 774951,
+    "sha256": "43e8c46f8c6120bc2452dfc1c310cc07cbe7ce6ca62da84445d78e6d4bb0846b"
+  },
+  "video/evidence/E08.png": {
+    "bytes": 819104,
+    "sha256": "b3233cb32231d360c102faf1cacbef2cc3ccb656318bdc09d1a916608b14252e"
+  },
+  "video/evidence/E09.png": {
+    "bytes": 867031,
+    "sha256": "41bedcaceb63a40e765eb252d9d82849e4f762fd7632656c11ef4eccc96f42bf"
+  },
+  "video/evidence/E10.png": {
+    "bytes": 878157,
+    "sha256": "d12bed31c312da7fa9e7df5d88b7b48302dd52745959e7a787f261ac15052d7e"
+  },
+  "video/evidence/E11.png": {
+    "bytes": 695944,
+    "sha256": "ce5c7cf93c1e6ad71aa6e02764e7ab63fa78254edf9a633280e61bd2c3292da4"
+  },
+  "video/README.txt": {
+    "bytes": 305,
+    "sha256": "a0833298a804a0dfda1a9dc093492e001c3d98984776007397ebc8402ccf4bc0"
+  },
+  "video/SHA256SUMS.json": {
+    "bytes": 1518,
+    "sha256": "a4900217a2ed5f633111c0d93251e2ce4062bc6fd928edcb1e359616892ea50b"
+  }
+}

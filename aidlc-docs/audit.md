@@ -1022,3 +1022,11 @@ Timestamp: 2026-09-09T03:41:47.4219685Z
 20 preparation tests PASS; real Excel on new non-measurement setup data PASS (read-only, values/hash/mtime). Original ZIP 79 payloads verified. Derived textual procedure and original descriptor provenance remain distinct. New operator kit has 30 files and delivery hash fda61ad9051776d386c47116bd61ad0ebc6b8e5ee0bce6b3275b48c064382699. Portable doctor returns PREPARED_NOT_READY / exit 2. Windows Home non-elevated; protected recorder/OS isolation/live bridge not implemented, input keys absent, runtime alignment and both-PC freeze pending. Model calls 0. No source reference imported, old runner executed, product changed, account provisioned, or historical result relabelled. Existing B receipt directory untouched. See result/p1-comparison-preparation-20260909 and preparation plan step5 remaining.
 
 - Preparation receipts are evidence of offline setup only; live comparison remains blocked.
+
+## 2026-09-09T05:34:42.351Z — P1 웹 증거 패키지 전달
+
+- 사용자 요청: 대표 3회차 로그 ZIP 및 제공된 P1 영상 ZIP을 repository에 올려 웹 담당자에게 전달.
+- 조치: result/p1-web-delivery-20260909/에 원본 ZIP, 추출 MP4/SRT/PNG/공개 로그, 원본·배포 파일 해시와 웹 반영 안내 추가. 제품·웹 코드 변경 없음.
+- 검증: 내부 manifest 파일 23개 해시 일치. 텍스트 자격증명 패턴 및 제공 증거 화면 11장 확인. 전체 영상 재생 검증은 미실행.
+- 추적성: 수동 게시 시연 영상과 자동 Cold 3회차 로그는 별개 실행. 편집 90초와 실제 업무 110.539초를 구분. 공개 Skill 증가를 재사용 실적으로 간주하지 않음.
+- 기존 승인/단계/실행 이력 보존. 본 변경은 결과물 인계이며 새로운 기능 구현 또는 단계 완료 승인이 아님.

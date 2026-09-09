@@ -1,0 +1,526 @@
+{
+  "schema_version": "1.0.0",
+  "language": "ko",
+  "product": "Agent SkillLoop",
+  "team": "노웨어(NOWHERE)",
+  "scenario": "P1 Cold",
+  "summary": "파일 직접 읽기 실패와 관련 Skill 없음 이후, 사용자가 직접 여는 것은 되는데 왜 읽지 못하는지 자연스럽게 묻는다. Agent는 이미 열린 Excel 문서에서 접근 방법을 찾아 업무를 완료하고, 환경 접근 절차를 사람 승인·독립 Replay 후 팀 저장소에 게시한다.",
+  "assets": {
+    "source": {
+      "filename": "p1시연.mp4",
+      "duration_seconds": 248.566633,
+      "width": 1978,
+      "height": 1718,
+      "fps": 30,
+      "sha256": "216433f162218373937466716ba0705fa53380bb6e9390ce3be7f9177b450a09"
+    },
+    "edited": {
+      "filename": "Agent_SkillLoop_P1_90s.mp4",
+      "duration_seconds": 90,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "sha256": "fc81e850ccdd2462833866f3db4cc0938173375e5d1c5512a3362c37a55a4a88"
+    }
+  },
+  "editing": {
+    "chronological_source_order": true,
+    "intro_outro_cards": false,
+    "subtitles_outside_recorded_viewport": true,
+    "persistent_disclosure": "실제 실행 화면 · 대기 구간 편집",
+    "simulation_disclosure": "가상 사내환경 시연",
+    "silent_audio": true,
+    "hold": {
+      "edited_start": 49,
+      "edited_end": 55,
+      "source_frame_seconds": 179.26666666666668,
+      "label": "결과 화면 유지"
+    },
+    "shots": [
+      {
+        "id": 0,
+        "out_start": 0,
+        "out_end": 1.4,
+        "source_start": 0,
+        "source_end": 1.4,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "업무 요청 입력",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 1,
+        "out_start": 1.4,
+        "out_end": 8,
+        "source_start": 1.4,
+        "source_end": 8,
+        "speed": 1,
+        "crop_y": 0,
+        "description": "업무 요청 실행",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 2,
+        "out_start": 8,
+        "out_end": 10,
+        "source_start": 18.5,
+        "source_end": 24.5,
+        "speed": 3,
+        "crop_y": 100,
+        "description": "직접 읽기와 팀 Skill 검색 실행",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 3,
+        "out_start": 10,
+        "out_end": 14,
+        "source_start": 24.8,
+        "source_end": 28.8,
+        "speed": 1,
+        "crop_y": 250,
+        "description": "파일 직접 읽기 실패 보고",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 4,
+        "out_start": 14,
+        "out_end": 18,
+        "source_start": 33.6,
+        "source_end": 37.6,
+        "speed": 1,
+        "crop_y": 250,
+        "description": "기존 해결 방법 없음 보고",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 5,
+        "out_start": 18,
+        "out_end": 25,
+        "source_start": 37.6,
+        "source_end": 44.6,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "사용자의 환경 설명 입력",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 6,
+        "out_start": 25,
+        "out_end": 29,
+        "source_start": 48.8,
+        "source_end": 52.8,
+        "speed": 1,
+        "crop_y": 420,
+        "description": "열린 Excel 조사 시작",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 7,
+        "out_start": 29,
+        "out_end": 32,
+        "source_start": 61,
+        "source_end": 70,
+        "speed": 3,
+        "crop_y": 400,
+        "description": "Excel 인스턴스와 문서 탐색",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 8,
+        "out_start": 32,
+        "out_end": 36,
+        "source_start": 84,
+        "source_end": 88,
+        "speed": 1,
+        "crop_y": 350,
+        "description": "정확한 대상 문서 발견",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 9,
+        "out_start": 36,
+        "out_end": 40,
+        "source_start": 109,
+        "source_end": 113,
+        "speed": 1,
+        "crop_y": 380,
+        "description": "열린 문서에서 데이터 읽기 성공 보고",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 10,
+        "out_start": 40,
+        "out_end": 44,
+        "source_start": 147,
+        "source_end": 159,
+        "speed": 3,
+        "crop_y": 380,
+        "description": "접근 절차와 업무 매핑 적용",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 11,
+        "out_start": 44,
+        "out_end": 47,
+        "source_start": 162,
+        "source_end": 165,
+        "speed": 1,
+        "crop_y": 420,
+        "description": "업무 완료와 차트 파일 읽기 보고",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 12,
+        "out_start": 47,
+        "out_end": 55,
+        "source_start": 177.3,
+        "source_end": 179.3,
+        "speed": 1,
+        "crop_y": 160,
+        "description": "실제 생산량과 예측값 결과",
+        "hold_seconds": 6.0
+      },
+      {
+        "id": 13,
+        "out_start": 55,
+        "out_end": 61,
+        "source_start": 179.3,
+        "source_end": 185.3,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "사람 승인 선택창과 실제 선택",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 14,
+        "out_start": 61,
+        "out_end": 64,
+        "source_start": 187,
+        "source_end": 190,
+        "speed": 1,
+        "crop_y": 650,
+        "description": "공유 범위와 승인 기록 안내",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 15,
+        "out_start": 64,
+        "out_end": 68,
+        "source_start": 202,
+        "source_end": 218,
+        "speed": 4,
+        "crop_y": 754,
+        "description": "승인 후 독립 Replay 실행",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 16,
+        "out_start": 68,
+        "out_end": 74,
+        "source_start": 220,
+        "source_end": 226,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "Replay PASS 및 원본 변경 없음 보고",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 17,
+        "out_start": 74,
+        "out_end": 78,
+        "source_start": 226,
+        "source_end": 232,
+        "speed": 1.5,
+        "crop_y": 754,
+        "description": "검증된 후보 게시 실행",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 18,
+        "out_start": 78,
+        "out_end": 82,
+        "source_start": 232,
+        "source_end": 236,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "공개 Skill 수 1개에서 2개로 갱신",
+        "hold_seconds": 0.0
+      },
+      {
+        "id": 19,
+        "out_start": 82,
+        "out_end": 90,
+        "source_start": 240,
+        "source_end": 248,
+        "speed": 1,
+        "crop_y": 754,
+        "description": "게시 완료·커밋·공유 범위 확인",
+        "hold_seconds": 0.0
+      }
+    ]
+  },
+  "evidence_classes": {
+    "screen_observation": "화면에서 직접 읽을 수 있는 입력·선택·값·상태 변화",
+    "agent_report": "Agent가 터미널에 표시한 실행 결과 설명. 펼친 stdout 또는 독립 검증 파일을 대신하지 않음"
+  },
+  "task": {
+    "request": "엑셀을 읽고 다음 달 예상 생산량을 포함한 추세선을 그려줘.",
+    "user_followup": "내가 직접 열면 열리거든. Agent SkillLoop를 통해 탐색해볼래.",
+    "followup_caption": "사용자가 자연스럽게 물어봅니다. 내가 직접 여는 건 되는데, 왜 못 열지?",
+    "followup_caption_is_paraphrase": true,
+    "environment": "해커톤용 가상 사내환경",
+    "actual_security_product_validation": false
+  },
+  "outcomes": {
+    "direct_file_read": {
+      "result": "failed",
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E02"
+      ],
+      "raw_error_visible": false
+    },
+    "team_skill_search": {
+      "result": "no_related_skill_reported",
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E02"
+      ],
+      "literal_NO_MATCH_visible": false
+    },
+    "document_access": {
+      "result": "already_open_workbook_read_reported",
+      "method": "실행 중인 Excel 확인 → 활성 인스턴스에서 대상 없음 → 열린 문서 목록 탐색 → 정확한 대상 문서 바인딩",
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E04"
+      ],
+      "original_unchanged_reported": true
+    },
+    "actual_production": [
+      {
+        "month": "2026-05",
+        "value": 1200,
+        "kind": "actual"
+      },
+      {
+        "month": "2026-06",
+        "value": 1350,
+        "kind": "actual"
+      },
+      {
+        "month": "2026-07",
+        "value": 1500,
+        "kind": "actual"
+      }
+    ],
+    "production_evidence_ids": [
+      "E03",
+      "E05"
+    ],
+    "forecast": {
+      "month": "2026-08",
+      "value": 1650,
+      "kind": "forecast",
+      "method_reported": "3점 선형회귀(OLS)",
+      "evidence_ids": [
+        "E05"
+      ],
+      "is_actual_production": false
+    },
+    "chart": {
+      "creation_reported": true,
+      "file_read_action_visible": true,
+      "chart_image_visible": false,
+      "note": "추세선 PNG 경로와 생성 완료 보고는 보이지만 차트 이미지 자체는 녹화에 노출되지 않음."
+    },
+    "approval": {
+      "user_selection": "승인하고 공유",
+      "evidence_class": "screen_observation",
+      "evidence_ids": [
+        "E06",
+        "E07"
+      ]
+    },
+    "replay": {
+      "result": "PASS",
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E08"
+      ],
+      "description": "승인한 환경 접근 절차를 새 실행으로 독립 재검증",
+      "different_solution_claim": false,
+      "different_pc_claim": false
+    },
+    "publication": {
+      "result": "completed_reported",
+      "evidence_class": "agent_report",
+      "commit_short": "e302bf2",
+      "evidence_ids": [
+        "E11"
+      ],
+      "remote_git_log_independently_verified": false,
+      "shared_scope_reported": "환경 접근 절차",
+      "excluded_from_skill_reported": [
+        "업무 데이터와 값",
+        "시트",
+        "차트",
+        "암호"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "id": "M01",
+      "name": "하단 상태줄 공개 Skill 수",
+      "before": 1,
+      "after": 2,
+      "delta": 1,
+      "unit": "개",
+      "evidence_class": "screen_observation",
+      "source_transition_seconds": 233.7,
+      "source_transition_frame_zero_based": 7011,
+      "edited_transition_seconds": 79.7,
+      "evidence_ids": [
+        "E09",
+        "E10"
+      ],
+      "interpretation": "공개 Skill 1개 추가. Warm 재사용 성공 횟수 증가와 구별."
+    },
+    {
+      "id": "M02",
+      "name": "하단 상태줄 실제 검증 횟수",
+      "before": 0,
+      "after": 0,
+      "delta": 0,
+      "unit": "회",
+      "evidence_class": "screen_observation",
+      "evidence_ids": [
+        "E09",
+        "E10",
+        "E11"
+      ],
+      "interpretation": "이번 Cold 게시 영상에서 검증된 재사용 횟수 증가는 관찰되지 않음. Replay PASS와 별도 지표."
+    },
+    {
+      "id": "M03",
+      "name": "다음 Agent의 Warm 재사용 성공",
+      "value": null,
+      "status": "not_shown",
+      "interpretation": "이번 영상에는 다음 Agent의 재사용 장면이 없음."
+    },
+    {
+      "id": "M04",
+      "name": "실제 업무 시간 절감률",
+      "value": null,
+      "status": "not_measured",
+      "interpretation": "원본 길이 또는 편집 길이로 계산하지 않음."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "description": "업무 요청",
+      "source_seconds": 3,
+      "edited_seconds": 3,
+      "path": "evidence/E01.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E02",
+      "description": "직접 읽기 실패·관련 Skill 없음 보고",
+      "source_seconds": 26,
+      "edited_seconds": 11.2,
+      "path": "evidence/E02.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E03",
+      "description": "열린 Excel의 3개월 실제 생산량",
+      "source_seconds": 49.8,
+      "edited_seconds": 26,
+      "path": "evidence/E03.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E04",
+      "description": "정확한 열린 문서에서 읽기 성공 보고",
+      "source_seconds": 112,
+      "edited_seconds": 39,
+      "path": "evidence/E04.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E05",
+      "description": "실제 생산량·다음 달 예측 결과",
+      "source_seconds": 178.3,
+      "edited_seconds": 48,
+      "path": "evidence/E05.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E06",
+      "description": "사람의 승인 선택창",
+      "source_seconds": 180,
+      "edited_seconds": 55.7,
+      "path": "evidence/E06.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E07",
+      "description": "승인하고 공유 선택 결과",
+      "source_seconds": 184,
+      "edited_seconds": 59.7,
+      "path": "evidence/E07.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E08",
+      "description": "독립 Replay PASS 보고",
+      "source_seconds": 220,
+      "edited_seconds": 68,
+      "path": "evidence/E08.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E09",
+      "description": "공개 Skill 1개: 증가 직전",
+      "source_seconds": 233.66666666666666,
+      "edited_seconds": 79.666667,
+      "path": "evidence/E09.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E10",
+      "description": "공개 Skill 2개: 증가 직후",
+      "source_seconds": 233.7,
+      "edited_seconds": 79.7,
+      "path": "evidence/E10.png",
+      "privacy_redacted": false
+    },
+    {
+      "id": "E11",
+      "description": "게시 완료·커밋 e302bf2 보고",
+      "source_seconds": 242,
+      "edited_seconds": 84,
+      "path": "evidence/E11.png",
+      "privacy_redacted": false
+    }
+  ],
+  "additional_recording": [
+    {
+      "scene": "직접 읽기 실패와 NO_MATCH 원문",
+      "request": "같은 실행의 접힌 명령 결과를 펼쳐 오류와 NO_MATCH가 읽히도록 3~5초 촬영."
+    },
+    {
+      "scene": "생성된 추세선 차트",
+      "request": "같은 실행이 생성한 PNG를 실제로 열어 5초 촬영. 3개월 실적과 8월 예측이 구분되어 보이게 유지."
+    }
+  ],
+  "evaluation_notes": [
+    "P1 Cold의 해결·후보·승인·Replay·게시 흐름을 평가한다.",
+    "원본의 NASCA 문구는 시연 내 Agent 설명이며 실제 NASCA 제품 검증의 증거가 아니다.",
+    "같은 공개 Skill 증가를 상태줄과 최종 답변에서 각각 독립 사건으로 중복 집계하지 않는다.",
+    "None/null은 미확인 또는 미측정을 뜻하며 실패나 0을 의미하지 않는다."
+  ]
+}
