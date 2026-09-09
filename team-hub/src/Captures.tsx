@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Plus, Trash2, ImagePlus, FileText } from "lucide-react";
+import p0Capture from "../../P0캡처.png";
+import p0Log from "./p0-execution-log.txt?raw";
 import { session } from "./communityApi";
 import {
   loadMedia,
@@ -10,9 +12,16 @@ import {
   type Capture,
 } from "./captureApi";
 
-function CaptureCard({ item, mine }: { item: Capture; mine: boolean }) {
-  const [media, setMedia] = useState("");
-  const [text, setText] = useState<string | null>(null);
+const repositoryP0: Capture = {
+  id: "repository-p0-20260909", scenario: "p0",
+  title: "Python 패키지 설치 · 기존 팀 Skill 재사용",
+  uid: "", mime: "image/png", chunks: 0, hasText: true,
+  createdAt: Date.parse("2026-09-09T12:02:00+09:00"),
+};
+
+function CaptureCard({ item, mine, bundled = false }: { item: Capture; mine: boolean; bundled?: boolean }) {
+  const [media, setMedia] = useState(bundled ? p0Capture : "");
+  const [text, setText] = useState<string | null>(bundled ? p0Log : null);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -99,7 +108,7 @@ function CaptureCard({ item, mine }: { item: Capture; mine: boolean }) {
           <button onClick={() => setDeleting(false)}>취소</button>
         </div>
       )}
-      {!!item.chunks && (
+      {(!!item.chunks || bundled) && (
         <div className="capture-media">
           {media ? (
             <a
@@ -123,10 +132,17 @@ function CaptureCard({ item, mine }: { item: Capture; mine: boolean }) {
             onClick={toggleText}
           >
             <FileText size={18} />
-            {open ? "실행 전문 접기" : "실행 전문 펼치기"}
+            {open ? "실행 로그 접기" : "실행 로그 펼치기"}
             <span>{open ? "−" : "+"}</span>
           </button>
-          {open && <pre>{busy ? "불러오는 중…" : text}</pre>}
+          {open && <>
+            <pre>{busy ? "불러오는 중…" : text}</pre>
+            {bundled && <p className="capture-log-note">
+              이 로그는 기존 팀 Skill을 재사용한 P0 실행 기록입니다. 패키지 설치 후 버전·import를 확인하고 재사용 성공 1회를 기록했습니다.
+              저장소의 별도 P0 검증 결과에도 버전 1.0.0, import 성공, 재사용 0→1이 기록돼 있습니다.
+              {" "}<a href="https://github.com/THEGREATCJPark/ddthon/blob/139e080a4c43aed793696c3bd8f568c7f0a02e23/result/p0-scoped-auto-20260909/github-cold-result.json" target="_blank" rel="noreferrer">검증 근거</a>
+            </p>}
+          </>}
         </div>
       )}
       {error && (
@@ -205,7 +221,7 @@ export default function Captures() {
       <div className="page-heading">
         <div>
           <h2>캡처 정리</h2>
-          <p>실제 실행 화면과 대화 전문</p>
+          <p>실제 실행 화면과 실행 로그</p>
         </div>
         <button
           className="button primary"
@@ -269,7 +285,7 @@ export default function Captures() {
             />
           )}
           <label>
-            실행 텍스트 전문
+            실행 로그 · 대화 전문
             <textarea
               rows={9}
               maxLength={60000}
@@ -280,16 +296,16 @@ export default function Captures() {
             />
           </label>
           <label className="capture-txt">
-            TXT 불러오기
+            로그 파일 불러오기 (.txt / .log)
             <input
               type="file"
-              accept=".txt,text/plain"
+              accept=".txt,.log,text/plain"
               disabled={saving}
               onChange={async (event) => {
                 const txt = event.target.files?.[0];
                 if (!txt) return;
                 if (txt.size > 240000) {
-                  setFormError("TXT는 240KB까지 불러올 수 있습니다.");
+                  setFormError("로그 파일은 240KB까지 불러올 수 있습니다.");
                   return;
                 }
                 try {
@@ -298,7 +314,7 @@ export default function Captures() {
                   setTranscript(value);
                   setFormError("");
                 } catch {
-                  setFormError("60,000자 이하 UTF-8 TXT 파일을 선택해 주세요.");
+                  setFormError("60,000자 이하 UTF-8 TXT 또는 LOG 파일을 선택해 주세요.");
                 }
               }}
             />
@@ -324,9 +340,9 @@ export default function Captures() {
           {error}
         </p>
       )}
-      {loading ? (
+      {loading && scenario !== "p0" ? (
         <p className="capture-empty">기록을 불러오는 중…</p>
-      ) : !visible.length && !error ? (
+      ) : !visible.length && scenario !== "p0" && !error ? (
         <div className="capture-empty">
           <ImagePlus size={32} />
           <h3>아직 {scenario.toUpperCase()} 실행 기록이 없습니다</h3>
@@ -334,6 +350,7 @@ export default function Captures() {
         </div>
       ) : null}
       <div className="capture-list">
+        {scenario === "p0" && <CaptureCard item={repositoryP0} mine={false} bundled />}
         {visible.map((item) => (
           <CaptureCard key={item.id} item={item} mine={uid === item.uid} />
         ))}
