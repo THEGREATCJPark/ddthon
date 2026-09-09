@@ -32,3 +32,11 @@ GitHub에서 재생 미리보기가 나오지 않으면 영상 링크의 **View 
 위 자동 검증 로그는 별도 실행의 근거이며 이 영상과 동일한 실행이라고 주장하지 않습니다. 이번 정리는 사용자 제공 미디어의 보관·연결 작업이며 새로운 P0 실행이나 QA 지적 자동 종결은 아닙니다.
 
 루트 `P0캡처.png`는 웹 캡처 탭의 기존 import 경로를 유지하기 위해 보존했습니다. 이 폴더의 PNG와 파일 내용은 같습니다.
+
+## AI 영상 평가 패키지
+
+[평가 패키지 전체 다운로드 (ZIP)](ai-evaluation/p0-ai-evaluation.zip) · [평가 순서](ai-evaluation/README_평가순서.txt) · [평가 가이드](ai-evaluation/Agent_SkillLoop_AI_평가자료.md) · [기계 판독 데이터 (JSON)](ai-evaluation/Agent_SkillLoop_AI_평가데이터.json)
+
+사용자가 추가 제공한 가이드·타임코드·카운트 전후 프레임·별도 실행 참조 자료입니다. GitHub에서 직접 읽을 수 있도록 ZIP 원본과 압축 해제본을 함께 보관했습니다. [카운트 변화 이미지](ai-evaluation/Agent_SkillLoop_카운트변화.png) · [전체 프레임 증거](ai-evaluation/evidence/) · [파일 무결성 확인 기록](ai-evaluation/package-receipt.json).
+
+패키지 내부 설명과 참조 실행의 구분은 원문 그대로 유지했습니다. 이번 업로드에서는 ZIP CRC와 제공된 SHA-256 목록을 대조했으며 별도의 Agent 실행·영상 재측정·QA 판정은 수행하지 않았습니다.

@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-09-09T03:42:17.621700+00:00",
+  "original_name": "Agent_SkillLoop_AI_평가패키지.zip",
+  "zip_sha256": "85e79205433a44fff2c95d497ce081cabb4f895487bb082cb70b476739932135",
+  "zip_bytes": 4847188,
+  "crc": "PASS",
+  "listed_sha256_verified": 15,
+  "unpacked_files": 17,
+  "source": "User-provided evaluation guide/data; packaged unchanged. Internal evaluation statements are supplied claims, not a new independent QA verdict."
+}

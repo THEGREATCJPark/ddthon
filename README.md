@@ -8,7 +8,7 @@
 
 **업무 요청 한 문장 → 팀의 검증된 해결 방법 적용 → 설치·사용 검증 → 재사용 기록 +1**
 
-[▶ 58초 시연 영상](result/p0-demo-20260909/p0-demo.mp4) · [한국어 자막](result/p0-demo-20260909/p0-demo.ko.srt) · [캡처·실행 근거 모음](result/p0-demo-20260909/README.md)
+[▶ 58초 시연 영상](result/p0-demo-20260909/p0-demo.mp4) · [한국어 자막](result/p0-demo-20260909/p0-demo.ko.srt) · [캡처·실행 근거 모음](result/p0-demo-20260909/README.md) · [AI 영상 평가 가이드·데이터](result/p0-demo-20260909/ai-evaluation/Agent_SkillLoop_AI_평가자료.md)
 
 [![실제 Claude Code P0 시연](result/p0-demo-20260909/p0-claude-code.png)](result/p0-demo-20260909/p0-demo.mp4)
 

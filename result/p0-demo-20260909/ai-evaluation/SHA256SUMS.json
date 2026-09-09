@@ -1,0 +1,17 @@
+{
+  "Agent_SkillLoop_AI_평가자료.md": "f34fe713a8ef12647242f23a0bfa0bdf3c1be44b48ac2f9426faae02d80df6e6",
+  "Agent_SkillLoop_AI_평가데이터.json": "b558f0665e4a7ccb0fc31092e95168f86e1faed65014b29400a4aff2d9bcb618",
+  "Agent_SkillLoop_카운트변화.png": "d9c935f068545851557b9874e316d78ba4d99e6fe4cc27ee7865fa333ea52409",
+  "Agent_SkillLoop_P0_58s.mp4": "db86ab8a32d2da23142ed4d5ba9344b89c0bdedf7fb635b37d10483a1c9a15e3",
+  "Agent_SkillLoop_ko.srt": "f632897ee4ae1ac12f4d401ad397923a7d2a4dd026e13f9a0d65b4b4f14afa7f",
+  "evidence/E01_request.png": "fec9fca08e4d828d20edaa9de0b2b235c87b903bad130e931b676af1038a8b95",
+  "evidence/E02_apply_command.png": "d14ec3bd84d60cfa9a8f9777eeb54e39d14fc832556defadc048192d2018e91c",
+  "evidence/E03_counter_last_zero.png": "bb5affdc9d4bb6553501b4e09a251f90036ae64dec5a9ee5b4dd3973f56756a5",
+  "evidence/E04_counter_first_one.png": "35bb1d67153d6589a2ee8506f6d3c0262da412f8687ce00cbbf2d3a2681646d3",
+  "evidence/E05_verify_command.png": "2d0b3965ab407eb66beabf99344fc3e3e810c4ab8e80beaf550e2ff25e4deb0a",
+  "evidence/E06_final_response.png": "49dc437d31bdc777c8ad5ceb0df62d52267dc4baf42d12f50569a27cebf24735",
+  "evidence/E07_edited_last_zero.png": "51db78060dbc477d636c3a8e268665191f03f151f28e8c930950734448f5c768",
+  "evidence/E08_edited_first_one.png": "05f3160174c23f9d98629bf0a98b37ab0fd208b26b3be88e7c8b38772acdb93e",
+  "references/independent_p0_result.json": "a5262c0c789e423a595724365936bea8a44e3c63944e781cad18304a63933926",
+  "references/independent_p0_log.txt": "8dc6e95fcd52032491e4cf75e5597c9ea513db77470041dec3b4902f4ca6d16a"
+}

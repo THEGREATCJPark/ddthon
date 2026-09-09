@@ -1,0 +1,612 @@
+{
+  "schema_version": "1.0.0",
+  "language": "ko-KR",
+  "prepared_on": "2026-09-09",
+  "product": {
+    "name": "Agent SkillLoop",
+    "team": "노웨어(NOWHERE)",
+    "scenario": "P0 기존 Skill 재사용",
+    "environment": "해커톤용 가상 사내환경"
+  },
+  "submission_summary_ko": "사용자는 패키지 설치 업무만 요청한다. Agent는 기존 팀 Skill을 적용해 설치·사용 검증을 완료했다고 보고하고, 같은 영상의 실제 상태줄은 검증 0회에서 1회로 갱신된다. 공개 Skill 수는 1개로 유지된다.",
+  "assets": {
+    "edited_video": {
+      "file": "Agent_SkillLoop_P0_58s.mp4",
+      "variant": "원본 화면 중심 수정본",
+      "duration_s": 58.0,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frame_count": 1740,
+      "sha256": "db86ab8a32d2da23142ed4d5ba9344b89c0bdedf7fb635b37d10483a1c9a15e3",
+      "included_in_zip": true
+    },
+    "source_video": {
+      "file": "p0시연.mp4",
+      "duration_s": 51.8,
+      "width": 2880,
+      "height": 1716,
+      "fps": 30,
+      "sha256": "dc6688a9f8d716a6c455fd811d741bd1fc4933727f6a078c97977079d6472603",
+      "included_in_zip": false,
+      "note": "사용자 첨부 원본. 평가 패키지에는 주요 전체 프레임을 대신 수록."
+    },
+    "subtitles": {
+      "file": "Agent_SkillLoop_ko.srt",
+      "evidence_role": "editorial_explanation_only"
+    },
+    "counter_comparison": {
+      "file": "Agent_SkillLoop_카운트변화.png",
+      "derived_from": [
+        "E03",
+        "E04"
+      ],
+      "native_ui_values_modified": false
+    }
+  },
+  "evidence_classes": {
+    "observed_ui": "동일 원본 영상의 실제 화면에서 직접 읽은 값·표시",
+    "observed_command": "동일 원본 영상에서 보이는 실행 명령; 성공 stdout 관찰과는 구별",
+    "agent_report": "동일 원본 영상의 Agent 최종 답변에 보고된 결과",
+    "implementation": "지정 커밋의 구현 코드로 확인; 영상 실행 커밋과 동일함은 미확인",
+    "independent_run": "저장소의 별도 실행 로그·결과; 영상 실행에 합산하지 않음",
+    "not_measured": "자료 없음 또는 측정하지 않음. null은 0이나 실패를 뜻하지 않음"
+  },
+  "observed_metrics": [
+    {
+      "id": "M01",
+      "name_ko": "실제 검증 카운트",
+      "before": 0,
+      "after": 1,
+      "delta": 1,
+      "unit": "회",
+      "evidence_class": "observed_ui",
+      "evidence_ids": [
+        "E03",
+        "E04",
+        "E07",
+        "E08"
+      ],
+      "first_one_edited_time_s": 36.2,
+      "first_one_source_time_s": 36.6,
+      "timing_resolution_s": 0.03333333333333333,
+      "meaning": "검증된 재사용 실적 표시. 서로 다른 두 UI 문구를 두 건으로 합산하지 않음."
+    },
+    {
+      "id": "M02",
+      "name_ko": "공개 Skill 수",
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "unit": "개",
+      "evidence_class": "observed_ui",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ],
+      "meaning": "기존 Skill 재사용을 보여줌. 공개 개수 유지 자체만으로 비공개 후보 생성 여부를 확정하지 않음."
+    },
+    {
+      "id": "M03",
+      "name_ko": "영상에서 관찰되는 사용자 업무 요청",
+      "value": 1,
+      "unit": "건",
+      "evidence_class": "observed_ui",
+      "evidence_ids": [
+        "E01"
+      ],
+      "scope": "제공된 녹화 구간"
+    },
+    {
+      "id": "M04",
+      "name_ko": "사용자의 추가 Skill 검색·적용·카운트 지시",
+      "value": 0,
+      "unit": "건",
+      "evidence_class": "observed_ui",
+      "scope": "원본 녹화 구간 전체에서 미관찰; 세션 밖 활동은 판단하지 않음"
+    },
+    {
+      "id": "M05",
+      "name_ko": "Agent가 보고한 성공 기록 증가",
+      "value": 1,
+      "unit": "회",
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E06"
+      ],
+      "same_event_as": "M01"
+    }
+  ],
+  "outcomes": {
+    "requested_task": {
+      "text": "이 프로젝트의 requirements.txt 를 보고 패키지 설치해줘",
+      "text_normalization": "화면 판독 시 띄어쓰기 정리",
+      "evidence_ids": [
+        "E01"
+      ]
+    },
+    "initial_install_failure": {
+      "reported_in_final_answer": true,
+      "raw_error_visible_in_video": false,
+      "evidence_class": "agent_report",
+      "evidence_ids": [
+        "E06"
+      ],
+      "reported_reason": "현재 패키지 경로에서 필요한 버전을 찾지 못함"
+    },
+    "reused_skill": {
+      "display_name": "python pip 사내환경 적용 방법",
+      "evidence_ids": [
+        "E03",
+        "E04",
+        "E06"
+      ],
+      "internal_id_from_video": null,
+      "version_from_video": null,
+      "digest_from_video": null,
+      "valid_candidates_count_from_video": null
+    },
+    "installation": {
+      "agent_reported_success": true,
+      "raw_success_stdout_visible": false,
+      "evidence_ids": [
+        "E06"
+      ]
+    },
+    "version": {
+      "agent_reported_value": "1.0.0",
+      "command_visible": true,
+      "raw_success_stdout_visible": false,
+      "evidence_ids": [
+        "E05",
+        "E06"
+      ]
+    },
+    "import": {
+      "agent_reported_success": true,
+      "command_visible": true,
+      "raw_success_stdout_visible": false,
+      "evidence_ids": [
+        "E05",
+        "E06"
+      ]
+    },
+    "same_work_python": {
+      "target_path_consistency_visible": true,
+      "evidence_ids": [
+        "E02",
+        "E05"
+      ],
+      "note": "설치 명령의 --python 대상과 별도 검증 명령의 작업 .venv 경로가 일치. SkillLoop 실행용 Python과 설치 대상 Python을 구분."
+    },
+    "persistent_usage_file_inspected_for_this_recording": false,
+    "github_reuse_upload_completed_in_this_recording": null,
+    "real_corporate_network_validated": false,
+    "proxy_block_validated": false,
+    "p1_new_skill_review_replay_publish_demonstrated": false,
+    "time_saved_seconds": null,
+    "token_savings": null,
+    "cost_savings": null,
+    "generalized_success_rate": null
+  },
+  "chronology_note": {
+    "counter_changes_before_followup_probe": true,
+    "explanation_ko": "카운트는 수정본 약 36.2초에 먼저 갱신되고, 이후 Agent가 같은 작업 Python의 별도 프로세스로 버전·import를 다시 확인한다. 코드상 내부 apply-and-verify 뒤에 기록하며, 후속 재확인 뒤 최초 증가한 것으로 재배열하지 않는다.",
+    "record_caption_window_s": [
+      47,
+      53
+    ],
+    "record_caption_is_new_counter_event": false
+  },
+  "implementation": {
+    "repository": "https://github.com/THEGREATCJPark/ddthon",
+    "reviewed_commit": "edcbbf44e7f0985351bd006ee37cfb0054483776",
+    "filmed_execution_commit": null,
+    "matching": {
+      "type": "deterministic_signal_matching",
+      "query": "pip-install-fail:<normalized package>",
+      "against": "descriptor.applicability.signals",
+      "exact_score": 2,
+      "prefix_score": 1,
+      "nonmatch_score": 0,
+      "ranking": [
+        "fit descending",
+        "version descending",
+        "id ascending"
+      ],
+      "source": "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/skillloop/match.py"
+    },
+    "retrieval": {
+      "method": "GitHub에서 미리 동기화한 로컬 SkillStore의 descriptor와 procedure 사용",
+      "source": "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/skillloop/gitsync.py"
+    },
+    "apply_and_verify": {
+      "checks": [
+        "descriptor digest",
+        "approved Skill / work Python / requirements / package source scope",
+        "pip exit code",
+        "installed version",
+        "import"
+      ],
+      "sources": [
+        "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/skillloop/cli.py",
+        "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/skillloop/reuse_service.py"
+      ]
+    },
+    "counting": {
+      "normal_path": "UsageTracker.record_actual_reuse",
+      "increment_requires": [
+        "is_real_success == true",
+        "demo_seed == false",
+        "run_id not previously recorded"
+      ],
+      "increment": 1,
+      "same_run_recording": "count unchanged; reason=same-execution",
+      "already_installed_without_skill_reuse": "INSTALL_OK_NO_REUSE, reuse_delta=0",
+      "same_shared_event": "event_id deduplication",
+      "source": "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/skillloop/usage.py",
+      "limitation": "구현 조건의 확인이며, 이번 영상 실행의 저장 JSON을 직접 검사한 것은 아님"
+    }
+  },
+  "independent_verification": {
+    "same_execution_as_video": false,
+    "run_id": "scope-proof",
+    "result_file": "references/independent_p0_result.json",
+    "log_file": "references/independent_p0_log.txt",
+    "source_result": "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/result/p0-scoped-auto-20260909/github-cold-result.json",
+    "source_log": "https://github.com/THEGREATCJPark/ddthon/blob/edcbbf44e7f0985351bd006ee37cfb0054483776/result/p0-scoped-auto-20260909/github-cold-full.txt",
+    "result": {
+      "install_exit": 0,
+      "retry_exit": 0,
+      "before": 0,
+      "after": 1,
+      "after_retry": 1,
+      "import_exit": 0,
+      "version": "1.0.0",
+      "confirmed_digest_supplied": false,
+      "live_events_pushed": false,
+      "git_pull_ok": true
+    },
+    "valid_candidates": 1,
+    "selected_fit": 1,
+    "selected_skill_id": "fix-skillloop-demo-pkg-install",
+    "selected_skill_version": "2.0.0",
+    "dedup_interpretation": "이 별도 검증의 재시도는 이미 설치되어 재사용 없이 종료하고 카운트가 1로 유지됨. same-execution 가드 자체를 통과시킨 실행 증거와 구별."
+  },
+  "timeline": [
+    {
+      "edited_s": [
+        0,
+        8
+      ],
+      "event": "사용자 업무 요청",
+      "evidence": "observed_ui",
+      "ids": [
+        "E01"
+      ]
+    },
+    {
+      "edited_s": [
+        8,
+        16
+      ],
+      "event": "프로젝트·requirements 확인",
+      "evidence": "observed_ui"
+    },
+    {
+      "edited_s": [
+        16,
+        19
+      ],
+      "event": "실제 설치 처리 명령 실행",
+      "evidence": "observed_command",
+      "ids": [
+        "E02"
+      ]
+    },
+    {
+      "edited_s": [
+        19,
+        24
+      ],
+      "event": "설치 실패에 대한 보충 자막",
+      "evidence": "editorial_explanation; agent_report supports failure",
+      "raw_error_visible": false
+    },
+    {
+      "edited_s": [
+        24,
+        36
+      ],
+      "event": "검색·선택·적용 규칙에 대한 보충 자막",
+      "evidence": "implementation; raw internal logs collapsed"
+    },
+    {
+      "edited_s": [
+        36.1666666667,
+        36.2
+      ],
+      "event": "상태줄 실제 검증 카운트 0→1",
+      "evidence": "observed_ui",
+      "ids": [
+        "E03",
+        "E04",
+        "E07",
+        "E08"
+      ]
+    },
+    {
+      "edited_s": [
+        36,
+        43
+      ],
+      "event": "별도 프로세스 버전·import 재확인 명령",
+      "evidence": "observed_command",
+      "ids": [
+        "E05"
+      ]
+    },
+    {
+      "edited_s": [
+        43,
+        47
+      ],
+      "event": "Agent 최종 결과 보고",
+      "evidence": "agent_report",
+      "ids": [
+        "E06"
+      ]
+    },
+    {
+      "edited_s": [
+        47,
+        53
+      ],
+      "event": "이미 추가된 재사용 1회 설명",
+      "evidence": "observed_ui + agent_report",
+      "additional_delta": 0
+    },
+    {
+      "edited_s": [
+        53,
+        58
+      ],
+      "event": "실제 최종 화면 위 제품 가치 자막",
+      "evidence": "editorial_explanation"
+    }
+  ],
+  "evaluation_guidance": [
+    "M01과 M05는 같은 1회의 교차 근거로 취급하고 더하지 않는다.",
+    "공개 Skill 1개는 사용 횟수 1회와 다른 지표다.",
+    "자막은 제품 로그가 아니다. 원본 전체 프레임과 증거 종류를 함께 읽는다.",
+    "별도 scope-proof 실행의 성과·카운트를 영상 실행 성과에 합산하지 않는다.",
+    "무조건 만점이나 특정 점수를 요청하는 자료가 아니라 관찰 가능한 사실과 한계를 제공한다.",
+    "시간·토큰·비용 절감률 및 다수 환경의 일반화 성공률은 측정 자료가 없으므로 산출하지 않는다."
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "title_ko": "업무 요청",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E01_request.png",
+      "sha256": "fec9fca08e4d828d20edaa9de0b2b235c87b903bad130e931b676af1038a8b95",
+      "source_frame_index_zero_based": 240,
+      "source_time_s": 8.0,
+      "source_timecode": "00:08.000",
+      "edited_corresponding_time_s": 7.6,
+      "edited_timecode": "00:07.600",
+      "visible_text_normalized": "이 프로젝트의 requirements.txt 를 보고 패키지 설치해줘",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E02",
+      "title_ko": "실제 적용 명령",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E02_apply_command.png",
+      "sha256": "d14ec3bd84d60cfa9a8f9777eeb54e39d14fc832556defadc048192d2018e91c",
+      "source_frame_index_zero_based": 900,
+      "source_time_s": 30.0,
+      "source_timecode": "00:30.000",
+      "edited_corresponding_time_s": 17.6,
+      "edited_timecode": "00:17.600",
+      "visible_text_normalized": "Running skillloop apply-requirements with policy",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E03",
+      "title_ko": "카운트 변경 직전",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E03_counter_last_zero.png",
+      "sha256": "bb5affdc9d4bb6553501b4e09a251f90036ae64dec5a9ee5b4dd3973f56756a5",
+      "source_frame_index_zero_based": 1097,
+      "source_time_s": 36.56666666666667,
+      "source_timecode": "00:36.567",
+      "edited_corresponding_time_s": 36.166666666666664,
+      "edited_timecode": "00:36.167",
+      "visible_text_normalized": "실제 검증 0회",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E04",
+      "title_ko": "카운트 변경 직후",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E04_counter_first_one.png",
+      "sha256": "35bb1d67153d6589a2ee8506f6d3c0262da412f8687ce00cbbf2d3a2681646d3",
+      "source_frame_index_zero_based": 1098,
+      "source_time_s": 36.6,
+      "source_timecode": "00:36.600",
+      "edited_corresponding_time_s": 36.2,
+      "edited_timecode": "00:36.200",
+      "visible_text_normalized": "실제 검증 1회",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E05",
+      "title_ko": "별도 프로세스 검증 명령",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E05_verify_command.png",
+      "sha256": "2d0b3965ab407eb66beabf99344fc3e3e810c4ab8e80beaf550e2ff25e4deb0a",
+      "source_frame_index_zero_based": 1212,
+      "source_time_s": 40.4,
+      "source_timecode": "00:40.400",
+      "edited_corresponding_time_s": 40.0,
+      "edited_timecode": "00:40.000",
+      "visible_text_normalized": "Verifying install version and importing in work venv",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E06",
+      "title_ko": "최종 결과 보고",
+      "evidence_type": "source_video_frame",
+      "file": "evidence/E06_final_response.png",
+      "sha256": "49dc437d31bdc777c8ad5ceb0df62d52267dc4baf42d12f50569a27cebf24735",
+      "source_frame_index_zero_based": 1338,
+      "source_time_s": 44.6,
+      "source_timecode": "00:44.600",
+      "edited_corresponding_time_s": 44.2,
+      "edited_timecode": "00:44.200",
+      "visible_text_normalized": "검증된 재사용 성공 기록이 1회 추가됐습니다.",
+      "extraction": "원본 영상에서 프레임 번호로 추출한 전체 PNG; 로그·숫자·자막 추가 없음"
+    },
+    {
+      "id": "E07",
+      "title_ko": "수정본의 카운트 전환 프레임",
+      "evidence_type": "edited_video_frame",
+      "file": "evidence/E07_edited_last_zero.png",
+      "sha256": "51db78060dbc477d636c3a8e268665191f03f151f28e8c930950734448f5c768",
+      "edited_frame_index_zero_based": 1085,
+      "edited_time_s": 36.166666666666664,
+      "edited_timecode": "00:36.167",
+      "source_time_s": 36.56666666666667,
+      "visible_count": 0,
+      "extraction": "수정본에서 프레임 번호로 추출. 편집 자막은 제품 로그 증거로 사용하지 않음."
+    },
+    {
+      "id": "E08",
+      "title_ko": "수정본의 카운트 전환 프레임",
+      "evidence_type": "edited_video_frame",
+      "file": "evidence/E08_edited_first_one.png",
+      "sha256": "05f3160174c23f9d98629bf0a98b37ab0fd208b26b3be88e7c8b38772acdb93e",
+      "edited_frame_index_zero_based": 1086,
+      "edited_time_s": 36.2,
+      "edited_timecode": "00:36.200",
+      "source_time_s": 36.6,
+      "visible_count": 1,
+      "extraction": "수정본에서 프레임 번호로 추출. 편집 자막은 제품 로그 증거로 사용하지 않음."
+    }
+  ],
+  "edit_map": [
+    {
+      "id": 0,
+      "out": 0,
+      "dur": 8,
+      "src": 0.4,
+      "length": 8,
+      "speed": 1,
+      "cue": 0
+    },
+    {
+      "id": 1,
+      "out": 8,
+      "dur": 4,
+      "src": 8.4,
+      "length": 8,
+      "speed": 2,
+      "cue": 1
+    },
+    {
+      "id": 2,
+      "out": 12,
+      "dur": 4,
+      "src": 16.4,
+      "length": 12,
+      "speed": 3,
+      "cue": 1
+    },
+    {
+      "id": 3,
+      "out": 16,
+      "dur": 3,
+      "src": 28.4,
+      "length": 3,
+      "speed": 1,
+      "cue": 2
+    },
+    {
+      "id": 4,
+      "out": 19,
+      "dur": 5,
+      "src": 31.4,
+      "length": 0.03333333333333333,
+      "speed": 1,
+      "cue": 3,
+      "explain": true
+    },
+    {
+      "id": 5,
+      "out": 24,
+      "dur": 4,
+      "src": 31.4,
+      "length": 2,
+      "speed": 1,
+      "cue": 4,
+      "explain": true
+    },
+    {
+      "id": 6,
+      "out": 28,
+      "dur": 4,
+      "src": 33.4,
+      "length": 0.03333333333333333,
+      "speed": 1,
+      "cue": 5,
+      "explain": true
+    },
+    {
+      "id": 7,
+      "out": 32,
+      "dur": 4,
+      "src": 33.4,
+      "length": 3,
+      "speed": 1,
+      "cue": 6,
+      "explain": true
+    },
+    {
+      "id": 8,
+      "out": 36,
+      "dur": 7,
+      "src": 36.4,
+      "length": 7,
+      "speed": 1,
+      "cue": 7
+    },
+    {
+      "id": 9,
+      "out": 43,
+      "dur": 4,
+      "src": 43.4,
+      "length": 4,
+      "speed": 1,
+      "cue": 8
+    },
+    {
+      "id": 10,
+      "out": 47,
+      "dur": 6,
+      "src": 47.4,
+      "length": 1,
+      "speed": 1,
+      "cue": 9
+    },
+    {
+      "id": 11,
+      "out": 53,
+      "dur": 5,
+      "src": 48.4,
+      "length": 3.3,
+      "speed": 1,
+      "cue": 10
+    }
+  ]
+}
