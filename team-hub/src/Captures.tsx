@@ -270,7 +270,7 @@ export default function Captures({initialScenario = "p0"}: {initialScenario?: "p
           <p>직접 여는 것은 가능하지만 Python으로는 접근하지 못했던 실제 경험에서 착안했습니다.<br/>Skill에 없는 문제를 Loop를 통해 해결하는 것이 목적입니다.</p>
           <p>오류를 감지한 Agent Skillloop가 조직 Skill Storage를 검색하지만 적합한 Skill을 찾지 못합니다.<br/>환경을 확인하고 여러 해결 방법을 시도하는 Loop를 통해 업무를 진행합니다.</p>
           <p>해결되면 그 시행착오에서 얻은 절차를 검토·Replay 후 조직 Skill Storage에 적재해, 다른 팀원이 같은 고생을 반복하지 않도록 돕습니다.</p>
-          <p className="capture-scenario-effect"><strong>효과</strong> · 비교 실행에서 SkillLoop 미사용 시 업무 완료 0/3회 → 사용 시 3/3회. 새 해결 절차를 팀에 공유해 다음 팀원의 시행착오를 줄입니다.<br/>사용 시 환경 사실을 함께 제공한 결과입니다. Skill 적재까지 진행한 아래 시연 영상과 비교 로그는 별도 실행입니다. <a href="#effects">측정 근거 보기 ↗</a></p>
+          <p className="capture-scenario-effect"><strong>효과</strong> · 비교 실행에서 SkillLoop 미사용 시 업무 완료 0/3회 → 사용 시 3/3회. 새 해결 절차를 팀에 공유해 다음 팀원의 시행착오를 줄입니다.<br/>Skill 적재까지 진행한 아래 시연 영상과 비교 로그는 별도 실행입니다. <a href="#effects">측정 근거 보기 ↗</a></p>
         </>}
       </div>
       {formOpen && (
