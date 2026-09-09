@@ -6,12 +6,15 @@ import {
   ArrowUpRight,
   Play,
   Images,
+  House,
 } from "lucide-react";
 import Flow from "./Flow";
 import Community from "./Community";
 import Demo from "./Demo";
 import Captures from "./Captures";
+import Overview from "./Overview";
 const tabs = [
+  { id: "overview", name: "개요", icon: House },
   { id: "flow", name: "진행 순서도", icon: GitBranch },
   { id: "team", name: "팀 의견", icon: MessageCircle },
   { id: "challenge", name: "태클 걸기", icon: Flame },
@@ -24,7 +27,8 @@ function readTab(): Tab {
   if (hash === "demo" || hash === "demo-p0" || hash === "demo-p1")
     return "demo";
   if (hash === "captures") return "captures";
-  return hash === "team" || hash === "challenge" ? hash : "flow";
+  if (hash === "flow" || hash === "team" || hash === "challenge") return hash;
+  return "overview";
 }
 export default function App() {
   const [tab, setTab] = useState<Tab>(readTab);
@@ -53,8 +57,8 @@ export default function App() {
         <div className="brand-heading">
           <a
             className="nowhere-logo"
-            href="#flow"
-            aria-label="노웨어 · 진행 순서도"
+            href="#overview"
+            aria-label="노웨어 · 개요"
           >
             <img
               src={`${import.meta.env.BASE_URL}images/nowhere-logo.png`}
@@ -88,7 +92,9 @@ export default function App() {
         ))}
       </nav>
       <main>
-        {tab === "flow" ? (
+        {tab === "overview" ? (
+          <Overview />
+        ) : tab === "flow" ? (
           <Flow />
         ) : tab === "demo" ? (
           <Demo initialScenario={location.hash === "#demo-p1" ? "p1" : "p0"} />
