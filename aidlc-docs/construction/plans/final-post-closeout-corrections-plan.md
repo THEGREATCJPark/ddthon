@@ -1,7 +1,7 @@
 # Final post-closeout corrections — proposed bounded scope
 
 Recorded: 2026-09-09T07:16:39.489586+00:00. Reviewed main: `b54e6947eb53688f6aa6cb289963ad96d5330898`.
-**APPROVED — implementation in progress.**
+**COMPLETE — approved scope implemented, verified and delivered; recorded execution-order deviation retained.**
 
 ## Decision scope
 
@@ -56,10 +56,10 @@ Security/Resiliency extension opt-outs stay as recorded; ordinary input integrit
 
 - [x] 1. Read current source and QA claims; reproduce native cp949 fixture failure and malformed-store traceback using disposable test data. Preserve pre-fix logs.
 - [x] 2. Obtain explicit approval of this four-item scope; append the user's exact approval. Existing final MVP acceptance and prior branch-cleanup authorization are not implementation approval for this bundle.
-- [ ] 3. Implement B, D and C in separate reviewable commits; validate each related contract before proceeding. Implement A with the pending ZIP plan. Preserve concurrent web changes and excluded presentation text.
-- [ ] 4. Run affected tests under both encoding modes, then final Python regression under documented UTF8 mode and native cp949 mode with real Excel opt-in disabled. Run existing web tests plus normal/filtered builds. Preserve actual failures and condition-specific counts; do not target a predetermined PASS count.
-- [ ] 5. Review diffs for preserved original media hashes, product approval/dedup behavior, unchanged excluded presentation, and official rule files. Record actual SHA/results/limitations and request final result acceptance/main-delivery approval appropriate to the user's scope.
-- [ ] 6. After authorized delivery, verify GitHub CI and append final evidence while retaining the already-accepted MVP baseline. No new P0/P1 agent filming, live Excel trial or submission-site upload is part of this bundle.
+- [x] 3. Implement B, D and C in separate reviewable commits; validate each related contract before proceeding. Implement A with the pending ZIP plan. Preserve concurrent web changes and excluded presentation text.
+- [x] 4. Run affected tests under both encoding modes, then final Python regression under documented UTF8 mode and native cp949 mode with real Excel opt-in disabled. Run existing web tests plus normal/filtered builds. Preserve actual failures and condition-specific counts; do not target a predetermined PASS count.
+- [x] 5. Review diffs for preserved original media hashes, product approval/dedup behavior, unchanged excluded presentation, and official rule files. Record actual SHA/results/limitations and request final result acceptance/main-delivery approval appropriate to the user's scope.
+- [x] 6. After authorized delivery, verify GitHub CI and append final evidence while retaining the already-accepted MVP baseline. No new P0/P1 agent filming, live Excel trial or submission-site upload is part of this bundle.
 
 Pre-fix diagnostic evidence: [planning diagnostics](../../history/final-followup-planning-20260909/README.md). No product/test implementation changes, commit or push have been performed for this proposal.
 
@@ -68,3 +68,6 @@ Approval received 2026-09-09T07:18:49.269422+00:00: user “어 진행해봐 빠
 ### Current execution checkpoint — 2026-09-09T07:27:09.5518404Z
 
 The earlier 'no implementation' sentence describes the pre-approval planning checkpoint only. All four scoped edits are now in the working tree, uncommitted. Step 3's sequential per-item validation was not followed: edits were batched before verification. This deviation and delayed state/checklist update are explicitly recorded in audit.md; no retroactive approval is claimed. Steps 3–6 remain incomplete until their remaining validation/review/delivery obligations are actually satisfied. Web tests and both builds passed; Python final regression and P1 rendered acceptance remain pending.
+
+
+Completion checkpoint 2026-09-09T07:33:34.985768+00:00: scope implemented and delivered on main d77177b; both local Python encoding runs PASS, normal/filtered web PASS, CI SUCCESS. Checkboxes indicate completed obligations; step3 execution-order deviation remains explicitly recorded and is not erased. User approval covered implementation/delivery; this result is reported for review without reopening the accepted MVP. Evidence: [follow-up result](../../../result/post-closeout-corrections-20260909/README.md).

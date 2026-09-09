@@ -1268,3 +1268,8 @@ Evidence currently retained in operator folders final-web-validation-072048 and 
 ## Implementation checkpoint correction — 2026-09-09T07:28:30.014343+00:00
 
 The concurrently recorded 07:27 review used an earlier workspace snapshot. Four implementation commits now exist: 02857b9 (locale fixture), 02e16f7 (pip target), 4734406 (CLI errors), a906565 (ZIP build). Native cp949 full suite finished at 07:26:42Z with 228 passed / 2 skipped; UTF8 full suite is still running. The sequential-validation deviation remains acknowledged; separate commit review and full regression do not retroactively erase it. Main push was rejected because concurrent web commit 50ffe71 advanced main; preserve and integrate that commit before retry. No force push. Original media/rules remain unchanged.
+
+
+## Final follow-up result — 2026-09-09T07:33:34.985768+00:00
+
+Approved four-item correction delivered on main d77177b after preserving concurrent main50ffe71. Local cp949 and UTF8 full suites each 228 passed / 2 skipped; normal/filtered web test/build PASS and identical dist; original media unchanged. GitHub runs34324030846 and34324030843 SUCCESS. P1 filtered-browser links/content confirmed. Existing plan-order deviation retained, not retroactively closed as full compliance. No new Agent/Excel trial, QA-score reassignment or submission-site action. [Evidence](../result/post-closeout-corrections-20260909/README.md).

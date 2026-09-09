@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-09-09T07:29:42.740760+00:00",
+  "integration_sha": "d77177b778a0c2bb84b7a470a8bbd109c8752e51",
+  "source_sha256": {
+    "skillloop/cli.py": "00ad2cb6f708a6f309b2aff51e861138b2df6b38a8bef711385c23d9e652d24b",
+    "skillloop/reuse_service.py": "3d9efce03b8db1fe54b7374228b710860fc11aa2f99ccd0542981f1c8ab970ed",
+    "tests/test_cli_errors.py": "31c03cf2504cd412e4133822a7c3358d298873ad7de05764f7c6e32faa41adb1",
+    "tests/test_reuse_service.py": "82b1e65fe65f1ae505de0c02555fceb19ef6290c1c6047a013cd422fa356bd11",
+    "tests/test_p0_scoped_auto_reuse.py": "0e0f7294efcc69a3273e0e78bd521f85a9619fb8a98a848be323a4afe53cfb2b",
+    "tests/test_p0_two_packages.py": "642f916f8bfb6dba84ee534e884efd83d5923fa29301a99b8924dc123a9e7ea0",
+    "team-hub/src/P1Media.tsx": "b20594ebcd4820cd6d33f075fed5a042295c2592df1199be81a83ec246d2d1ca"
+  },
+  "zip_sha256": "fe2abcd51a1d1e53e73b40b2ec96eeaf9c86b7a2149ffca6e4acf335e995a879"
+}

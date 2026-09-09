@@ -1,0 +1,22 @@
+
+> ddthon-team-hub@1.0.0 test
+> node --experimental-strip-types --test src/workspace.test.ts src/demoScenarios.test.ts src/exampleSkillData.test.ts
+
+✔ ordinary P0 request does not require repeated recovery instructions (1.3372ms)
+✔ candidate and human approval do not increment publication or reuse (1.2288ms)
+✔ environment fact turn precedes discovery without supplying an API answer (0.6655ms)
+✔ generated valid drafts preserve content, normalize boundaries, and are idempotent (10.0622ms)
+✔ generated whitespace-only required fields are rejected; blank author gets the default (4.4597ms)
+✔ generated over-limit fields are rejected while exact boundaries remain valid (6.9357ms)
+✔ progress links preserve independent parallel stages (1.8676ms)
+✔ unrecognized link versions and invalid statuses never invent progress (0.3848ms)
+✔ challenge forcibly removes submitted identity; team needs a name (0.5517ms)
+✔ comments reject blank and oversized text; sample remains visibly synthetic (0.3008ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 462.7695

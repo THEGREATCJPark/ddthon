@@ -1,6 +1,6 @@
 # 제출 필터 호환성 보완 — P1 ZIP 의존성 제거 계획
 
-상태: **APPROVED / 최종 후속 수정 계획과 함께 구현 중**
+상태: **COMPLETE / 최종 후속 수정 결과·CI 연결 완료**
 작성: 2026-09-09T07:11:16.725361+00:00
 검토 main: `b54e6947eb53688f6aa6cb289963ad96d5330898`. 기존 해커톤 MVP 개발 완료·최종 수용은 유지한다.
 
@@ -31,8 +31,8 @@
 - [x] 2. 이 계획의 변경 범위에 대한 사용자 구현 승인을 원문으로 기록한다. 승인 전 제품/웹 소스는 수정하지 않는다.
 - [x] 3. 동시 웹 변경을 보존한 최신 main에서 위 두 파일만 최소 수정한다. 원본 근거의 SHA-256과 변경 전후 차이를 확인한다.
 - [x] 4. 동일 소스 기준 임시 검증 사본에서 lockfile 기반 설치, 기존 웹 테스트, 일반 웹 빌드를 실행한다. 별도의 필터 적용 사본은 10MB 초과 파일을 처음부터 포함하지 않고 웹 빌드한다. 저장소 원본 파일을 삭제하지 않는다.
-- [ ] 5. 필터 적용 빌드에서도 P1 영상·자막·차트·공개 로그가 존재/표시되는지와 원본 ZIP 링크를 확인한다. 생성 결과가 ZIP의 로컬 번들 경로를 요구하지 않는지 검사한다. 일반/제외 조건의 실행 로그, 소스 SHA, 제외 파일 목록, 원본 해시를 보존한다.
-- [ ] 6. 실제 결과와 변경 SHA를 audit/state 및 제출 보완 기록에 연결하고 결과 검토를 요청한다. main 반영/CI 확인은 승인 범위에 맞춰 진행한다. 기존 완료 기록을 소급 변경하거나 행사 사이트 제출 버튼을 대신 누르지 않는다.
+- [x] 5. 필터 적용 빌드에서도 P1 영상·자막·차트·공개 로그가 존재/표시되는지와 원본 ZIP 링크를 확인한다. 생성 결과가 ZIP의 로컬 번들 경로를 요구하지 않는지 검사한다. 일반/제외 조건의 실행 로그, 소스 SHA, 제외 파일 목록, 원본 해시를 보존한다.
+- [x] 6. 실제 결과와 변경 SHA를 audit/state 및 제출 보완 기록에 연결하고 결과 검토를 요청한다. main 반영/CI 확인은 승인 범위에 맞춰 진행한다. 기존 완료 기록을 소급 변경하거나 행사 사이트 제출 버튼을 대신 누르지 않는다.
 
 ## AI-DLC 적용 깊이
 
@@ -47,3 +47,6 @@
 
 
 현재 점검 (2026-09-09T07:27:09.5518404Z): 위 승인 대기 문구는 계획 당시 기록이다. 최종 4건 계획 승인 후 두 파일 수정 및 원본 해시 보존, 일반/대용량 ZIP 제외 사본의 테스트·빌드를 확인했다. step 3/4 체크는 즉시 갱신하지 못해 지금 갱신하며, 실제 실행 시각은 web summary의 2026-09-09T07:22:17.360990+00:00이다. step 5/6은 아직 완료로 표시하지 않는다.
+
+
+Completion checkpoint 2026-09-09T07:33:34.985768+00:00: scope implemented and delivered on main d77177b; both local Python encoding runs PASS, normal/filtered web PASS, CI SUCCESS. Checkboxes indicate completed obligations; step3 execution-order deviation remains explicitly recorded and is not erased. User approval covered implementation/delivery; this result is reported for review without reopening the accepted MVP. Evidence: [follow-up result](../../../result/post-closeout-corrections-20260909/README.md).
