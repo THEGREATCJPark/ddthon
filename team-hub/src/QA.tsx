@@ -102,10 +102,24 @@ const reviewPts = events.filter((e) => e.basis === "review");
 const comparePts = events.filter((e) => e.basis === "compare");
 const twoRows = comparePts.length > 0;
 
+/* 같은 줄에서 바로 옆 칸에 붙은 눈금은 라벨이 겹친다(회차가 늘수록 칸 간격이 좁아진다).
+   그런 눈금만 한 단 아래로 내려 적고, 내릴 자리를 축 아래에 미리 확보한다. */
+const isDense = (e: Event) => {
+  const row = events.filter((o) => o.basis === e.basis);
+  const k = row.findIndex((o) => o.i === e.i);
+  return k > 0 && row[k - 1].i === e.i - 1;
+};
+const STAGGER = events.some((e) => isDense(e)) ? 30 : 0;
+
 /* 점수 차트는 0~100 고정 축이다. 자체 추정이라 밴드를 함께 그리고, 밴드 없이
    점 하나만 찍지 않는다 — 추정을 확정처럼 보이게 하는 가장 흔한 방법이다. */
-const SH = twoRows ? 282 : 244;
-const SPAD = { top: 20, right: 60, bottom: twoRows ? 90 : 54, left: 44 };
+const SH = (twoRows ? 282 : 244) + 2 * STAGGER;
+const SPAD = {
+  top: 20,
+  right: 60,
+  bottom: (twoRows ? 90 : 54) + 2 * STAGGER,
+  left: 44,
+};
 const sx = (i: number) =>
   SPAD.left + (i * (W - SPAD.left - SPAD.right)) / Math.max(events.length - 1, 1);
 const sy = (v: number) =>
@@ -126,7 +140,13 @@ function ScoreChart() {
   /* 커밋 SHA 눈금이 겹치지 않도록 기준별로 줄을 나눈다 — 심사 줄, 비교 줄.
      같은 줄에서 이웃한 눈금(예: 심사 3·4회차가 시각순으로 붙어 있을 때)은 앞쪽을
      start로 붙여 라벨이 서로 밀려나지 않게 한다. 날짜는 줄 안에서 바뀔 때만 적는다. */
-  const rowY = (e: Event) => (e.basis === "compare" && twoRows ? SH - 36 : SH - 70);
+  const rowY = (e: Event) => {
+    const base =
+      e.basis === "compare" && twoRows
+        ? SH - 36 - STAGGER
+        : SH - 70 - 2 * STAGGER;
+    return base + (isDense(e) ? STAGGER : 0);
+  };
   const rowOf = (e: Event) => events.filter((o) => o.basis === e.basis);
   const side = (e: Event) => {
     if (e.i === 0) return " start";
@@ -158,9 +178,11 @@ function ScoreChart() {
         </span>
         {lastCmp && (
           <span className="qa-score-sub">
-            같은 커밋을 비교 기준으로 다시 매긴 값 <b>{lastCmp.total}</b> · 밴드{" "}
+            비교 기준으로 다시 매긴 값 <b>{lastCmp.total}</b> · 밴드{" "}
             {lastCmp.lo}~{lastCmp.hi} · <code>{lastCmp.sha}</code>
-            {lastCmp.sha === last.sha && " — 두 기준이 같은 커밋에서 만났습니다"}
+            {lastCmp.sha === last.sha
+              ? " — 두 기준이 같은 커밋에서 만났습니다"
+              : " (심사 기준과 채점한 커밋이 다릅니다)"}
           </span>
         )}
       </div>
@@ -254,10 +276,10 @@ function ScoreChart() {
 
           {twoRows && (
             <>
-              <text className="qa-axis qa-rowlabel" x={SPAD.left - 10} y={SH - 70}>
+              <text className="qa-axis qa-rowlabel" x={SPAD.left - 10} y={SH - 70 - 2 * STAGGER}>
                 심사
               </text>
-              <text className="qa-axis qa-rowlabel" x={SPAD.left - 10} y={SH - 36}>
+              <text className="qa-axis qa-rowlabel" x={SPAD.left - 10} y={SH - 36 - STAGGER}>
                 비교
               </text>
             </>
