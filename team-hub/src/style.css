@@ -1975,6 +1975,11 @@ footer > span:last-child {
 }
 
 .capture-list { display: grid; gap: 24px; margin-top: 24px; }
+.capture-scenario-intro { display: grid; gap: 10px; margin-top: 24px; padding-left: 20px; border-left: 3px solid var(--border); color: var(--muted); }
+.capture-scenario-intro h3 { color: var(--navy); font-size: 18px; line-height: 1.6; }
+.capture-scenario-intro p { font-size: 15px; }
+.capture-scenario-intro .capture-scenario-effect { margin-top: 4px; font-size: 13px; }
+.capture-scenario-effect a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 .capture-card, .capture-form { border: 1px solid var(--border); border-radius: 14px; background: #fff; overflow: hidden; }
 .capture-card > header { display: flex; justify-content: space-between; align-items: center; padding: 22px 26px; }
 .capture-card h3 { margin: 6px 0; font-size: 22px; }

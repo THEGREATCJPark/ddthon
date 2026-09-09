@@ -21,9 +21,9 @@ import QA from "./QA";
 import ExampleSkills from "./ExampleSkills";
 const tabs = [
   { id: "overview", name: "개요", icon: House },
+  { id: "captures", name: "시연 영상 및 캡쳐", icon: Images },
   { id: "effects", name: "효과", icon: BarChart3 },
   { id: "flow", name: "진행 순서도", icon: GitBranch },
-  { id: "captures", name: "시연 영상 및 캡쳐", icon: Images },
   { id: "qa", name: "QA 검증", icon: BadgeCheck },
   { id: "skills", name: "예시 스킬", icon: BookOpen },
   { id: "team", name: "팀 의견", icon: MessageCircle },

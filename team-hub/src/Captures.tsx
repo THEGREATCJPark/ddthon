@@ -230,8 +230,7 @@ export default function Captures({initialScenario = "p0"}: {initialScenario?: "p
     <section className="captures-page">
       <div className="page-heading">
         <div>
-          <h2>시연 영상 및 캡쳐</h2>
-          <p>실제 실행 화면과 실행 로그</p>
+          <h2>실제 실행 화면과 실행 로그</h2>
         </div>
         <button
           className="button primary"
@@ -259,6 +258,20 @@ export default function Captures({initialScenario = "p0"}: {initialScenario?: "p
             </span>
           </button>
         ))}
+      </div>
+      <div className="capture-scenario-intro" key={scenario}>
+        {scenario === "p0" ? <>
+          <h3>Python 패키지 설치 시나리오입니다.</h3>
+          <p>비개발자 엔지니어들이 자주 부딪히는 문제를 시나리오로 진행해 봤습니다.<br/>DSDN에 이미 해결법이 많아 따라 하면 풀리는 간단한 문제지만, 직접 시도하는 엔지니어는 적습니다.</p>
+          <p>오류를 감지한 Agent Skillloop가 조직 Skill Storage에 이미 적재된 Skill을 찾아 적용해, 빠르게 해결하는 것이 목적입니다.</p>
+          <p className="capture-scenario-effect"><strong>효과</strong> · Skill 있으면 약 46초, 없으면 약 169초. 출력 토큰은 없으면 약 3,400개, 있으면 약 1,900개.<br/>각 3회 평균 · 시간은 최종 응답 기준 · 미사용은 중단 1회 포함. <a href="#effects">측정 근거 보기 ↗</a></p>
+        </> : <>
+          <h3>NASCA로 보안 처리된 Excel 파일을 읽는 시나리오입니다.</h3>
+          <p>직접 여는 것은 가능하지만 Python으로는 접근하지 못했던 실제 경험에서 착안했습니다.<br/>Skill에 없는 문제를 Loop를 통해 해결하는 것이 목적입니다.</p>
+          <p>오류를 감지한 Agent Skillloop가 조직 Skill Storage를 검색하지만 적합한 Skill을 찾지 못합니다.<br/>환경을 확인하고 여러 해결 방법을 시도하는 Loop를 통해 업무를 진행합니다.</p>
+          <p>해결되면 그 시행착오에서 얻은 절차를 검토·Replay 후 조직 Skill Storage에 적재해, 다른 팀원이 같은 고생을 반복하지 않도록 돕습니다.</p>
+          <p className="capture-scenario-effect"><strong>효과</strong> · 비교 실행에서 SkillLoop 미사용 시 업무 완료 0/3회 → 사용 시 3/3회. 새 해결 절차를 팀에 공유해 다음 팀원의 시행착오를 줄입니다.<br/>사용 시 환경 사실을 함께 제공한 결과입니다. Skill 적재까지 진행한 아래 시연 영상과 비교 로그는 별도 실행입니다. <a href="#effects">측정 근거 보기 ↗</a></p>
+        </>}
       </div>
       {formOpen && (
         <form className="capture-form" ref={form} onSubmit={submit}>

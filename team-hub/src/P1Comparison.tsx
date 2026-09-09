@@ -7,7 +7,7 @@ const after = rows.filter(r=>r.task_complete === "True");
 const SOURCE = "https://github.com/THEGREATCJPark/ddthon/blob/f7e06f9cc698f2c753af165f9bf9e428a1fb4017/result/p1-evaluation-comparison-20260909";
 export default function P1Comparison() {
   return <article className="impact-evidence" id="p1-results">
-    <div className="impact-evidence-heading"><div><span className="overview-eyebrow">P1 · 사내 환경에서 Excel 읽기·예측·차트 생성</span><h3>SkillLoop 없을 땐 미완료, 쓰니 성공.</h3></div><a href="#captures-p1">실제 영상·로그 ↗</a></div>
+    <div className="impact-evidence-heading"><div><span className="overview-eyebrow">P1 · 사내 환경에서 Excel 읽기·예측·차트 생성</span><h3>SkillLoop 없을 땐 미완료, 써보니 성공.</h3></div><a href="#captures-p1">실제 영상·로그 ↗</a></div>
     <p>동일 Excel 업무의 적용 전·후 3회 비교. 적용 후에도 기존 P1 Skill은 없었습니다. <strong>SkillLoop와 사용자 환경 단서를 활용해 새 문제를 해결한 결과</strong>입니다.</p>
     <div className="p1-outcome-grid">
       <section><span>SkillLoop 미사용</span><h4>0 / 3 <small>업무 완료</small></h4><div>{before.map(r=><p key={r.round}><XCircle size={22}/><b>{r.round}회차</b><span>미완료</span></p>)}</div><p className="p1-outcome-description">암호·사본·추가 자료 요청으로 종료.<br/>실제 데이터와 차트 결과 없음.</p></section>
