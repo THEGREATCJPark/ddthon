@@ -1,0 +1,10 @@
+# NASCA demo wording / public fixture password
+
+User explicitly requested direct NASCA wording for hackathon presentation and the public fixture password nowhere. A bounded amendment was recorded before edits in the existing AI-DLC Code Plan. No website or core lifecycle changes.
+
+- Display label: NASCA 보안 프로그램. For the marked hackathon scenario, C9 uses the requested first-turn demo line after actual failure + real NO_MATCH and then waits for user facts without asking a direct Excel question.
+- Metadata retains virtual=true, scenario_id=hackathon-nasca and diagnosis_source=demo-scenario-configuration. This is a fictional demo narrative, not evidence of actual NASCA software detection. The implementation remains Office encrypted XLSX with read-only Excel access.
+- Operator setup default password is public demo data nowhere. Custom hidden-password option retained. No password in work context/descriptors/reuse events. Existing files keep their original passwords; new user workspace uses the requested default.
+- Fresh C:/Users/cik61/Desktop/skillloop-p1-feedback-20260909/cold and warm folders were actually created, and Excel kept open. Previous advice gave the launch path before the user ran preparation; corrected by actual preparation now. Claude executable is C:/Users/cik61/.local/bin/claude.exe (separator before .local).
+- Targeted27 tests PASS. Separate actual operator reopen automation again reached a password dialog and did not pass; Computer Use input could not reliably target the field, and only that separate check's dialog was cancelled. Evidence preserved in excel-nowhere-reopen.json. This does not establish success or failure of a human entering nowhere. Manual reopening remains unverified. Existing user demo Excel was not targeted or closed.
+- Official AI-DLC rule files remain unchanged. Historical C9/match Code Plan omission and previous failed tests are preserved. Current stage remains CONSTRUCTION / Build & Test, no blanket completion approval. Other session's B receipt and web changes untouched.

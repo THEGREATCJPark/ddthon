@@ -105,3 +105,14 @@ Additional validation within operator-preparation step: one isolated real Excel 
 
 
 Outcome: implementation and26 targeted checks completed. Actual reopen automation FAILED/blocked on password dialog despite supplied password; preserved3 attempts and cancelled only owned test prompt. Manual operator reopen and new Agent prose remain unverified, not passed. No overall completion/acceptance claimed.
+
+## Explicit demo narration / public fixture password amendment
+
+User explicitly requests direct NASCA wording for the hackathon demo and public team password `nowhere`. Current request authorizes bounded C9/operator-presentation correction. Preserve the truth of technical evidence: implementation is Office encryption, no actual NASCA detection; retain virtual/scenario source in metadata and audit. No website changes or real security-system implementation.
+
+- [x] Operator prep defaults to public demo password nowhere; custom hidden input remains optional. Never put passwords in Skill descriptors/events or Agent context. Existing samples/evidence remain unchanged; prepare fresh workspace for user.
+- [x] Prepared context sets display_label NASCA 보안 프로그램 and a demo-only narration, retaining virtual=true and scenario source. C9 uses the requested scenario line only after actual direct failure + real NO_MATCH under that marked demo context. Normal environments cannot claim NASCA detection from metadata. First turn ends without question; no solution hint or invented runtime PASS.
+- [ ] Update related CLI label rendering and tests; validate default/custom passwords and context separation. Verify actual owned Excel file can be reopened with nowhere (operator/UI if COM argument handling fails), direct parser failure remains, source bytes unchanged. Do not claim Agent Cold PASS from this operator check.
+- [x] Append actual result and source SHA, retain failed earlier reopen attempts and historical plan omission; confirm official AI-DLC rules unchanged, no scope/lifecycle changes. Commit/push owned files only; B report/web untouched.
+
+Receipt:27 targeted PASS; actual requested workspace created and Excel left open. Reopen automation again did not pass (password dialog; UI input targeting unavailable), retained error and cancelled separate test dialog only. Step with actual reopen remains incomplete. Manual user reopening/new Agent acceptance pending. Existing B receipt untouched.

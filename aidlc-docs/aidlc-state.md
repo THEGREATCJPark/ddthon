@@ -1,5 +1,12 @@
 # AI-DLC State Tracking
 
+## 최신 / 실제 P1 작업 폴더 준비 및 데모 설정
+
+- 사용자 요청으로 공개 데모 암호 nowhere와 NASCA 직접 시연 문구 반영. 실제 NASCA 탐지 증거가 아닌 시연 설정이며, metadata의 virtual/scenario 출처와 Office 암호화 구현 기록 유지.
+- skillloop-p1-feedback-20260909/cold·warm 실제 생성, owned Excel 열림. 이전 안내 경로가 생성 전이었던 오류를 보정. 현재 PREPARED_NOT_RUN, 새 Agent 성공 미주장.
+- 관련27 tests PASS. 별도 COM 재열람은 암호 대기창에서 자동 입력 제어가 되지 않아 미통과; 해당 검사창만 취소. 사용자 Excel 재열람은 확인 필요. 웹/B자료 불변.
+
+
 ## 최신 / P1 live feedback (2026-09-09)
 
 - Existing CONSTRUCTION / Build & Test. User requested first-turn failure/search report without direct Excel question; C9/S2/help and US-P1-2 AC-1 aligned. Next user-provided fact still precedes discovery. NASCA(가상) is environment label, not verified real NASCA diagnosis. August actual data must not be fabricated from a forecast.

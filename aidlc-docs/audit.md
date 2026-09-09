@@ -924,3 +924,11 @@ Actual owned-workbook reopen attempt failed with com_error; retained excel-reope
 ## 2026-09-09T01:23:25.6541210Z — P1 feedback validation and remaining operator check
 26 targeted tests PASS. Actual Excel operator reopen did not pass:3 attempts preserved, valid-length and positional calls still prompted for password. Computer Use inspected the unique owned test workbook window and Escape cancelled only its dialog for cleanup; no unrelated user Excel killed. API length guard not claimed as proven cause. Existing work XLSX/store/usage/settings hashes unchanged; C9 refreshed. User manual reopening and revised Agent first-turn prose remain unverified. No new candidate approval/publication, no website changes. Implementation complete within correction scope; overall Build & Test remains open.
 
+
+## 2026-09-09T01:27:08.4377823Z — Explicit demo wording and public fixture password request
+User explicitly requests direct NASCA presentation wording and demo password nowhere. Before-code amendment recorded. Applies to marked fictional demonstration context, not actual installed-program diagnosis. Office encryption/source trace stays accurate; no new PASS/evidence or published candidate approval. Public fixture password is user-designated non-secret demonstration data, not a company credential. Existing sample files are preserved; new setup will use it. Existing CONSTRUCTION continues.
+
+
+## 2026-09-09T01:31:39.4916128Z — P1 path correction and demo-profile validation
+Interrupted request resumed from recorded plan, not restarted. Actual requested cold/warm folders now created with public nowhere password; ready.json owned Excel6756, user workspace kept open.27 targeted tests PASS. Separate actual operator reopen prompted for password; Computer Use field targeting failed, Escape cancelled only separate owned check. Preserve FAIL receipt; do not claim manual reopen or Agent PASS. Direct NASCA line applies only as configured fictional demo narration; Office encryption/virtual provenance retained. Official rule files unchanged; no website/B changes.
+

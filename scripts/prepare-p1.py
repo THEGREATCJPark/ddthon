@@ -7,7 +7,6 @@ import argparse
 import getpass
 import json
 from pathlib import Path
-import secrets
 import shutil
 import sys
 import time
@@ -18,6 +17,8 @@ from tests.prepare_p0_work import configure_statusline
 from skillloop.cli import _DEMO_SKILL_CONTENT
 from skillloop.descriptor import make_descriptor
 from skillloop.store import SkillStore
+
+DEMO_PASSWORD = 'nowhere'  # User-designated public hackathon fixture password.
 
 
 def validate_operator_password(password):
@@ -39,6 +40,9 @@ def read_operator_password():
 
 
 def prepare(destination, *, operator_password=None):
+    demo_default = operator_password is None
+    if demo_default:
+        operator_password = DEMO_PASSWORD
     if operator_password is not None:
         validate_operator_password(operator_password)
     import win32com.client
@@ -60,7 +64,9 @@ def prepare(destination, *, operator_password=None):
             state = work / '.skillloop'; state.mkdir()
             (state / 'context.json').write_text(json.dumps({
                 'environment_class': 'internal-managed-document',
-                'display_label': '사내환경 · NASCA(가상)', 'virtual': True
+                'display_label': 'NASCA 보안 프로그램', 'virtual': True,
+                'scenario_id': 'hackathon-nasca',
+                'diagnosis_source': 'demo-scenario-configuration'
             }, ensure_ascii=False, indent=2), encoding='utf-8')
             wb = excel.Workbooks.Add(); books.append(wb)
             ws = wb.Worksheets(1); ws.Name = sheet
@@ -71,7 +77,7 @@ def prepare(destination, *, operator_password=None):
             # Task numeric cells remain numeric, despite month text formatting.
             for i in range(3): ws.Cells(row + i + 1, col + 3).Value2 = base + i * 150
             wb.SaveAs(str(work / filename), FileFormat=51,
-                      Password=operator_password if operator_password is not None else secrets.token_urlsafe(10))
+                      Password=operator_password)
             store = SkillStore(str(state / 'store.json'))
             store.put(make_descriptor(_DEMO_SKILL_CONTENT))
             (state / 'usage.json').write_text('{"counts":{},"seen_run_ids":[],"events":{}}', encoding='utf-8')
@@ -89,10 +95,10 @@ def prepare(destination, *, operator_password=None):
         excel.Visible = True
         print('READY: workbooks are open; create STOP file to finish', flush=True)
         print('Cold 문서는 이미 열린 Excel 창에서 확인하세요. 이 터미널은 유지하세요.', flush=True)
-        if operator_password is not None:
+        if not demo_default:
             print('파일을 다시 열 때는 방금 정한 운영자 암호를 직접 입력하세요. Agent에게 전달하지 마세요.', flush=True)
         else:
-            print('임의 암호는 보관하지 않습니다. 다시 열 수 있어야 한다면 새 폴더에 --ask-password로 준비하세요.', flush=True)
+            print('공개 데모 파일 암호: nowhere. 파일을 다시 열 때 운영자가 입력하세요.', flush=True)
         deadline = time.monotonic() + 7200
         while time.monotonic() < deadline and not (destination / 'STOP').exists():
             time.sleep(1)

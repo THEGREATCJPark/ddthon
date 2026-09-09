@@ -15,10 +15,11 @@ def load_prepare():
     return module
 
 
-def test_operator_password_is_only_used_for_save_not_exposed(tmp_path, monkeypatch, capsys):
+@pytest.mark.parametrize('custom_password', [None, 'operator-demo1'])
+def test_operator_password_is_only_used_for_save_not_exposed(tmp_path, monkeypatch, capsys, custom_password):
     prep = load_prepare()
     books = []
-    password = 'operator-demo1'
+    password = custom_password or prep.DEMO_PASSWORD
     class Book:
         def __init__(self):
             self.closed = self.activated = False
@@ -42,13 +43,23 @@ def test_operator_password_is_only_used_for_save_not_exposed(tmp_path, monkeypat
     monkeypatch.setitem(sys.modules, 'win32process', process)
     dest = tmp_path / 'new-work'
     monkeypatch.setattr(prep.time, 'sleep', lambda _: (dest / 'STOP').touch())
-    prep.prepare(dest, operator_password=password)
+    prep.prepare(dest, operator_password=custom_password)
     assert len(books) == 2 and all(b.saved_password == password for b in books)
     assert books[0].activated and app.Visible
     assert all(b.closed for b in books)
-    assert password not in capsys.readouterr().out
+    output = capsys.readouterr().out
+    if custom_password:
+        assert password not in output
+    else:
+        assert password == 'nowhere' and 'nowhere' in output
     for path in dest.rglob('*'):
         if path.is_file(): assert password.encode() not in path.read_bytes()
+    import json
+    context = json.loads((dest / 'cold/.skillloop/context.json').read_text(encoding='utf-8'))
+    assert context['display_label'] == 'NASCA 보안 프로그램'
+    assert context['virtual'] is True
+    assert context['diagnosis_source'] == 'demo-scenario-configuration'
+    assert 'method' not in context and 'password' not in context
     # The test double does not write an XLSX. Do not claim encryption/Excel PASS.
 
 

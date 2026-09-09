@@ -194,7 +194,9 @@ def run_p1(xlsx_path=None, store_path=None, usage_path=None, run_id=None, **kwar
         try:
             context = json.loads(context_file.read_text(encoding='utf-8'))
             if context.get('virtual') is True and context.get('environment_class') == 'internal-managed-document':
-                print('작업 환경: 사내환경 · NASCA(가상) (작업 공간에 제공된 환경 정보)')
+                label = ('NASCA 보안 프로그램' if context.get('scenario_id') == 'hackathon-nasca'
+                         else '사내환경 · NASCA(가상)')
+                print(f'작업 환경: {label}')
         except (OSError, ValueError):
             pass  # descriptive context is not an execution/approval gate
     try:
