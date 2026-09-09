@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **시연 우선 / 비교 추가 개발 보류**: 사용자 지시에 따라 추가 비교 인프라 개발은 중단하고 기존 P1 실제 시연·로그 확보를 우선한다. 비교 계획 미완료를 완료로 변경하지 않는다. 상세 계획 문서별 사전 승인과 대화 진행 승인은 구분해 기록; 과거 승인 소급 없음. 준비된 FULL_PRODUCT_WARM 폴더/문서/설정 존재 및 Claude Bedrock 인증 상태 확인(모델 미호출). 이전 capture 종료1·수집로그0이므로 새 촬영 성공은 아직 미확인. 사용자가 대상 문서를 도중에 열며 진행, Warm은 실제 MATCH/재사용으로 표시. 최종 수용·제출 완료 아님.
+
+
 - **P1 비교 런타임 정합 후속 완료**: 별도 운영자 Python3.13.14와 공통안 명시 라이브러리 설치·pip check·동일 준비검사20 PASS. 새 Excel검사 첫 암호창 BLOCKED 보존, 기존 운영자 launcher와 같은 generated COM wrapper로 정정 후 새 데이터 PASS. 제품 .venv 미변경. r2 전달 ZIP/전체 의존성 lock 준비. 원본 입력 키, 외부 recorder/격리 연결, 양쪽 동결은 여전히 대기이며 모델호출0. 기존 Python 불일치 기록은 과거이며 현재 runtime_gaps는 비어 있음. result/p1-comparison-preparation-20260909/local-runtime-aligned.json 참조.
 
 
