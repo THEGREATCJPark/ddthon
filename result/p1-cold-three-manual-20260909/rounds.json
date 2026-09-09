@@ -1,0 +1,75 @@
+{
+  "mode": "FULL_PRODUCT_COLD_MANUAL",
+  "model": "claude-opus-4-8",
+  "effort": "medium",
+  "filename": "AAAAA01_직전_3달_생산량.xlsx",
+  "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+  "baseline_sha": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+  "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+  "source_sha": "2d7218dbdb27d4d5da3a635d90240f3775b3e017",
+  "product_python": "C:\\Users\\cik61\\Desktop\\ddthon-main\\.venv\\Scripts\\python.exe",
+  "claude": "C:\\Users\\cik61\\.local\\bin\\claude.exe",
+  "rounds": [
+    {
+      "round": 1,
+      "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p1-cold-3runs-20260909-125935\\round-1",
+      "branch": "codex/p1-cold-20260909-125935-r1",
+      "sync": {
+        "ok": true,
+        "commit": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+        "branch": "codex/p1-cold-20260909-125935-r1",
+        "synced_at": "2026-09-09T03:59:42.640542+00:00",
+        "branch_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "queryable_range": "shared Git bundles",
+        "imported": 1,
+        "conflicts": 0,
+        "events": 0
+      },
+      "p1_count": 0,
+      "operator_search": "NO_MATCH",
+      "agent_test": "NOT_RUN"
+    },
+    {
+      "round": 2,
+      "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p1-cold-3runs-20260909-125935\\round-2",
+      "branch": "codex/p1-cold-20260909-125935-r2",
+      "sync": {
+        "ok": true,
+        "commit": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+        "branch": "codex/p1-cold-20260909-125935-r2",
+        "synced_at": "2026-09-09T03:59:49.695150+00:00",
+        "branch_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "queryable_range": "shared Git bundles",
+        "imported": 1,
+        "conflicts": 0,
+        "events": 0
+      },
+      "p1_count": 0,
+      "operator_search": "NO_MATCH",
+      "agent_test": "NOT_RUN"
+    },
+    {
+      "round": 3,
+      "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-p1-cold-3runs-20260909-125935\\round-3",
+      "branch": "codex/p1-cold-20260909-125935-r3",
+      "sync": {
+        "ok": true,
+        "commit": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "remote": "https://github.com/THEGREATCJPark/ddthon.git",
+        "branch": "codex/p1-cold-20260909-125935-r3",
+        "synced_at": "2026-09-09T03:59:56.203779+00:00",
+        "branch_revision": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+        "queryable_range": "shared Git bundles",
+        "imported": 1,
+        "conflicts": 0,
+        "events": 0
+      },
+      "p1_count": 0,
+      "operator_search": "NO_MATCH",
+      "agent_test": "NOT_RUN"
+    }
+  ],
+  "launcher_sha256": "1237215632d2cbd6d12b1d40a7bfc17bbb647f19cc596dedb77ee08e6943b11d"
+}

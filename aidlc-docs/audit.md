@@ -1046,3 +1046,11 @@ Assistant acknowledged incorrect Warm instruction. Actual existing warm imports 
 ## Fresh Cold filming workspace verified
 Timestamp: 2026-09-09T03:55:50.9589640Z
 New Desktop/skillloop-p1-cold-filming-20260909-125519/cold prepared from real team-skill-demo-20260909 sync. Skill count1 (P0), P1 count0, usage/events0. Operator contract search file-access-fail:xlsx returns NO_MATCH (not an Agent task run). Actual statusLine command in workspace exits0, displays pip Skill only and actual reuse0; no NASCA P1 popularity. Launcher parsed; no auto Excel opening/model call. Original Warm/P1 candidate/shared2-event history preserved. User must exit Warm session and launch this new Cold path; manually open this exact new workbook later.
+
+## User-approved three manual Cold preparations
+Timestamp: 2026-09-09T03:59:14.2292835Z
+User requests setup commands and procedure for three manually run P1 Cold sessions with video; assistant records logs/time/tokens/success later. Existing planning approval and current setup request authorize three isolated workspaces/new P0-only transport branches, recorded launcher and check-only validation. No task/model call during preparation. Final candidate approvals remain with user.
+
+## Three manual P1 Cold workspaces ready
+Timestamp: 2026-09-09T04:01:02.5053776Z
+Prepared Desktop/skillloop-p1-cold-3runs-20260909-125935 with three rounds and separate new codex/p1-cold-20260909-125935-r1/r2/r3 remote transport branches, each at original P0-only75b6e542. Three check-only launcher executions exit0 with P1=0/no usage/same workbook hash. No model/task/Excel opening during prep. Fixed model opus4-8/medium; per-session UUID and per-attempt native-log copy/metadata collector implemented (actual collection awaits user run). Old branches/workspaces untouched. Same-run human approvals still required for publication. No proxy causal speedup claim.

@@ -2,6 +2,9 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **사용자 직접 P1 Cold3회 준비 완료**: Desktop/skillloop-p1-cold-3runs-20260909-125935, Round1/2/3과 분리 Git 브랜치. 모두 P0 Skill1/P1 Skill0/실적0, 동일 XLSX, 실제 check-only 3회 PASS. Claude opus4-8 medium 새 UUID 세션, 종료 시 원본 로그/시간/store/usage 보관. 모델/시연은 아직 NOT_RUN. 적용 전 데이터는 다른 PC 제공; 별도 정밀 비교 도구/VM 추가 작업 없음. 사용자는 동일 요청→해당회차 파일 직접 열기→탐색/업무→사람 승인→게시→/cost 캡처→/exit 순서. 현재 권장 시연 경로는 이3회 폴더이며 이전 Cold/Warm은 보존.
+
+
 - **시연 경로 정정: P1 Cold가 사용자 의도**. 기존 Warm 안내는 잘못이었음. 새 Desktop/skillloop-p1-cold-filming-20260909-125519/cold 준비: 실제 team-skill-demo-20260909 동기화, P0 Skill1/P1 Skill0/events0, operator 검색 NO_MATCH 및 실제 상태줄 pip만/재사용0 확인. 현재 Warm 세션을 나가 새 Cold launcher 사용. 파일은 해당 새 경로에서 사용자가 도중에 직접 열기. 이전 Warm/old Cold 후보/공유 실적은 삭제하지 않음. Agent 시연은 아직 NOT_RUN.
 
 
