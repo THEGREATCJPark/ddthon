@@ -58,7 +58,8 @@ def test_real_work_persists_and_counts_exactly_once(tmp_path, monkeypatch, capsy
     assert count(first) == 1
     output = capsys.readouterr().out
     assert "‘python pip 사내환경 적용 방법’ Skill로 설치와 사용 확인을 마쳤습니다." in output
-    assert "성공 기록이 1회 추가됐습니다(로컬 누적 1회)" in output
+    assert "성공 기록이 1회 추가됐습니다." in output
+    assert "팀이 이미 해결한 환경 문제라, 해결법을 다시 탐색하지 않고 처리했습니다." in output
     check = subprocess.run([first["work_python"], "-c",
                             "import skillloop_demo_pkg; import importlib.metadata as m; "
                             "assert m.version('skillloop-demo-pkg') == '1.0.0'"],

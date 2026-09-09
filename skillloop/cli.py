@@ -286,7 +286,8 @@ def apply_requirements(requirements: str, python: str, store_path: str,
         title = statusline_mod.skill_title(selected.id, selected.version)
         if rec.counted:
             print(f"‘{title}’ Skill로 설치와 사용 확인을 마쳤습니다. "
-                  f"검증된 재사용 성공 기록이 1회 추가됐습니다(로컬 누적 {rec.new_count}회).")
+                  "검증된 재사용 성공 기록이 1회 추가됐습니다. "
+                  "팀이 이미 해결한 환경 문제라, 해결법을 다시 탐색하지 않고 처리했습니다.")
         else:
             print(f"‘{title}’ Skill의 적용 결과를 확인했습니다. 이번 처리로 재사용 기록은 추가되지 않았습니다.")
         print("apply-requirements: WORK_ENV_PRESERVED candidate_delta=0")

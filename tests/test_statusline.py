@@ -30,6 +30,23 @@ def test_published_int_shown():
     assert "상태 미연결" not in line
 
 
+def test_connected_surface_uses_org_counts_and_published_skills_only():
+    snap = _snapshot(1, 99, 20, 8, synced_at="2026-09-09T02:14:08Z")
+    snap["skills"] = [{"id": "unpublished-candidate", "version": "1"}]
+    snap["organization"] = {
+        "available": True, "viewer_contributions": 1, "verified_reuses": 0,
+        "people": [{"alias": "cj", "contributions": 1}],
+        "ranking": [{"id": "fix-skillloop-demo-pkg-install", "version": "2.0.0", "reuse_count": 0}],
+    }
+    text = render_statusline(snap)
+    assert len(text.splitlines()) == 4
+    assert "공개 Skill 1개" in text and "내가 기여한 Skill 1개" in text
+    assert "저장된 Skill - python pip 사내환경 적용 방법" in text
+    assert "실제 검증 0회" in text and "마지막 동기화" in text
+    for hidden in ("로컬", "팀 동기화 확인", "팀 게시 기준", "99회", "20회", "unpublished-candidate", "인기 스킬"):
+        assert hidden not in text
+
+
 def test_actual_and_demo_distinguished():
     line = render_statusline(_snapshot(PUBLISHED_UNKNOWN, 2, 5, 1))
     assert "실제 검증 2회" in line

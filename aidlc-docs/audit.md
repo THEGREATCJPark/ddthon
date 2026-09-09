@@ -972,3 +972,9 @@ Final full regression165PASS/2SKIP (277.06s), scoped setup15PASS; counts overlap
 ## 2026-09-09T02:21:41.1215871Z — Implementation pushed and live handoff ready
 Implementation/source commit5fff0c4 pushed successfully to origin/main. Source/tests/evidence current; no website changes. Live data branch75b6e54225a9fa4e71e7174168161d61fa923e31 confirmed P0-only, legacy branch remains e50c6ac3629b46e28fb6dee9c59ecefa7345da7b. P1 workflow now asks permission inside Claude Code, not Windows GUI. User actual dialogue/approval/publication remains pending, not a blocker to prepared code handoff. Environment process for org P1 remains running intentionally. Unrelated B receipt remains untracked. Overall final acceptance remains open.
 
+
+## 2026-09-09T02:28:03.8469171Z — Capture UX amendment authorized
+User requested connected status simplification, no redundant Skill storage installation, and P0 team knowledge reuse messaging. Recorded three-step amendment before implementation. Preserve exact remote execution and P1 publication gates, live work data and other-session website. Current phase remains CONSTRUCTION / integrated Build & Test.
+
+## 2026-09-09T02:31:26.1126459Z — Capture UX implementation and verification
+Bounded amendment complete: connected C11 simplified; organization source and last-sync retained; storage setup question prohibited in C9; remote exact execution and P1 review gates unchanged. Actual P0 verified-counted output communicates team reuse. P0 14 tests passed in initial focused run, final display/accounting 24 passed after updating old-label assertions (38 unique checks). Earlier stale-label failures preserved. Three prepared workspace C9 copies refreshed; actual P0 status displays published1/contribution1/verified1. User data, website and official rule files unchanged. New Agent conversational wording awaits its next run; no fabricated live confirmation.

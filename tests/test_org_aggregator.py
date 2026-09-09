@@ -157,9 +157,9 @@ def test_remote_event_visible_without_local_reuse_and_repeat_is_readonly(tmp_pat
     assert snap["organization"]["verified_reuses"] == 1
     assert snap["organization"]["viewer_contributions"] == 1
     text = render_statusline(snap)
-    assert "팀 실제 검증 1회" in text and "로컬 데모 기준 0회 + 실제 검증 0회" in text
-    assert "인기 스킬(팀) - shared@1 · 실제 1회" in text
-    assert "팀 게시 기여 1위: alice" in text
+    assert "실제 검증 1회" in text and "로컬" not in text
+    assert "인기 스킬 - shared@1 · 실제 1회" in text
+    assert "우리팀 스킬 적재왕: alice" in text
     assert "팀 게시 Skill 실제 재사용(중복 제외)</th><td>1" in render_page(snap, "/", {})
     assert open(receiver.path, "rb").read() == before
 

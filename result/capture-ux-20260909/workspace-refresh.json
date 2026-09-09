@@ -1,0 +1,17 @@
+[
+  {
+    "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-org-p0-20260909",
+    "skill_sha256": "8ba10e19c519e145f07b82244b1c707426e45cb2c66aa0a08894bd6a67dda9da",
+    "updated": "C9 instructions only; store, usage, policy unchanged"
+  },
+  {
+    "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-org-p1-20260909\\cold",
+    "skill_sha256": "8ba10e19c519e145f07b82244b1c707426e45cb2c66aa0a08894bd6a67dda9da",
+    "updated": "C9 instructions only; store, usage, policy unchanged"
+  },
+  {
+    "workspace": "C:\\Users\\cik61\\Desktop\\skillloop-org-p1-20260909\\warm",
+    "skill_sha256": "8ba10e19c519e145f07b82244b1c707426e45cb2c66aa0a08894bd6a67dda9da",
+    "updated": "C9 instructions only; store, usage, policy unchanged"
+  }
+]

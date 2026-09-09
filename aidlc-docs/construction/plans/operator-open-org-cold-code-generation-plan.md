@@ -121,3 +121,12 @@ Steps1–9 approved. Part2 starts now. Keep direct NASCA demo presentation. Acce
 165 passed/2 skipped in final full regression (seed20260909); skipped interactive Excel and obsolete unlinked-runner condition are explicit. Separate real Excel open2/2 and Git-backed P0 preflight pass. Setup follow-up15PASS covers final operator launcher/help behavior. Native GUI implementation removed per user correction, conversation receipt validates exact candidate and source response. New live branch75b6e54225a9fa4e71e7174168161d61fa923e31 has P0-only; all three user stores P1 count0/events0. Final live P1 approval/publication remains USER_PENDING. Full earlier failure and stale-store test failure retained.
 
 Remote implementation receipt: 5fff0c4 pushed to origin/main. All nine implementation/preparation steps complete; final live P1 candidate permission/publication belongs to the user and is not marked PASS by this plan.
+
+## Approved capture UX amendment — 2026-09-09T02:28:03.8177395Z
+User explicitly requests removing connected status labels '팀 동기화 확인', '로컬 1개', '팀 게시 기준', redundant storage installation questions, and communicating reuse value. Existing US-UI-1/FR-UI-3 and US-P0-1; no new feature or storage/execution authorization change.
+1. [x] C11 connected status: four lines with organization counts/contributions/ranking and last sync; hide duplicate local accounting. Unconnected diagnostics remain. Zero-reuse stored Skills are not popular Skills; use published organization ranking for connected stored list.
+2. [x] C9 and CLI: already-configured storage used directly; no install/reconnect question. Exact remote execution confirmation, when required, asks about applying the displayed solution, not installing storage. Verified counted success explains reusing team knowledge and actual +1; no success claim before verification.
+3. [x] Focused status/accounting and actual P0 regression; refresh prepared workspace C9 instructions, preserve data, record evidence, commit/push. No website edits or live-work resets.
+Approval: latest user '얼른 수정해줘봐' plus specific requested text; bounded amendment proceeds under existing approved plan. P1 candidate approval remains separate.
+
+Validation: initial focused run 37 passed/1 stale-display assertion failure (P0 14 tests passed). After aligning only requested text assertions, display/accounting rerun 24 passed. Three intermediate stale-text failures retained. No runtime behavior changed during assertion corrections. Prepared C9 copies refreshed; live status observed; no user-work counters reset.

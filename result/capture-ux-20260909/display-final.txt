@@ -1,0 +1,33 @@
+.....................F..                                                 [100%]
+================================== FAILURES ===================================
+____ test_remote_event_visible_without_local_reuse_and_repeat_is_readonly _____
+
+tmp_path = WindowsPath('C:/Users/cik61/AppData/Local/Temp/pytest-of-cik61/pytest-73/test_remote_event_visible_with0')
+
+    def test_remote_event_visible_without_local_reuse_and_repeat_is_readonly(tmp_path):
+        from skillloop.statusline import render_statusline
+        from skillloop.dashboard import render_page
+        store, receiver = _seed(tmp_path)
+        d = D.make_descriptor(_content("shared", "1", "alice")); store.put(d)
+        sender = UsageTracker(str(tmp_path / "sender.json"))
+        sender.record_actual_reuse(build_evidence(
+            {k: getattr(d, k) for k in ("id", "version", "digest")},
+            {"is_real_success": True}, "remote-run", reuser_alias="bob"))
+        blob = sender.export_shared_usage()
+        assert receiver.import_shared_usage(blob, local_ref_exists=lambda ref: ref == _published(d)["ref"])[0]["applied"]
+        assert not receiver.import_shared_usage(blob, local_ref_exists=lambda ref: True)[0]["applied"]
+        before = open(receiver.path, "rb").read()
+        snap = OA.build_snapshot(store, receiver, FakeLifecycle([_published(d)]), Synced(), my_alias="alice")
+        assert snap["accounting"]["actual_reuses"] == 0
+        assert snap["organization"]["verified_reuses"] == 1
+        assert snap["organization"]["viewer_contributions"] == 1
+        text = render_statusline(snap)
+        assert "실제 검증 1회" in text and "로컬" not in text
+        assert "인기 스킬 - shared@1 · 실제 1회" in text
+>       assert "팀 게시 기여 1위: alice" in text
+E       assert '팀 게시 기여 1위: alice' in "🧠 SkillLoop | 📚 '디디톤 기술혁신팀' 공개 Skill 1개 | alice\n✨ 내가 기여한 Skill 1개 · 팀에 도움이 될 스킬을 공유해 보세요\n👑 우리팀 스킬 적재왕: alice | 🔥 인기 스킬 - shared@1 · 실제 1회 적용\n실제 검증 1회 · 마지막 동기화 2026-09-09T00:00:00Z"
+
+tests\test_org_aggregator.py:162: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_org_aggregator.py::test_remote_event_visible_without_local_reuse_and_repeat_is_readonly
+1 failed, 23 passed in 0.54s

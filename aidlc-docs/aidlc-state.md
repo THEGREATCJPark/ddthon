@@ -2,6 +2,8 @@
 
 ## 현재 상태 — 2026-09-09 Git 조직 시연 준비
 
+- **Capture UX 보완**: 연결 상태줄의 중복 로컬/팀 기준 문구 제거, 조직 실적·마지막 동기화 유지. 저장소 재설치 질문 금지, 필요한 exact Skill 실행 확인은 적용 목적 질문으로 구분. P0 실제 성공 시 기존 팀 지식 재사용 가치 안내. P0 14 tests 및 최종 표시/집계 24 tests PASS(38개 고유 검사), 이전 표시 기대문구 실패 기록 보존. result/capture-ux-20260909/.
+
 - **Current Stage**: CONSTRUCTION / 통합 Build & Test. 승인된 operator/org Cold 계획 구현 및 실제 Git 연결 완료; 최종 전체165 PASS/2 SKIP, 준비 경로 후속15 PASS. 구현5fff0c4 origin/main push 완료. 최종 제품/사용자 시연 승인 아님.
 - **현재 시연 DB**: ddthon/team-skill-demo-20260909, 초기 데이터75b6e54225a9fa4e71e7174168161d61fa923e31. P0 Skill1·P1 Skill0·공유 실적0. 기존 team-skill-store/P1 이력 보존.
 - **사용자 작업**: skillloop-org-p0-20260909, skillloop-org-p1-20260909/cold 및 warm 준비. 같은 조직 DB 수신, 사용자 실적0. warm도 P1 게시 후 sync해야 Warm이 된다.
