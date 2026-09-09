@@ -1,5 +1,5 @@
 {
-  "reviewedSha": "6fefa6b",
+  "reviewedSha": "57dfa1f",
   "reviewedAt": "2026-09-09",
   "reviewer": "팀 내부 독립 QA",
   "disclaimer": "팀이 자체적으로 수행한 독립 QA 점검 결과입니다. 공식 심사 결과가 아닙니다.",
@@ -22,10 +22,10 @@
       "name": "자동화 테스트",
       "state": "검증됨",
       "pct": 100,
-      "summary": "144 passed · 2 skipped, 커밋된 실행 로그와 독립적으로 일치",
+      "summary": "180 passed · 2 skipped, 빈 환경에서 독립적으로 재현됨 (exit 0)",
       "evidence": [
-        "위 설치 직후 시드 고정 pytest 실행 → 144 passed, 2 skipped (372.9s, exit 0)",
-        "저장소에 커밋된 실행 로그와 수치가 일치 — 리포트만 있고 재현이 안 되는 경우가 아님",
+        "위 설치 직후 시드 고정 pytest 실행 → 180 passed, 2 skipped (182 collected, exit 0)",
+        "리포트만 있고 재현이 안 되는 경우가 아니라, 받은 사람이 같은 명령으로 같은 수치를 냄",
         "실패 기록도 지우지 않고 보존되어 있음 (최초 1건 실패 로그 포함)"
       ]
     },
@@ -34,7 +34,7 @@
       "name": "CLI 실동작",
       "state": "부분 검증",
       "pct": 80,
-      "summary": "주요 명령 4종을 실제로 실행해 동작과 출력을 확인",
+      "summary": "주요 명령을 실제로 실행해 동작과 출력을 확인",
       "evidence": [
         "run-p0 — 실제 설치 실패를 관찰해 기존 Skill과 MATCH, 재사용 1회 기록 (exit 0)",
         "status — 로컬 데모 · 실제 검증 · 팀 동기화를 섞지 않고 분리해 보고 (exit 0)",
@@ -54,7 +54,8 @@
         "재실행 독립성 — 이전 실행 결과물을 입력으로 받지 못하는 구조",
         "데모 데이터와 실제 실적이 코드 수준에서 분리되어 집계됨",
         "검증기 누출 없음 — 결과 전체를 다시 계산해 비교하고, 원본 문서는 변경되지 않음",
-        "미실행 항목을 통과로 바꾸지 않고 미실행 그대로 공개"
+        "미실행 항목을 통과로 바꾸지 않고 미실행 그대로 공개",
+        "이번 회차 새로 바뀐 코드 변경분도 재감사 — 통과를 가짜로 만드는 새 경로가 생기지 않았음"
       ]
     },
     {
@@ -78,7 +79,7 @@
     },
     {
       "cmd": "pytest --hypothesis-seed=20260908",
-      "result": "144 passed, 2 skipped (372.9s)",
+      "result": "180 passed, 2 skipped (182 collected)",
       "exit": 0
     },
     {
@@ -93,9 +94,9 @@
     }
   ],
   "findings": {
-    "total": 18,
+    "total": 19,
     "resolved": 10,
-    "tracking": 8,
+    "tracking": 9,
     "note": "아래는 그중 제품에 관한 해소 항목입니다. 나머지는 QA 진행 자체에 대한 항목이라 생략했습니다."
   },
   "resolvedItems": [
@@ -116,7 +117,7 @@
     {
       "id": "F3",
       "found": "문서에 적힌 설치 명령만으로는 빈 환경에서 테스트가 통과하지 못했음 (빌드 도구 미선언)",
-      "fixed": "필요한 빌드 의존성을 명시 — 빈 환경 재현에서 144 passed / 2 skipped, exit 0",
+      "fixed": "필요한 빌드 의존성을 명시 — 빈 환경 재현에서 테스트 전량 통과, exit 0",
       "round": 6,
       "at": "09-09 09:57"
     },
@@ -161,7 +162,8 @@
     { "n": 3, "at": "09-08 18:55", "sha": "7256272", "total": 36, "lo": 30, "hi": 44 },
     { "n": 4, "at": "09-08 19:17", "sha": "25ecfe5", "total": 37, "lo": 31, "hi": 45 },
     { "n": 5, "at": "09-08 20:05", "sha": "a22e176", "total": 37, "lo": 31, "hi": 45 },
-    { "n": 6, "at": "09-09 09:57", "sha": "6fefa6b", "total": 81, "lo": 75, "hi": 88 }
+    { "n": 6, "at": "09-09 09:57", "sha": "6fefa6b", "total": 81, "lo": 75, "hi": 88 },
+    { "n": 7, "at": "09-09 12:41", "sha": "57dfa1f", "total": 83, "lo": 77, "hi": 90 }
   ],
   "rounds": [
     { "n": 1, "at": "09-08 17:33", "sha": "7cbc856", "counted": false },
@@ -169,6 +171,7 @@
     { "n": 3, "at": "09-08 18:55", "sha": "7256272", "counted": true, "resolved": 4, "tracking": 9 },
     { "n": 4, "at": "09-08 19:17", "sha": "25ecfe5", "counted": true, "resolved": 4, "tracking": 10 },
     { "n": 5, "at": "09-08 20:05", "sha": "a22e176", "counted": true, "resolved": 4, "tracking": 11 },
-    { "n": 6, "at": "09-09 09:57", "sha": "6fefa6b", "counted": true, "resolved": 10, "tracking": 8 }
+    { "n": 6, "at": "09-09 09:57", "sha": "6fefa6b", "counted": true, "resolved": 10, "tracking": 8 },
+    { "n": 7, "at": "09-09 12:41", "sha": "57dfa1f", "counted": true, "resolved": 10, "tracking": 9, "opened": 1 }
   ]
 }
