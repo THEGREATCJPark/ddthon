@@ -9,8 +9,8 @@
 ## 최소 Code Plan
 
 - [x] 1. 최신 main과 실패 근거를 확인하고 최소 계획/승인을 구현 전에 기록한다. 기존 공식 규칙과 extension 설정 유지. Python/PBT 로직 변경이 없어 재실행은 N/A이며 기존 228/2 및 CI 근거를 참조한다.
-- [ ] 2. `team-hub/src/ProductIntro.tsx`의 원본 MP4 import를 아래 커밋 고정 URL 상수로 교체한다. `SUBMISSION.md`에 현재 검증 연결·이전 마감 기준·소개 영상 필터/인터넷 의존을 표시하고, `aidlc-docs/construction/build-and-test/build-and-test-summary.md` 맨 앞에서 현재 228/2 근거와 기존 MVP 마감 기록을 구분한다. 원본 영상·해시·설명/UI 배치는 유지한다. 단계 완료 즉시 체크 및 audit 갱신 후 검증한다.
-- [ ] 3. 일반 및 10MB 초과 원본 ZIP/MP4가 모두 빠진 사본에서 기존 웹 테스트·빌드, dist 동일성, 영상 URL·브라우저 재생 가능 여부, 문서 링크·원본 hash를 검증한다. 영향 없는 Python/실 Excel 시나리오는 반복하지 않는다. 실패 시 고친 뒤 관련 검증만 반복한다.
+- [x] 2. `team-hub/src/ProductIntro.tsx`의 원본 MP4 import를 아래 커밋 고정 URL 상수로 교체한다. `SUBMISSION.md`에 현재 검증 연결·이전 마감 기준·소개 영상 필터/인터넷 의존을 표시하고, `aidlc-docs/construction/build-and-test/build-and-test-summary.md` 맨 앞에서 현재 228/2 근거와 기존 MVP 마감 기록을 구분한다. 원본 영상·해시·설명/UI 배치는 유지한다. 단계 완료 즉시 체크 및 audit 갱신 후 검증한다.
+- [x] 3. 일반 및 10MB 초과 원본 ZIP/MP4가 모두 빠진 사본에서 기존 웹 테스트·빌드, dist 동일성, 영상 URL·브라우저 재생 가능 여부, 문서 링크·원본 hash를 검증한다. 영향 없는 Python/실 Excel 시나리오는 반복하지 않는다. 실패 시 고친 뒤 관련 검증만 반복한다.
 - [ ] 4. 실제 결과를 기록하고 main 반영·웹 CI 확인 후 완료로 기록한다. 동시 다른 세션 변경은 보존한다. 과거 절차 이탈/승인 기록을 소급 변경하지 않는다.
 
 원본 URL: https://raw.githubusercontent.com/THEGREATCJPark/ddthon/2e034256e1529bec30687a110c9cdea50b357171/result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4

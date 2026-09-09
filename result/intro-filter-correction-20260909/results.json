@@ -1,0 +1,44 @@
+[
+  {
+    "condition": "normal",
+    "command": "npm test",
+    "exit": 0,
+    "started": "2026-09-09T07:40:00.161392+00:00",
+    "ended": "2026-09-09T07:40:01.610494+00:00",
+    "log": "normal-test.txt",
+    "excluded": []
+  },
+  {
+    "condition": "normal",
+    "command": "npm run build",
+    "exit": 0,
+    "started": "2026-09-09T07:40:01.611213+00:00",
+    "ended": "2026-09-09T07:40:10.709160+00:00",
+    "log": "normal-build.txt",
+    "excluded": []
+  },
+  {
+    "condition": "filtered",
+    "command": "npm test",
+    "exit": 0,
+    "started": "2026-09-09T07:40:13.088922+00:00",
+    "ended": "2026-09-09T07:40:14.182839+00:00",
+    "log": "filtered-test.txt",
+    "excluded": [
+      "result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4",
+      "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip"
+    ]
+  },
+  {
+    "condition": "filtered",
+    "command": "npm run build",
+    "exit": 0,
+    "started": "2026-09-09T07:40:14.183943+00:00",
+    "ended": "2026-09-09T07:40:22.151574+00:00",
+    "log": "filtered-build.txt",
+    "excluded": [
+      "result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4",
+      "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip"
+    ]
+  }
+]

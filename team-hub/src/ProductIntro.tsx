@@ -1,5 +1,6 @@
 import {CheckCircle2, FileSearch, FolderCheck, RefreshCw} from "lucide-react";
-import introVideo from "../../result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4?url";
+// Keep the original >10MB video available without making it a build input.
+const introVideo = "https://raw.githubusercontent.com/THEGREATCJPark/ddthon/2e034256e1529bec30687a110c9cdea50b357171/result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4";
 const mechanisms = [
   [FileSearch,"실패에서 찾고","오류와 적용 조건으로 맞는 팀 Skill을 찾습니다."],
   [RefreshCw,"새로운 문제는 Loop를 통해 해결하고","맞는 Skill이 없으면 환경을 확인하고 해결 방법을 탐색합니다."],

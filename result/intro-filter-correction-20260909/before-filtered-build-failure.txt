@@ -1,0 +1,15 @@
+
+> ddthon-team-hub@1.0.0 build
+> tsc -b && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 1586 modules transformed.
+✗ Build failed in 5.60s
+error during build:
+Could not resolve "../../result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4?url" from "src/ProductIntro.tsx"
+file: C:/Users/cik61/Desktop/skillloop-closeout-20260909/final-intake-review-073646/team-hub/src/ProductIntro.tsx
+    at getRollupError (file:///C:/Users/cik61/Desktop/skillloop-closeout-20260909/repo/team-hub/node_modules/rollup/dist/es/shared/parseAst.js:317:41)
+    at error (file:///C:/Users/cik61/Desktop/skillloop-closeout-20260909/repo/team-hub/node_modules/rollup/dist/es/shared/parseAst.js:313:42)
+    at ModuleLoader.handleInvalidResolvedId (file:///C:/Users/cik61/Desktop/skillloop-closeout-20260909/repo/team-hub/node_modules/rollup/dist/es/shared/node-entry.js:22002:24)
+    at file:///C:/Users/cik61/Desktop/skillloop-closeout-20260909/repo/team-hub/node_modules/rollup/dist/es/shared/node-entry.js:21962:26

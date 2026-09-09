@@ -5,7 +5,7 @@
 ## 저장소에서 읽는 순서
 
 1. [README](README.md): 문제·해결·설치·실행·AI 도구·팀, 실제 P0/P1 화면.
-2. [현재 상태](aidlc-docs/aidlc-state.md) → [Build & Test](aidlc-docs/construction/build-and-test/build-and-test-summary.md) → [마감 근거](result/development-closeout-20260909/README.md).
+2. [현재 상태](aidlc-docs/aidlc-state.md) → [최신 후속 수정·검증](result/post-closeout-corrections-20260909/README.md) → [Build & Test](aidlc-docs/construction/build-and-test/build-and-test-summary.md) → [MVP 마감 당시 근거](result/development-closeout-20260909/README.md).
 3. [요구사항](aidlc-docs/inception/requirements/requirements.md), [스토리](aidlc-docs/inception/user-stories/stories.md), application-design/와 construction/의 설계·계획·테스트 근거.
 4. [audit](aidlc-docs/audit.md): 실제 승인·변경·실패·정정 기록. 과거 state는 aidlc-docs/history/에 보존.
 
@@ -22,11 +22,13 @@
 
 ## Git 제출과 필터 한도
 
-공개 저장소 https://github.com/THEGREATCJPark/ddthon 의 **기본 main 브랜치**가 Git 제출 대상이다. PR #4를 main에 반영하고 병합 SHA `0a23c49`의 CI/Pages를 확인했다. 이후 문서 마감 커밋은 같은 코드 트리를 유지한다. 사이트 최종 제출 버튼은 사용자가 수행한다. 특정 SHA 고정 제출은 그 SHA의 source ZIP을 사용한다.
+공개 저장소 https://github.com/THEGREATCJPark/ddthon 의 **기본 main 브랜치**가 Git 제출 대상이다. MVP 마감 당시 PR #4와 `0a23c49`의 CI/Pages를 확인했고, 이후 승인된 후속 수정은 별도 기록했다. 현재 Python 검증은 `d77177b`의 **228 PASS / 2 SKIP**이며 [후속 검증 근거](result/post-closeout-corrections-20260909/README.md)를 따른다. 그 뒤 소개 영상 등 웹 변경은 해당 커밋의 웹 CI로 구분한다. 사이트 최종 제출 버튼은 사용자가 수행한다. 특정 SHA 고정 제출은 그 SHA의 source ZIP을 사용한다.
 
-사용자 제공 한도: source ZIP 200MB, 압축 해제 1GB/10,000개; 평가 필터는 개별 10MB/전체 100MB/1,000개. 정확한 현재 파일 수·크기는 [inventory](result/development-closeout-20260909/submission-inventory.json) 참조.
+사용자 제공 한도: source ZIP 200MB, 압축 해제 1GB/10,000개; 평가 필터는 개별 10MB/전체 100MB/1,000개. [inventory](result/development-closeout-20260909/submission-inventory.json)는 MVP 마감 당시의 파일 수·크기이며 이후 추가 파일을 포함한 현재값은 아니다.
 
 원본 `result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip`은 10MB를 넘어 평가에서 제외될 수 있다. 원본·해시를 보존하면서, 10MB 이하의 추출 MP4·PNG·SRT·텍스트에 README가 직접 연결된다. 웹의 선택적 원본 ZIP 다운로드는 해당 파일을 보존한 GitHub 커밋의 URL을 사용하며 ZIP을 빌드 입력으로 import하지 않는다. 원본 다운로드에는 인터넷 연결이 필요하며, 영상·자막·로그 표시는 개별 파일을 사용한다. 평가기가 ZIP 내부를 읽을 것이라고 기대하지 않는다. `.venv`, `node_modules`, `.git`, 개인 인증 설정은 추적 소스에 포함하지 않는다.
+
+30초 소개 영상 `result/agent-skillloop-intro-20260909/Agent_SkillLoop_Animated_30s.mp4`도 16,255,648바이트로 개별 필터 대상이다. 원본은 보존하고 웹에서는 커밋 고정 GitHub URL로 재생하여 빌드 의존성을 없앴다. 소개 영상 재생에는 인터넷 연결이 필요하다. 이 애니메이션은 실제 P0/P1 실행 증거와 구분하며, 10MB 이하의 실제 시연 영상·이미지·로그는 개별 파일로 계속 제공한다.
 
 ## 갤러리에 직접 입력할 내용
 

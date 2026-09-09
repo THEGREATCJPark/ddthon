@@ -1278,3 +1278,9 @@ Approved four-item correction delivered on main d77177b after preserving concurr
 ## Intro filter/docs approval — 2026-09-09T07:39:09.889871+00:00
 
 User: “어 그것만 반영해봐 ai-dlc 위배된다면 하지말고”. Approves the previously proposed pinned intro-video URL and current-vs-historical validation pointers only. Plan intro-filter-docs-plan.md written before implementation. Existing MVP acceptance and extension configuration retained; no restart or new product scope.
+
+
+Intro follow-up step2 completed — 2026-09-09T07:39:40.777261+00:00: only ProductIntro URL and SUBMISSION/Build & Test current-vs-historical pointers modified. Original media/Python unchanged. Step3 verification begins now; no PASS claimed yet.
+
+
+Intro step3 verification complete — 2026-09-09T07:41:29.000824+00:00: normal/filtered npm test10 PASS and build PASS, dist hashes identical; original MP4 unchanged, raw URL HEAD200 and browser frame rendering confirmed. Documentation links valid. Source/contract scope unchanged. Evidence result/intro-filter-correction-20260909. Proceeding to approved main/CI delivery.

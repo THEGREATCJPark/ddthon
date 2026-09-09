@@ -1,5 +1,13 @@
 # Build & Test — 사용자 수용 및 main 전달 완료
 
+## 현재 검증 기준 — 승인된 후속 수정 포함
+
+Python은 `d77177b` 기준 **228 PASS / 2 SKIP**(로컬 cp949·UTF8 각각 및 GitHub CI), 웹은 10 PASS·일반/대용량 ZIP 제외 빌드 PASS다. [후속 수정 결과·CI](../../../result/post-closeout-corrections-20260909/README.md)를 현재 근거로 사용한다. 이후 소개 영상 필터 호환성 보완은 [승인 계획](../plans/intro-filter-docs-plan.md)에 따라 별도 검증하며 Python 소스는 변경하지 않는다.
+
+## MVP 최초 마감 당시 기록
+
+**아래 200 PASS 및 “이후 Python 동일” 문구는 최초 마감 시점에 한정한다.** 후속 수정 이후의 현재 코드·테스트 개수로 읽지 않는다. 이전 실행·사용자 수용 근거는 보존한다.
+
 최종 전달 보완: 다른 세션의 설명 웹 변경 `2f19f3c`를 보존·통합했다. 동일 소스의 웹 CI34318992726(테스트·규칙·빌드·Pages) SUCCESS, Python은 `0a23c49`와 동일하다. `result/development-closeout-20260909/final-web-followup-ci.json`에 확인 근거를 추가했다. 이후 기록 커밋은 이 소스와 동일하다.
 
 **해커톤 MVP 범위의 Build & Test 완료, 최종 사용자 수용 완료.**
