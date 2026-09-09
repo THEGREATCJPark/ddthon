@@ -557,7 +557,7 @@ def cmd_p1(args):
         return 2
 
 
-def main(argv: list[str] | None = None) -> int:
+def _main(argv: list[str] | None = None) -> int:
     """콘솔 스크립트 진입점. 서브커맨드 라우팅."""
     _ensure_utf8_stdout()
     parser = argparse.ArgumentParser(prog="skillloop")
@@ -655,6 +655,16 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_dashboard(host=args.host, port=args.port)
     parser.print_help()
     return 2
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Present operational failures without hiding programmer errors or exits."""
+    _ensure_utf8_stdout()
+    try:
+        return _main(argv)
+    except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as exc:
+        print(f"skillloop: ERROR {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":
