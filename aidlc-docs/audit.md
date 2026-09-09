@@ -861,3 +861,15 @@ Recorded test plan before execution: construction/build-and-test/cold-response-r
 ## 2026-09-08T23:17:06.268028+00:00 — Additional Cold execution and response review complete
 
 Source d8c45cb frozen. Fresh P0 1 and P1 Cold2 functional PASS; forecasts1650/2550, candidate1/reuse0 each; original hashes unchanged; no approval/publish. P0 independent import1.0.0/reuse1. Product environment label2/2, Agent narrative naming1/2, inconsistent Korean and schema/coordinate retry chatter documented as UX findings. All visible tool/prose traces and intermediary errors retained; private reasoning excluded. Operator formatting issues corrected from unchanged raw traces; scripts guard old logs against overwrites. Owned Excel STOP cleanup confirmed. Result/cold-review-20260909; whole-product final review and B-PC reproduction remain. Product/C9 untouched; existing full-suite/PBT not redundantly rerun for evidence-only change.
+
+## 2026-09-09T00:02:37.0289074Z — Dialogue UX / interactive live demo request, Part 1 review
+
+User request (raw): 어 피드백을 기반으로 한 프롬프트를 줄테니, ai-dlc 과정을 충실히 이행하면서 다음 프롬프트를 진행해
+
+Full attached prompt preserved verbatim at construction/plans/dialogue-ux-live-demo-request.md (SHA256 253E383BAC1B62D2781CDF1CDC8051ED85761A911B3896AB3701237850B191A6). Read current state/audit, approved P0/P1/U3/presentation plans, actual cold/acceptance/alignment evidence and C9/CLI/S2/harness/replay/web code. Main8bd731b equals remote; worktree clean at entry. A/B completed-handoff provenance and remote branch SHAs unchanged. No claim of observing teammate PC processes.
+
+Prepared construction/plans/dialogue-ux-live-demo-code-generation-plan.md before implementation. FR-P1-3 / US-P1-2 AC1 already require conversational environment facts; repair missing C9 turn, no new scenario/lifecycle. Actual search is Team Skill only; proposed not_provided scope means no separate Org Knowledge source in this run, not removal of the requirement. Current active fixture has no20 seed baseline; web uses0→1 and separates available Skill from new publication. Existing replay/approval evidence remains historical, never new local approval. No product/web edits, tests, live runs, deployment or retroactive approval in this step.
+
+Computer-use skill read, @oai/sky runtime initialized, live list_apps succeeded; no current Claude window and no input sent. P0 LIVE DEMO RUN #1 remains unstarted pending corrections/regression. No external preimplementation access. Official workflow files unchanged. Extension settings retained (Partial PBT; Security/Resiliency opt-out with core NFR still enforced).
+
+Approval prompt: 위 최소 Code Plan의8단계(수정·회귀·P1 2-turn·실제 P0 UI1회·증거·웹 연결·CI/Pages)를 승인해 주시면 Part2를 이어서 수행합니다. User prompt §0 and code-generation Part1 Step7 explicitly require this plan gate. No repeated question about already approved technology, ownership or lifecycle.

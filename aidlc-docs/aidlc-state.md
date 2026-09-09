@@ -1,5 +1,10 @@
 # AI-DLC State Tracking
 
+## 현재 검토 — 대화 UX / 실제 UI 시연 계획 (2026-09-09)
+
+- **게이트**: CONSTRUCTION / Code Generation 보완 Part 1 완료, REVIEW REQUIRED. `construction/plans/dialogue-ux-live-demo-code-generation-plan.md`의8단계 승인 대기. 첨부 요청 §0의 최소 Code Plan 승인 gate 유지, 구현·시험·배포 아직 미착수.
+- **판단**: P1 환경 사실 대화는 기존 FR-P1-3/US-P1-2의 누락 복원. C9 한국어·도구 안내·차트 경로·웹 설명 정합화, 실제 검색 범위 표시. 새로운 요구사항/lifecycle/Unit 없음. 기존 Code Plan 승인은 과거 구현에 대한 것이며 이번 새 계획 승인으로 꾸미지 않는다.
+- **기준**: main8bd731b / origin 동일, 시작 clean. A/B 인수 완료 기록 유지. Computer Use 초기화·앱 조회 성공; 실제 Claude UI 시연은 회귀 후1회만 예정. B-PC NOT_RUN 유지.
 ## 최신 상태 — 2026-09-09 오전 인계
 
 - **추가 Cold/응답 검토**: 제품/C9 d8c45cb 고정, 새 P0 1+P1 Cold2 기능PASS(1650/2550). CLI 사내환경·NASCA(가상) 표시는2/2, Agent 설명·한국어·입력계약 안내는 개선 필요. 전체 원문·판정 `result/cold-review-20260909/`; 기능 성공을 UX 완료로 합치지 않는다. 이번에는 테스트·기록만, 응답 개선 구현은 아직 하지 않았다.
