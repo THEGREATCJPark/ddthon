@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-09-09T07:26:24.637974+00:00",
+  "served_assets": [
+    {
+      "asset": "actual-trend-DYuBOkAS.png",
+      "status": 200,
+      "bytes": 45723,
+      "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+    },
+    {
+      "asset": "Agent_SkillLoop_P1_90s-BjOT1hCv.mp4",
+      "status": 200,
+      "bytes": 5163626,
+      "sha256": "fc81e850ccdd2462833866f3db4cc0938173375e5d1c5512a3362c37a55a4a88"
+    },
+    {
+      "asset": "P1-Web-Log-Round3-CBwyvpRb.zip",
+      "status": 200,
+      "bytes": 79232,
+      "sha256": "85aac8546a4310f96ee31a29048a5c69cdef47c6ceccb3bce15291bc3f3d5c18"
+    },
+    {
+      "asset": "transcript.public-DF5cdqZo.md",
+      "status": 200,
+      "bytes": 46296,
+      "sha256": "6b7df5ad172ddd56a4c474308bacd67b9785b992ccbc7dffe220bcb7a7fc0506"
+    }
+  ],
+  "original_download": {
+    "url": "https://raw.githubusercontent.com/THEGREATCJPark/ddthon/bd7eb987915f17721bf3c29ff6349a45e8fdc64e/result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
+    "status": 200,
+    "content_type": "application/zip",
+    "length": "11270872"
+  },
+  "pinned_url_in_bundle": true,
+  "browser": "In-app browser tab5, filtered build /ddthon/#captures-p1: selected P1 tab; AX state contains video controls, MP4 link, Korean subtitle link, pinned raw ZIP link, actual chart, response text and full-log expander. Screenshot confirms P1 tab rendered. Full video playback was not rerun.",
+  "browser_checked_at": "2026-09-09T07:29:21.904563+00:00"
+}

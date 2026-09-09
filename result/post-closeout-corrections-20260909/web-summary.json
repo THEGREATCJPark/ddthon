@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-09-09T07:22:17.360990+00:00",
+  "normal_and_filtered_build_success": true,
+  "build_outputs_identical": true,
+  "excluded": [
+    {
+      "path": "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
+      "bytes": 11270872
+    }
+  ],
+  "source_zip_preserved_bytes": 11270872
+}

@@ -1,0 +1,29 @@
+
+> ddthon-team-hub@1.0.0 build
+> tsc -b && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 1640 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                      0.73 kB │ gzip:   0.48 kB
+dist/assets/actual-trend-DYuBOkAS.png               45.72 kB
+dist/assets/transcript.public-DF5cdqZo.md           46.30 kB
+dist/assets/P1-Web-Log-Round3-CBwyvpRb.zip          79.23 kB
+dist/assets/E01_request-C3FHyy__.png               127.46 kB
+dist/assets/E02_apply_command-B7BN4KhC.png         234.19 kB
+dist/assets/E03_counter_last_zero-BHvSyD95.png     241.87 kB
+dist/assets/E04_counter_first_one-B9G0j-am.png     242.27 kB
+dist/assets/Agent_SkillLoop_카운트변화-C3Pz9VNe.png     251.45 kB
+dist/assets/E05_verify_command-C0_eAc-y.png        256.83 kB
+dist/assets/p0-claude-code-CXoWAbus.png            267.88 kB
+dist/assets/E06_final_response-BT62SPFu.png        272.68 kB
+dist/assets/E08_edited_first_one-DC9zYl4G.png      326.39 kB
+dist/assets/E07_edited_last_zero-BDfzkqSV.png      328.35 kB
+dist/assets/p0-demo-LdLpGJAt.mp4                 2,851.95 kB
+dist/assets/p0-ai-evaluation-BR9mJcHo.zip        4,847.19 kB
+dist/assets/Agent_SkillLoop_P1_90s-BjOT1hCv.mp4  5,163.63 kB
+dist/assets/index-KjkbUdKP.css                      58.29 kB │ gzip:  12.45 kB
+dist/assets/index-D3k41y1M.js                      909.86 kB │ gzip: 281.19 kB
+✓ built in 11.30s
