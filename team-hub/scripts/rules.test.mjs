@@ -178,3 +178,15 @@ test("skill examples are public, bounded and deletable only by their author", as
   await assertFails(deleteDoc(doc(other,"skillExamples","valid")));
   await assertSucceeds(deleteDoc(doc(author,"skillExamples","valid")));
 });
+
+test("free-text skill ideas accept a body without structured fields", async () => {
+  const db = env.authenticatedContext("free-author").firestore();
+  const other = env.authenticatedContext("free-other").firestore();
+  const data = {title:"Free idea",body:"A freely written experience",author:"Team",uid:"free-author",createdAt:serverTimestamp()};
+  await assertSucceeds(setDoc(doc(db,"skillExamples","free-valid"),data));
+  await assertFails(setDoc(doc(db,"skillExamples","free-empty"),{...data,body:""}));
+  await assertFails(setDoc(doc(db,"skillExamples","free-large"),{...data,body:"x".repeat(60001)}));
+  await assertFails(setDoc(doc(other,"skillExamples","free-spoof"),data));
+  await assertFails(deleteDoc(doc(other,"skillExamples","free-valid")));
+  await assertSucceeds(deleteDoc(doc(db,"skillExamples","free-valid")));
+});

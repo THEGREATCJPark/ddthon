@@ -11,15 +11,16 @@ export const valueFields = [
   {key: "benefit", label: "조직에 주는 도움", max: 240, placeholder: "예: 장비 PC의 업로드 장애 대응 방법을 팀이 함께 사용"},
   {key: "effect", label: "기대효과", max: 240, placeholder: "예: 같은 오류의 원인을 다시 탐색하는 시간 감소"},
 ] as const;
-export type SkillDraft = Record<(typeof fields)[number]["key"], string> & Partial<Record<(typeof valueFields)[number]["key"], string>>;
+export type SkillDraft = Record<(typeof fields)[number]["key"], string> & Partial<Record<(typeof valueFields)[number]["key"], string>> & {body?: string};
 export type ExampleSkill = SkillDraft & {id: string; uid: string; createdAt: number};
-export const emptyDraft = Object.fromEntries([...fields, ...valueFields].map(f => [f.key, ""])) as SkillDraft;
-export function validateExample(input: SkillDraft): SkillDraft {
-  return Object.fromEntries([...fields, ...valueFields].map(f => {
-    const value = (input[f.key] || "").trim();
-    if (!value || value.length > f.max) throw new Error(`${f.label}: 1~${f.max}자로 입력해 주세요.`);
-    return [f.key, value];
-  })) as SkillDraft;
+export type FreeSkillDraft = {title: string; body: string; author: string};
+export const emptyDraft: FreeSkillDraft = {title:"", body:"", author:""};
+export function validateExample(input: FreeSkillDraft): FreeSkillDraft {
+  const title = input.title.trim(), body = input.body.trim(), author = input.author.trim() || "팀원";
+  if (!title || title.length > 100) throw new Error("제목을 입력해 주세요. (100자 이내)");
+  if (!body || body.length > 60000) throw new Error("내용을 입력해 주세요. (60,000자 이내)");
+  if (author.length > 30) throw new Error("이름은 30자 이내로 입력해 주세요.");
+  return {title, body, author};
 }
 export const featured: SkillDraft = {
   title: "사내 S3 스토리지 연결 오류 해결",

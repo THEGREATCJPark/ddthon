@@ -2220,3 +2220,7 @@ footer > span:last-child {
 .example-row-detail h4 { color: var(--blue); margin: 20px 0 10px; }.example-row-detail p { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.85; margin: 0; font-size: 14px; }
 .example-row-detail section:nth-child(n+3), .example-row-detail .example-actions { grid-column: 1 / -1; }
 @media(max-width:900px) { .example-list-head { display:none; }.example-row-summary { grid-template-columns: 1fr 1fr; }.example-row-name { grid-column:1/-1; }.example-cell-label { display:block; font-size:12px; color:var(--muted); margin-bottom:6px; } }
+
+.example-free-summary .example-body-preview { grid-column: 2 / 4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
+.example-free-body { grid-column: 1 / -1; padding-top: 20px; }
+@media(max-width:900px) { .example-free-summary .example-body-preview { grid-column: 1 / -1; } }
