@@ -69,6 +69,21 @@ def test_discovery_is_not_auto_selected_and_warm_counts(scope):
     assert '1200' not in json.dumps(usage.list_shared_events())
 
 
+def test_cold_fact_wait_records_actual_scope_without_access_or_state_writes(scope, monkeypatch):
+    file, store, usage = scope
+    def forbidden(*args, **kwargs):
+        raise AssertionError('No discovered procedure: must not access the application')
+    monkeypatch.setattr(h, 'run_file_access_procedure', forbidden)
+    report = execute_p1(str(file), store, usage, 'waiting-for-user')
+    assert report['status'] == 'NEEDS_AGENT_DISCOVERY'
+    observed, search = report['trace']
+    assert observed['ran'] and not observed['ok']
+    assert search['status'] == 'NO_MATCH'
+    assert search['scope'] == 'Team Skill' and search['query'] == 'file-access-fail:xlsx'
+    assert search['org_knowledge'] == {'status': 'not_provided', 'searched': False}
+    assert store.list() == [] and usage.list_shared_events() == []
+
+
 def test_review_replay_gate_restart_and_mutation(scope):
     file, store, usage = scope
     d = build_candidate(PROC)

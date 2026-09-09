@@ -1,0 +1,6 @@
+
+> ddthon-team-hub@1.0.0 build
+> tsc -b && vite build
+
+'tsc' is not recognized as an internal or external command,
+operable program or batch file.

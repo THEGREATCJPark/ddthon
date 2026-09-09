@@ -527,12 +527,27 @@ def main(argv: list[str] | None = None) -> int:
     pd = sub.add_parser("dashboard", help="localhost 읽기전용 대시보드 기동")
     pd.add_argument("--host", default="127.0.0.1", help="바인딩 호스트(기본 127.0.0.1)")
     pd.add_argument("--port", type=int, default=8765, help="포트(기본 8765)")
-    p1 = sub.add_parser('run-p1', help='실제 XLSX 실패·검색·Agent 절차 적용·업무·후보화')
+    p1 = sub.add_parser('run-p1', help='실제 XLSX 실패·검색·Agent 절차 적용·업무·후보화',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''입력 계약 (현재 문서의 정답 배치를 제공하는 것이 아닙니다):
+  --task-mapping: JSON object, 정확히 sheet/month_col/total_col/first_row 네 key.
+    sheet: 실제 snapshot에서 확인한 시트 이름(string).
+    month_col, total_col, first_row: 1-based positive integer.
+    UsedRange 상대 좌표가 아닌 worksheet 절대 좌표. month_col != total_col.
+  --procedure: 실제 발견한 접근이 지원 어댑터와 일치하는 경우에만
+    {"action":"file-access","method":"excel-com-attach"}를 전달.
+    업무 데이터/시트/열/행/예측식/암호/파일 경로는 procedure에 포함하지 않음.
+  NEEDS_AGENT_DISCOVERY: 실제 실패·검색 후 정상적인 환경 사실 확인 대기.
+    사용자에게 Excel 열람 가능 여부를 확인하고 답변 뒤 탐색합니다.
+  NEEDS_TASK_MAPPING: 로컬 artifact_ref를 읽어 현재 문서의 실제 배치를 판단.
+  --app-open은 보고된 전제이며 실제 workbook 접근 성공의 증명이 아닙니다.
+  WORK_COMPLETE의 chart_ref는 최종 답변에 실제 파일 경로/링크로 전달합니다.
+  검색 범위는 Team Skill. 별도 Org Knowledge 입력은 현재 제공되지 않습니다.''')
     p1.add_argument('--xlsx', required=True)
     p1.add_argument('--store', required=True)
     p1.add_argument('--usage', required=True)
     p1.add_argument('--run-id')
-    p1.add_argument('--app-open', action='store_true')
+    p1.add_argument('--app-open', action='store_true', help='사용자가 보고/실제 확인한 열람 전제; 잠금 파일만으로 확정 금지')
     p1.add_argument('--procedure', help='Agent가 발견한 명시적 read-only procedure JSON')
     p1.add_argument('--task-mapping', help='현재 업무의 시트·열·시작행 JSON (공유 Skill 아님)')
     p1.add_argument('--confirm-skill', help='명시적으로 실행 확인한 exact digest')

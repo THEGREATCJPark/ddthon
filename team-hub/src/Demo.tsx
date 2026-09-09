@@ -172,7 +172,7 @@ export default function Demo({
       <div className="demo-storyline">
         {(scenario === "p0"
           ? ["업무 요청", "공급 실패", "팀 경험 적용", "설치 검증·재사용"]
-          : ["NO_MATCH·탐색", "차트·후보", "검토·Replay", "Git 게시·새 Agent 재사용"]
+          : ["NO_MATCH·사용자 환경 확인", "탐색·차트·후보", "검토·Replay", "Git 게시·다음 팀원 재사용"]
         ).map((text, i) => (
           <span key={text}>
             {i > 0 && <b>→</b>}
@@ -255,9 +255,9 @@ export default function Demo({
           </button>
         </div>
         <div className="claude-statusbar skillloop-terminal-status">
-          <div>🧠 SkillLoop · 설명용 팀 현황 | 📚 팀 게시 Skill <DemoCounter value={demoState.published} initial={0} unit="개" /></div>
-          <div>✨ 미게시 후보 {demoState.candidates}개 · 게시된 기여 <DemoCounter value={demoState.published} initial={0} unit="개" /></div>
-          <div>🔥 시뮬레이션 재사용 <DemoCounter value={demoState.reused} initial={0} unit="회" /> · {scenario === "p0" ? "새 후보 0개" : `새 Agent의 중복 후보 ${demoState.warm ? "0개" : "아직 재사용 전"}`}</div>
+          <div>🧠 SkillLoop · 설명용 현황 | 📚 사용 가능 Skill <DemoCounter value={demoState.available} initial={1} unit="개" /> (기존 로컬 승인 1개 포함)</div>
+          <div>✨ 미게시 후보 {demoState.candidates}개 · 이번에 새로 팀 게시 <DemoCounter value={demoState.published} initial={0} unit="개" /></div>
+          <div>🔥 실제 검증 재사용 흐름 <DemoCounter value={demoState.reused} initial={0} unit="회" /> · {scenario === "p0" ? "새 후보 0개" : `다음 팀원의 중복 후보 ${demoState.warm ? "0개" : "아직 재사용 전"}`}</div>
           <div className="skillloop-evidence">위 숫자는 설명용 상태 · 실제 로컬/팀 실적 변경 없음</div>
         </div>
       </div>

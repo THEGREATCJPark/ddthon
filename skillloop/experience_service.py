@@ -134,7 +134,9 @@ def execute_p1(xlsx_path, store, usage, run_id, *, app_open=False, procedure=Non
     obs = match.FailureObservation('read xlsx', 'xlsx', SIGNAL, 1)
     outcome = match.search(obs, store)
     trace = [{'step': 'direct-access', 'ran': observation.ran, 'ok': observation.ok, 'error': observation.error},
-             {'step': 'search', 'status': outcome.status, 'rationale': outcome.rationale}]
+             {'step': 'search', 'scope': 'Team Skill', 'query': SIGNAL,
+              'org_knowledge': {'status': 'not_provided', 'searched': False},
+              'status': outcome.status, 'rationale': outcome.rationale}]
     env = harness.EnvContext(xlsx_path, app_open)
     if outcome.status == 'MATCH':
         selected = outcome.descriptor
@@ -164,7 +166,8 @@ def execute_p1(xlsx_path, store, usage, run_id, *, app_open=False, procedure=Non
         return {'status': outcome.status, 'trace': trace}
     if procedure is None:
         return {'status': 'NEEDS_AGENT_DISCOVERY', 'trace': trace,
-                'facts_needed': 'Confirm the available application session and permitted read-only access; discover a procedure.'}
+                'facts_needed': '사용자 환경에서 이 파일을 Excel로 열어 볼 수 있는지 확인해 주세요. '
+                                '아직 대화로 확인하지 않았다면 답변을 기다린 뒤 허용 read-only 대안을 탐색합니다.'}
     procedure = candidate_procedure(procedure)  # never choose or default the solution
     access = harness.run_file_access_procedure(procedure, env)
     if not access.ok:

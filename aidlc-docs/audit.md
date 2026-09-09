@@ -873,3 +873,10 @@ Prepared construction/plans/dialogue-ux-live-demo-code-generation-plan.md before
 Computer-use skill read, @oai/sky runtime initialized, live list_apps succeeded; no current Claude window and no input sent. P0 LIVE DEMO RUN #1 remains unstarted pending corrections/regression. No external preimplementation access. Official workflow files unchanged. Extension settings retained (Partial PBT; Security/Resiliency opt-out with core NFR still enforced).
 
 Approval prompt: 위 최소 Code Plan의8단계(수정·회귀·P1 2-turn·실제 P0 UI1회·증거·웹 연결·CI/Pages)를 승인해 주시면 Part2를 이어서 수행합니다. User prompt §0 and code-generation Part1 Step7 explicitly require this plan gate. No repeated question about already approved technology, ownership or lifecycle.
+
+## 2026-09-09T00:15:59.7512103Z — Dialogue UX Code Plan approval before Part 2
+
+User (raw): 어 승인
+
+Approves all eight steps of construction/plans/dialogue-ux-live-demo-code-generation-plan.md as presented: bounded corrections, regression, two-turn P1, one interactive P0 session, evidence, push/CI/Pages. This is development approval, not a new candidate human review or remote execution approval. Existing CONSTRUCTION continues.
+

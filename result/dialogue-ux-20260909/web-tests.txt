@@ -1,0 +1,19 @@
+
+> ddthon-team-hub@1.0.0 test
+> node --experimental-strip-types --test src/workspace.test.ts src/demoScenarios.test.ts
+
+✔ ordinary P0 request does not require repeated recovery instructions (0.8803ms)
+✔ candidate and human approval do not increment publication or reuse (0.67ms)
+✔ environment fact turn precedes discovery without supplying an API answer (0.2976ms)
+✔ progress links preserve independent parallel stages (1.2097ms)
+✔ unrecognized link versions and invalid statuses never invent progress (0.1674ms)
+✔ challenge forcibly removes submitted identity; team needs a name (0.2643ms)
+✔ comments reject blank and oversized text; sample remains visibly synthetic (0.1255ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 136.6467
