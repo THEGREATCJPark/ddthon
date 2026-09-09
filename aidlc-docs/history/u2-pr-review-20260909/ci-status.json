@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-09-09T07:02:48.555117+00:00",
+  "tested_commit": "481d7a0ed8442d78433c37344b8b4da3fc34fc01",
+  "runs": [
+    {
+      "id": 34321513133,
+      "name": "SkillLoop Python verification",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34321513133"
+    }
+  ],
+  "prior_observation": {
+    "recorded_at": "2026-09-09T07:00:07.508581+00:00",
+    "tested_commit": "481d7a0ed8442d78433c37344b8b4da3fc34fc01",
+    "runs": [
+      {
+        "id": 34321513133,
+        "name": "SkillLoop Python verification",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34321513133"
+      }
+    ]
+  },
+  "test_summary": {
+    "passed": 200,
+    "skipped": 2,
+    "duration_seconds": 197.83,
+    "python": "3.12.10",
+    "job_id": 102368988226,
+    "excerpt": "ci-tests-excerpt.txt"
+  }
+}

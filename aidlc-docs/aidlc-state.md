@@ -51,3 +51,15 @@
 [마감 전 state 전체 원문](history/aidlc-state-pre-closeout-20260909.md)에 반복 Latest·당시 대기·단계 체크박스를 원본 바이트로 보존했다. 그 문서는 현재 상태가 아니다. audit.md는 양쪽 브랜치 기록과 timestamp correction을 보존하며 매 이벤트 OS UTC 시간을 새로 취득한다.
 
 ‘전 과정 완전 준수’ 주장을 하지 않는다. MVP를 최종 수용한 뒤에도 변경 영향에 맞는 계획·승인·구현·검증으로 개선을 이어갈 수 있다. 이전 완료 범위/소스와 후속 작업 상태를 구분한다.
+
+
+## 승인 후 저장소 정리 — 2026-09-09
+
+갱신: 2026-09-09T07:00:07.518307+00:00. 사용자 “어 다 정리해줘”에 따른 후속 저장소 정리. 기존 MVP 개발 완료 상태 유지.
+
+- main `481d7a0ed8442d78433c37344b8b4da3fc34fc01`에 B의 PR #2/#3 원문·작성자·커밋 근거 및 현재 판단을 보존하고 두 PR을 종료했다. 과거 발견 기록을 지우거나 현재 설계로 소급 변경하지 않았다.
+- 병합 완료 개발/QA 7개와 원문 보존된 문서 2개, 총 원격 브랜치 9개 삭제. main 및 Skill 저장소/시연 9개 유지. 로컬 작업 폴더 보존.
+- 테스트 설명 한 줄 정정, 실행 AST/제품/공식 규칙 무변경. 기존 관련 테스트 18 PASS / 1 실 Excel opt-in SKIP. CI는 [실제 조회 결과](history/u2-pr-review-20260909/ci-status.json)로 구분한다.
+- [정리 결과](history/u2-pr-review-20260909/maintenance-result.md), [현재 PR 판단](construction/u2-p1-git/pr-review-disposition.md), [승인 계획](construction/plans/repository-cleanup-plan-20260909.md). pip 입력 검증 보완은 이번 범위 밖이며 미반영이다.
+
+정리 변경 CI 최종 확인: 481d7a0 / run34321513133 SUCCESS, Python 3.12.10에서 200 PASS / 2 SKIP(197.83초). 후속 정리 기록은 문서만 변경한다.

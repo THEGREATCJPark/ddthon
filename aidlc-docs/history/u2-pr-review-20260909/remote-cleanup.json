@@ -1,0 +1,72 @@
+{
+  "recorded_at": "2026-09-09T06:59:07.884259+00:00",
+  "authorization": "어 다 정리해줘",
+  "preservation_main": "481d7a0ed8442d78433c37344b8b4da3fc34fc01",
+  "deleted": {
+    "codex/development-closeout-20260909": "54b3bd17efce561d15643aba1c2fefa786531ed0",
+    "codex/team-hub": "be3013f18a6b54ae0716ee44d2e2945b21e0f4fc",
+    "work/u1-p1": "cb25a62d865fda405e5b051438dc53db32e4b990",
+    "work/u2-p1-git": "1760d325a60316fb9b8b52b50d412be058635c42",
+    "qa/embed-20260909-1120": "54a903c403089d61592284a89229aa8b15b5df66",
+    "qa/embed-20260909-1315": "19ea1969a28b77d7fa3e8b20b11f9c49dd06de9a",
+    "qa/embed-20260909-1430": "98a4900172a86ace4e866c26c8a8465135f3f58c",
+    "docs/u2-integration-contract-diff": "43282aab483bd12ff08c17b55323359ba4ad9df9",
+    "docs/u2-known-limitations": "c53158c001d88710d076138bd383d9a395c35a16"
+  },
+  "retained_data_heads": {
+    "codex/p1-auto-cold-r1-20260909-132154": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r1": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r2": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r3": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-manual-r1-20260909-133215": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-r1-retry-20260909-131227": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-ready-r1-20260909-134050": "e302bf213679a038fea04e5058188096cb96c24b",
+    "team-skill-demo-20260909": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "team-skill-store": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b"
+  },
+  "remote_heads_after": {
+    "codex/p1-auto-cold-r1-20260909-132154": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r1": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r2": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-20260909-125935-r3": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-manual-r1-20260909-133215": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-r1-retry-20260909-131227": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "codex/p1-cold-ready-r1-20260909-134050": "e302bf213679a038fea04e5058188096cb96c24b",
+    "main": "481d7a0ed8442d78433c37344b8b4da3fc34fc01",
+    "team-skill-demo-20260909": "75b6e54225a9fa4e71e7174168161d61fa923e31",
+    "team-skill-store": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b"
+  },
+  "delete_command_result": "To https://github.com/THEGREATCJPark/ddthon.git\n - [deleted]         codex/development-closeout-20260909\n - [deleted]         codex/team-hub\n - [deleted]         docs/u2-integration-contract-diff\n - [deleted]         docs/u2-known-limitations\n - [deleted]         qa/embed-20260909-1120\n - [deleted]         qa/embed-20260909-1315\n - [deleted]         qa/embed-20260909-1430\n - [deleted]         work/u1-p1\n - [deleted]         work/u2-p1-git\n",
+  "deletion_guard": "Atomic remote deletion with exact per-head force-with-lease; merged ancestry or archived original bytes checked first",
+  "prs_after": [
+    {
+      "number": 4,
+      "state": "closed",
+      "merged_at": "2026-09-09T06:21:36Z",
+      "closed_at": "2026-09-09T06:21:36Z",
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/4"
+    },
+    {
+      "number": 3,
+      "state": "closed",
+      "merged_at": null,
+      "closed_at": "2026-09-09T06:58:28Z",
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/3"
+    },
+    {
+      "number": 2,
+      "state": "closed",
+      "merged_at": null,
+      "closed_at": "2026-09-09T06:58:25Z",
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/2"
+    },
+    {
+      "number": 1,
+      "state": "closed",
+      "merged_at": "2026-09-08T14:02:33Z",
+      "closed_at": "2026-09-08T14:02:33Z",
+      "url": "https://github.com/THEGREATCJPark/ddthon/pull/1"
+    }
+  ],
+  "local_checkouts": "Not removed or reset; only stale origin remote-tracking refs pruned"
+}

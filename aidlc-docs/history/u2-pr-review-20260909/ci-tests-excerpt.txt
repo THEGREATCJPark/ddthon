@@ -1,0 +1,6 @@
+Source: GitHub Actions job 102368988226, run 34321513133
+Commit: 481d7a0ed8442d78433c37344b8b4da3fc34fc01
+Only setup/command/final test summary lines are retained here; full job log remains at the CI URL.
+2026-09-09T06:58:26.0429469Z Successfully set up CPython (3.12.10)
+2026-09-09T06:59:00.6007063Z ##[group]Run python -m pytest --hypothesis-seed=20260908 -o addopts='' -q
+2026-09-09T07:02:20.4026539Z 200 passed, 2 skipped in 197.83s (0:03:17)
