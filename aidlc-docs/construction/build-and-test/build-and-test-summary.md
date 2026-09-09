@@ -2,7 +2,7 @@
 
 ## 현재 검증 기준 — 승인된 후속 수정 포함
 
-Python은 `d77177b` 기준 **228 PASS / 2 SKIP**(로컬 cp949·UTF8 각각 및 GitHub CI), 웹은 10 PASS·일반/대용량 ZIP 제외 빌드 PASS다. [후속 수정 결과·CI](../../../result/post-closeout-corrections-20260909/README.md)를 현재 근거로 사용한다. 이후 소개 영상 필터 호환성 보완은 [승인 계획](../plans/intro-filter-docs-plan.md)에 따라 별도 검증하며 Python 소스는 변경하지 않는다.
+Python은 `d77177b` 기준 **228 PASS / 2 SKIP**(로컬 cp949·UTF8 각각 및 GitHub CI), 웹은 10 PASS·일반/대용량 ZIP 제외 빌드 PASS다. [후속 수정 결과·CI](../../../result/post-closeout-corrections-20260909/README.md)를 현재 근거로 사용한다. 이후 소개 영상 필터 호환성 보완은 [승인 계획](../plans/intro-filter-docs-plan.md)에 따라 별도 검증·main 반영·웹 CI까지 완료했다. [소개 영상 보완 결과](../../../result/intro-filter-correction-20260909/README.md). Python 소스는 변경하지 않았다.
 
 ## MVP 최초 마감 당시 기록
 

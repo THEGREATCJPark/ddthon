@@ -1284,3 +1284,6 @@ Intro follow-up step2 completed — 2026-09-09T07:39:40.777261+00:00: only Produ
 
 
 Intro step3 verification complete — 2026-09-09T07:41:29.000824+00:00: normal/filtered npm test10 PASS and build PASS, dist hashes identical; original MP4 unchanged, raw URL HEAD200 and browser frame rendering confirmed. Documentation links valid. Source/contract scope unchanged. Evidence result/intro-filter-correction-20260909. Proceeding to approved main/CI delivery.
+
+
+Intro step4 complete — 2026-09-09T07:42:59.407096+00:00: main fcc1e50, web CI34325148671 build/deploy SUCCESS including tests/rules. Approved two-item scope complete, original media/Python/rules unchanged. Final outcome and limits: result/intro-filter-correction-20260909/README.md. Previous MVP acceptance preserved.
