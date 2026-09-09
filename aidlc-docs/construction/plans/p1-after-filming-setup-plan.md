@@ -30,3 +30,14 @@ User says P1 Skill must not already exist. Assistant's Warm launch instruction w
 
 ## Approved three manual full-product Cold runs — 2026-09-09T03:59:14.2292835Z
 User clarified: this PC runs P1 Cold three times manually and films; assistant later extracts tokens/time/success. Before-PC data supplied separately. Prepare three new workspaces and three new Git transport branches from the verified P0-only baseline so one run's P1 publication cannot contaminate the next. Preserve existing branches and workspaces. Same workbook bytes/task/bootstrap and explicit Claude model claude-opus-4-8/medium across three fresh UUID sessions. Operator launcher checks zero P1/usage and remote baseline before starting, writes per-attempt metadata, copies exact native session JSONL on exit. No model is launched during setup/check-only. Human opening and publication approval remain in user dialogue. Wall-clock including human delays is separate from Agent time/token extraction, no invented final usage. This is observed FULL_PRODUCT_COLD, not controlled NO_SKILL/WARM_SKILL_ONLY. No more benchmark infrastructure development.
+
+## User-approved Auto-mode round1 retry — 2026-09-09T04:21:32.9914032Z
+User: 그럼 auto mode로 진행할테니까 다시 round1 cold 세팅하고 보고해
+Bounded Build & Test preparation: (1) launcher accepts optional manifest permission_mode=auto and records mode; disable unanswered question auto-continue for this session, preserve default compatibility; (2) new round1 with identical input, P0-only Git branch, latest C9, no P1/usage; (3) operator-only password-free viewing entry outside Agent workspace; (4) parse/preflight and record readiness without model task or opening Excel. Existing results preserved. Human candidate approval/Replay/publication unchanged. Local CLI help verifies auto option; actual provider availability checked by interactive launch, never bypass fallback.
+
+Validation: new auto-mode root132154 prepared; actual Git sync/check-only/P1 NO_MATCH PASS; PowerShell parse PASS. Opener target validated, live window and interactive Auto/selector pending user. No model calls during preparation.
+
+## 2026-09-09T04:40:50.3570413Z — Fresh Cold after attach-only correction (approved execution)
+User: 아니 다시 cold환경 세팅해줘. ai-dlc 규정을 위반하지않았는지, 충실하게 이행했는지도 점검ㅅ해
+Execute existing manual Cold preparation with latest C9 already-open-only boundary from session start, new workspace/remote, same input, P1/usage0, operator opener outside task directory, store-init+sync for actual status metadata. Preserve all failed/partial attempts, no Excel/model execution. Validate hashes/NO_MATCH/status/launcher and audit continuity; new retry remains distinct from old measurements.
+

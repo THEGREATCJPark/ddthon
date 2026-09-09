@@ -1,0 +1,16 @@
+{
+  "comparison.csv": "63126da56b814b0c3deb373b48834bc0b860731eeff9aa93a20d21079114d01f",
+  "metrics.csv": "954090ccb9b2e4f28c3b6b228ac828387b2241eb2c84260286b0fbdc60e9c50b",
+  "operator-evidence-hashes.json": "e70a5a5dafdc5f8b3004b97cd1ba39f6bef180681804c942f94d7d05128661ac",
+  "README.md": "c7d2e387498464a55b1140f7d691040b6c1074c7b5faddbc47de0e473febd29e",
+  "round-1-responses.md": "5165bc0a085114422a6edc0fa2d531b23d1f09fb012f78e5d206d0c929551f83",
+  "round-1-result.json": "c80ef955aec5752cb81354be989eb7d4e53af433b00e0b129abe58590a894bce",
+  "round-2-responses.md": "50a7dcb9d361f3663cfac69f49468ae2d01a4a7c2c344b825a246e3ba2012194",
+  "round-2-result.json": "3e5f9bddd56ee20a28d37a152b703bf6b2309ea9708878bd22822bfaad118a67",
+  "round-3-responses.md": "860298b1fc5373b029e52ed6e4ed1a71acd309e7d6a540a3dad042746224fb5c",
+  "round-3-result.json": "ce73c165848ba60663abd5b693b36ce4171956c8a5b0ab8fd65614a7e8d8de03",
+  "summary.json": "663fb5ccd6496aa41afcfe574fd856323c9c9854881126a049ef9c84001e0cae",
+  "transcript-visible-1.json": "c9d193ba940ba2a4e9f39d845c4f1f31cf2f2f49510e5e57ec230aa390d5aafe",
+  "transcript-visible-2.json": "65715c0af0f9c587b5b6f119c12122c3872e8d2f0a02f979899fd6d895ef80de",
+  "transcript-visible-3.json": "aef2bb1059394d9d57f2e095af24770ba20ed99c611f9841d2efae86b8cbb759"
+}

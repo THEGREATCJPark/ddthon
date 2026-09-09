@@ -1,0 +1,184 @@
+{
+  "title": "P1 observed before3 and after4 comparison",
+  "rubric_basis": "User-provided organizer guide, confirmed against EVALUATION.md and requirements CON-3; no claim of new official web fetch",
+  "rubric_weights": {
+    "AI-DLC": 25,
+    "problem": 20,
+    "creativity": 15,
+    "completeness": 15,
+    "usability": 15,
+    "maintainability_security": 10
+  },
+  "final_weight": {
+    "AI": 0.4,
+    "participant_vote": 0.6
+  },
+  "rows": [
+    {
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "round": 1,
+      "session_id": "50c4e8e3-a156-48d7-9cbb-e7a186767316",
+      "task_complete": false,
+      "time_endpoint": "unsuccessful_final_response",
+      "elapsed_seconds": 340.16,
+      "user_final_seconds": 340.16,
+      "native_usage": {
+        "input_tokens": 34,
+        "output_tokens": 14591,
+        "cache_creation_input_tokens": 24903,
+        "cache_read_input_tokens": 222380
+      },
+      "full_cli_cost_estimate_usd": 0.63761875,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "c3e1f8aec85116fccb850bc4ac5f022bfdcfb1807d1d78ce80db0b7870857105"
+    },
+    {
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "round": 2,
+      "session_id": "86a1a738-0034-4161-a462-fea1c1c12499",
+      "task_complete": false,
+      "time_endpoint": "unsuccessful_final_response",
+      "elapsed_seconds": 133.451,
+      "user_final_seconds": 133.451,
+      "native_usage": {
+        "input_tokens": 16,
+        "output_tokens": 2281,
+        "cache_creation_input_tokens": 9189,
+        "cache_read_input_tokens": 50823
+      },
+      "full_cli_cost_estimate_usd": 0.14578775,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "95c2f17915b5923d5dc886f7643583a9d57cbd4d6268d5ba7f22a49fef8fa1dc"
+    },
+    {
+      "condition": "NO_SKILL_PREOPENED_SUPERVISED",
+      "round": 3,
+      "session_id": "3014628c-991b-46b2-8ba3-955970699061",
+      "task_complete": false,
+      "time_endpoint": "unsuccessful_final_response",
+      "elapsed_seconds": 418.307,
+      "user_final_seconds": 418.307,
+      "native_usage": {
+        "input_tokens": 32,
+        "output_tokens": 17724,
+        "cache_creation_input_tokens": 25174,
+        "cache_read_input_tokens": 221279
+      },
+      "full_cli_cost_estimate_usd": 0.717077,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "2768368a9f52e37300b0e555a9a88904e9766a7199936c4e181d7d7687e108aa"
+    },
+    {
+      "condition": "FULL_PRODUCT_COLD_PREOPENED_FACT_GIVEN",
+      "round": 1,
+      "session_id": "3d24b49d-5cfc-4b32-af87-aef77ee582fe",
+      "task_complete": true,
+      "time_endpoint": "first_WORK_COMPLETE",
+      "elapsed_seconds": 365.093,
+      "user_final_seconds": 382.699,
+      "native_usage": {
+        "input_tokens": 64,
+        "output_tokens": 18626,
+        "cache_creation_input_tokens": 45767,
+        "cache_read_input_tokens": 975163
+      },
+      "full_cli_cost_estimate_usd": 1.3310939999999998,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "d3c5d4fa061efed10d7d71ef7410e353fe82b581e844844191e35cec19633a5b",
+      "candidate_delta": 1,
+      "actual_reuse_delta": 0,
+      "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+    },
+    {
+      "condition": "FULL_PRODUCT_COLD_PREOPENED_FACT_GIVEN",
+      "round": 2,
+      "session_id": "13db51f6-5c09-45b5-858b-3ebc1925fd02",
+      "task_complete": true,
+      "time_endpoint": "first_WORK_COMPLETE",
+      "elapsed_seconds": 105.093,
+      "user_final_seconds": 120.788,
+      "native_usage": {
+        "input_tokens": 20,
+        "output_tokens": 6062,
+        "cache_creation_input_tokens": 24612,
+        "cache_read_input_tokens": 211147
+      },
+      "full_cli_cost_estimate_usd": 0.48277175,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "5c86a589427dc051cfbd8e5d2606023e7673a3aa672a32ada9a9dc7aef771b7f",
+      "candidate_delta": 1,
+      "actual_reuse_delta": 0,
+      "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+    },
+    {
+      "condition": "FULL_PRODUCT_COLD_PREOPENED_FACT_GIVEN",
+      "round": 3,
+      "session_id": "6b648caa-91c4-4830-8a00-aa42c40566be",
+      "task_complete": true,
+      "time_endpoint": "first_WORK_COMPLETE",
+      "elapsed_seconds": 110.539,
+      "user_final_seconds": 127.155,
+      "native_usage": {
+        "input_tokens": 18,
+        "output_tokens": 6672,
+        "cache_creation_input_tokens": 24512,
+        "cache_read_input_tokens": 183972
+      },
+      "full_cli_cost_estimate_usd": 0.49015024999999995,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "75b069b713bdfd0a0b2b703ed9baafeb94a5f78605ef59c0ad9e075c1a260559",
+      "candidate_delta": 1,
+      "actual_reuse_delta": 0,
+      "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+    },
+    {
+      "condition": "FULL_PRODUCT_COLD_PREOPENED_FACT_GIVEN",
+      "round": 4,
+      "session_id": "d67b81e8-e002-48de-98a8-231d28b32843",
+      "task_complete": true,
+      "time_endpoint": "first_WORK_COMPLETE",
+      "elapsed_seconds": 87.836,
+      "user_final_seconds": 106.553,
+      "native_usage": {
+        "input_tokens": 20,
+        "output_tokens": 4782,
+        "cache_creation_input_tokens": 23388,
+        "cache_read_input_tokens": 209216
+      },
+      "full_cli_cost_estimate_usd": 0.465387,
+      "input_sha256": "fcdbf97a191a7ba1d6c5921183fed9ce03594b11b7621adafd6c5a25e8bfa935",
+      "source_raw_sha256": "b5def00e518a37f5184f9ff86dda534c77e8c268f483ddb0df6f9a0d4c7fbd18",
+      "candidate_delta": 1,
+      "actual_reuse_delta": 0,
+      "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4"
+    }
+  ],
+  "source_files_sha256": {
+    "result\\p1-before-after-comparison-20260909\\comparison.json": "de5ffefbbb887aebc3c1a55f43765b720e7b2b38df7f7ad6f79253625eed70dd",
+    "result\\p1-preopened-three-20260909\\four-run-summary.json": "992834c108215db7ff234b6ac4bce4af2bd759f50f5977cf165542418e0b12ae",
+    "EVALUATION.md": "d670fef62670e6d08ba1978f661bb0e2fca5b03580a7814358645b0955da2928",
+    "aidlc-docs\\inception\\requirements\\requirements.md": "9fa4002fae9ed15db13ac6dfd29c9503d8ffafe99fb6207ef6a81980d3d644ef"
+  },
+  "comparison_limits": [
+    "Before task not completed; durations are not matched successful completion times",
+    "After receives upfront user fact, before does not",
+    "Manual before vs auto after, different PC/runtime, caches not reset",
+    "Round4 added after seeing first3; retain all4 primary; rounds2-4 only labelled post-hoc",
+    "Cold new discovery not Warm existing-Skill reuse; no causal token/cost/speed or universal success rate claim",
+    "Full CLI costs are estimates; token rows are task cutoff after, final failure before"
+  ],
+  "before": {
+    "n": 3,
+    "completed": 0,
+    "mean_seconds": 297.30600000000004,
+    "median_seconds": 340.16
+  },
+  "after": {
+    "n": 4,
+    "completed": 4,
+    "mean_task_seconds": 167.14025,
+    "median_task_seconds": 107.816,
+    "mean_user_final_seconds": 184.29875,
+    "post_hoc_last3_mean_task_seconds": 101.156
+  }
+}

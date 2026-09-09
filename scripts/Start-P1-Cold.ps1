@@ -5,7 +5,12 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $env:PYTHONUTF8 = '1'
+$SetupRoot = (Resolve-Path -LiteralPath $SetupRoot).Path
 $manifest = Get-Content -LiteralPath (Join-Path $SetupRoot 'rounds.json') -Raw -Encoding utf8 | ConvertFrom-Json
+$permissionMode = $manifest.permission_mode
+if ($permissionMode -and $permissionMode -notin @('manual','auto')) {
+    throw 'Unsupported preparation permission mode; no bypass fallback.'
+}
 $run = @($manifest.rounds | Where-Object { $_.round -eq $Round })[0]
 $work = $run.workspace
 $preflightCode = @'
@@ -38,7 +43,8 @@ $sessionId = [guid]::NewGuid().ToString()
 $metadata = @{round=$Round;session_id=$sessionId;workspace=$work;branch=$run.branch;
     mode='FULL_PRODUCT_COLD_MANUAL';model=$manifest.model;effort=$manifest.effort;
     input_sha256=$manifest.input_sha256;source_sha=$manifest.source_sha;
-    started_at=$started.ToUniversalTime().ToString('o');preflight=($preflight | ConvertFrom-Json)}
+    started_at=$started.ToUniversalTime().ToString('o');preflight=($preflight | ConvertFrom-Json);
+    permission_mode=$(if ($permissionMode) { $permissionMode } else { 'inherited' })}
 $metadata | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $attempt 'start.json') -Encoding utf8
 Copy-Item -LiteralPath (Join-Path $work '.skillloop/store.json') -Destination (Join-Path $attempt 'store-before.json')
 Copy-Item -LiteralPath (Join-Path $work '.skillloop/usage.json') -Destination (Join-Path $attempt 'usage-before.json')
@@ -46,12 +52,23 @@ Write-Host "P1 Cold round $Round. Start screen recording, then enter the task."
 Write-Host 'After the task, capture /cost and exit with /exit. Open only this round workbook when needed.'
 $exitCode = $null
 $oldLocation = Get-Location
+$oldAfkTimeout = [Environment]::GetEnvironmentVariable('CLAUDE_AFK_TIMEOUT_MS', 'Process')
 try {
     Set-Location -LiteralPath $work
-    & $manifest.claude --model $manifest.model --effort $manifest.effort --session-id $sessionId
+    $launchArgs = @('--model', $manifest.model, '--effort', $manifest.effort, '--session-id', $sessionId)
+    if ($permissionMode) { $launchArgs += @('--permission-mode', $permissionMode) }
+    if ($permissionMode) {
+        # Auto tool permissions do not authorize candidate publication.
+        $questionSettings = Join-Path $attempt 'question-settings.json'
+        '{"askUserQuestionTimeout":"never"}' | Set-Content -LiteralPath $questionSettings -Encoding utf8
+        $launchArgs += @('--settings', (Resolve-Path -LiteralPath $questionSettings).Path)
+        [Environment]::SetEnvironmentVariable('CLAUDE_AFK_TIMEOUT_MS', $null, 'Process')
+    }
+    & $manifest.claude @launchArgs
     $exitCode = $LASTEXITCODE
 }
 finally {
+    [Environment]::SetEnvironmentVariable('CLAUDE_AFK_TIMEOUT_MS', $oldAfkTimeout, 'Process')
     Set-Location $oldLocation
     $finished = Get-Date
     $copied = @()

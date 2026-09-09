@@ -1,0 +1,5 @@
+﻿round,verdict,task_seconds,user_final_seconds,input_tokens,output_tokens,cache_creation_input_tokens,cache_read_input_tokens
+1,PASS,365.093,382.699,64,18626,45767,975163
+2,PASS,105.093,120.788,20,6062,24612,211147
+3,PASS,110.539,127.155,18,6672,24512,183972
+4,PASS,87.836,106.553,20,4782,23388,209216
