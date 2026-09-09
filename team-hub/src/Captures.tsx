@@ -156,8 +156,16 @@ function CaptureCard({ item, mine, bundled = false }: { item: Capture; mine: boo
   );
 }
 
-export default function Captures() {
-  const [scenario, setScenario] = useState<"p0" | "p1">("p0");
+export default function Captures({initialScenario = "p0"}: {initialScenario?: "p0" | "p1"}) {
+  const [scenario, setScenario] = useState<"p0" | "p1">(initialScenario);
+  useEffect(() => {
+    const syncScenario = () => {
+      if (location.hash === "#captures-p1") setScenario("p1");
+      else if (location.hash === "#captures-p0" || location.hash === "#captures") setScenario("p0");
+    };
+    window.addEventListener("hashchange", syncScenario);
+    return () => window.removeEventListener("hashchange", syncScenario);
+  }, []);
   const [items, setItems] = useState<Capture[]>([]);
   const [uid, setUid] = useState("");
   const [loading, setLoading] = useState(true);
@@ -241,7 +249,7 @@ export default function Captures() {
             role="tab"
             aria-selected={scenario === value}
             disabled={saving}
-            onClick={() => setScenario(value)}
+            onClick={() => {setScenario(value); location.hash = `captures-${value}`;}}
           >
             <b>{value.toUpperCase()}</b>
             <span>

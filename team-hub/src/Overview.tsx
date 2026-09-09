@@ -1,3 +1,4 @@
+import ProductIntro from "./ProductIntro";
 import {
   ArrowRight,
   Database,
@@ -73,6 +74,9 @@ const steps = [
 export default function Overview() {
   return (
     <section className="overview-page">
+      <ProductIntro />
+      <details className="build-evidence">
+        <summary>해커톤 동안 우리가 만든 것 · AI-DLC 문답 근거</summary>
       <div className="overview-section-title">
         <div>
           <span className="overview-eyebrow">BUILT DURING THE HACKATHON</span>
@@ -142,6 +146,7 @@ export default function Overview() {
           <a href="#challenge">태클 남기기 →</a>
         </div>
       </div>
+      </details>
     </section>
   );
 }
