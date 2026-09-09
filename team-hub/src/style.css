@@ -2055,3 +2055,140 @@ footer > span:last-child {
 .overview-records p { color:var(--muted); max-width:720px; font-size:14px; }
 .overview-records > div:last-child { display:flex; flex-direction:column; gap:12px; flex-shrink:0; font-size:14px; }
 @media(max-width:900px) { .overview-grid { grid-template-columns:1fr; } .overview-section-title,.overview-records { align-items:start; flex-direction:column; } }
+
+/* ===== QA 검증 탭 ===== */
+.qa-page { display: grid; gap: 22px; }
+.qa-headline { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: #eef4ff; color: var(--blue); font-weight: 700; font-size: 14px; white-space: nowrap; }
+.qa-card { min-width: 0; border: 1px solid var(--border); border-radius: 14px; background: #fff; padding: 24px 26px; }
+.qa-card-head { margin-bottom: 18px; }
+.qa-card-head h3 { display: flex; align-items: center; gap: 8px; font-size: 19px; }
+.qa-card-head p { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+
+/* `> svg` 한정 — 이 컨테이너 안의 details 아이콘까지 100%로 늘리지 않기 위해 */
+.qa-chart-scroll { overflow-x: auto; min-width: 0; max-width: 100%; }
+.qa-chart-scroll > svg { width: 100%; height: auto; display: block; }
+.qa-grid { stroke: var(--border); stroke-width: 1; }
+.qa-axis { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.qa-xtick { text-anchor: middle; }
+.qa-xtick.start { text-anchor: start; }
+.qa-xtick.end { text-anchor: end; }
+.qa-xday { fill: var(--navy); font-weight: 600; }
+.qa-ytick { text-anchor: end; }
+.qa-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.qa-dot { stroke: #fff; stroke-width: 2; cursor: pointer; transition: r .12s; }
+@media (prefers-reduced-motion: reduce) { .qa-dot { transition: none; } }
+.qa-dot:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.qa-endlabel { fill: var(--navy); font-size: 12px; font-weight: 700; }
+.qa-nocount { fill: var(--muted); font-size: 10.5px; text-anchor: middle; }
+.qa-nocount.start { text-anchor: start; }
+.qa-score-hero { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 4px; }
+.qa-score-hero b { font-size: 46px; font-weight: 800; letter-spacing: -2px; line-height: 1; font-variant-numeric: tabular-nums; }
+.qa-score-hero > span { font-size: 15px; color: var(--muted); }
+.qa-score-hero em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--muted); background: #eef0f4; border-radius: 5px; padding: 3px 7px; margin-left: 4px; }
+.qa-score-band { margin-left: auto; font-size: 13px; }
+.qa-score-band code { color: var(--navy); }
+.qa-scoreband { fill: #10244914; stroke: none; }
+.qa-scoreline { fill: none; stroke: var(--navy); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.qa-scoredot { fill: var(--navy); }
+.qa-sha { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 11.5px; fill: var(--navy); font-weight: 600; }
+.qa-tip { margin-top: 10px; font-size: 13px; color: var(--navy); background: #f5f7fb; border-radius: 8px; padding: 10px 14px; }
+.qa-tip code { margin-left: 8px; color: var(--muted); font-size: 12px; }
+.qa-legend { display: flex; gap: 18px; list-style: none; padding: 0; margin: 14px 0 0; font-size: 13px; color: var(--muted); }
+.qa-legend li { display: flex; align-items: center; gap: 7px; }
+.qa-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.qa-axisnote { font-size: 12.5px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+.qa-table { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; }
+.qa-table summary { display: flex; list-style: none; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: var(--blue); font-weight: 600; }
+.qa-table-scroll { overflow-x: auto; margin-top: 12px; }
+.qa-table table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 460px; font-variant-numeric: tabular-nums; }
+.qa-table th, .qa-table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.qa-table th { color: var(--muted); font-weight: 600; }
+.qa-table code { color: var(--muted); }
+.qa-table summary::-webkit-details-marker { display: none; }
+.qa-table summary svg { flex: none; }
+.qa-table[open] summary svg { transform: rotate(180deg); }
+
+.qa-areas { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.qa-areas > li { min-width: 0; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
+.qa-areas > li:last-child { border-bottom: 0; padding-bottom: 0; }
+.qa-areas button { display: grid; grid-template-columns: minmax(96px, 150px) auto 1fr 18px; align-items: center; gap: 14px; width: 100%; padding: 12px 0 6px; text-align: left; }
+.qa-area-name { min-width: 0; font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
+.qa-state { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.qa-state.s-ok { background: #eef4ff; color: var(--blue); }
+.qa-state.s-clean { background: #e9f6ef; color: #17784a; }
+.qa-state.s-part { background: #fdf3e0; color: #8a6320; }
+.qa-state.s-notrun { background: #eef0f4; color: var(--muted); }
+.qa-bar { position: relative; height: 8px; border-radius: 4px; background: #eef0f4; overflow: hidden; }
+.qa-bar i { position: absolute; inset: 0 auto 0 0; background: var(--blue); border-radius: 4px; }
+.qa-bar em { position: absolute; left: 0; top: -6px; font-size: 11.5px; font-style: normal; color: var(--muted); }
+.qa-areas .flip { transform: rotate(180deg); }
+.qa-area-summary { font-size: 13.5px; color: var(--muted); }
+.qa-evidence { margin: 12px 0 0; padding-left: 18px; display: grid; gap: 7px; font-size: 13.5px; color: var(--navy); }
+
+.qa-runs { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.qa-runs li { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 14px; background: #f5f7fb; border-radius: 9px; font-size: 13.5px; }
+.qa-runs code { min-width: 0; overflow-wrap: anywhere; font-size: 13px; color: var(--navy); font-weight: 600; }
+.qa-runs span { color: var(--muted); }
+.qa-runs b { margin-left: auto; color: #17784a; font-size: 12.5px; }
+
+.qa-counts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.qa-counts button { flex: 1 1 120px; text-align: left; background: #f5f7fb; border: 1px solid transparent; border-radius: 10px; padding: 16px 18px; transition: background .12s, border-color .12s; }
+.qa-counts button:hover { background: #eaeff8; }
+.qa-counts button.on { background: #eef4ff; border-color: var(--blue); }
+.qa-counts button.on b { color: var(--blue); }
+@media (prefers-reduced-motion: reduce) { .qa-counts button { transition: none; } }
+.qa-findings-panel { margin-top: 18px; }
+.qa-rest { display: grid; gap: 10px; padding: 18px 20px; background: #f5f7fb; border-radius: 10px; font-size: 13.5px; line-height: 1.7; }
+.qa-fixlog + .qa-rest { margin-top: 18px; }
+.qa-rest h4 { margin: 0; font-size: 15px; }
+.qa-rest p { margin: 0; }
+.qa-tracking { background: #fff8ec; }
+.qa-breakdown { display: grid; gap: 16px; }
+.qa-stack { display: flex; gap: 3px; height: 16px; }
+.qa-stack i { border-radius: 3px; min-width: 6px; }
+.b-listed { background: var(--blue); }
+.b-unlisted { background: #a9b6cd; }
+.b-tracking { background: var(--gold); }
+.qa-buckets { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.qa-buckets li { min-width: 0; display: grid; grid-template-columns: 12px auto 1fr auto; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+.qa-buckets li:last-child { border-bottom: 0; }
+.qa-buckets li > i { width: 12px; height: 12px; border-radius: 3px; }
+.qa-buckets b { font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.qa-buckets span { color: var(--muted); }
+.qa-buckets button { font-size: 12.5px; font-weight: 700; color: var(--blue); white-space: nowrap; padding: 5px 11px; border-radius: 999px; background: #eef4ff; }
+.qa-buckets button:hover { background: #dfe9fd; }
+.qa-unlisted { margin-top: 16px; padding: 14px 18px; background: #f5f7fb; border-radius: 10px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+.qa-unlisted b { color: var(--navy); }
+@media (max-width: 720px) {
+  .qa-buckets li { grid-template-columns: 12px auto 1fr; }
+  .qa-buckets button { grid-column: 2 / -1; justify-self: start; }
+}
+.qa-counts b { display: block; font-size: 30px; font-weight: 800; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+.qa-counts span { font-size: 13px; color: var(--muted); }
+.qa-findings .muted { font-size: 13px; }
+.qa-fixlog { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 2px; counter-reset: fix; }
+.qa-fixlog li { min-width: 0; display: grid; gap: 6px; padding: 16px 0; border-top: 1px solid var(--border); }
+.qa-fix-meta { display: flex; align-items: center; gap: 10px; }
+.qa-fix-id { font-size: 11.5px; font-weight: 800; letter-spacing: .05em; color: var(--muted); background: #eef0f4; border-radius: 5px; padding: 3px 7px; }
+.qa-fix-round { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.qa-fix-found, .qa-fix-fixed { display: grid; grid-template-columns: 46px 1fr; gap: 12px; font-size: 13.5px; line-height: 1.65; }
+.qa-fix-found span, .qa-fix-fixed span { font-size: 11.5px; font-weight: 700; padding-top: 3px; }
+.qa-fix-found { color: var(--muted); }
+.qa-fix-found span { color: #8a6320; }
+.qa-fix-fixed { color: var(--navy); }
+.qa-fix-fixed span { color: #17784a; }
+
+@media (max-width: 720px) {
+  .qa-fix-found, .qa-fix-fixed { grid-template-columns: 1fr; gap: 2px; }
+}
+
+@media (max-width: 720px) {
+  .qa-page .page-heading { flex-wrap: wrap; }
+  .qa-headline { white-space: normal; }
+  /* 축 글자가 6px로 줄어드는 대신 스크롤 — 읽을 수 없는 차트는 차트가 아니다 */
+  .qa-chart-scroll > svg { min-width: 560px; }
+  .qa-areas button { grid-template-columns: 1fr auto 18px; gap: 8px 10px; padding-bottom: 2px; }
+  .qa-bar { grid-column: 1 / -1; margin-top: 4px; }
+  .qa-runs li { align-items: flex-start; }
+  .qa-runs b { margin-left: 0; }
+}
