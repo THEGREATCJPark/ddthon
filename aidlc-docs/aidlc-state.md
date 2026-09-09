@@ -1,5 +1,12 @@
 # AI-DLC State Tracking
 
+## 현재 우선 작업 — B-PC 공용 Skill 왕복 검증 (2026-09-09)
+
+- 기존 CONSTRUCTION / Build & Test를 이어간다. B 보고 기준 main fff0ffa, Python 3.12.2 제품 설치·import 성공. 개발 의존성 설치는 cp949 오류 후 `python -X utf8`로 성공했다.
+- CJ는 requirements-dev.txt 첫 주석만 ASCII로 정정했다. 기존 파일 cp949 decode 실패 재현, 변경 파일 ASCII/UTF-8/cp949 해석 동일·4개 선언 불변·로컬 pip 파싱 PASS. B PC에서 수정 파일 재실행 완료로 주장하지 않는다.
+- B는 설치를 반복하지 않고 Excel 준비 → 원격 Skill pull → exact 실행 확인 → Warm → usage push를 진행한다. B-PC 업무 성공과 CJ 수신·중복 방지 검증은 아직 NOT_RUN.
+- 대화 UX의 미커밋 웹 변경·실행 증거는 보존하며 기존 계획 완료로 승격하지 않는다. 공식 규칙·제품 범위·게시 게이트 불변.
+
 ## 최신 결과 — 대화 UX 검증 (2026-09-09)
 
 - **현재 단계**: CONSTRUCTION / 통합 Build & Test. 승인된 대화 정합화 구현 완료, P1 실제2-turn PASS, Python144 PASS/2 SKIP, 웹7 tests/build PASS. Python/C9 검증 소스fff0ffa. 웹 완료 시 마지막 대화 스크롤 보완도 검증됨.

@@ -84,6 +84,9 @@ $bRemote = "https://github.com/THEGREATCJPark/ddthon.git"
 
 ## 5. 인계할 결과와 문제 대응
 
+- 구버전 requirements-dev.txt의 한글 주석을 읽다 cp949 UnicodeDecodeError가 발생하면 `python -X utf8 -m pip install -r requirements-dev.txt`로 설치할 수 있습니다. 현재 파일은 주석만 ASCII로 정정했으며 의존성 선언은 동일합니다. 이미 우회 설치에 성공했다면 재설치나 새 clone 없이 해당 제품 SHA를 기록하고 다음 단계로 진행하세요.
+- 채팅 복사 시 경로 구분자가 빠질 수 있으므로 위 코드 블록을 기준으로 합니다. `skillloop-b-demo\.venv`, `warm\.skillloop` 사이의 역슬래시를 보존하세요.
+
 - 제품 main SHA, 공용 branch commit SHA, 실행한 명령, 성공/실패 출력.
 - 자연어 요청부터 차트·재사용 +1까지 캡처/영상. 원격 공유 후 CJ 화면도 촬영.
 - 403: GitHub 인증 계정·초대 수락·write 권한 확인. 토큰을 채팅이나 저장소에 넣지 않음.

@@ -887,3 +887,12 @@ Source fff0ffa: targeted39 PASS, full144 PASS/2 SKIP, seed20260908. P1 same-sess
 
 P0 LIVE DEMO RUN #1 NOT_RUN: fresh environment prepared at fff0ffa and Claude Code launched, but actual sky list_windows/list_apps did not expose the terminal. No prompt sent, no screenshots or visible dialogue acquired, usage0 remains. No headless/fake UI substitute. Existing window kept for user continuation. Computer Use itself initialized successfully; limitation is target availability. B-PC still NOT_RUN; owned P1 Excel PID21296 cleanup confirmed absent. First fff0ffa PythonCI34294753220/Pages34294753194 success; final web scroll revision pipeline pending.
 
+
+## 2026-09-09T00:34:27.5180923Z — B-PC dependency decoding defect / bounded correction
+
+B reports main fff0ffa, Python 3.12.2: product installation/imports succeeded; development requirements failed with cp949 UnicodeDecodeError, then succeeded with python -X utf8. This is teammate-reported execution, not CJ reproduction of B pip. Continue existing Build & Test and approved reproducibility work. Planned correction: only replace requirements-dev.txt non-ASCII comment with ASCII; keep all four dependency declarations unchanged. Validate old cp949 decoding and new ASCII/UTF-8/cp949 compatibility plus pip requirements parsing. B can continue Excel preparation and shared Skill pull without waiting or reinstalling. TWO_DEVICE Warm / usage roundtrip remains NOT_RUN. Preserve pending dialogue UX files and evidence; no official rules, lifecycle, approval, or scope changes.
+
+## 2026-09-09T00:35:11.9590975Z — B-PC dependency correction validated
+
+Original HEAD requirements bytes fail cp949 decoding locally. Updated file decodes identically as ASCII, UTF-8 and cp949; four dependency declarations unchanged and local pip parse_requirements returns all four. No package install or B-PC rerun claimed. Updated B guide fallback/path-copy note and current state. Comment/documentation-only correction; full product suite not repeated. Existing unrelated web/evidence changes preserved.
+
