@@ -22,8 +22,8 @@ const steps = [
   {
     title: "조직 Skill Storage를 구축했어요.",
     icon: Database,
-    body: "해결 방법을 적용 조건·절차·버전과 함께 저장하고 GitHub로 공유합니다. 개인 대화에 남던 경험을 다른 Agent가 찾아 쓸 수 있게 했습니다.",
-    flow: ["해결 절차 저장", "버전·내용 확인", "조직 공유"],
+    body: "사내에서는 S3를 조직 Skill 저장소로 사용하는 구성을 전제로 합니다. 이번 해커톤은 사외 환경이라 사내 S3 대신 GitHub로 공유 흐름을 간단히 구현했습니다. 저장 수단보다, 개인의 해결 경험을 조직에 쌓고 다음 Agent가 꺼내 쓰는 흐름을 확인하는 데 집중했습니다.",
+    flow: ["사내 적용 · S3 구상", "해커톤 구현 · GitHub", "조직 Skill 공유"],
     question: "Q4 · Skill 표현 형태",
     answer: "C",
     quote:
