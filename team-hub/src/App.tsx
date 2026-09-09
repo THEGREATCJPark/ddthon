@@ -36,6 +36,20 @@ export default function App() {
   return (
     <div className={`site ${tab === "demo" ? "demo-site" : ""}`}>
       <header className="masthead">
+        <div className="event-banner">
+          <div className="event-banner-copy">
+            <span>DS S/W DEVELOPER HACKATHON</span>
+            <strong>제4회 디디톤</strong>
+            <p>Humans set the direction. AI brings the speed.</p>
+          </div>
+          <img
+            className="event-banner-art"
+            src={`${import.meta.env.BASE_URL}images/ddthon-banner.png`}
+            width="1024"
+            height="434"
+            alt="제4회 디디톤 행사 배너"
+          />
+        </div>
         <div className="brand-heading">
           <a
             className="nowhere-logo"
@@ -58,20 +72,6 @@ export default function App() {
             </h1>
             <p>한 번 푼 문제, 팀의 다음 해결법으로.</p>
           </div>
-        </div>
-        <div className="event-banner">
-          <div className="event-banner-copy">
-            <span>DS S/W DEVELOPER HACKATHON</span>
-            <strong>제4회 디디톤</strong>
-            <p>Humans set the direction. AI brings the speed.</p>
-          </div>
-          <img
-            className="event-banner-art"
-            src={`${import.meta.env.BASE_URL}images/ddthon-banner.png`}
-            width="1024"
-            height="434"
-            alt="제4회 디디톤 행사 배너"
-          />
         </div>
       </header>
       <nav className="tabs" aria-label="주 메뉴">
