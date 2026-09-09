@@ -4,8 +4,8 @@
 
 ## 현재 기준
 
-- 통합 브랜치: `codex/development-closeout-20260909`; 현재 소스 `388a6618fbc9f272a78a2d343c617fb7b0ae34c4`. 검증 코드 `6197a97` 이후 소스 동일, 문서/증거만 추가.
-- 원본 작업 폴더와 미커밋 변경 보존. 원격 `81ecad4`까지 통합. 이 브랜치는 아직 main에 전달하지 않았다.
+- 통합 브랜치: `codex/development-closeout-20260909`; Python 검증 코드 `6197a97` 이후 제품/Python 테스트 동일. 웹은 원격 `3b2c19d` UI를 통합하고 승인된 테스트 보완 후 재검증했다.
+- 원본 작업 폴더와 미커밋 변경 보존. 원격 `3b2c19d`까지 통합. 이 브랜치는 아직 main에 전달하지 않았다.
 - [마감 계획](construction/plans/development-closeout-plan.md)은 사용자 ‘그래 그럼 진행해’로 실행 승인됨. 계획 승인과 최종 결과 수용은 구분한다.
 
 ## 단계와 완료 근거
@@ -15,20 +15,20 @@
 | Inception 요구·스토리·설계·Units | 기존 승인 완료, 재시작 없음 |
 | U0/U1/U2/U3 제품 구현 | 통합 구현·실행 근거 확보, 역사적 C9/match 계획 누락 보존 |
 | Python 최종 설치/회귀 | 200 PASS / 2 SKIP, seed20260908 |
-| 웹 단위/빌드/동일 소스 CI | 7 PASS/build PASS, emulator CI PASS |
+| 웹 단위/빌드/규칙 CI | 최신 웹 10 PASS/build PASS, 불변 rules emulator CI PASS |
 | P0 기존 팀 Skill 재사용 | 새 환경3회 PASS, 각 reuse+1/candidate0 |
 | P1 Cold 업무/차트 | 추가4회 PASS, 전회차 보존 |
 | 사람 승인/Replay/Git 게시 | 별도 수동 실제 PASS e302bf2 |
 | 원격 수신/Warm/실적 dedup | 기존 실제 PASS, 독립 workspace 기준 |
 | 별도 물리 B-PC 전체 종단 | 독립 재현 NOT_RUN; 수신 검증과 구분 |
-| 전체 Build & Test 수용 | 웹 PBT·승인/배포 근거·최종 검토 대기 |
+| 전체 Build & Test 수용 | 필수 보완 해소, 최종 결과 수용·main 전달 대기 |
 | Operations | 승인된 MVP 범위 밖 / placeholder |
 
 ## 지금 남은 일
 
-1. [웹 입력 PBT 최소 보완 계획](construction/plans/web-example-validation-closeout-plan.md) 승인·구현·검증. 기존 Partial 규칙상 해소 전 전체 완료 선언 금지.
-2. 웹 신규 쓰기의 실제 사전 승인 기록 확인. 운영 Firestore rules는 현재 파일과 정확한 hash 일치를 확인했다. 없으면 ‘현재 검토’로 기록하며 과거 승인을 만들지 않는다.
-3. README 최신 근거 연결, 최종 결과 수용, Git main/CI 전달 확인.
+1. 웹 입력 PBT: 승인 후 구현, 3개 생성 검사 포함 웹 10 PASS/build PASS. 해당 미해결 항목 해소.
+2. 웹 신규 쓰기: 사용자 “어 수용할게”로 현재 수용. 사전 승인 근거 미확인 이력 보존. 운영 rules exact hash PASS 유지.
+3. README·SUBMISSION.md·현재 검증 정리 완료. 최종 결과 수용 후 Git main 전달 및 CI 확인.
 
 실제 로그·조건·제한: [최종 Build & Test 요약](construction/build-and-test/build-and-test-summary.md), [마감 검토 보고](../result/development-closeout-20260909/README.md). 추가 원격 P0 비교는 [적용 전6회/후3회 원문](../result/p0-six-before-three-after-20260909/README.md); 선정/실패/권한 대기와 비용 증가를 보존한다.
 

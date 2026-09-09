@@ -4,6 +4,20 @@
 
 코딩 경험이 적은 사내 엔지니어가 업무를 요청하면, Agent가 환경 제약으로 막힌 지점에서 검증된 팀 Skill을 재사용합니다. 처음 겪는 문제는 해결 절차를 후보로 남기고 사람 검토·독립 Replay를 거쳐 공유합니다.
 
+## 제출본 확인 안내
+
+[최신 검증·제한](result/development-closeout-20260909/README.md) · [AI-DLC 현재 상태](aidlc-docs/aidlc-state.md) · [제출 구조·갤러리 안내](SUBMISSION.md)
+
+현재 통합 검증은 **Python 200 PASS / 2 SKIP, 웹 10 PASS / build PASS**입니다. P0 WITH_SKILL 3회, P1 Cold 4회 업무 성공을 확인했고, 별도 수동 P1 회차에서 사람 승인 → 독립 Replay → Git 게시를 확인했습니다. 서로 다른 회차의 영상과 성능 측정값을 구분합니다. 최종 사용자 수용·main 전달 상태는 위 현재 상태 문서에 표시합니다.
+
+## P1 실제 시연 영상
+
+[▶ 90초 시연 영상](result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_90s.mp4) · [대표 실행 로그](result/p1-web-log-round3-20260909/README.md)
+
+![P1 실제 후보 게시 전후](result/p1-web-delivery-20260909/video/Agent_SkillLoop_P1_게시전후.png)
+
+영상은 사람 승인·Replay·게시를 포함한 수동 회차이며, 대표 로그는 별도 자동 Cold 업무 회차입니다. 90초는 편집 영상 길이입니다.
+
 ## P0 실제 시연 영상
 
 **업무 요청 한 문장 → 팀의 검증된 해결 방법 적용 → 설치·사용 검증 → 재사용 기록 +1**
@@ -20,13 +34,13 @@
 
 ## 현재 동작과 확인 범위
 
-2026-09-09 추가 검증: 한국어 대화·도구 도움말을 보완하고 **P1 실패/NO_MATCH → 사용자 Excel 열람 사실 확인 → 탐색/업무 완료**를 같은 Claude 세션의 두 턴으로 실행했습니다. 예상2550·차트·후보1/reuse0, 전체 Python144 PASS/2 SKIP. [대화 UX 검증](result/dialogue-ux-20260909/README.md)을 참고하세요. 당시 자동 조작으로 시도한 P0 interactive 실행은 [NOT_RUN 기록](result/live-demo-p0-20260909/README.md)으로 보존했습니다. **이후 사용자가 직접 실행한 P0 영상·캡처를 확보했으며 [실제 시연 자료](result/p0-demo-20260909/README.md)에서 확인할 수 있습니다.** 과거 미실행과 이후 사용자 실행은 별개의 기록입니다.
+이전 검증 기록(현재 결과는 위 최신 검증 링크 참조): 한국어 대화·도구 도움말을 보완하고 **P1 실패/NO_MATCH → 사용자 Excel 열람 사실 확인 → 탐색/업무 완료**를 같은 Claude 세션의 두 턴으로 실행했습니다. 예상2550·차트·후보1/reuse0, 전체 Python144 PASS/2 SKIP. [대화 UX 검증](result/dialogue-ux-20260909/README.md)을 참고하세요. 당시 자동 조작으로 시도한 P0 interactive 실행은 [NOT_RUN 기록](result/live-demo-p0-20260909/README.md)으로 보존했습니다. **이후 사용자가 직접 실행한 P0 영상·캡처를 확보했으며 [실제 시연 자료](result/p0-demo-20260909/README.md)에서 확인할 수 있습니다.** 과거 미실행과 이후 사용자 실행은 별개의 기록입니다.
 
 - **P0 기존 경험 재사용:** 자연어 설치 요청 → 실제 pip 공급 실패 → MATCH → 같은 작업 venv에 설치·버전/import 확인 → 실제 reuse +1. 다른 경로에서 Claude 3개 사례 성공. 추가로 다른 패키지 2종에 같은 환경 Skill을 적용하는 코드 검증을 진행했습니다.
 - **P1 새 경험:** NASCA(가상) 사내환경에서 직접 XLSX 읽기 실패 → NO_MATCH → 새 Claude의 실제 탐색 → 열린 Excel read-only 접근 → 현재 파일의 열 해석 → OLS 예측·PNG 차트 → 환경 절차만 후보화까지 실행했습니다.
 - **상태줄/대시보드:** 로컬 실행과 관찰된 팀 게시·재사용 실적을 구분합니다. 같은 이벤트를 중복 집계하지 않으며, 동기화 미연결은 확인 대기로 표시합니다.
 - **P1 실제 공유·재사용:** exact 후보 사람 승인 → 다른 문서 독립 Replay PASS → GitHub team-skill-store 게시 → 새 Claude Warm에서 업무·차트·reuse+1·후보0 → 재사용 이벤트 공유·중복 없는 수신까지 실행했습니다. 추가 Cold 3회도 다른 시트/열/값에서 성공했습니다.
-- **남은 검증/정리:** 별도 B PC 재현과 최종 시연·갤러리 검토. 현재 원격 검증은 같은 PC의 독립 workspace와 실제 GitHub에서 수행했습니다.
+- **검증 제한:** 별도 B PC의 전체 제품 종단은 독립 재현하지 않았습니다. 원격 검증은 같은 PC의 독립 workspace와 실제 GitHub에서 수행했습니다. 최종 시연·영상 근거는 확보했습니다.
 
 ![실제 P1 업무 결과](result/scenario-correction/cold-trend.png)
 
@@ -96,7 +110,7 @@ Claude Code/Amazon Bedrock으로 요구사항·설계·Unit 구현 및 실제 �
 
 제출에는 소스·의존성 선언·fixture·aidlc-docs·실행 증거를 포함합니다. .venv, .git, 개인 설정, 인증정보는 제출 ZIP에 넣지 않습니다.
 
-최종 UI·배포 검증: [집계/웹 검증 기록](result/final-alignment/README.md). 제품 소스935b8ec에서 로컬142 PASS/2 SKIP 및 Windows CI·Pages 배포 성공을 확인했습니다.
+이전 UI·배포 검증 기록: [집계/웹 검증 기록](result/final-alignment/README.md). 제품 소스935b8ec에서 로컬142 PASS/2 SKIP 및 Windows CI·Pages 배포 성공을 확인했습니다.
 
 ## 독립 QA 검증
 
@@ -111,4 +125,4 @@ Claude Code/Amazon Bedrock으로 요구사항·설계·Unit 구현 및 실제 �
 직접 표시하는 진행 순서도, 팀 댓글·답글, 다른 팀의 익명 태클, 독립 QA 검증 기록을 함께 봅니다. 웹 소스·lockfile·설정·라이선스는 [team-hub/](team-hub/README.md)에 포함하며, 기존 codex/team-hub 작성 이력을 보존합니다. GitHub Actions가 실행 대상 SHA를 빌드해 Pages로 배포합니다. 댓글·캡처는 기존 Firebase 커뮤니티이며 제품 Skill 저장소와 별개입니다. 웹의 P0/P1 버튼 진행은 설명용 시뮬레이션이고 실제 실행 로그·차트를 따로 연결합니다. 순서도 표시는 제품 실행 검증이나 AI-DLC 승인을 대신하지 않습니다.
 
 ## GitHub 조직 Skill 실제 시연
-새 시연 DB는 [team-skill-demo-20260909](https://github.com/THEGREATCJPark/ddthon/tree/team-skill-demo-20260909)입니다. 초기 P0 Skill만 동기화하고, P1은 Cold 탐색 후 Claude Code 대화에서 사용자가 승인하면 독립 Replay와 게시를 진행합니다. 기존 team-skill-store의 검증 이력은 보존합니다. [실행 안내](aidlc-docs/construction/build-and-test/org-demo-user-guide.md) · [실제 검증 로그](result/operator-org-cold-20260909/README.md). 최신 전체 Python165PASS/2SKIP이며 새로운 사용자 P1 게시 시연은 별도 수용 단계입니다.
+새 시연 DB는 [team-skill-demo-20260909](https://github.com/THEGREATCJPark/ddthon/tree/team-skill-demo-20260909)입니다. 초기 P0 Skill만 동기화하고, P1은 Cold 탐색 후 Claude Code 대화에서 사용자가 승인하면 독립 Replay와 게시를 진행합니다. 기존 team-skill-store의 검증 이력은 보존합니다. [실행 안내](aidlc-docs/construction/build-and-test/org-demo-user-guide.md) · [실제 검증 로그](result/operator-org-cold-20260909/README.md). 이 안내 작성 당시 전체 Python165PASS/2SKIP이었으며, 이후 수동 P1 사용자 승인·Replay·게시를 실제 확인했습니다. 최신 검증은 상단 링크를 참조하세요.
