@@ -7,6 +7,7 @@ import {
   Play,
   Images,
   House,
+  BarChart3,
   BadgeCheck,
   BookOpen,
 } from "lucide-react";
@@ -15,10 +16,12 @@ import Community from "./Community";
 import Demo from "./Demo";
 import Captures from "./Captures";
 import Overview from "./Overview";
+import Effects from "./Effects";
 import QA from "./QA";
 import ExampleSkills from "./ExampleSkills";
 const tabs = [
   { id: "overview", name: "개요", icon: House },
+  { id: "effects", name: "효과", icon: BarChart3 },
   { id: "flow", name: "진행 순서도", icon: GitBranch },
   { id: "captures", name: "시연 영상 및 캡쳐", icon: Images },
   { id: "qa", name: "QA 검증", icon: BadgeCheck },
@@ -33,6 +36,7 @@ function readTab(): Tab {
   if (hash === "demo" || hash === "demo-p0" || hash === "demo-p1")
     return "demo";
   if (["captures", "captures-p0", "captures-p1"].includes(hash)) return "captures";
+  if (hash === "effects") return "effects";
   if (hash === "qa") return "qa";
   if (hash === "skills") return "skills";
   if (hash === "flow" || hash === "team" || hash === "challenge") return hash;
@@ -102,6 +106,8 @@ export default function App() {
       <main>
         {tab === "overview" ? (
           <Overview />
+        ) : tab === "effects" ? (
+          <Effects />
         ) : tab === "flow" ? (
           <Flow />
         ) : tab === "demo" ? (
