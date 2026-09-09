@@ -32,3 +32,15 @@ Deliver executable offline preparation and verification tooling, tests, operator
 Offline tooling and operator kit implemented; 20 preparation tests PASS. A new encrypted setup workbook (not received measurement input) passed real Excel read-only attach/value/hash/mtime checks. Derived text is mechanically validated, not model-validated or newly published. Portable doctor intentionally exits 2 PREPARED_NOT_READY. No live runner was activated and no model called.
 
 Step 5 remains incomplete at its readiness boundary: protected recorder/OS isolation and its live bridge are not implemented here; source input keys are absent; Python/dependency versions differ; both-PC acceptance/freeze is pending. Windows Home session is not elevated; no system account or VM was provisioned. Local scripts do not replace those missing steps with self-attestation. Delivery: Desktop/P1-Paired-Preparation-20260909.zip, operator-only (includes oracle, excludes keys). Source product/web/filming state unchanged.
+
+## Approved runtime alignment continuation — 2026-09-09T03:45:34.2111926Z
+User: 어 진행해. Finish independent runtime alignment and readiness checks without model calls. Install Python 3.13.14 and exact proposed dependencies into a new operator-only runtime if available, preserving product .venv and system defaults. Normal package/runtime downloads are dependencies, not external preimplementation reference reuse. Keep original kit/protocol hash unchanged; export a new revision and actual installation evidence. Do not provision accounts/VM or bypass SAFETY_STOP. Missing peer runner/key material remains blocked.
+
+
+### Runtime continuation outcome
+
+Aligned Python3.13.14 and exact proposed dependencies in operator/runtime, pip check and same20 preparation tests PASS. Full resolved dependency lock recorded for peer agreement. First Excel Open reached a password dialog (BLOCKED preserved); use generated COM wrapper as existing approved operator launcher does; a new setup data validation then PASS. Runtime discrepancy resolved; source input keys, protected recorder bridge/isolation and peer freeze remain blocked. No model invocation or product environment change. r2 operator ZIP delivered; previous r1 preserved.
+
+## User-directed closure and filming priority — 2026-09-09T03:53:28.3704460Z
+User requests AI-DLC review and moving to demonstration. Additional comparison infrastructure development is deferred, not completed. Preserve r1/r2, existing SAFETY_STOP and blocked-readiness evidence. Prior conversation approval covered the stated preparation intent; no claim that the later detailed artifact had a separate pre-implementation approval. Future material scope/policy changes require a concise presented plan and explicit approval; bounded approved defect fixes retain their evidence and tests. Product full-Warm filming can proceed independently; quantitative six-run comparison remains a separate optional deliverable, and elapsed times from different protocols are not causal speedup evidence.
+

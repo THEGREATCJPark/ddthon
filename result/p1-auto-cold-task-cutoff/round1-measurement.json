@@ -1,0 +1,64 @@
+{
+  "session_id": "ae179f5e-1cd8-49ee-9ef0-ac9024f5bfbd",
+  "condition": "FULL_PRODUCT_COLD_MANUAL_AUTO",
+  "source_log_sha256": "7bb478c7eed79161c160db7f764a9c558d25ee08f0965aacd1330475b5719d42",
+  "cutoff_policy": "First real work result plus chart generation; human review/Replay/publish excluded. User-facing completion recorded separately. Native assistant messages deduplicated by message.id; not whole-session /cost. Classifier billing and undisclosed usage not inferred.",
+  "start": "2026-09-09T04:23:38.608Z",
+  "work_result_at": "2026-09-09T04:25:31.762Z",
+  "user_facing_result_at": "2026-09-09T04:25:46.221Z",
+  "work_result_elapsed_seconds": 113.154,
+  "user_facing_result_elapsed_seconds": 127.613,
+  "environment_fact_wait_seconds": 17.825,
+  "replay_tool_roundtrip_seconds": 2.699,
+  "publish_permission_roundtrip_seconds": 51.833,
+  "usage_through_work_result": {
+    "unique_assistant_message_ids": [
+      "msg_bdrk_6udtl5eepxusxvac2jxt7uuaqljswq2vd5dcsxy4divj4hmu3keq",
+      "msg_bdrk_aegn5d6pzbds77jhoxmmm5c3fbusmfwpluyxijmubyydegxtt5xa",
+      "msg_bdrk_jctj3kwyvpf3425dpdhtnakli3rbkzymmfsxyxje6ttzytm7alfq",
+      "msg_bdrk_hici43aluqio2hnuqvrczu7xqwbudvniqhufnxr2bryqzd4sepwa",
+      "msg_bdrk_tfgyt44ol5l3v52u4jmlislpn5tsld6knvrv75jxiv6ggksgptaa",
+      "msg_bdrk_n6xfq7j733f3kmoiwqcgq2xgucnpoevt3bwo5jdcg642zix5ebca",
+      "msg_bdrk_schsni3346j3jupoymqwte3ipukzbogfgcxgpfycbfyi25yb5yra",
+      "msg_bdrk_m5plpmvjmxgjfehkwftovah3tnwpieaorkqb25l2a52hbomr37fa",
+      "msg_bdrk_dgthtzo33fxxvyhyvgpkhbnnewd56d4vzikgqndllm7sjuf2vl7q",
+      "msg_bdrk_gqscad6qlltpxq6un5p3hlnwpqwvmfziwatkllnws6rtdledmxea",
+      "msg_bdrk_thqyvls44kd6wkx47rl7p3n4hwbzjx2uygt7bqeezrj6dkimnwdq"
+    ],
+    "totals": {
+      "input_tokens": 22,
+      "output_tokens": 4831,
+      "cache_read_input_tokens": 326221,
+      "cache_creation_input_tokens": 23576
+    }
+  },
+  "usage_through_result_message": {
+    "unique_assistant_message_ids": [
+      "msg_bdrk_6udtl5eepxusxvac2jxt7uuaqljswq2vd5dcsxy4divj4hmu3keq",
+      "msg_bdrk_aegn5d6pzbds77jhoxmmm5c3fbusmfwpluyxijmubyydegxtt5xa",
+      "msg_bdrk_jctj3kwyvpf3425dpdhtnakli3rbkzymmfsxyxje6ttzytm7alfq",
+      "msg_bdrk_hici43aluqio2hnuqvrczu7xqwbudvniqhufnxr2bryqzd4sepwa",
+      "msg_bdrk_tfgyt44ol5l3v52u4jmlislpn5tsld6knvrv75jxiv6ggksgptaa",
+      "msg_bdrk_n6xfq7j733f3kmoiwqcgq2xgucnpoevt3bwo5jdcg642zix5ebca",
+      "msg_bdrk_schsni3346j3jupoymqwte3ipukzbogfgcxgpfycbfyi25yb5yra",
+      "msg_bdrk_m5plpmvjmxgjfehkwftovah3tnwpieaorkqb25l2a52hbomr37fa",
+      "msg_bdrk_dgthtzo33fxxvyhyvgpkhbnnewd56d4vzikgqndllm7sjuf2vl7q",
+      "msg_bdrk_gqscad6qlltpxq6un5p3hlnwpqwvmfziwatkllnws6rtdledmxea",
+      "msg_bdrk_thqyvls44kd6wkx47rl7p3n4hwbzjx2uygt7bqeezrj6dkimnwdq",
+      "msg_bdrk_dodgx2kv2jc6ptgobj4e3rywywjg2m3tcnspjtzws47kxqsfeeoq",
+      "msg_bdrk_46hu7isgsds3v5ry3ejhznlimpze7kkmw5nt2hh4qg6tajqxij4q"
+    ],
+    "totals": {
+      "input_tokens": 26,
+      "output_tokens": 5899,
+      "cache_read_input_tokens": 401276,
+      "cache_creation_input_tokens": 25588
+    }
+  },
+  "note": "Result message also contains candidate summary; its output tokens cannot be exactly split into task and review invitation. Runtime includes tool/LLM and user delay, not pure inference time.",
+  "work_verdict": "WORK_COMPLETE returned with work_verified=true; independent chart visual review pending",
+  "publication_verdict": "PERMISSION_DENIED_BEFORE_EXECUTION",
+  "human_review": "Actual AskUserQuestion answer approve recorded",
+  "replay": "PASS in tool result",
+  "classifier_or_subagent_extra_tokens": null
+}

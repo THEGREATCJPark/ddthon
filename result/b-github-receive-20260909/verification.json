@@ -1,0 +1,311 @@
+{
+  "time_utc": "2026-09-09T01:19:30.198171+00:00",
+  "source_sha": "4b4601ffe8b61961ddff9c8a081cb4d56b3a018e",
+  "source_mode": "committed skillloop snapshot; concurrent worktree changes excluded",
+  "receiver": "C:\\Users\\cik61\\AppData\\Local\\Temp\\skillloop-b-receive-2eebb0e607d44358b1fb2702c57ad9c8",
+  "first_pull": {
+    "ok": true,
+    "commit": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-09T01:19:28.590252+00:00",
+    "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+    "queryable_range": "shared Git bundles",
+    "imported": 1,
+    "conflicts": 0,
+    "events": 2
+  },
+  "second_pull": {
+    "ok": true,
+    "commit": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+    "branch": "team-skill-store",
+    "synced_at": "2026-09-09T01:19:30.178177+00:00",
+    "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+    "queryable_range": "shared Git bundles",
+    "imported": 0,
+    "conflicts": 0,
+    "events": 0
+  },
+  "b_event": {
+    "demo_seed": false,
+    "event_id": "5b0881dd2b06478341aa8f4f4ff81028d018d6e1c06802074d64cd987794f508",
+    "evidence": {
+      "is_real_success": true,
+      "verification": {
+        "action": "file-access",
+        "is_real_success": true,
+        "original_unchanged": true,
+        "save_called": false
+      }
+    },
+    "reuser_alias": "한석훈",
+    "skill_ref": {
+      "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+      "id": "file-access-8738e696cff8bbb20c98",
+      "version": "1.0.0"
+    },
+    "timestamp": "2026-09-09T00:55:37Z"
+  },
+  "event_id_matches_reported_run": true,
+  "first_snapshot": {
+    "summary": {
+      "distinct_skills_local": 1,
+      "published_skills": 1,
+      "verified_reuse_events": 2,
+      "reuser_aliases": [
+        "local",
+        "한석훈"
+      ],
+      "contributor_aliases": [
+        "local"
+      ]
+    },
+    "scope": {
+      "local": "로컬 store·usage 기준(항상 가용)",
+      "org": "동기화된 events·lifecycle 기준"
+    },
+    "skills": [
+      {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "applicability": {
+          "signals": [
+            "file-access-fail:xlsx"
+          ]
+        },
+        "demo_seed": false,
+        "local_reuse_count": 0,
+        "org_reuse_count": 2
+      }
+    ],
+    "people": [
+      {
+        "alias": "local",
+        "role": "author",
+        "contributions": 1,
+        "cross_reuse": 0
+      },
+      {
+        "alias": "한석훈",
+        "role": "reuser",
+        "contributions": 0,
+        "cross_reuse": 1
+      }
+    ],
+    "states": [
+      {
+        "ref": {
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0",
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+        },
+        "lifecycle_state": "PUBLISHED",
+        "local_review_evidence": null,
+        "remote_publish_evidence": {
+          "ok": true,
+          "commit": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+          "branch": "team-skill-store",
+          "synced_at": "2026-09-09T01:19:28.590252+00:00",
+          "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+          "queryable_range": "shared Git bundles",
+          "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json"
+        }
+      }
+    ],
+    "ranking": [
+      {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "reuse_count": 0,
+        "demo_seed": false
+      }
+    ],
+    "activity": [
+      {
+        "timestamp": "2026-09-09T00:55:37Z",
+        "skill_ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reuser_alias": "한석훈"
+      },
+      {
+        "timestamp": "2026-09-08T14:50:45Z",
+        "skill_ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reuser_alias": "local"
+      }
+    ],
+    "last_sync": {
+      "synced_at": "2026-09-09T01:19:28.590252+00:00",
+      "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+      "queryable_range": "shared Git bundles"
+    },
+    "organization": {
+      "available": true,
+      "basis": "마지막 동기화 후 로컬에 관찰된 게시 Skill·검증 이벤트 (실시간 전체 조직 아님)",
+      "verified_reuses": 2,
+      "ranking": [
+        {
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0",
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "reuse_count": 2,
+          "demo_seed": false
+        }
+      ],
+      "people": [
+        {
+          "alias": "local",
+          "contributions": 1
+        }
+      ],
+      "viewer_contributions": 0
+    },
+    "accounting": {
+      "actual_reuses": 0,
+      "demo_seed_reuses": 0
+    },
+    "viewer": {
+      "alias": "한석훈",
+      "contributions": 0,
+      "reuses": 1
+    }
+  },
+  "second_snapshot": {
+    "summary": {
+      "distinct_skills_local": 1,
+      "published_skills": 1,
+      "verified_reuse_events": 2,
+      "reuser_aliases": [
+        "local",
+        "한석훈"
+      ],
+      "contributor_aliases": [
+        "local"
+      ]
+    },
+    "scope": {
+      "local": "로컬 store·usage 기준(항상 가용)",
+      "org": "동기화된 events·lifecycle 기준"
+    },
+    "skills": [
+      {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "applicability": {
+          "signals": [
+            "file-access-fail:xlsx"
+          ]
+        },
+        "demo_seed": false,
+        "local_reuse_count": 0,
+        "org_reuse_count": 2
+      }
+    ],
+    "people": [
+      {
+        "alias": "local",
+        "role": "author",
+        "contributions": 1,
+        "cross_reuse": 0
+      },
+      {
+        "alias": "한석훈",
+        "role": "reuser",
+        "contributions": 0,
+        "cross_reuse": 1
+      }
+    ],
+    "states": [
+      {
+        "ref": {
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0",
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af"
+        },
+        "lifecycle_state": "PUBLISHED",
+        "local_review_evidence": null,
+        "remote_publish_evidence": {
+          "ok": true,
+          "commit": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+          "branch": "team-skill-store",
+          "synced_at": "2026-09-09T01:19:30.178177+00:00",
+          "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+          "queryable_range": "shared Git bundles",
+          "bundle": "skills/636d38a76531d4501c86078eb5d050e8775ae9c831630d8f7f537fc571de2f65.json"
+        }
+      }
+    ],
+    "ranking": [
+      {
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0",
+        "reuse_count": 0,
+        "demo_seed": false
+      }
+    ],
+    "activity": [
+      {
+        "timestamp": "2026-09-09T00:55:37Z",
+        "skill_ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reuser_alias": "한석훈"
+      },
+      {
+        "timestamp": "2026-09-08T14:50:45Z",
+        "skill_ref": {
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0"
+        },
+        "reuser_alias": "local"
+      }
+    ],
+    "last_sync": {
+      "synced_at": "2026-09-09T01:19:30.178177+00:00",
+      "branch_revision": "e50c6ac3629b46e28fb6dee9c59ecefa7345da7b",
+      "queryable_range": "shared Git bundles"
+    },
+    "organization": {
+      "available": true,
+      "basis": "마지막 동기화 후 로컬에 관찰된 게시 Skill·검증 이벤트 (실시간 전체 조직 아님)",
+      "verified_reuses": 2,
+      "ranking": [
+        {
+          "id": "file-access-8738e696cff8bbb20c98",
+          "version": "1.0.0",
+          "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+          "reuse_count": 2,
+          "demo_seed": false
+        }
+      ],
+      "people": [
+        {
+          "alias": "local",
+          "contributions": 1
+        }
+      ],
+      "viewer_contributions": 0
+    },
+    "accounting": {
+      "actual_reuses": 0,
+      "demo_seed_reuses": 0
+    },
+    "viewer": {
+      "alias": "한석훈",
+      "contributions": 0,
+      "reuses": 1
+    }
+  },
+  "verdict": "PASS: B event received exactly once; repeat +0; CJ local reuse remains 0",
+  "limitations": "B Excel execution and missing transcript not independently reproduced; this is Git receiver verification only."
+}

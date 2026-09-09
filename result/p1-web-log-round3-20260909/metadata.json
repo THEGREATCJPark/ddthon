@@ -1,0 +1,19 @@
+{
+  "session_id": "6b648caa-91c4-4830-8a00-aa42c40566be",
+  "condition": "FULL_PRODUCT_COLD_PREOPENED_FACT_GIVEN",
+  "task_seconds": 110.539,
+  "user_final_seconds": 127.155,
+  "tokens_at_task": {
+    "input_tokens": 18,
+    "output_tokens": 6672,
+    "cache_creation_input_tokens": 24512,
+    "cache_read_input_tokens": 183972
+  },
+  "candidate_delta": 1,
+  "reuse_delta": 0,
+  "publication": "NOT_RUN (not requested in these measurements)",
+  "video": "NOT_RECORDED for this session; do not identify separate manual video as this run",
+  "source_native_sha256": "75b069b713bdfd0a0b2b703ed9baafeb94a5f78605ef59c0ad9e075c1a260559",
+  "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+  "selection": "Representative response quality from four observed trials; not overall performance statistic"
+}

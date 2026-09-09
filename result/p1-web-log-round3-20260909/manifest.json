@@ -1,0 +1,30 @@
+{
+  "actual-trend.png": {
+    "sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "bytes": 45723
+  },
+  "metadata.json": {
+    "sha256": "815a586f9a586f9bb1ba910a2680611da315e5b78a5609605309b00fddd24fe9",
+    "bytes": 847
+  },
+  "README.md": {
+    "sha256": "0797a0b30c3c69d6508a8e7bdde78374d767b17f50c398d06274c3c67dedb5a9",
+    "bytes": 3347
+  },
+  "responses.public.md": {
+    "sha256": "35ce1105b7d1f94b60c03f2080cbc83acd1b8b234559de43fa1bd136bdb80839",
+    "bytes": 3174
+  },
+  "timeline.json": {
+    "sha256": "5b89369489e6704500734862b9bbc700de8d1a30c4e788a2859b4a5c36decd26",
+    "bytes": 1094
+  },
+  "transcript.public.json": {
+    "sha256": "cd15e80941046e4300051b43561b94ee2cbf161c46de16d29e590748a2d5fc35",
+    "bytes": 50984
+  },
+  "transcript.public.md": {
+    "sha256": "6b7df5ad172ddd56a4c474308bacd67b9785b992ccbc7dffe220bcb7a7fc0506",
+    "bytes": 46296
+  }
+}

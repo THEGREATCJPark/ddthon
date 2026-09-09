@@ -1,0 +1,26 @@
+{
+  "zip_sha256": "19023cf0e80328b182a14ad8113c3ba689d4376c03d758aabaef31a6d17c2b80",
+  "payload_verified": 24,
+  "source_session_id": "50c4e8e3-a156-48d7-9cbb-e7a186767316",
+  "condition": "ASSISTANT_SUPERVISED_PREOPENED_NO_SKILL_PILOT",
+  "task_result": "TASK_NOT_COMPLETED_AGENT_REQUESTED_PASSWORD",
+  "task_seconds": 340.16,
+  "video": "NOT_RECORDED",
+  "source_message_usage_verified": {
+    "input_tokens": 34,
+    "output_tokens": 14591,
+    "cache_creation_input_tokens": 24903,
+    "cache_read_input_tokens": 222380
+  },
+  "message_ids": 17,
+  "cli_final_usage": {
+    "input_tokens": 1062,
+    "output_tokens": 14619,
+    "cache_creation_input_tokens": 24903,
+    "cache_read_input_tokens": 222380
+  },
+  "usage_mismatch_preserved": true,
+  "classification": "Separate preopened NO_SKILL pilot1; not manual3 or paired performance benchmark",
+  "runtime_mutation": false,
+  "model_calls": 0
+}

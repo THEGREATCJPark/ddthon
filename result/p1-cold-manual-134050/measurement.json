@@ -1,0 +1,146 @@
+{
+  "session_id": "e518ab42-7679-4726-849b-252f64fbcd99",
+  "condition": "FULL_PRODUCT_COLD_MANUAL",
+  "source_log_sha256": "44ffdb2249004832ee81b3ed9753b5dec90be36cf92b5929145cf48575ae5c8f",
+  "start_utc": "2026-09-09T04:45:35.163Z",
+  "work_result_utc": "2026-09-09T04:48:11.989Z",
+  "user_facing_result_utc": "2026-09-09T04:48:30.900Z",
+  "publication_utc": "2026-09-09T04:49:23.418Z",
+  "final_response_utc": "2026-09-09T04:49:35.898Z",
+  "task_result_seconds": 156.826,
+  "user_facing_task_seconds": 175.737,
+  "task_to_publish_seconds": 228.255,
+  "task_to_final_seconds": 240.735,
+  "user_environment_reply_wait_seconds": 19.42,
+  "task_interval_usage": {
+    "message_count": 14,
+    "tool_calls": 13,
+    "tokens": {
+      "input_tokens": 28,
+      "output_tokens": 6950,
+      "cache_creation_input_tokens": 24463,
+      "cache_read_input_tokens": 451854
+    },
+    "message_ids": [
+      "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+      "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+      "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+      "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+      "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+      "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+      "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+      "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+      "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+      "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+      "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+      "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+      "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+      "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq"
+    ]
+  },
+  "user_facing_task_usage": {
+    "message_count": 16,
+    "tool_calls": 14,
+    "tokens": {
+      "input_tokens": 32,
+      "output_tokens": 8152,
+      "cache_creation_input_tokens": 26890,
+      "cache_read_input_tokens": 532610
+    },
+    "message_ids": [
+      "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+      "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+      "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+      "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+      "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+      "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+      "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+      "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+      "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+      "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+      "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+      "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+      "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+      "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq",
+      "msg_bdrk_fmbuvv4f46q7pf6iher7dq6qnn2lp67mqoltvufzs22tuxnfkzgq",
+      "msg_bdrk_r45wx75gboryxiamdfufd3vmohp3bfe7eikqg6y75grprrz24zja"
+    ]
+  },
+  "through_final_usage": {
+    "message_count": 23,
+    "tool_calls": 21,
+    "tokens": {
+      "input_tokens": 46,
+      "output_tokens": 10628,
+      "cache_creation_input_tokens": 32841,
+      "cache_read_input_tokens": 844565
+    },
+    "message_ids": [
+      "msg_bdrk_km5wlpmvankqrfuj52isuf7r2lxg7lfbivzigx5y3yykwuexoora",
+      "msg_bdrk_wdmyy5othncy6dqw4sfny6dlfnutfcjd4uivkpvvuzy2bb7itrqa",
+      "msg_bdrk_yqb2fhqwcq4o33ebdfhvcszftyzxozxweyfdfgloktlb5umwl7hq",
+      "msg_bdrk_hsaa5e3y2ilwdma77vew46ya5mvrdaekokdgl4ftia55teelicla",
+      "msg_bdrk_kjrvltgxfra4xodmdmu3lvgtclshca7rah25gqpzaltvlp3khszq",
+      "msg_bdrk_c4dojiaqitmiehg5arvml7mejatsw6plbnhhgihtg5hhauy6fs5a",
+      "msg_bdrk_c6dl5xkxhz3he63swhww4a6lgmb3hdoxfxy7wq2axvokysciibva",
+      "msg_bdrk_dik5diud7thdawilpubq4y2ntapeu2w5ctmzpzbqh4fu5qqqozjq",
+      "msg_bdrk_zbp3awvjk7w75l5qjdgvgd5macxwjh4xoto4una5enf6eyxtf43q",
+      "msg_bdrk_ofxutsxldfrqpxoxvvmeb3y56y2gflla6xa2z4vzlgtvnv6zng7q",
+      "msg_bdrk_xnj46ti4ck76b4u72lqh2m3i76ara5fw3hwn7oxifgs2htff7j7a",
+      "msg_bdrk_2hs4n756vwuttx22xcxqqazoqjvb4twwbto5t7c4xarb3irj4fxq",
+      "msg_bdrk_4ejwu6dcftdhpnvm5vwfecr4e7nszbapnt3erpdjgolqpbsvzdmq",
+      "msg_bdrk_aiyio27m4j2qvtbkfkjzb2eo6wg6vryzaghs3bvgasdqplwbsabq",
+      "msg_bdrk_fmbuvv4f46q7pf6iher7dq6qnn2lp67mqoltvufzs22tuxnfkzgq",
+      "msg_bdrk_r45wx75gboryxiamdfufd3vmohp3bfe7eikqg6y75grprrz24zja",
+      "msg_bdrk_hlhvezdlkmu2qxmzx5uwhrpahy5peucot6xhvisgzj5dojs5jfkq",
+      "msg_bdrk_4vhziwvf2zno23zjne2ijo3n7lrcouts26oelww5duiw2zjw6jkq",
+      "msg_bdrk_hyea5hcgjjhqnxavxc37vamahb4x64pciqy747jzzwrv2bauv4jq",
+      "msg_bdrk_ash6aqijefzpqtii2hwauhzm5o66tgcst7s7u3ewc2lwayaapqwq",
+      "msg_bdrk_bdd6uftnbi43ddunt24i55aaxeo2p3mkfs3oirszrmiiqwdryiaa",
+      "msg_bdrk_kge6bcxvtrj62ju7yiauohast5dcf7v6m25kaqrkmgc4txklojhq",
+      "msg_bdrk_hfvyolv6yxparpdglt2riiyicykr76a5f5iutam45gjc5muhzgqq"
+    ]
+  },
+  "success": {
+    "task_runtime": "WORK_COMPLETE/work_verified=true",
+    "forecast": "2026-08 / 1650; actual1200,1350,1500",
+    "chart": "PASS: visual review of actual chart; May/June/July 1200/1350/1500, August forecast1650 distinguished by dashed forecast segment",
+    "human_review": {
+      "approval_source": "claude-code-user",
+      "decision": "approve",
+      "ref": {
+        "digest": "359c5c1763416cdb3aa9828adef40219d1ac5448f82d62f91ebbca82768727af",
+        "id": "file-access-8738e696cff8bbb20c98",
+        "version": "1.0.0"
+      },
+      "reviewed_at": "2026-09-09T04:48:51.073116+00:00",
+      "reviewer": "박찬준",
+      "user_response": "승인하고 공유"
+    },
+    "replay_verdict": "PASS",
+    "publication_state": "PUBLISHED",
+    "remote_commit": "e302bf213679a038fea04e5058188096cb96c24b",
+    "remote_current_tip": "e302bf213679a038fea04e5058188096cb96c24b",
+    "remote_tip_matches_recorded_commit": true,
+    "reuse": {},
+    "chart_sha256": "16b47e6a4ee810d6bc69c83a499a878f473ea70e7d7b6e3e5996b32be79bf7d4",
+    "task_verdict": "PASS (runtime evidence and actual chart review; not a new Excel execution)",
+    "candidate_delta": 1,
+    "actual_reuse_delta": 0
+  },
+  "errors_preserved": [
+    "First replay omitted --xlsx and exited2; retry with argument PASS",
+    "PowerShell sheet-name encoding required UTF8 read-back"
+  ],
+  "prior_attempt_same_workspace": {
+    "session_id": "b1770452-1aaf-4573-bc30-deceb5aa5514",
+    "status": "Stopped after initial failure/search question; not included in this successful session totals; preserved"
+  },
+  "limits": [
+    "Task cutoff is first completed work+chart tool result, includes user waiting; not pure inference time",
+    "Message usage deduplicated by message.id; cached tokens separate; not provider bill or whole-session /cost",
+    "User-facing result message includes sharing invitation; tokens not exactly separable",
+    "One successful Cold trial, not three and not Warm speed evidence",
+    "Raw log copied operator-only; no private thinking or full raw log exported to repository"
+  ]
+}

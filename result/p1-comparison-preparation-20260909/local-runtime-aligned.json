@@ -1,0 +1,15 @@
+{
+  "status": "LOCAL_RUNTIME_ALIGNED_PEER_FREEZE_PENDING",
+  "python": "3.13.14",
+  "python_path": "C:\\Users\\cik61\\Desktop\\P1-Paired-Preparation-20260909\\operator\\runtime\\Scripts\\python.exe",
+  "cli_version": "2.1.266 (Claude Code)",
+  "excel_version": "16.0",
+  "excel_build": "20326.0",
+  "explicit_dependency_gaps": {},
+  "full_dependency_lock_sha256": "a837f82eadd2871b330e650c246c894afaf37b3e58c29fd77894108b6e605280",
+  "preparation_tests": "20 PASS; same tests rerun on aligned runtime, not 40 unique tests",
+  "mechanical_excel_validation": "PASS after generated COM-wrapper fix; first BLOCKED preserved",
+  "model_calls": 0,
+  "original_inputs_opened": false,
+  "isolated_recorder_ready": false
+}

@@ -1,0 +1,10 @@
+{
+  "received_at": "2026-09-09T04:02:44.724454+00:00",
+  "response_zip_sha256": "071f8d24971054b72d9cb9296760c464c884f01ca2933331f0c5f2ace7a7c7cb",
+  "payloads_verified": 10,
+  "verifier_source_binding_finding": "ACCEPTED: conditional arithmetic/manual-review aggregator, not actual transcript validation",
+  "runtime_role_separation": "ACCEPTED: do not install operator crypto tools into Agent runtime merely for checker",
+  "peer_checked": "r1",
+  "current_protocol": "FULL_PRODUCT_COLD_MANUAL vs separate NO_SKILL_MANUAL; not former WARM_SKILL_ONLY controlled benchmark",
+  "actions": "No new verifier adapter/VM development; native manually observed runs and raw source review; SAFETY_STOP runner unchanged"
+}

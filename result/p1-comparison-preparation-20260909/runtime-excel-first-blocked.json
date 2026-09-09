@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-09-09T03:47:54.358198+00:00",
+  "kind": "MECHANICAL_DERIVED_PROCEDURE_VALIDATION_NOT_AGENT_MEASUREMENT",
+  "model_calls": 0,
+  "measurement_inputs_used": false,
+  "injected_skill_sha256": "f4593d89eeae88803d946172b58b24ca1cfb24705942c7039c9e37f1b8fe4dcb",
+  "validation_code_sha256": "5668d77e887e2ba4644b9fd397539b2ae5fd117ec11275bb7c537e6f496205f9",
+  "verdict": "BLOCKED",
+  "error_type": "com_error",
+  "error": "(-2147352567, '예외가 발생했습니다.', (0, 'Microsoft Excel', 'Workbooks 클래스 중 Open 메서드에 오류가 있습니다.', 'xlmain11.chm', 0, -2146827284), None)",
+  "finished_at": "2026-09-09T03:49:21.653682+00:00"
+}

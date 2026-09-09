@@ -58,7 +58,10 @@ def main(root):
         import pythoncom
         import win32com.client as com
         pythoncom.CoInitialize()
-        app = com.DispatchEx('Excel.Application')
+        # Fresh runtimes lack generated Excel wrappers. Dynamic dispatch can
+        # mis-marshal optional Open/Password arguments and display a dialog.
+        # Same generated-wrapper contract as the approved operator launcher.
+        app = com.gencache.EnsureDispatch(com.DispatchEx('Excel.Application'))
         app.Visible = False
         app.DisplayAlerts = False  # only our newly owned setup app
         book = app.Workbooks.Add()
@@ -68,7 +71,9 @@ def main(root):
         password = uuid.uuid4().hex[:12]
         book.SaveAs(str(target), FileFormat=51, Password=password)
         book.Close(SaveChanges=False)
-        book = app.Workbooks.Open(str(target), UpdateLinks=0, ReadOnly=True, Password=password)
+        book = app.Workbooks.Open(Filename=str(target), UpdateLinks=0, ReadOnly=True,
+                                  Password=password, IgnoreReadOnlyRecommended=True,
+                                  Notify=False, AddToMru=False)
         password = None
         before, mtime = sha(target), target.stat().st_mtime_ns
         from openpyxl import load_workbook

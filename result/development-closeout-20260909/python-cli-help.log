@@ -1,0 +1,16 @@
+usage: skillloop [-h]
+                 {run-p0,apply-requirements,share-export,share-import,status,match,dashboard,run-p1,review,replay,publish,store-init,sync} ...
+
+positional arguments:
+  {run-p0,apply-requirements,share-export,share-import,status,match,dashboard,run-p1,review,replay,publish,store-init,sync}
+    run-p0              P0 재사용 데모 실행
+    apply-requirements  기존 작업 venv의 합성 requirements 설치·Skill 재사용
+    share-export        VERIFIED_REUSE 공유 이벤트 export
+    share-import        공유 이벤트 import(검증·dedup)
+    status              Claude 하단 상태줄 네 줄(읽기전용)
+    match               관찰된 실패 신호로 재사용 Skill 검색(읽기전용, 적용·카운트 없음)
+    dashboard           localhost 읽기전용 대시보드 기동
+    run-p1              실제 XLSX 실패·검색·Agent 절차 적용·업무·후보화
+
+options:
+  -h, --help            show this help message and exit

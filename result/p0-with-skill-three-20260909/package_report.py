@@ -1,0 +1,106 @@
+"""Package observed evidence only; never launches a model or changes product data."""
+from pathlib import Path
+import json, csv, hashlib, statistics, zipfile
+
+OUT = Path(__file__).resolve().parent
+ROOT = Path('C:/Users/cik61/Desktop/skillloop-p0-with-skill-three-20260909-143018')
+s = json.loads((OUT/'summary.json').read_text(encoding='utf-8'))
+runs, before = s['runs'], s['before']
+keys = ['input_tokens','output_tokens','cache_creation_input_tokens','cache_read_input_tokens']
+rows=[]
+for r in before:
+    rows.append(['NO_SKILL',r['run'],r['status'],r['elapsed_to_agent_import_version_seconds'],r['elapsed_to_final_seconds'],* [r['raw_tokens'][k] for k in keys],r['estimated_cost_usd'],r['tool_calls']])
+for r in runs:
+    rows.append(['WITH_SKILL',r['round'],r['verdict'],r['task_seconds'],r['user_final_seconds'],*[r['full_native_tokens'][k] for k in keys],r['final_aggregate'][0]['total_cost_usd'],r['tool_calls']])
+with (OUT/'comparison.csv').open('w',encoding='utf-8-sig',newline='') as f:
+    w=csv.writer(f);w.writerow(['condition','round','result','first_verified_seconds_SEE_README','final_text_timestamp_seconds',*['full_native_'+k for k in keys],'full_cli_estimated_usd','tool_calls']);w.writerows(rows)
+
+text = '''# P0 기존 팀 Skill 재사용: 실제 3회 측정
+
+사용자 요청으로 수행한 2026-09-09 Build & Test 관측 결과입니다. 첫 3회를 모두 보존했고 결과에 따른 교체 실행은 없습니다. 이번 실행 중 제품 코드·게시 게이트·공식 AI-DLC 규칙을 변경하지 않았습니다.
+
+## 결과
+
+| 조건 | 회차 | 실제 결과 | 설치·검증 완료까지 | 최종 답변 기록까지 |
+|---|---:|---|---:|---:|
+'''
+for row in rows:
+    text += f"| {row[0]} | {row[1]} | {row[2]} | {str(row[3])+'초' if row[3] is not None else '미완료'} | {row[4]:.3f}초 |\n"
+text += '''
+WITH_SKILL 업무 완료 평균 **34.634초**, 최종 답변 기록 평균 **45.597초**. 세 회 모두 초기 패키지 미설치·사용 기록 0건에서 시작했습니다. 실제 일반 설치 실패, Git에서 받은 기존 P0 Skill MATCH, 승인된 동일 요청 범위의 자동 적용, 같은 작업 Python에서 설치·버전·import 검증을 확인했습니다. 각 회차 별도 프로세스에서 importlib.metadata 버전 1.0.0과 패키지 ok()=True를 재확인했습니다. 각 store의 Skill은 불변, candidate +0, 재사용 이벤트 +1입니다. 세 회 합계 3건은 각각의 작업 폴더에 기록됐으며 GitHub 공유 실적을 갱신하지 않았습니다.
+
+NO_SKILL은 2회 자체 해결했고 3회차는 공급 위치를 추가로 요청하며 중단했습니다. 따라서 ‘Skill이 없으면 설치할 수 없다’는 결론은 지지하지 않습니다. 이번 WITH_SKILL 세 회에서는 해결법을 재탐색하지 않고 기존 절차를 사용했습니다.
+
+## 시간·토큰 집계 기준
+
+- WITH_SKILL 업무 시점: 최초 사용자 요청부터 실제 apply-requirements의 검증 성공·reuse=1 도구 결과까지. 이후 Agent의 별도 import 재확인과 최종 설명은 제외합니다. 운영자 독립 검증 시각도 JSON에 별도 보존했습니다.
+- NO_SKILL 표의 업무 시점은 최초 Agent import·버전 확인입니다. 1회차는 __version__ 확인이며 엄격한 importlib.metadata 확인은 운영자가 153.685초에 수행했습니다. 2회차는 Agent가 101.947초에 엄격한 확인을 수행했습니다. 서로 다른 검증 종료점으로 절감률을 계산하지 않습니다.
+- 최종 답변 시간은 native assistant 텍스트의 기록 시각입니다. 별도 화면 스트리밍 종료 계측값은 아닙니다. 프로세스 실행 시간은 operator/run.json에 따로 있습니다.
+- task_tokens는 업무 완료 도구 결과까지, full_native_tokens는 최종 답변까지의 message.id 중복 제거 합계입니다. 비교 CSV는 양쪽 모두 **전체 native** 토큰을 사용합니다. 캐시 읽기/생성은 일반 입력·출력과 가격이 달라 단순 토큰 총합을 비용처럼 해석하지 않습니다.
+- CLI 비용은 전체 세션의 단 한 번의 최종 추정값이며 실제 청구서가 아닙니다. modelUsage와 native usage의 입력/출력 차이는 원문 그대로 보존하며 합쳐 더하지 않습니다.
+
+| 조건·회차 | 일반 입력 | 출력 | 캐시 생성 | 캐시 읽기 | 전체 CLI 추정 USD |
+|---|---:|---:|---:|---:|---:|
+'''
+for row in rows:
+    text += f"| {row[0]} {row[1]} | {row[5]:,} | {row[6]:,} | {row[7]:,} | {row[8]:,} | {row[9]:.6f} |\n"
+bc=statistics.mean(r['estimated_cost_usd'] for r in before)
+ac=statistics.mean(r['final_aggregate'][0]['total_cost_usd'] for r in runs)
+text += f'''
+전체 세션 평균 추정 비용은 NO_SKILL **${bc:.6f}**, WITH_SKILL **${ac:.6f}**입니다. 이번 자료는 비용 감소를 보여주지 않습니다. WITH_SKILL의 짧은 출력과 별개로 Skill/연결 지침을 읽는 입력·캐시 비용이 포함됩니다.
+
+## 비교 조건과 한계
+
+- 양쪽은 같은 사용자 task, requirements, wheel 바이트를 사용했습니다. 수신 ZIP 87 payload 해시를 확인했습니다. 기존 repo wheel 대신 수신된 정확한 wheel을 새 측정 공급 폴더에 복사했으며 원본 ZIP은 보존했습니다.
+- 같은 Claude Opus 4.8 / medium / Bedrock / CLI 2.1.266입니다. 그러나 적용 전은 Python 3.13.14·pip 26.1.2·manual 승인, 적용 후는 Python 3.14.0·pip 25.2·auto print입니다. PC·캐시·제품 버전·도구/경계 지침도 완전히 같지 않습니다.
+- 적용 전 운영자 승인 10/10/5회, 추가 해결 힌트 0회. 적용 후 중간 사용자 개입 0회. 적용 전 승인 대기 시간은 정확히 분리 계측되지 않았으므로 임의로 빼지 않습니다.
+- 이는 제품을 포함한 관측 비교이며 통제된 ‘Skill 하나의 인과적 효과’ 실험이 아닙니다. 2/3와 3/3은 이번 표본 결과이며 일반 성공률이 아닙니다.
+- 실제 실패는 오프라인 기본 공급 폴더에서 패키지를 찾지 못한 오류입니다. 실제 proxy 차단·타임아웃·NASCA를 검증한 것으로 표현하지 않습니다.
+- Git branch team-skill-demo-20260909의 기존 P0 v2를 가져왔습니다. descriptor digest a2b876ae6d00f92fa5b7ef4d476ab74e3feb64b2d1df910b4185c5d382d2ad03. 허용 공급원 연결과 scoped-auto 정책은 측정 전 운영자가 구성했으며 승인된 설치 범위를 넘는 명령 허가는 추가하지 않았습니다.
+- 새 작업 환경의 패키지 설치는 Cold, **팀 지식은 기존 Skill을 이용하는 재사용 조건**입니다. P1의 새 해결법 탐색 Cold와 구분합니다.
+
+## 응답 품질
+
+세 회 모두 실제 ‘현재 설정 경로에서 버전을 찾지 못함’을 설명했고, 팀의 ‘python pip 사내환경 적용 방법’으로 해결·검증·재사용 1회 기록을 알렸습니다. 원격 게시 완료나 존재하지 않는 proxy 오류를 창작하지 않았습니다. 2·3회차는 최초 설치를 별도로 한 뒤 제품이 다시 실패를 관찰해 설치 시도가 반복되는 소규모 UX 중복이 있습니다. 성공 여부에 영향은 없으며 이번 측정 중 문구나 코드를 고치지 않았습니다.
+
+## 파일과 추적성
+
+- summary.json / round-*-result.json: 실제 검증 근거·run/event ID·입력 무변경·로그 SHA·원본 최종 집계.
+- metrics.csv: 적용 후 업무 종료 기준의 토큰. comparison.csv: 양쪽 전체 세션 기준의 토큰.
+- round-*-responses.md: 실제 Agent 공개 응답. transcript-visible-*.json: 실제 도구 호출/응답; 비공개 추론 제외, 경로 마스킹 및 반복 bootstrap 생략을 명시했습니다.
+- 원본 stream/native JSONL, stderr, setup/종료/독립 검증 기록: `{ROOT.as_posix()}/operator/round-1..3`. 원본은 운영자 보관이며 공개 ZIP에 넣지 않습니다.
+- 측정 계획: aidlc-docs/construction/plans/p0-with-skill-three-observation-plan.md. 현재 phase는 CONSTRUCTION / Build & Test입니다. 이 결과가 전체 제출 완료나 Git push 완료를 의미하지 않습니다.
+- 영상은 이번 자동 실행에서 촬영하지 않았습니다. 기존 수동 시연 영상과 함께 쓸 때 별도 측정 회차라고 표시하세요.
+'''
+(OUT/'README.md').write_text(text,encoding='utf-8')
+
+hashes={}
+for n in range(1,4):
+    rd=ROOT/'operator'/f'round-{n}'; events=[]
+    for line in (rd/'native.jsonl').read_text(encoding='utf-8').splitlines():
+        e=json.loads(line);m=e.get('message') or {};c=m.get('content',[])
+        if isinstance(c,str):
+            if e.get('type')=='user':events.append({'time':e.get('timestamp'),'role':'user','text':c})
+            continue
+        for b in c if isinstance(c,list) else []:
+            if b.get('type') not in ('text','tool_use','tool_result'):continue
+            safe=dict(b)
+            raw=json.dumps(safe,ensure_ascii=False)
+            if 'Successfully loaded skill' in raw or len(raw)>18000:
+                safe={'type':b.get('type'),'omitted': 'Long bootstrap/context output omitted; original retained with SHA.'}
+            events.append({'time':e.get('timestamp'),'role':e.get('type'),'block':safe})
+    public=json.dumps({'note':'Visible text/tool blocks only; private thinking excluded. Personal root path masked. Any long bootstrap output omission is labelled. No result replaced.','events':events},ensure_ascii=False,indent=2)
+    public=public.replace('C:\\\\Users\\\\cik61','<USER_HOME>').replace('C:/Users/cik61','<USER_HOME>').replace('c:\\\\users\\\\cik61','<USER_HOME>')
+    (OUT/f'transcript-visible-{n}.json').write_text(public,encoding='utf-8')
+    for p in rd.iterdir():
+        if p.is_file():hashes[f'round-{n}/{p.name}']=hashlib.sha256(p.read_bytes()).hexdigest()
+(OUT/'operator-evidence-hashes.json').write_text(json.dumps(hashes,indent=2),encoding='utf-8')
+files=[p for p in OUT.iterdir() if p.is_file() and p.name not in ('manifest.json','package_report.py')]
+manifest={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+(OUT/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+dest=Path('C:/Users/cik61/Desktop/P0-WithSkill-Three-Runs-20260909-143018.zip')
+with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED) as z:
+    for p in files+[OUT/'manifest.json']:z.write(p,p.name)
+with zipfile.ZipFile(dest) as z:
+    assert all(hashlib.sha256(z.read(k)).hexdigest()==v for k,v in manifest.items())
+print(json.dumps({'zip':str(dest),'sha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'payloads':len(files),'before_mean_estimate':bc,'after_mean_estimate':ac},ensure_ascii=False))
