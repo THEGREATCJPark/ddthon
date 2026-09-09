@@ -88,8 +88,14 @@ Claude Code/Amazon Bedrock으로 요구사항·설계·Unit 구현 및 실제 �
 
 최종 UI·배포 검증: [집계/웹 검증 기록](result/final-alignment/README.md). 제품 소스935b8ec에서 로컬142 PASS/2 SKIP 및 Windows CI·Pages 배포 성공을 확인했습니다.
 
+## 독립 QA 검증
+
+팀 내부 독립 QA가 회차마다 같은 기준으로 배포물을 다시 점검하고, 나온 지적을 수정한 뒤 다음 회차에서 재확인합니다. 회차별 추정 점수(채점한 커밋 포함)·지적 처리 건수·해소 이력을 [QA 검증 탭](https://thegreatcjpark.github.io/ddthon/#qa)에서 봅니다. 같은 수치의 원본 데이터는 [team-hub/src/qaReport.json](team-hub/src/qaReport.json)에 있습니다.
+
+점수는 QA 자체 추정이며 공식 심사 결과가 아닙니다. 아직 닫히지 않은 지적은 건수만 공개하고, 닫히는 대로 해소 이력에 같은 형식으로 추가합니다.
+
 ## 팀 협업 공간
 
 [노웨어 · Agent Skillloop 열기](https://thegreatcjpark.github.io/ddthon/)
 
-직접 표시하는 진행 순서도, 팀 댓글·답글, 다른 팀의 익명 딴지를 함께 봅니다. 웹 소스·lockfile·설정·라이선스는 [team-hub/](team-hub/README.md)에 포함하며, 기존 codex/team-hub 작성 이력을 보존합니다. GitHub Actions가 실행 대상 SHA를 빌드해 Pages로 배포합니다. 댓글·캡처는 기존 Firebase 커뮤니티이며 제품 Skill 저장소와 별개입니다. 웹의 P0/P1 버튼 진행은 설명용 시뮬레이션이고 실제 실행 로그·차트를 따로 연결합니다. 순서도 표시는 제품 실행 검증이나 AI-DLC 승인을 대신하지 않습니다.
+직접 표시하는 진행 순서도, 팀 댓글·답글, 다른 팀의 익명 딴지, 독립 QA 검증 기록을 함께 봅니다. 웹 소스·lockfile·설정·라이선스는 [team-hub/](team-hub/README.md)에 포함하며, 기존 codex/team-hub 작성 이력을 보존합니다. GitHub Actions가 실행 대상 SHA를 빌드해 Pages로 배포합니다. 댓글·캡처는 기존 Firebase 커뮤니티이며 제품 Skill 저장소와 별개입니다. 웹의 P0/P1 버튼 진행은 설명용 시뮬레이션이고 실제 실행 로그·차트를 따로 연결합니다. 순서도 표시는 제품 실행 검증이나 AI-DLC 승인을 대신하지 않습니다.
