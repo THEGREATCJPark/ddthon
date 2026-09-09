@@ -77,7 +77,7 @@ def test_git_received_generic_skill_actual_cold_install_without_confirmation(tmp
     py = receiver_dir / '.venv' / ('Scripts/python.exe' if sys.platform == 'win32' else 'bin/python')
     empty = receiver_dir / 'empty'; empty.mkdir()
     config = py.parent.parent / 'pip.ini' if sys.platform == 'win32' else py.parent.parent / 'pip.conf'
-    config.write_text(f'[global]\nno-index=true\nfind-links={empty}\ndisable-pip-version-check=true\n', encoding='utf-8')
+    config.write_text(f'[global]\nno-index=true\nfind-links={empty.resolve().as_uri()}\ndisable-pip-version-check=true\n', encoding='utf-8')
     req = receiver_dir / 'requirements.txt'; req.write_text('different-example==4.2.0\n', encoding='utf-8')
     policy['imports'] = {'different-example': 'different_example'}
     policy['scoped_auto_apply'].update(receiver.context, requirements=str(req), work_python=str(py))

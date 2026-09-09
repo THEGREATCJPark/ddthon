@@ -36,7 +36,7 @@ def test_two_task_packages_reuse_same_environment_skill(tmp_path, capsys):
         subprocess.run([sys.executable, '-m', 'venv', str(folder / '.venv')], check=True, capture_output=True)
         python = folder / '.venv' / ('Scripts/python.exe' if sys.platform == 'win32' else 'bin/python')
         config = folder / '.venv' / ('pip.ini' if sys.platform == 'win32' else 'pip.conf')
-        config.write_text(f'[global]\nno-index=true\nfind-links={failing}\ndisable-pip-version-check=true\n', encoding='utf-8')
+        config.write_text(f'[global]\nno-index=true\nfind-links={failing.resolve().as_uri()}\ndisable-pip-version-check=true\n', encoding='utf-8')
         req = folder / 'requirements.txt'; req.write_text(f'{name}=={version}\n', encoding='utf-8')
         store = folder / 'store.json'; SkillStore(str(store)).put(descriptor)
         usage = folder / 'usage.json'; policy = folder / 'policy.json'
