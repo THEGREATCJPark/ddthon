@@ -1190,3 +1190,10 @@ PR #4 merged as 0a23c49748107279139d240275b1e0cadf9db9ce. Exact main Python CI34
 ## Concurrent web update preserved during final delivery
 Timestamp: 2026-09-09T06:28:23.223167+00:00
 First docs-only push rejected non-fast-forward because independent web session pushed 2f19f3c. No force push; merged both histories. Changes are presentation/effects panels only; existing source datasets and comparison limitations retained. Exact web main2f19f3c CI34318992726 all successful including Pages. Current code tree equals that revision; Python unchanged from 0a23c49 successful CI. Final accepted MVP closeout remains valid.
+
+
+## Post-acceptance repository maintenance — approved cleanup
+**Timestamp**: 2026-09-09T06:56:49.258555+00:00
+**User Input**: "어 다 정리해줘"
+**Context**: User approves the immediately preceding branch/PR cleanup review. Plan recorded before file corrections/deletions at construction/plans/repository-cleanup-plan-20260909.md. Current main 123fb49b6b4b02190d6074baba11a6e44e24d155; seven merged development/QA heads, two outdated documentation PRs, nine retained data/demo heads. No product behavior change or pip security fix authorization inferred. Existing Security/Resiliency extension opt-outs preserved; Partial PBT unchanged and not applicable to the documentation/reference cleanup.
+**Action**: Preserve historical PR documents and attribution, correct one stale test explanation, verify and deliver main; then close two superseded PRs and delete only reviewed disposable heads with SHA checks. Current MVP remains accepted.
