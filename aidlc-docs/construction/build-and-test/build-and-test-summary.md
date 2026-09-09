@@ -1,5 +1,7 @@
 # Build & Test — 사용자 수용 및 main 전달 완료
 
+최종 전달 보완: 다른 세션의 설명 웹 변경 `2f19f3c`를 보존·통합했다. 동일 소스의 웹 CI34318992726(테스트·규칙·빌드·Pages) SUCCESS, Python은 `0a23c49`와 동일하다. `result/development-closeout-20260909/final-web-followup-ci.json`에 확인 근거를 추가했다. 이후 기록 커밋은 이 소스와 동일하다.
+
 **해커톤 MVP 범위의 Build & Test 완료, 최종 사용자 수용 완료.**
 
 - Python 테스트 대상 코드: `6197a975b020768cc29bcd92dd27553406da268e`. 이후 Python 제품/테스트 동일. 웹은 원격 `3b2c19d`와 승인된 입력 PBT 보완을 포함해 재검증했다.

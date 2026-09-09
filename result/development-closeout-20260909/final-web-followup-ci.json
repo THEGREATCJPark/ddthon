@@ -1,0 +1,150 @@
+{
+  "captured_at": "2026-09-09T06:28:23.213496+00:00",
+  "latest_web_main_sha": "2f19f3c76c85acb07cc9bc57e9b6da1327b7c0aa",
+  "code_tree_equality_to_current_HEAD": true,
+  "run_url": "https://github.com/THEGREATCJPark/ddthon/actions/runs/34318992726",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "build",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-09T06:25:32Z",
+          "completed_at": "2026-09-09T06:25:33Z"
+        },
+        {
+          "name": "Checkout workspace",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-09T06:25:33Z",
+          "completed_at": "2026-09-09T06:25:35Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-09T06:25:35Z",
+          "completed_at": "2026-09-09T06:25:43Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-09T06:25:43Z",
+          "completed_at": "2026-09-09T06:25:43Z"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-09T06:25:43Z",
+          "completed_at": "2026-09-09T06:25:48Z"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-09T06:25:48Z",
+          "completed_at": "2026-09-09T06:25:49Z"
+        },
+        {
+          "name": "Verify comment security rules in isolated emulator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-09T06:25:49Z",
+          "completed_at": "2026-09-09T06:25:58Z"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-09T06:25:58Z",
+          "completed_at": "2026-09-09T06:26:07Z"
+        },
+        {
+          "name": "Run actions/upload-pages-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-09T06:26:07Z",
+          "completed_at": "2026-09-09T06:26:09Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-09-09T06:26:09Z",
+          "completed_at": "2026-09-09T06:26:09Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-09-09T06:26:09Z",
+          "completed_at": "2026-09-09T06:26:09Z"
+        },
+        {
+          "name": "Post Checkout workspace",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-09-09T06:26:09Z",
+          "completed_at": "2026-09-09T06:26:09Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-09-09T06:26:09Z",
+          "completed_at": "2026-09-09T06:26:09Z"
+        }
+      ]
+    },
+    {
+      "name": "deploy",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-09T06:26:16Z",
+          "completed_at": "2026-09-09T06:26:17Z"
+        },
+        {
+          "name": "Deploy GitHub Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-09T06:26:17Z",
+          "completed_at": "2026-09-09T06:26:23Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-09T06:26:23Z",
+          "completed_at": "2026-09-09T06:26:23Z"
+        }
+      ]
+    }
+  ],
+  "reason": "Concurrent web presentation-only update preserved; its exact main source passed all web CI and Pages. Python source unchanged from verified 0a23c49."
+}

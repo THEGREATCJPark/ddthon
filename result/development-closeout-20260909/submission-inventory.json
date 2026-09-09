@@ -1,12 +1,12 @@
 {
-  "captured_at": "2026-09-09T06:26:40.088246+00:00",
+  "captured_at": "2026-09-09T06:28:23.284969+00:00",
   "verified_main_sha": "0a23c49748107279139d240275b1e0cadf9db9ce",
   "repo": {
     "visibility": "public",
     "default_branch": "main"
   },
-  "file_count": 701,
-  "total_bytes": 48636026,
+  "file_count": 704,
+  "total_bytes": 48638106,
   "over_10MB": [
     {
       "path": "result/p1-web-delivery-20260909/Agent-SkillLoop-P1-Video.zip",
@@ -194,11 +194,11 @@
     },
     {
       "path": "aidlc-docs/aidlc-state.md",
-      "bytes": 4902
+      "bytes": 5264
     },
     {
       "path": "aidlc-docs/audit.md",
-      "bytes": 220979
+      "bytes": 221522
     },
     {
       "path": "aidlc-docs/construction/P0/nfr-requirements/nfr-requirements.md",
@@ -250,7 +250,7 @@
     },
     {
       "path": "aidlc-docs/construction/build-and-test/build-and-test-summary.md",
-      "bytes": 3811
+      "bytes": 4173
     },
     {
       "path": "aidlc-docs/construction/build-and-test/build-instructions.md",
@@ -698,7 +698,7 @@
     },
     {
       "path": "result/development-closeout-20260909/README.md",
-      "bytes": 9610
+      "bytes": 9972
     },
     {
       "path": "result/development-closeout-20260909/bundle-line-ending-comparison.json",
@@ -717,6 +717,10 @@
       "bytes": 498
     },
     {
+      "path": "result/development-closeout-20260909/final-web-followup-ci.json",
+      "bytes": 4830
+    },
+    {
       "path": "result/development-closeout-20260909/history-hashes.json",
       "bytes": 228
     },
@@ -726,7 +730,7 @@
     },
     {
       "path": "result/development-closeout-20260909/manifest.json",
-      "bytes": 4043
+      "bytes": 4187
     },
     {
       "path": "result/development-closeout-20260909/python-cli-help.json",
@@ -786,7 +790,7 @@
     },
     {
       "path": "result/development-closeout-20260909/submission-inventory.json",
-      "bytes": 72503
+      "bytes": 72622
     },
     {
       "path": "result/development-closeout-20260909/web-build.json",
@@ -2582,7 +2586,7 @@
     },
     {
       "path": "team-hub/src/App.tsx",
-      "bytes": 4243
+      "bytes": 4449
     },
     {
       "path": "team-hub/src/Captures.tsx",
@@ -2595,6 +2599,10 @@
     {
       "path": "team-hub/src/Demo.tsx",
       "bytes": 11825
+    },
+    {
+      "path": "team-hub/src/Effects.tsx",
+      "bytes": 347
     },
     {
       "path": "team-hub/src/ExampleSkills.tsx",
@@ -2610,15 +2618,19 @@
     },
     {
       "path": "team-hub/src/Overview.tsx",
-      "bytes": 7078
+      "bytes": 153
     },
     {
       "path": "team-hub/src/P0Comparison.tsx",
-      "bytes": 6103
+      "bytes": 6319
     },
     {
       "path": "team-hub/src/P0Media.tsx",
       "bytes": 2587
+    },
+    {
+      "path": "team-hub/src/P1Comparison.tsx",
+      "bytes": 3731
     },
     {
       "path": "team-hub/src/P1Media.tsx",
@@ -2626,7 +2638,7 @@
     },
     {
       "path": "team-hub/src/ProductIntro.tsx",
-      "bytes": 5016
+      "bytes": 1462
     },
     {
       "path": "team-hub/src/QA.tsx",
@@ -2674,7 +2686,7 @@
     },
     {
       "path": "team-hub/src/style.css",
-      "bytes": 68915
+      "bytes": 70252
     },
     {
       "path": "team-hub/src/workspace.test.ts",

@@ -1,5 +1,7 @@
 # 해커톤 MVP 개발 마감 완료
 
+최종 전달 보완: 다른 세션의 설명 웹 변경 `2f19f3c`를 보존·통합했다. 동일 소스의 웹 CI34318992726(테스트·규칙·빌드·Pages) SUCCESS, Python은 `0a23c49`와 동일하다. `result/development-closeout-20260909/final-web-followup-ci.json`에 확인 근거를 추가했다. 이후 기록 커밋은 이 소스와 동일하다.
+
 최종 사용자 수용을 기록하고 PR #4를 main `0a23c49748107279139d240275b1e0cadf9db9ce`에 병합했습니다. 해당 SHA의 Python CI·웹 테스트·Firestore emulator·빌드·Pages 배포 모두 SUCCESS입니다. [최종 영수증](final-delivery-ci.json).
 
 검증된 코드 이후에는 이 마감 기록만 추가합니다. 사이트 제출 버튼/manifest 업로드는 수행하지 않았습니다. 알려진 제한과 과거 누락은 아래에 보존합니다. 후속 개발은 이 완료 기준을 보존한 별도 변경 관리로 이어갑니다.

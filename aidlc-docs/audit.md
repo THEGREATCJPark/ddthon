@@ -1186,3 +1186,7 @@ Decision: Final generated test changes and Build & Test results accepted with do
 Timestamp: 2026-09-09T06:26:40.010429+00:00
 User acceptance: 최종 결과와 알려진 제한을 수용합니다. main 반영과 CI 확인 후 개발 완료로 마감해주세요.
 PR #4 merged as 0a23c49748107279139d240275b1e0cadf9db9ce. Exact main Python CI34318706218 and web CI34318706589 all successful, including Firestore emulator and Pages deployment. Public page/entrypoint HTTP200, hashes and step receipts recorded in result/development-closeout-20260909/final-delivery-ci.json. Core/source unchanged after verified SHA; closing records only. Known limitations and historical deviations preserved. Operations outside approved MVP scope. Website submission button/manifest upload not performed. Subsequent changes follow scoped impact/plan/approval/build-test, preserving this accepted baseline.
+
+## Concurrent web update preserved during final delivery
+Timestamp: 2026-09-09T06:28:23.223167+00:00
+First docs-only push rejected non-fast-forward because independent web session pushed 2f19f3c. No force push; merged both histories. Changes are presentation/effects panels only; existing source datasets and comparison limitations retained. Exact web main2f19f3c CI34318992726 all successful including Pages. Current code tree equals that revision; Python unchanged from 0a23c49 successful CI. Final accepted MVP closeout remains valid.
