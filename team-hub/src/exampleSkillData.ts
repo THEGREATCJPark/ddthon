@@ -33,3 +33,15 @@ export const featured: SkillDraft = {
   procedure: "1. access_key, secret_key, bucket, endpoint를 확인합니다. target_key는 선택입니다. 자격증명은 코드에 직접 넣지 않고 환경에 맞는 설정·시크릿 관리 방식을 사용합니다.\n\n2. boto3 클라이언트 생성 시 사내 스토리지의 endpoint_url을 명시합니다.\n\n3. 연결 후에도 403이 지속되면 오류 응답과 서버·로컬 시각 차이를 확인합니다. 403만으로 시간 오차라고 단정하지 않습니다.\n\n4. 공유된 사례에서는 ntplib로 서버 시각을 받아 botocore의 서명 시각만 보정했습니다. 시스템 시계는 변경하지 않았습니다.",
   verification: "버킷 리스팅 성공 여부와 대상 key 조회 성공 여부를 확인합니다.\n이 페이지에는 경험 기반 후보를 소개합니다. 실행 코드나 독립 Replay 결과가 첨부된 검증 완료 Skill은 아닙니다.",
 };
+
+export const bigdataqueryExample: SkillDraft = {
+  title: "자연어로 사내 DB 조회 · bigdataquery 활용",
+  author: "팀원 공유 · 활용 사례",
+  benefit: "코딩·SQL이 어려운 DS 직원이 필요한 데이터를 자연어로 요청하고, 사내 DB 조회에 필요한 환경 설정과 실행 절차를 함께 활용합니다.",
+  effect: "SQL 작성과 Python 환경 준비의 진입 장벽을 낮추고, 반복되는 설치·조회 문제의 해결 경험을 다음 요청에 재사용할 수 있습니다.",
+  problem: "대상: 코딩 및 SQL을 어려워하는 모든 DS 직원.\n사내 DB 접속용 Python 라이브러리 bigdataquery를 사용하는 데 어려움이 있고, 다양한 조건을 반영한 SQL 작성도 쉽지 않습니다.\n\n요청 예시: ‘제조 진행이력 테이블에서 XX075030 step의 최근 30일간 데이터 뽑아줘.’\n자연어 요청을 SQL query로 바꾼 뒤 bigdataquery를 통해 실제 데이터를 추출하는 활용 사례입니다.",
+  cause: "SQL 작성뿐 아니라 시스템 환경 설치 오류, Python 버전·패키지 환경 불일치, 요청한 테이블·조건 컬럼의 존재 여부 확인까지 여러 단계에서 막힐 수 있습니다.",
+  applicability: "사내 DB 조회에 bigdataquery를 사용하는 Python 환경.\n설치 오류와 해결 방법, 실행 가능한 환경 구성, 테이블·컬럼 확인 절차를 재사용할 환경 지식으로 축적합니다.",
+  procedure: "1. 사용에 필요한 시스템 환경을 준비합니다. 설치 중 발생하는 오류 예시와 해결 방법을 확인합니다.\n\n2. 필요한 Python 버전과 현재 버전이 일치하는지, pip 업그레이드가 필요한지 확인합니다. 기존 환경에서 실행이 불가능하면 uv나 conda를 활용해 실행 가능한 가상환경을 구성합니다.\n\n3. bigdataquery를 import하고, 질문에 포함된 테이블과 조건 컬럼이 존재하는지 확인합니다. 없으면 LIKE 검색 등으로 유사 테이블을 찾아 요청 의도와 맞는지 확인합니다.\n\n4. 확인한 테이블·컬럼을 기준으로 자연어의 조건을 SQL에 반영하고, bigdataquery의 getData 함수로 실제 데이터를 추출합니다.",
+  verification: "요청한 테이블·조건 컬럼을 사용했는지, XX075030 step과 최근 30일 조건이 조회에 반영됐는지 확인합니다.\n이 항목은 공유받은 활용 사례를 정리한 Skill 후보입니다. 이 웹에서 사내 DB 조회를 실행하거나 결과를 검증한 기록은 아닙니다.",
+};
