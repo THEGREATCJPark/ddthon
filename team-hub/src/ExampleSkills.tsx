@@ -2,7 +2,7 @@ import {useEffect, useState, type FormEvent} from "react";
 import {Plus, Search, ChevronDown} from "lucide-react";
 import {session} from "./communityApi";
 import {watchExamples, saveExample, removeExample} from "./exampleSkillApi";
-import {fields, valueFields, emptyDraft, featured, bigdataqueryExample, type SkillDraft, type ExampleSkill} from "./exampleSkillData";
+import {fields, valueFields, emptyDraft, featured, bigdataqueryExample, datalakeExample, type SkillDraft, type ExampleSkill} from "./exampleSkillData";
 
 function SkillCard({item, sample = false, mine = false}: {item: SkillDraft & {id?: string}; sample?: boolean; mine?: boolean}) {
   const [confirm, setConfirm] = useState(false);
@@ -53,7 +53,7 @@ export default function ExampleSkills() {
     catch {setFormError("등록하지 못했습니다. 입력 내용은 유지됩니다. 연결을 확인하고 다시 시도해 주세요.");}
     finally {setBusy(false);}
   }
-  const allItems = [{...featured, id:"featured-s3", uid:""}, {...bigdataqueryExample, id:"featured-bigdataquery", uid:""}, ...items];
+  const allItems = [{...featured, id:"featured-s3", uid:""}, {...bigdataqueryExample, id:"featured-bigdataquery", uid:""}, {...datalakeExample, id:"featured-datalake", uid:""}, ...items];
   const needle = search.trim().toLocaleLowerCase();
   const visible = allItems.filter(item => (item.body || "").toLocaleLowerCase().includes(needle) || [...fields, ...valueFields].some(f => (item[f.key] || "").toLocaleLowerCase().includes(needle)));
   return <section className="examples-page">
