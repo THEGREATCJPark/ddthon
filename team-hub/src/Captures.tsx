@@ -221,7 +221,7 @@ export default function Captures() {
     <section className="captures-page">
       <div className="page-heading">
         <div>
-          <h2>실제 시행 화면</h2>
+          <h2>시연 영상 및 캡쳐</h2>
           <p>실제 실행 화면과 실행 로그</p>
         </div>
         <button
