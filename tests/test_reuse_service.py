@@ -80,6 +80,22 @@ def test_index_selection_alone_is_not_success(clean_env):
     assert res.is_real_success is False          # 선택 사실만으로는 성공 아님
 
 
+@pytest.mark.parametrize('target', [
+    None, 42, '', '--target=elsewhere', '-rrequirements.txt',
+    'pkg @ https://example.invalid/pkg.whl', 'https://example.invalid/pkg.whl',
+    'C:\\packages\\pkg.whl', './pkg', '../pkg', '/tmp/pkg',
+    'pkg-1.0-py3-none-any.whl', 'pkg.tar.gz', 'pkg.ZIP', 'pkg.tar.bz2',
+    'pkg==1.0', 'pkg;marker', 'pkg\n', 'pkg ', 'pkg\x00',
+])
+def test_legacy_invalid_target_never_installs(monkeypatch, target):
+    monkeypatch.setattr(H, 'is_clean', lambda *args: True)
+    calls = []
+    monkeypatch.setattr(RS, '_pip_install', lambda *args: calls.append(args))
+    with pytest.raises(ValueError, match='INVALID_TARGET'):
+        RS.apply_and_verify(_skill('allow', target), _obs(), object(), 'invalid-target')
+    assert calls == []
+
+
 # --------------------------------------------------------------------------- #
 # P1 — file-access 분기. B(1760d32) 실제 반환형 AccessResult + evidence 근거로 재검증.
 # --------------------------------------------------------------------------- #

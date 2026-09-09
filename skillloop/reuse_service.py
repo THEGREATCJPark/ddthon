@@ -26,6 +26,7 @@ CJ 소유 계약(envharness_p0)은 호출만.
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import tempfile
 from dataclasses import dataclass
@@ -35,6 +36,11 @@ from . import envharness_p0 as harness
 # procedure.action 식별자. P0=pip-install(기본, 동작 보존), P1=file-access.
 ACTION_PIP_INSTALL = "pip-install"
 ACTION_FILE_ACCESS = "file-access"
+
+# Legacy demo contract accepts distribution names, never pip options or files.
+_DISTRIBUTION_NAME = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?")
+_ARCHIVE_SUFFIXES = ('.zip', '.whl', '.tar.bz2', '.tbz', '.tar.gz', '.tgz',
+                     '.tar', '.tar.xz', '.txz', '.tlz', '.tar.lz', '.tar.lzma')
 
 
 @dataclass
@@ -120,6 +126,9 @@ def _apply_pip_install(selected, obs, env, run_id: str, pip_task=None) -> Applic
     cfg = selected.procedure
     if pip_task is None:
         index_name = cfg['index']; target = cfg.get('target', obs.target_pkg)
+        if (not isinstance(target, str) or not _DISTRIBUTION_NAME.fullmatch(target)
+                or target.lower().endswith(_ARCHIVE_SUFFIXES)):
+            raise ValueError('INVALID_TARGET: expected a bare distribution name, not an option, URL or file')
         index_dir = harness.resolve_index(index_name)
         expected_version, module = harness.TARGET_VERSION, harness.TARGET_IMPORT
         install_target = target
